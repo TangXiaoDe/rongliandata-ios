@@ -130,7 +130,7 @@ extension AppLoadingView {
         // 1. indicator
         mainView.addSubview(self.indicatorView)
         self.indicatorView.type = NVActivityIndicatorType.ballClipRotatePulse
-        self.indicatorView.color = UIColor.init(hex: 0x00bdb2)
+        self.indicatorView.color = AppColor.theme
         self.indicatorView.padding = 0
         self.indicatorView.snp.makeConstraints { (make) in
             make.width.height.equalTo(self.indicatorWH)
@@ -141,7 +141,7 @@ extension AppLoadingView {
         }
         // 2. titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 15), textColor: UIColor.init(hex: 0x00bdb2), alignment: .center)
+        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 15), textColor: AppColor.theme, alignment: .center)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(15)

@@ -20,6 +20,7 @@ class LoginRegisterController: BaseViewController {
     fileprivate let topBgImgView: UIImageView = UIImageView()
     fileprivate let logoView: UIImageView = UIImageView()
     fileprivate let switchView: LoginRegisterSwitchView = LoginRegisterSwitchView()
+    fileprivate let loginFlagView: UIButton = UIButton.init(type: .custom)
     fileprivate let horScrollView: UIScrollView = UIScrollView()
     fileprivate let loginView: LoginView = LoginView()
     fileprivate let registerView: RegisterView = RegisterView.loadXib()!
@@ -37,6 +38,9 @@ class LoginRegisterController: BaseViewController {
         let scrollH: CGFloat = kScreenHeight - kBottomHeight - self.topBgImgSize.height - horScrollTopMargin
         return scrollH
     }
+    
+    fileprivate let loginFlagViewSize: CGSize = CGSize.init(width: 93, height: 32)
+    
 
     // MARK: - Private Property
 
@@ -134,11 +138,22 @@ extension LoginRegisterController {
         // 4. switch
         self.view.addSubview(self.switchView)
         self.switchView.delegate = self
+        self.switchView.isHidden = true   // 该版本隐藏
         self.switchView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(self.topBgImgView.snp.top).offset(self.switchCenterYTopMargin)
             make.height.equalTo(LoginRegisterSwitchView.viewHeight)
             make.width.equalTo(LoginRegisterSwitchView.viewWidth)
+        }
+        self.view.addSubview(self.loginFlagView)
+        self.loginFlagView.set(title: "登录", titleColor: UIColor.init(hex: 0x29313D), for: .normal)
+        self.loginFlagView.set(font: UIFont.pingFangSCFont(size: 18), cornerRadius: self.loginFlagViewSize.height * 0.5)
+        self.loginFlagView.backgroundColor = AppColor.theme
+        self.loginFlagView.isUserInteractionEnabled = false
+        self.loginFlagView.snp.makeConstraints { (make) in
+            make.size.equalTo(self.loginFlagViewSize)
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(self.topBgImgView.snp.top).offset(self.switchCenterYTopMargin)
         }
         // 5. horScroll
         self.view.addSubview(self.horScrollView)
@@ -166,18 +181,19 @@ extension LoginRegisterController {
             make.width.equalTo(kScreenWidth)
             make.leading.equalToSuperview()
             make.height.equalTo(horScrollH)
-        }
-        // 2. registerContainer
-        let registerContainer: UIView = UIView()
-        scrollView.addSubview(registerContainer)
-        self.initialRegisterContainer(registerContainer)
-        registerContainer.snp.makeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
-            make.width.equalTo(kScreenWidth)
-            make.leading.equalTo(loginContainer.snp.trailing)
             make.trailing.equalToSuperview()
-            make.height.equalTo(horScrollH)
         }
+//        // 2. registerContainer
+//        let registerContainer: UIView = UIView()
+//        scrollView.addSubview(registerContainer)
+//        self.initialRegisterContainer(registerContainer)
+//        registerContainer.snp.makeConstraints { (make) in
+//            make.top.bottom.equalToSuperview()
+//            make.width.equalTo(kScreenWidth)
+//            make.leading.equalTo(loginContainer.snp.trailing)
+//            make.trailing.equalToSuperview()
+//            make.height.equalTo(horScrollH)
+//        }
     }
     fileprivate func initialLoginContainer(_ container: UIView) -> Void {
         // 1. scrollView
@@ -223,8 +239,8 @@ extension LoginRegisterController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         self.isPresentedFlag = nil != self.navigationController?.presentingViewController ? true : false
-        self.barView.leftItem.isHidden = !self.isPresentedFlag
-        self.loginView.showVisitorLogin = !self.isPresentedFlag
+        self.barView.leftItem.isHidden = true // !self.isPresentedFlag      // 该版本隐藏
+        self.loginView.showVisitorLogin = false // !self.isPresentedFlag    // 该版本隐藏
     }
 
     /// 标题修改

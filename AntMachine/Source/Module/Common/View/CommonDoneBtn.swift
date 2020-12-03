@@ -16,9 +16,9 @@ typealias AppDoneBtn = CommonDoneBtn
 class CommonDoneBtn: BaseButton {
 
 
-    fileprivate let normalColors: [CGColor] = [UIColor.init(hex: 0x169CFF).cgColor, UIColor.init(hex: 0x6EEEFC).cgColor]
-    fileprivate let disableColors: [CGColor] = [UIColor.init(hex: 0x35426A).cgColor, UIColor.init(hex: 0x35426A).cgColor]
-    fileprivate let highlightedColors: [CGColor] = [UIColor.init(hex: 0x169CFF).cgColor, UIColor.init(hex: 0x6EEEFC).cgColor]
+    fileprivate let normalColors: [CGColor] = [UIColor.init(hex: 0xF5BE41).cgColor, UIColor.init(hex: 0xF5BE41).cgColor]
+    fileprivate let disableColors: [CGColor] = [UIColor.init(hex: 0xC5CED9).cgColor, UIColor.init(hex: 0xC5CED9).cgColor]
+    fileprivate let highlightedColors: [CGColor] = [UIColor.init(hex: 0xF5BE41).cgColor, UIColor.init(hex: 0xF5BE41).cgColor]
 
     override init(frame: CGRect) {
         super.init(frame: frame)

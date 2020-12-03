@@ -98,14 +98,14 @@ extension LaunchController {
         let hasAdverts: Bool = !DataBaseManager().advert.getAdverts(for: AdvertSpaceType.boot).isEmpty
         let isLogined: Bool = AccountManager.share.isLogin
         if isFirst {
-            RootManager.share.type = .guide
+            RootManager.share.type = .login // .guide
         } else if LaunchType.remote != AppConfig.share.internal.launch && hasAdverts {
             RootManager.share.type = .advert
         } else if isLogined {
             RootManager.share.type = .main
             //AppUtil.updateCurrentUserInfo()
         } else {
-            RootManager.share.type = .login   // .login
+            RootManager.share.type = .login 
         }
     }
 

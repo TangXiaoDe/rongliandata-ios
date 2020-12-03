@@ -125,6 +125,7 @@ extension LoginView {
         self.loginTypeBtn.set(title: "login.type.smscode".localized, titleColor: AppColor.theme, for: .normal)
         self.loginTypeBtn.set(font: UIFont.systemFont(ofSize: 14))
         self.loginTypeBtn.addTarget(self, action: #selector(loginTypeBtnClick(_:)), for: .touchUpInside)
+        self.loginTypeBtn.isHidden = true   // 该版本隐藏
         self.loginTypeBtn.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(lrMargin)
             make.top.equalTo(self.loginBtn.snp.bottom).offset(typeBtnTopMargin)
