@@ -50,6 +50,10 @@ class ThemeConfig {
     var minorColor: UIColor = UIColor.init(hex: 0x2D385C)
     /// 分割线颜色
     var dividingColor: UIColor = UIColor.init(hex: 0xE2E2E2)
+    /// 主题红色
+    var themeRedColor: UIColor = UIColor.init(hex: 0xCE586E)
+    /// 主题黄色
+    var themeYellowColor: UIColor = UIColor.init(hex: 0xFF8068)
 
     /// 标题色(页面)
     var titleColor: UIColor = UIColor.init(hex: 0x29313D)
