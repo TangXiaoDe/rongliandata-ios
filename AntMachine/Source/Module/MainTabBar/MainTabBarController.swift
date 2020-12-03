@@ -81,9 +81,9 @@ extension MainTabBarController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         // items
-        let firstItem = TabbarItemModel(title: "tabbar.home".localized, normalImageName: "IMG_tabbar_icon_imeet_normal", selectedImageName: "IMG_tabbar_icon_imeet_selected", childVC: FirstPageController.init())
-        let quipItem = TabbarItemModel(title: "tabbar.equip".localized, normalImageName: "IMG_tabbar_icon_square_normal", selectedImageName: "IMG_tabbar_icon_square_selected", childVC: EquipmentHomeController.init())
-        let mineItem = TabbarItemModel(title: "tabbar.mine".localized, normalImageName: "IMG_tabbar_icon_planet_normal", selectedImageName: "IMG_tabbar_icon_planet_selected", childVC: MineHomeController.init())
+        let firstItem = TabbarItemModel(title: "tabbar.home".localized, normalImageName: "IMG_tabbar_icon_home_normal", selectedImageName: "IMG_tabbar_icon_home_selected", childVC: FirstPageController.init())
+        let quipItem = TabbarItemModel(title: "tabbar.equip".localized, normalImageName: "IMG_tabbar_icon_shebei_normal", selectedImageName: "IMG_tabbar_icon_shebei_selected", childVC: EquipmentHomeController.init())
+        let mineItem = TabbarItemModel(title: "tabbar.mine".localized, normalImageName: "IMG_tabbar_icon_mine_normal", selectedImageName: "IMG_tabbar_icon_mine_selected", childVC: MineHomeController.init())
         if AppConfig.share.shield.currentNeedShield {
             self.items = [firstItem, quipItem, mineItem]
         } else {
