@@ -67,7 +67,7 @@ class ThemeConfig {
     var minorTextColor: UIColor = UIColor.init(hex: 0x8C97AC)
 
     /// 页面背景色(占位色)
-    var pageBgColor: UIColor = UIColor.init(hex: 0xF6F6F6)
+    var pageBgColor: UIColor = UIColor.init(hex: 0xF1F2F6)
     /// 图片背景色(占位色)
     var imgBgColor: UIColor = UIColor.init(hex: 0x000000).withAlphaComponent(0.3)
 
