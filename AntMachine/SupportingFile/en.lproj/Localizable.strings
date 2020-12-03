@@ -65,6 +65,7 @@
 "login.type.password" = "Password Login";
 "login.type.smscode" = "SMSCode Login";
 "login.forgetpwd" = "Forget Password?";
+"login.visitor.login" = "Visitor Login";
 
 "register.agreement.agree" = "Register means agree";
 "register.agreement" = "《iMeet User Agreement》";

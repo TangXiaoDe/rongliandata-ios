@@ -123,14 +123,14 @@ extension LoginRegisterController {
             make.height.equalTo(self.topBgImgSize.height)
         }
         // 3. logoView
-//        self.view.addSubview(self.logoView)
-//        self.logoView.set(cornerRadius: 0)
-//        self.logoView.image = UIImage.init(named: "IMG_login_cunlian_logo")
-//        self.logoView.snp.makeConstraints { (make) in
-//            make.size.equalTo(self.logoSize)
-//            make.centerX.equalToSuperview()
-//            make.top.equalToSuperview().offset(self.logoTopMargin)
-//        }
+        self.view.addSubview(self.logoView)
+        self.logoView.set(cornerRadius: 0)
+        self.logoView.image = UIImage.init(named: "IMG_login_cunlian_logo")
+        self.logoView.snp.makeConstraints { (make) in
+            make.size.equalTo(self.logoSize)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.logoTopMargin)
+        }
         // 4. switch
         self.view.addSubview(self.switchView)
         self.switchView.delegate = self
@@ -388,31 +388,31 @@ extension LoginRegisterController {
 
     /// 请求当前用户信息
     private func requestCurrentUserInfo(with token: AccountTokenModel, for account: String, isRegister: Bool = false) -> Void {
-//        UserNetworkManager.getCurrentUser { [weak self](status, msg, model) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.view.isUserInteractionEnabled = true
-//            self.loadingView.dismiss()
-//            guard status, let model = model else {
-//                // 注册时 只要用户请求成功，即使用户信息获取失败，也要进入主界面
-//                if isRegister {
-//                    AppConfig.share.internal.settedJPushAlias = false
-//                    self.showRegisterPopView()
-//                } else {
-//                    Toast.showToast(title: msg)
-//                }
-//                return
-//            }
-//            let accountInfo = AccountModel.init(account: account, token: token, isLast: true, userInfo: model)
-//            AccountManager.share.addLoginAccountInfo(accountInfo)
-//            JPushHelper.instance.setAlias("\(model.id)")
-//            if isRegister {
-//                self.showRegisterPopView()
-//            } else {
-//                self.enterMainPage()
-//            }
-//        }
+        UserNetworkManager.getCurrentUser { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            self.view.isUserInteractionEnabled = true
+            self.loadingView.dismiss()
+            guard status, let model = model else {
+                // 注册时 只要用户请求成功，即使用户信息获取失败，也要进入主界面
+                if isRegister {
+                    AppConfig.share.internal.settedJPushAlias = false
+                    self.showRegisterPopView()
+                } else {
+                    Toast.showToast(title: msg)
+                }
+                return
+            }
+            let accountInfo = AccountModel.init(account: account, token: token, isLast: true, userInfo: model)
+            AccountManager.share.addLoginAccountInfo(accountInfo)
+            JPushHelper.instance.setAlias("\(model.id)")
+            if isRegister {
+                self.showRegisterPopView()
+            } else {
+                self.enterMainPage()
+            }
+        }
     }
 
 }

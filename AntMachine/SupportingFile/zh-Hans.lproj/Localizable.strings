@@ -65,6 +65,7 @@
 "login.type.password" = "账号密码登录";
 "login.type.smscode" = "短信验证登录";
 "login.forgetpwd" = "忘记密码?";
+"login.visitor.login" = "游客登录";
 
 "register.agreement.agree" = "注册即代表同意";
 "register.agreement" = "《链乎用户服务协议》";
