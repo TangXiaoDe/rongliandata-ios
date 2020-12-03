@@ -45,24 +45,24 @@ class ThemeConfig {
     }
 
     /// 主题色
-    var themeColor: UIColor = UIColor.init(hex: 0x6EEEFC)
+    var themeColor: UIColor = UIColor.init(hex: 0xF5BE41)
     /// 辅助色/次要色
     var minorColor: UIColor = UIColor.init(hex: 0x2D385C)
     /// 分割线颜色
-    var dividingColor: UIColor = UIColor.init(hex: 0x35426A)
+    var dividingColor: UIColor = UIColor.init(hex: 0xE2E2E2)
 
     /// 标题色(页面)
-    var titleColor: UIColor = UIColor.white
+    var titleColor: UIColor = UIColor.init(hex: 0x29313D)
     /// 正文颜色
-    var mainTextColor: UIColor = UIColor.white
-    var subMainTextColor: UIColor = UIColor.white
+    var mainTextColor: UIColor = UIColor.init(hex: 0x29313D)
+    var subMainTextColor: UIColor = UIColor.init(hex: 0x333333)
     /// 详情颜色
-    var detailTextColor: UIColor = UIColor.white
+    var detailTextColor: UIColor = UIColor.init(hex: 0x666666)
     /// 详情颜色
     var minorTextColor: UIColor = UIColor.init(hex: 0x8C97AC)
 
     /// 页面背景色(占位色)
-    var pageBgColor: UIColor = UIColor.init(hex: 0x202A46)
+    var pageBgColor: UIColor = UIColor.init(hex: 0xF6F6F6)
     /// 图片背景色(占位色)
     var imgBgColor: UIColor = UIColor.init(hex: 0x000000).withAlphaComponent(0.3)
 
@@ -77,19 +77,19 @@ class ThemeConfig {
     var inputPlaceColor: UIColor = UIColor.init(hex: 0x525C6E)
 
     /// 导航栏背景色
-    var navBarTintColor: UIColor = UIColor.init(hex: 0x2D385C)
+    var navBarTintColor: UIColor = UIColor.init(hex: 0xFFFFFF)
     /// 导航栏主题色 - 左右按钮item颜色
-    var navTintColor: UIColor = UIColor.init(hex: 0xFFFFFF)
+    var navTintColor: UIColor = UIColor.init(hex: 0x333333)
     /// 导航栏标题色
-    var navTitleColor: UIColor = UIColor.init(hex: 0xFFFFFF)
+    var navTitleColor: UIColor = UIColor.init(hex: 0x333333)
     /// 导航栏阴影颜色
-    var navShadowColor: UIColor = UIColor.init(hex: 0x202A46)   // 0xE2E2E2
+    var navShadowColor: UIColor = UIColor.init(hex: 0xE2E2E2)   // 0xE2E2E2
     
     /// 标签栏背景色
-    var tabBarTintColor: UIColor = UIColor.init(hex: 0x2D385C)
+    var tabBarTintColor: UIColor = UIColor.init(hex: 0xFFFFFF)
     /// 标签栏未选中色
-    var tabItemUnSelectedColor: UIColor = UIColor.init(hex: 0x8C97AC)
+    var tabItemUnSelectedColor: UIColor = UIColor.init(hex: 0xC7C6D1)
     /// 标签栏选中色
-    var tabItemSelectedColor: UIColor = UIColor.init(hex: 0x6EEEFC)
+    var tabItemSelectedColor: UIColor = UIColor.init(hex: 0xF5BE41)
 
 }
