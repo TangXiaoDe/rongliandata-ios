@@ -66,7 +66,7 @@ class ThemeConfig {
     var minorTextColor: UIColor = UIColor.init(hex: 0x8C97AC)
 
     /// 页面背景色(占位色)
-    var pageBgColor: UIColor = UIColor.init(hex: 0xF6F6F6)
+    var pageBgColor: UIColor = UIColor.init(hex: 0xF1F2F6)
     /// 图片背景色(占位色)
     var imgBgColor: UIColor = UIColor.init(hex: 0x000000).withAlphaComponent(0.3)
 
@@ -76,9 +76,9 @@ class ThemeConfig {
     var disableTitleColor: UIColor = UIColor.init(hex: 0x8C97AC)
 
     /// 输入框背景色
-    var inputBgColor: UIColor = UIColor.init(hex: 0x202A46)
+    var inputBgColor: UIColor = UIColor.init(hex: 0xFFFFFF)
     /// 输入框PlaceHolder文字颜色
-    var inputPlaceColor: UIColor = UIColor.init(hex: 0x525C6E)
+    var inputPlaceColor: UIColor = UIColor.init(hex: 0xC5CED9)
 
     /// 导航栏背景色
     var navBarTintColor: UIColor = UIColor.init(hex: 0xFFFFFF)

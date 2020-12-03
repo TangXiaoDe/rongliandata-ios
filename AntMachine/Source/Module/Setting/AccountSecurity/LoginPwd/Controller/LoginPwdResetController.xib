@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginPwdResetController" customModule="JXProject" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginPwdResetController" customModule="AntMachine" customModuleProvider="target">
             <connections>
                 <outlet property="accountField" destination="1EL-gG-GFF" id="2lB-rG-jHh"/>
                 <outlet property="areaCodeBtn" destination="HPb-TU-G55" id="O0K-R6-yx6"/>
@@ -30,8 +30,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVQ-W4-vVy" userLabel="ResetPwdBtn" customClass="CommonDoneBtn" customModule="JXProject" customModuleProvider="target">
-                    <rect key="frame" x="12" y="502" width="351" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVQ-W4-vVy" userLabel="ResetPwdBtn" customClass="CommonDoneBtn" customModule="AntMachine" customModuleProvider="target">
+                    <rect key="frame" x="12" y="472" width="351" height="44"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="XPG-Gg-uQD"/>
@@ -45,13 +45,13 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hnh-3C-gaW" userLabel="TopView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_login_pwd_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gJb-tw-BPq" userLabel="LogoView">
-                            <rect key="frame" x="144.5" y="40" width="118" height="103"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_login_cunlian_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gJb-tw-BPq" userLabel="LogoView">
+                            <rect key="frame" x="166" y="40" width="75" height="73"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="103" id="hfN-Ow-M3t"/>
-                                <constraint firstAttribute="width" constant="118" id="j0a-tg-Ihb"/>
+                                <constraint firstAttribute="height" constant="73" id="hfN-Ow-M3t"/>
+                                <constraint firstAttribute="width" constant="75" id="j0a-tg-Ihb"/>
                             </constraints>
                         </imageView>
                     </subviews>
@@ -63,7 +63,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s9i-WM-LH2" userLabel="CenterView">
-                    <rect key="frame" x="0.0" y="190" width="375" height="224"/>
+                    <rect key="frame" x="0.0" y="160" width="375" height="224"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wtu-BK-Zui" userLabel="ConfirmPwdView">
                             <rect key="frame" x="20" y="168" width="335" height="56"/>
@@ -315,10 +315,10 @@
     <resources>
         <image name="IMG_icon_pwd_hidden" width="17" height="8"/>
         <image name="IMG_icon_pwd_show" width="17" height="11"/>
+        <image name="IMG_login_cunlian_logo" width="74.5" height="73"/>
         <image name="IMG_login_icon_codedlock" width="16.5" height="17"/>
         <image name="IMG_login_icon_phone" width="15" height="22"/>
         <image name="IMG_login_icon_validation" width="17" height="19"/>
-        <image name="IMG_login_pwd_logo" width="117" height="83"/>
         <image name="IMG_login_reinput_correct" width="16" height="16"/>
         <image name="IMG_login_reinput_mistake" width="16" height="16"/>
         <image name="IMG_login_triangle" width="7.5" height="4"/>
