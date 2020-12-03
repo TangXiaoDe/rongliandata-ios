@@ -1,8 +1,8 @@
 //
 //  MineHomePlaceModel.swift
-//  JXProject
+//  AntMachine
 //
-//  Created by 小唐 on 2020/4/28.
+//  Created by 小唐 on 2020/12/3.
 //  Copyright © 2020 ChainOne. All rights reserved.
 //
 

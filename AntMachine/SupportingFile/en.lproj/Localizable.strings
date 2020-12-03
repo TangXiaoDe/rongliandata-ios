@@ -8,12 +8,8 @@
 
 
 // Tabbar名字
-"tabbar.imeet" = "iMeet";
-"tabbar.meet" = "Meet";
-"tabbar.mining" = "Mining";
-"tabbar.task" = "Task";
-"tabbar.square" = "Square";
-"tabbar.planet" = "Planet";
+"tabbar.home" = "Home";
+"tabbar.equip" = "Equip";
 "tabbar.mine" = "Mine";
 
 
@@ -65,6 +61,7 @@
 "login.type.password" = "Password Login";
 "login.type.smscode" = "SMSCode Login";
 "login.forgetpwd" = "Forget Password?";
+"login.visitor.login" = "Visitor Login";
 
 "register.agreement.agree" = "Register means agree";
 "register.agreement" = "《iMeet User Agreement》";

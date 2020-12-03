@@ -15,9 +15,8 @@ struct ServerAddressConfig {
     /// 接口版本 api/v2/ —— 单独的接口请求中可配置接口对应的版本
     /// 端口
 
-    //static let develop: ServerAddressConfig = ServerAddressConfig(address: "http://a.imeet.io/")
-    static let develop: ServerAddressConfig = ServerAddressConfig(address: "https://a.imeet.io/")
-    static let release: ServerAddressConfig = ServerAddressConfig(address: "https://www.immeet.com/")
+    static let develop: ServerAddressConfig = ServerAddressConfig(address: "http://b.myjq-ipfs.com/")
+    static let release: ServerAddressConfig = ServerAddressConfig(address: "http://b.myjq-ipfs.com/")
 
     init(address: String) {
         self.address = address

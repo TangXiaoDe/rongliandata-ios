@@ -132,6 +132,16 @@ extension AppUtil {
             hud.hide(animated: false)
         }
     }
+    
+    /// present出登录界面
+    class func presentLoginPage() -> Void {
+        let loginVC = LoginRegisterController.init()
+        let loginNC = BaseNavigationController.init(rootViewController: loginVC)
+        loginNC.modalPresentationStyle = .overCurrentContext
+        DispatchQueue.main.async {
+            RootManager.share.showRootVC.present(loginNC, animated: true, completion: nil)
+        }
+    }
 
 }
 
