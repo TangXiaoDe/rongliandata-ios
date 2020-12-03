@@ -19,10 +19,11 @@ protocol MineHomeIncomeInfoViewProtocol: class {
 
 class MineHomeIncomeInfoView: UIControl {
 
+    static var viewHeight: CGFloat {
+        return CGSize.init(width: 351, height: 140).scaleAspectForWidth(kScreenWidth - 2 * 12).height
+    }
     // MARK: - Internal Property
     let viewWidth: CGFloat
-    static let topHeight: CGFloat = 50
-    static let viewHeight: CGFloat = 125
     
     var model: AssetInfoModel? {
         didSet {
@@ -32,23 +33,24 @@ class MineHomeIncomeInfoView: UIControl {
     weak var delegate: MineHomeIncomeInfoViewProtocol?
 
     fileprivate let mainView: UIView = UIView()
-    fileprivate let topView: UIControl = UIControl()
-    fileprivate let myIncomeLabel: UILabel = UILabel()
-    fileprivate let allIncomeBtn: UIButton = UIButton(type: .custom)
-
-    fileprivate let bottomView: UIView = UIView()
-    
-    fileprivate let itemTagBase: Int = 250
-    /// 待结算
-    fileprivate var withdrawMoneyView: TopTitleBottomTitleControl!
-    /// 可提现
-    fileprivate var soonMoneyView: TopTitleBottomTitleControl!
+    fileprivate let bgImgView: UIImageView = UIImageView()
     /// 累计收益
-    fileprivate var totalMoneyView: TopTitleBottomTitleControl!
+    fileprivate var totalMoneyView: TopTitleBottomTitleControl = TopTitleBottomTitleControl()
+    /// 可提现
+    fileprivate var soonMoneyView: TopTitleBottomTitleControl = TopTitleBottomTitleControl()
+    /// 资产余额
+    fileprivate var balanceMoneyView: TopTitleBottomTitleControl = TopTitleBottomTitleControl()
+
     
     fileprivate let bottomMargin: CGFloat = 15
     
-    fileprivate let lrMargin: CGFloat = 15
+    fileprivate let lrMargin: CGFloat = 12
+    
+    fileprivate let bgViewSize: CGSize = CGSize.init(width: 351, height: 140).scaleAspectForWidth(kScreenWidth - 2 * 12)
+    
+    fileprivate var itemMaxWidth: CGFloat {
+        return (kScreenWidth - 2 * self.lrMargin)/3
+    }
 
     // MARK: - Private Property
 
@@ -91,98 +93,59 @@ extension MineHomeIncomeInfoView {
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
         mainView.backgroundColor = UIColor.white
         mainView.set(cornerRadius: 10)
-        let topViewH: CGFloat = MineHomeIncomeInfoView.topHeight
-        let bottomViewH: CGFloat = MineHomeIncomeInfoView.viewHeight - MineHomeIncomeInfoView.topHeight
-        // 1. topView
-        mainView.addSubview(self.topView)
-        self.initialTopView(self.topView)
-        self.topView.addTarget(self, action: #selector(myIncomeControlClick(_:)), for: .touchUpInside)
-        self.topView.snp.makeConstraints { (make) in
-            make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(topViewH)
+        mainView.addSubview(self.bgImgView)
+        self.bgImgView.image = UIImage.init(named: "IMG_mine_fil_bg")
+        self.bgImgView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
-        self.topView.addLineWithSide(.inBottom, color: UIColor(hex: 0xe2e2e2), thickness: 0.5, margin1: lrMargin, margin2: lrMargin)
-        // 2. bottomView
-        mainView.addSubview(self.bottomView)
-        self.initialBottomView(self.bottomView)
-        self.bottomView.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.topView.snp.bottom)
-            make.height.equalTo(bottomViewH)
+
+        mainView.addSubview(self.totalMoneyView)
+        self.totalMoneyView.topLabel.set(text: "FIL累计收入", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0xDBEBFF), alignment: .left)
+        self.totalMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 28, weight: .regular), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
+        self.totalMoneyView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(lrMargin)
+            make.top.equalToSuperview().offset(20)
+            make.width.equalTo(self.itemMaxWidth * 3)
+        }
+        self.totalMoneyView.bottomLabel.snp.remakeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.centerY.equalTo(self.totalMoneyView.topLabel.snp.centerY).offset(21)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+    
+        // soonMoneyView
+        mainView.addSubview(self.soonMoneyView)
+        self.soonMoneyView.topLabel.set(text: "可提现余额(FIL)", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0xDBEBFF), alignment: .left)
+        self.soonMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 18, weight: .regular), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
+        self.soonMoneyView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(lrMargin)
+            make.bottom.equalToSuperview().offset(-15)
+            make.width.equalTo(self.itemMaxWidth)
+        }
+        self.soonMoneyView.bottomLabel.snp.remakeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.centerY.equalTo(self.soonMoneyView.topLabel.snp.centerY).offset(21)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        // balanceMoneyView
+        mainView.addSubview(self.balanceMoneyView)
+        self.balanceMoneyView.topLabel.set(text: "资产余额(FIL)", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0xDBEBFF), alignment: .left)
+        self.balanceMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 18, weight: .regular), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
+        self.balanceMoneyView.snp.makeConstraints { (make) in
+            make.left.equalTo(self.soonMoneyView.snp.right)
+            make.width.equalTo(self.itemMaxWidth)
+            make.bottom.equalTo(self.soonMoneyView.snp.bottom)
+        }
+        self.balanceMoneyView.bottomLabel.snp.remakeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.centerY.equalTo(self.balanceMoneyView.topLabel.snp.centerY).offset(21)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
         }
     }
-    fileprivate func initialTopView(_ topView: UIView) -> Void {
-        // 1. myIncomeLabel
-        topView.addSubview(self.myIncomeLabel)
-        self.myIncomeLabel.set(text: "我的收益", font: UIFont.systemFont(ofSize: 15), textColor: UIColor(hex: 0x333333))
-        self.myIncomeLabel.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(self.lrMargin)
-        }
-        // 2. allIncomeBtn
-        topView.addSubview(self.allIncomeBtn)
-        self.allIncomeBtn.contentHorizontalAlignment = .right
-        self.allIncomeBtn.addTarget(self, action: #selector(allIncomeBtnClick(_:)), for: .touchUpInside)
-        self.allIncomeBtn.set(title: nil, titleColor: UIColor.init(hex: 0x333333), for: .normal)
-        self.allIncomeBtn.set(font: UIFont.systemFont(ofSize: 12))
-        self.allIncomeBtn.isUserInteractionEnabled = false
-        self.allIncomeBtn.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-lrMargin)
-        }
-        // allIncomeBtnRightIcon
-        let accessory: UIImage? = UIImage(named: "IMG_common_detail")
-        let accessorySize: CGSize = accessory?.size ?? CGSize.zero
-        let accessoryView: UIImageView = UIImageView(image: accessory)
-        self.allIncomeBtn.addSubview(accessoryView)
-        accessoryView.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.size.equalTo(accessorySize)
-        }
-        self.allIncomeBtn.contentEdgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: accessorySize.width + 5)
-    }
-    fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
-//        let items: [String] = ["待结算", "可提现", "累计收益"]
-        let items: [String] = ["可提现", "累计收益"]
-        // MARK: - TODO item布局应重新划分，主要是item的宽度计算问题
-        let itemMaxW: CGFloat = CGFloat(Int((self.viewWidth - lrMargin * 2.0) / CGFloat(items.count)))
-        let itemWidth: CGFloat = 54
-        for (index, item) in items.enumerated() {
-            let itemView: TopTitleBottomTitleControl = TopTitleBottomTitleControl()
-            itemView.topLabel.snp.remakeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.bottom.equalTo(itemView.snp.centerY).offset(-2)
-                make.left.right.equalToSuperview()
-            }
-            itemView.bottomLabel.snp.remakeConstraints { (make) in
-                make.top.equalTo(itemView.topLabel.snp.bottom).offset(0)
-                make.centerX.equalToSuperview()
-                make.left.right.equalToSuperview()
-                make.bottom.equalToSuperview()
-            }
-            itemView.bottomLabel.text = item
-            itemView.topLabel.textColor = AppColor.themeYellow
-            itemView.topLabel.font = UIFont.pingFangSCFont(size: 18, weight: .medium)
-            itemView.bottomLabel.textColor = UIColor.init(hex: 0x333333)
-            itemView.bottomLabel.textAlignment = .center
-            itemView.addTarget(self, action: #selector(mineIncomeBtnClick(_:)), for: .touchUpInside)
-            bottomView.addSubview(itemView)
-            itemView.tag = index + self.itemTagBase
-            itemView.snp.makeConstraints { (make) in
-                make.width.lessThanOrEqualTo(itemMaxW)
-                make.width.greaterThanOrEqualTo(itemWidth)
-                make.height.equalTo(60)
-                //make.top.equalToSuperview()
-                make.centerY.equalToSuperview()
-                let centerXMargin: CGFloat = lrMargin + itemMaxW * (CGFloat(index) + 0.5)
-                make.centerX.equalTo(bottomView.snp.leading).offset(centerXMargin)
-            }
-        }
-//        self.soonMoneyView = (bottomView.viewWithTag(self.itemTagBase + 0) as! TopTitleBottomTitleControl)
-        self.withdrawMoneyView = (bottomView.viewWithTag(self.itemTagBase + 0) as! TopTitleBottomTitleControl)
-        self.totalMoneyView = (bottomView.viewWithTag(self.itemTagBase + 1) as! TopTitleBottomTitleControl)
-    }
+
 }
 // MARK: - Private UI Xib加载后处理
 extension MineHomeIncomeInfoView {
@@ -198,19 +161,8 @@ extension MineHomeIncomeInfoView {
         guard let model = model else {
             return
         }
-        /// 可提现
-//        var withdrawAtt = NSAttributedString.textAttTuples()
-//        withdrawAtt.append((str: "可提现", font: UIFont.pingFangSCFont(size: 12, weight: .regular), color: AppColor.mainText))
-//        withdrawAtt.append((str: "(CNY)", font: UIFont.pingFangSCFont(size: 12, weight: .regular), color: UIColor.init(hex: 0x999999)))
-//        self.withdrawMoneyView.bottomLabel.attributedText = NSAttributedString.attribute(withdrawAtt)
-//        self.withdrawMoneyView.topLabel.text = model.balance.decimalProcess(digits: 2)
-//        /// 累计收益
-//        var totalAtt = NSAttributedString.textAttTuples()
-//        totalAtt.append((str: "累计收益", font: UIFont.pingFangSCFont(size: 12, weight: .regular), color: AppColor.mainText))
-//        totalAtt.append((str: "(CNY)", font: UIFont.pingFangSCFont(size: 12, weight: .regular), color: UIColor.init(hex: 0x999999)))
-//        self.totalMoneyView.bottomLabel.attributedText = NSAttributedString.attribute(totalAtt)
-//        self.totalMoneyView.topLabel.text = model.total.decimalProcess(digits: 2)
-
+//        self.soonMoneyView.bottomLabel.text = model.balance.decimalProcess(digits: 4)
+//        self.balanceMoneyView.bottomLabel.text = model.balance.decimalProcess(digits: 4)
         self.layoutIfNeeded()
     }
 }

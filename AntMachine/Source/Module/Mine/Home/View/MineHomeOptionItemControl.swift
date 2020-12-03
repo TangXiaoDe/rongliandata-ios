@@ -124,7 +124,7 @@ extension MineHomeOptionItemControl {
         }
         // 2. accessoryView
         self.addSubview(self.accessoryView)
-        self.accessoryView.image = UIImage.init(named: "IMG_common_detail")
+        self.accessoryView.image = UIImage.init(named: "IMG_mine_list_arrow")
         self.accessoryView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-lrMargin)

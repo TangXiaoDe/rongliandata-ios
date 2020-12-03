@@ -42,7 +42,7 @@ class MineHomeOptionView: UIView {
     fileprivate var sections: [[[String: String]]] = [[[:]]]
 
     fileprivate let lrMargin: CGFloat = 0
-    fileprivate let verMargin: CGFloat = 12
+    fileprivate let verMargin: CGFloat = 10
     fileprivate let tbMargin: CGFloat = 0
     fileprivate let itemTagBase: Int = 250
     fileprivate weak var versionItemControl: MineHomeOptionItemControl!
@@ -94,13 +94,12 @@ extension MineHomeOptionView {
 
     // 界面布局
     fileprivate func initialUI() -> Void {
-        let walletItem: [String: String] = ["title":"我的钱包", "image":"IMG_mine_icon_list_tianxie"]
-        let marketItem: [String: String] = ["title":"我的市场", "image":"IMG_mine_icon_list_shezhi"]
-        let taskItem: [String: String] = ["title":"我的任务", "image":"IMG_mine_icon_list_kefu"]
-        let inviteItem: [String: String] = ["title":"邀请好友", "image":"IMG_mine_icon_list_bangzhu"]
-        let settingItem: [String: String] = ["title":"设置", "image":"IMG_mine_icon_list_banben"]
-        let normalItems: [[[String: String]]] = [[walletItem, marketItem, taskItem, inviteItem, settingItem]]
-        let shieldItems: [[[String: String]]] = [[inviteItem, settingItem]]
+        let accountItem: [String: String] = ["title":"账户安全", "image":"IMG_mine_icon_zhaq"]
+        let userInfoItem: [String: String] = ["title":"个人资料", "image":"IMG_mine_icon_zl"]
+        let clearItem: [String: String] = ["title":"清除缓存", "image":"IMG_mine_icon_qc"]
+        let logoutItem: [String: String] = ["title":"退出登录", "image":"IMG_mine_icon_tc"]
+        let normalItems: [[[String: String]]] = [[accountItem, userInfoItem], [clearItem, logoutItem]]
+        let shieldItems: [[[String: String]]] = [[accountItem, userInfoItem], [clearItem, logoutItem]]
         self.sections = AppConfig.share.shield.currentNeedShield ? shieldItems : normalItems
         self.setupWithSections(self.sections)
     }
@@ -133,9 +132,10 @@ extension MineHomeOptionView {
             for (jndex, dict) in dictArray.enumerated() {
                 let itemControl = MineHomeOptionItemControl()
                 itemControl.showAccessory = true
-                itemControl.showImage = false
+                itemControl.showImage = true
                 sectionView.addSubview(itemControl)
                 itemControl.title = dict["title"]
+                itemControl.iconImgView.image = UIImage.init(named: dict["image"] ?? "")
                 itemControl.tag = self.itemTagBase + itemIndex
                 itemControl.addTarget(self, action: #selector(itemControlClick(_:)), for: .touchUpInside)
                 itemControl.bottomLine.isHidden = (jndex == dictArray.count - 1)
@@ -173,16 +173,14 @@ extension MineHomeOptionView {
             return
         }
         switch title {
-        case "我的钱包":
+        case "账户安全":
             self.delegate?.optionView(self, didSelectedAsset: itemControl)
-        case "我的市场":
+        case "个人资料":
             self.delegate?.optionView(self, didSelectedMarket: itemControl)
-        case "我的任务":
+        case "清除缓存":
             self.delegate?.optionView(self, didSelectedTask: itemControl)
-        case "邀请好友":
+        case "退出登录":
             self.delegate?.optionView(self, didSelectedInviteUser: itemControl)
-        case "设置":
-            self.delegate?.optionView(self, didSelectedSetting: itemControl)
         default:
             break
         }
