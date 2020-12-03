@@ -8,12 +8,8 @@
 
 
 // Tabbar名字
-"tabbar.imeet" = "iMeet";
-"tabbar.meet" = "Meet";
-"tabbar.mining" = "Mining";
-"tabbar.task" = "Task";
-"tabbar.square" = "Square";
-"tabbar.planet" = "Planet";
+"tabbar.home" = "Home";
+"tabbar.equip" = "Equip";
 "tabbar.mine" = "Mine";
 
 

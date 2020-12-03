@@ -256,11 +256,6 @@
 		539DE17C2578985300A343BF /* AppDelegate+JPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE0532578985200A343BF /* AppDelegate+JPush.swift */; };
 		539DE17D2578985300A343BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE0542578985200A343BF /* AppDelegate.swift */; };
 		539DE1892578985300A343BF /* MainTabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE0662578985200A343BF /* MainTabBarController+Extension.swift */; };
-		539DE18A2578985300A343BF /* ThirdHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE0682578985200A343BF /* ThirdHomeController.swift */; };
-		539DE18B2578985300A343BF /* FirstHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE0692578985200A343BF /* FirstHomeController.swift */; };
-		539DE18C2578985300A343BF /* FifthHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE06A2578985200A343BF /* FifthHomeController.swift */; };
-		539DE18D2578985300A343BF /* FourthHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE06B2578985200A343BF /* FourthHomeController.swift */; };
-		539DE18E2578985300A343BF /* SecondHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE06C2578985200A343BF /* SecondHomeController.swift */; };
 		539DE18F2578985300A343BF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE06D2578985200A343BF /* MainTabBarController.swift */; };
 		539DE1902578985300A343BF /* TabbarItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE06E2578985200A343BF /* TabbarItemModel.swift */; };
 		539DE1912578985300A343BF /* AYBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 539DE0722578985200A343BF /* AYBubbleView.m */; };
@@ -322,6 +317,33 @@
 		539DE2FE2578C72600A343BF /* PasswordRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE2FC2578C72600A343BF /* PasswordRequestInfo.swift */; };
 		539DE3352578C8B500A343BF /* AccountRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3332578C8B500A343BF /* AccountRequestInfo.swift */; };
 		539DE3362578C8B500A343BF /* AccountNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3342578C8B500A343BF /* AccountNetworkManager.swift */; };
+		539DE3722578D1D900A343BF /* FirstPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3662578D1D800A343BF /* FirstPageController.swift */; };
+		539DE3732578D1D900A343BF /* FPHomeQuotationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3682578D1D900A343BF /* FPHomeQuotationItemModel.swift */; };
+		539DE3742578D1D900A343BF /* FPHomeIPFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3692578D1D900A343BF /* FPHomeIPFSModel.swift */; };
+		539DE3752578D1D900A343BF /* FirstPageHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE36A2578D1D900A343BF /* FirstPageHomeModel.swift */; };
+		539DE3762578D1D900A343BF /* FPHomeOrePoolItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE36C2578D1D900A343BF /* FPHomeOrePoolItemView.swift */; };
+		539DE3772578D1D900A343BF /* FPHomeQuotationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE36D2578D1D900A343BF /* FPHomeQuotationItemView.swift */; };
+		539DE3782578D1D900A343BF /* FPHomeOrePoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE36E2578D1D900A343BF /* FPHomeOrePoolView.swift */; };
+		539DE3792578D1D900A343BF /* XDMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE36F2578D1D900A343BF /* XDMarqueeView.swift */; };
+		539DE37A2578D1D900A343BF /* FPHomeQuotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3702578D1D900A343BF /* FPHomeQuotationView.swift */; };
+		539DE37B2578D1D900A343BF /* FPHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3712578D1D900A343BF /* FPHomeHeaderView.swift */; };
+		539DE3822578D1F600A343BF /* FirstPageRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3802578D1F600A343BF /* FirstPageRequestInfo.swift */; };
+		539DE3832578D1F600A343BF /* FirstPageNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3812578D1F600A343BF /* FirstPageNetworkManager.swift */; };
+		539DE38C2578D27300A343BF /* EquipmentHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE38B2578D27300A343BF /* EquipmentHomeController.swift */; };
+		539DE3942578D28C00A343BF /* EquipmentListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3932578D28C00A343BF /* EquipmentListModel.swift */; };
+		539DE3992578D29E00A343BF /* EquipmentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3982578D29E00A343BF /* EquipmentListCell.swift */; };
+		539DE3A82578D2F400A343BF /* MineHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3A72578D2F400A343BF /* MineHomeController.swift */; };
+		539DE3B02578D30000A343BF /* MineHomePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3AF2578D30000A343BF /* MineHomePlaceView.swift */; };
+		539DE3B82578D30E00A343BF /* MineHomePlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3B72578D30E00A343BF /* MineHomePlaceModel.swift */; };
+		539DE3C62578D3F300A343BF /* MessageHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3BE2578D3F300A343BF /* MessageHomeController.swift */; };
+		539DE3C72578D3F300A343BF /* MessageListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3BF2578D3F300A343BF /* MessageListController.swift */; };
+		539DE3C82578D3F300A343BF /* MessageUnreadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3C12578D3F300A343BF /* MessageUnreadModel.swift */; };
+		539DE3C92578D3F300A343BF /* MessageListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3C22578D3F300A343BF /* MessageListModel.swift */; };
+		539DE3CA2578D3F300A343BF /* MessageHomeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3C42578D3F300A343BF /* MessageHomeListCell.swift */; };
+		539DE3CB2578D3F300A343BF /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3C52578D3F300A343BF /* MessageListCell.swift */; };
+		539DE3D22578D41200A343BF /* MessageNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3D02578D41200A343BF /* MessageNetworkManager.swift */; };
+		539DE3D32578D41200A343BF /* MessageRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3D12578D41200A343BF /* MessageRequestInfo.swift */; };
+		539DE3D82578D4C900A343BF /* MallHomeNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3D72578D4C900A343BF /* MallHomeNavBar.swift */; };
 		53A6F41524E0FA3500E8C9B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2CC24E0FA3200E8C9B4 /* Assets.xcassets */; };
 		53A6F41624E0FA3500E8C9B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2CE24E0FA3200E8C9B4 /* README.md */; };
 		53A6F41724E0FA3500E8C9B4 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2D024E0FA3200E8C9B4 /* LaunchScreen.strings */; };
@@ -614,11 +636,6 @@
 		539DE0532578985200A343BF /* AppDelegate+JPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+JPush.swift"; sourceTree = "<group>"; };
 		539DE0542578985200A343BF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		539DE0662578985200A343BF /* MainTabBarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainTabBarController+Extension.swift"; sourceTree = "<group>"; };
-		539DE0682578985200A343BF /* ThirdHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdHomeController.swift; sourceTree = "<group>"; };
-		539DE0692578985200A343BF /* FirstHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstHomeController.swift; sourceTree = "<group>"; };
-		539DE06A2578985200A343BF /* FifthHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FifthHomeController.swift; sourceTree = "<group>"; };
-		539DE06B2578985200A343BF /* FourthHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthHomeController.swift; sourceTree = "<group>"; };
-		539DE06C2578985200A343BF /* SecondHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondHomeController.swift; sourceTree = "<group>"; };
 		539DE06D2578985200A343BF /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		539DE06E2578985200A343BF /* TabbarItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarItemModel.swift; sourceTree = "<group>"; };
 		539DE0712578985200A343BF /* AYBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AYBubbleView.h; sourceTree = "<group>"; };
@@ -688,6 +705,33 @@
 		539DE2FC2578C72600A343BF /* PasswordRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRequestInfo.swift; sourceTree = "<group>"; };
 		539DE3332578C8B500A343BF /* AccountRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountRequestInfo.swift; sourceTree = "<group>"; };
 		539DE3342578C8B500A343BF /* AccountNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountNetworkManager.swift; sourceTree = "<group>"; };
+		539DE3662578D1D800A343BF /* FirstPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageController.swift; sourceTree = "<group>"; };
+		539DE3682578D1D900A343BF /* FPHomeQuotationItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeQuotationItemModel.swift; sourceTree = "<group>"; };
+		539DE3692578D1D900A343BF /* FPHomeIPFSModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeIPFSModel.swift; sourceTree = "<group>"; };
+		539DE36A2578D1D900A343BF /* FirstPageHomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageHomeModel.swift; sourceTree = "<group>"; };
+		539DE36C2578D1D900A343BF /* FPHomeOrePoolItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeOrePoolItemView.swift; sourceTree = "<group>"; };
+		539DE36D2578D1D900A343BF /* FPHomeQuotationItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeQuotationItemView.swift; sourceTree = "<group>"; };
+		539DE36E2578D1D900A343BF /* FPHomeOrePoolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeOrePoolView.swift; sourceTree = "<group>"; };
+		539DE36F2578D1D900A343BF /* XDMarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XDMarqueeView.swift; sourceTree = "<group>"; };
+		539DE3702578D1D900A343BF /* FPHomeQuotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeQuotationView.swift; sourceTree = "<group>"; };
+		539DE3712578D1D900A343BF /* FPHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeHeaderView.swift; sourceTree = "<group>"; };
+		539DE3802578D1F600A343BF /* FirstPageRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageRequestInfo.swift; sourceTree = "<group>"; };
+		539DE3812578D1F600A343BF /* FirstPageNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageNetworkManager.swift; sourceTree = "<group>"; };
+		539DE38B2578D27300A343BF /* EquipmentHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentHomeController.swift; sourceTree = "<group>"; };
+		539DE3932578D28C00A343BF /* EquipmentListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentListModel.swift; sourceTree = "<group>"; };
+		539DE3982578D29E00A343BF /* EquipmentListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentListCell.swift; sourceTree = "<group>"; };
+		539DE3A72578D2F400A343BF /* MineHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineHomeController.swift; sourceTree = "<group>"; };
+		539DE3AF2578D30000A343BF /* MineHomePlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineHomePlaceView.swift; sourceTree = "<group>"; };
+		539DE3B72578D30E00A343BF /* MineHomePlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineHomePlaceModel.swift; sourceTree = "<group>"; };
+		539DE3BE2578D3F300A343BF /* MessageHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHomeController.swift; sourceTree = "<group>"; };
+		539DE3BF2578D3F300A343BF /* MessageListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListController.swift; sourceTree = "<group>"; };
+		539DE3C12578D3F300A343BF /* MessageUnreadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageUnreadModel.swift; sourceTree = "<group>"; };
+		539DE3C22578D3F300A343BF /* MessageListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListModel.swift; sourceTree = "<group>"; };
+		539DE3C42578D3F300A343BF /* MessageHomeListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHomeListCell.swift; sourceTree = "<group>"; };
+		539DE3C52578D3F300A343BF /* MessageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
+		539DE3D02578D41200A343BF /* MessageNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNetworkManager.swift; sourceTree = "<group>"; };
+		539DE3D12578D41200A343BF /* MessageRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequestInfo.swift; sourceTree = "<group>"; };
+		539DE3D72578D4C900A343BF /* MallHomeNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallHomeNavBar.swift; sourceTree = "<group>"; };
 		53A6F2CC24E0FA3200E8C9B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53A6F2CD24E0FA3200E8C9B4 /* AntMachine.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = AntMachine.entitlements; sourceTree = "<group>"; };
 		53A6F2CE24E0FA3200E8C9B4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1113,6 +1157,8 @@
 		539DDF462578985200A343BF /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				539DE3CF2578D41200A343BF /* Message */,
+				539DE37F2578D1F600A343BF /* FirstPage */,
 				539DE3322578C8B500A343BF /* Account */,
 				539DE2FA2578C72600A343BF /* Password */,
 				539DE2BB2578C4F300A343BF /* User */,
@@ -1371,6 +1417,7 @@
 		539DDF932578985200A343BF /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				539DE39D2578D2D000A343BF /* Mine */,
 				539DDF942578985200A343BF /* ThirdConfig_develop.plist */,
 				539DDF952578985200A343BF /* AppInternalConfig.swift */,
 				539DDF962578985200A343BF /* ThirdConfig.swift */,
@@ -1389,6 +1436,10 @@
 		539DDF9F2578985200A343BF /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				539DE3BC2578D3F300A343BF /* Message */,
+				539DE3A22578D2E400A343BF /* Mine */,
+				539DE3872578D25B00A343BF /* Equipment */,
+				539DE3642578D1D800A343BF /* FirstPage */,
 				539DE21F2578C2BE00A343BF /* Setting */,
 				539DDFA02578985200A343BF /* Guide */,
 				539DDFAE2578985200A343BF /* Test */,
@@ -1883,23 +1934,10 @@
 			isa = PBXGroup;
 			children = (
 				539DE0662578985200A343BF /* MainTabBarController+Extension.swift */,
-				539DE0672578985200A343BF /* MainChild */,
 				539DE06D2578985200A343BF /* MainTabBarController.swift */,
 				539DE06E2578985200A343BF /* TabbarItemModel.swift */,
 			);
 			path = MainTabBar;
-			sourceTree = "<group>";
-		};
-		539DE0672578985200A343BF /* MainChild */ = {
-			isa = PBXGroup;
-			children = (
-				539DE0682578985200A343BF /* ThirdHomeController.swift */,
-				539DE0692578985200A343BF /* FirstHomeController.swift */,
-				539DE06A2578985200A343BF /* FifthHomeController.swift */,
-				539DE06B2578985200A343BF /* FourthHomeController.swift */,
-				539DE06C2578985200A343BF /* SecondHomeController.swift */,
-			);
-			path = MainChild;
 			sourceTree = "<group>";
 		};
 		539DE06F2578985200A343BF /* Library */ = {
@@ -2259,6 +2297,219 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
+		539DE3642578D1D800A343BF /* FirstPage */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3652578D1D800A343BF /* Controller */,
+				539DE3672578D1D800A343BF /* Model */,
+				539DE36B2578D1D900A343BF /* View */,
+			);
+			path = FirstPage;
+			sourceTree = "<group>";
+		};
+		539DE3652578D1D800A343BF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3662578D1D800A343BF /* FirstPageController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		539DE3672578D1D800A343BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3682578D1D900A343BF /* FPHomeQuotationItemModel.swift */,
+				539DE3692578D1D900A343BF /* FPHomeIPFSModel.swift */,
+				539DE36A2578D1D900A343BF /* FirstPageHomeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		539DE36B2578D1D900A343BF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3D72578D4C900A343BF /* MallHomeNavBar.swift */,
+				539DE36C2578D1D900A343BF /* FPHomeOrePoolItemView.swift */,
+				539DE36D2578D1D900A343BF /* FPHomeQuotationItemView.swift */,
+				539DE36E2578D1D900A343BF /* FPHomeOrePoolView.swift */,
+				539DE36F2578D1D900A343BF /* XDMarqueeView.swift */,
+				539DE3702578D1D900A343BF /* FPHomeQuotationView.swift */,
+				539DE3712578D1D900A343BF /* FPHomeHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		539DE37F2578D1F600A343BF /* FirstPage */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3802578D1F600A343BF /* FirstPageRequestInfo.swift */,
+				539DE3812578D1F600A343BF /* FirstPageNetworkManager.swift */,
+			);
+			path = FirstPage;
+			sourceTree = "<group>";
+		};
+		539DE3872578D25B00A343BF /* Equipment */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3882578D25B00A343BF /* Controller */,
+				539DE3892578D25B00A343BF /* Model */,
+				539DE38A2578D25B00A343BF /* View */,
+			);
+			path = Equipment;
+			sourceTree = "<group>";
+		};
+		539DE3882578D25B00A343BF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				539DE38B2578D27300A343BF /* EquipmentHomeController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		539DE3892578D25B00A343BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3932578D28C00A343BF /* EquipmentListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		539DE38A2578D25B00A343BF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3982578D29E00A343BF /* EquipmentListCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		539DE39D2578D2D000A343BF /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				539DE39E2578D2D000A343BF /* Home */,
+			);
+			name = Mine;
+			path = AntMachine/Source/Module/Mine;
+			sourceTree = SOURCE_ROOT;
+		};
+		539DE39E2578D2D000A343BF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				539DE39F2578D2D000A343BF /* Controller */,
+				539DE3A02578D2D000A343BF /* Model */,
+				539DE3A12578D2D000A343BF /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		539DE39F2578D2D000A343BF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		539DE3A02578D2D000A343BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		539DE3A12578D2D000A343BF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		539DE3A22578D2E400A343BF /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3A32578D2E400A343BF /* Home */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		539DE3A32578D2E400A343BF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3A42578D2E400A343BF /* Controller */,
+				539DE3A52578D2E400A343BF /* Model */,
+				539DE3A62578D2E400A343BF /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		539DE3A42578D2E400A343BF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3A72578D2F400A343BF /* MineHomeController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		539DE3A52578D2E400A343BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3B72578D30E00A343BF /* MineHomePlaceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		539DE3A62578D2E400A343BF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3AF2578D30000A343BF /* MineHomePlaceView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		539DE3BC2578D3F300A343BF /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3BD2578D3F300A343BF /* Controller */,
+				539DE3C02578D3F300A343BF /* Model */,
+				539DE3C32578D3F300A343BF /* View */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		539DE3BD2578D3F300A343BF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3BE2578D3F300A343BF /* MessageHomeController.swift */,
+				539DE3BF2578D3F300A343BF /* MessageListController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		539DE3C02578D3F300A343BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3C12578D3F300A343BF /* MessageUnreadModel.swift */,
+				539DE3C22578D3F300A343BF /* MessageListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		539DE3C32578D3F300A343BF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3C42578D3F300A343BF /* MessageHomeListCell.swift */,
+				539DE3C52578D3F300A343BF /* MessageListCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		539DE3CF2578D41200A343BF /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				539DE3D02578D41200A343BF /* MessageNetworkManager.swift */,
+				539DE3D12578D41200A343BF /* MessageRequestInfo.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		53A6F12C24E0FA2E00E8C9B4 /* AntMachine */ = {
 			isa = PBXGroup;
 			children = (
@@ -2603,6 +2854,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				539DE3C82578D3F300A343BF /* MessageUnreadModel.swift in Sources */,
 				539DE09D2578985300A343BF /* Kingfisher+Extension.swift in Sources */,
 				539DE1732578985300A343BF /* BaseLabel.swift in Sources */,
 				539DE1692578985300A343BF /* PageDefaultEmptyView.swift in Sources */,
@@ -2623,7 +2875,6 @@
 				539DE0C52578985300A343BF /* XDWebViwSourceType.swift in Sources */,
 				539DE0E02578985300A343BF /* PicturesThumbView.swift in Sources */,
 				539DE2142578C18700A343BF /* SmsCodeLoginInputView.swift in Sources */,
-				539DE18C2578985300A343BF /* FifthHomeController.swift in Sources */,
 				539DE0952578985300A343BF /* DataBaseManager.swift in Sources */,
 				539DE0F82578985300A343BF /* MomentGuideController.swift in Sources */,
 				539DE2842578C2BF00A343BF /* PhoneBindController.swift in Sources */,
@@ -2645,6 +2896,7 @@
 				539DE10F2578985300A343BF /* UnreadBubbleView.swift in Sources */,
 				539DE0FB2578985300A343BF /* TestTextView.swift in Sources */,
 				539DE15E2578985300A343BF /* OrderListEmptyView.swift in Sources */,
+				539DE37B2578D1D900A343BF /* FPHomeHeaderView.swift in Sources */,
 				539DE1382578985300A343BF /* AppLoadingView.swift in Sources */,
 				539DE0D22578985300A343BF /* ProjectFont.swift in Sources */,
 				539DE13B2578985300A343BF /* PopViewUtil.swift in Sources */,
@@ -2654,6 +2906,8 @@
 				539DE1372578985300A343BF /* IndicatorWindowTop.swift in Sources */,
 				539DE14B2578985300A343BF /* AppHomeNavStatusView.swift in Sources */,
 				539DE1112578985300A343BF /* BubbleDrawTestController.swift in Sources */,
+				539DE3D82578D4C900A343BF /* MallHomeNavBar.swift in Sources */,
+				539DE3942578D28C00A343BF /* EquipmentListModel.swift in Sources */,
 				539DE1752578985300A343BF /* BaseTableView.swift in Sources */,
 				539DE12A2578985300A343BF /* AdvertIcarouselBannerView.swift in Sources */,
 				539DE0FF2578985300A343BF /* XDPushAnimation.swift in Sources */,
@@ -2675,11 +2929,13 @@
 				539DE0B12578985300A343BF /* AppFont.swift in Sources */,
 				539DE1592578985300A343BF /* ListEmptyPlaceHolderView.swift in Sources */,
 				539DE1742578985300A343BF /* BaseControl.swift in Sources */,
+				539DE3752578D1D900A343BF /* FirstPageHomeModel.swift in Sources */,
 				539DE2A82578C2BF00A343BF /* UserInfoHeaderView.swift in Sources */,
 				539DE12B2578985300A343BF /* AdvertBannerItemView.swift in Sources */,
 				539DE0DB2578985300A343BF /* PhoneUtil.swift in Sources */,
 				539DE0A72578985300A343BF /* UITextField+Extension.swift in Sources */,
 				539DE15F2578985300A343BF /* SettingItemCell.swift in Sources */,
+				539DE3832578D1F600A343BF /* FirstPageNetworkManager.swift in Sources */,
 				539DE0B32578985300A343BF /* AccountModel.swift in Sources */,
 				539DE0C02578985300A343BF /* NetworkManager.swift in Sources */,
 				539DE1712578985300A343BF /* BaseTextView.swift in Sources */,
@@ -2688,7 +2944,6 @@
 				539DE1922578985300A343BF /* HQFlowView.m in Sources */,
 				539DE0F92578985300A343BF /* NoviceGuideManager.swift in Sources */,
 				539DE10E2578985300A343BF /* BubbleTestController.swift in Sources */,
-				539DE18E2578985300A343BF /* SecondHomeController.swift in Sources */,
 				539DE11E2578985300A343BF /* UserExtraModel.swift in Sources */,
 				539DE2192578C18700A343BF /* RegisterView.swift in Sources */,
 				539DE10D2578985300A343BF /* TextViewTestController.swift in Sources */,
@@ -2706,6 +2961,7 @@
 				539DE2A02578C2BF00A343BF /* LocalSettingModel.swift in Sources */,
 				539DE0AF2578985300A343BF /* AppNotificationName.swift in Sources */,
 				5394398B24F8A8A50097DCAA /* ResourcePlacePicture.swift in Sources */,
+				539DE3722578D1D900A343BF /* FirstPageController.swift in Sources */,
 				539DE09A2578985300A343BF /* SelectedAreaModel.swift in Sources */,
 				539DE08D2578985300A343BF /* UserExtraObject.swift in Sources */,
 				539DE0F12578985300A343BF /* ThirdChildConfig.swift in Sources */,
@@ -2713,11 +2969,14 @@
 				539DE0CF2578985300A343BF /* AlipayResultModel.swift in Sources */,
 				539DE12C2578985300A343BF /* SearchViewController.swift in Sources */,
 				539DE2A52578C2BF00A343BF /* UserNameUpdateController.swift in Sources */,
+				539DE3B82578D30E00A343BF /* MineHomePlaceModel.swift in Sources */,
 				539DE1342578985300A343BF /* ShareManager.swift in Sources */,
 				539DE1482578985300A343BF /* PublishVideoModel.swift in Sources */,
+				539DE3C62578D3F300A343BF /* MessageHomeController.swift in Sources */,
 				539DE1232578985300A343BF /* AdvertHelper.swift in Sources */,
 				539DE1132578985300A343BF /* RedDotBubbleView.swift in Sources */,
 				539DE0C92578985300A343BF /* XDRefreshHeader.swift in Sources */,
+				539DE3CB2578D3F300A343BF /* MessageListCell.swift in Sources */,
 				539DE0D02578985300A343BF /* PayUtil.swift in Sources */,
 				539DE2122578C18700A343BF /* LoginRegisterController.swift in Sources */,
 				539DE1792578985300A343BF /* AppDelegate+WxApi.swift in Sources */,
@@ -2734,9 +2993,9 @@
 				539DE0C62578985300A343BF /* XDWKWebViewController.swift in Sources */,
 				539DE10C2578985300A343BF /* TestPopInteractiveController.swift in Sources */,
 				539DE0972578985300A343BF /* AreaSelectDemoController.swift in Sources */,
+				539DE3A82578D2F400A343BF /* MineHomeController.swift in Sources */,
 				539DE13D2578985300A343BF /* DoubleIconControl.swift in Sources */,
 				539DE18F2578985300A343BF /* MainTabBarController.swift in Sources */,
-				539DE18A2578985300A343BF /* ThirdHomeController.swift in Sources */,
 				539DE0A52578985300A343BF /* UIViewController+Extension.swift in Sources */,
 				539DE21B2578C18700A343BF /* LoginRegisterSwitchView.swift in Sources */,
 				539DE14A2578985300A343BF /* PublishImageModel.swift in Sources */,
@@ -2750,15 +3009,17 @@
 				539DE1102578985300A343BF /* BubbleDrawTestView.swift in Sources */,
 				539DE1952578985300A343BF /* CWAIMIndexBar.m in Sources */,
 				539DE1012578985300A343BF /* TestDismissInteractiveController.swift in Sources */,
-				539DE18D2578985300A343BF /* FourthHomeController.swift in Sources */,
 				539DE1442578985300A343BF /* TitleValueControl.swift in Sources */,
 				539DE16B2578985300A343BF /* PageDefaultLoadingView.swift in Sources */,
+				539DE3D32578D41200A343BF /* MessageRequestInfo.swift in Sources */,
 				539DE0D62578985300A343BF /* Constant.swift in Sources */,
 				539DE1302578985300A343BF /* SearchHistorySectionHeader.swift in Sources */,
 				539DE1702578985300A343BF /* BaseCollectionView.swift in Sources */,
 				539DE0D82578985300A343BF /* PickerPopView.swift in Sources */,
 				539DE12D2578985300A343BF /* SearchHistoryController.swift in Sources */,
+				539DE3762578D1D900A343BF /* FPHomeOrePoolItemView.swift in Sources */,
 				539DE0C82578985300A343BF /* XDRefreshFooter.swift in Sources */,
+				539DE38C2578D27300A343BF /* EquipmentHomeController.swift in Sources */,
 				539DE0E42578985300A343BF /* UploadTokenModel.swift in Sources */,
 				539DE0CB2578985300A343BF /* TCWebCodesResultModel.swift in Sources */,
 				539DE0982578985300A343BF /* AreaManager.swift in Sources */,
@@ -2775,7 +3036,9 @@
 				539DE0CD2578985300A343BF /* CashPayManager.swift in Sources */,
 				539DE27C2578C2BF00A343BF /* SettingCenterTitleCell.swift in Sources */,
 				539DE2A72578C2BF00A343BF /* UserInfoControl.swift in Sources */,
+				539DE3B02578D30000A343BF /* MineHomePlaceView.swift in Sources */,
 				539DE0912578985300A343BF /* AccountObject.swift in Sources */,
+				539DE3782578D1D900A343BF /* FPHomeOrePoolView.swift in Sources */,
 				539DE13A2578985300A343BF /* ToastUtil.swift in Sources */,
 				539DE1942578985300A343BF /* HQImagePageControl.m in Sources */,
 				539DE1052578985300A343BF /* XDPresentationController.swift in Sources */,
@@ -2796,7 +3059,6 @@
 				539DE1022578985300A343BF /* TestPresentationController.swift in Sources */,
 				539DE2BE2578C4F300A343BF /* UserRequestInfo.swift in Sources */,
 				539DE28B2578C2BF00A343BF /* PayPwdSetController.swift in Sources */,
-				539DE18B2578985300A343BF /* FirstHomeController.swift in Sources */,
 				539DE1462578985300A343BF /* IconTitleValueView.swift in Sources */,
 				539DE1762578985300A343BF /* BaseTextField.swift in Sources */,
 				539DE27F2578C2BF00A343BF /* PhoneVerityController.swift in Sources */,
@@ -2810,10 +3072,13 @@
 				539DE2782578C2BF00A343BF /* SettingHomeController.swift in Sources */,
 				539DE09E2578985300A343BF /* JPushHelper.swift in Sources */,
 				539DE2862578C2BF00A343BF /* LoginPwdUpdateController.swift in Sources */,
+				539DE3D22578D41200A343BF /* MessageNetworkManager.swift in Sources */,
 				539DE1542578985300A343BF /* CommonShowToastView.swift in Sources */,
 				539DE1612578985300A343BF /* SettingItemModel.swift in Sources */,
 				539DE1932578985300A343BF /* HQIndexBannerSubview.m in Sources */,
 				539DE0882578985300A343BF /* AdvertSpaceObject.swift in Sources */,
+				539DE3992578D29E00A343BF /* EquipmentListCell.swift in Sources */,
+				539DE37A2578D1D900A343BF /* FPHomeQuotationView.swift in Sources */,
 				539DE0942578985300A343BF /* AccountDBManager.swift in Sources */,
 				539DE1072578985300A343BF /* TestPushController.swift in Sources */,
 				539DE0A82578985300A343BF /* CacheManager.swift in Sources */,
@@ -2826,6 +3091,7 @@
 				539DE2A42578C2BF00A343BF /* UserDescUpdateController.swift in Sources */,
 				539DE1472578985300A343BF /* TitleContainer.swift in Sources */,
 				539DE08E2578985300A343BF /* LevelObject.swift in Sources */,
+				539DE3772578D1D900A343BF /* FPHomeQuotationItemView.swift in Sources */,
 				539DE1962578985300A343BF /* iCarousel.m in Sources */,
 				539DE0F02578985300A343BF /* ServerConfigModel.swift in Sources */,
 				539DE0F32578985300A343BF /* LaunchController.swift in Sources */,
@@ -2854,6 +3120,7 @@
 				539DE17B2578985300A343BF /* RootManager.swift in Sources */,
 				539DE1662578985300A343BF /* PageDefaultNothingView.swift in Sources */,
 				539DE1082578985300A343BF /* TestDismissController.swift in Sources */,
+				539DE3CA2578D3F300A343BF /* MessageHomeListCell.swift in Sources */,
 				539DE0CE2578985300A343BF /* CashPayInfoModel.swift in Sources */,
 				539DE2852578C2BF00A343BF /* PhoneBindUpdateController.swift in Sources */,
 				539DE2802578C2BF00A343BF /* AuthViewController.swift in Sources */,
@@ -2866,6 +3133,8 @@
 				539DE0D42578985300A343BF /* XDNestScrollContainerView.swift in Sources */,
 				539DE1772578985300A343BF /* BaseView.swift in Sources */,
 				539DE16D2578985300A343BF /* BaseTableViewController.swift in Sources */,
+				539DE3732578D1D900A343BF /* FPHomeQuotationItemModel.swift in Sources */,
+				539DE3C72578D3F300A343BF /* MessageListController.swift in Sources */,
 				539DE0A02578985300A343BF /* String+QRCode.swift in Sources */,
 				539DE0B82578985300A343BF /* AdvertNetworkManager.swift in Sources */,
 				539DE2BF2578C4F300A343BF /* UserNetworkManager.swift in Sources */,
@@ -2883,9 +3152,12 @@
 				539DE0EE2578985300A343BF /* ServerAddressConfig.swift in Sources */,
 				539DE1982578985300A343BF /* EFCountAdapter.swift in Sources */,
 				539DE09F2578985300A343BF /* UIImage+QRCode.swift in Sources */,
+				539DE3792578D1D900A343BF /* XDMarqueeView.swift in Sources */,
 				539DE1032578985300A343BF /* TestPresentInteractiveController.swift in Sources */,
+				539DE3C92578D3F300A343BF /* MessageListModel.swift in Sources */,
 				539DE0EA2578985300A343BF /* ThirdConfig.swift in Sources */,
 				539DE1332578985300A343BF /* ReportTargetModel.swift in Sources */,
+				539DE3822578D1F600A343BF /* FirstPageRequestInfo.swift in Sources */,
 				539DE13F2578985300A343BF /* TitleIconView.swift in Sources */,
 				539DE1682578985300A343BF /* PageDefaultErrorView.swift in Sources */,
 				539DE14E2578985300A343BF /* CommonSearchView.swift in Sources */,
@@ -2896,6 +3168,7 @@
 				539DE1042578985300A343BF /* TestPushInteractiveController.swift in Sources */,
 				539DE0B92578985300A343BF /* AdvertRequestInfo.swift in Sources */,
 				539DE1092578985300A343BF /* XDPushPopAnimation.swift in Sources */,
+				539DE3742578D1D900A343BF /* FPHomeIPFSModel.swift in Sources */,
 				539DE0922578985300A343BF /* AccountLoginObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

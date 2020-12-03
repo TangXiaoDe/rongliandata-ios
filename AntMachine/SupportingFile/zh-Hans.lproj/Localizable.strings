@@ -8,12 +8,8 @@
 
 
 // Tabbar名字
-"tabbar.imeet" = "链乎";
-"tabbar.meet" = "遇见";
-"tabbar.mining" = "挖矿";
-"tabbar.task" = "任务";
-"tabbar.square" = "广场";
-"tabbar.planet" = "星球";
+"tabbar.home" = "首页";
+"tabbar.equip" = "设备";
 "tabbar.mine" = "我的";
 
 

@@ -48,6 +48,11 @@ class ThemeConfig {
     var themeColor: UIColor = UIColor.init(hex: 0xF5BE41)
     /// 辅助色/次要色
     var minorColor: UIColor = UIColor.init(hex: 0x2D385C)
+    /// 主题红色
+    var themeRedColor: UIColor = UIColor.init(hex: 0xCE586E)
+    /// 主题黄色
+    var themeYellowColor: UIColor = UIColor.init(hex: 0xFF8605)
+    
     /// 分割线颜色
     var dividingColor: UIColor = UIColor.init(hex: 0xE2E2E2)
 

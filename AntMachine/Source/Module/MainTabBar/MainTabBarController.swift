@@ -81,17 +81,13 @@ extension MainTabBarController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         // items
-        let imeetItem = TabbarItemModel(title: "tabbar.imeet".localized, normalImageName: "IMG_tabbar_icon_imeet_normal", selectedImageName: "IMG_tabbar_icon_imeet_selected", childVC: FirstHomeController())
-        let meetItem = TabbarItemModel(title: "tabbar.meet".localized, normalImageName: "IMG_tabbar_icon_meet_normal", selectedImageName: "IMG_tabbar_icon_meet_selected", childVC: SecondHomeController())
-        //let wakuangItem = TabbarItemModel(title: "tabbar.mining".localized, normalImageName: "IMG_tabbar_icon_wk_normal", selectedImageName: "IMG_tabbar_icon_wk_selected", childVC: MiningHomeController.init(showTabBar: true))
-        let taskItem = TabbarItemModel(title: "tabbar.task".localized, normalImageName: "IMG_tabbar_icon_task_normal", selectedImageName: "IMG_tabbar_icon_task_select", childVC: ThirdHomeController.init())
-        //let squareItem = TabbarItemModel(title: "tabbar.square".localized, normalImageName: "IMG_tabbar_icon_square_normal", selectedImageName: "IMG_tabbar_icon_square_selected", childVC: SquareHomeController())
-        let squareItem = TabbarItemModel(title: "tabbar.square".localized, normalImageName: "IMG_tabbar_icon_square_normal", selectedImageName: "IMG_tabbar_icon_square_selected", childVC: FourthHomeController())
-        let planeItem = TabbarItemModel(title: "tabbar.planet".localized, normalImageName: "IMG_tabbar_icon_planet_normal", selectedImageName: "IMG_tabbar_icon_planet_selected", childVC: FifthHomeController())
+        let firstItem = TabbarItemModel(title: "tabbar.home".localized, normalImageName: "IMG_tabbar_icon_imeet_normal", selectedImageName: "IMG_tabbar_icon_imeet_selected", childVC: FirstPageController.init())
+        let quipItem = TabbarItemModel(title: "tabbar.equip".localized, normalImageName: "IMG_tabbar_icon_square_normal", selectedImageName: "IMG_tabbar_icon_square_selected", childVC: EquipmentHomeController.init())
+        let mineItem = TabbarItemModel(title: "tabbar.mine".localized, normalImageName: "IMG_tabbar_icon_planet_normal", selectedImageName: "IMG_tabbar_icon_planet_selected", childVC: MineHomeController.init())
         if AppConfig.share.shield.currentNeedShield {
-            self.items = [imeetItem, meetItem, taskItem, squareItem, planeItem]
+            self.items = [firstItem, quipItem, mineItem]
         } else {
-            self.items = [imeetItem, meetItem, taskItem, squareItem, planeItem]
+            self.items = [firstItem, quipItem, mineItem]
         }
         self.setupChildControllers()
     }

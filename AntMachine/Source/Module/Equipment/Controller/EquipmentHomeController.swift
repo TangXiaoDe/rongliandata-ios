@@ -1,24 +1,21 @@
 //
-//  SecondHomeController.swift
+//  EquipmentHomeController.swift
 //  AntMachine
 //
-//  Created by 小唐 on 2019/5/15.
-//  Copyright © 2019 ChainOne. All rights reserved.
+//  Created by 小唐 on 2020/12/3.
+//  Copyright © 2020 ChainOne. All rights reserved.
 //
 
 import UIKit
 
-class SecondHomeController: BaseViewController {
+class EquipmentHomeController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
+    
 
     /*
     // MARK: - Navigation

@@ -15,14 +15,10 @@ import RealmSwift
 enum AdvertSpaceType: String {
     /// 启动页
     case boot = "app:start"
-    /// APP-推荐广告
-    case square = "app:plaza:top"
-    /// APP-推荐广告
-    case recommend = "app:recommend:top"
-    /// 广场任务
-    case squareTask = "app:plaza:task:top"
-    /// 星球顶部广告
-    case planet = "app:star:top"
+    /// 首页广告
+    case home = "app:home"
+    /// 商品
+    case goods = "app:goods"
 }
 
 class AdvertSpaceModel: Mappable {
