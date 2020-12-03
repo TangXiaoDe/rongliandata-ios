@@ -18,13 +18,12 @@ class AppColor {
     static let theme: UIColor = AppConfig.share.theme.themeColor
     /// 辅助色/次要色
     static let minor: UIColor = AppConfig.share.theme.minorColor
+    /// 分割线颜色
+    static let dividing: UIColor = AppConfig.share.theme.dividingColor
     /// 红色
     static let themeRed: UIColor = AppConfig.share.theme.themeRedColor
     /// 黄色
     static let themeYellow: UIColor = AppConfig.share.theme.themeYellowColor
-    
-    /// 分割线颜色
-    static let dividing: UIColor = AppConfig.share.theme.dividingColor
 
     /// 标题色(页面)
     static let title: UIColor = AppConfig.share.theme.titleColor

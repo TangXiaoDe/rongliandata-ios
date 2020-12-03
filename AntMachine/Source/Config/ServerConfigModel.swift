@@ -25,6 +25,8 @@ class ServerConfigModel: Mappable {
     var register_protocol: String = ""
 //    /// 是否开启版本管理
 //    var isVersionControl: Bool = false
+    /// fil配置信息
+    var filConfig: FilConfigModel?
 
     required init?(map: Map) {
 
@@ -36,6 +38,7 @@ class ServerConfigModel: Mappable {
         bonusLimit <- map["bonus"]
         register_protocol <- map["register_protocol"]
 //        isVersionControl <- map["start_version_control"]
+        filConfig <- map["fil:issue"]
     }
 
 }
@@ -90,4 +93,28 @@ class BonusLimitModel: Mappable {
         userDaily <- (map["user_daily_limit"], DoubleStringTransform.default)
     }
 
+}
+/// Fil数据模型
+class FilConfigModel: Mappable {
+    /// 总锁仓
+    var total_lock: String = ""
+    /// 总抵押
+    var total_pawn: String = ""
+    /// 总可用
+    var total_enable: String = ""
+    /// fil钱包主页tips
+    var tips: String = ""
+    
+    var archive: String = ""
+    
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        total_lock <- map["total_lock"]
+        total_pawn <- map["total_pawn"]
+        total_enable <- map["total_enable"]
+        tips <- map["tips"]
+        archive <- map["archive"]
+    }
 }

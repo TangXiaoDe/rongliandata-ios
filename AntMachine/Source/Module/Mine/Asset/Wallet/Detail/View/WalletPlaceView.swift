@@ -1,8 +1,8 @@
 //
-//  MineHomePlaceView.swift
-//  AntMachine
+//  WalletPlaceView.swift
+//  JXProject
 //
-//  Created by 小唐 on 2020/12/3.
+//  Created by zhaowei on 2020/10/27.
 //  Copyright © 2020 ChainOne. All rights reserved.
 //
 

@@ -278,5 +278,12 @@ extension Notification.Name {
 
     /// 图片长按识别二维码成功
     static let PictureLongPressQRCode = NSNotification.Name(rawValue: "app.notification.name.picture.longpress.qrcode")
-
+    
+    /// Fil钱包
+    struct Fil {
+        /// 订单刷新
+        static let refresh = NSNotification.Name(rawValue: "app.notification.name.Fil.refresh")
+        /// 绑定地址成功
+        static let withdrawAdress = NSNotification.Name(rawValue: "app.notification.name.Fil.withdrawAdress")
+    }
 }
