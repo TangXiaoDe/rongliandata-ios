@@ -102,10 +102,10 @@ extension LaunchController {
         } else if LaunchType.remote != AppConfig.share.internal.launch && hasAdverts {
             RootManager.share.type = .advert
         } else if isLogined {
-            RootManager.share.type = .main
+            RootManager.share.type = .login // .main
             //AppUtil.updateCurrentUserInfo()
         } else {
-            RootManager.share.type = .login 
+            RootManager.share.type = .login
         }
     }
 
