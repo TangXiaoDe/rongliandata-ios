@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RegisterView" customModule="iMeet" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RegisterView" customModule="StorageChain" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="425"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -32,9 +28,12 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZA-x5-8gc" userLabel="agreementBtn">
-                            <rect key="frame" x="113" y="-5" width="135" height="27"/>
+                            <rect key="frame" x="113" y="2" width="184" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="NbD-OP-O0T"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="《链优品商城服务协议》">
+                            <state key="normal" title="《聚秀矿场用户服务及隐私协议》">
                                 <color key="titleColor" red="0.43137254901960786" green="0.93333333333333335" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
@@ -59,9 +58,9 @@
                         <constraint firstItem="u6k-jh-cjV" firstAttribute="centerY" secondItem="hLS-tZ-anq" secondAttribute="centerY" id="mge-ps-Zyj"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qt9-4k-WCk" userLabel="RegisterBtn" customClass="CommonDoneBtn" customModule="iMeet" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qt9-4k-WCk" userLabel="RegisterBtn" customClass="CommonDoneBtn" customModule="StorageChain" customModuleProvider="target">
                     <rect key="frame" x="12" y="312" width="351" height="44"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="Ox8-o8-Ate"/>
                     </constraints>
@@ -93,13 +92,13 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="gxM-D5-Qmf"/>
                             </constraints>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" red="0.15294117647058825" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s9Z-Wy-kcw" userLabel="LineView">
                             <rect key="frame" x="0.0" y="55.5" width="335" height="0.5"/>
-                            <color key="backgroundColor" red="0.20784313725490194" green="0.25882352941176467" blue="0.41568627450980389" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="vpd-AZ-whS"/>
                             </constraints>
@@ -132,21 +131,21 @@
                                 <constraint firstAttribute="width" constant="22" id="lTD-Ge-aXC"/>
                                 <constraint firstAttribute="height" constant="22" id="rzg-zo-WD1"/>
                             </constraints>
-                            <state key="normal" image="IMG_icon_reinput_mistake"/>
-                            <state key="selected" image="IMG_icon_reinput_correct"/>
+                            <state key="normal" image="IMG_login_reinput_mistake"/>
+                            <state key="selected" image="IMG_login_reinput_correct"/>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请再次输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xna-K0-laL" userLabel="PasswordField">
                             <rect key="frame" x="26" y="13" width="287" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="iiq-Cg-gaE"/>
                             </constraints>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" red="0.15294117647058825" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijl-RL-c5u" userLabel="LineView">
                             <rect key="frame" x="0.0" y="55.5" width="335" height="0.5"/>
-                            <color key="backgroundColor" red="0.20784313725490194" green="0.25882352941176467" blue="0.41568627450980389" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="XbC-XP-L5p"/>
                             </constraints>
@@ -175,7 +174,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPJ-wS-9z5" userLabel="LineView">
                             <rect key="frame" x="0.0" y="55.5" width="335" height="0.5"/>
-                            <color key="backgroundColor" red="0.20784313725490194" green="0.25882352941176467" blue="0.41568627450980389" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="npe-PS-tSy"/>
                             </constraints>
@@ -185,7 +184,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="ffZ-fZ-c87"/>
                             </constraints>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" red="0.15294117647058825" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
@@ -200,7 +199,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="+86">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleColor" red="0.15294117647058825" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_login_triangle" translatesAutoresizingMaskIntoConstraints="NO" id="fEe-Sf-gqQ" userLabel="CodeArrow">
@@ -240,7 +239,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="获取验证码">
-                                <color key="titleColor" red="0.43137254901960786" green="0.93333333333333335" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="0.96078431372549022" green="0.74509803921568629" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="sendCodeBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="ysD-Ji-fPj"/>
@@ -254,13 +253,13 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="MZh-j7-MCz"/>
                             </constraints>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" red="0.15294117647058825" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NM4-Ex-FHR" userLabel="LineView">
                             <rect key="frame" x="0.0" y="55.5" width="335" height="0.5"/>
-                            <color key="backgroundColor" red="0.20784313725490194" green="0.25882352941176467" blue="0.41568627450980389" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="y4r-Bs-qgG"/>
                             </constraints>
@@ -287,18 +286,18 @@
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_login_icon_invitecode" translatesAutoresizingMaskIntoConstraints="NO" id="4LK-z7-zT0" userLabel="leftIcon">
                             <rect key="frame" x="2" y="19" width="18" height="18"/>
                         </imageView>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入邀请码(选填)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="11r-he-xrp" userLabel="InviteCodeField">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入邀请码(必填)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="11r-he-xrp" userLabel="InviteCodeField">
                             <rect key="frame" x="26" y="13" width="309" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="AE4-gp-s4U"/>
                             </constraints>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" red="0.15294117647058825" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="soR-HB-e25" userLabel="LineView">
                             <rect key="frame" x="0.0" y="55.5" width="335" height="0.5"/>
-                            <color key="backgroundColor" red="0.20784313725490194" green="0.25882352941176467" blue="0.41568627450980389" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="lqd-jV-ush"/>
                             </constraints>
@@ -318,7 +317,8 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="QmU-ex-RhP" firstAttribute="trailing" secondItem="qt9-4k-WCk" secondAttribute="trailing" id="0EU-fV-f7H"/>
                 <constraint firstItem="SgL-JH-ftf" firstAttribute="trailing" secondItem="hEw-PM-nOT" secondAttribute="trailing" id="0NM-zq-UZd"/>
@@ -344,7 +344,6 @@
                 <constraint firstItem="aoG-97-Veh" firstAttribute="top" secondItem="qLH-4j-HFY" secondAttribute="bottom" id="x6R-MP-lpS"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="accountField" destination="H4x-97-cLA" id="HxO-Rc-kPE"/>
                 <outlet property="accountView" destination="hEw-PM-nOT" id="rHn-6M-R9M"/>
@@ -366,19 +365,20 @@
                 <outlet property="verifyCodeField" destination="tit-X9-wsP" id="i72-N2-etU"/>
                 <outlet property="verifyCodeView" destination="SgL-JH-ftf" id="g8m-2V-dHW"/>
             </connections>
+            <point key="canvasLocation" x="138" y="154"/>
         </view>
     </objects>
     <resources>
         <image name="IMG_icon_pwd_hidden" width="17" height="8"/>
         <image name="IMG_icon_pwd_show" width="17" height="11"/>
-        <image name="IMG_icon_reinput_correct" width="16" height="16"/>
-        <image name="IMG_icon_reinput_mistake" width="16" height="16"/>
         <image name="IMG_login_icon_codedlock" width="16.5" height="17"/>
         <image name="IMG_login_icon_invitecode" width="18" height="18"/>
         <image name="IMG_login_icon_phone" width="15" height="22"/>
         <image name="IMG_login_icon_validation" width="17" height="19"/>
         <image name="IMG_login_option_checked" width="16" height="16"/>
-        <image name="IMG_login_option_uncheck" width="17" height="17"/>
+        <image name="IMG_login_option_uncheck" width="16" height="16"/>
+        <image name="IMG_login_reinput_correct" width="16" height="16"/>
+        <image name="IMG_login_reinput_mistake" width="16" height="16"/>
         <image name="IMG_login_triangle" width="7.5" height="4"/>
     </resources>
 </document>

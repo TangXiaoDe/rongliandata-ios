@@ -1,6 +1,6 @@
 //
 //  LoginView.swift
-//  AntMachine
+//  iMeet
 //
 //  Created by 小唐 on 2019/3/11.
 //  Copyright © 2019 ChainOne. All rights reserved.
@@ -14,6 +14,7 @@ protocol LoginViewProtocol: class {
     func loginView(_ loginView: LoginView, didCliedkedLogin loginBtn: UIButton, account: String, smsCode: String) -> Void
     func loginView(_ loginView: LoginView, didCliedkedForgetPwd forgetPwdBtn: UIButton) -> Void
     func loginView(_ loginView: LoginView, didChangedLoginType loginType: LoginType) -> Void
+    func loginView(_ loginView: LoginView, didCliedkedVisitorLogin visitorLoginBtn: UIButton) -> Void
 }
 
 class LoginView: UIView {
@@ -23,6 +24,12 @@ class LoginView: UIView {
     var showType: LoginType = .password {
         didSet {
             self.setupShowType(showType)
+        }
+    }
+    /// 是否显示游客登录
+    var showVisitorLogin: Bool = false {
+        didSet {
+            self.visitorLoginBtn.isHidden = !showVisitorLogin
         }
     }
 
@@ -41,6 +48,7 @@ class LoginView: UIView {
     let loginBtn: CommonDoneBtn = CommonDoneBtn.init(type: .custom)
     let loginTypeBtn: UIButton = UIButton.init(type: .custom)
     let forgetPwdBtn: UIButton = UIButton.init(type: .custom)
+    let visitorLoginBtn: UIButton = UIButton.init(type: .custom)    // 游客登录
 
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let doneBtnH: CGFloat = 44
@@ -103,8 +111,7 @@ extension LoginView {
         mainView.addSubview(self.loginBtn)
         self.loginBtn.gradientLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.lrMargin * 2.0, height: self.doneBtnH)
         self.loginBtn.addTarget(self, action: #selector(loginBtnClick(_:)), for: .touchUpInside)
-        self.loginBtn.set(title: "donebtn.login".localized, titleColor: UIColor.white, for: .normal)
-        self.loginBtn.set(title: "donebtn.login".localized, titleColor: UIColor.init(hex: 0x8C97AC), for: .disabled)
+        self.loginBtn.setTitle("donebtn.login".localized, for: .normal)
         self.loginBtn.set(font: UIFont.systemFont(ofSize: 18), cornerRadius: 5, borderWidth: 0, borderColor: UIColor.clear)
         self.loginBtn.snp.makeConstraints { (make) in
             make.height.equalTo(self.doneBtnH)
@@ -121,17 +128,30 @@ extension LoginView {
         self.loginTypeBtn.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(lrMargin)
             make.top.equalTo(self.loginBtn.snp.bottom).offset(typeBtnTopMargin)
-            make.bottom.equalToSuperview()
+            //make.bottom.equalToSuperview()
         }
         // 4. forgetPwdBtn
         mainView.addSubview(self.forgetPwdBtn)
         self.forgetPwdBtn.contentHorizontalAlignment = .right
-        self.forgetPwdBtn.set(title: "login.forgetpwd".localized, titleColor: UIColor.init(hex: 0x8C97AC), for: .normal)
+        self.forgetPwdBtn.set(title: "login.forgetpwd".localized, titleColor: AppColor.minorText, for: .normal)
         self.forgetPwdBtn.set(font: UIFont.systemFont(ofSize: 12))
         self.forgetPwdBtn.addTarget(self, action: #selector(forgetPwdBtnClick(_:)), for: .touchUpInside)
         self.forgetPwdBtn.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-lrMargin)
             make.centerY.equalTo(self.loginTypeBtn)
+        }
+        // 5. visitorLoginBtn
+        mainView.addSubview(self.visitorLoginBtn)
+        self.visitorLoginBtn.set(title: "login.visitor.login".localized, titleColor: AppColor.theme, for: .normal)
+        self.visitorLoginBtn.set(title: "login.visitor.login".localized, titleColor: AppColor.theme, for: .highlighted)
+        self.visitorLoginBtn.set(font: UIFont.systemFont(ofSize: 13))
+        self.visitorLoginBtn.addTarget(self, action: #selector(visitorLoginBtnClick(_:)), for: .touchUpInside)
+        self.visitorLoginBtn.isHidden = true    // 默认隐藏
+        self.visitorLoginBtn.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.loginBtn)
+            //make.centerY.equalTo(self.loginTypeBtn)
+            make.top.greaterThanOrEqualTo(self.loginTypeBtn.snp.bottom)
+            make.bottom.equalToSuperview().offset(-32)
         }
     }
 
@@ -241,6 +261,11 @@ extension LoginView {
         self.endEditing(true)
         self.delegate?.loginView(self, didCliedkedForgetPwd: button)
     }
+    @objc fileprivate func visitorLoginBtnClick(_ button: UIButton) -> Void {
+        self.endEditing(true)
+        self.delegate?.loginView(self, didCliedkedVisitorLogin: button)
+    }
+
 }
 
 // MARK: - Extension Function

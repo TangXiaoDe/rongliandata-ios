@@ -85,6 +85,11 @@ extension Notification.Name {
 
         /// 实名认证提交
         static let certSubmit = NSNotification.Name(rawValue: "app.notification.name.user.certSubmit")
+        
+        /// 用户登录 - RootManager中根控切换方式
+        static let login = NSNotification.Name(rawValue: "app.notification.name.user.login")
+        /// 用户登录 - 登录页是present出来的方式登录，需更新tabbarVC的tabbarItem
+        static let dismissLogin = NSNotification.Name(rawValue: "app.notification.name.user.dismissLogin")
     }
 
     /// 支付密码

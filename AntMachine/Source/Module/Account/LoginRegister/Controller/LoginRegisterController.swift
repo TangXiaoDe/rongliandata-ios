@@ -1,9 +1,9 @@
 //
 //  LoginRegisterController.swift
-//  AntMachine
+//  iMeet
 //
 //  Created by 小唐 on 2019/5/29.
-//  Copyright © 2019 ChainOne. All rights reserved.
+//  Copyright © 2019 iMeet. All rights reserved.
 //
 //  登录注册页，左右切换登录注册
 
@@ -23,13 +23,20 @@ class LoginRegisterController: BaseViewController {
     fileprivate let horScrollView: UIScrollView = UIScrollView()
     fileprivate let loginView: LoginView = LoginView()
     fileprivate let registerView: RegisterView = RegisterView.loadXib()!
-
-    fileprivate let topBgImgSize: CGSize = CGSize.init(width: 375, height: 235).scaleAspectForWidth(kScreenWidth)
+    
+    fileprivate let topBgImgSize: CGSize = CGSize.init(width: 375, height: 228).scaleAspectForWidth(kScreenWidth)
     fileprivate let logoTopMargin: CGFloat = kStatusBarHeight + 60
-    fileprivate let logoSize: CGSize = CGSize.init(width: 84, height: 82)
-    fileprivate let switchTopMargin: CGFloat = 30
-    fileprivate let horScrollTopMargin: CGFloat = 23
-    fileprivate let horScrollH: CGFloat = kScreenHeight - kBottomHeight - LoginRegisterSwitchView.viewHeight - kStatusBarHeight - 60 - 82 - 30 - 23 // logoTopMargin,logoH,switchTopMargin,switchH,scrollTop
+    fileprivate let logoSize: CGSize = CGSize.init(width: 75, height: 73)
+    fileprivate var switchCenterYTopMargin: CGFloat {
+        let switchCenterYMultipy: CGFloat = (228.0 - 30.0) / 228.0
+        let topMargin: CGFloat = self.topBgImgSize.height * switchCenterYMultipy
+        return topMargin
+    }
+    fileprivate let horScrollTopMargin: CGFloat = 15
+    fileprivate var horScrollH: CGFloat {
+        let scrollH: CGFloat = kScreenHeight - kBottomHeight - self.topBgImgSize.height - horScrollTopMargin
+        return scrollH
+    }
 
     // MARK: - Private Property
 
@@ -40,6 +47,8 @@ class LoginRegisterController: BaseViewController {
 
     /// 注册是否需要同步
     fileprivate var isRegisterSync: Bool = false
+    /// 是否是presented来的(viewDidLoad里判断)
+    fileprivate var isPresentedFlag: Bool = false
 
     // MARK: - Initialize Function
 
@@ -62,24 +71,25 @@ extension LoginRegisterController {
         self.initialUI()
         self.initialDataSource()
         // 网络检测
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChangedNotificationProcess(_:)), name: NSNotification.Name.NetWork.reachabilityChanged, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChangedNotificationProcess(_:)), name: NSNotification.Name.imeet.reachabilityChanged, object: nil)
         VersionManager.share.updateProcess()    // 版本更新判断
         // 初始数据(配置、广告)再次加载，避免首次问题
         AppUtil.getSystemConfig()              // 应用启动配置(来自服务器)
         AdvertManager.share.downloadAllAds()     // 广告
         // navbar 设置
         let titleFont: UIFont = UIFont.pingFangSCFont(size: 18, weight: .medium)
-        self.navigationController?.setNavBarTheme(titleFont: titleFont, titleColor: UIColor.white, tintColor: UIColor.white, barTintColor: UIColor.init(hex: 0x2D385C), isTranslucent: false)
+        self.navigationController?.setNavBarTheme(titleFont: titleFont, titleColor: AppColor.navTitle, tintColor: AppColor.navTint, barTintColor: AppColor.navBarTint, isTranslucent: false, shadowColor: AppColor.navShadow)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotifiationProcess(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotifiationProcess(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -89,27 +99,23 @@ extension LoginRegisterController {
 extension LoginRegisterController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        // 0. bgLayer
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.init(hex: 0x2E3D64).cgColor, UIColor.init(hex: 0x1F2A46).cgColor]
-        gradientLayer.locations = [0, 1]
-        gradientLayer.startPoint = CGPoint.init(x: 0.5, y: 0)
-        gradientLayer.endPoint = CGPoint.init(x: 0.5, y: 1)
-        self.view.layer.addSublayer(gradientLayer)
-        gradientLayer.frame = UIScreen.main.bounds
+        self.view.backgroundColor = UIColor.white
         // 1. navigationbar
         self.view.addSubview(self.barView)
         self.barView.title = "common.login".localized
-        self.barView.leftItem.isHidden = true
-        self.barView.rightItem.isHidden = true
+        self.barView.delegate = self
         self.barView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview().offset(kStatusBarHeight)
             make.height.equalTo(kNavigationBarHeight)
         }
+        self.barView.leftItem.setImage(UIImage.init(named: "IMG_icon_btn_close"), for: .normal)
+        self.barView.leftItem.setImage(UIImage.init(named: "IMG_icon_btn_close"), for: .highlighted)
+        self.barView.leftItem.isHidden = true
+        self.barView.rightItem.isHidden = true
         // 2. topBg
         self.view.addSubview(self.topBgImgView)
-        self.topBgImgView.image = UIImage.init(named: "IMG_bg_login_top")
+        self.topBgImgView.image = UIImage.init(named: "IMG_login_bg_top")
         self.topBgImgView.set(cornerRadius: 0)
         self.topBgImgView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
@@ -117,20 +123,20 @@ extension LoginRegisterController {
             make.height.equalTo(self.topBgImgSize.height)
         }
         // 3. logoView
-        self.view.addSubview(self.logoView)
-        self.logoView.set(cornerRadius: 0)
-        self.logoView.image = UIImage.init(named: "IMG_login_imeet_logo")
-        self.logoView.snp.makeConstraints { (make) in
-            make.size.equalTo(self.logoSize)
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(self.logoTopMargin)
-        }
+//        self.view.addSubview(self.logoView)
+//        self.logoView.set(cornerRadius: 0)
+//        self.logoView.image = UIImage.init(named: "IMG_login_cunlian_logo")
+//        self.logoView.snp.makeConstraints { (make) in
+//            make.size.equalTo(self.logoSize)
+//            make.centerX.equalToSuperview()
+//            make.top.equalToSuperview().offset(self.logoTopMargin)
+//        }
         // 4. switch
         self.view.addSubview(self.switchView)
         self.switchView.delegate = self
         self.switchView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.logoView.snp.bottom).offset(self.switchTopMargin)
+            make.centerY.equalTo(self.topBgImgView.snp.top).offset(self.switchCenterYTopMargin)
             make.height.equalTo(LoginRegisterSwitchView.viewHeight)
             make.width.equalTo(LoginRegisterSwitchView.viewWidth)
         }
@@ -140,7 +146,7 @@ extension LoginRegisterController {
         self.horScrollView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.snp_bottomMargin)
-            make.top.equalTo(self.switchView.snp.bottom).offset(horScrollTopMargin)
+            make.top.equalTo(self.topBgImgView.snp.bottom).offset(horScrollTopMargin)
         }
         // View Hierarchy
         self.view.bringSubviewToFront(self.barView)
@@ -186,8 +192,9 @@ extension LoginRegisterController {
         self.loginView.delegate = self
         self.loginView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.bottom.lessThanOrEqualToSuperview().offset(-0)
             make.width.equalTo(kScreenWidth)
+            make.bottom.lessThanOrEqualToSuperview().offset(-0)
+            make.height.equalTo(self.horScrollH)
         }
     }
     fileprivate func initialRegisterContainer(_ container: UIView) -> Void {
@@ -215,7 +222,9 @@ extension LoginRegisterController {
 extension LoginRegisterController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
-
+        self.isPresentedFlag = nil != self.navigationController?.presentingViewController ? true : false
+        self.barView.leftItem.isHidden = !self.isPresentedFlag
+        self.loginView.showVisitorLogin = !self.isPresentedFlag
     }
 
     /// 标题修改
@@ -317,64 +326,64 @@ extension LoginRegisterController {
 extension LoginRegisterController {
     /// 密码登录请求
     fileprivate func passwordLoginRequest(account: String, password: String, ticket: String, randStr: String) -> Void {
-//        self.view.isUserInteractionEnabled = false
-//        loadingView.title = "登录中"
-//        loadingView.show()
-//        AccountNetworkManager.pwdLogin(account: account, password: password, ticket: ticket, randStr: randStr) { [weak self](status, msg, model) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            guard status, let model = model else {
-//                self.view.isUserInteractionEnabled = true
-//                self.loadingView.dismiss()
-//                Toast.showToast(title: msg)
-//                return
-//            }
-//            NetworkManager.share.configAuthorization(model.token)
-//            // token获取成功，请求当前用户信息
-//            self.requestCurrentUserInfo(with: model, for: account)
-//        }
+        self.view.isUserInteractionEnabled = false
+        loadingView.title = "登录中"
+        loadingView.show()
+        AccountNetworkManager.pwdLogin(account: account, password: password, ticket: ticket, randStr: randStr) { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            guard status, let model = model else {
+                self.view.isUserInteractionEnabled = true
+                self.loadingView.dismiss()
+                Toast.showToast(title: msg)
+                return
+            }
+            NetworkManager.share.configAuthorization(model.token)
+            // token获取成功，请求当前用户信息
+            self.requestCurrentUserInfo(with: model, for: account)
+        }
     }
     /// 短信验证码登录请求
     fileprivate func smsCodeLoginRequest(account: String, smsCode: String) -> Void {
         self.view.isUserInteractionEnabled = false
-//        loadingView.title = "登录中"
-//        loadingView.show()
-//        AccountNetworkManager.smsCodeLogin(account: account, smsCode: smsCode) { [weak self](status, msg, model) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            guard status, let model = model else {
-//                self.view.isUserInteractionEnabled = true
-//                self.loadingView.dismiss()
-//                Toast.showToast(title: msg)
-//                return
-//            }
-//            NetworkManager.share.configAuthorization(model.token)
-//            // token获取成功，请求当前用户信息
-//            self.requestCurrentUserInfo(with: model, for: account)
-//        }
+        loadingView.title = "登录中"
+        loadingView.show()
+        AccountNetworkManager.smsCodeLogin(account: account, smsCode: smsCode) { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            guard status, let model = model else {
+                self.view.isUserInteractionEnabled = true
+                self.loadingView.dismiss()
+                Toast.showToast(title: msg)
+                return
+            }
+            NetworkManager.share.configAuthorization(model.token)
+            // token获取成功，请求当前用户信息
+            self.requestCurrentUserInfo(with: model, for: account)
+        }
     }
     /// 注册请求
     fileprivate func registerRequest(account: String, smsCode: String, password: String, confirmPwd: String, inviteCode: String?) -> Void {
-//        self.view.isUserInteractionEnabled = false
-//        loadingView.title = "注册中"
-//        loadingView.show()
-//        AccountNetworkManager.register(account: account, password: password, confirmPwd: confirmPwd, smsCode: smsCode, inviteCode: inviteCode) { [weak self](status, msg, data) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            guard status, let data = data else {
-//                self.view.isUserInteractionEnabled = true
-//                self.loadingView.dismiss()
-//                Toast.showToast(title: msg)
-//                return
-//            }
-//            NetworkManager.share.configAuthorization(data.token.token)
-//            // token获取成功，请求当前用户信息
-//            self.requestCurrentUserInfo(with: data.token, for: account, isRegister: true)
-//            self.isRegisterSync = data.syncStatus
-//        }
+        self.view.isUserInteractionEnabled = false
+        loadingView.title = "注册中"
+        loadingView.show()
+        AccountNetworkManager.register(account: account, password: password, confirmPwd: confirmPwd, smsCode: smsCode, inviteCode: inviteCode) { [weak self](status, msg, data) in
+            guard let `self` = self else {
+                return
+            }
+            guard status, let data = data else {
+                self.view.isUserInteractionEnabled = true
+                self.loadingView.dismiss()
+                Toast.showToast(title: msg)
+                return
+            }
+            NetworkManager.share.configAuthorization(data.token.token)
+            // token获取成功，请求当前用户信息
+            self.requestCurrentUserInfo(with: data.token, for: account, isRegister: true)
+            self.isRegisterSync = data.syncStatus
+        }
     }
 
     /// 请求当前用户信息
@@ -412,17 +421,27 @@ extension LoginRegisterController {
 extension LoginRegisterController {
     /// 进入忘记密码界面
     fileprivate func enterForgetPwdPage() -> Void {
-//        let forgetPwdVC = LoginPwdForgetController.init(scene: LoginPwdForgetScene.login)
-//        self.navigationController?.pushViewController(forgetPwdVC, animated: true)
+        let forgetPwdVC = LoginPwdForgetController.init(scene: LoginPwdForgetScene.login)
+        self.navigationController?.pushViewController(forgetPwdVC, animated: true)
     }
     /// 进入协议界面
     fileprivate func enterAgreementPage() -> Void {
-        let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.strUrl(strUrl: UrlManager.strAgreementUrl))
+        guard let registerProtocol = AppConfig.share.server?.register_protocol else {
+            return
+        }
+        let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.strUrl(strUrl: registerProtocol))
         self.enterPageVC(webVC)
     }
     /// 进入主页
     fileprivate func enterMainPage() -> Void {
-        RootManager.share.type = .main
+        // 判断是否是present出来的界面，若是则直接dismiss，否则游客登录处理
+        if let _ = self.navigationController?.presentingViewController {
+            self.navigationController?.dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: AppNotificationName.User.dismissLogin, object: nil, userInfo: nil)
+            return
+        } else {
+            RootManager.share.type = .main
+        }
     }
     /// 进入注册完成性别设置界面
     fileprivate func enterRegisterCompletePage() -> Void {
@@ -432,13 +451,14 @@ extension LoginRegisterController {
     }
 
     fileprivate func showRegisterPopView() -> Void {
-        let popView: RegisterPopView = RegisterPopView()
-        popView.isSync = self.isRegisterSync
-        popView.doneBtnClickAction = { (popView, doneBtn) in
-            popView.removeFromSuperview()
-            self.enterRegisterCompletePage()
-        }
-        PopViewUtil.showPopView(popView)
+        self.enterRegisterCompletePage()
+//        let popView: RegisterPopView = RegisterPopView()
+//        popView.isSync = self.isRegisterSync
+//        popView.doneBtnClickAction = { (popView, doneBtn) in
+//            popView.removeFromSuperview()
+//            self.enterRegisterCompletePage()
+//        }
+//        PopViewUtil.showPopView(popView)
     }
 
 }
@@ -483,15 +503,7 @@ extension LoginRegisterController: UIScrollViewDelegate {
 // MARK: - <LoginViewProtocol>
 extension LoginRegisterController: LoginViewProtocol {
     func loginView(_ loginView: LoginView, didCliedkedLogin loginBtn: UIButton, account: String, password: String) -> Void {
-//        // 腾讯防水墙
-//        let appId: String = AppConfig.share.third.tcCaptcha.pwdLoginId
-//        TCWebCodesBridge.shared().loadTencentCaptcha(self.view, appid: appId) { (resultDic) in
-//            if let result = Mapper<TCWebCodesResultModel>().map(JSONObject: resultDic), 0 == result.code {
-//                self.passwordLoginRequest(account: account, password: password, ticket: result.ticket, randStr: result.randStr)
-//            } else {
-//                Toast.showToast(title: "滑块验证失败\n请滑到指定位置，或检查你的网络")
-//            }
-//        }
+        self.passwordLoginRequest(account: account, password: password, ticket: "", randStr: "")
     }
     func loginView(_ loginView: LoginView, didCliedkedLogin loginBtn: UIButton, account: String, smsCode: String) -> Void {
         self.smsCodeLoginRequest(account: account, smsCode: smsCode)
@@ -502,6 +514,13 @@ extension LoginRegisterController: LoginViewProtocol {
     func loginView(_ loginView: LoginView, didChangedLoginType loginType: LoginType) {
         self.navigationItem.title = self.titleWithType(type: self.type, loginType: self.loginView.showType)
     }
+    func loginView(_ loginView: LoginView, didCliedkedVisitorLogin visitorLoginBtn: UIButton) -> Void {
+        // TODO: - 用户登录、游客登录 是否需要通知处理呢？
+        // 用户登录/注册 发送用户登录通知
+        // 游客登录 发送游客登录通知
+        self.enterMainPage()
+    }
+
 }
 
 // MARK: - <RegisterViewProtocol>
@@ -513,3 +532,20 @@ extension LoginRegisterController: RegisterViewProtocol {
         self.registerRequest(account: account, smsCode: smsCode, password: password, confirmPwd: confirmPwd, inviteCode: inviteCode)
     }
 }
+
+// MARK: - <AppHomeNavBarProtocol>
+extension LoginRegisterController: AppHomeNavBarProtocol {
+    /// 导航栏左侧按钮点击回调
+    func homeBar(_ navBar: AppHomeNavBar, didClickedLeftItem itemView: UIButton) -> Void {
+        if let _ = self.navigationController?.presentingViewController {
+            self.navigationController?.dismiss(animated: true, completion: nil)
+            return
+        }
+    }
+    /// 导航栏右侧按钮点击回调
+    func homeBar(_ navBar: AppHomeNavBar, didClickedRightItem itemView: UIButton) -> Void {
+        
+    }
+
+}
+

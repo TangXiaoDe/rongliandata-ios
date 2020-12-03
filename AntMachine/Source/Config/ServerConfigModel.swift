@@ -21,8 +21,8 @@ class ServerConfigModel: Mappable {
     var quitDay: Int = 0
     /// 红包限制
     var bonusLimit: BonusLimitModel?
-//    /// 注册协议
-//    var registerAgreement: String = ""
+    /// 注册协议
+    var register_protocol: String = ""
 //    /// 是否开启版本管理
 //    var isVersionControl: Bool = false
 
@@ -34,7 +34,7 @@ class ServerConfigModel: Mappable {
         business <- map["business"]
         quitDay <- map["quit_limit_day"]
         bonusLimit <- map["bonus"]
-//        registerAgreement <- map["register_protocol"]
+        register_protocol <- map["register_protocol"]
 //        isVersionControl <- map["start_version_control"]
     }
 

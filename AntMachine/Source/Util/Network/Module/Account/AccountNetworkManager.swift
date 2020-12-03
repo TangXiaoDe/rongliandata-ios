@@ -1,6 +1,6 @@
 //
 //  AccountNetworkManager.swift
-//  AntMachine
+//  iMeet
 //
 //  Created by 小唐 on 2019/6/5.
 //  Copyright © 2019 ChainOne. All rights reserved.
@@ -14,24 +14,37 @@ class AccountNetworkManager {
 }
 
 /// 验证码无需授权的场景
-enum SMSCodeUnAuthScene: String {
-    /// 短信登录
-    case smscodeLogin = "app-code-login"
+enum SMSCodeScene: String {
     /// 注册
-    case register = "app-register"
-    /// 登录密码忘记/重置
-    case loginPwdForget = "app-login-pass"
-    /// 绑定手机号 - 新手机号
-    case phoneBind = "app-bind-phone"
+    case register = "register"
+    /// 登录
+    case login = "login"
+    /// 更新登录密码
+    case loginPwd = "update-login-pass"
+    /// 设置支付密码
+    case payPwd = "set-pay-pass"
 }
 
-/// 验证码需授权的场景
-enum SMSCodeAuthScene: String {
-    /// 支付密码
-    case payPwd = "app-pay-pass"
-    /// 绑定手机号 - 原手机号
-    case phoneBind = "app-bind-phone"
-}
+///// 验证码无需授权的场景
+//enum SMSCodeUnAuthScene: String {
+//    /// 短信登录
+//    case smscodeLogin = "app-code-login"
+//    /// 注册
+//    case register = "app-register"
+//    /// 登录密码忘记/重置
+//    case loginPwdForget = "app-login-pass"
+//    /// 绑定手机号 - 新手机号
+//    case phoneBind = "app-bind-phone"
+//}
+//
+///// 验证码需授权的场景
+//enum SMSCodeAuthScene: String {
+//    /// 支付密码
+//    case payPwd = "app-pay-pass"
+//    /// 绑定手机号 - 原手机号
+//    case phoneBind = "app-bind-phone"
+//}
+
 
 
 // MARK: - Login
@@ -167,13 +180,20 @@ extension AccountNetworkManager {
 
 // MARK: - SMSCode
 extension AccountNetworkManager {
-    /// 发送无需登录授权验证码 - 需账号
-    class func sendUnAuthSMSCode(account: String, scene: SMSCodeUnAuthScene, ticket: String, randStr: String, complete: @escaping((_ status: Bool, _ msg: String?) -> Void)) -> Void {
+    /// 发送验证码
+    /// - Note: 已授权用户不需要传手机号
+    class func sendSMSCode(account: String?, scene: SMSCodeScene, ticket: String, randStr: String, token: String? = nil, complete: @escaping((_ status: Bool, _ msg: String?) -> Void)) -> Void {
         // 1.请求 url
-        var requestInfo = AccountRequestInfo.SMSCode.send_unauth
+        var requestInfo = AccountRequestInfo.SMSCode.sendSMS
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
         // 2.配置参数
-        let parameter: [String: Any] = ["phone": account, "scene": scene.rawValue, "ticket": ticket, "randstr": randStr]
+        var parameter: [String: Any] = ["scene": scene.rawValue, "ticket": ticket, "randstr": randStr]
+        if let account = account {
+            parameter["phone"] = account
+        }
+        if let token = token {
+            parameter["token"] = token
+        }
         requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
@@ -187,34 +207,38 @@ extension AccountNetworkManager {
             }
         }
     }
-    /// 发送需登录授权验证码
-    class func sendAuthSMSCode(scene: SMSCodeAuthScene, ticket: String, randStr: String, complete: @escaping((_ status: Bool, _ msg: String?) -> Void)) -> Void {
-        // 1.请求 url
-        var requestInfo = AccountRequestInfo.SMSCode.send_auth
-        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
-        // 2.配置参数
-        let parameter: [String: Any] = ["scene": scene.rawValue, "ticket": ticket, "randstr": randStr]
-        requestInfo.parameter = parameter
-        // 3.发起请求
-        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
-            switch networkResult {
-            case .error(_):
-                complete(false, "prompt.network.error".localized)
-            case .failure(let failure):
-                complete(false, failure.message)
-            case .success(let response):
-                complete(true, response.message)
-            }
-        }
-    }
+//    /// 发送需登录授权验证码
+//    class func sendAuthSMSCode(scene: SMSCodeAuthScene, ticket: String, randStr: String, complete: @escaping((_ status: Bool, _ msg: String?) -> Void)) -> Void {
+//        // 1.请求 url
+//        var requestInfo = AccountRequestInfo.SMSCode.send_auth
+//        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+//        // 2.配置参数
+//        let parameter: [String: Any] = ["scene": scene.rawValue, "ticket": ticket, "randstr": randStr]
+//        requestInfo.parameter = parameter
+//        // 3.发起请求
+//        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+//            switch networkResult {
+//            case .error(_):
+//                complete(false, "prompt.network.error".localized)
+//            case .failure(let failure):
+//                complete(false, failure.message)
+//            case .success(let response):
+//                complete(true, response.message)
+//            }
+//        }
+//    }
 
-    /// 验证码校验 - 无需认证登录
-    class func verifyUnAuthSMSCode(account: String, scene: SMSCodeUnAuthScene, code: String, complete: @escaping((_ status: Bool, _ msg: String?) -> Void)) -> Void {
+    /// 校验验证码
+    /// - Note: 已授权用户不需要传手机号
+    class func validSMSCode(account: String?, scene: SMSCodeScene, code: String, complete: @escaping((_ status: Bool, _ msg: String?) -> Void)) -> Void {
         // 1.请求 url
-        var requestInfo = AccountRequestInfo.SMSCode.verify_unauth
+        var requestInfo = AccountRequestInfo.SMSCode.validSMS
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
         // 2.配置参数
-        let parameter: [String: Any] = ["phone": account, "scene": scene.rawValue, "code": code]
+        var parameter: [String: Any] = ["scene": scene.rawValue, "code": code]
+        if let account = account {
+            parameter["phone"] = account
+        }
         requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
@@ -230,24 +254,24 @@ extension AccountNetworkManager {
     }
 
     /// 验证码校验 - 需认证登录
-    class func verifyAuthSMSCode(scene: SMSCodeAuthScene, code: String, complete: @escaping((_ status: Bool, _ msg: String?) -> Void)) -> Void {
-        // 1.请求 url
-        var requestInfo = AccountRequestInfo.SMSCode.verify_auth
-        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
-        // 2.配置参数
-        let parameter: [String: Any] = ["scene": scene.rawValue, "code": code]
-        requestInfo.parameter = parameter
-        // 3.发起请求
-        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
-            switch networkResult {
-            case .error(_):
-                complete(false, "prompt.network.error".localized)
-            case .failure(let failure):
-                complete(false, failure.message)
-            case .success(let response):
-                complete(true, response.message)
-            }
-        }
-    }
+//    class func verifyAuthSMSCode(scene: SMSCodeAuthScene, code: String, complete: @escaping((_ status: Bool, _ msg: String?) -> Void)) -> Void {
+//        // 1.请求 url
+//        var requestInfo = AccountRequestInfo.SMSCode.verify_auth
+//        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+//        // 2.配置参数
+//        let parameter: [String: Any] = ["scene": scene.rawValue, "code": code]
+//        requestInfo.parameter = parameter
+//        // 3.发起请求
+//        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+//            switch networkResult {
+//            case .error(_):
+//                complete(false, "prompt.network.error".localized)
+//            case .failure(let failure):
+//                complete(false, failure.message)
+//            case .success(let response):
+//                complete(true, response.message)
+//            }
+//        }
+//    }
 
 }

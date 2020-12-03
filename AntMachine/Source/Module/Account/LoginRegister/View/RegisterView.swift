@@ -1,6 +1,6 @@
 //
 //  RegisterView.swift
-//  AntMachine
+//  iMeet
 //
 //  Created by 小唐 on 2019/3/11.
 //  Copyright © 2019 ChainOne. All rights reserved.
@@ -49,6 +49,10 @@ class RegisterView: UIView {
     @IBOutlet weak var agreementBtn: UIButton!
     /// 协议同意描述
     @IBOutlet weak var agreePromptLabel: UILabel!
+    
+    fileprivate let coverBtn = UIButton.init(type: .custom)
+    
+    fileprivate var captchaView: DXCaptchaView!
 
     // MARK: - Private Property
 
@@ -123,32 +127,32 @@ extension RegisterView {
         self.backgroundColor = UIColor.clear
         // accountField
         let accountClearBtn: UIButton = UIButton.init(type: .custom)
-        accountClearBtn.setImage(UIImage.init(named: "IMG_icon_input_clear"), for: .normal)
+        accountClearBtn.setImage(UIImage.init(named: "IMG_login_input_clear"), for: .normal)
         accountClearBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 30)
         accountClearBtn.addTarget(self, action: #selector(accountClearBtnClick(_:)), for: .touchUpInside)
         self.accountField.rightView = accountClearBtn
         self.accountField.rightViewMode = .never    // 右侧清除按钮暂不显示
         self.accountField.addTarget(self, action: #selector(accountFieldValueChanged(_:)), for: .editingChanged)
-        self.accountField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.phone".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x525C6E)])
+        self.accountField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.phone".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         // smsCodeField
         self.verifyCodeField.addTarget(self, action: #selector(smsCodeFieldValueChanged(_:)), for: .editingChanged)
         //self.verifyCodeField.clearButtonMode = .whileEditing      // 右侧清除按钮暂不显示
-        self.verifyCodeField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.smscode".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x525C6E)])
+        self.verifyCodeField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.smscode".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         // passwordField
         let passwordClearBtn: UIButton = UIButton.init(type: .custom)
-        passwordClearBtn.setImage(UIImage.init(named: "IMG_icon_input_clear"), for: .normal)
+        passwordClearBtn.setImage(UIImage.init(named: "IMG_login_input_clear"), for: .normal)
         passwordClearBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 30)
         passwordClearBtn.addTarget(self, action: #selector(passwordClearBtnClick(_:)), for: .touchUpInside)
         self.passwordField.rightView = passwordClearBtn
         self.passwordField.rightViewMode = .never    // 右侧清除按钮暂不显示
         self.passwordField.isSecureTextEntry = true
         self.passwordField.addTarget(self, action: #selector(passwordFieldValueChanged(_:)), for: .editingChanged)
-        self.passwordField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.loginpwd.desc".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x525C6E)])
+        self.passwordField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.loginpwd.desc".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         // pwdSecurityBtn
         self.pwdSecurityBtn.isSelected = false
         // confirmPwdField
         let confirmPwdClearBtn: UIButton = UIButton.init(type: .custom)
-        confirmPwdClearBtn.setImage(UIImage.init(named: "IMG_icon_input_clear"), for: .normal)
+        confirmPwdClearBtn.setImage(UIImage.init(named: "IMG_login_input_clear"), for: .normal)
         confirmPwdClearBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 30)
         confirmPwdClearBtn.addTarget(self, action: #selector(confirmPwdClearBtnClick(_:)), for: .touchUpInside)
         self.confirmPwdField.rightView = confirmPwdClearBtn
@@ -156,7 +160,7 @@ extension RegisterView {
         self.confirmPwdField.isSecureTextEntry = true
         self.confirmPwdField.addTarget(self, action: #selector(confirmPwdFieldValueChanged(_:)), for: .editingChanged)
         self.confirmPwdField.addTarget(self, action: #selector(confirmPwdFieldBeginEditing(_:)), for: .editingDidBegin)
-        self.confirmPwdField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.repassword".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x525C6E)])
+        self.confirmPwdField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.repassword".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         // confirmPwdCorrectBtn
         self.confirmPwdCorrectBtn.isUserInteractionEnabled = false
         self.confirmPwdCorrectBtn.contentMode = .right
@@ -165,27 +169,31 @@ extension RegisterView {
         self.registerBtn.backgroundColor = UIColor.clear
         self.registerBtn.gradientLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.registerBtnLrMargin * 2.0, height: self.registerBtnH)
         self.registerBtn.set(cornerRadius: 5)
-        self.registerBtn.set(title: "donebtn.register".localized, titleColor: UIColor.white, for: .normal)
-        self.registerBtn.set(title: "donebtn.register".localized, titleColor: UIColor.init(hex: 0x8C97AC), for: .disabled)
+        self.registerBtn.setTitle("donebtn.register".localized, for: .normal)
         // agreeBtn
         self.agreeBtn.isSelected = false
         // sendSmsBtn
         self.sendCodeBtn.set(font: UIFont.systemFont(ofSize: 12), cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.theme)
         self.sendCodeBtn.setTitle("smscode.send".localized, for: .normal)
+        self.sendCodeBtn.setTitleColor(AppColor.theme, for: .normal)
+        self.sendCodeBtn.backgroundColor = UIColor.init(hex: 0xFFFFFF)
         // countdownLabel
         self.addSubview(self.countdownLabel)
-        self.countdownLabel.set(text: nil, font: UIFont.systemFont(ofSize: 12), textColor: UIColor(hex: 0x8C97AC), alignment: .center)
-        self.countdownLabel.set(cornerRadius: 5, borderWidth: 1, borderColor: UIColor.init(hex: 0x8C97AC))
+        self.countdownLabel.set(text: nil, font: UIFont.systemFont(ofSize: 12), textColor: AppColor.minorText, alignment: .center)
+        self.countdownLabel.set(cornerRadius: 5, borderWidth: 1, borderColor: AppColor.minorText)
         self.countdownLabel.isHidden = true // 默认隐藏
         self.countdownLabel.snp.makeConstraints { (make) in
             make.edges.equalTo(self.sendCodeBtn)
         }
         // inviteCodeField
-        self.inviteCodeField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.register.invitecode".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x525C6E)])
+        self.inviteCodeField.addTarget(self, action: #selector(inviteCodeFieldValueChanged(_:)), for: .editingChanged)
+        self.inviteCodeField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.register.invitecode".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         // agreement
         self.agreeBtn.isSelected = true     // 默认勾选协议同意 
         self.agreePromptLabel.text = "register.agreement.agree".localized
         self.agreementBtn.setTitle("register.agreement".localized, for: .normal)
+        self.agreementBtn.set(title: "register.agreement".localized, titleColor: AppColor.theme, for: .normal)
+        self.agreementBtn.addLineWithSide(.outBottom, color: AppColor.theme, thickness: 1, margin1: 0, margin2: 0)
         // 版本适配
         if #available(iOS 11.0, *) {
             self.passwordField.textContentType = UITextContentType.name
@@ -203,10 +211,10 @@ extension RegisterView {
 
     fileprivate func couldDone() -> Bool {
         var flag: Bool = false
-        guard let account = self.accountField.text, let verifyCode = self.verifyCodeField.text, let password = self.passwordField.text, let confirmPwd = self.confirmPwdField.text else {
+        guard let account = self.accountField.text, let verifyCode = self.verifyCodeField.text, let password = self.passwordField.text, let confirmPwd = self.confirmPwdField.text, let inviteCode = self.inviteCodeField.text else {
             return flag
         }
-        flag = (!account.isEmpty && !verifyCode.isEmpty && self.agreeBtn.isSelected && !password.isEmpty && !confirmPwd.isEmpty)
+        flag = (!account.isEmpty && !verifyCode.isEmpty && self.agreeBtn.isSelected && !password.isEmpty && !confirmPwd.isEmpty && !inviteCode.isEmpty)
         return flag
     }
     fileprivate func couldDoneProcess() -> Void {
@@ -241,12 +249,12 @@ extension RegisterView {
     }
 
     /// 注册按钮点击
-    @IBAction func registerBtnClick(_ sender: UIButton) {
+    @IBAction func registerBtnClick(_ sender: GradientLayerButton) {
         self.endEditing(true)
-        guard let account = self.accountField.text, let smsCode = self.verifyCodeField.text, let password = self.passwordField.text, let confirmPwd = self.confirmPwdField.text else {
+        guard let account = self.accountField.text, let smsCode = self.verifyCodeField.text, let password = self.passwordField.text, let confirmPwd = self.confirmPwdField.text, let inviteCode = self.inviteCodeField.text else {
             return
         }
-        self.delegate?.registerView(self, didCliedkedRegister: sender, account: account, password: password, confirmPwd: confirmPwd, smsCode: smsCode, inviteCode: self.inviteCodeField.text)
+        self.delegate?.registerView(self, didCliedkedRegister: sender, account: account, password: password, confirmPwd: confirmPwd, smsCode: smsCode, inviteCode: inviteCode)
     }
 
     /// 协议按钮点击
@@ -285,17 +293,23 @@ extension RegisterView {
         guard let account = self.accountField.text, !account.isEmpty else {
             return
         }
-        // 腾讯防水墙
-        let window = UIApplication.shared.keyWindow!
-        let appId = AppConfig.share.third.tcCaptcha.registerId
-//        TCWebCodesBridge.shared().loadTencentCaptcha(window, appid: appId) { (resultDic) in
-//            if let result = Mapper<TCWebCodesResultModel>().map(JSONObject: resultDic), 0 == result.code {
-//                // 发送验证码请求
-//                self.sendSmsCodeRequest(account: account, ticket: result.ticket, randStr: result.randStr)
-//            } else {
-//                Toast.showToast(title: "prompt.webcode.failure".localized)
-//            }
-//        }
+        
+        // 顶象验证
+        self.coverBtn.backgroundColor = UIColor.black.withAlphaComponent(0)
+        self.coverBtn.addTarget(self, action: #selector(coverBtnClick(_:)), for: .touchUpInside)
+        UIApplication.shared.keyWindow?.addSubview(self.coverBtn)
+        self.coverBtn.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        let appId: String = "fc939e1ccf39d5533743d748d566f345"
+        let config: [String: Any] = ["appId": appId]
+        let captchaFrame: CGRect = CGRect.init(x: kScreenWidth * 0.5 - 150, y: kScreenHeight * 0.5 - 100, width: 300, height: 200)
+        //let captchaView: DXCaptchaView = DXCaptchaView.init(appId: appId, delegate: self, frame: captchaFrame)
+        self.captchaView = DXCaptchaView.init(config: config, delegate: self, frame: captchaFrame)
+        UIApplication.shared.keyWindow?.addSubview(self.captchaView)
+        
+        // 发送验证码请求
+//        self.sendSmsCodeRequest(account: account, ticket: "", randStr: "")
     }
 
     /// 账号输入框输入监听
@@ -325,21 +339,25 @@ extension RegisterView {
     }
     /// 邀请码输入框监听
     @objc fileprivate func inviteCodeFieldValueChanged(_ textField: UITextField) -> Void {
-
+        self.couldDoneProcess()
     }
 
 }
 
 // MARK: - Extension Function
 extension RegisterView {
-
+    /// 遮罩点击
+    @objc func coverBtnClick(_ button: UIButton) -> Void {
+        self.coverBtn.removeFromSuperview()
+        self.captchaView.removeFromSuperview()
+    }
 }
 
 extension RegisterView {
     /// 发送短信验证码请求
-    fileprivate func sendSmsCodeRequest(account: String, ticket: String, randStr: String) -> Void {
+    fileprivate func sendSmsCodeRequest(account: String, ticket: String, randStr: String, token: String) -> Void {
         self.isUserInteractionEnabled = false
-        AccountNetworkManager.sendUnAuthSMSCode(account: account, scene: .register, ticket: ticket, randStr: randStr) { [weak self] (status, msg) in
+        AccountNetworkManager.sendSMSCode(account: account, scene: .register, ticket: ticket, randStr: randStr, token: token) { [weak self] (status, msg) in
             guard let `self` = self else {
                 return
             }
@@ -396,5 +414,30 @@ extension RegisterView {
 
 // MARK: - <XXXDelegate>
 extension RegisterView {
+
+}
+
+// MARK: - <DXCaptchaDelegate>
+extension RegisterView: DXCaptchaDelegate {
+    func captchaView(_ view: DXCaptchaView!, didReceive eventType: DXCaptchaEventType, arg dict: [AnyHashable : Any]!) {
+        print("RegisterView captchaView didReceive arg")
+        switch eventType {
+        case DXCaptchaEventSuccess:
+            guard let token = dict["token"] as? String, let account = self.accountField.text else {
+                ToastUtil.showToast(title: "验证失败")
+                view.removeFromSuperview()
+                self.coverBtn.removeFromSuperview()
+                return
+            }
+            view.removeFromSuperview()
+            self.coverBtn.removeFromSuperview()
+            // 发送验证码请求
+            self.sendSmsCodeRequest(account: account, ticket: "", randStr: "", token: token)
+        case DXCaptchaEventFail:
+            break
+        default:
+            break
+        }
+    }
 
 }

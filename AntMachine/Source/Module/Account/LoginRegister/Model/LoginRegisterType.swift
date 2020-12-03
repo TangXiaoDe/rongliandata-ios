@@ -1,9 +1,9 @@
 //
 //  LoginRegisterType.swift
-//  AntMachine
+//  iMeet
 //
 //  Created by 小唐 on 2019/5/30.
-//  Copyright © 2019 ChainOne. All rights reserved.
+//  Copyright © 2019 iMeet. All rights reserved.
 //
 //  登录注册类型
 

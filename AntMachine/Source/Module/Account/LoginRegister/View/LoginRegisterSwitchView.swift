@@ -1,6 +1,6 @@
 //
 //  LoginRegisterSwitchView.swift
-//  AntMachine
+//  iMeet
 //
 //  Created by 小唐 on 2019/3/11.
 //  Copyright © 2019 ChainOne. All rights reserved.
@@ -86,13 +86,13 @@ extension LoginRegisterSwitchView {
         }
     }
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        mainView.backgroundColor = UIColor.init(hex: 0x2D385C)
-        mainView.set(cornerRadius: self.itemH * 0.5, borderWidth: 0.5, borderColor: UIColor.init(hex: 0x00BDD2))
+        mainView.backgroundColor = UIColor.init(hex: 0xF7F6FF)
+        mainView.set(cornerRadius: self.itemH * 0.5, borderWidth: 0.5, borderColor: AppColor.theme)
         let font: UIFont = UIFont.systemFont(ofSize: 18)
-        let normalTitleColor: UIColor = UIColor.init(hex: 0x00BDD2)
-        let selectedTitleColor: UIColor = UIColor.white
-        let normalBgColor: UIColor = UIColor.init(hex: 0x2D385C)
-        let selectedBgColor: UIColor = UIColor.init(hex: 0x00BDD2)
+        let normalTitleColor: UIColor = AppColor.theme
+        let selectedTitleColor: UIColor = UIColor.init(hex: 0xffffff)
+        let normalBgColor: UIColor = UIColor.init(hex: 0xF7F6FF)
+        let selectedBgColor: UIColor = AppColor.theme
         // 1. loginBtn
         mainView.addSubview(self.loginBtn)
         self.loginBtn.set(title: "common.login".localized, titleColor: normalTitleColor, image: nil, bgImage: UIImage.imageWithColor(normalBgColor), for: .normal)

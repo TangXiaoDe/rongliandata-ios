@@ -1,6 +1,6 @@
 //
 //  SmsCodeLoginInputView.swift
-//  AntMachine
+//  iMeet
 //
 //  Created by 小唐 on 2019/3/11.
 //  Copyright © 2019 ChainOne. All rights reserved.
@@ -101,19 +101,21 @@ extension SmsCodeLoginInputView {
         self.backgroundColor = UIColor.clear
         // 1. accountField
         let accountClearBtn: UIButton = UIButton.init(type: .custom)
-        accountClearBtn.setImage(UIImage.init(named: "IMG_icon_input_clear"), for: .normal)
+        accountClearBtn.setImage(UIImage.init(named: "IMG_login_input_clear"), for: .normal)
         accountClearBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 30)
         accountClearBtn.addTarget(self, action: #selector(accountClearBtnClick(_:)), for: .touchUpInside)
         self.accountField.rightView = accountClearBtn
         self.accountField.rightViewMode = .whileEditing
         self.accountField.addTarget(self, action: #selector(accountFieldValueChanged(_:)), for: .editingChanged)
-        self.accountField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.phone".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x525C6E)])
+        self.accountField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.phone".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         // 2. verifyCodeField
         self.smsCodeField.addTarget(self, action: #selector(smsCodeFieldValueChanged(_:)), for: .editingChanged)
-        self.smsCodeField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.smscode".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x525C6E)])
+        self.smsCodeField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.smscode".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         // 3. sendSmsBtn
         self.sendSmsBtn.set(font: UIFont.systemFont(ofSize: 12), cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.theme)
         self.sendSmsBtn.setTitle("smscode.send".localized, for: .normal)
+        self.sendSmsBtn.setTitleColor(AppColor.theme, for: .normal)
+        self.sendSmsBtn.backgroundColor = UIColor.init(hex: 0xFFFFFF)
         // 4. countLabel
         self.addSubview(self.countdownLabel)
         self.countdownLabel.set(text: nil, font: UIFont.systemFont(ofSize: 12), textColor: UIColor(hex: 0x8C97AC), alignment: .center)
@@ -138,17 +140,8 @@ extension SmsCodeLoginInputView {
         guard let account = self.accountField.text, !account.isEmpty else {
             return
         }
-//        let window: UIWindow = UIApplication.shared.keyWindow!
-//        // 腾讯防水墙
-//        let appId = AppConfig.share.third.tcCaptcha.smsLoginId
-//        TCWebCodesBridge.shared().loadTencentCaptcha(window, appid: appId) { (resultDic) in
-//            if let result = Mapper<TCWebCodesResultModel>().map(JSONObject: resultDic), 0 == result.code {
-//                // 发送验证码请求
-//                self.sendSmsCodeRequest(account: account, ticket: result.ticket, randStr: result.randStr)
-//            } else {
-//                Toast.showToast(title: "滑块验证失败\n请滑到指定位置，或检查你的网络")
-//            }
-//        }
+        // 发送验证码请求
+        self.sendSmsCodeRequest(account: account, ticket: "", randStr: "")
     }
 
     /// 账号输入框输入值变更
@@ -173,7 +166,7 @@ extension SmsCodeLoginInputView {
     /// 发送短信验证码请求
     fileprivate func sendSmsCodeRequest(account: String, ticket: String, randStr: String) -> Void {
         self.isUserInteractionEnabled = false
-        AccountNetworkManager.sendUnAuthSMSCode(account: account, scene: .smscodeLogin, ticket: ticket, randStr: randStr) {  [weak self](status, msg) in
+        AccountNetworkManager.sendSMSCode(account: account, scene: .login, ticket: ticket, randStr: randStr) {  [weak self](status, msg) in
             guard let `self` = self else {
                 return
             }

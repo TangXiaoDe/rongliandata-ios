@@ -1,6 +1,6 @@
 //
 //  PasswordLoginInputView.swift
-//  AntMachine
+//  iMeet
 //
 //  Created by 小唐 on 2019/3/11.
 //  Copyright © 2019 ChainOne. All rights reserved.
@@ -83,17 +83,17 @@ extension PasswordLoginInputView {
         self.backgroundColor = UIColor.clear
         // accountField
         let accountClearBtn: UIButton = UIButton.init(type: .custom)
-        accountClearBtn.setImage(UIImage.init(named: "IMG_icon_input_clear"), for: .normal)
+        accountClearBtn.setImage(UIImage.init(named: "IMG_login_input_clear"), for: .normal)
         accountClearBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 30)
         accountClearBtn.addTarget(self, action: #selector(accountClearBtnClick(_:)), for: .touchUpInside)
         self.accountField.rightView = accountClearBtn
         self.accountField.rightViewMode = .whileEditing
         self.accountField.addTarget(self, action: #selector(accountFieldValueChanged(_:)), for: .editingChanged)
-        self.accountField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.phone".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x525C6E)])
+        self.accountField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.phone".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         // passwordField
         self.passwordField.isSecureTextEntry = true
         self.passwordField.addTarget(self, action: #selector(passwordFieldValueChanged(_:)), for: .editingChanged)
-        self.passwordField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.password".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x525C6E)])
+        self.passwordField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.password".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         self.pwdSecurityBtn.isSelected = false
         // 版本适配
         if #available(iOS 11.0, *) {

@@ -47,4 +47,8 @@
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "AYBubbleView.h"
 
+// DingXiang
+#import <DingxiangCaptchaSDKStatic/DXCaptchaView.h>
+#import <DingxiangCaptchaSDKStatic/DXCaptchaDelegate.h>
+
 #endif /* iMeet_Bridging_Header_h */

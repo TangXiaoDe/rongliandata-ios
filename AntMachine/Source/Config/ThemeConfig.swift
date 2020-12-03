@@ -55,8 +55,11 @@ class ThemeConfig {
     var titleColor: UIColor = UIColor.white
     /// 正文颜色
     var mainTextColor: UIColor = UIColor.white
+    var subMainTextColor: UIColor = UIColor.white
     /// 详情颜色
     var detailTextColor: UIColor = UIColor.white
+    /// 详情颜色
+    var minorTextColor: UIColor = UIColor.init(hex: 0x8C97AC)
 
     /// 页面背景色(占位色)
     var pageBgColor: UIColor = UIColor.init(hex: 0x202A46)

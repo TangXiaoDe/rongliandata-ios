@@ -743,7 +743,7 @@ class TSPicturePreviewItem: UIView, UIScrollViewDelegate {
                 // 清理本地模糊的图片缓存
                 ImageCache.default.removeImage(forKey: imageObject.cacheKey)
                 // 更新界面
-                weakSelf.loadImage(placeholder: UIImage.create(with: IMeetColor.disable, size: weakSelf.imageView.frame.size), forceToRefresh: true)
+                weakSelf.loadImage(placeholder: UIImage.create(with: AppColor.disable, size: weakSelf.imageView.frame.size), forceToRefresh: true)
             }
             weakSelf.delegate?.itemFinishPaid(weakSelf)
         }

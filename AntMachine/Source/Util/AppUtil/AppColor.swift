@@ -25,8 +25,12 @@ class AppColor {
     static let title: UIColor = AppConfig.share.theme.titleColor
     /// 正文颜色
     static let mainText: UIColor = AppConfig.share.theme.mainTextColor
+    static let subMainText: UIColor = AppConfig.share.theme.subMainTextColor
     /// 详情颜色
     static let detailText: UIColor = AppConfig.share.theme.detailTextColor
+    /// 辅助文字
+    static let minorText: UIColor = AppConfig.share.theme.minorTextColor
+    
 
     /// 页面背景色(占位色)
     static let pageBg: UIColor = AppConfig.share.theme.pageBgColor
@@ -39,7 +43,7 @@ class AppColor {
     /// 输入框背景色
     static let inputBg: UIColor = AppConfig.share.theme.inputBgColor
     /// 输入框PlaceHolder文字颜色
-    static let inputPlace: UIColor = AppConfig.share.theme.inputPlaceColor
+    static let inputPlaceHolder: UIColor = AppConfig.share.theme.inputPlaceColor
 
 
     /// 导航栏背景色
