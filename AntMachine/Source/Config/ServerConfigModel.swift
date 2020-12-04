@@ -104,8 +104,11 @@ class FilConfigModel: Mappable {
     var total_enable: String = ""
     /// fil钱包主页tips
     var tips: String = ""
-    
+    ///
     var archive: String = ""
+
+    /// 设备模块使用的，封存配比
+    var pawn: String = ""
     
     required init?(map: Map) {
         
@@ -116,5 +119,16 @@ class FilConfigModel: Mappable {
         total_enable <- map["total_enable"]
         tips <- map["tips"]
         archive <- map["archive"]
+        pawn <- map["pawn"]
     }
+
+    /// 设备封装配比
+    var equip_pawn: Double {
+        var value: Double = 0
+        if let realValue = Double(self.pawn) {
+            value = realValue
+        }
+        return value
+    }
+    
 }

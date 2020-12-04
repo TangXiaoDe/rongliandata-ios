@@ -354,6 +354,9 @@
 		53A6F41C24E0FA3500E8C9B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2E024E0FA3200E8C9B4 /* Main.storyboard */; };
 		53A6F43E24E0FA3500E8C9B4 /* ProductDetail.css in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F30724E0FA3200E8C9B4 /* ProductDetail.css */; };
 		53A6F45C24E121EF00E8C9B4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F45B24E121EF00E8C9B4 /* Info.plist */; };
+		53B0D9C72579EB5B009A2396 /* EquipmentHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B0D9C62579EB5B009A2396 /* EquipmentHomeModel.swift */; };
+		53B0D9CD257A1271009A2396 /* EquipmentRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B0D9CC257A1271009A2396 /* EquipmentRequestInfo.swift */; };
+		53B0D9D2257A127C009A2396 /* EquipmentNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B0D9D1257A127C009A2396 /* EquipmentNetworkManager.swift */; };
 		950009702578DAA3002B8944 /* MineHomeOptionItemControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9500096C2578DAA3002B8944 /* MineHomeOptionItemControl.swift */; };
 		950009712578DAA3002B8944 /* MineHomeIncomeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9500096D2578DAA3002B8944 /* MineHomeIncomeInfoView.swift */; };
 		950009722578DAA3002B8944 /* MineHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9500096E2578DAA3002B8944 /* MineHomeHeaderView.swift */; };
@@ -798,6 +801,9 @@
 		53A6F2E224E0FA3200E8C9B4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53A6F30724E0FA3200E8C9B4 /* ProductDetail.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = ProductDetail.css; sourceTree = "<group>"; };
 		53A6F45B24E121EF00E8C9B4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		53B0D9C62579EB5B009A2396 /* EquipmentHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentHomeModel.swift; sourceTree = "<group>"; };
+		53B0D9CC257A1271009A2396 /* EquipmentRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentRequestInfo.swift; sourceTree = "<group>"; };
+		53B0D9D1257A127C009A2396 /* EquipmentNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentNetworkManager.swift; sourceTree = "<group>"; };
 		66D2B43036CC2F2CC04B0C31 /* Pods-AntMachine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntMachine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntMachine/Pods-AntMachine.debug.xcconfig"; sourceTree = "<group>"; };
 		9500096C2578DAA3002B8944 /* MineHomeOptionItemControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeOptionItemControl.swift; sourceTree = "<group>"; };
 		9500096D2578DAA3002B8944 /* MineHomeIncomeInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeIncomeInfoView.swift; sourceTree = "<group>"; };
@@ -1253,6 +1259,7 @@
 		539DDF462578985200A343BF /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				53B0D9CB257A1266009A2396 /* Equipment */,
 				95000A4B2578DF1B002B8944 /* System */,
 				950009842578DB01002B8944 /* Asset */,
 				9500097C2578DAEA002B8944 /* Mine */,
@@ -2471,6 +2478,7 @@
 			isa = PBXGroup;
 			children = (
 				539DE3932578D28C00A343BF /* EquipmentListModel.swift */,
+				53B0D9C62579EB5B009A2396 /* EquipmentHomeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2633,6 +2641,15 @@
 				5394398824F8A8980097DCAA /* ResourcePlaceAudio.swift */,
 			);
 			path = Audio;
+			sourceTree = "<group>";
+		};
+		53B0D9CB257A1266009A2396 /* Equipment */ = {
+			isa = PBXGroup;
+			children = (
+				53B0D9CC257A1271009A2396 /* EquipmentRequestInfo.swift */,
+				53B0D9D1257A127C009A2396 /* EquipmentNetworkManager.swift */,
+			);
+			path = Equipment;
 			sourceTree = "<group>";
 		};
 		7CE3DDFBB3BEE90065106194 /* Frameworks */ = {
@@ -3348,6 +3365,7 @@
 				539DE0B12578985300A343BF /* AppFont.swift in Sources */,
 				539DE1592578985300A343BF /* ListEmptyPlaceHolderView.swift in Sources */,
 				539DE1742578985300A343BF /* BaseControl.swift in Sources */,
+				53B0D9CD257A1271009A2396 /* EquipmentRequestInfo.swift in Sources */,
 				539DE3752578D1D900A343BF /* FirstPageHomeModel.swift in Sources */,
 				539DE2A82578C2BF00A343BF /* UserInfoHeaderView.swift in Sources */,
 				95000A322578DE7C002B8944 /* WalletBalanceProgressView.swift in Sources */,
@@ -3551,6 +3569,7 @@
 				539DE1202578985300A343BF /* LaunchAdvertItemView.swift in Sources */,
 				539DE0A32578985300A343BF /* UIFont+Extension.swift in Sources */,
 				95000A702578E487002B8944 /* MineHomePlaceModel.swift in Sources */,
+				53B0D9C72579EB5B009A2396 /* EquipmentHomeModel.swift in Sources */,
 				539DE1502578985300A343BF /* CommonSmsCodeView.swift in Sources */,
 				539DE16E2578985300A343BF /* BaseNavigationController.swift in Sources */,
 				539DE0C22578985300A343BF /* UrlManager.swift in Sources */,
@@ -3623,6 +3642,7 @@
 				539DE1602578985300A343BF /* SettingSectionHeader.swift in Sources */,
 				539DE1042578985300A343BF /* TestPushInteractiveController.swift in Sources */,
 				539DE0B92578985300A343BF /* AdvertRequestInfo.swift in Sources */,
+				53B0D9D2257A127C009A2396 /* EquipmentNetworkManager.swift in Sources */,
 				539DE1092578985300A343BF /* XDPushPopAnimation.swift in Sources */,
 				539DE3742578D1D900A343BF /* FPHomeIPFSModel.swift in Sources */,
 				539DE0922578985300A343BF /* AccountLoginObject.swift in Sources */,

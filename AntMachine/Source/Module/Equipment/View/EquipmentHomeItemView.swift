@@ -13,7 +13,7 @@ class EquipmentHomeItemView: UIView {
     
     // MARK: - Internal Property
     
-    var model: String? {
+    var model: EquipmentListModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -245,12 +245,22 @@ extension EquipmentHomeItemView {
     }
     
     /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-        guard let _ = model else {
+    fileprivate func setupWithModel(_ model: EquipmentListModel?) -> Void {
+        //self.setupAsDemo()
+        guard let model = model else {
             return
         }
         // 子控件数据加载
+        self.titleLabel.text = "第\(model.fil_level)期"
+        self.specView.valueLabel.text = model.spec_level
+        self.miningNumView.valueLabel.text = model.total_ming.decimalValidDigitsProcess(digits: 4)
+        self.fengzhuangNumView.valueLabel.text = model.fengzhuang_num.decimalValidDigitsProcess(digits: 2)
+        self.progressNumView.valueLabel.text = (model.fengcun_progress * 1).decimalValidDigitsProcess(digits: 2) + "%"
+        
+        var totalNumAtts = NSAttributedString.textAttTuples()
+        totalNumAtts.append((str: "\(model.t_num)", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: UIColor.init(hex: 0xFF455E)))
+        totalNumAtts.append((str: " T", font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: UIColor.init(hex: 0xFF455E)))
+        self.totalNumView.attributedText = NSAttributedString.attribute(totalNumAtts)
     }
     
 }

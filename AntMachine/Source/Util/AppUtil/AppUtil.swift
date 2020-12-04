@@ -173,16 +173,16 @@ extension AppUtil {
 extension AppUtil {
     /// 获取系统配置
     class func getSystemConfig() -> Void {
-//        SystemNetworkManager.appServerConfig { (status, msg, model) in
-//            guard status, let model = model else {
-//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
-//                    // 发送通知
-//                    NotificationCenter.default.post(name: NSNotification.Name.App.getSystemConfig, object: nil)
-//                })
-//                return
-//            }
-//            AppConfig.share.server = model
-//        }
+        SystemNetworkManager.appServerConfig { (status, msg, model) in
+            guard status, let model = model else {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                    // 发送通知
+                    NotificationCenter.default.post(name: NSNotification.Name.App.getSystemConfig, object: nil)
+                })
+                return
+            }
+            AppConfig.share.server = model
+        }
     }
 
     /// 更新认证状态

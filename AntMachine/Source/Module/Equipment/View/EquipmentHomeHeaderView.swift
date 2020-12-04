@@ -16,7 +16,7 @@ class EquipmentHomeHeaderView: UIView {
     
     static let viewHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
     
-    var model: String? {
+    var model: EquipmentHomeModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -134,12 +134,13 @@ extension EquipmentHomeHeaderView {
         self.valueLabel.text = "5,100"
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-        guard let _ = model else {
+    fileprivate func setupWithModel(_ model: EquipmentHomeModel?) -> Void {
+        //self.setupAsDemo()
+        guard let model = model else {
             return
         }
         // 子控件数据加载
+        self.valueLabel.text = model.total.decimalValidDigitsProcess(digits: 0)
     }
     
 }

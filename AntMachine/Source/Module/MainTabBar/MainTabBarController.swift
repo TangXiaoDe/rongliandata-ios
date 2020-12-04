@@ -50,6 +50,7 @@ extension MainTabBarController {
         VersionManager.share.updateProcess()        // 版本更新判断
         AppUtil.updateRealNameCert()              // 实名认证状态更新
         AppUtil.updateUserTotalCT()               // CT数更新
+        AppUtil.getSystemConfig()                 // 获取系统配置
 
         /// 通知响应添加，采用统一入口
         NotificationCenter.default.addObserver(self, selector: #selector(notificationProcess(_:)), name: AppNotification.Advert.click, object: nil)
