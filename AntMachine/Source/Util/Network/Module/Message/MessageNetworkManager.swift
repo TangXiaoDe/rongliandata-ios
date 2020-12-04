@@ -1,5 +1,5 @@
 //
-//  LYPNetworkManager+Message.swift
+//  MessageNetworkManager.swift
 //  CCMall
 //
 //  Created by 小唐 on 2019/2/22.
