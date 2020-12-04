@@ -136,14 +136,14 @@ extension MineHomeController {
             make.bottom.equalToSuperview().offset(-bottomMargin)
         }
         // shield
-        self.incomeInfoView.isHidden = AppConfig.share.shield.currentNeedShield
-        if AppConfig.share.shield.currentNeedShield {
-            self.incomeInfoView.snp.remakeConstraints { (make) in
-                make.leading.equalToSuperview().offset(lrMargin)
-                make.trailing.equalToSuperview().offset(-lrMargin)
-                make.top.equalTo(self.headerView.snp.bottom).offset(-56)
-            }
-        }
+//        self.incomeInfoView.isHidden = AppConfig.share.shield.currentNeedShield
+//        if AppConfig.share.shield.currentNeedShield {
+//            self.incomeInfoView.snp.remakeConstraints { (make) in
+//                make.leading.equalToSuperview().offset(lrMargin)
+//                make.trailing.equalToSuperview().offset(-lrMargin)
+//                make.top.equalTo(self.headerView.snp.bottom).offset(-56)
+//            }
+//        }
     }
 }
 
