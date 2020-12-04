@@ -253,7 +253,12 @@ extension EquipmentHomeController: UIScrollViewDelegate {
 
     ///
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+        let offset = scrollView.contentOffset
+        if offset.y > self.headerHeight - self.itemTopMargin - kStatusBarHeight {
+            self.statusBar.backgroundColor = AppColor.theme
+        } else {
+            self.statusBar.backgroundColor = UIColor.clear
+        }
     }
 
 }
