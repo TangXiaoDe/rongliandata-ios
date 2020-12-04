@@ -140,7 +140,7 @@ extension SettingItemCell {
     }
     // 主视图布局
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        mainView.backgroundColor = UIColor.init(hex: 0x2D385C)
+        mainView.backgroundColor = UIColor.white
         // 1. leftIcon
         mainView.addSubview(self.leftIconView)
         self.leftIconView.contentMode = .left
@@ -159,7 +159,7 @@ extension SettingItemCell {
         }
         // 3. titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: UIColor.white)
+        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.mainText)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(self.lrMargin)
@@ -205,7 +205,7 @@ extension SettingItemCell {
         }
 
         self.titleLabel.isHidden = false
-        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: UIColor.white)
+        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.mainText)
         self.titleLabel.snp.remakeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(self.lrMargin)

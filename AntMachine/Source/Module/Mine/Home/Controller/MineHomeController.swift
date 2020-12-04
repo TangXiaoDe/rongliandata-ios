@@ -8,6 +8,7 @@
 //  我的主页
 
 import UIKit
+import Kingfisher
 /// 我的主页
 class MineHomeController: BaseViewController {
 
@@ -37,7 +38,7 @@ class MineHomeController: BaseViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
+        return UIStatusBarStyle.default
     }
 }
 
@@ -152,6 +153,7 @@ extension MineHomeController {
 extension MineHomeController {
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
+        self.calculatCache()
         self.scrollView.mj_header?.beginRefreshing()
     }
     
@@ -214,27 +216,71 @@ extension MineHomeController {
 //    }
 //}
 
+// MARK: extension
+extension MineHomeController {
+    /// 退出登录处理
+    fileprivate func logout() -> Void {
+        CacheManager.instance.clearWebCookieAndCache()
+        AccountManager.share.logoutProcess()
+        JPushHelper.instance.deleteAlias()
+        RootManager.share.type = .login
+    }
+    /// 退出登录弹窗
+    fileprivate func showLogoutAlert() -> Void {
+        let alertVC = UIAlertController.init(title: nil, message: "退出登录?", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        alertVC.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (action) in
+            self.logout()
+        }))
+        DispatchQueue.main.async {
+            // 若遇到此处问题，请记录机型、系统、问题描述，可尝试使用RootManager.share下的 .rootVC .showRootVC；
+            self.present(alertVC, animated: false, completion: nil)
+        }
+    }
+    /// 缓存清理
+    fileprivate func showClearCacheAlert() -> Void {
+        let alertVC = UIAlertController.init(title: nil, message: "是否清理缓存?", preferredStyle: .actionSheet)
+        alertVC.addAction(UIAlertAction.init(title: "确定", style: .destructive, handler: { (action) in
+            self.clearCache()
+        }))
+        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    fileprivate func clearCache() -> Void {
+        // Kingfisher 缓存
+        KingfisherManager.shared.cache.clearDiskCache()
+        // 自定义缓存文件 清除
+
+        // 重新计算缓存大小
+        CacheManager.instance.getCacheSize { (cacheSize) in
+            self.optionView.cacheSize = cacheSize
+        }
+    }
+    fileprivate func calculatCache() -> Void {
+        // 计算缓存大小
+        CacheManager.instance.getCacheSize { (cacheSize) in
+            self.optionView.cacheSize = cacheSize
+        }
+    }
+}
+
 // MARK: - <MineHomeOptionViewProtocol>
 extension MineHomeController: MineHomeOptionViewProtocol {
-    /// 我的钱包/资产主页
-    func optionView(_ optionView: MineHomeOptionView, didSelectedAsset itemView: MineHomeOptionItemControl) {
-        self.enterAssetPage()
+    /// 账户安全
+    func optionView(_ optionView: MineHomeOptionView, didSelectedAccount itemView: MineHomeOptionItemControl) -> Void {
+        self.enterAccountSecurityPage()
     }
-    /// 我的市场
-    func optionView(_ optionView: MineHomeOptionView, didSelectedMarket itemView: MineHomeOptionItemControl) -> Void {
-
+    /// 个人资料
+    func optionView(_ optionView: MineHomeOptionView, didSelectedUserInfo itemView: MineHomeOptionItemControl) -> Void {
+        self.enterUserInfoPage()
     }
-    /// 我的任务
-    func optionView(_ optionView: MineHomeOptionView, didSelectedTask itemView: MineHomeOptionItemControl) -> Void {
-
+    /// 清除缓存
+    func optionView(_ optionView: MineHomeOptionView, didSelectedClearCache itemView: MineHomeOptionItemControl) -> Void {
+        self.showClearCacheAlert()
     }
-    /// 邀请好友
-    func optionView(_ optionView: MineHomeOptionView, didSelectedInviteUser itemView: MineHomeOptionItemControl) -> Void {
-
-    }
-    /// 设置
-    func optionView(_ optionView: MineHomeOptionView, didSelectedSetting itemView: MineHomeOptionItemControl) -> Void {
-        self.enterSettingPage()
+    /// 退出登录
+    func optionView(_ optionView: MineHomeOptionView, didSelectedLogout itemView: MineHomeOptionItemControl) -> Void {
+        self.showLogoutAlert()
     }
 }
 
@@ -267,8 +313,8 @@ extension MineHomeController: MineHomeIncomeInfoViewProtocol {
 extension MineHomeController {
     /// 未读消息
     fileprivate func enterMessagePage() -> Void {
-//        let messageVC = MessageHomeController()
-//        self.navigationController?.pushViewController(messageVC, animated: true)
+        let messageVC = MessageHomeController()
+        self.navigationController?.pushViewController(messageVC, animated: true)
     }
 
     /// 我的Fil钱包
@@ -289,5 +335,9 @@ extension MineHomeController {
     /// 进入个人资料界面
     fileprivate func enterUserInfoPage() -> Void {
         self.enterPageVC(CurrentUserInfoController())
+    }
+    /// 账户安全
+    fileprivate func enterAccountSecurityPage()  {
+        self.enterPageVC(AccountSecurityHomeController())
     }
 }

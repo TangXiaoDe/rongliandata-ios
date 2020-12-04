@@ -47,7 +47,7 @@ class ThemeConfig {
     /// 主题色
     var themeColor: UIColor = UIColor.init(hex: 0xF5BE41)
     /// 辅助色/次要色
-    var minorColor: UIColor = UIColor.init(hex: 0x2D385C)
+    var minorColor: UIColor = UIColor.init(hex: 0xFFFFFF)
     /// 分割线颜色
     var dividingColor: UIColor = UIColor.init(hex: 0xE2E2E2)
     /// 主题红色
@@ -71,7 +71,7 @@ class ThemeConfig {
     var imgBgColor: UIColor = UIColor.init(hex: 0x000000).withAlphaComponent(0.3)
 
     /// 不可用颜色
-    var disableColor: UIColor = UIColor.init(hex: 0x35426A)
+    var disableColor: UIColor = UIColor.init(hex: 0xC7CED8)
     /// 文字不可用颜色
     var disableTitleColor: UIColor = UIColor.init(hex: 0x8C97AC)
 

@@ -13,21 +13,17 @@
 import UIKit
 
 protocol MineHomeOptionViewProtocol: class {
-    /// 我的资产
-    func optionView(_ optionView: MineHomeOptionView, didSelectedAsset itemView: MineHomeOptionItemControl) -> Void
-    /// 我的市场
-    func optionView(_ optionView: MineHomeOptionView, didSelectedMarket itemView: MineHomeOptionItemControl) -> Void
-    /// 我的任务
-    func optionView(_ optionView: MineHomeOptionView, didSelectedTask itemView: MineHomeOptionItemControl) -> Void
-    /// 邀请好友
-    func optionView(_ optionView: MineHomeOptionView, didSelectedInviteUser itemView: MineHomeOptionItemControl) -> Void
-    /// 设置
-    func optionView(_ optionView: MineHomeOptionView, didSelectedSetting itemView: MineHomeOptionItemControl) -> Void
+    /// 账户安全
+    func optionView(_ optionView: MineHomeOptionView, didSelectedAccount itemView: MineHomeOptionItemControl) -> Void
+    /// 个人资料
+    func optionView(_ optionView: MineHomeOptionView, didSelectedUserInfo itemView: MineHomeOptionItemControl) -> Void
+    /// 清除缓存
+    func optionView(_ optionView: MineHomeOptionView, didSelectedClearCache itemView: MineHomeOptionItemControl) -> Void
+    /// 退出登录
+    func optionView(_ optionView: MineHomeOptionView, didSelectedLogout itemView: MineHomeOptionItemControl) -> Void
 }
 extension MineHomeOptionViewProtocol {
-    func optionView(_ optionView: MineHomeOptionView, didSelectedCurrentVersion itemView: MineHomeOptionItemControl) -> Void {
 
-    }
 }
 
 class MineHomeOptionView: UIView {
@@ -35,6 +31,16 @@ class MineHomeOptionView: UIView {
     // MARK: - Internal Property
 
     weak var delegate: MineHomeOptionViewProtocol?
+    
+    var cacheSize: UInt? {
+        didSet {
+            guard let cacheSize = cacheSize  else {
+                return
+            }
+            let strCache = String(format: "%d.0 M", cacheSize / (1024 * 1024) )
+            self.cacheItemControl.detail = strCache
+        }
+    }
 
     // MARK: - Private Property
 
@@ -45,10 +51,7 @@ class MineHomeOptionView: UIView {
     fileprivate let verMargin: CGFloat = 10
     fileprivate let tbMargin: CGFloat = 0
     fileprivate let itemTagBase: Int = 250
-    fileprivate weak var versionItemControl: MineHomeOptionItemControl!
-    fileprivate weak var inviteCodeItemControl: MineHomeOptionItemControl!
-//    fileprivate weak var inviteRecordItemControl: MineHomeOptionItemControl!
-//    fileprivate weak var ecologicalItemControl: MineHomeOptionItemControl!
+    fileprivate weak var cacheItemControl: MineHomeOptionItemControl!
 
     fileprivate let inviteCodeIndex: Int = 0
 //    fileprivate let inviteRecordIndex: Int = 3
@@ -154,7 +157,9 @@ extension MineHomeOptionView {
                 jTopView = itemControl
                 itemIndex += 1
             }
+            self.cacheItemControl = sectionView.viewWithTag(self.itemTagBase + 2) as? MineHomeOptionItemControl
         }
+        
     }
 
     fileprivate func initialInAwakeNib() -> Void {
@@ -174,13 +179,13 @@ extension MineHomeOptionView {
         }
         switch title {
         case "账户安全":
-            self.delegate?.optionView(self, didSelectedAsset: itemControl)
+            self.delegate?.optionView(self, didSelectedAccount: itemControl)
         case "个人资料":
-            self.delegate?.optionView(self, didSelectedMarket: itemControl)
+            self.delegate?.optionView(self, didSelectedUserInfo: itemControl)
         case "清除缓存":
-            self.delegate?.optionView(self, didSelectedTask: itemControl)
+            self.delegate?.optionView(self, didSelectedClearCache: itemControl)
         case "退出登录":
-            self.delegate?.optionView(self, didSelectedInviteUser: itemControl)
+            self.delegate?.optionView(self, didSelectedLogout: itemControl)
         default:
             break
         }

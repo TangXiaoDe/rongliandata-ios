@@ -31,6 +31,8 @@ extension MainTabBarController {
             break
         case NSNotification.Name.NetWork.reachabilityChanged:
             break
+        case NSNotification.Name.Message.refresh:
+            self.requestUnreadMessage()
         default:
             break
         }
@@ -149,4 +151,18 @@ extension MainTabBarController {
     }
 
 }
-
+extension MainTabBarController {
+    /// 未读消息
+    fileprivate func requestUnreadMessage() -> Void {
+        MessageNetworkManager.getUnreadMessage { [weak self](status, msg, model) in
+            guard let _ = self else {
+                return
+            }
+            guard status, let model = model else {
+                return
+            }
+            NotificationCenter.default.post(name:AppNotificationName.Message.unread, object: model, userInfo: nil)
+        }
+    }
+    
+}
