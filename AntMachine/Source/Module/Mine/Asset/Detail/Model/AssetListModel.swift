@@ -255,6 +255,15 @@ class AssetListModel: Mappable {
             case .failure:
                 color = UIColor.init(hex: 0xE68E40)
             }
+        case .filIssue:
+            switch self.status {
+            case .wait:
+                color = UIColor.init(hex: 0x333333)
+            case .success:
+                color = UIColor.init(hex: 0x333333)
+            case .failure:
+                color = UIColor.init(hex: 0xE68E40)
+            }
         default:
             break
         }
@@ -309,6 +318,15 @@ class AssetListModel: Mappable {
         }
         switch self.type {
         case .filWithDrawal:
+            switch self.status {
+            case .wait:
+                color = UIColor.init(hex: 0x007FFF)
+            case .success:
+                color = UIColor.init(hex: 0x333333)
+            case .failure:
+                color = UIColor.init(hex: 0xE68E40)
+            }
+        case .filIssue:
             switch self.status {
             case .wait:
                 color = UIColor.init(hex: 0x007FFF)

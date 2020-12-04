@@ -53,10 +53,10 @@ extension WalletListController {
 extension WalletListController {
     override func initialUI() -> Void {
         super.initialUI()
-        self.view.backgroundColor = AppColor.minor
+        self.view.backgroundColor = AppColor.pageBg
         // 1. navigationbar
         // 2. tableView
-        self.tableView.backgroundColor = AppColor.minor
+        self.tableView.backgroundColor = AppColor.pageBg
         self.tableView.mj_header?.isHidden = false
         // 顶部位置 的版本适配
         if #available(iOS 11.0, *) {
@@ -197,6 +197,8 @@ extension WalletListController {
         let model = self.sourceList[indexPath.row]
         switch model.type {
         case .filWithDrawal:
+            self.enterFilWithdrawalDetailPage(with: model)
+        case .filIssue:
             self.enterFilWithdrawalDetailPage(with: model)
         default:
             break

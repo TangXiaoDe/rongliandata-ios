@@ -19,6 +19,8 @@ class WalletDetailHomeController: BaseViewController {
     fileprivate let scrollView: UIScrollView = UIScrollView()
 
     fileprivate let titleViewH: CGFloat = AssetActionTitleView.viewHeight
+    
+    fileprivate let scrollTopMargin: CGFloat = 12
 
     fileprivate(set) var selectedIndex: Int = 0 {
         didSet {
@@ -54,6 +56,7 @@ extension WalletDetailHomeController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -64,7 +67,7 @@ extension WalletDetailHomeController {
 extension WalletDetailHomeController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = AppColor.pageBg
         // navigation
         self.navigationItem.title = "FIL明细"
         // 1. titleView
@@ -79,7 +82,7 @@ extension WalletDetailHomeController {
         self.initialScrollView(self.scrollView)
         self.scrollView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.titleView.snp.bottom)
+            make.top.equalTo(self.titleView.snp.bottom).offset(scrollTopMargin)
             make.bottom.equalToSuperview().offset(-kBottomHeight)
         }
     }
@@ -88,7 +91,7 @@ extension WalletDetailHomeController {
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
-        let scrollViewH: CGFloat = kScreenHeight - kBottomHeight - kNavigationStatusBarHeight - self.titleViewH
+        let scrollViewH: CGFloat = kScreenHeight - kBottomHeight - kNavigationStatusBarHeight - self.titleViewH - scrollTopMargin
         let childVCList: [WalletListController] = [WalletListController.init(type: .all),
                                              WalletListController.init(type: .income),
                                              WalletListController.init(type: .outcome)]

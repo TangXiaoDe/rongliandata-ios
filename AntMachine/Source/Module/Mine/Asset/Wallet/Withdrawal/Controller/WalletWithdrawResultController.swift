@@ -69,7 +69,7 @@ extension WalletWithdrawResultController {
 extension WalletWithdrawResultController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = AppColor.minor
+        self.view.backgroundColor = UIColor.white
         // navbar
         self.navigationItem.title = "提现"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "IMG_navbar_back"), style: .plain, target: self, action: #selector(navLeftItemClick))
