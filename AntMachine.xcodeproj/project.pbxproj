@@ -341,6 +341,9 @@
 		539DE3D22578D41200A343BF /* MessageNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3D02578D41200A343BF /* MessageNetworkManager.swift */; };
 		539DE3D32578D41200A343BF /* MessageRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3D12578D41200A343BF /* MessageRequestInfo.swift */; };
 		539DE3D82578D4C900A343BF /* MallHomeNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE3D72578D4C900A343BF /* MallHomeNavBar.swift */; };
+		539DE40D2578EBE700A343BF /* EquipmentHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE40C2578EBE700A343BF /* EquipmentHomeHeaderView.swift */; };
+		539DE4122578EBF400A343BF /* EquipmentHomeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE4112578EBF400A343BF /* EquipmentHomeFooterView.swift */; };
+		539DE4172578EC1F00A343BF /* EquipmentHomeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DE4162578EC1F00A343BF /* EquipmentHomeItemView.swift */; };
 		53A6F41524E0FA3500E8C9B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2CC24E0FA3200E8C9B4 /* Assets.xcassets */; };
 		53A6F41624E0FA3500E8C9B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2CE24E0FA3200E8C9B4 /* README.md */; };
 		53A6F41724E0FA3500E8C9B4 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2D024E0FA3200E8C9B4 /* LaunchScreen.strings */; };
@@ -774,6 +777,9 @@
 		539DE3D02578D41200A343BF /* MessageNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNetworkManager.swift; sourceTree = "<group>"; };
 		539DE3D12578D41200A343BF /* MessageRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequestInfo.swift; sourceTree = "<group>"; };
 		539DE3D72578D4C900A343BF /* MallHomeNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallHomeNavBar.swift; sourceTree = "<group>"; };
+		539DE40C2578EBE700A343BF /* EquipmentHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentHomeHeaderView.swift; sourceTree = "<group>"; };
+		539DE4112578EBF400A343BF /* EquipmentHomeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentHomeFooterView.swift; sourceTree = "<group>"; };
+		539DE4162578EC1F00A343BF /* EquipmentHomeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentHomeItemView.swift; sourceTree = "<group>"; };
 		53A6F2CC24E0FA3200E8C9B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53A6F2CD24E0FA3200E8C9B4 /* AntMachine.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = AntMachine.entitlements; sourceTree = "<group>"; };
 		53A6F2CE24E0FA3200E8C9B4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -2473,6 +2479,9 @@
 			isa = PBXGroup;
 			children = (
 				539DE3982578D29E00A343BF /* EquipmentListCell.swift */,
+				539DE40C2578EBE700A343BF /* EquipmentHomeHeaderView.swift */,
+				539DE4112578EBF400A343BF /* EquipmentHomeFooterView.swift */,
+				539DE4162578EC1F00A343BF /* EquipmentHomeItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3426,6 +3435,7 @@
 				539DE14A2578985300A343BF /* PublishImageModel.swift in Sources */,
 				539DE08B2578985300A343BF /* UserUpChainObject.swift in Sources */,
 				539DE2FE2578C72600A343BF /* PasswordRequestInfo.swift in Sources */,
+				539DE4122578EBF400A343BF /* EquipmentHomeFooterView.swift in Sources */,
 				539DE1432578985300A343BF /* TitleIconControl.swift in Sources */,
 				539DE0DC2578985300A343BF /* XDGifImageView.swift in Sources */,
 				539DE0DA2578985300A343BF /* CommonAlertUtil.swift in Sources */,
@@ -3525,6 +3535,7 @@
 				539DE1472578985300A343BF /* TitleContainer.swift in Sources */,
 				539DE08E2578985300A343BF /* LevelObject.swift in Sources */,
 				539DE3772578D1D900A343BF /* FPHomeQuotationItemView.swift in Sources */,
+				539DE4172578EC1F00A343BF /* EquipmentHomeItemView.swift in Sources */,
 				539DE1962578985300A343BF /* iCarousel.m in Sources */,
 				539DE0F02578985300A343BF /* ServerConfigModel.swift in Sources */,
 				539DE0F32578985300A343BF /* LaunchController.swift in Sources */,
@@ -3588,6 +3599,7 @@
 				539DE1392578985300A343BF /* ToastView.swift in Sources */,
 				539DE1062578985300A343BF /* XDPopAnimation.swift in Sources */,
 				539DE11B2578985300A343BF /* RecommendUserModel.swift in Sources */,
+				539DE40D2578EBE700A343BF /* EquipmentHomeHeaderView.swift in Sources */,
 				539DE0BC2578985300A343BF /* UploadRequestInfo.swift in Sources */,
 				539DE1562578985300A343BF /* NavUserIconView.swift in Sources */,
 				539DE0EE2578985300A343BF /* ServerAddressConfig.swift in Sources */,
