@@ -103,7 +103,7 @@ extension AssetListCell {
     }
     // 主视图布局
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        mainView.backgroundColor = AppColor.minor
+        mainView.backgroundColor = UIColor.white
         // 0.x - titleLabel约束依赖valueLabel，而valueLabel约束也依赖titleLabel；
         mainView.addSubview(self.valueLabel)
         // 1. iconView
@@ -146,7 +146,7 @@ extension AssetListCell {
             make.trailing.equalToSuperview().offset(-lrMargin)
         }
         // 8. bottomLine
-        self.bottomLine = mainView.addLineWithSide(.inBottom, color: AppColor.pageBg, thickness: 0.5, margin1: self.titleLeftMargin, margin2: 0)
+        self.bottomLine = mainView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 0.5, margin1: self.titleLeftMargin, margin2: 0)
     }
 }
 

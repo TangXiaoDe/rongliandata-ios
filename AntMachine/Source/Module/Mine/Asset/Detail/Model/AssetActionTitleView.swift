@@ -85,7 +85,7 @@ extension AssetActionTitleView {
     fileprivate func initialUI() -> Void {
         self.addSubview(self.mainView)
         self.initialMainView(self.mainView)
-        self.mainView.backgroundColor = AppColor.minor
+        self.mainView.backgroundColor = UIColor.white
         self.mainView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
@@ -151,22 +151,17 @@ extension AssetActionTitleView {
     fileprivate func didSetupSelectedIndex(_ selectedIndex: Int) -> Void {
         // selectedBtn
         self.selectedBtn?.isSelected = false
-        if let button = self.mainView.viewWithTag(self.titleBtnTagBase + selectedIndex) as? UIButton {
-            button.isSelected = true
-            self.selectedBtn = button
+        guard let button = self.mainView.viewWithTag(self.titleBtnTagBase + selectedIndex) as? UIButton  else {
+            return
         }
+        button.isSelected = true
+        self.selectedBtn = button
         // slider
         self.slider.snp.remakeConstraints { (make) in
             make.width.equalTo(sliderViewW)
             make.bottom.equalToSuperview()
             make.height.equalTo(self.sliderViewH)
-            if 0 == selectedIndex {
-                make.leading.equalToSuperview().offset(lrMargin)
-            } else if 1 == selectedIndex {
-                make.centerX.equalToSuperview()
-            } else {
-                make.trailing.equalToSuperview().offset(-lrMargin)
-            }
+            make.centerX.equalTo(button)
         }
         UIView.animate(withDuration: 0.25) {
             self.layoutIfNeeded()

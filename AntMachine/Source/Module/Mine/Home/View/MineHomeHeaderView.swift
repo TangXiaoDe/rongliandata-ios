@@ -23,7 +23,7 @@ class MineHomeHeaderView: UIView {
 
     // MARK: - Internal Property
 
-    static var viewHeight: CGFloat = 192 + kStatusBarHeight // 6s下267
+    static var viewHeight: CGFloat = 92 - 20 + kStatusBarHeight // 6s下267
 
     static let iconTopMargin: CGFloat = UIDevice.current.isiPhoneXSeries() ? 86 : 66
 
@@ -33,11 +33,6 @@ class MineHomeHeaderView: UIView {
     var userModel: CurrentUserModel? {
         didSet {
             self.setupUserModel(userModel)
-        }
-    }
-    var assetModel: AssetInfoModel? {
-        didSet {
-            self.setupAssetModel(assetModel)
         }
     }
     var unReadNum: Int? {
@@ -63,18 +58,12 @@ class MineHomeHeaderView: UIView {
     fileprivate let vipImgView: UIImageView = UIImageView()
 
     fileprivate let titleValueView: UIView = UIView()
-    /// COMC
-    fileprivate let comcItemView = TopTitleBottomTitleControl()
-    /// 矿石
-    fileprivate let oreItemView = TopTitleBottomTitleControl()
-    /// 矿力
-    fileprivate let powerItemView = TopTitleBottomTitleControl()
 
     fileprivate let animaViewTopMargin: CGFloat = 50 + kStatusBarHeight
     
-    fileprivate let infoTopMargin: CGFloat = UIDevice.current.isiPhoneXSeries() ? 88 : 64
-    fileprivate let iconWH: CGFloat = 50
-    fileprivate let nameLeftMargin: CGFloat = 17
+    fileprivate let infoBottomMargin: CGFloat = 13
+    fileprivate let iconWH: CGFloat = 44
+    fileprivate let nameLeftMargin: CGFloat = 12
     fileprivate let nameDescVerMargin: CGFloat = 4
     
     fileprivate let incomeTopMargin: CGFloat = 25
@@ -148,17 +137,17 @@ extension MineHomeHeaderView {
         self.infoView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(lrMargin)
             make.trailing.equalToSuperview().offset(-lrMargin)
-            make.top.equalToSuperview().offset(infoTopMargin)
+            make.bottom.equalToSuperview().offset(-infoBottomMargin)
         }
         // 2. noticeBtn
         mainView.addSubview(self.noticeBtn)
-        self.noticeBtn.setImage(UIImage.init(named: "IMG_mine_message"), for: .normal)
-        self.noticeBtn.setImage(UIImage.init(named: "IMG_mine_message"), for: .selected)
+        self.noticeBtn.setImage(UIImage.init(named: "IMG_mine_icon_message"), for: .normal)
+        self.noticeBtn.setImage(UIImage.init(named: "IMG_mine_icon_message"), for: .selected)
         self.noticeBtn.addTarget(self, action: #selector(noticeBtnClick(_:)), for: .touchUpInside)
         self.noticeBtn.contentEdgeInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         self.noticeBtn.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-10)
-            make.top.equalToSuperview().offset(kStatusBarHeight)
+            make.centerY.equalTo(self.infoView)
         }
         // 3. unReadView
         mainView.addSubview(self.unReadView)
@@ -188,9 +177,9 @@ extension MineHomeHeaderView {
         infoView.isUserInteractionEnabled = true
         // 2.x iconContainer
         infoView.addSubview(iconContainer)
-        iconContainer.set(cornerRadius: (self.iconWH + 5.0) * 0.5, borderWidth: 5 * 0.5, borderColor: UIColor.init(hex: 0xf6f6f6).withAlphaComponent(0.5))
+        iconContainer.set(cornerRadius: (self.iconWH) * 0.5, borderWidth: 0, borderColor: UIColor.clear)
         iconContainer.snp.makeConstraints { (make) in
-            make.width.height.equalTo(self.iconWH + 5.0)
+            make.width.height.equalTo(self.iconWH)
             make.top.bottom.leading.equalToSuperview()
         }
         // 2. iconView
@@ -203,11 +192,11 @@ extension MineHomeHeaderView {
         }
         // 3. nameLabel
         infoView.addSubview(self.nameLabel)
-        self.nameLabel.set(text: nil, font: UIFont(name: "PingFangSC-Medium", size: 15), textColor: UIColor.white)
+        self.nameLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 15, weight: .medium), textColor: AppColor.mainText)
         self.nameLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(iconContainer.snp.trailing).offset(nameLeftMargin)
             make.trailing.equalToSuperview()
-            make.bottom.equalTo(iconContainer.snp.centerY).offset(-self.nameDescVerMargin * 0.5)
+            make.centerY.equalTo(iconContainer.snp.centerY)
         }
         // 4. vipImgView
         infoView.addSubview(self.vipImgView)
@@ -248,15 +237,6 @@ extension MineHomeHeaderView {
             make.trailing.equalToSuperview()
             make.centerY.equalTo(iconContainer.snp.centerY).offset(0)
         }
-    }
-    fileprivate func setupAssetModel(_ model: AssetInfoModel?) -> Void {
-        guard let model = model else {
-            return
-        }
-//        self.powerItemView.topLabel.text = model.power.amount.decimalProcess(digits: 0)
-//        self.oreItemView.topLabel.text = model.ore.amount.decimalProcess(digits: 4)
-//        self.comcItemView.topLabel.text = model.comc.amount.decimalProcess(digits: 4)
-        self.layoutIfNeeded()
     }
     
     fileprivate func setupunReadNum(_ num: Int?) -> Void {

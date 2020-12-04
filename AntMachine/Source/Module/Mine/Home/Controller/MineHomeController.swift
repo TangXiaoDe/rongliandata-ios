@@ -81,6 +81,7 @@ extension MineHomeController {
         self.view.addSubview(self.statusView)
         self.statusView.backgroundColor = AppColor.theme
         self.statusView.alpha = 0
+        self.statusView.isHidden = true
         self.statusView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(kStatusBarHeight)
@@ -106,7 +107,7 @@ extension MineHomeController {
     /// 滚动视图布局
     fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.delegate = self
+//        scrollView.delegate = self
         self.scrollView.mj_header = XDRefreshHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         // headerView
         scrollView.addSubview(self.headerView)
@@ -120,7 +121,7 @@ extension MineHomeController {
         scrollView.addSubview(self.incomeInfoView)
         self.incomeInfoView.delegate = self
         self.incomeInfoView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.headerView.snp.bottom).offset(56)
+            make.top.equalTo(self.headerView.snp.bottom).offset(0)
             make.leading.equalToSuperview().offset(lrMargin)
             make.trailing.equalToSuperview().offset(-lrMargin)
             make.height.equalTo(MineHomeIncomeInfoView.viewHeight)
@@ -166,7 +167,7 @@ extension MineHomeController {
             }
             self.userInfo = model.user
             self.headerView.userModel = model.user
-            self.incomeInfoView.model = model.cny
+            self.incomeInfoView.model = model.filModel
         }
     }
 
@@ -189,29 +190,29 @@ extension MineHomeController {
 extension MineHomeController {
     /// 未读消息通知处理
     @objc fileprivate func unreadMessageNoticiationProcess(_ notification: Notification) -> Void {
-//        guard let model = notification.object as? MessageUnreadModel else {
-//            return
-//        }
-//        self.headerView.unReadNum = model.count
+        guard let model = notification.object as? MessageUnreadModel else {
+            return
+        }
+        self.headerView.unReadNum = model.count
     }
 }
 
 // MARK: - Delegate Function
 
 // MARK: - <UIScrollViewDelegate>
-extension MineHomeController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset
-        let orderY: CGFloat = MineHomeHeaderView.viewHeight - MineHomeIncomeInfoView.viewHeight - kStatusBarHeight
-        if offset.y <= orderY {
-            self.statusView.alpha = (orderY - abs(offset.y - orderY)) / orderY
-        } else if offset.y > orderY {
-            self.statusView.alpha = 1
-        } else if offset.y < 0 {
-            self.statusView.alpha = 1
-        }
-    }
-}
+//extension MineHomeController: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let offset = scrollView.contentOffset
+//        let orderY: CGFloat = MineHomeHeaderView.viewHeight - MineHomeIncomeInfoView.viewHeight - kStatusBarHeight
+//        if offset.y <= orderY {
+//            self.statusView.alpha = (orderY - abs(offset.y - orderY)) / orderY
+//        } else if offset.y > orderY {
+//            self.statusView.alpha = 1
+//        } else if offset.y < 0 {
+//            self.statusView.alpha = 1
+//        }
+//    }
+//}
 
 // MARK: - <MineHomeOptionViewProtocol>
 extension MineHomeController: MineHomeOptionViewProtocol {
@@ -257,13 +258,9 @@ extension MineHomeController: MineHomeHeaderViewProtocol {
 }
 // MARK: - <MineHomeIncomeInfoViewProtocol>
 extension MineHomeController: MineHomeIncomeInfoViewProtocol {
-    /// 我的收益点击
-    func incomeInfoView(_ view: MineHomeIncomeInfoView, clickAllIncomeControl: UIControl) {
-
-    }
-    /// 我的收益点击
-    func incomeInfoView(_ view: MineHomeIncomeInfoView, clickItemControl: UIControl) {
-
+    /// fil点击
+    func incomeInfoView(_ view: MineHomeIncomeInfoView, clickAllIncomeControl: UIView) {
+        self.enterFilHomePage()
     }
 }
 // MARK: - EnterPage
@@ -275,9 +272,9 @@ extension MineHomeController {
     }
 
     /// 我的Fil钱包
-    fileprivate func enterWalletPage() -> Void {
-//        let assetVC = WalletHomeController()
-//        self.navigationController?.pushViewController(assetVC, animated: true)
+    fileprivate func enterFilHomePage() -> Void {
+        let filVC = WalletHomeController()
+        self.navigationController?.pushViewController(filVC, animated: true)
     }
     /// 我的资产
     fileprivate func enterAssetPage() -> Void {

@@ -12,9 +12,7 @@ import UIKit
 
 protocol MineHomeIncomeInfoViewProtocol: class {
     //点击全部
-    func incomeInfoView(_ view: MineHomeIncomeInfoView, clickAllIncomeControl: UIControl) -> Void
-    //点击单个
-    func incomeInfoView(_ view: MineHomeIncomeInfoView, clickItemControl: UIControl) -> Void
+    func incomeInfoView(_ view: MineHomeIncomeInfoView, clickAllIncomeControl: UIView) -> Void
 }
 
 class MineHomeIncomeInfoView: UIControl {
@@ -25,7 +23,7 @@ class MineHomeIncomeInfoView: UIControl {
     // MARK: - Internal Property
     let viewWidth: CGFloat
     
-    var model: AssetInfoModel? {
+    var model: WalletFilInfoModel? {
         didSet {
             self.setupModel(model)
         }
@@ -94,12 +92,16 @@ extension MineHomeIncomeInfoView {
         mainView.backgroundColor = UIColor.white
         mainView.set(cornerRadius: 10)
         mainView.addSubview(self.bgImgView)
+        self.bgImgView.isUserInteractionEnabled = false
         self.bgImgView.image = UIImage.init(named: "IMG_mine_fil_bg")
         self.bgImgView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        self.bgImgView.isUserInteractionEnabled = true
+        self.bgImgView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(allIncomeBtnClick(_:))))
 
         mainView.addSubview(self.totalMoneyView)
+        self.totalMoneyView.isUserInteractionEnabled = false
         self.totalMoneyView.topLabel.set(text: "FIL累计收入", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0xDBEBFF), alignment: .left)
         self.totalMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 28, weight: .regular), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
         self.totalMoneyView.snp.makeConstraints { (make) in
@@ -116,6 +118,7 @@ extension MineHomeIncomeInfoView {
     
         // soonMoneyView
         mainView.addSubview(self.soonMoneyView)
+        self.soonMoneyView.isUserInteractionEnabled = false
         self.soonMoneyView.topLabel.set(text: "可提现余额(FIL)", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0xDBEBFF), alignment: .left)
         self.soonMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 18, weight: .regular), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
         self.soonMoneyView.snp.makeConstraints { (make) in
@@ -131,6 +134,7 @@ extension MineHomeIncomeInfoView {
         }
         // balanceMoneyView
         mainView.addSubview(self.balanceMoneyView)
+        self.balanceMoneyView.isUserInteractionEnabled = false
         self.balanceMoneyView.topLabel.set(text: "资产余额(FIL)", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0xDBEBFF), alignment: .left)
         self.balanceMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 18, weight: .regular), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
         self.balanceMoneyView.snp.makeConstraints { (make) in
@@ -157,30 +161,24 @@ extension MineHomeIncomeInfoView {
 
 // MARK: - Data Function
 extension MineHomeIncomeInfoView {
-    fileprivate func setupModel(_ model: AssetInfoModel?) -> Void {
+    fileprivate func setupModel(_ model: WalletFilInfoModel?) -> Void {
         guard let model = model else {
             return
         }
-//        self.soonMoneyView.bottomLabel.text = model.balance.decimalProcess(digits: 4)
-//        self.balanceMoneyView.bottomLabel.text = model.balance.decimalProcess(digits: 4)
-        self.layoutIfNeeded()
+        self.totalMoneyView.bottomLabel.text = model.income.decimalProcess(digits: 4)
+        self.soonMoneyView.bottomLabel.text = model.withdrawable.decimalProcess(digits: 4)
+        self.balanceMoneyView.bottomLabel.text = model.fil_balance.decimalProcess(digits: 4)
     }
 }
 
 // MARK: - Event Function
 extension MineHomeIncomeInfoView {
-    /// 我的收入按钮点击
-    @objc fileprivate func myIncomeControlClick(_ control: UIControl) -> Void {
-        self.delegate?.incomeInfoView(self, clickAllIncomeControl: control)
-    }
     /// 全部收入按钮点击
-    @objc fileprivate func allIncomeBtnClick(_ button: UIButton) -> Void {
-        self.delegate?.incomeInfoView(self, clickAllIncomeControl: button)
-    }
-
-    /// 我的收入点击响应
-    @objc fileprivate func mineIncomeBtnClick(_ control: UIControl) {
-        self.delegate?.incomeInfoView(self, clickItemControl: control)
+    @objc fileprivate func allIncomeBtnClick(_ tapGR: UITapGestureRecognizer) -> Void {
+        guard  let view = tapGR.view else {
+            return
+        }
+        self.delegate?.incomeInfoView(self, clickAllIncomeControl: view)
     }
 }
 
