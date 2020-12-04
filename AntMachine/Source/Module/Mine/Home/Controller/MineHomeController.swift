@@ -75,7 +75,7 @@ extension MineHomeController {
 // MARK: - UI
 extension MineHomeController {
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = AppColor.pageBg
+        self.view.backgroundColor = UIColor.white
         // 1. navigationbar
         self.navigationItem.title = "我的"
         // 3.statusView
@@ -131,8 +131,8 @@ extension MineHomeController {
         scrollView.addSubview(self.optionView)
         self.optionView.delegate = self
         self.optionView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(lrMargin)
-            make.trailing.equalToSuperview().offset(-lrMargin)
+            make.leading.equalToSuperview().offset(0)
+            make.trailing.equalToSuperview().offset(-0)
             //make.top.equalTo(self.incomeView.snp.bottom).offset(verMargin)
             make.top.equalTo(self.incomeInfoView.snp.bottom).offset(verMargin)
             make.bottom.equalToSuperview().offset(-bottomMargin)

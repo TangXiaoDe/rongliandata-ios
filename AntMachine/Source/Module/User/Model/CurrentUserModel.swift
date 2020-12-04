@@ -199,7 +199,7 @@ class CurrentUserModel: NSObject, Mappable {
         inviteCode <- map["invite_code"]
         bio <- map["bio"]
         power <- map["power"]
-        payPwdStatus <- map["pay_pass_status"]
+        payPwdStatus <- map["paypass_status"]
 //        grade <- map["grade"]
         recommender <- map["parent"]
         extra <- map["extra"]

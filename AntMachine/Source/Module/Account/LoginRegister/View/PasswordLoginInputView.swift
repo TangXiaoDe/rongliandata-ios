@@ -88,6 +88,7 @@ extension PasswordLoginInputView {
         accountClearBtn.addTarget(self, action: #selector(accountClearBtnClick(_:)), for: .touchUpInside)
         self.accountField.rightView = accountClearBtn
         self.accountField.rightViewMode = .whileEditing
+        self.accountField.keyboardType = .decimalPad
         self.accountField.addTarget(self, action: #selector(accountFieldValueChanged(_:)), for: .editingChanged)
         self.accountField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.phone".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         // passwordField

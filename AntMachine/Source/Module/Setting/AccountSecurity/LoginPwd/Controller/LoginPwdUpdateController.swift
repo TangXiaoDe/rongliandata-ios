@@ -119,8 +119,8 @@ extension LoginPwdUpdateController {
         // doneBtn
         self.doneBtn.backgroundColor = UIColor.clear
         self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18), cornerRadius: 5)
-        self.doneBtn.set(title: "确认修改", titleColor: AppColor.mainText, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
-        self.doneBtn.set(title: "确认修改", titleColor: AppColor.mainText, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .highlighted)
+        self.doneBtn.set(title: "确认修改", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
+        self.doneBtn.set(title: "确认修改", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .highlighted)
         self.doneBtn.set(title: "确认修改", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(UIColor.init(hex: 0xD9DCE4)), for: .disabled)
     }
 }

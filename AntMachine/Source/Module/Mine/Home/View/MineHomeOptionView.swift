@@ -110,13 +110,14 @@ extension MineHomeOptionView {
     /// 数据加载
     fileprivate func setupWithSections(_ sections: [[[String: String]]]) -> Void {
         self.removeAllSubView()
+        self.backgroundColor = AppColor.pageBg
         var topView: UIView = self
         var itemIndex: Int = 0
         for (index, dictArray) in sections.enumerated() {
             let sectionView = UIView()
             self.addSubview(sectionView)
             sectionView.backgroundColor = UIColor.white
-            sectionView.set(cornerRadius: 10)
+//            sectionView.set(cornerRadius: 10)
             sectionView.snp.makeConstraints { (make) in
                 make.leading.equalToSuperview().offset(lrMargin)
                 make.trailing.equalToSuperview().offset(-lrMargin)
@@ -141,7 +142,7 @@ extension MineHomeOptionView {
                 itemControl.iconImgView.image = UIImage.init(named: dict["image"] ?? "")
                 itemControl.tag = self.itemTagBase + itemIndex
                 itemControl.addTarget(self, action: #selector(itemControlClick(_:)), for: .touchUpInside)
-                itemControl.bottomLine.isHidden = (jndex == dictArray.count - 1)
+                itemControl.bottomLine.isHidden = true
                 itemControl.snp.makeConstraints { (make) in
                     make.leading.trailing.equalToSuperview()
                     make.height.equalTo(MineHomeOptionItemControl.itemHeight)

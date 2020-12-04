@@ -250,13 +250,13 @@ extension WalletHomeMainView {
         }
         // 两个label 预约基于bondView 放最后
         centerView.addSubview(self.withdrwalingLabel)
-        self.withdrwalingLabel.set(text: "提现中 0.00", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x7B3805), alignment: .left)
+        self.withdrwalingLabel.set(text: "提现中 0.00", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
         self.withdrwalingLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(lrMargin)
             make.centerY.equalTo(self.bondView.snp.top).offset(-16)
         }
         centerView.addSubview(self.withdrwaledLabel)
-        self.withdrwaledLabel.set(text: "已提现 0.00", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x7B3805), alignment: .left)
+        self.withdrwaledLabel.set(text: "已提现 0.00", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
         self.withdrwaledLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.withdrwalingLabel.snp.right).offset(20)
             make.centerY.equalTo(self.withdrwalingLabel)
