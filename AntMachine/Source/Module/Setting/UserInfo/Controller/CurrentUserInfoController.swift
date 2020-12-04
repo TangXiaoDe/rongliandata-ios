@@ -17,7 +17,6 @@ class CurrentUserInfoController: BaseViewController {
 
     @IBOutlet weak var phoneDetailLabel: UILabel!
     @IBOutlet weak var headIcon: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
 
     fileprivate let iconWH: CGFloat = 40
     fileprivate let rightViewLeftMargin: CGFloat = 80
@@ -54,6 +53,7 @@ extension CurrentUserInfoController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -70,7 +70,6 @@ extension CurrentUserInfoController {
         self.headIcon.set(cornerRadius: self.iconWH * 0.5)
         // detailLabel
         self.phoneDetailLabel.font = UIFont.pingFangSCFont(size: 15, weight: .medium)
-        self.nameLabel.font = UIFont.pingFangSCFont(size: 15, weight: .medium)
         self.phoneDetailLabel.text = nil
     }
 }
@@ -92,7 +91,6 @@ extension CurrentUserInfoController {
         }
         self.headIcon.kf.setImage(with: model.avatarUrl, placeholder: kPlaceHolderAvatar, options: nil, progressBlock: nil, completionHandler: nil)
         self.phoneDetailLabel.text = model.phone
-        self.nameLabel.text = model.name
     }
 }
 

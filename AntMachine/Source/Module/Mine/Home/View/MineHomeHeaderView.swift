@@ -185,7 +185,7 @@ extension MineHomeHeaderView {
         // 2. iconView
         iconContainer.addSubview(self.iconView)
         self.iconView.set(cornerRadius: self.iconWH * 0.5)
-        self.iconView.image = UIImage.init(named: "IMG_user_avatar_default")
+        self.iconView.image = UIImage.init(named: "IMG_mine_userface_default")
         self.iconView.snp.makeConstraints { (make) in
             make.width.height.equalTo(self.iconWH)
             make.center.equalToSuperview()

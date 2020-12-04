@@ -16,16 +16,16 @@ class AccountSecurityController: BaseTableViewController {
     // MARK: - Internal Property
 
     // MARK: - Private Property
-
     fileprivate var sourceList: [SettingSectionModel] = []
-    fileprivate var imeetAccountModel: SettingItemModel = SettingItemModel.init(type: .rightDetail, title: "链聊账号")
-    fileprivate var bindPhoneModel: SettingItemModel = SettingItemModel.init(type: .rightDetailAccessory, title: "绑定手机号")
-    fileprivate let loginPwdModel: SettingItemModel = SettingItemModel.init(type: .rightAccessory, title: "登录密码")
+    fileprivate let loginPwdModel: SettingItemModel = SettingItemModel.init(type: .rightAccessory, title: "修改登录密码")
     fileprivate let payPwdModel: SettingItemModel = SettingItemModel.init(type: .rightAccessory, title: "支付密码")
-    //  TODO: - 绑定与授权待接口后台更新
-    fileprivate let authSection: SettingSectionModel = SettingSectionModel.init(title: "绑定与授权", items: [])
 
 
+    fileprivate var model: CurrentUserModel? {
+        didSet {
+            self.setupModel(model)
+        }
+    }
     // MARK: - Initialize Function
 
 }
@@ -37,6 +37,11 @@ extension AccountSecurityController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
 }
 
 // MARK: - UI
@@ -44,8 +49,9 @@ extension AccountSecurityController {
     override func initialUI() -> Void {
         super.initialUI()
         // 1. navigationbar
-        self.navigationItem.title = "账号与安全"
+        self.navigationItem.title = "账户安全"
         // 2. tableView
+        self.tableView.contentInset = UIEdgeInsets.init(top: 12, left: 0, bottom: 0, right: 0)
         // 顶部位置 的版本适配
         if #available(iOS 11.0, *) {
             self.tableView.contentInsetAdjustmentBehavior = .never
@@ -59,18 +65,22 @@ extension AccountSecurityController {
 extension AccountSecurityController {
     // MARK: - Private  数据处理与加载
     override func initialDataSource() -> Void {
-        self.imeetAccountModel.detail = AccountManager.share.currentAccountInfo?.userInfo?.number
-        self.bindPhoneModel.detail = AccountManager.share.currentAccountInfo?.userInfo?.phone
-        // 构造数据
-        let section1 = SettingSectionModel.init(title: nil, items: [self.imeetAccountModel, self.bindPhoneModel])
-        let section2 = SettingSectionModel.init(title: nil, items: [self.loginPwdModel])
-        if !AppConfig.share.shield.currentNeedShield {
-            section2.items.append(self.payPwdModel)
+        let normalSection = SettingSectionModel.init(title: nil, items: [self.loginPwdModel, self.payPwdModel])
+        let shieldSection = SettingSectionModel.init(title: nil, items: [self.loginPwdModel])
+        let section = AppConfig.share.shield.currentNeedShield ? shieldSection : normalSection
+        guard let user = AccountManager.share.currentAccountInfo?.userInfo else {
+            return
         }
-        self.sourceList = [section1, section2]
+        self.model = user
+        self.sourceList = [section]
+//        self.headerView.avatarView.isUserInteractionEnabled = true
         self.tableView.reloadData()
     }
-
+    fileprivate func setupModel(_ model: CurrentUserModel?) {
+        guard let model = model else {
+            return
+        }
+    }
 }
 
 // MARK: - Event(事件响应)
@@ -78,9 +88,7 @@ extension AccountSecurityController {
     /// cell点击响应处理
     fileprivate func cellSelectWithTitle(_ title: String) -> Void {
         switch title {
-        case "绑定手机号":
-            self.enterBindPhonePage()
-        case "登录密码":
+        case "修改登录密码":
             self.enterLoginPwdPage()
         case "支付密码":
             self.enterPayPwdPage()
@@ -91,19 +99,13 @@ extension AccountSecurityController {
 
 }
 
-// MARK; - Request(网络请求)
+// MARK: - Request(网络请求)
 extension AccountSecurityController {
-
 
 }
-
 // MARK: - Enter Page
 extension AccountSecurityController {
-    /// 手机号绑定界面
-    fileprivate func enterBindPhonePage() -> Void {
-        let bindVC = PhoneBindController()
-        self.enterPageVC(bindVC)
-    }
+
     /// 登录密码设置界面
     fileprivate func enterLoginPwdPage() -> Void {
         let loginPwdUpdateVC = LoginPwdUpdateController()
@@ -123,7 +125,6 @@ extension AccountSecurityController {
             self.enterPageVC(verifyVC)
         }
     }
-
 }
 
 // MARK: - Notification
@@ -132,6 +133,15 @@ extension AccountSecurityController {
 }
 
 // MARK: - Extension
+extension AccountSecurityController {
+
+}
+// MARK: - Alert
+extension AccountSecurityController {
+
+}
+
+// MARK: - Event
 extension AccountSecurityController {
 
 }
@@ -153,21 +163,7 @@ extension AccountSecurityController {
         let model = self.sourceList[indexPath.section].items[indexPath.row]
         let cell = SettingItemCell.cellInTableView(tableView, at: indexPath)
         cell.model = model
-        cell.showBottomLine = (self.sourceList[indexPath.section].items.count - 1 != indexPath.row)
-        switch model.title {
-        case "链聊账号":
-            cell.detailLabel.font = UIFont.pingFangSCFont(size: 18)
-            cell.detailLabel.textColor = AppColor.mainText
-            cell.detailLabel.snp.remakeConstraints { (make) in
-                make.centerY.equalToSuperview()
-                make.trailing.equalToSuperview().offset(-26)
-            }
-        case "绑定手机号":
-            cell.detailLabel.font = UIFont.pingFangSCFont(size: 18)
-            cell.detailLabel.textColor = AppColor.mainText
-        default:
-            break
-        }
+        cell.showBottomLine = (indexPath.row != self.sourceList[indexPath.section].items.count - 1)
         return cell
     }
 
@@ -186,15 +182,15 @@ extension AccountSecurityController {
         self.cellSelectWithTitle(model.title)
     }
 
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return SettingSectionHeader.separateHeight
-    }
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
-    }
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = SettingSectionHeader.headerInTableView(tableView)
-        return header
-    }
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 0.01
+//    }
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 12
+//    }
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let header = SettingSectionHeader.headerInTableView(tableView)
+//        return header
+//    }
 
 }

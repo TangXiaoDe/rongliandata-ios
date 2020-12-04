@@ -217,7 +217,7 @@ extension AppUtil {
     class func commonGradientLayer() -> CAGradientLayer {
         let gradientLayer = CAGradientLayer()
         gradientLayer.locations = [0, 1]
-        gradientLayer.colors = [UIColor.init(hex: 0x169CFF).cgColor, AppColor.theme.cgColor]
+        gradientLayer.colors = [AppColor.theme.cgColor, AppColor.theme.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         return gradientLayer
