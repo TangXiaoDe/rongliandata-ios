@@ -13,7 +13,7 @@ import Reachability
 extension Notification.Name {
     struct NetWork {
         /// 网络状态变更
-        static let reachabilityChanged = Notification.Name.init("app.notification.name.imeet.reachabilityChanged")
+        static let reachabilityChanged = Notification.Name.init("app.notification.name.network.reachabilityChanged")
     }
 }
 
