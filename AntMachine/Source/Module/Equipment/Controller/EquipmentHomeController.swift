@@ -104,7 +104,7 @@ extension EquipmentHomeController {
         scrollView.delegate = self
         scrollView.mj_header = XDRefreshHeader.init(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         scrollView.mj_footer = XDRefreshFooter.init(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
-        scrollView.mj_header.isHidden = true
+        scrollView.mj_header.isHidden = false
         scrollView.mj_footer.isHidden = true
         // 1. headerView
         scrollView.addSubview(self.headerView)
@@ -129,7 +129,7 @@ extension EquipmentHomeController {
     }
     
     /// 数据加载
-    fileprivate func setupItemContainer(with models: [String]) -> Void {
+    fileprivate func setupItemContainer(with models: [EquipmentListModel]) -> Void {
         self.itemContainer.removeAllSubviews()
         var topView: UIView = self.itemContainer
         for (index, model) in models.enumerated() {
@@ -162,16 +162,16 @@ extension EquipmentHomeController {
 
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
-        //self.tableView.mj_header.beginRefreshing()
-        self.setupAsDemo()
-        self.headerView.model = nil
+        self.scrollView.mj_header.beginRefreshing()
+        //self.setupAsDemo()
+        //self.headerView.model = nil
     }
     ///
     fileprivate func setupAsDemo() -> Void {
         for i in 0...25 {
             self.sourceList.append("\(i)")
         }
-        self.setupItemContainer(with: self.sourceList)
+        //self.setupItemContainer(with: self.sourceList)
     }
 
 }
@@ -195,23 +195,18 @@ extension EquipmentHomeController {
 
     /// 下拉刷新请求
     fileprivate func refreshRequest() -> Void {
-//        MessageNetworkManager.getMessageList(offset: 0, limit: self.limit) { [weak self](status, msg, models) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.tableView.mj_header.endRefreshing()
-//            self.tableView.mj_footer.state = .idle
-//            guard status, let models = models else {
-//                ToastUtil.showToast(title: msg)
-//                self.tableView.showDefaultEmpty = self.sourceList.isEmpty
-//                return
-//            }
-//            self.sourceList = models
-//            self.offset = self.sourceList.count
-//            self.tableView.mj_footer.isHidden = models.count < self.limit
-//            self.tableView.showDefaultEmpty = self.sourceList.isEmpty
-//            self.tableView.reloadData()
-//        }
+        EquipmentNetworkManager.getHomeData { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            self.scrollView.mj_header.endRefreshing()
+            guard status, let model = model else {
+                ToastUtil.showToast(title: msg)
+                return
+            }
+            self.headerView.model = model
+            self.setupItemContainer(with: model.list)
+        }
     }
     
     /// 上拉加载更多请求
@@ -258,7 +253,12 @@ extension EquipmentHomeController: UIScrollViewDelegate {
 
     ///
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+        let offset = scrollView.contentOffset
+        if offset.y > self.headerHeight - self.itemTopMargin - kStatusBarHeight {
+            self.statusBar.backgroundColor = AppColor.theme
+        } else {
+            self.statusBar.backgroundColor = UIColor.clear
+        }
     }
 
 }
