@@ -38,8 +38,8 @@ pod 'SwiftLint', '0.32.0'                 # SwiftLint 代码规范
 # Objective-C
 pod 'YYKit', '1.0.9'                      # iOS 组件
 pod 'MJRefresh', '3.2.0'                  # 上下拉刷新
-#pod 'TZImagePickerController', '3.2.1'    # 视频.图片选择框
-pod 'TZImagePickerController', :git => 'https://github.com/TangXiaoDe/TZImagePickerController.git', :tag => '3.2.1.3'    # 视频.图片选择框
+pod 'TZImagePickerController', '3.5.2'    # 视频.图片选择框
+#pod 'TZImagePickerController', :git => 'https://github.com/TangXiaoDe/TZImagePickerController.git', :tag => '3.2.1.3'    # 视频.图片选择框
 pod 'SDCycleScrollView', '1.80'           # 轮播
 pod 'SDWebImage', '5.0.2'                 # 图片加载库
 pod 'JPush', '3.2.0'                      # 极光推送
