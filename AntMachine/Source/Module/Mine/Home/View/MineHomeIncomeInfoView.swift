@@ -38,6 +38,8 @@ class MineHomeIncomeInfoView: UIControl {
     fileprivate var soonMoneyView: TopTitleBottomTitleControl = TopTitleBottomTitleControl()
     /// 资产余额
     fileprivate var balanceMoneyView: TopTitleBottomTitleControl = TopTitleBottomTitleControl()
+    
+    fileprivate let moreIconView = UIImageView()
 
     
     fileprivate let bottomMargin: CGFloat = 15
@@ -107,13 +109,21 @@ extension MineHomeIncomeInfoView {
         self.totalMoneyView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(lrMargin)
             make.top.equalToSuperview().offset(20)
-            make.width.equalTo(self.itemMaxWidth * 3)
         }
         self.totalMoneyView.bottomLabel.snp.remakeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.centerY.equalTo(self.totalMoneyView.topLabel.snp.centerY).offset(21)
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
+        }
+        
+        mainView.addSubview(self.moreIconView)
+        self.moreIconView.image = UIImage.init(named: "IMG_mine_fil_arrow_go")
+        self.moreIconView.snp.makeConstraints { (make) in
+            make.left.equalTo(self.totalMoneyView.topLabel.snp.right).offset(6)
+            make.centerY.equalTo(self.totalMoneyView.topLabel)
+            make.width.equalTo(4)
+            make.height.equalTo(8)
         }
     
         // soonMoneyView

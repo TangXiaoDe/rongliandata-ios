@@ -18,7 +18,7 @@ class AssetActionTitleView: UIView {
 
     // MARK: - Internal Property
 
-    static let viewHeight: CGFloat = 32
+    static let viewHeight: CGFloat = 44
 
     weak var delegate: AssetActionTitleViewProtocol?
     var titleClickAction:((_ titleView: AssetActionTitleView, _ index: Int, _ title: String) -> Void)?

@@ -43,7 +43,7 @@ class XDMarqueeView: UIView
     private weak var displayLink: CADisplayLink?
     private var duration: TimeInterval = 0
     /// 是否向左滚动标记
-    private var isLeft: Bool = true
+    private var isLeft: Bool = false
     /// 是否需要滚动标记
     private var isCanRun: Bool = true
 
@@ -99,7 +99,7 @@ extension XDMarqueeView {
         let textWith = textSize.width + margin * 2
         self.scrollView.contentSize = CGSize.init(width: 0, height: textWith)
         self.textLabel.frame = CGRect.init(x: 0, y: 0, width: textWith, height: textSize.height)
-        self.duration = 0
+        self.duration = -TimeInterval(self.text.size(maxSize: CGSize.init(width: CGFloat.max, height: 20), font: self.textFont).width)
         self.isCanRun = textWith > self.width
         self.displayLink?.isPaused = self.width >= textWith
     }
@@ -197,8 +197,9 @@ extension XDMarqueeView {
             }
         }
         else {
-            self.isLeft = true
-            self.duration -= scale
+            self.duration = -TimeInterval(self.text.size(maxSize: CGSize.init(width: CGFloat.max, height: 20), font: self.textFont).width) + scale
+//            self.isLeft = false
+//            self.duration -= scale
         }
         self.scrollView.setContentOffset(CGPoint.init(x: self.duration, y: 0), animated: false)
     }
