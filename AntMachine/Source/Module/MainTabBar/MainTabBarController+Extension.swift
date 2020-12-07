@@ -33,6 +33,8 @@ extension MainTabBarController {
             break
         case NSNotification.Name.Message.refresh:
             self.requestUnreadMessage()
+        case NSNotification.Name.Network.Illicit:
+            self.authenticationIllicitNotificationProcess(notification)
         default:
             break
         }
