@@ -11,7 +11,8 @@ import Foundation
 /// 上传token请求接口
 class UploadNetworkManager {
     /// uploadtoken
-    class func getUploadToken(complete: @escaping((_ status: Bool, _ msg: String?, _ model: UploadTokenModel?) -> Void)) -> Void {
+    /// default/video 视频用video
+    class func getUploadToken(policy: String = "default", complete: @escaping((_ status: Bool, _ msg: String?, _ model: UploadTokenModel?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = UploadRequestInfo.uploadToken
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])

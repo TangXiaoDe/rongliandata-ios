@@ -59,7 +59,7 @@ class UploadManager {
 
     @available(iOS 9.1, *)
     func uploadVideo(asset: PHAsset, ModuleName: String, complete: @escaping((_ status: Bool, _ msg: String?, _ results: PublishVideoModel?) -> Void)) {
-        UploadNetworkManager.getUploadToken { (status, msg, uploadTokenModel) in
+        UploadNetworkManager.getUploadToken(policy: "video") { (status, msg, uploadTokenModel) in
             guard let uploadToken = uploadTokenModel?.uploadToken else {
                 complete(false, msg, nil)
                 return
@@ -86,7 +86,7 @@ class UploadManager {
     }
 
     func uploadVideo(filePath: String, ModuleName: String, width: CGFloat, height: CGFloat, complete: @escaping((_ status: Bool, _ msg: String?, _ results: PublishVideoModel?) -> Void)) {
-        UploadNetworkManager.getUploadToken { (status, msg, uploadTokenModel) in
+        UploadNetworkManager.getUploadToken(policy: "video") { (status, msg, uploadTokenModel) in
             guard let uploadToken = uploadTokenModel?.uploadToken else {
                 complete(false, msg, nil)
                 return
