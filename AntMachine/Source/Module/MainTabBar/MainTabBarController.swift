@@ -56,6 +56,7 @@ extension MainTabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(notificationProcess(_:)), name: AppNotification.Advert.click, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(notificationProcess(_:)), name: AppNotification.NetWork.reachabilityChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(notificationProcess(_:)), name: AppNotification.Message.refresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationProcess(_:)), name: AppNotificationName.Network.Illicit, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {

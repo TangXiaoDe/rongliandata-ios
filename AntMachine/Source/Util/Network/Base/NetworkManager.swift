@@ -24,7 +24,7 @@ extension Notification.Name {
 /// 特殊的状态码
 enum StatusCode: Int {
     /// 登录授权不合法
-    case illicit = 401
+    case illicit = 4001
     /// 服务器停机维护
     case hostDown = 503
     /// 请求成功
@@ -133,7 +133,7 @@ extension NetworkManager {
                         if resultModel.code == 0 {
                             let result = RequestResult<T>.success(resultModel)
                             complete(result)
-                        } else if resultModel.code == 401 {
+                        } else if resultModel.code == StatusCode.illicit.rawValue {
                             let result = RequestResult<T>.failure(resultModel)
                             complete(result)
                             NotificationCenter.default.post(name: NSNotification.Name.Network.Illicit, object: nil)
