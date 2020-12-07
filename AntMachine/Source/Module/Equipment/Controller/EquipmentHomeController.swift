@@ -111,6 +111,7 @@ extension EquipmentHomeController {
         self.headerView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(self.headerHeight)
+            make.width.equalTo(kScreenWidth)
         }
         // 2. itemContainer
         scrollView.addSubview(self.itemContainer)
