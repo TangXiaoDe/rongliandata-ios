@@ -111,7 +111,7 @@ extension MainTabBarController {
         // addChildController方式 多次添加
         // self.addChildViewController(childNC)
         // 默认选中
-        self.selectedIndex = 2
+        self.selectedIndex = 0
         // tabbar上item里的图文间距调整
         customTabbar.setTitleImageInsets(titlePositionOffset: UIOffset.init(horizontal: 0, vertical: -2), imageInsets: UIEdgeInsets.init(top: -1, left: 0, bottom: 1, right: 0))
     }

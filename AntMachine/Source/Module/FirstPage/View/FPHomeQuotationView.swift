@@ -150,7 +150,7 @@ extension FPHomeQuotationView {
         // 3. changeLabel
         let changeLabel: UILabel = UILabel.init()
         sectionView.addSubview(changeLabel)
-        changeLabel.set(text: "名称", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999), alignment: .right)
+        changeLabel.set(text: "涨跌幅", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999), alignment: .right)
         changeLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-10)
