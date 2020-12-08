@@ -114,7 +114,7 @@ class WalletFilInfoModel: Mappable {
             if cunProgress.isNaN {
                 cunProgress = 0
             }
-            return Double(cunProgress * 100).decimalValidDigitsProcess(digits: 0)
+            return Double(cunProgress * 100).decimalValidDigitsProcess(digits: 4)
         }
         return "0"
     }
