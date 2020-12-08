@@ -9,6 +9,29 @@
 import Foundation
 import ObjectMapper
 
+enum EquipmentStatus: Int {
+    /// 部署中
+    case deploying = 1
+    /// 挖矿中
+    case mining
+    /// 已关闭
+    case closed
+    
+    var title: String {
+        var title: String = ""
+        switch self {
+        case .deploying:
+            title = "部署中"
+        case .mining:
+            title = "挖矿中"
+        case .closed:
+            title = "已关闭"
+        }
+        return title
+    }
+
+}
+
 class EquipmentListModel: Mappable {
     
     var id: Int = 0
@@ -28,10 +51,13 @@ class EquipmentListModel: Mappable {
     var fil_level: String = ""
     /// 规格，如：1个月
     var spec_level: String = ""
+    /// 状态 1部署中  2挖矿中 3关闭
+    var status_value: Int = 0
     ///
     var createdDate: Date = Date()
     ///
     var updatedDate: Date = Date()
+
 
     required init?(map: Map) {
         
@@ -48,7 +74,18 @@ class EquipmentListModel: Mappable {
         spec_level <- map["spec_level"]
         createdDate <- (map["created_at"], DateStringTransform.current)
         updatedDate <- (map["updated_at"], DateStringTransform.current)
+        status_value <- map["status"]
     }
+    
+    /// 状态
+    var status: EquipmentStatus {
+        var status: EquipmentStatus = EquipmentStatus.deploying
+        if let realStatus = EquipmentStatus.init(rawValue: self.status_value) {
+            status = realStatus
+        }
+        return status
+    }
+     
     
     
     /// 封装数量=  抵押金额 / (后台配置封存配比 * 当期T数)
@@ -71,5 +108,52 @@ class EquipmentListModel: Mappable {
         let progress: Double = self.fengzhuang_num / Double(self.t_num)
         return progress
     }
+    
+}
+
+
+extension EquipmentListModel {
+
+    
+    /// 0x2381FB挖矿中 | 0x333333部署中 | 0x999999已关闭
+    /// 状态标题颜色
+    var statusColor: UIColor {
+        var color: UIColor
+        switch self.status {
+        case .deploying:
+            color = UIColor.init(hex: 0x333333)
+        case .mining:
+            color = UIColor.init(hex: 0x2381FB)
+        case .closed:
+            color = UIColor.init(hex: 0x999999)
+        }
+        return color
+    }
+    
+    ///
+    var iconColor: UIColor {
+        var color: UIColor
+        switch self.status {
+        case .deploying:
+            color = UIColor.init(hex: 0xFF455E)
+        case .mining:
+            color = UIColor.init(hex: 0x2280FB)
+        case .closed:
+            color = UIColor.init(hex: 0xDDDDDD)
+        }
+        return color
+    }
+    
+    ///
+    var totalNumColor: UIColor {
+        let color: UIColor = self.status == .closed ? UIColor.init(hex: 0xFFB6C0) : UIColor.init(hex: 0xFF455E)
+        return color
+    }
+    ///
+    var titleColor: UIColor {
+        let color: UIColor = self.status == .closed ? UIColor.init(hex: 0x999999) : UIColor.init(hex: 0x333333)
+        return color
+    }
+     
     
 }

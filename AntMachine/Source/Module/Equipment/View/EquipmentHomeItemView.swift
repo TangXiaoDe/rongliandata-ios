@@ -28,6 +28,7 @@ class EquipmentHomeItemView: UIView {
     fileprivate let titleLabel: UILabel = UILabel.init()                // 第xxx期
     fileprivate let specView: TitleValueView = TitleValueView.init()    // 封装规格
     fileprivate let totalNumView: UILabel = UILabel.init()               // 规格数，xxT
+    fileprivate let statusLabel: UILabel = UILabel.init()                // 状态
     fileprivate let dashLine: XDDashLineView = XDDashLineView.init(lineColor: AppColor.dividing, lengths: [3.0, 3.0])
     
     fileprivate let bottomView: UIView = UIView.init()
@@ -167,7 +168,14 @@ extension EquipmentHomeItemView {
             make.trailing.equalToSuperview().offset(-self.rightMargin)
             make.centerY.equalTo(self.iconView)
         }
-        // 5. dashLine
+        // 5. statusLabel
+        topView.addSubview(self.statusLabel)
+        self.statusLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999), alignment: .right)
+        self.statusLabel.snp.remakeConstraints { (make) in
+            make.trailing.equalTo(self.totalNumView)
+            make.centerY.equalTo(self.specView)
+        }
+        // 6. dashLine
         topView.addSubview(self.dashLine)
         self.dashLine.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview()
@@ -237,6 +245,9 @@ extension EquipmentHomeItemView {
         self.miningNumView.valueLabel.text = "324.12345678"
         self.fengzhuangNumView.valueLabel.text = "46.45"
         self.progressNumView.valueLabel.text = "14.20%"
+        // 0x2381FB挖矿中 | 0x333333部署中 | 0x999999已关闭
+        self.statusLabel.text = "挖矿中"
+        self.statusLabel.textColor = UIColor.init(hex: 0x2381FB)
         
         var totalNumAtts = NSAttributedString.textAttTuples()
         totalNumAtts.append((str: "200", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: UIColor.init(hex: 0xFF455E)))
@@ -252,14 +263,19 @@ extension EquipmentHomeItemView {
         }
         // 子控件数据加载
         self.titleLabel.text = "第\(model.fil_level)期"
+        self.titleLabel.textColor = model.titleColor
         self.specView.valueLabel.text = model.spec_level
+        self.specView.valueLabel.textColor = model.titleColor
         self.miningNumView.valueLabel.text = model.total_ming.decimalValidDigitsProcess(digits: 4)
         self.fengzhuangNumView.valueLabel.text = model.fengzhuang_num.decimalValidDigitsProcess(digits: 2)
         self.progressNumView.valueLabel.text = (model.fengcun_progress * 100).decimalValidDigitsProcess(digits: 2) + "%"
-        
+        self.statusLabel.text = model.status.title
+        self.statusLabel.textColor = model.statusColor
+        self.iconView.backgroundColor = model.iconColor
+
         var totalNumAtts = NSAttributedString.textAttTuples()
-        totalNumAtts.append((str: "\(model.t_num)", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: UIColor.init(hex: 0xFF455E)))
-        totalNumAtts.append((str: " T", font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: UIColor.init(hex: 0xFF455E)))
+        totalNumAtts.append((str: "\(model.t_num)", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: model.totalNumColor))
+        totalNumAtts.append((str: " T", font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: model.totalNumColor))
         self.totalNumView.attributedText = NSAttributedString.attribute(totalNumAtts)
     }
     
