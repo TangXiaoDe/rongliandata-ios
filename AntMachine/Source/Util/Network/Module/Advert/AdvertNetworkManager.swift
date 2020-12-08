@@ -43,10 +43,10 @@ extension AdvertNetworkManager {
     class func getAdverts(spaceId: Int, spaceFlag: String, specialId: Int? = nil, complete: @escaping((_ status: Bool, _ msg: String?, _ models: [AdvertModel]?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = AdvertRequestInfo.spaceAdverts
-        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: ["\(spaceId)"])
         // 2.配置参数
-        let parameter: [String: Any] = ["pos_id": spaceId]
-        requestInfo.parameter = parameter
+        //let parameter: [String: Any] = ["pos_id": spaceId]
+        //requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
             switch networkResult {

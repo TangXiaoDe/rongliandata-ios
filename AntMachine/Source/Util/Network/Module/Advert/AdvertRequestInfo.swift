@@ -13,6 +13,6 @@ class AdvertRequestInfo {
     /// 广告位
     static let spaces = RequestInfo<AdvertSpaceModel>.init(method: .get, path: "ad/pos", replaceds: [])
     /// 指定广告位下的广告
-    static let spaceAdverts = RequestInfo<AdvertModel>.init(method: .get, path: "ad", replaceds: [])
+    static let spaceAdverts = RequestInfo<AdvertModel>.init(method: .get, path: "ads/{pos_id}/list", replaceds: ["{pos_id}"])
 
 }
