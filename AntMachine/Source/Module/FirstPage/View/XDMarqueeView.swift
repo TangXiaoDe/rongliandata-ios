@@ -99,7 +99,7 @@ extension XDMarqueeView {
         let textWith = textSize.width + margin * 2
         self.scrollView.contentSize = CGSize.init(width: 0, height: textWith)
         self.textLabel.frame = CGRect.init(x: 0, y: 0, width: textWith, height: textSize.height)
-        self.duration = -TimeInterval(self.text.size(maxSize: CGSize.init(width: CGFloat.max, height: 20), font: self.textFont).width)
+        self.duration = -min(TimeInterval(self.text.size(maxSize: CGSize.init(width: CGFloat.max, height: 20), font: self.textFont).width), Double(self.width))
         self.isCanRun = textWith > self.width
         self.displayLink?.isPaused = self.width >= textWith
     }
@@ -197,7 +197,7 @@ extension XDMarqueeView {
             }
         }
         else {
-            self.duration = -TimeInterval(self.text.size(maxSize: CGSize.init(width: CGFloat.max, height: 20), font: self.textFont).width) + scale
+            self.duration = -min(TimeInterval(self.text.size(maxSize: CGSize.init(width: CGFloat.max, height: 20), font: self.textFont).width), Double(self.width))
 //            self.isLeft = false
 //            self.duration -= scale
         }
