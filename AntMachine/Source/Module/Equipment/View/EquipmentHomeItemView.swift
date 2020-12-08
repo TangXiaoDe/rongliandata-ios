@@ -255,7 +255,7 @@ extension EquipmentHomeItemView {
         self.specView.valueLabel.text = model.spec_level
         self.miningNumView.valueLabel.text = model.total_ming.decimalValidDigitsProcess(digits: 4)
         self.fengzhuangNumView.valueLabel.text = model.fengzhuang_num.decimalValidDigitsProcess(digits: 2)
-        self.progressNumView.valueLabel.text = (model.fengcun_progress * 1).decimalValidDigitsProcess(digits: 2) + "%"
+        self.progressNumView.valueLabel.text = (model.fengcun_progress * 100).decimalValidDigitsProcess(digits: 2) + "%"
         
         var totalNumAtts = NSAttributedString.textAttTuples()
         totalNumAtts.append((str: "\(model.t_num)", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: UIColor.init(hex: 0xFF455E)))

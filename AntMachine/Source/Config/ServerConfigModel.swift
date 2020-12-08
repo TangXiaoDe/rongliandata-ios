@@ -123,9 +123,9 @@ class FilConfigModel: Mappable {
     }
 
     /// 设备封装配比
-    var equip_pawn: Double {
+    var equip_archive: Double {
         var value: Double = 0
-        if let realValue = Double(self.pawn) {
+        if let realValue = Double(self.archive) {
             value = realValue
         }
         return value

@@ -41,7 +41,7 @@ class EquipmentListModel: Mappable {
         eq_no <- map["eq_no"]
         t_num <- map["t_num"]
         user_id <- map["user_id"]
-        total_ming <- map["total_ming"]
+        total_ming <- (map["total_ming"], DoubleStringTransform.default)
         mortgage_fee <- (map["mortgage_fee"], DoubleStringTransform.default)
         amin_id <- map["amin_id"]
         fil_level <- map["fil_level"]
@@ -51,15 +51,15 @@ class EquipmentListModel: Mappable {
     }
     
     
-    /// 封装数量=  抵押金额 / 后台配置封存配比 * 当期T数
+    /// 封装数量=  抵押金额 / (后台配置封存配比 * 当期T数)
     var fengzhuang_num: Double {
         guard let config = AppConfig.share.server?.filConfig else {
             return 0
         }
-        if config.equip_pawn < 0.000001 {
+        if config.equip_archive < 0.000001 {
             return 0
         }
-        let num = self.mortgage_fee / config.equip_pawn * Double(self.t_num)
+        let num = self.mortgage_fee / (config.equip_archive * Double(self.t_num))
         return num
     }
 
