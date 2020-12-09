@@ -43,6 +43,7 @@ class FPHomeIPFSModel: Mappable
     /// 24小时FIL增量
     var one_day_fil_str: String = ""
     /// 流通总量
+    var current_fil: Double = 0
     var current_fil_str: String = ""
     /// 24小时成交额
     var last_turnover_str: String = ""
@@ -77,6 +78,7 @@ class FPHomeIPFSModel: Mappable
         avg_messages_tipset <- map["avg_messages_tipset"]
         active_miners <- map["active_miners"]
         one_day_fil_str <- map["one_day_fil_str"]
+        current_fil <- (map["current_fil"], DoubleStringTransform.default)
         current_fil_str <- map["current_fil_str"]
         last_turnover_str <- map["last_turnover_str"]
         total_fil_str <- map["total_fil_str"]

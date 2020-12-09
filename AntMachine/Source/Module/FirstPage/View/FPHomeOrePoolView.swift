@@ -193,7 +193,7 @@ extension FPHomeOrePoolView {
         self.bolckRewardItemView.valueLabel.text = model.ipfs?.mining_income_str_one_day
         self.avgBlockTimeItemView.valueLabel.text = model.ipfs?.one_day_fil_str
         self.activeMinerItemView.valueLabel.text = model.ipfs?.active_miners
-        self.totalFilItemView.valueLabel.text = model.ipfs?.current_fil_str
+        self.totalFilItemView.valueLabel.text = model.ipfs?.current_fil.decimalValidDigitsProcess(digits: 4)
     }
     
 }
