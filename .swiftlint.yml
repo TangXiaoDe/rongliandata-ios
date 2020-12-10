@@ -1,9 +1,9 @@
 included: # 执行 linting 时包含的路径
-  - AntMachine/
-  - AntMachineTests/
+  - AntClusterB/
+  - AntClusterBTests/
 excluded: # 执行 linting 时忽略的路径
   - Pods
-  - AntMachine/Source/Libraries/ # 该目录下的代码由三方提供，非开发人员原著，故代码风格难以统一，因此忽略掉
+  - AntClusterB/Source/Libraries/ # 该目录下的代码由三方提供，非开发人员原著，故代码风格难以统一，因此忽略掉
   
 file_length: # 文档源码行数
   warning: 400
