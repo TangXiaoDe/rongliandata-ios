@@ -3860,7 +3860,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Apple Development: Zilong Song (MPHZ428C9Q)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zilong Song (MPHZ428C9Q)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -3883,9 +3883,9 @@
 					"$(PROJECT_DIR)/iMeet/Source/Library/EMHelper/3rdParty/VoiceConvert",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.comc.antmachine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chainone.antclusterb;
 				PRODUCT_NAME = AntMachine;
-				PROVISIONING_PROFILE_SPECIFIER = "MultipleApp-Development";
+				PROVISIONING_PROFILE_SPECIFIER = "AntClusterB-Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/SupportingFile/$(PRODUCT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3898,7 +3898,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Apple Distribution: ZiLong Song (SR77FF5URN)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ZiLong Song (SR77FF5URN)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -3921,9 +3921,9 @@
 					"$(PROJECT_DIR)/iMeet/Source/Library/EMHelper/3rdParty/VoiceConvert",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.comc.antmachine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chainone.antclusterb;
 				PRODUCT_NAME = AntMachine;
-				PROVISIONING_PROFILE_SPECIFIER = "MultipleApp-AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "AntClusterB-AdHoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/SupportingFile/$(PRODUCT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
