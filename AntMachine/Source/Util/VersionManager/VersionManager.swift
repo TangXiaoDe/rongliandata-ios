@@ -90,18 +90,18 @@ extension VersionManager {
 extension VersionManager {
     /// 从网络上获取最新版本信息，再处理
     fileprivate func networkVersionProcess() -> Void {
-//        /// 最新版本信息从服务器上获取
-//        SystemNetworkManager.getLatestVersion { (status, msg, model) in
-//            guard status, let model = model else {
-//                return
-//            }
-//            self.serverVersonInfo = model
-//            if self.versionCompareForNeedUpdate(local: self.currentVersion, newest: model.version) {
-//                self.showUpdateView()
-//            } else if (self.currentVersion == model.version && self.buildCompareForNeedUpdate(local: self.currentBuild, newest: String(model.versionCode))) {
-//                self.showUpdateView()
-//            }
-//        }
+        /// 最新版本信息从服务器上获取
+        SystemNetworkManager.getLatestVersion { (status, msg, model) in
+            guard status, let model = model else {
+                return
+            }
+            self.serverVersonInfo = model
+            if self.versionCompareForNeedUpdate(local: self.currentVersion, newest: model.version) {
+                self.showUpdateView()
+            } else if (self.currentVersion == model.version && self.buildCompareForNeedUpdate(local: self.currentBuild, newest: String(model.versionCode))) {
+                self.showUpdateView()
+            }
+        }
     }
     /// 已知最新的版本，直接进行本地处理
     func localVersionProcess(with newestVersion: String, newstBuild: String) -> Void {
