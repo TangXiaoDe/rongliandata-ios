@@ -122,6 +122,7 @@ extension EquipmentHomeController {
         // 3. footerView
         scrollView.addSubview(self.footerView)
         self.footerView.model = "没有更多数据"
+        self.footerView.isHidden = true     // 默认隐藏
         self.footerView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.itemContainer.snp.bottom).offset(0)
@@ -207,6 +208,7 @@ extension EquipmentHomeController {
             }
             self.headerView.model = model
             self.setupItemContainer(with: model.list)
+            self.footerView.isHidden = model.list.isEmpty
         }
     }
     
