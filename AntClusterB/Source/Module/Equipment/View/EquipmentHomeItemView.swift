@@ -267,7 +267,7 @@ extension EquipmentHomeItemView {
         self.specView.valueLabel.text = model.spec_level
         self.specView.valueLabel.textColor = model.titleColor
         self.miningNumView.valueLabel.text = model.total_ming.decimalValidDigitsProcess(digits: 4)
-        self.fengzhuangNumView.valueLabel.text = model.fengzhuang_num.decimalValidDigitsProcess(digits: 2)
+        self.fengzhuangNumView.valueLabel.text = model.seal_num.decimalValidDigitsProcess(digits: 2)
         self.progressNumView.valueLabel.text = (model.fengcun_progress * 100).decimalValidDigitsProcess(digits: 2) + "%"
         self.statusLabel.text = model.status.title
         self.statusLabel.textColor = model.statusColor
