@@ -31,20 +31,10 @@ class WalletFilInfoModel: Mappable {
     var address: String = ""
     /// 提币地址:null未绑定
     var withdrawal_address: String?
-    
+    /// 已封存数量
+    var total_seal: Double = 0
     /// 总存力
-//    var total_save_power: String = "0.0"
-    var str_total_save_power: String = ""
-    var int_total_save_power: Int = 0
-    var total_save_power: String {
-        var power: String = self.str_total_save_power
-        if self.str_total_save_power.isEmpty {
-            if self.int_total_save_power >= 0 {
-                power = "\(self.int_total_save_power)"
-            }
-        }
-        return power
-    }
+    var total_save_power: Double = 0
     
     /// Fil资产余额
     var fil_balance: String {
@@ -97,26 +87,24 @@ class WalletFilInfoModel: Mappable {
         }
         return ""
     }
-    /// 已封存数量：XXTB，计算方式为钱包抵押金额除以 全局钱包config archive
-    var cunNum: CGFloat {
-        if let pawn = Double(pawn), let config = AppConfig.share.server?.filConfig, let archive = Double(config.archive) {
-            if (pawn/archive).isNaN {
-                return 0
-            }
-            return CGFloat(pawn/archive)
-        }
-        return 0
-    }
+    /// 注：已封存数量从后台返回
+//    /// 已封存数量：XXTB，计算方式为钱包抵押金额除以 全局钱包config archive
+//    var cunNum: CGFloat {
+//        if let pawn = Double(pawn), let config = AppConfig.share.server?.filConfig, let archive = Double(config.archive) {
+//            if (pawn/archive).isNaN {
+//                return 0
+//            }
+//            return CGFloat(pawn/archive)
+//        }
+//        return 0
+//    }
     /// 已封存数量除以总存力
     var cunProgress: String {
-        if let total_save_power = Double(self.total_save_power) {
-            var cunProgress = self.cunNum/CGFloat(total_save_power)
-            if cunProgress.isNaN {
-                cunProgress = 0
-            }
-            return Double(cunProgress * 100).decimalValidDigitsProcess(digits: 4)
+        if self.total_save_power <= 0.000001 {
+            return "0"
         }
-        return "0"
+        let progress = self.total_seal/total_save_power
+        return Double(progress * 100).decimalValidDigitsProcess(digits: 2)
     }
     
     required init?(map: Map) {
@@ -133,9 +121,8 @@ class WalletFilInfoModel: Mappable {
         fil_to_cny <- map["fil_to_cny"]
         withdrawal_address <- map["withdrawal_address"]
         address <- map["address"]
-//        total_save_power <- map["total_save_power"]
-        int_total_save_power <- map["total_save_power"]
-        str_total_save_power <- map["total_save_power"]
+        total_seal <- (map["total_seal"], DoubleStringTransform.default)
+        total_save_power <- (map["total_save_power"], DoubleStringTransform.default)
     }
 
 }

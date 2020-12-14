@@ -410,8 +410,8 @@ extension WalletHomeMainView {
         self.lockUpItem.model = model
         
         self.totalCunView.valueLabel.text = "\(model.total_save_power)".decimalProcess(digits: 4) + "T"
-        self.hasCunView.valueLabel.text = "\(model.cunNum)".decimalProcess(digits: 4) + "T"
-        self.cunProgressView.valueLabel.text = "\(model.cunProgress)".decimalProcess(digits: 4) + "%"
+        self.hasCunView.valueLabel.text = "\(model.total_seal)".decimalProcess(digits: 4) + "T"
+        self.cunProgressView.valueLabel.text = "\(model.cunProgress)".decimalProcess(digits: 2) + "%"
     }
 }
 
