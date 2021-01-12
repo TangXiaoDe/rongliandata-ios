@@ -131,7 +131,9 @@ extension MiningDetailListCell {
 
     // 界面布局
     fileprivate func initialUI() -> Void {
-        self.contentView.backgroundColor = AppColor.pageBg
+        //self.contentView.backgroundColor = AppColor.pageBg
+        self.backgroundColor = UIColor.clear
+        self.contentView.backgroundColor = UIColor.clear
         // topSeparate
         self.contentView.addSubview(self.topSeparateView)
         self.initialTopSeparateView(self.topSeparateView)
