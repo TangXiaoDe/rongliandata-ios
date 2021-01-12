@@ -14,5 +14,7 @@ class EquipmentRequestInfo {
 
     /// 主页数据
     static let homeData = RequestInfo<EquipmentHomeModel>.init(method: .get, path: "eqs", replaceds: [])
+    /// 挖矿日志
+    static let miningLogs = RequestInfo<MiningLogModel>.init(method: .get, path: "eqs/logs/{id}", replaceds: ["{id}"])
 
 }

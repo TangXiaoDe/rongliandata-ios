@@ -31,6 +31,7 @@ class EquipmentHomeController: BaseViewController
     fileprivate let itemHeight: CGFloat = 125
     fileprivate let itemVerMargin: CGFloat = 12
     fileprivate let itemTopMargin: CGFloat = 68     // -header.bottom
+    fileprivate let itemViewTagBase: Int = 250
 
     fileprivate let footerHeight: CGFloat = 44
 
@@ -139,6 +140,7 @@ extension EquipmentHomeController {
             self.itemContainer.addSubview(itemView)
             itemView.model = model
             itemView.set(cornerRadius: 10)
+            itemView.tag = self.itemViewTagBase + index
             itemView.snp.makeConstraints { (make) in
                 make.leading.equalToSuperview().offset(self.lrMargin)
                 make.trailing.equalToSuperview().offset(-self.lrMargin)
@@ -153,6 +155,9 @@ extension EquipmentHomeController {
                 }
             }
             topView = itemView
+            // tapGR
+            let tapGR: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGRProcess(_:)))
+            itemView.addGestureRecognizer(tapGR)
         }
         self.view.layoutIfNeeded()
     }
@@ -188,6 +193,14 @@ extension EquipmentHomeController {
     /// 底部记载更多
     @objc fileprivate func footerLoadMore() -> Void {
         self.loadMoreRequest()
+    }
+    
+    ///
+    @objc fileprivate func tapGRProcess(_ tapGR: UITapGestureRecognizer) -> Void {
+        guard tapGR.state == .recognized, let tapView = tapGR.view as? EquipmentHomeItemView, let model = tapView.model else {
+            return
+        }
+        self.enterDetailPage(with: model)
     }
     
 }
@@ -236,7 +249,12 @@ extension EquipmentHomeController {
 
 // MARK: - Enter Page
 extension EquipmentHomeController {
-    
+    ///
+    fileprivate func enterDetailPage(with model: EquipmentListModel) -> Void {
+        let detailVC = MiningDetailController.init(model: model)
+        self.enterPageVC(detailVC)
+    }
+
 }
 
 // MARK: - Notification Function

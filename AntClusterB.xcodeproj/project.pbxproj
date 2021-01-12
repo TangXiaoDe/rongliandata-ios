@@ -10,6 +10,17 @@
 		19361C6E2B28E277821BB141 /* Pods_AntClusterB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 588CD34ABF9B40BEA4DB4824 /* Pods_AntClusterB.framework */; };
 		5301C32C228AB8B000F47C36 /* AntClusterBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301C32B228AB8B000F47C36 /* AntClusterBTests.swift */; };
 		5301C337228AB8B000F47C36 /* AntClusterBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301C336228AB8B000F47C36 /* AntClusterBUITests.swift */; };
+		530B28CB25AD484000B8723E /* EquipmentHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28C225AD483F00B8723E /* EquipmentHomeController.swift */; };
+		530B28CC25AD484000B8723E /* EquipmentListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28C425AD483F00B8723E /* EquipmentListModel.swift */; };
+		530B28CD25AD484000B8723E /* EquipmentHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28C525AD483F00B8723E /* EquipmentHomeModel.swift */; };
+		530B28CE25AD484000B8723E /* EquipmentHomeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28C725AD483F00B8723E /* EquipmentHomeFooterView.swift */; };
+		530B28CF25AD484000B8723E /* EquipmentHomeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28C825AD483F00B8723E /* EquipmentHomeItemView.swift */; };
+		530B28D025AD484000B8723E /* EquipmentHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28C925AD484000B8723E /* EquipmentHomeHeaderView.swift */; };
+		530B28D125AD484000B8723E /* EquipmentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28CA25AD484000B8723E /* EquipmentListCell.swift */; };
+		530B28D925AD485C00B8723E /* MiningDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28D825AD485C00B8723E /* MiningDetailController.swift */; };
+		530B28DE25AD487800B8723E /* MiningLogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28DD25AD487800B8723E /* MiningLogModel.swift */; };
+		530B28E325AD489F00B8723E /* MiningDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28E225AD489F00B8723E /* MiningDetailHeaderView.swift */; };
+		530B28E825AD48C900B8723E /* MiningDetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28E725AD48C900B8723E /* MiningDetailListCell.swift */; };
 		5394398924F8A8980097DCAA /* ResourcePlaceAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394398824F8A8980097DCAA /* ResourcePlaceAudio.swift */; };
 		5394398B24F8A8A50097DCAA /* ResourcePlacePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394398A24F8A8A50097DCAA /* ResourcePlacePicture.swift */; };
 		53A6F41524E0FA3500E8C9B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2CC24E0FA3200E8C9B4 /* Assets.xcassets */; };
@@ -386,13 +397,6 @@
 		53DF26A72581FC9C00165247 /* MainTabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF25132581FC9600165247 /* MainTabBarController+Extension.swift */; };
 		53DF26A82581FC9C00165247 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF25142581FC9600165247 /* MainTabBarController.swift */; };
 		53DF26A92581FC9C00165247 /* TabbarItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF25152581FC9600165247 /* TabbarItemModel.swift */; };
-		53DF26AA2581FC9C00165247 /* EquipmentHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF25182581FC9600165247 /* EquipmentHomeController.swift */; };
-		53DF26AB2581FC9C00165247 /* EquipmentListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF251A2581FC9600165247 /* EquipmentListModel.swift */; };
-		53DF26AC2581FC9C00165247 /* EquipmentHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF251B2581FC9600165247 /* EquipmentHomeModel.swift */; };
-		53DF26AD2581FC9C00165247 /* EquipmentHomeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF251D2581FC9600165247 /* EquipmentHomeFooterView.swift */; };
-		53DF26AE2581FC9C00165247 /* EquipmentHomeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF251E2581FC9600165247 /* EquipmentHomeItemView.swift */; };
-		53DF26AF2581FC9C00165247 /* EquipmentHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF251F2581FC9600165247 /* EquipmentHomeHeaderView.swift */; };
-		53DF26B02581FC9C00165247 /* EquipmentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF25202581FC9600165247 /* EquipmentListCell.swift */; };
 		53DF26B12581FC9C00165247 /* AYBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53DF25242581FC9700165247 /* AYBubbleView.m */; };
 		53DF26B22581FC9C00165247 /* HQFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53DF25262581FC9700165247 /* HQFlowView.m */; };
 		53DF26B32581FC9C00165247 /* HQIndexBannerSubview.m in Sources */ = {isa = PBXBuildFile; fileRef = 53DF25272581FC9700165247 /* HQIndexBannerSubview.m */; };
@@ -434,6 +438,17 @@
 		5301C332228AB8B000F47C36 /* AntClusterBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AntClusterBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5301C336228AB8B000F47C36 /* AntClusterBUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntClusterBUITests.swift; sourceTree = "<group>"; };
 		5301C338228AB8B000F47C36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		530B28C225AD483F00B8723E /* EquipmentHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeController.swift; sourceTree = "<group>"; };
+		530B28C425AD483F00B8723E /* EquipmentListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentListModel.swift; sourceTree = "<group>"; };
+		530B28C525AD483F00B8723E /* EquipmentHomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeModel.swift; sourceTree = "<group>"; };
+		530B28C725AD483F00B8723E /* EquipmentHomeFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeFooterView.swift; sourceTree = "<group>"; };
+		530B28C825AD483F00B8723E /* EquipmentHomeItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeItemView.swift; sourceTree = "<group>"; };
+		530B28C925AD484000B8723E /* EquipmentHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeHeaderView.swift; sourceTree = "<group>"; };
+		530B28CA25AD484000B8723E /* EquipmentListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentListCell.swift; sourceTree = "<group>"; };
+		530B28D825AD485C00B8723E /* MiningDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningDetailController.swift; sourceTree = "<group>"; };
+		530B28DD25AD487800B8723E /* MiningLogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningLogModel.swift; sourceTree = "<group>"; };
+		530B28E225AD489F00B8723E /* MiningDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningDetailHeaderView.swift; sourceTree = "<group>"; };
+		530B28E725AD48C900B8723E /* MiningDetailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningDetailListCell.swift; sourceTree = "<group>"; };
 		5336D29C23169EDA0090FEAF /* ASIHTTPRequest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ASIHTTPRequest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5336D29E23169EEC0090FEAF /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5336D2A023169F350090FEAF /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -823,13 +838,6 @@
 		53DF25132581FC9600165247 /* MainTabBarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainTabBarController+Extension.swift"; sourceTree = "<group>"; };
 		53DF25142581FC9600165247 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		53DF25152581FC9600165247 /* TabbarItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarItemModel.swift; sourceTree = "<group>"; };
-		53DF25182581FC9600165247 /* EquipmentHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeController.swift; sourceTree = "<group>"; };
-		53DF251A2581FC9600165247 /* EquipmentListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentListModel.swift; sourceTree = "<group>"; };
-		53DF251B2581FC9600165247 /* EquipmentHomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeModel.swift; sourceTree = "<group>"; };
-		53DF251D2581FC9600165247 /* EquipmentHomeFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeFooterView.swift; sourceTree = "<group>"; };
-		53DF251E2581FC9600165247 /* EquipmentHomeItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeItemView.swift; sourceTree = "<group>"; };
-		53DF251F2581FC9600165247 /* EquipmentHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeHeaderView.swift; sourceTree = "<group>"; };
-		53DF25202581FC9600165247 /* EquipmentListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentListCell.swift; sourceTree = "<group>"; };
 		53DF25232581FC9700165247 /* AYBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AYBubbleView.h; sourceTree = "<group>"; };
 		53DF25242581FC9700165247 /* AYBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AYBubbleView.m; sourceTree = "<group>"; };
 		53DF25262581FC9700165247 /* HQFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQFlowView.m; sourceTree = "<group>"; };
@@ -925,6 +933,79 @@
 				5301C338228AB8B000F47C36 /* Info.plist */,
 			);
 			path = AntClusterBUITests;
+			sourceTree = "<group>";
+		};
+		530B28BC25AD483F00B8723E /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				530B28BD25AD483F00B8723E /* Controller */,
+				530B28BE25AD483F00B8723E /* Model */,
+				530B28BF25AD483F00B8723E /* View */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		530B28BD25AD483F00B8723E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				530B28D825AD485C00B8723E /* MiningDetailController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		530B28BE25AD483F00B8723E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				530B28DD25AD487800B8723E /* MiningLogModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		530B28BF25AD483F00B8723E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				530B28E225AD489F00B8723E /* MiningDetailHeaderView.swift */,
+				530B28E725AD48C900B8723E /* MiningDetailListCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		530B28C025AD483F00B8723E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				530B28C125AD483F00B8723E /* Controller */,
+				530B28C325AD483F00B8723E /* Model */,
+				530B28C625AD483F00B8723E /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		530B28C125AD483F00B8723E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				530B28C225AD483F00B8723E /* EquipmentHomeController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		530B28C325AD483F00B8723E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				530B28C425AD483F00B8723E /* EquipmentListModel.swift */,
+				530B28C525AD483F00B8723E /* EquipmentHomeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		530B28C625AD483F00B8723E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				530B28C725AD483F00B8723E /* EquipmentHomeFooterView.swift */,
+				530B28C825AD483F00B8723E /* EquipmentHomeItemView.swift */,
+				530B28C925AD484000B8723E /* EquipmentHomeHeaderView.swift */,
+				530B28CA25AD484000B8723E /* EquipmentListCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		53A6F12C24E0FA2E00E8C9B4 /* AntClusterB */ = {
@@ -2822,39 +2903,10 @@
 		53DF25162581FC9600165247 /* Equipment */ = {
 			isa = PBXGroup;
 			children = (
-				53DF25172581FC9600165247 /* Controller */,
-				53DF25192581FC9600165247 /* Model */,
-				53DF251C2581FC9600165247 /* View */,
+				530B28BC25AD483F00B8723E /* Detail */,
+				530B28C025AD483F00B8723E /* Home */,
 			);
 			path = Equipment;
-			sourceTree = "<group>";
-		};
-		53DF25172581FC9600165247 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				53DF25182581FC9600165247 /* EquipmentHomeController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		53DF25192581FC9600165247 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				53DF251A2581FC9600165247 /* EquipmentListModel.swift */,
-				53DF251B2581FC9600165247 /* EquipmentHomeModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		53DF251C2581FC9600165247 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				53DF251D2581FC9600165247 /* EquipmentHomeFooterView.swift */,
-				53DF251E2581FC9600165247 /* EquipmentHomeItemView.swift */,
-				53DF251F2581FC9600165247 /* EquipmentHomeHeaderView.swift */,
-				53DF25202581FC9600165247 /* EquipmentListCell.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		53DF25212581FC9600165247 /* Library */ = {
@@ -3246,7 +3298,6 @@
 				53DF26752581FC9B00165247 /* FPHomeQuotationItemModel.swift in Sources */,
 				53DF25A02581FC9800165247 /* CommonAlertUtil.swift in Sources */,
 				53DF25882581FC9800165247 /* UrlManager.swift in Sources */,
-				53DF26AB2581FC9C00165247 /* EquipmentListModel.swift in Sources */,
 				53DF26402581FC9A00165247 /* BaseTableViewCell.swift in Sources */,
 				53DF26302581FC9A00165247 /* SettingSectionModel.swift in Sources */,
 				53DF26072581FC9900165247 /* PopViewUtil.swift in Sources */,
@@ -3279,6 +3330,7 @@
 				53DF25D82581FC9900165247 /* UnreadNumBubbleView.swift in Sources */,
 				53DF263F2581FC9A00165247 /* BaseTextView.swift in Sources */,
 				53DF264F2581FC9A00165247 /* AssetInfoModel.swift in Sources */,
+				530B28CF25AD484000B8723E /* EquipmentHomeItemView.swift in Sources */,
 				53DF26612581FC9B00165247 /* WalletWithdrawConfigModel.swift in Sources */,
 				53DF26352581FC9A00165247 /* PageDefaultNetErrorView.swift in Sources */,
 				53DF25672581FC9700165247 /* AppFont.swift in Sources */,
@@ -3292,6 +3344,7 @@
 				53DF25772581FC9800165247 /* UserNetworkManager.swift in Sources */,
 				53DF25CF2581FC9900165247 /* XDPushPopAnimation.swift in Sources */,
 				53DF259F2581FC9800165247 /* PickerUtil.swift in Sources */,
+				530B28D025AD484000B8723E /* EquipmentHomeHeaderView.swift in Sources */,
 				53DF25AB2581FC9800165247 /* VerionUpdateController.swift in Sources */,
 				53DF26422581FC9A00165247 /* BaseControl.swift in Sources */,
 				53DF25B72581FC9800165247 /* ThirdChildConfig.swift in Sources */,
@@ -3300,7 +3353,6 @@
 				53DF266F2581FC9B00165247 /* AppDelegate+WxApi.swift in Sources */,
 				53DF269E2581FC9B00165247 /* LocalSettingModel.swift in Sources */,
 				53DF26A52581FC9C00165247 /* UserInfoControl.swift in Sources */,
-				53DF26AC2581FC9C00165247 /* EquipmentHomeModel.swift in Sources */,
 				53DF26992581FC9B00165247 /* LoginPwdResetController.swift in Sources */,
 				53DF25692581FC9700165247 /* AccountModel.swift in Sources */,
 				53DF257B2581FC9800165247 /* MineNetworkManager.swift in Sources */,
@@ -3324,13 +3376,13 @@
 				53DF25BE2581FC9800165247 /* MomentGuideController.swift in Sources */,
 				53DF26592581FC9A00165247 /* WalletHomeController.swift in Sources */,
 				53DF257A2581FC9800165247 /* MineRequestInfo.swift in Sources */,
-				53DF26B02581FC9C00165247 /* EquipmentListCell.swift in Sources */,
 				53DF26572581FC9A00165247 /* ReceiptAccountInfoModel.swift in Sources */,
 				53DF25A12581FC9800165247 /* PhoneUtil.swift in Sources */,
 				53DF26732581FC9B00165247 /* AppDelegate.swift in Sources */,
 				53DF25FE2581FC9900165247 /* ReportViewController.swift in Sources */,
 				53DF26442581FC9A00165247 /* BaseTextField.swift in Sources */,
 				53DF25CB2581FC9900165247 /* XDPresentationController.swift in Sources */,
+				530B28CB25AD484000B8723E /* EquipmentHomeController.swift in Sources */,
 				53DF25CC2581FC9900165247 /* XDPopAnimation.swift in Sources */,
 				53DF25BC2581FC9800165247 /* MeetGuideController.swift in Sources */,
 				53DF26512581FC9A00165247 /* AssetActionTitleView.swift in Sources */,
@@ -3347,6 +3399,7 @@
 				53DF25F52581FC9900165247 /* AdvertSDCycleBannerView.swift in Sources */,
 				53DF26372581FC9A00165247 /* PageDefaultEmptyView.swift in Sources */,
 				53DF25E12581FC9900165247 /* MessageListModel.swift in Sources */,
+				530B28CC25AD484000B8723E /* EquipmentListModel.swift in Sources */,
 				53DF262F2581FC9A00165247 /* SettingItemModel.swift in Sources */,
 				53DF260A2581FC9900165247 /* DoubleTitleControl.swift in Sources */,
 				53DF266B2581FC9B00165247 /* WalletListController.swift in Sources */,
@@ -3364,11 +3417,14 @@
 				53DF26202581FC9A00165247 /* XDDashLineView.swift in Sources */,
 				53DF26532581FC9A00165247 /* AssetListExtendModel.swift in Sources */,
 				53DF25DC2581FC9900165247 /* TestHomeCell.swift in Sources */,
+				530B28CE25AD484000B8723E /* EquipmentHomeFooterView.swift in Sources */,
+				530B28D925AD485C00B8723E /* MiningDetailController.swift in Sources */,
 				53DF258E2581FC9800165247 /* XDRefreshFooter.swift in Sources */,
 				53DF25462581FC9700165247 /* CurrentUserObject.swift in Sources */,
 				53DF26642581FC9B00165247 /* WithdrawBindAddressPopView.swift in Sources */,
 				53DF25B12581FC9800165247 /* ThemeConfig.swift in Sources */,
 				53DF25942581FC9800165247 /* CashPayInfoModel.swift in Sources */,
+				530B28D125AD484000B8723E /* EquipmentListCell.swift in Sources */,
 				53DF25982581FC9800165247 /* ProjectFont.swift in Sources */,
 				53DF268A2581FC9B00165247 /* SettingHomeModel.swift in Sources */,
 				53DF26BB2581FC9C00165247 /* EFCountAdapter.swift in Sources */,
@@ -3389,6 +3445,7 @@
 				53DF255B2581FC9700165247 /* UIViewController+Extension.swift in Sources */,
 				53DF25412581FC9700165247 /* UserUpChainObject.swift in Sources */,
 				53DF25832581FC9800165247 /* UploadNetworkManager.swift in Sources */,
+				530B28CD25AD484000B8723E /* EquipmentHomeModel.swift in Sources */,
 				53DF268D2581FC9B00165247 /* SettingCenterTitleCell.swift in Sources */,
 				53DF25EE2581FC9900165247 /* LaunchAdvertView.swift in Sources */,
 				53DF266A2581FC9B00165247 /* WithdrawAddressPlaceView.swift in Sources */,
@@ -3399,9 +3456,9 @@
 				53DF26342581FC9A00165247 /* PageDefaultNothingView.swift in Sources */,
 				53DF26582581FC9A00165247 /* RechargePlaceView.swift in Sources */,
 				53DF26742581FC9B00165247 /* FirstPageController.swift in Sources */,
-				53DF26AD2581FC9C00165247 /* EquipmentHomeFooterView.swift in Sources */,
 				53DF26722581FC9B00165247 /* AppDelegate+JPush.swift in Sources */,
 				53DF26BD2581FC9C00165247 /* EFTimingMethod.swift in Sources */,
+				530B28DE25AD487800B8723E /* MiningLogModel.swift in Sources */,
 				53DF25BD2581FC9800165247 /* MiningGuideController.swift in Sources */,
 				53DF25AC2581FC9800165247 /* ServerVersionModel.swift in Sources */,
 				53DF25F02581FC9900165247 /* AdvertManager.swift in Sources */,
@@ -3414,7 +3471,6 @@
 				53DF25F62581FC9900165247 /* AdvertIcarouselBannerView.swift in Sources */,
 				53DF26272581FC9A00165247 /* ListEmptyPlaceHolderView.swift in Sources */,
 				53DF25E72581FC9900165247 /* RecommendUserModel.swift in Sources */,
-				53DF26AE2581FC9C00165247 /* EquipmentHomeItemView.swift in Sources */,
 				53DF25682581FC9700165247 /* AccountLoginModel.swift in Sources */,
 				53DF26942581FC9B00165247 /* PhoneBindController.swift in Sources */,
 				53DF26002581FC9900165247 /* ShareManager.swift in Sources */,
@@ -3436,11 +3492,12 @@
 				53DF26082581FC9900165247 /* BasePopView.swift in Sources */,
 				53DF25602581FC9700165247 /* AppImage.swift in Sources */,
 				53DF26232581FC9A00165247 /* CommonAvatarView.swift in Sources */,
+				530B28E825AD48C900B8723E /* MiningDetailListCell.swift in Sources */,
+				530B28E325AD489F00B8723E /* MiningDetailHeaderView.swift in Sources */,
 				53DF26812581FC9B00165247 /* SmsCodeLoginInputView.swift in Sources */,
 				53DF25BA2581FC9800165247 /* GuideController.swift in Sources */,
 				53DF25622581FC9700165247 /* QRCodeUtil.swift in Sources */,
 				53DF255F2581FC9700165247 /* LocationManager.swift in Sources */,
-				53DF26AA2581FC9C00165247 /* EquipmentHomeController.swift in Sources */,
 				53DF25542581FC9700165247 /* JPushHelper.swift in Sources */,
 				53DF26B22581FC9C00165247 /* HQFlowView.m in Sources */,
 				53DF26322581FC9A00165247 /* SettingItemTipsCell.swift in Sources */,
@@ -3565,7 +3622,6 @@
 				53DF26112581FC9900165247 /* TitleButtonView.swift in Sources */,
 				53DF269D2581FC9B00165247 /* PasswordInputItemView.swift in Sources */,
 				53DF263B2581FC9A00165247 /* BaseTableViewController.swift in Sources */,
-				53DF26AF2581FC9C00165247 /* EquipmentHomeHeaderView.swift in Sources */,
 				53DF261A2581FC9A00165247 /* TopTitleBottomTitleControl.swift in Sources */,
 				53DF25802581FC9800165247 /* EquipmentNetworkManager.swift in Sources */,
 				53DF25562581FC9700165247 /* String+QRCode.swift in Sources */,
