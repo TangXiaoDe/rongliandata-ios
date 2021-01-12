@@ -198,8 +198,6 @@ extension WalletListController {
         switch model.type {
         case .filWithDrawal:
             self.enterFilWithdrawalDetailPage(with: model)
-        case .filIssue:
-            self.enterFilWithdrawalDetailPage(with: model)
         default:
             break
         }
