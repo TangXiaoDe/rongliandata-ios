@@ -21,6 +21,7 @@
 		530B28DE25AD487800B8723E /* MiningLogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28DD25AD487800B8723E /* MiningLogModel.swift */; };
 		530B28E325AD489F00B8723E /* MiningDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28E225AD489F00B8723E /* MiningDetailHeaderView.swift */; };
 		530B28E825AD48C900B8723E /* MiningDetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28E725AD48C900B8723E /* MiningDetailListCell.swift */; };
+		530B28ED25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28EC25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift */; };
 		5394398924F8A8980097DCAA /* ResourcePlaceAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394398824F8A8980097DCAA /* ResourcePlaceAudio.swift */; };
 		5394398B24F8A8A50097DCAA /* ResourcePlacePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394398A24F8A8A50097DCAA /* ResourcePlacePicture.swift */; };
 		53A6F41524E0FA3500E8C9B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2CC24E0FA3200E8C9B4 /* Assets.xcassets */; };
@@ -449,6 +450,7 @@
 		530B28DD25AD487800B8723E /* MiningLogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningLogModel.swift; sourceTree = "<group>"; };
 		530B28E225AD489F00B8723E /* MiningDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningDetailHeaderView.swift; sourceTree = "<group>"; };
 		530B28E725AD48C900B8723E /* MiningDetailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningDetailListCell.swift; sourceTree = "<group>"; };
+		530B28EC25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNoMoreDataFooterView.swift; sourceTree = "<group>"; };
 		5336D29C23169EDA0090FEAF /* ASIHTTPRequest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ASIHTTPRequest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5336D29E23169EEC0090FEAF /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5336D2A023169F350090FEAF /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -966,6 +968,7 @@
 			children = (
 				530B28E225AD489F00B8723E /* MiningDetailHeaderView.swift */,
 				530B28E725AD48C900B8723E /* MiningDetailListCell.swift */,
+				530B28EC25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3346,6 +3349,7 @@
 				53DF259F2581FC9800165247 /* PickerUtil.swift in Sources */,
 				530B28D025AD484000B8723E /* EquipmentHomeHeaderView.swift in Sources */,
 				53DF25AB2581FC9800165247 /* VerionUpdateController.swift in Sources */,
+				530B28ED25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift in Sources */,
 				53DF26422581FC9A00165247 /* BaseControl.swift in Sources */,
 				53DF25B72581FC9800165247 /* ThirdChildConfig.swift in Sources */,
 				53DF255D2581FC9700165247 /* UITextField+Extension.swift in Sources */,

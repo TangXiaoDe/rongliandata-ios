@@ -26,6 +26,7 @@ class MiningDetailController: BaseViewController
     fileprivate var sourceList: [MiningLogModel] = []
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
+    fileprivate var showFooter: Bool = false
     
     fileprivate let headerHeight: CGFloat = MiningDetailHeaderView.viewHeight
     fileprivate let topBgSize: CGSize = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth)
@@ -166,6 +167,7 @@ extension MiningDetailController {
             self.sourceList = models
             self.offset = self.sourceList.count
             self.tableView.mj_footer.isHidden = models.count < self.limit
+            self.showFooter = models.count < self.limit
             self.tableView.reloadData()
         }
     }
@@ -182,7 +184,9 @@ extension MiningDetailController {
                 return
             }
             if models.count < self.limit {
-                self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                //self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                self.tableView.mj_footer.isHidden = true
+                self.showFooter = true
             }
             self.sourceList += models
             self.offset = self.sourceList.count
@@ -240,6 +244,20 @@ extension MiningDetailController: UITableViewDelegate {
         //return 44
     }
 
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let height: CGFloat = self.showFooter ? CommonNoMoreDataFooterView.viewHeight : 0.01
+        return height
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        var view: UIView? = UIView.init()
+        if self.showFooter {
+            let footerView = CommonNoMoreDataFooterView.footerInTableView(tableView)
+            footerView.title = "没有更多数据"
+            view = footerView
+        }
+        return view
+    }
+    
     ///
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt\(indexPath.row)")
