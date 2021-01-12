@@ -282,7 +282,7 @@ extension MiningDetailListCell {
         }
         // 控件加载数据
         self.dateLabel.text = model.createDate.string(format: "yyyy年MM月dd日", timeZone: .current)
-        self.miningNumView.valueLabel.text = model.extend?.amount.decimalValidDigitsProcess(digits: 8)
+        self.miningNumView.valueLabel.text = model.amount.decimalValidDigitsProcess(digits: 8)
         self.fenzuaNumView.valueLabel.text = model.extend?.fz_num.decimalValidDigitsProcess(digits: 8)
     }
 
