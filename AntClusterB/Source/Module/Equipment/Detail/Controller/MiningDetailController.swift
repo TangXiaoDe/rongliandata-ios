@@ -21,7 +21,7 @@ class MiningDetailController: BaseViewController
     fileprivate let topBgView: UIImageView = UIImageView.init()
     fileprivate let navBar: AppHomeNavStatusView = AppHomeNavStatusView.init()
     fileprivate let headerView: MiningDetailHeaderView = MiningDetailHeaderView.init()
-    fileprivate let tableView: UITableView = UITableView(frame: CGRect.zero, style: .plain)
+    fileprivate let tableView: UITableView = UITableView(frame: CGRect.zero, style: .grouped)
     
     fileprivate var sourceList: [MiningLogModel] = []
     fileprivate var offset: Int = 0
