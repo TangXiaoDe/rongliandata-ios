@@ -29,10 +29,10 @@ class FPHomeOrePoolView: UIView
     fileprivate let titleView: TitleView = TitleView.init()
     
     fileprivate let container: UIView = UIView.init()
-    fileprivate let bolckRewardItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 区块奖励(FIL)
-    fileprivate let avgBlockTimeItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 平均出块时间(S)
-    fileprivate let activeMinerItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 活跃矿工数(人)
-    fileprivate let totalFilItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 流通总量(FIL)
+    fileprivate let miningIncomeOneDayItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 24h平均挖矿收益(FIL/TiB)
+    fileprivate let addPowerCostItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 新增算力成本(FIL/TiB)
+    fileprivate let nowNledgeCollateralItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 当前扇区质押量(FiL/32GiB)
+    fileprivate let totalPledgeCollateralItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // FIL质押量(FIL)
 
     
     fileprivate let titleViewHeight: CGFloat = 40
@@ -135,10 +135,10 @@ extension FPHomeOrePoolView {
     ///
     fileprivate func initialContainer(_ container: UIView) -> Void {
         self.container.removeAllSubviews()
-        let itemViews: [FPHomeOrePoolItemView] = [self.bolckRewardItemView, self.avgBlockTimeItemView, self.activeMinerItemView, self.totalFilItemView]
-        let titels: [String] = ["24h平均挖矿收益(FIL/TiB)", "近24h产出量(FIL)", "活跃矿工数(人)", "流通总量(FIL)"]
-        let iconNames: [String] = ["IMG_img_home_bg_reward", "IMG_img_home_bg_time", "IMG_img_home_bg_number", "IMG_img_home_bg_liutong"]
-        let nameIconNames: [String] = ["IMG_home_icon_reward", "IMG_home_icon_time", "IMG_home_icon_number", "IMG_home_icon_liutong"]
+        let itemViews: [FPHomeOrePoolItemView] = [self.miningIncomeOneDayItemView, self.addPowerCostItemView, self.nowNledgeCollateralItemView, self.totalPledgeCollateralItemView]
+        let titels: [String] = ["24h平均挖矿收益(FIL/TiB)", "新增算力成本(FIL/TIB)", "当前扇区质押量(FIL/32GiB)", "FIL质押量(FIL)"]
+        let iconNames: [String] = ["IMG_img_home_bg_reward", "IMG_img_home_bg_chengben", "IMG_img_home_bg_shanxing", "IMG_img_home_bg_zhiya"]
+        let nameIconNames: [String] = ["IMG_home_icon_reward", "IMG_home_icon_chengben", "IMG_home_icon_shanxing", "IMG_home_icon_zhiya"]
         for (index, itemView) in itemViews.enumerated() {
             let row: Int = index / self.itemColCount
             let col: Int = index % self.itemColCount
@@ -178,10 +178,10 @@ extension FPHomeOrePoolView {
 extension FPHomeOrePoolView {
     ///
     fileprivate func setupAsDemo() -> Void {
-        self.bolckRewardItemView.valueLabel.text = "32.19"
-        self.avgBlockTimeItemView.valueLabel.text = "30"
-        self.activeMinerItemView.valueLabel.text = "684"
-        self.totalFilItemView.valueLabel.text = "5415661211"
+        self.miningIncomeOneDayItemView.valueLabel.text = "32.19"
+        self.addPowerCostItemView.valueLabel.text = "30"
+        self.nowNledgeCollateralItemView.valueLabel.text = "684"
+        self.totalPledgeCollateralItemView.valueLabel.text = "5415661211"
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: FirstPageHomeModel?) -> Void {
@@ -190,10 +190,10 @@ extension FPHomeOrePoolView {
             return
         }
         // 子控件数据加载
-        self.bolckRewardItemView.valueLabel.text = model.ipfs?.mining_income_str_one_day
-        self.avgBlockTimeItemView.valueLabel.text = model.ipfs?.one_day_fil_str
-        self.activeMinerItemView.valueLabel.text = model.ipfs?.active_miners
-        self.totalFilItemView.valueLabel.text = model.ipfs?.current_fil.decimalValidDigitsProcess(digits: 4)
+        self.miningIncomeOneDayItemView.valueLabel.text = model.ipfs?.mining_income_str_one_day
+        self.addPowerCostItemView.valueLabel.text = model.ipfs?.add_power_cost
+        self.nowNledgeCollateralItemView.valueLabel.text = model.ipfs?.now_pledge_collateral
+        self.totalPledgeCollateralItemView.valueLabel.text = model.ipfs?.pledge_collateral
     }
     
 }

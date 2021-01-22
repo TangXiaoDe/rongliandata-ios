@@ -14,7 +14,7 @@ import ObjectMapper
 class FPHomeIPFSModel: Mappable
 {
     
-    /// 全网总算力
+    /// 全网总算力(有效算力)
     var total_power: String = ""
     /// 最新区块高度
     var tipset_height: String = ""
@@ -53,9 +53,18 @@ class FPHomeIPFSModel: Mappable
     var flow_rate: String = ""
     /// 24小时平均挖矿收益(T)
     var mining_income_str_one_day: String = ""
-    /// 总质压
+    /// FIL总质押量
     var pledge_collateral: String = ""
-
+    /// 当前扇区质押量
+    var now_pledge_collateral: String = ""
+    /// 总账户数
+    var total_account: String = ""
+    /// 平均区块间隔
+    var avg_block_tipset: String = ""
+    /// 新增算力成本
+    var add_power_cost: String = ""
+    /// FIL销毁量
+    var fil_destroy_total: String = ""
 
     init() {
             
@@ -85,6 +94,11 @@ class FPHomeIPFSModel: Mappable
         flow_rate <- map["flow_rate"]
         mining_income_str_one_day <- map["mining_income_str_one_day"]
         pledge_collateral <- map["pledge_collateral"]
+        now_pledge_collateral <- map["now_pledge_collateral"]
+        total_account <- map["total_account"]
+        avg_block_tipset <- map["avg_block_tipset"]
+        add_power_cost <- map["add_power_cost"]
+        fil_destroy_total <- map["fil_destroy_total"]
     }
     
 }
