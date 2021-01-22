@@ -16,6 +16,7 @@ class XDMarqueeView: UIView
     
     public var text: String = "" {
         didSet {
+            text = text.replacingOccurrences(of: "\n", with: "")
             self.textLabel.text = text
             self.setNeedsLayout()
         }

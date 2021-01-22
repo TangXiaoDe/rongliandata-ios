@@ -44,7 +44,7 @@ class FPHomeHeaderView: UIView
     
     fileprivate let ipfsView: UIView = UIView.init()
     fileprivate let totalPowerItemView: TitleValueView = TitleValueView.init()    // 全网总算力
-    fileprivate let tipsetHeightItemView: TitleValueView = TitleValueView.init()  // 最新区块高度
+    fileprivate let activeMinersItemView: TitleValueView = TitleValueView.init()  // 活跃矿工人数
     
     
     fileprivate let bannerHeight: CGFloat = CGSize(width: 351, height: 140).scaleAspectForWidth(kScreenWidth - 24.0).height
@@ -195,8 +195,8 @@ extension FPHomeHeaderView {
         let valueCenterYTopMargin: CGFloat = 18     // super.top
         //
         ipfsView.removeAllSubviews()
-        let itemViews: [TitleValueView] = [self.totalPowerItemView, self.tipsetHeightItemView]
-        let titles: [String] = ["全网总算力(PIB)", "最新区块高度"]
+        let itemViews: [TitleValueView] = [self.totalPowerItemView, self.activeMinersItemView]
+        let titles: [String] = ["全网有效算力(EIB)", "活跃矿工人数(人)"]
         let bgImgNames: [String] = ["IMG_img_home_bg_pib", "IMG_img_home_bg_qkgd"]
         for (index, itemView) in itemViews.enumerated() {
             let row: Int = index / self.itemColCount
@@ -258,9 +258,9 @@ extension FPHomeHeaderView {
     fileprivate func setupAsDemo() -> Void {
         self.bannerView.backgroundColor = UIColor.random
         self.bannerView.models = []
-        self.noticeContentView.text = "合众IPFS合众IPFS合众IPFS合众IPFS合众IPFS合众IPFS合众IPFS合众IPFS"
+        self.noticeContentView.text = "海马算力海马算力海马算力海马算力海马算力海马算力海马算力海马算力"
         self.totalPowerItemView.valueLabel.text = "499200"
-        self.tipsetHeightItemView.valueLabel.text = "76251"
+        self.activeMinersItemView.valueLabel.text = "76251"
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: FirstPageHomeModel?) -> Void {
@@ -272,7 +272,7 @@ extension FPHomeHeaderView {
         self.bannerView.models = model.averts
         self.noticeContentView.text = model.newstNotice?.content ?? ""
         self.totalPowerItemView.valueLabel.text = model.ipfs?.total_power
-        self.tipsetHeightItemView.valueLabel.text = model.ipfs?.tipset_height
+        self.activeMinersItemView.valueLabel.text = model.ipfs?.active_miners
         
         let showAdverts: Bool = !model.averts.isEmpty
         self.bannerView.isHidden = !showAdverts
