@@ -276,7 +276,7 @@ extension FPHomeHeaderView {
         
         let showAdverts: Bool = !model.averts.isEmpty
         self.bannerView.isHidden = !showAdverts
-        self.bannerView.snp.makeConstraints { (make) in
+        self.bannerView.snp.updateConstraints { (make) in
             let topMargin: CGFloat = showAdverts ? self.bannerTopMargin : 0
             let height: CGFloat = showAdverts ? self.bannerHeight : 0
             make.top.equalToSuperview().offset(topMargin)
