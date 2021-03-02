@@ -16,6 +16,13 @@ class EquipmentHomeHeaderView: UIView {
     
     static let viewHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
     
+    static var valueBottomMargin: CGFloat {
+        let height: CGFloat = EquipmentHomeHeaderView.viewHeight
+        let header = EquipmentHomeHeaderView.init()
+        let bottomMargin: CGFloat = height - header.titleCenterYTopMargin - header.valueCenterYTopMargin - 15.0 - 15.0
+        return min(60, max(0, bottomMargin))
+    }
+    
     var model: EquipmentHomeModel? {
         didSet {
             self.setupWithModel(model)
@@ -108,7 +115,7 @@ extension EquipmentHomeHeaderView {
         }
         // 3. valueLabel
         mainView.addSubview(self.valueLabel)
-        self.valueLabel.set(text: nil, font: UIFont.systemFont(ofSize: 28, weight: .medium), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .center)
+        self.valueLabel.set(text: "0", font: UIFont.systemFont(ofSize: 28, weight: .medium), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .center)
         self.valueLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(self.titleLabel.snp.centerY).offset(self.valueCenterYTopMargin)

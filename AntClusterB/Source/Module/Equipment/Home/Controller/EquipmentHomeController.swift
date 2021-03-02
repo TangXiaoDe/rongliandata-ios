@@ -12,7 +12,7 @@ import UIKit
 typealias EquipmentListController = EquipmentHomeController
 class EquipmentHomeController: BaseViewController
 {
-    
+
     // MARK: - Internal Property
 
     // MARK: - Private Property
@@ -30,7 +30,7 @@ class EquipmentHomeController: BaseViewController
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let itemHeight: CGFloat = 125
     fileprivate let itemVerMargin: CGFloat = 12
-    fileprivate let itemTopMargin: CGFloat = 68     // -header.bottom
+    fileprivate let itemTopMargin: CGFloat = EquipmentHomeHeaderView.valueBottomMargin     // -header.bottom
     fileprivate let itemViewTagBase: Int = 250
 
     fileprivate let footerHeight: CGFloat = 44
