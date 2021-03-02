@@ -61,6 +61,9 @@ class EquipmentListModel: Mappable {
     var updatedDate: Date = Date()
 
 
+    init(no: String) {
+        self.eq_no = no
+    }
     required init?(map: Map) {
         
     }
