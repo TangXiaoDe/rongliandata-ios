@@ -17,11 +17,13 @@ class EquipmentNetworkManager {
 extension EquipmentNetworkManager {
 
     /// 主页数据
-    class func getHomeData(complete: @escaping((_ status: Bool, _ msg: String?, _ model: EquipmentHomeModel?) -> Void)) -> Void {
+    class func getHomeData(offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ model: EquipmentHomeModel?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = EquipmentRequestInfo.homeData
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
         // 2.配置参数
+        let parameter: [String: Any] = ["offset": offset, "limit": limit]
+        requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
             switch networkResult {

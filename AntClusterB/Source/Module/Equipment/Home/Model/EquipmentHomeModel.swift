@@ -13,7 +13,9 @@ class EquipmentHomeModel: Mappable {
     
     var total: Double = 0
     var list: [EquipmentListModel] = []
-        
+    
+    init() {
+    }
     required init?(map: Map) {
         
     }

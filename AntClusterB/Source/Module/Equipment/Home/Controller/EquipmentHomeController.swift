@@ -23,6 +23,7 @@ class EquipmentHomeController: BaseViewController
     fileprivate let footerView: EquipmentHomeFooterView = EquipmentHomeFooterView.init()
     
     fileprivate var sourceList: [String] = []
+    fileprivate var model: EquipmentHomeModel = EquipmentHomeModel.init()
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     
@@ -210,39 +211,48 @@ extension EquipmentHomeController {
 
     /// 下拉刷新请求
     fileprivate func refreshRequest() -> Void {
-        EquipmentNetworkManager.getHomeData { [weak self](status, msg, model) in
+        EquipmentNetworkManager.getHomeData(offset: 0, limit: self.limit) { [weak self](status, msg, model) in
             guard let `self` = self else {
                 return
             }
             self.scrollView.mj_header.endRefreshing()
+            self.scrollView.mj_footer.state = .idle
             guard status, let model = model else {
                 ToastUtil.showToast(title: msg)
                 return
             }
-            self.headerView.model = model
-            self.setupItemContainer(with: model.list)
-            self.footerView.isHidden = model.list.isEmpty
+            self.model = model
+            self.offset = self.model.list.count
+            self.headerView.model = self.model
+            self.setupItemContainer(with: self.model.list)
+            self.footerView.isHidden = model.list.isEmpty || model.list.count >= self.limit
+            self.scrollView.mj_footer.isHidden = model.list.count < self.limit
         }
     }
     
     /// 上拉加载更多请求
     fileprivate func loadMoreRequest() -> Void {
-//        MessageNetworkManager.getMessageList(offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.tableView.mj_footer.endRefreshing()
-//            guard status, let models = models else {
-//                self.tableView.mj_footer.endRefreshingWithWeakNetwork()
-//                return
-//            }
-//            if models.count < self.limit {
-//                self.tableView.mj_footer.endRefreshingWithNoMoreData()
-//            }
-//            self.sourceList += models
-//            self.offset = self.sourceList.count
-//            self.tableView.reloadData()
-//        }
+        EquipmentNetworkManager.getHomeData(offset: self.offset, limit: self.limit) { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            self.scrollView.mj_footer.endRefreshing()
+            guard status, let model = model else {
+                ToastUtil.showToast(title: msg)
+                return
+            }
+            self.model.list.append(contentsOf: model.list)
+            self.offset = self.model.list.count
+            self.headerView.model = self.model
+            self.setupItemContainer(with: self.model.list)
+            if model.list.isEmpty || model.list.count >= self.limit {
+                self.footerView.isHidden = false
+                self.scrollView.mj_footer.isHidden = true
+            } else {
+                self.footerView.isHidden = true
+                self.scrollView.mj_footer.isHidden = false
+            }
+        }
     }
 
 }
