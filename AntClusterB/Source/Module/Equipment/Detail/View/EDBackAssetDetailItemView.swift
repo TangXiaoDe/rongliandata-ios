@@ -29,7 +29,7 @@ class EDBackAssetDetailItemView: BaseView {
         }
     }
     
-    var model: String? {
+    var model: EDAssetReturnListModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -157,12 +157,16 @@ extension EDBackAssetDetailItemView {
         self.interestValueLabel.text = "1.021"
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-        guard let _ = model else {
+    fileprivate func setupWithModel(_ model: EDAssetReturnListModel?) -> Void {
+        //self.setupAsDemo()
+        guard let model = model else {
             return
         }
         // 子控件数据加载
+        self.dateValueLabel.text = model.createdDate.string(format: "yyyy.MM.dd", timeZone: .current)
+        self.zhiyaValueLabel.text = model.pledge.decimalValidDigitsProcess(digits: 8)
+        self.gasValueLabel.text = model.gas.decimalValidDigitsProcess(digits: 8)
+        self.interestValueLabel.text = model.interest.decimalValidDigitsProcess(digits: 8)
     }
     
     ///

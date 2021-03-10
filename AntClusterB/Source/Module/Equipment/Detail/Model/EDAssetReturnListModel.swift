@@ -27,6 +27,9 @@ class EDAssetReturnListModel: Mappable {
     var updatedDate: Date = Date.init()
 
 
+    init() {
+        
+    }
     required init?(map: Map) {
         
     }

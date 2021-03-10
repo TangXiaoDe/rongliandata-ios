@@ -263,6 +263,14 @@ class EDAssetModel: Mappable {
     var createdDate: Date = Date.init()
     ///
     var updatedDate: Date = Date.init()
+    
+    /// 待归还
+    var wait_pledge: Double {
+        return self.pledge - self.return_pledge
+    }
+    var wait_gas: Double {
+        return self.gas - self.return_gas
+    }
 
 
     required init?(map: Map) {
