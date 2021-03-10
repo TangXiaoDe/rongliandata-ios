@@ -23,9 +23,16 @@ class EquipmentDetailView: UIView
     
     // MARK: - Internal Property
     
-    var model: String? {
+    var model: EquipmentDetailModel? {
         didSet {
             self.setupWithModel(model)
+        }
+    }
+    var returns: [EDAssetReturnListModel]? {
+        didSet {
+            if let returns = returns {
+//                self.backAssetDetailView.model = nil
+            }
         }
     }
 
@@ -138,16 +145,13 @@ extension EquipmentDetailView {
         }
         //
         self.packageDetailView.title = "封装详情"
-        self.assetSurveyView.model = nil
         self.loanCapitalView.title = "借贷资本明细"
         self.backedAssetView.title = "已归还"
         self.unbackAssetView.title = "待归还"
         //
+        self.assetSurveyView.model = nil
         self.assetSurveyView.delegate = self
         self.backAssetDetailView.model = nil
-        //        self.backAssetDetailView.title = "归还资本明细"
-        
-        
     }
     
 }
@@ -169,12 +173,15 @@ extension EquipmentDetailView {
         
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-        guard let _ = model else {
+    fileprivate func setupWithModel(_ model: EquipmentDetailModel?) -> Void {
+        //self.setupAsDemo()
+        guard let model = model else {
             return
         }
         // 子控件数据加载
+        
+        
+        
     }
     
 }

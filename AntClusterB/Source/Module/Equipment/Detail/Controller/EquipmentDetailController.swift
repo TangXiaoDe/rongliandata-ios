@@ -26,16 +26,20 @@ class EquipmentDetailController: BaseViewController
     
     fileprivate let detailView: EquipmentDetailView = EquipmentDetailView.init()
     
-    fileprivate let topBgViewHeight: CGFloat = EquipDetailHeaderView.viewHeight
+    fileprivate let topBgViewHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
     
-    fileprivate let topViewHeight: CGFloat = 150
+    fileprivate let topViewHeight: CGFloat = EquipDetailHeaderView.viewHeight
     fileprivate let topViewLrMargin: CGFloat = 12
-    fileprivate let topViewTopMargin: CGFloat = 18
+    fileprivate let topViewTopMargin: CGFloat = 20
     
     fileprivate let detailViewTopMargin: CGFloat = 12
     
     
+    fileprivate var detail: EquipmentDetailModel?
+    fileprivate var returns: [EDAssetReturnListModel] = []
     
+    fileprivate var offset: Int = 0
+    fileprivate let limit: Int = 20
     
     
     
@@ -88,8 +92,9 @@ extension EquipmentDetailController {
         self.view.backgroundColor = AppColor.pageBg
         // 1. topBg
         self.view.addSubview(self.topBgView)
-        self.topBgView.backgroundColor = UIColor.init(hex: 0x282E42)
-        self.topBgView.setupCorners(UIRectCorner.init([UIRectCorner.bottomLeft, UIRectCorner.bottomRight]), selfSize: CGSize.init(width: kScreenWidth, height: self.topBgViewHeight), cornerRadius: 50)
+        self.topBgView.image = UIImage.init(named: "IMG_sb_top_bg")
+        //self.topBgView.backgroundColor = UIColor.init(hex: 0x282E42)
+        //self.topBgView.setupCorners(UIRectCorner.init([UIRectCorner.bottomLeft, UIRectCorner.bottomRight]), selfSize: CGSize.init(width: kScreenWidth, height: self.topBgViewHeight), cornerRadius: 50)
         self.topBgView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(self.topBgViewHeight)
@@ -131,7 +136,6 @@ extension EquipmentDetailController {
         }
         // 1. topView
         scrollView.addSubview(self.topView)
-        self.topView.backgroundColor = UIColor.red
         self.topView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.topViewLrMargin)
             make.trailing.equalToSuperview().offset(-self.topViewLrMargin)
@@ -154,7 +158,8 @@ extension EquipmentDetailController {
 extension EquipmentDetailController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
-        
+        self.topView.model = self.model
+        self.scrollView.mj_header.beginRefreshing()
     }
 
 
@@ -164,11 +169,53 @@ extension EquipmentDetailController {
 extension EquipmentDetailController {
     ///
     @objc fileprivate func headerRefresh() -> Void {
-        self.scrollView.mj_header.endRefreshing()
+//        self.scrollView.mj_header.endRefreshing()
+        
+        EquipmentNetworkManager.refreshEquipmentDetailData(id: self.id, offset: 0, limit: self.limit) { [weak self](status, msg, data) in
+            guard let `self` = self else {
+                return
+            }
+            self.scrollView.mj_header.endRefreshing()
+            self.scrollView.mj_footer.state = .idle
+            guard status, let data = data else {
+                ToastUtil.showToast(title: msg)
+                return
+            }
+            self.detail = data.detail
+            self.returns = data.returns
+            self.topView.model = self.model
+            self.detailView.model = self.detail
+            self.detailView.returns = self.returns
+            //self.footerView.isHidden = model.list.isEmpty || model.list.count >= self.limit
+            //self.scrollView.mj_footer.isHidden = model.list.count < self.limit
+        }
     }
     ///
     @objc fileprivate func footerLoadMore() -> Void {
         self.scrollView.mj_footer.endRefreshing()
+        
+//        EquipmentNetworkManager.getHomeData(offset: self.offset, limit: self.limit) { [weak self](status, msg, model) in
+//            guard let `self` = self else {
+//                return
+//            }
+//            self.scrollView.mj_footer.endRefreshing()
+//            guard status, let model = model else {
+//                ToastUtil.showToast(title: msg)
+//                return
+//            }
+//            self.model.list.append(contentsOf: model.list)
+//            self.offset = self.model.list.count
+//            self.headerView.model = self.model
+//            self.setupItemContainer(with: self.model.list)
+//            if model.list.isEmpty || model.list.count >= self.limit {
+//                self.footerView.isHidden = false
+//                self.scrollView.mj_footer.isHidden = true
+//            } else {
+//                self.footerView.isHidden = true
+//                self.scrollView.mj_footer.isHidden = false
+//            }
+//        }
+
     }
     
 }

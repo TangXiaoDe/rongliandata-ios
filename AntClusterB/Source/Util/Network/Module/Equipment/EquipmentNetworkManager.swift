@@ -71,10 +71,10 @@ extension EquipmentNetworkManager {
 extension EquipmentNetworkManager {
 
     /// 设备详情
-    class func getEquipmentDetail(order: String, complete: @escaping((_ status: Bool, _ msg: String?, _ model: EquipmentDetailModel?) -> Void)) -> Void {
+    class func getEquipmentDetail(id: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ model: EquipmentDetailModel?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = EquipmentRequestInfo.equipmentDetail
-        requestInfo.urlPath = requestInfo.fullPathWith(replacers: ["\(order)"])
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: ["\(id)"])
         // 2.配置参数
         let parameter: [String: Any] = [ :]
         requestInfo.parameter = parameter
@@ -153,4 +153,54 @@ extension EquipmentNetworkManager {
         }
     }
 
+}
+
+
+extension EquipmentNetworkManager {
+    
+    /// 设备详情页请求封装
+    class func refreshEquipmentDetailData(id: Int, offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ data: (detail: EquipmentDetailModel, returns: [EDAssetReturnListModel])?) -> Void)) -> Void {
+        let group = DispatchGroup.init()
+
+        var detailStatus: Bool = false
+        var detailMsg: String? = nil
+        var detailModel: EquipmentDetailModel? = nil
+        var returnStatus: Bool = false
+        var returnMsg: String? = nil
+        var returnModels: [EDAssetReturnListModel]? = nil
+
+        // 设备详情
+        group.enter()
+        Self.getEquipmentDetail(id: id) { (status, msg, model) in
+            detailStatus = status
+            detailMsg = msg
+            detailModel = model
+            group.leave()
+        }
+
+        // 资产归还流水
+        group.enter()
+        Self.getAssetBackList(order_id: id, offset: offset, limit: limit) { (status, msg, models) in
+            returnStatus = status
+            returnMsg = msg
+            returnModels = models
+            group.leave()
+        }
+
+        group.notify(queue: DispatchQueue.main) {
+            let status: Bool = detailStatus && returnStatus
+            var msg: String? = nil
+            if !detailStatus {
+                msg = detailMsg
+            } else if !returnStatus {
+                msg = returnMsg
+            }
+            var data: (detail: EquipmentDetailModel, returns: [EDAssetReturnListModel])? = nil
+            if let detailModel = detailModel, let returnModels = returnModels {
+                data = (detail: detailModel, returns: returnModels)
+            }
+            complete(status, msg, data)
+        }
+    }
+    
 }

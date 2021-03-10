@@ -273,11 +273,14 @@ extension EquipDetailHeaderView {
     
     /// 数据加载
     fileprivate func setupWithModel(_ model: EquipmentListModel?) -> Void {
-        self.setupAsDemo()
+        //self.setupAsDemo()
         guard let model = model else {
             return
         }
         // 子控件数据加载
+        
+        self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
+        
         self.titleLabel.text = "第\(model.fil_level)期"
         self.titleLabel.textColor = model.titleColor
         self.specView.valueLabel.text = model.spec_level
@@ -293,11 +296,7 @@ extension EquipDetailHeaderView {
         totalNumAtts.append((str: "\(model.t_num)", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: model.totalNumColor))
         totalNumAtts.append((str: " T", font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: model.totalNumColor))
         self.totalNumView.attributedText = NSAttributedString.attribute(totalNumAtts)
-        if model.zone == .ipfs {
-            self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
-        } else {
-            self.initialCenterView(self.centerView, [self.incomeNumView, self.yesterdayNumView, self.huibenNumView])
-        }
+
     }
     
 }
