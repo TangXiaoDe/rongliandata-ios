@@ -13,6 +13,7 @@ class EquipmentDetailController: BaseViewController
     // MARK: - Internal Property
     
     let id: Int
+    let model: EquipmentListModel
     
     // MARK: - Private Property
 
@@ -21,11 +22,11 @@ class EquipmentDetailController: BaseViewController
     
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
 
-    fileprivate let topView: UIView = UIView.init()
+    fileprivate let topView: EquipDetailHeaderView = EquipDetailHeaderView.init()
     
     fileprivate let detailView: EquipmentDetailView = EquipmentDetailView.init()
     
-    fileprivate let topBgViewHeight: CGFloat = 220
+    fileprivate let topBgViewHeight: CGFloat = EquipDetailHeaderView.viewHeight
     
     fileprivate let topViewHeight: CGFloat = 150
     fileprivate let topViewLrMargin: CGFloat = 12
@@ -41,8 +42,9 @@ class EquipmentDetailController: BaseViewController
     
     // MARK: - Initialize Function
     
-    init(id: Int) {
-        self.id = id
+    init(model: EquipmentListModel) {
+        self.model = model
+        self.id = model.id
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder aDecoder: NSCoder) {

@@ -203,6 +203,8 @@ extension EquipmentHomeController {
             return
         }
 //        self.enterDetailPage(with: model)
+        //self.enterMiningDetailPage(with: model)
+        self.enterEquipmentDetailPage(with: model)
     }
     
 }
@@ -265,15 +267,15 @@ extension EquipmentHomeController {
 //        let detailVC = MiningDetailController.init(model: model)
 //        self.enterPageVC(detailVC)
 //    }
-    /// 设备详情
-    fileprivate func enterEquipmentDetailPage(id: Int) -> Void {
-        let equipDetailVC = EquipmentDetailController.init(id: id)
-        self.enterPageVC(equipDetailVC)
-    }
     /// 挖坑明细
     fileprivate func enterOreDetailPage(with model: EquipmentListModel) -> Void {
         let oreDetailVC = OreDetailController.init(listModel: model)
         self.enterPageVC(oreDetailVC)
+    }
+    /// 设备详情页
+    fileprivate func enterEquipmentDetailPage(with model: EquipmentListModel) -> Void {
+        let detailVC = EquipmentDetailController.init(model: model)
+        self.enterPageVC(detailVC)
     }
 }
 
@@ -309,7 +311,7 @@ extension EquipmentHomeController: EquipmentHomeItemViewProtocol {
         guard let model = view.model else {
             return
         }
-        self.enterEquipmentDetailPage(id: model.id)
+        self.enterEquipmentDetailPage(with: model)
     }
     /// 挖坑
     func itemView(_ view: EquipmentHomeItemView, didClickOreDetail btn: UIButton) {
