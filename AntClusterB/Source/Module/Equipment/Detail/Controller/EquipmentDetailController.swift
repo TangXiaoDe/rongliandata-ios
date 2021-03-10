@@ -169,8 +169,6 @@ extension EquipmentDetailController {
 extension EquipmentDetailController {
     ///
     @objc fileprivate func headerRefresh() -> Void {
-//        self.scrollView.mj_header.endRefreshing()
-        
         EquipmentNetworkManager.refreshEquipmentDetailData(id: self.id, offset: 0, limit: self.limit) { [weak self](status, msg, data) in
             guard let `self` = self else {
                 return
@@ -186,36 +184,29 @@ extension EquipmentDetailController {
             self.topView.model = self.model
             self.detailView.model = self.detail
             self.detailView.returns = self.returns
-            //self.footerView.isHidden = model.list.isEmpty || model.list.count >= self.limit
-            //self.scrollView.mj_footer.isHidden = model.list.count < self.limit
+            self.offset = data.returns.count
+            self.scrollView.mj_footer.isHidden = data.returns.count < self.limit
         }
     }
     ///
     @objc fileprivate func footerLoadMore() -> Void {
-        self.scrollView.mj_footer.endRefreshing()
-        
-//        EquipmentNetworkManager.getHomeData(offset: self.offset, limit: self.limit) { [weak self](status, msg, model) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.scrollView.mj_footer.endRefreshing()
-//            guard status, let model = model else {
-//                ToastUtil.showToast(title: msg)
-//                return
-//            }
-//            self.model.list.append(contentsOf: model.list)
-//            self.offset = self.model.list.count
-//            self.headerView.model = self.model
-//            self.setupItemContainer(with: self.model.list)
-//            if model.list.isEmpty || model.list.count >= self.limit {
-//                self.footerView.isHidden = false
-//                self.scrollView.mj_footer.isHidden = true
-//            } else {
-//                self.footerView.isHidden = true
-//                self.scrollView.mj_footer.isHidden = false
-//            }
-//        }
-
+        EquipmentNetworkManager.getAssetBackList(order_id: self.id, offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
+            guard let `self` = self else {
+                return
+            }
+            self.scrollView.mj_footer.endRefreshing()
+            guard status, let models = models else {
+                ToastUtil.showToast(title: msg)
+                self.scrollView.mj_footer.endRefreshingWithWeakNetwork()
+                return
+            }
+            self.returns.append(contentsOf: models)
+            self.offset = self.returns.count
+            self.detailView.returns = self.returns
+            if models.isEmpty {
+                self.scrollView.mj_footer.endRefreshingWithNoMoreData()
+            }
+        }
     }
     
 }

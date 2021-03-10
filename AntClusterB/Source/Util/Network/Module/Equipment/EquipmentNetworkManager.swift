@@ -148,7 +148,22 @@ extension EquipmentNetworkManager {
             case .failure(let failure):
                 complete(false, failure.message, nil)
             case .success(let response):
-                complete(true, response.message, response.models)
+                //complete(true, response.message, response.models)
+                
+                // 临时测试代码
+                var models: [EDAssetReturnListModel] = []
+                for _ in 0...20 {
+                    let item = EDAssetReturnListModel.init()
+                    item.gas = 0.123
+                    item.pledge = 1.23123
+                    item.interest = 1.201
+                    models.append(item)
+                }
+                if offset > 65 {
+                    models = []
+                }
+                complete(true, response.message, models)
+                
             }
         }
     }
@@ -187,7 +202,7 @@ extension EquipmentNetworkManager {
             
             // 临时测试代码
             returnModels = []
-            for _ in 0...10 {
+            for _ in 0...20 {
                 let item = EDAssetReturnListModel.init()
                 item.gas = 0.123
                 item.pledge = 1.23123
