@@ -16,7 +16,12 @@ class EquipmentHomeController: BaseViewController
     // MARK: - Internal Property
 
     // MARK: - Private Property
-    fileprivate let statusBar: UIView = UIView.init()
+    
+    //fileprivate let statusBar: UIView = UIView.init()
+    fileprivate let navBar: AppHomeNavStatusView = AppHomeNavStatusView.init()
+    
+    fileprivate let topBgView: UIImageView = UIImageView.init()
+    
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
     fileprivate let headerView: EquipmentHomeHeaderView = EquipmentHomeHeaderView.init()
     fileprivate let itemContainer: UIView = UIView.init()
@@ -27,15 +32,17 @@ class EquipmentHomeController: BaseViewController
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     
+    fileprivate let topBgViewHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
+    
     fileprivate let headerHeight: CGFloat = EquipmentHomeHeaderView.viewHeight
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let itemHeight: CGFloat = EquipmentHomeItemView.viewHeight
     fileprivate let itemVerMargin: CGFloat = 12
-    fileprivate let itemTopMargin: CGFloat = EquipmentHomeHeaderView.valueBottomMargin     // -header.bottom
+    //fileprivate let itemTopMargin: CGFloat = EquipmentHomeHeaderView.valueBottomMargin     // -header.bottom
+    fileprivate let itemTopMargin: CGFloat = 0
     fileprivate let itemViewTagBase: Int = 250
 
     fileprivate let footerHeight: CGFloat = 44
-
 
 
     
@@ -78,18 +85,30 @@ extension EquipmentHomeController {
     /// 界面布局
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = AppColor.pageBg
-        // 1. statusBar
-        self.view.addSubview(self.statusBar)
-        self.statusBar.backgroundColor = UIColor.clear
-        self.statusBar.snp.makeConstraints { (make) in
+        // 1. topBg
+        self.view.addSubview(self.topBgView)
+        self.topBgView.image = UIImage.init(named: "IMG_sb_top_bg")
+        //self.topBgView.backgroundColor = UIColor.init(hex: 0x282E42)
+        //self.topBgView.setupCorners(UIRectCorner.init([UIRectCorner.bottomLeft, UIRectCorner.bottomRight]), selfSize: CGSize.init(width: kScreenWidth, height: self.topBgViewHeight), cornerRadius: 50)
+        self.topBgView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(kStatusBarHeight)
+            make.height.equalTo(self.topBgViewHeight)
+        }
+        // 2. navBar
+        self.view.addSubview(self.navBar)
+        self.navBar.titleLabel.set(text: "设备列表", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.navBar.leftItem.isHidden = true
+        self.navBar.rightItem.isHidden = true
+        self.navBar.snp.makeConstraints { (make) in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(kNavigationStatusBarHeight)
         }
         // 2. scrollView
         self.view.addSubview(self.scrollView)
         self.initialScrollView(self.scrollView)
         self.scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(self.navBar.snp.bottom)
         }
         // 顶部位置 的版本适配
         if #available(iOS 11.0, *) {
@@ -97,8 +116,6 @@ extension EquipmentHomeController {
         } else if #available(iOS 9.0, *) {
             self.automaticallyAdjustsScrollViewInsets = false
         }
-        // view Hierarchy
-        self.view.bringSubviewToFront(self.statusBar)
     }
     ///
     fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
@@ -296,12 +313,12 @@ extension EquipmentHomeController: UIScrollViewDelegate {
 
     ///
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset
-        if offset.y > self.headerHeight - self.itemTopMargin - kStatusBarHeight {
-            self.statusBar.backgroundColor = AppColor.theme
-        } else {
-            self.statusBar.backgroundColor = UIColor.clear
-        }
+//        let offset = scrollView.contentOffset
+//        if offset.y > self.headerHeight - self.itemTopMargin - kStatusBarHeight {
+//            self.statusBar.backgroundColor = AppColor.theme
+//        } else {
+//            self.statusBar.backgroundColor = UIColor.clear
+//        }
     }
 
 }

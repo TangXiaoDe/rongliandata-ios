@@ -14,14 +14,15 @@ class EquipmentHomeHeaderView: UIView {
     
     // MARK: - Internal Property
     
-    static let viewHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
+    static let viewHeight: CGFloat = 90
+//        CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
     
-    static var valueBottomMargin: CGFloat {
-        let height: CGFloat = EquipmentHomeHeaderView.viewHeight
-        let header = EquipmentHomeHeaderView.init()
-        let bottomMargin: CGFloat = height - header.titleCenterYTopMargin - header.valueCenterYTopMargin - 15.0 - 15.0
-        return min(60, max(0, bottomMargin))
-    }
+//    static var valueBottomMargin: CGFloat {
+//        let height: CGFloat = EquipmentHomeHeaderView.viewHeight
+//        let header = EquipmentHomeHeaderView.init()
+//        let bottomMargin: CGFloat = height - header.titleCenterYTopMargin - header.valueCenterYTopMargin - 15.0 - 15.0
+//        return min(60, max(0, bottomMargin))
+//    }
     
     var model: EquipmentHomeModel? {
         didSet {
@@ -37,8 +38,11 @@ class EquipmentHomeHeaderView: UIView {
     fileprivate let valueLabel: UILabel = UILabel.init()
     
     fileprivate let lrMargin: CGFloat = 12
-    fileprivate let titleCenterYTopMargin: CGFloat = kStatusBarHeight + 32  // super.top
-    fileprivate let valueCenterYTopMargin: CGFloat = 45     // title.centerY
+//    fileprivate let titleCenterYTopMargin: CGFloat = kStatusBarHeight + 32  // super.top
+//    fileprivate let valueCenterYTopMargin: CGFloat = 45     // title.centerY
+    
+    fileprivate let valueCenterYTopMargin = 30
+    fileprivate let titleCenterYBottomMargin = 30
     
     // MARK: - Initialize Function
     init() {
@@ -99,27 +103,33 @@ extension EquipmentHomeHeaderView {
     }
     /// mainView布局
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        // 1. bgView
-        mainView.addSubview(self.bgView)
-        self.bgView.set(cornerRadius: 0)
-        self.bgView.image = UIImage.init(named: "IMG_sb_top_bg")
-        self.bgView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+//        // 1. bgView
+//        mainView.addSubview(self.bgView)
+//        self.bgView.set(cornerRadius: 0)
+//        //self.bgView.image = UIImage.init(named: "IMG_sb_top_bg")
+//        self.bgView.snp.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//        }
+        // 3. valueLabel
+        mainView.addSubview(self.valueLabel)
+        self.valueLabel.set(text: "0", font: UIFont.systemFont(ofSize: 28, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.valueLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.leading.greaterThanOrEqualToSuperview()
+            make.trailing.lessThanOrEqualToSuperview()
+            make.centerY.equalTo(mainView.snp.top).offset(self.valueCenterYTopMargin)
+//                .equalTo(self.titleLabel.snp.centerY)
         }
         // 2. titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "设备总量(T)", font: UIFont.systemFont(ofSize: 14), textColor: UIColor.init(hex: 0xFFEFBB), alignment: .center)
+        self.titleLabel.set(text: "设备总量(T)", font: UIFont.systemFont(ofSize: 14), textColor: UIColor.init(hex: 0x333333), alignment: .center)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.centerY.equalTo(mainView.snp.top).offset(self.titleCenterYTopMargin)
+            make.leading.greaterThanOrEqualToSuperview()
+            make.trailing.lessThanOrEqualToSuperview()
+            make.centerY.equalTo(mainView.snp.bottom).offset(-self.titleCenterYBottomMargin)
         }
-        // 3. valueLabel
-        mainView.addSubview(self.valueLabel)
-        self.valueLabel.set(text: "0", font: UIFont.systemFont(ofSize: 28, weight: .medium), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .center)
-        self.valueLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.centerY.equalTo(self.titleLabel.snp.centerY).offset(self.valueCenterYTopMargin)
-        }
+
     }
     
 }
