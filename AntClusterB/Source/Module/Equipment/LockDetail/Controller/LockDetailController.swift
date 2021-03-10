@@ -13,7 +13,9 @@ import UIKit
 class LockDetailController: BaseViewController
 {
     // MARK: - Internal Property
+    
     fileprivate var currency: CurrencyType
+    
     // MARK: - Private Property
     fileprivate let topBgView: UIImageView = UIImageView()
     fileprivate let navBar: AppHomeNavStatusView = AppHomeNavStatusView.init()
