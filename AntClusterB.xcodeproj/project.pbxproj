@@ -937,14 +937,14 @@
 			path = AntClusterBUITests;
 			sourceTree = "<group>";
 		};
-		530B28BC25AD483F00B8723E /* Detail */ = {
+		530B28BC25AD483F00B8723E /* MiningDetail */ = {
 			isa = PBXGroup;
 			children = (
 				530B28BD25AD483F00B8723E /* Controller */,
 				530B28BE25AD483F00B8723E /* Model */,
 				530B28BF25AD483F00B8723E /* View */,
 			);
-			path = Detail;
+			path = MiningDetail;
 			sourceTree = "<group>";
 		};
 		530B28BD25AD483F00B8723E /* Controller */ = {
@@ -2906,7 +2906,7 @@
 		53DF25162581FC9600165247 /* Equipment */ = {
 			isa = PBXGroup;
 			children = (
-				530B28BC25AD483F00B8723E /* Detail */,
+				530B28BC25AD483F00B8723E /* MiningDetail */,
 				530B28C025AD483F00B8723E /* Home */,
 			);
 			path = Equipment;
