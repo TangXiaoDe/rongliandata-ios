@@ -1,24 +1,16 @@
 //
-//  EquipmentHomeItemView.swift
-//  AntClusterB
+//  OreDetailHeaderView.swift
+//  MallProject
 //
-//  Created by 小唐 on 2020/12/3.
-//  Copyright © 2020 ChainOne. All rights reserved.
+//  Created by zhaowei on 2021/3/9.
+//  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  
-
-protocol EquipmentHomeItemViewProtocol: class {
-    /// 点击设备明细按钮
-    func itemView(_ view: EquipmentHomeItemView, didClickEquipmentDetail btn: UIButton)
-    /// 点击挖坑详情按钮
-    func itemView(_ view: EquipmentHomeItemView, didClickOreDetail btn: UIButton)
-}
 
 import UIKit
 
-class EquipmentHomeItemView: UIView {
+class OreDetailHeaderView: UIView {
     
-    static let viewHeight: CGFloat = 178
+    static let viewHeight: CGFloat = CGSize.init(width: 351, height: 146.5).scaleAspectForWidth(kScreenWidth - 2 * 12).height
     // MARK: - Internal Property
     
     var model: EquipmentListModel? {
@@ -26,11 +18,10 @@ class EquipmentHomeItemView: UIView {
             self.setupWithModel(model)
         }
     }
-    weak var delegate: EquipmentHomeItemViewProtocol?
-    
     // MARK: - Private Property
 
     fileprivate let mainView: UIView = UIView.init()
+    fileprivate let bgImgView: UIImageView = UIImageView()
     
     fileprivate let topView: UIView = UIView.init()
     fileprivate let iconView: UIImageView = UIImageView.init()          // 左侧红色竖线
@@ -49,19 +40,11 @@ class EquipmentHomeItemView: UIView {
     fileprivate let incomeNumView: TitleValueView = TitleValueView.init()   // 累计收益
     fileprivate let yesterdayNumView: TitleValueView = TitleValueView.init()   // 昨日收益
     fileprivate let huibenNumView: TitleValueView = TitleValueView.init()   // 回本进度
-    
-    fileprivate let bottomDashLine: XDDashLineView = XDDashLineView.init(lineColor: UIColor.init(hex: 0xECECEC), lengths: [3.0, 3.0])
-    fileprivate let bottomView: UIView = UIView.init()
-    fileprivate let equimentDetailBtn: UIButton = UIButton.init(type: .custom)
-    fileprivate let oreDetailBtn: UIButton = UIButton.init(type: .custom)
 
-    fileprivate let topViewHeight: CGFloat = 71
-    fileprivate let centerViewHeight: CGFloat = 62
-    fileprivate let bottomViewHeight: CGFloat = 44
+    fileprivate let topViewHeight: CGFloat = 72
+    fileprivate let centerViewHeight: CGFloat = 63
     fileprivate let leftMargin: CGFloat = 12
     fileprivate let rightMargin: CGFloat = 12
-    fileprivate let detailBtnSize: CGSize = CGSize.init(width: 74, height: 28)
-    fileprivate let detailBtnHorMargin: CGFloat = 12
     
 
     // MARK: - Initialize Function
@@ -87,16 +70,16 @@ class EquipmentHomeItemView: UIView {
 }
 
 // MARK: - Internal Function
-extension EquipmentHomeItemView {
+extension OreDetailHeaderView {
 
-    class func loadXib() -> EquipmentHomeItemView? {
-        return Bundle.main.loadNibNamed("EquipmentHomeItemView", owner: nil, options: nil)?.first as? EquipmentHomeItemView
+    class func loadXib() -> OreDetailHeaderView? {
+        return Bundle.main.loadNibNamed("OreDetailHeaderView", owner: nil, options: nil)?.first as? OreDetailHeaderView
     }
 
 }
 
 // MARK: - LifeCircle/Override Function
-extension EquipmentHomeItemView {
+extension OreDetailHeaderView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -111,11 +94,10 @@ extension EquipmentHomeItemView {
     
 }
 // MARK: - UI Function
-extension EquipmentHomeItemView {
+extension OreDetailHeaderView {
     
     /// 界面布局
     fileprivate func initialUI() -> Void {
-        self.backgroundColor = UIColor.white
         //
         self.addSubview(self.mainView)
         self.initialMainView(self.mainView)
@@ -125,33 +107,31 @@ extension EquipmentHomeItemView {
     }
     /// mainView布局
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        // 1. topView
-        mainView.addSubview(self.topView)
-        self.initialTopView(self.topView)
-        self.topView.snp.makeConstraints { (make) in
-            make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(self.topViewHeight)
+        mainView.addSubview(self.bgImgView)
+        self.bgImgView.image = UIImage.init(named: "IMG_mine_sb_top_box")
+        self.bgImgView.set(cornerRadius: 0)
+        self.bgImgView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
         // 2. centerView
         mainView.addSubview(self.centerView)
         self.initialCenterView(self.centerView, [])
         self.centerView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.topView.snp.bottom)
+            make.bottom.equalToSuperview()
             make.height.equalTo(self.centerViewHeight)
         }
-        // 3. bottomView
-        mainView.addSubview(self.bottomView)
-        self.initiaBottomView(self.bottomView, [])
-        self.bottomView.snp.makeConstraints { (make) in
+        // 1. topView
+        mainView.addSubview(self.topView)
+        self.initialTopView(self.topView)
+        self.topView.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self.centerView.snp.top)
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.centerView.snp.bottom)
-            make.height.equalTo(self.bottomViewHeight)
+            make.height.equalTo(self.topViewHeight)
         }
     }
     ///
     fileprivate func initialTopView(_ topView: UIView) -> Void {
-        
         let iconSize: CGSize = CGSize.init(width: 3, height: 28)
         let iconTopMargin: CGFloat = 10
         let titleCenterYTopMargin: CGFloat = 23     // super.top
@@ -231,7 +211,7 @@ extension EquipmentHomeItemView {
                     make.leading.equalTo(leftView.snp.trailing)
                 }
                 if itemViews.count - 1 == index {
-//                    make.trailing.equalToSuperview()
+                    make.trailing.equalToSuperview()
                 }
             }
             itemView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999), alignment: .center)
@@ -257,44 +237,9 @@ extension EquipmentHomeItemView {
         self.yesterdayNumView.titleLabel.text = "昨日收益"
         self.huibenNumView.titleLabel.text = "回本进度"
     }
-    fileprivate func initiaBottomView(_ bottomView: UIView, _ itemViews: [UIButton]) -> Void {
-        bottomView.removeAllSubviews()
-        // 0. dashLine
-        bottomView.addSubview(self.bottomDashLine)
-        self.bottomDashLine.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview().offset(self.leftMargin)
-            make.trailing.equalToSuperview().offset(-self.rightMargin)
-            make.height.equalTo(0.5)
-        }
-        var rightView: UIView = bottomView
-        for (index, itemView) in itemViews.enumerated() {
-            bottomView.addSubview(itemView)
-            itemView.snp.makeConstraints { (make) in
-                make.size.equalTo(self.detailBtnSize)
-                if 0 == index {
-                    make.trailing.equalToSuperview().offset(-rightMargin)
-                } else {
-                    make.trailing.equalTo(rightView.snp.leading).offset(-detailBtnHorMargin)
-                }
-                make.centerY.equalToSuperview()
-            }
-            rightView = itemView
-        }
-        // equimentDetailBtn
-        self.equimentDetailBtn.set(title: "设备详情", titleColor: UIColor.init(hex: 0xF5BE41), for: .normal)
-        self.equimentDetailBtn.set(font: UIFont.pingFangSCFont(size: 13, weight: .medium), cornerRadius: 4, borderWidth: 0.5, borderColor: UIColor.init(hex: 0xF5BE41))
-        self.equimentDetailBtn.backgroundColor = UIColor.init(hex: 0xFFFBED)
-        self.equimentDetailBtn.addTarget(self, action: #selector(equipmentDetailBtnClick(_:)), for: .touchUpInside)
-        // oreDetailBtn
-        self.oreDetailBtn.set(title: "挖矿详情", titleColor: UIColor.init(hex: 0x00B8FF), for: .normal)
-        self.oreDetailBtn.set(font: UIFont.pingFangSCFont(size: 13, weight: .medium), cornerRadius: 4, borderWidth: 0.5, borderColor: UIColor.init(hex: 0x00B8FF))
-        self.oreDetailBtn.backgroundColor = UIColor.init(hex: 0xEEF5FF)
-        self.oreDetailBtn.addTarget(self, action: #selector(oreDetailBtnClick(_:)), for: .touchUpInside)
-    }
 }
 // MARK: - UI Xib加载后处理
-extension EquipmentHomeItemView {
+extension OreDetailHeaderView {
 
     /// awakeNib时的处理
     fileprivate func initialInAwakeNib() -> Void {
@@ -304,12 +249,11 @@ extension EquipmentHomeItemView {
 }
 
 // MARK: - Data Function
-extension EquipmentHomeItemView {
+extension OreDetailHeaderView {
 
     ///
     fileprivate func setupAsDemo() -> Void {
         self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
-        self.initiaBottomView(self.bottomView, [self.equimentDetailBtn, self.oreDetailBtn])
         self.titleLabel.text = "第20201019期"
         self.specView.valueLabel.text = "1个月"
         self.miningNumView.valueLabel.text = "324.12345678"
@@ -333,10 +277,8 @@ extension EquipmentHomeItemView {
         }
 //        if model.zone == .ipfs {
             self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
-            self.initiaBottomView(self.bottomView, [self.equimentDetailBtn, self.oreDetailBtn])
 //        } else {
 //            self.initialCenterView(self.centerView, [self.incomeNumView, self.yesterdayNumView, self.huibenNumView])
-//            self.initiaBottomView(self.bottomView, [self.oreDetailBtn])
 //        }
         // 子控件数据加载
         self.titleLabel.text = "第\(model.fil_level)期"
@@ -359,31 +301,23 @@ extension EquipmentHomeItemView {
 }
 
 // MARK: - Event Function
-extension EquipmentHomeItemView {
+extension OreDetailHeaderView {
 
-    //
-    @objc fileprivate func equipmentDetailBtnClick(_ btn: UIButton) -> Void {
-        self.delegate?.itemView(self, didClickEquipmentDetail: btn)
-    }
-    @objc fileprivate func oreDetailBtnClick(_ btn: UIButton) -> Void {
-        self.delegate?.itemView(self, didClickOreDetail: btn)
-    }
 }
 
 // MARK: - Notification Function
-extension EquipmentHomeItemView {
+extension OreDetailHeaderView {
     
 }
 
 // MARK: - Extension Function
-extension EquipmentHomeItemView {
+extension OreDetailHeaderView {
     
 }
 
 // MARK: - Delegate Function
 
 // MARK: - <XXXDelegate>
-extension EquipmentHomeItemView {
+extension OreDetailHeaderView {
     
 }
-

@@ -430,6 +430,11 @@
 		53DF26BB2581FC9C00165247 /* EFCountAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF253B2581FC9700165247 /* EFCountAdapter.swift */; };
 		53DF26BC2581FC9C00165247 /* EFCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF253C2581FC9700165247 /* EFCount.swift */; };
 		53DF26BD2581FC9C00165247 /* EFTimingMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF253D2581FC9700165247 /* EFTimingMethod.swift */; };
+		9536A73225F8BAB300280E5C /* OreDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A72B25F8BAB300280E5C /* OreDetailController.swift */; };
+		9536A73325F8BAB300280E5C /* OreDetailPlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A72D25F8BAB300280E5C /* OreDetailPlaceModel.swift */; };
+		9536A73425F8BAB300280E5C /* OreDetailPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A72F25F8BAB300280E5C /* OreDetailPlaceView.swift */; };
+		9536A73525F8BAB300280E5C /* OreDetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A73025F8BAB300280E5C /* OreDetailItemView.swift */; };
+		9536A73625F8BAB300280E5C /* OreDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A73125F8BAB300280E5C /* OreDetailHeaderView.swift */; };
 		C9D54A936C70BE6D1996E6A8 /* Pods_AntClusterBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -902,6 +907,11 @@
 		588CD34ABF9B40BEA4DB4824 /* Pods_AntClusterB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AntClusterB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AntClusterBTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F9ADBDE1A95C1FDD464985 /* Pods-AntClusterB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterB.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterB/Pods-AntClusterB.release.xcconfig"; sourceTree = "<group>"; };
+		9536A72B25F8BAB300280E5C /* OreDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OreDetailController.swift; sourceTree = "<group>"; };
+		9536A72D25F8BAB300280E5C /* OreDetailPlaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OreDetailPlaceModel.swift; sourceTree = "<group>"; };
+		9536A72F25F8BAB300280E5C /* OreDetailPlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OreDetailPlaceView.swift; sourceTree = "<group>"; };
+		9536A73025F8BAB300280E5C /* OreDetailItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OreDetailItemView.swift; sourceTree = "<group>"; };
+		9536A73125F8BAB300280E5C /* OreDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OreDetailHeaderView.swift; sourceTree = "<group>"; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3040,6 +3050,7 @@
 		53DF25162581FC9600165247 /* Equipment */ = {
 			isa = PBXGroup;
 			children = (
+				9536A72925F8BAB300280E5C /* OreDetail */,
 				53AA78EF25F8AF460081D04A /* Mall */,
 				53AA78D525F8AD640081D04A /* LockDetail */,
 				53AA78BE25F8AC2D0081D04A /* Detail */,
@@ -3145,6 +3156,42 @@
 				5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9536A72925F8BAB300280E5C /* OreDetail */ = {
+			isa = PBXGroup;
+			children = (
+				9536A72A25F8BAB300280E5C /* Controller */,
+				9536A72C25F8BAB300280E5C /* Model */,
+				9536A72E25F8BAB300280E5C /* View */,
+			);
+			path = OreDetail;
+			sourceTree = "<group>";
+		};
+		9536A72A25F8BAB300280E5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9536A72B25F8BAB300280E5C /* OreDetailController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		9536A72C25F8BAB300280E5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9536A72D25F8BAB300280E5C /* OreDetailPlaceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9536A72E25F8BAB300280E5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9536A72F25F8BAB300280E5C /* OreDetailPlaceView.swift */,
+				9536A73025F8BAB300280E5C /* OreDetailItemView.swift */,
+				9536A73125F8BAB300280E5C /* OreDetailHeaderView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		F04D23F0F385BDC908419D96 /* Pods */ = {
@@ -3518,6 +3565,7 @@
 				53DF264E2581FC9A00165247 /* CurrencyType.swift in Sources */,
 				53DF25722581FC9800165247 /* AdvertNetworkManager.swift in Sources */,
 				53DF256E2581FC9800165247 /* PasswordNetworkManager.swift in Sources */,
+				9536A73525F8BAB300280E5C /* OreDetailItemView.swift in Sources */,
 				53DF25EA2581FC9900165247 /* UserExtraModel.swift in Sources */,
 				53DF25BE2581FC9800165247 /* MomentGuideController.swift in Sources */,
 				53DF26592581FC9A00165247 /* WalletHomeController.swift in Sources */,
@@ -3538,6 +3586,7 @@
 				53DF26392581FC9A00165247 /* PageDefaultLoadingView.swift in Sources */,
 				53DF25F72581FC9900165247 /* AdvertBannerItemView.swift in Sources */,
 				53DF25962581FC9800165247 /* PayUtil.swift in Sources */,
+				9536A73325F8BAB300280E5C /* OreDetailPlaceModel.swift in Sources */,
 				53DF26092581FC9900165247 /* DoubleIconControl.swift in Sources */,
 				53DF25912581FC9800165247 /* TCWebCodesResultModel.swift in Sources */,
 				53DF26282581FC9A00165247 /* BasePlaceHolder.swift in Sources */,
@@ -3599,6 +3648,7 @@
 				53DF25EE2581FC9900165247 /* LaunchAdvertView.swift in Sources */,
 				53DF266A2581FC9B00165247 /* WithdrawAddressPlaceView.swift in Sources */,
 				53DF261E2581FC9A00165247 /* CommonDoneBtn.swift in Sources */,
+				9536A73225F8BAB300280E5C /* OreDetailController.swift in Sources */,
 				53DF26032581FC9900165247 /* IndicatorWindowTop.swift in Sources */,
 				53DF26902581FC9B00165247 /* AuthViewController.swift in Sources */,
 				53DF25B32581FC9800165247 /* ShieldConfig.swift in Sources */,
@@ -3696,6 +3746,7 @@
 				53DF25FA2581FC9900165247 /* SearchHistoryModel.swift in Sources */,
 				53DF26042581FC9900165247 /* AppLoadingView.swift in Sources */,
 				53DF25C72581FC9900165247 /* TestDismissInteractiveController.swift in Sources */,
+				9536A73625F8BAB300280E5C /* OreDetailHeaderView.swift in Sources */,
 				53DF25442581FC9700165247 /* LevelObject.swift in Sources */,
 				53DF26212581FC9A00165247 /* GradientLayerButton.swift in Sources */,
 				53DF25792581FC9800165247 /* SystemNetworkManager.swift in Sources */,
@@ -3706,6 +3757,7 @@
 				53DF25422581FC9700165247 /* UserTagObject.swift in Sources */,
 				53DF26882581FC9B00165247 /* LoginRegisterSwitchView.swift in Sources */,
 				53DF25D02581FC9900165247 /* TestPresentController.swift in Sources */,
+				9536A73425F8BAB300280E5C /* OreDetailPlaceView.swift in Sources */,
 				53DF25FC2581FC9900165247 /* SearchHistorySectionHeader.swift in Sources */,
 				53DF26602581FC9B00165247 /* WalletWithdrawResultController.swift in Sources */,
 				53DF25572581FC9700165247 /* String+Extension.swift in Sources */,
