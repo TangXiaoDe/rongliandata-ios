@@ -27,7 +27,7 @@ class LockDetailController: BaseViewController
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     
-    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height
+    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
     fileprivate let headerHeight: CGFloat = LockDetailHeaderView.viewHeight
     fileprivate let headerViewTopMargin: CGFloat = 0
     fileprivate let itemVerMargin: CGFloat = 0
@@ -82,15 +82,15 @@ extension LockDetailController {
         // 0.topBgView
         self.view.addSubview(self.topBgView)
         self.topBgView.set(cornerRadius: 0)
-        self.topBgView.image = UIImage.init(named: "IMG_mine_sb_top_bg")
+        self.topBgView.image = UIImage.init(named: "IMG_sb_top_bg")
         self.topBgView.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(self.topBgHeight)
         }
         // 1.nav
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "锁仓\(self.currency.rawValue.uppercased())线性收益", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.white, alignment: .center)
-        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .normal)
+        self.navBar.titleLabel.set(text: "锁仓\(self.currency.rawValue.uppercased())线性收益", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()

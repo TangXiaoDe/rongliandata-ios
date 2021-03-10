@@ -127,27 +127,23 @@ extension LockDetailItemView {
         for (index, itemView) in itemViews.enumerated() {
             centerView.addSubview(itemView)
             itemView.snp.makeConstraints { (make) in
-                make.width.equalToSuperview().multipliedBy(1.0 / 3.0)
                 if 0 == index {
-                    make.leading.equalToSuperview()
+                    make.leading.equalToSuperview().offset(12)
+                    make.width.equalTo(kScreenWidth * 0.5 - 12 - 20)
                 } else {
                     make.leading.equalTo(leftView.snp.trailing)
-                }
-                if itemViews.count - 1 == index {
-                    make.trailing.equalToSuperview()
+                    make.width.equalTo((kScreenWidth * 0.5 + 20.0 - 12.0) * 0.5)
                 }
             }
             itemView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999), alignment: .center)
             itemView.titleLabel.snp.remakeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.leading.greaterThanOrEqualToSuperview()
+                make.leading.equalToSuperview()
                 make.trailing.lessThanOrEqualToSuperview()
                 make.centerY.equalTo(centerView.snp.bottom).offset(-titleCenterYBottomMargin)
             }
             itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText, alignment: .center)
             itemView.valueLabel.snp.remakeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.leading.greaterThanOrEqualToSuperview()
+                make.leading.equalToSuperview()
                 make.trailing.lessThanOrEqualToSuperview()
                 make.centerY.equalTo(centerView.snp.top).offset(valueCenterYTopMargin)
             }

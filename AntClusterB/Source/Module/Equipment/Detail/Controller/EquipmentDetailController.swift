@@ -101,10 +101,10 @@ extension EquipmentDetailController {
         }
         // 2. navBar
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "设备详情", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.white, alignment: .center)
+        self.navBar.titleLabel.set(text: "设备详情", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
         self.navBar.leftItem.isHidden = false
-        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .normal)
-        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .highlighted)
+        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
+        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .highlighted)
         self.navBar.rightItem.isHidden = true
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in

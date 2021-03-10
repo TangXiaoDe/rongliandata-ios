@@ -104,7 +104,7 @@ extension LockDetailHeaderView {
 //        }
         // 3. valueLabel
         mainView.addSubview(self.valueLabel)
-        self.valueLabel.set(text: "0", font: UIFont.pingFangSCFont(size: 28, weight: .medium), textColor: UIColor.init(hex: 0xE9C483), alignment: .center)
+        self.valueLabel.set(text: "0", font: UIFont.pingFangSCFont(size: 28, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
         self.valueLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(mainView.snp.top).offset(self.valueCenterYTopMargin)
@@ -112,7 +112,7 @@ extension LockDetailHeaderView {
         }
         // 2. titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "累计收益(FIL)", font: UIFont.pingFangSCFont(size: 14), textColor: UIColor.init(hex: 0xE9C483).withAlphaComponent(0.5), alignment: .center)
+        self.titleLabel.set(text: "累计收益(FIL)", font: UIFont.pingFangSCFont(size: 14), textColor: UIColor.init(hex: 0x333333).withAlphaComponent(0.8), alignment: .center)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(self.valueLabel.snp.centerY).offset(self.titleCenterYTopMargin)
@@ -124,13 +124,13 @@ extension LockDetailHeaderView {
             make.height.equalTo(self.bottomViewHeight)
             make.bottom.equalToSuperview()
         }
-        self.bottomView.backgroundColor = UIColor.init(hex: 0xeaebec)
+        self.bottomView.backgroundColor = UIColor.init(R: 255, G: 250, B: 232)
         self.bottomView.setupCorners([UIRectCorner.topLeft, UIRectCorner.topRight], selfSize: CGSize.init(width: kScreenWidth, height: self.bottomViewHeight), cornerRadius: 16)
     }
     /// bottom
     fileprivate func initialBottomView(_ bottomView: UIView, _ itemViews: [TitleValueView]) -> Void {
         bottomView.removeAllSubviews()
-        let titleCenterYBottomMargin: CGFloat = 26 // super.bottom
+        let titleCenterYBottomMargin: CGFloat = 30 // super.bottom
         let valueCenterYTopMargin: CGFloat = 20    // super.top
         var leftView: UIView = bottomView
         for (index, itemView) in itemViews.enumerated() {
