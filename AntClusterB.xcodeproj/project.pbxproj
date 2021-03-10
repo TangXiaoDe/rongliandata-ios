@@ -53,6 +53,7 @@
 		53AA78F225F8AF5D0081D04A /* ProductDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA78F125F8AF5D0081D04A /* ProductDetailModel.swift */; };
 		53AA78F725F8AFAB0081D04A /* PayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA78F625F8AFAB0081D04A /* PayType.swift */; };
 		53AA78FC25F8B05E0081D04A /* MiningMachineOrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA78FB25F8B05E0081D04A /* MiningMachineOrderStatus.swift */; };
+		53AA790125F8B6170081D04A /* EquipDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA790025F8B6170081D04A /* EquipDetailHeaderView.swift */; };
 		53DF253E2581FC9700165247 /* AdvertSpaceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF22F92581FC9200165247 /* AdvertSpaceObject.swift */; };
 		53DF253F2581FC9700165247 /* AdvertObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF22FA2581FC9200165247 /* AdvertObject.swift */; };
 		53DF25402581FC9700165247 /* AdvertDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF22FC2581FC9200165247 /* AdvertDBManager.swift */; };
@@ -514,6 +515,7 @@
 		53AA78F125F8AF5D0081D04A /* ProductDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailModel.swift; sourceTree = "<group>"; };
 		53AA78F625F8AFAB0081D04A /* PayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayType.swift; sourceTree = "<group>"; };
 		53AA78FB25F8B05E0081D04A /* MiningMachineOrderStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningMachineOrderStatus.swift; sourceTree = "<group>"; };
+		53AA790025F8B6170081D04A /* EquipDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipDetailHeaderView.swift; sourceTree = "<group>"; };
 		53DF22F92581FC9200165247 /* AdvertSpaceObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertSpaceObject.swift; sourceTree = "<group>"; };
 		53DF22FA2581FC9200165247 /* AdvertObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertObject.swift; sourceTree = "<group>"; };
 		53DF22FC2581FC9200165247 /* AdvertDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertDBManager.swift; sourceTree = "<group>"; };
@@ -1147,6 +1149,7 @@
 				53AA78C725F8AC2D0081D04A /* EquipmentDetailView.swift */,
 				53AA78C825F8AC2D0081D04A /* EDUniversalSubjectView.swift */,
 				53AA78C925F8AC2D0081D04A /* EDBackAssetDetailItemView.swift */,
+				53AA790025F8B6170081D04A /* EquipDetailHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3535,6 +3538,7 @@
 				53DF26962581FC9B00165247 /* LoginPwdUpdateController.swift in Sources */,
 				53DF26362581FC9A00165247 /* PageDefaultErrorView.swift in Sources */,
 				53DF25D92581FC9900165247 /* RedDotBubbleView.swift in Sources */,
+				53AA790125F8B6170081D04A /* EquipDetailHeaderView.swift in Sources */,
 				53DF26392581FC9A00165247 /* PageDefaultLoadingView.swift in Sources */,
 				53DF25F72581FC9900165247 /* AdvertBannerItemView.swift in Sources */,
 				53DF25962581FC9800165247 /* PayUtil.swift in Sources */,

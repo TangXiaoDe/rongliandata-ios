@@ -201,7 +201,8 @@ extension EquipmentHomeController {
         guard tapGR.state == .recognized, let tapView = tapGR.view as? EquipmentHomeItemView, let model = tapView.model else {
             return
         }
-        self.enterDetailPage(with: model)
+        //self.enterMiningDetailPage(with: model)
+        self.enterEquipmentDetailPage(with: model)
     }
     
 }
@@ -259,8 +260,14 @@ extension EquipmentHomeController {
 
 // MARK: - Enter Page
 extension EquipmentHomeController {
-    ///
-    fileprivate func enterDetailPage(with model: EquipmentListModel) -> Void {
+    
+    /// 设备详情页
+    fileprivate func enterEquipmentDetailPage(with model: EquipmentListModel) -> Void {
+        let detailVC = EquipmentDetailController.init(model: model)
+        self.enterPageVC(detailVC)
+    }
+    /// 挖矿明细页
+    fileprivate func enterMiningDetailPage(with model: EquipmentListModel) -> Void {
         let detailVC = MiningDetailController.init(model: model)
         self.enterPageVC(detailVC)
     }
