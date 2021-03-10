@@ -25,6 +25,6 @@ class EquipmentRequestInfo {
     static let linear_release = RequestInfo<LockDetailListModel>.init(method: .get, path: "equipments/linear_release/{order_id}", replaceds: ["{order_id}"])
     
     /// 资产详情
-    static let assetDetail = RequestInfo<AssetListModel>.init(method: .get, path: "equipments/miner_log/{order_id}", replaceds: ["{order_id}"])
+    static let assetDetail = RequestInfo<MiningLogModel>.init(method: .get, path: "eqs/logs/{id}", replaceds: ["{id}"])
     
 }

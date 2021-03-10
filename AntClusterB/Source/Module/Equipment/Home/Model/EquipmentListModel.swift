@@ -140,7 +140,7 @@ extension EquipmentListModel {
         case .deploying:
             color = UIColor.init(hex: 0x333333)
         case .mining:
-            color = UIColor.init(hex: 0x2381FB)
+            color = UIColor.init(hex: 0x00B8FF)
         case .closed:
             color = UIColor.init(hex: 0x999999)
         }

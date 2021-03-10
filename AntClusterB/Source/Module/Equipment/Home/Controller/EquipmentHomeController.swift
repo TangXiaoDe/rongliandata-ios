@@ -29,7 +29,7 @@ class EquipmentHomeController: BaseViewController
     
     fileprivate let headerHeight: CGFloat = EquipmentHomeHeaderView.viewHeight
     fileprivate let lrMargin: CGFloat = 12
-    fileprivate let itemHeight: CGFloat = 125
+    fileprivate let itemHeight: CGFloat = EquipmentHomeItemView.viewHeight
     fileprivate let itemVerMargin: CGFloat = 12
     fileprivate let itemTopMargin: CGFloat = EquipmentHomeHeaderView.valueBottomMargin     // -header.bottom
     fileprivate let itemViewTagBase: Int = 250
@@ -140,6 +140,7 @@ extension EquipmentHomeController {
             let itemView = EquipmentHomeItemView.init()
             self.itemContainer.addSubview(itemView)
             itemView.model = model
+            itemView.delegate = self
             itemView.set(cornerRadius: 10)
             itemView.tag = self.itemViewTagBase + index
             itemView.snp.makeConstraints { (make) in
@@ -201,6 +202,7 @@ extension EquipmentHomeController {
         guard tapGR.state == .recognized, let tapView = tapGR.view as? EquipmentHomeItemView, let model = tapView.model else {
             return
         }
+//        self.enterDetailPage(with: model)
         //self.enterMiningDetailPage(with: model)
         self.enterEquipmentDetailPage(with: model)
     }
@@ -260,18 +262,21 @@ extension EquipmentHomeController {
 
 // MARK: - Enter Page
 extension EquipmentHomeController {
-    
+    /// 老版本挖坑明细
+//    fileprivate func enterOreDetailPage(with model: EquipmentListModel) -> Void {
+//        let detailVC = MiningDetailController.init(model: model)
+//        self.enterPageVC(detailVC)
+//    }
+    /// 挖坑明细
+    fileprivate func enterOreDetailPage(with model: EquipmentListModel) -> Void {
+        let oreDetailVC = OreDetailController.init(listModel: model)
+        self.enterPageVC(oreDetailVC)
+    }
     /// 设备详情页
     fileprivate func enterEquipmentDetailPage(with model: EquipmentListModel) -> Void {
         let detailVC = EquipmentDetailController.init(model: model)
         self.enterPageVC(detailVC)
     }
-    /// 挖矿明细页
-    fileprivate func enterMiningDetailPage(with model: EquipmentListModel) -> Void {
-        let detailVC = MiningDetailController.init(model: model)
-        self.enterPageVC(detailVC)
-    }
-
 }
 
 // MARK: - Notification Function
@@ -299,4 +304,20 @@ extension EquipmentHomeController: UIScrollViewDelegate {
         }
     }
 
+}
+extension EquipmentHomeController: EquipmentHomeItemViewProtocol {
+    /// 设备
+    func itemView(_ view: EquipmentHomeItemView, didClickEquipmentDetail btn: UIButton) {
+        guard let model = view.model else {
+            return
+        }
+        self.enterEquipmentDetailPage(with: model)
+    }
+    /// 挖坑
+    func itemView(_ view: EquipmentHomeItemView, didClickOreDetail btn: UIButton) {
+        guard let model = view.model else {
+            return
+        }
+        self.enterOreDetailPage(with: model)
+    }
 }
