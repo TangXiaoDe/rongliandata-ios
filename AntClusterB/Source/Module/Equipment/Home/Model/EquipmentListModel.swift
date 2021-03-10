@@ -59,6 +59,15 @@ class EquipmentListModel: Mappable {
     var createdDate: Date = Date()
     ///
     var updatedDate: Date = Date()
+    
+    ///
+    var zoneValue: String = ""
+    var zone: ProductZone {
+        if let type = ProductZone(rawValue: self.zoneValue) {
+            return type
+        }
+        return ProductZone.ipfs
+    }
 
 
     init(no: String) {
@@ -81,6 +90,7 @@ class EquipmentListModel: Mappable {
         createdDate <- (map["created_at"], DateStringTransform.current)
         updatedDate <- (map["updated_at"], DateStringTransform.current)
         status_value <- map["status"]
+        zoneValue <- map["zone"]
     }
     
     /// 状态

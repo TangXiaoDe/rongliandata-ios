@@ -196,35 +196,36 @@ extension EquipmentDetailModel {
     
     /// 回本比例
     var recory_progress: Double {
-        guard let increase = AppConfig.share.currencyPrice, let product = self.product else {
-            return 0
-        }
-        var currency_price: Double = 0
-        switch product.zone {
-        case .btc:
-            currency_price = increase.btc?.price ?? 0
-        case .eth:
-            currency_price = increase.eth?.price ?? 0
-        case .ipfs:
-            currency_price = increase.ipfs?.price ?? 0
-        }
-        //
-        var progress: Double = 0
-        if self.recovery >= 1 {
-            progress = 1
-        } else if self.total_price <= 0 {
-            progress = 0
-        } else {
-            let outpuNum = NSDecimalNumber.init(value: self.total_output)
-            let currencyPriceNum = NSDecimalNumber.init(value: currency_price)
-            let totalPriceNum = NSDecimalNumber.init(value: self.total_price)
-            let resultNum = outpuNum.multiplying(by: currencyPriceNum).dividing(by: totalPriceNum)
-            //progress = self.total_output * currency_price / self.total_price    // total_price 为现金
-            progress = resultNum.doubleValue
-        }
-        progress = max(0, progress)
-        progress = min(1, progress)
-        return progress
+        return 0
+//        guard let increase = AppConfig.share.currencyPrice, let product = self.product else {
+//            return 0
+//        }
+//        var currency_price: Double = 0
+//        switch product.zone {
+//        case .btc:
+//            currency_price = increase.btc?.price ?? 0
+//        case .eth:
+//            currency_price = increase.eth?.price ?? 0
+//        case .ipfs:
+//            currency_price = increase.ipfs?.price ?? 0
+//        }
+//        //
+//        var progress: Double = 0
+//        if self.recovery >= 1 {
+//            progress = 1
+//        } else if self.total_price <= 0 {
+//            progress = 0
+//        } else {
+//            let outpuNum = NSDecimalNumber.init(value: self.total_output)
+//            let currencyPriceNum = NSDecimalNumber.init(value: currency_price)
+//            let totalPriceNum = NSDecimalNumber.init(value: self.total_price)
+//            let resultNum = outpuNum.multiplying(by: currencyPriceNum).dividing(by: totalPriceNum)
+//            //progress = self.total_output * currency_price / self.total_price    // total_price 为现金
+//            progress = resultNum.doubleValue
+//        }
+//        progress = max(0, progress)
+//        progress = min(1, progress)
+//        return progress
     }
     
 }

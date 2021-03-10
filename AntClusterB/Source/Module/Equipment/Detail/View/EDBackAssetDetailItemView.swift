@@ -25,7 +25,7 @@ class EDBackAssetDetailItemView: BaseView {
 //    }
     var isLast: Bool = false {
         didSet {
-            self.co.bottomLine.isHidden = isLast
+            self.bottomLine.isHidden = isLast
         }
     }
     
