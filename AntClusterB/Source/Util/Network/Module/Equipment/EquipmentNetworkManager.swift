@@ -208,9 +208,20 @@ extension EquipmentNetworkManager {
             returnStatus = status
             returnMsg = msg
             returnModels = models
+            
+            // 临时测试代码
+            returnModels = []
+            for _ in 0...10 {
+                let item = EDAssetReturnListModel.init()
+                item.gas = 0.123
+                item.pledge = 1.23123
+                item.interest = 1.201
+                returnModels?.append(item)
+            }
+            
             group.leave()
         }
-
+        
         group.notify(queue: DispatchQueue.main) {
             let status: Bool = detailStatus && returnStatus
             var msg: String? = nil

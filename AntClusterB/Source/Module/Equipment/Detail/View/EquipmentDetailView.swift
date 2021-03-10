@@ -30,9 +30,7 @@ class EquipmentDetailView: UIView
     }
     var returns: [EDAssetReturnListModel]? {
         didSet {
-            if let returns = returns {
-//                self.backAssetDetailView.model = nil
-            }
+            self.backAssetDetailView.models = returns
         }
     }
 
@@ -151,7 +149,7 @@ extension EquipmentDetailView {
         //
         self.assetSurveyView.model = nil
         self.assetSurveyView.delegate = self
-        self.backAssetDetailView.model = nil
+        self.backAssetDetailView.models = nil
     }
     
 }
@@ -175,13 +173,20 @@ extension EquipmentDetailView {
     /// 数据加载
     fileprivate func setupWithModel(_ model: EquipmentDetailModel?) -> Void {
         //self.setupAsDemo()
-        guard let model = model else {
+        guard let model = model, let asset = model.assets else {
             return
         }
         // 子控件数据加载
+        self.packageDetailView.zhiyaItemView.valueLabel.text = asset.pledge.decimalValidDigitsProcess(digits: 8)
+        self.packageDetailView.xiaohaoItemView.valueLabel.text = asset.gas.decimalValidDigitsProcess(digits: 8)
+        self.loanCapitalView.zhiyaItemView.valueLabel.text = asset.pledge.decimalValidDigitsProcess(digits: 8)
+        self.loanCapitalView.xiaohaoItemView.valueLabel.text = asset.gas.decimalValidDigitsProcess(digits: 8)
+        self.backedAssetView.zhiyaItemView.valueLabel.text = asset.return_pledge.decimalValidDigitsProcess(digits: 8)
+        self.backedAssetView.xiaohaoItemView.valueLabel.text = asset.return_gas.decimalValidDigitsProcess(digits: 8)
+        self.unbackAssetView.zhiyaItemView.valueLabel.text = asset.wait_pledge.decimalValidDigitsProcess(digits: 8)
+        self.unbackAssetView.xiaohaoItemView.valueLabel.text = asset.wait_gas.decimalValidDigitsProcess(digits: 8)
         
-        
-        
+        self.assetSurveyView.model = asset
     }
     
 }

@@ -184,7 +184,7 @@ extension EDUniversalSubjectView {
                 make.trailing.lessThanOrEqualToSuperview()
                 make.centerY.equalTo(itemView.snp.top).offset(itemTitleCenterYTopMargin)
             }
-            itemView.valueLabel.set(text: "0", font: UIFont.pingFangSCFont(size: 20, weight: .medium), textColor: AppColor.mainText)
+            itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 20, weight: .medium), textColor: AppColor.mainText)
             itemView.valueLabel.snp.remakeConstraints { (make) in
                 make.leading.equalToSuperview().offset(itemInLrMargin)
                 make.trailing.lessThanOrEqualToSuperview()

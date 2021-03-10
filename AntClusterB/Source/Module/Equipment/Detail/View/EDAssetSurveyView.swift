@@ -23,7 +23,7 @@ class EDAssetSurveyView: UIView {
     
     // MARK: - Internal Property
     
-    var model: String? {
+    var model: EDAssetModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -223,7 +223,7 @@ extension EDAssetSurveyView {
                 make.trailing.lessThanOrEqualToSuperview()
                 make.centerY.equalTo(itemView.snp.top).offset(itemTitleCenterYTopMargin)
             }
-            itemView.valueLabel.set(text: "0", font: UIFont.pingFangSCFont(size: 20, weight: .medium), textColor: AppColor.mainText)
+            itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 20, weight: .medium), textColor: AppColor.mainText)
             itemView.valueLabel.snp.remakeConstraints { (make) in
                 make.leading.equalToSuperview().offset(itemInLrMargin)
                 make.trailing.lessThanOrEqualToSuperview()
@@ -277,12 +277,16 @@ extension EDAssetSurveyView {
    
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-//        guard let model = model else {
-//            return
-//        }
-//        // 子控件数据加载
+    fileprivate func setupWithModel(_ model: EDAssetModel?) -> Void {
+        //self.setupAsDemo()
+        guard let model = model else {
+            return
+        }
+        // 子控件数据加载
+        self.canUseItemView.valueLabel.text = model.available.decimalValidDigitsProcess(digits: 8)
+        self.diyaItemView.valueLabel.text = model.pawn.decimalValidDigitsProcess(digits: 8)
+        self.lockItemView.valueLabel.text = model.lock.decimalValidDigitsProcess(digits: 8)
+        self.frozenItemView.valueLabel.text = model.frozen.decimalValidDigitsProcess(digits: 8)
     }
 
 }

@@ -14,9 +14,9 @@ class EDBackAssetDetailView: UIView {
     
     // MARK: - Internal Property
 
-    var model: String? {
+    var models: [EDAssetReturnListModel]? {
         didSet {
-            self.setupWithModel(model)
+            self.setupWithModels(models)
         }
     }
     
@@ -205,7 +205,7 @@ extension EDBackAssetDetailView {
     }
 
     ///
-    fileprivate func setupformContainer(with models: [String]) -> Void {
+    fileprivate func setupformContainer(with models: [EDAssetReturnListModel]) -> Void {
         self.formContainer.removeAllSubviews()
         //
         var topView: UIView = self.formContainer
@@ -291,7 +291,7 @@ extension EDBackAssetDetailView {
         //self.titleView.iconView.backgroundColor = UIColor.red
 //        self.titleView.titleLabel.text = "我是标题"
         
-        self.setupformContainer(with: ["", "", "", ""])
+        self.setupformContainer(with: [])
         
 //
 //        self.statusView.isHidden = false
@@ -344,12 +344,13 @@ extension EDBackAssetDetailView {
 //        self.zhiyaItemView.titleLabel.text = zhiyaTitle
 //        self.xiaohaoItemView.titleLabel.text = xiaohaoTitle
     }
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-//        guard let model = model else {
-//            return
-//        }
-//        // 子控件数据加载
+    fileprivate func setupWithModels(_ models: [EDAssetReturnListModel]?) -> Void {
+        //self.setupAsDemo()
+        guard let models = models else {
+            return
+        }
+        // 子控件数据加载
+        self.setupformContainer(with: models)
     }
 
 }
