@@ -1169,10 +1169,10 @@
 			isa = PBXGroup;
 			children = (
 				53AA78C525F8AC2D0081D04A /* EDBackAssetDetailView.swift */,
+				53AA78C925F8AC2D0081D04A /* EDBackAssetDetailItemView.swift */,
 				53AA78C625F8AC2D0081D04A /* EDAssetSurveyView.swift */,
 				53AA78C725F8AC2D0081D04A /* EquipmentDetailView.swift */,
 				53AA78C825F8AC2D0081D04A /* EDUniversalSubjectView.swift */,
-				53AA78C925F8AC2D0081D04A /* EDBackAssetDetailItemView.swift */,
 				53AA790025F8B6170081D04A /* EquipDetailHeaderView.swift */,
 			);
 			path = View;

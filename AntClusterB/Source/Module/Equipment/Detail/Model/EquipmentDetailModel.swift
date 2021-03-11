@@ -94,6 +94,26 @@ class EquipmentDetailModel: Mappable {
     var wait_gas: Double = 0
     ///
     var wait_pledge: Double = 0
+    
+    ///
+    var eq_no: String = ""
+    ///
+    var t_num: Int  = 0
+    ///
+    var total_mining: Double = 0
+    ///
+    var mortgage_fee: Double = 0
+    ///
+    var fil_level: String = ""
+    ///
+    var spec_level: String = ""
+    ///
+    var seal_num: Double = 0
+    ///
+    var dividend_ratio: Double = 0
+    /// 利息
+    var interest: Double = 0
+    
 
     
     /// 请求时间
@@ -150,6 +170,16 @@ class EquipmentDetailModel: Mappable {
         wait_gas <- (map["wait_gas"], DoubleStringTransform.default)
         wait_pledge <- (map["wait_pledge"], DoubleStringTransform.default)
 
+        eq_no <- map["eq_no"]
+        t_num <- map["t_num"]
+        fil_level <- map["fil_level"]
+        spec_level <- map["spec_level"]
+        total_mining <- (map["total_mining"], DoubleStringTransform.default)
+        mortgage_fee <- (map["mortgage_fee"], DoubleStringTransform.default)
+        seal_num <- (map["seal_num"], DoubleStringTransform.default)
+        dividend_ratio <- (map["dividend_ratio"], DoubleStringTransform.default)
+        interest <- (map["interest"], DoubleStringTransform.default)
+        
     }
     
 }
