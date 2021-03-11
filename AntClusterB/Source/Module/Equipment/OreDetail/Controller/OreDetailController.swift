@@ -43,9 +43,9 @@ class OreDetailController: BaseViewController
         //super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return UIStatusBarStyle.lightContent
+//    }
 }
 
 // MARK: - Internal Function
@@ -88,8 +88,8 @@ extension OreDetailController {
         }
         // 1.nav
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "挖矿明细-\(self.listModel.zone.title)", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.white, alignment: .center)
-        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .normal)
+        self.navBar.titleLabel.set(text: "挖矿明细-\(self.listModel.zone.title)", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText, alignment: .center)
+        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
@@ -214,7 +214,7 @@ extension OreDetailController {
 
     /// 下拉刷新请求
     fileprivate func refreshRequest(complete: ((_ status: Bool, _ msg: String?, _ models: [AssetListModel]?) -> Void)? = nil) -> Void {
-        EquipmentNetworkManager.getEquipAssetDetail(order_id: self.listModel.id, action: .all, type: .miner_release, offset: 0, limit: self.limit) { [weak self](status, msg, models) in
+        EquipmentNetworkManager.getEquipAssetDetail(order_id: self.listModel.id, action: .all, type: .fil_issue, offset: 0, limit: self.limit) { [weak self](status, msg, models) in
             guard let `self` = self else {
                 return
             }
@@ -233,7 +233,7 @@ extension OreDetailController {
     
     /// 上拉加载更多请求
     fileprivate func loadMoreRequest() -> Void {
-        EquipmentNetworkManager.getEquipAssetDetail(order_id: self.listModel.id, action: .all, type: .miner_release, offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
+        EquipmentNetworkManager.getEquipAssetDetail(order_id: self.listModel.id, action: .all, type: .fil_issue, offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
             guard let `self` = self else {
                 return
             }

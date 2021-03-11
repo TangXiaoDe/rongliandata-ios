@@ -56,9 +56,9 @@ class EquipmentDetailController: BaseViewController
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return UIStatusBarStyle.lightContent
+//    }
 
 }
 
