@@ -14,7 +14,7 @@ class LockDetailController: BaseViewController
 {
     // MARK: - Internal Property
     
-    fileprivate let id: Int
+    fileprivate let id: Int?
     
     // MARK: - Private Property
     fileprivate let topBgView: UIImageView = UIImageView()
@@ -37,7 +37,7 @@ class LockDetailController: BaseViewController
     fileprivate let itemViewTagBase: Int = 250
 
     // MARK: - Initialize Function
-    init(id: Int) {
+    init(id: Int? = nil) {
         self.id = id
         super.init(nibName: nil, bundle: nil)
     }
