@@ -12,7 +12,7 @@ class OreDetailItemView: UIView {
     
     // MARK: - Internal Property
     
-    var model: MiningLogModel? {
+    var model: AssetListModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -197,7 +197,7 @@ extension OreDetailItemView {
         self.fengzhuangNumView.valueLabel.text = "46.45"
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: MiningLogModel?) -> Void {
+    fileprivate func setupWithModel(_ model: AssetListModel?) -> Void {
 //        self.setupAsDemo()
         guard let model = model else {
             return

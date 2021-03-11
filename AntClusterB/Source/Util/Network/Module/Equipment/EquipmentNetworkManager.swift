@@ -68,7 +68,7 @@ extension EquipmentNetworkManager {
     }
     
     /// 挖矿日志/记录/明细/流水
-    class func getMiningLogs(id: Int, offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ models: [MiningLogModel]?) -> Void)) -> Void {
+    class func getMiningLogs(id: Int, offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ models: [AssetListModel]?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = EquipmentRequestInfo.miningLogs
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: ["\(id)"])
@@ -115,7 +115,7 @@ extension EquipmentNetworkManager {
     }
     /// 资产明细
     /// 锁仓 fil:lock , 可用 fil:available,抵押'fil:pawn',挖矿 miner:release
-    class func getEquipAssetDetail(order_id: Int, action: AssetActionType, type: EquipmentAssetType, offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ models: [MiningLogModel]?) -> Void)) -> Void {
+    class func getEquipAssetDetail(order_id: Int, action: AssetActionType, type: EquipmentAssetType, offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ models: [AssetListModel]?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = EquipmentRequestInfo.assetDetail
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: ["\(order_id)"])

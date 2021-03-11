@@ -15,7 +15,7 @@ class EquipmentRequestInfo {
     /// 主页数据
     static let homeData = RequestInfo<EquipmentHomeModel>.init(method: .get, path: "eqs", replaceds: [])
     /// 挖矿日志
-    static let miningLogs = RequestInfo<MiningLogModel>.init(method: .get, path: "eqs/logs/{id}", replaceds: ["{id}"])
+    static let miningLogs = RequestInfo<AssetListModel>.init(method: .get, path: "eqs/logs/{id}", replaceds: ["{id}"])
 
     /// 设备详情
     static let equipmentDetail = RequestInfo<EquipmentDetailModel>.init(method: .get, path: "equipments/{order}", replaceds: ["{order}"])
@@ -28,6 +28,6 @@ class EquipmentRequestInfo {
     
     
     /// 资产详情
-    static let assetDetail = RequestInfo<MiningLogModel>.init(method: .get, path: "equipments/miner_log/{order_id}", replaceds: ["{order_id}"])
+    static let assetDetail = RequestInfo<AssetListModel>.init(method: .get, path: "equipments/miner_log/{order_id}", replaceds: ["{order_id}"])
     
 }

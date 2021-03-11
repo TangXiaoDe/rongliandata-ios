@@ -57,9 +57,11 @@ extension WalletDetailHomeController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.hiddenNavBarShadow()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.navigationController?.showNavBarShadow(color: AppColor.navShadow)
     }
 }
 
@@ -67,7 +69,7 @@ extension WalletDetailHomeController {
 extension WalletDetailHomeController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = AppColor.pageBg
+        self.view.backgroundColor = UIColor.white
         // navigation
         self.navigationItem.title = "FIL明细"
         // 1. titleView
@@ -77,6 +79,7 @@ extension WalletDetailHomeController {
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(self.titleViewH)
         }
+        self.titleView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 0.5, margin1: 0, margin2: 0)
         // 2. scrollView
         self.view.addSubview(self.scrollView)
         self.initialScrollView(self.scrollView)

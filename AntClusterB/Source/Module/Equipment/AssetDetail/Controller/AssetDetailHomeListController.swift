@@ -20,7 +20,7 @@ class AssetDetailHomeListController: BaseTableViewController {
 
     // MARK: - Private Property
 
-    fileprivate var sourceList: [MiningLogModel] = []
+    fileprivate var sourceList: [AssetListModel] = []
 
     // MARK: - Initialize Function
     init(type: AssetListType, model: EquipmentDetailModel) {
@@ -37,7 +37,7 @@ class AssetDetailHomeListController: BaseTableViewController {
 
 // MARK: - Internal Function
 extension AssetDetailHomeListController {
-    func refreshData(complete: ((_ status: Bool, _ msg: String?, _ models: [MiningLogModel]?) -> Void)? = nil) -> Void {
+    func refreshData(complete: ((_ status: Bool, _ msg: String?, _ models: [AssetListModel]?) -> Void)? = nil) -> Void {
         self.refreshDataRequest(complete: complete)
     }
 
@@ -96,7 +96,7 @@ extension AssetDetailHomeListController {
         self.loadmoreDataRequest()
     }
 
-    fileprivate func refreshDataRequest(complete: ((_ status: Bool, _ msg: String?, _ models: [MiningLogModel]?) -> Void)? = nil) -> Void {
+    fileprivate func refreshDataRequest(complete: ((_ status: Bool, _ msg: String?, _ models: [AssetListModel]?) -> Void)? = nil) -> Void {
         EquipmentNetworkManager.getEquipAssetDetail(order_id: self.model.id, action: self.actionType, type: self.assetType, offset: 0, limit: self.limit) { [weak self](status, msg, models) in
             guard let `self` = self else {
                 return
@@ -118,7 +118,7 @@ extension AssetDetailHomeListController {
         }
     }
 
-    fileprivate func loadmoreDataRequest(complete: ((_ status: Bool, _ msg: String?, _ models: [MiningLogModel]?) -> Void)? = nil) -> Void {
+    fileprivate func loadmoreDataRequest(complete: ((_ status: Bool, _ msg: String?, _ models: [AssetListModel]?) -> Void)? = nil) -> Void {
         EquipmentNetworkManager.getEquipAssetDetail(order_id: self.model.id, action: self.actionType, type: self.assetType, offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
             guard let `self` = self else {
                 return

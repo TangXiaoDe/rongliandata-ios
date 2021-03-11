@@ -106,133 +106,71 @@ class AssetListModel: Mappable {
     /// 标题
     var title: String = ""
     /// 资产流水类型
-    var typeValue: String = ""
+    var type_value: String = ""
     /// 金额
-    var amount: String = ""
+    var amount: Double = 0
     /// 用户id
-    var userId: Int = 0
+    var user_id: Int = 0
     /// 贡献的用户
-    var targetUserId: Int = 0
-    /// 目标类型
-    var targetTypeValue: String = ""
+    var target_user_id: Int = 0
+    ///
+    var target_id: Int = 0
     /// 动作: 1-收入 2-支出
-    var actionValue: Int = 0
-    /// 扩展字段 - 社群升级数据类型
-    var extend: AssetListExtendModel? = nil
+    var action_value: Int = 0
     /// 0-待处理 1-成功 2-失败
-    var satusValue: Int = 0
+    var status_value: Int = 0
     /// 币种
-    var coinValue: String = ""
-    /// 当前用户
-    var user: SimpleUserModel?
-    /// 对方用户
-    var targetUser: SimpleUserModel?
+    var coin_value: String = ""
     /// 创建时间
     var createDate: Date = Date()
     /// 修改时间
     var updateDate: Date = Date()
-    /// FIL提币手续费
-    var filWithdrawalFee: String? = nil
-
+    
+    /// 扩展字段
+    var extend: AssetListExtendModel? = nil
+    /// 当前用户
+    var user: SimpleUserModel?
+    /// 对方用户
+    var target_user: SimpleUserModel?
+    /// 目标类型
+    var target_type_value: String = ""
 
     required init?(map: Map) {
-
+        
     }
     func mapping(map: Map) {
         id <- map["id"]
         title <- map["title"]
-        typeValue <- map["type"]
-        amount <- map["amount"]
-        userId <- map["user_id"]
-        targetUserId <- map["target_user_id"]
-        targetTypeValue <- map["target_type"]
-        actionValue <- map["action"]
-        extend <- map["extend"]
-        satusValue <- map["status"]
+        type_value <- map["type"]
+        amount <- (map["amount"], DoubleStringTransform.default)
+        user_id <- map["user_id"]
+        target_user_id <- map["target_user_id"]
+        target_id <- map["target_id"]
+        action_value <- map["action"]
+        status_value <- map["status"]
+        coin_value <- map["currency"]
         createDate <- (map["created_at"], DateStringTransform.current)
         updateDate <- (map["updated_at"], DateStringTransform.current)
-        coinValue <- map["currency"]
+        extend <- map["extend"]
+        
         user <- map["user"]
-        targetUser <- map["target_user"]
-        filWithdrawalFee <- map["extend.fee"]
-    }
-    
-    
-    var currency: CurrencyType {
-        if let type = CurrencyType(rawValue: self.coinValue) {
-            return type
-        }
-        return CurrencyType.usdt
-    }
-    var status: AssetStatus {
-        if let status = AssetStatus.init(rawValue: self.satusValue) {
-            return status
-        }
-        return AssetStatus.wait
+        target_user <- map["target_user"]
+        target_type_value <- map["target_type"]
     }
     var action: AssetAction {
-        if let action = AssetAction.init(rawValue: self.actionValue) {
+        if let action = AssetAction.init(rawValue: self.action_value) {
             return action
         }
         return AssetAction.income
     }
-    var type: TypeStatus {
-        if let action = TypeStatus.init(rawValue: self.typeValue) {
-            return action
-        }
-        return TypeStatus.ore
-    }
-
-    /// 转账title
-    var transferTitle: String {
-        var title: String = ""
-        switch self.action {
-        case .income:
-            title = "转账-来自" + (self.user?.name ?? "")
-        case .outcome:
-            title = "转账-转给" + (self.targetUser?.name ?? "")
-        }
-        return title
-    }
-    
-    /// 图标
-    var icon: UIImage? {
-        var icon: UIImage? = AppImage.PlaceHolder.image
-        switch self.type {
-        case .cnyWithdrawal:
-            icon = UIImage.init(named: "IMG_sc_icon_shouyi_zfb")
-        case .tranferExpend:
-            icon = AppImage.PlaceHolder.avatar
-        case .tranferIncome:
-            icon = AppImage.PlaceHolder.avatar
-        case .agentReward:
-            icon = UIImage.init(named: "IMG_sc_icon_shouyi_tuiguang")
-        case .saleCommission:
-            icon = UIImage.init(named: "IMG_sc_icon_shouyi_tuiguang")
-        case .goodsDeduct:
-            icon = UIImage.init(named: "IMG_sc_icon_cl_gouwu")
-        case .returnDeduct:
-            icon = UIImage.init(named: "IMG_sc_icon_cl_gouwu")
-        case .ore:
-            icon = UIImage.init(named: "IMG_asset_usdt")
-        case .filIssue:
-            icon = UIImage.init(named: "IMG_asset_fil")
-        case .filWithDrawal:
-            icon = UIImage.init(named: "IMG_asset_fil")
-        default:
-            icon = UIImage.init(named: "IMG_asset_usdt")
-        }
-        return icon
-    }
-
     /// 值标题
     var valueTitle: String {
         var title: String = ""
         switch self.action {
         case .income:
-            title = "+" + self.amount.decimalProcess(digits: 8)
+            title = "+" + self.amount.decimalValidDigitsProcess(digits: 8)
         case .outcome:
-            title = "-" + self.amount.decimalProcess(digits: 8)
+            title = "-" + self.amount.decimalValidDigitsProcess(digits: 8)
         }
         return title
     }
@@ -241,102 +179,9 @@ class AssetListModel: Mappable {
         var color: UIColor = UIColor.init(hex: 0xF4CF4B)
         switch self.action {
         case .income:
-            color = AppColor.theme
+            color = UIColor.init(hex: 0xF04F0F)
         case .outcome:
             color = AppColor.mainText
-        }
-        switch self.type {
-        case .filWithDrawal:
-            switch self.status {
-            case .wait:
-                color = UIColor.init(hex: 0x333333)
-            case .success:
-                color = UIColor.init(hex: 0x333333)
-            case .failure:
-                color = UIColor.init(hex: 0xE68E40)
-            }
-        case .filIssue:
-            switch self.status {
-            case .wait:
-                color = UIColor.init(hex: 0x333333)
-            case .success:
-                color = UIColor.init(hex: 0x333333)
-            case .failure:
-                color = UIColor.init(hex: 0xE68E40)
-            }
-        default:
-            break
-        }
-        return color
-    }
-    
-    /// 状态描述
-    var statusTitle: String {
-        var title: String = ""
-        switch self.status {
-        case .wait:
-            title = "待处理"
-        case .success:
-            title = "成功"
-        case .failure:
-            title = "交易关闭"
-        }
-        switch self.type {
-        case .cnyWithdrawal:
-            switch self.status {
-            case .wait:
-                title = "提现中"
-            case .success:
-                title = "已成功"
-            case .failure:
-                title = "已驳回"
-            }
-        case .filWithDrawal:
-            switch self.status {
-            case .wait:
-                title = "审核中"
-            case .success:
-                title = "提现成功"
-            case .failure:
-                title = "提现失败"
-            }
-        default:
-            break
-        }
-        return title
-    }
-    /// 状态颜色
-    var statusColor: UIColor {
-        var color: UIColor = UIColor.init(hex: 0x8C97AC)
-        switch self.status {
-        case .wait:
-            color = AppColor.theme
-        case .success:
-            color = AppColor.minorText
-        case .failure:
-            color = AppColor.themeRed
-        }
-        switch self.type {
-        case .filWithDrawal:
-            switch self.status {
-            case .wait:
-                color = UIColor.init(hex: 0x007FFF)
-            case .success:
-                color = UIColor.init(hex: 0x333333)
-            case .failure:
-                color = UIColor.init(hex: 0xE68E40)
-            }
-        case .filIssue:
-            switch self.status {
-            case .wait:
-                color = UIColor.init(hex: 0x007FFF)
-            case .success:
-                color = UIColor.init(hex: 0x333333)
-            case .failure:
-                color = UIColor.init(hex: 0xE68E40)
-            }
-        default:
-            break
         }
         return color
     }

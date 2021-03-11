@@ -23,7 +23,7 @@ class MiningDetailController: BaseViewController
     fileprivate let headerView: MiningDetailHeaderView = MiningDetailHeaderView.init()
     fileprivate let tableView: UITableView = UITableView(frame: CGRect.zero, style: .grouped)
     
-    fileprivate var sourceList: [MiningLogModel] = []
+    fileprivate var sourceList: [AssetListModel] = []
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     fileprivate var showFooter: Bool = false
