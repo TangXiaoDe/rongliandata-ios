@@ -286,4 +286,9 @@ extension Notification.Name {
         /// 绑定地址成功
         static let withdrawAdress = NSNotification.Name(rawValue: "app.notification.name.Fil.withdrawAdress")
     }
+    /// 设备
+    struct Equipment {
+        /// 资产明细刷新
+        static let assetTypeChange = NSNotification.Name(rawValue: "app.notification.name.Equipment.assetTypeChange")
+    }
 }

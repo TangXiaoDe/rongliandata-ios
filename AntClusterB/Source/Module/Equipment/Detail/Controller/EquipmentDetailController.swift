@@ -213,16 +213,18 @@ extension EquipmentDetailController {
 
 // MARK: - Enter Page
 extension EquipmentDetailController {
+
  
     /// 进入锁仓详情页
     fileprivate func enterEquipLockDetailPage(with currency: CurrencyType = .fil) -> Void {
         let detailVC = LockDetailController.init(currency: currency)
         self.enterPageVC(detailVC)
     }
-    
-    /// 进入资产明细页
-    fileprivate func enterEquipAssetDetalPage() -> Void {
-        
+
+    /// 资产明细
+    fileprivate func enterAssetDetail(with model: EquipmentDetailModel) {
+        let assetVC = AssetDetailHomeController.init(model: model)
+        self.enterPageVC(assetVC)
     }
 
 }
@@ -267,7 +269,10 @@ extension EquipmentDetailController: EquipmentDetailViewProtocol {
     /// 资产明细入口点击
     func detailView(_ detailView: EquipmentDetailView, didClickedAssetDetail addetDetailView: UIView) -> Void {
         print("EquipmentDetailController detailView didClickedAssetDetail")
-        self.enterEquipAssetDetalPage()
+        guard let model = detailView.model else {
+            return
+        }
+        self.enterAssetDetail(with: model)
     }
     /// 锁仓详情入口点击
     func detailView(_ detailView: EquipmentDetailView, didClickedLockDetail lockDetailView: UIView) -> Void {

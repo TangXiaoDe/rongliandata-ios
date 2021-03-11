@@ -10,10 +10,28 @@
 import Foundation
 
 enum EquipmentAssetType: String {
+    case all = ""
     case fil_lock = "fil:lock"
     case fil_available = "fil:available"
     case fil_pawn = "fil:pawn"
     case miner_release = "miner:release"
+    
+    var title: String {
+        var title = ""
+        switch self {
+        case .all:
+            title = "全部"
+        case .fil_lock:
+            title = "锁仓"
+        case .fil_available:
+            title = "可用"
+        case .fil_pawn:
+            title = "抵押"
+        case .miner_release:
+            title = "挖坑"
+        }
+        return title
+    }
 }
 
 /// 设备相关请求接口
@@ -97,7 +115,13 @@ extension EquipmentNetworkManager {
         var requestInfo = EquipmentRequestInfo.assetDetail
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: ["\(order_id)"])
         // 2.配置参数
-        let parameter: [String: Any] = ["action": action.rawValue, "type": type.rawValue, "offset": offset, "limit": limit]
+        var parameter: [String: Any] = ["offset": offset, "limit": limit]
+        if !action.title.isEmpty {
+            parameter["action"] = action.title
+        }
+        if !type.rawValue.isEmpty {
+            parameter["type"] = type.rawValue
+        }
         requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in

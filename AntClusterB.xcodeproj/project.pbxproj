@@ -436,6 +436,13 @@
 		9536A73425F8BAB300280E5C /* OreDetailPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A72F25F8BAB300280E5C /* OreDetailPlaceView.swift */; };
 		9536A73525F8BAB300280E5C /* OreDetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A73025F8BAB300280E5C /* OreDetailItemView.swift */; };
 		9536A73625F8BAB300280E5C /* OreDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A73125F8BAB300280E5C /* OreDetailHeaderView.swift */; };
+		9536A74625F8C3EC00280E5C /* AssetDetailHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A73F25F8C3EC00280E5C /* AssetDetailHomeController.swift */; };
+		9536A74725F8C3EC00280E5C /* AssetDetailHomeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74025F8C3EC00280E5C /* AssetDetailHomeListController.swift */; };
+		9536A74825F8C3EC00280E5C /* AssetDetailPlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74225F8C3EC00280E5C /* AssetDetailPlaceModel.swift */; };
+		9536A74925F8C3EC00280E5C /* AssetDetailPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74425F8C3EC00280E5C /* AssetDetailPlaceView.swift */; };
+		9536A74A25F8C3EC00280E5C /* AssetDetailFilterPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74525F8C3EC00280E5C /* AssetDetailFilterPopView.swift */; };
+		9536A74F25F8C4AD00280E5C /* AssetDetailTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74E25F8C4AD00280E5C /* AssetDetailTitleView.swift */; };
+		9536A78425F8CA2B00280E5C /* AssetDetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A78325F8CA2B00280E5C /* AssetDetailListCell.swift */; };
 		C9D54A936C70BE6D1996E6A8 /* Pods_AntClusterBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -914,6 +921,13 @@
 		9536A72F25F8BAB300280E5C /* OreDetailPlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OreDetailPlaceView.swift; sourceTree = "<group>"; };
 		9536A73025F8BAB300280E5C /* OreDetailItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OreDetailItemView.swift; sourceTree = "<group>"; };
 		9536A73125F8BAB300280E5C /* OreDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OreDetailHeaderView.swift; sourceTree = "<group>"; };
+		9536A73F25F8C3EC00280E5C /* AssetDetailHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailHomeController.swift; sourceTree = "<group>"; };
+		9536A74025F8C3EC00280E5C /* AssetDetailHomeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailHomeListController.swift; sourceTree = "<group>"; };
+		9536A74225F8C3EC00280E5C /* AssetDetailPlaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailPlaceModel.swift; sourceTree = "<group>"; };
+		9536A74425F8C3EC00280E5C /* AssetDetailPlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailPlaceView.swift; sourceTree = "<group>"; };
+		9536A74525F8C3EC00280E5C /* AssetDetailFilterPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailFilterPopView.swift; sourceTree = "<group>"; };
+		9536A74E25F8C4AD00280E5C /* AssetDetailTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailTitleView.swift; sourceTree = "<group>"; };
+		9536A78325F8CA2B00280E5C /* AssetDetailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailListCell.swift; sourceTree = "<group>"; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3053,6 +3067,7 @@
 		53DF25162581FC9600165247 /* Equipment */ = {
 			isa = PBXGroup;
 			children = (
+				9536A73D25F8C3EC00280E5C /* AssetDetail */,
 				9536A72925F8BAB300280E5C /* OreDetail */,
 				53AA78EF25F8AF460081D04A /* Mall */,
 				53AA78D525F8AD640081D04A /* LockDetail */,
@@ -3193,6 +3208,44 @@
 				9536A72F25F8BAB300280E5C /* OreDetailPlaceView.swift */,
 				9536A73025F8BAB300280E5C /* OreDetailItemView.swift */,
 				9536A73125F8BAB300280E5C /* OreDetailHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9536A73D25F8C3EC00280E5C /* AssetDetail */ = {
+			isa = PBXGroup;
+			children = (
+				9536A73E25F8C3EC00280E5C /* Controller */,
+				9536A74125F8C3EC00280E5C /* Model */,
+				9536A74325F8C3EC00280E5C /* View */,
+			);
+			path = AssetDetail;
+			sourceTree = "<group>";
+		};
+		9536A73E25F8C3EC00280E5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9536A73F25F8C3EC00280E5C /* AssetDetailHomeController.swift */,
+				9536A74025F8C3EC00280E5C /* AssetDetailHomeListController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		9536A74125F8C3EC00280E5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9536A74225F8C3EC00280E5C /* AssetDetailPlaceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9536A74325F8C3EC00280E5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9536A74E25F8C4AD00280E5C /* AssetDetailTitleView.swift */,
+				9536A74425F8C3EC00280E5C /* AssetDetailPlaceView.swift */,
+				9536A74525F8C3EC00280E5C /* AssetDetailFilterPopView.swift */,
+				9536A78325F8CA2B00280E5C /* AssetDetailListCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3594,6 +3647,7 @@
 				53DF26092581FC9900165247 /* DoubleIconControl.swift in Sources */,
 				53DF25912581FC9800165247 /* TCWebCodesResultModel.swift in Sources */,
 				53DF26282581FC9A00165247 /* BasePlaceHolder.swift in Sources */,
+				9536A74A25F8C3EC00280E5C /* AssetDetailFilterPopView.swift in Sources */,
 				53DF25702581FC9800165247 /* AssetRequestInfo.swift in Sources */,
 				53AA78EA25F8AEA40081D04A /* IconTitleIconControl.swift in Sources */,
 				53AA78E425F8AD640081D04A /* LockDetailHeaderView.swift in Sources */,
@@ -3658,6 +3712,7 @@
 				53DF25B32581FC9800165247 /* ShieldConfig.swift in Sources */,
 				53DF26342581FC9A00165247 /* PageDefaultNothingView.swift in Sources */,
 				53DF26582581FC9A00165247 /* RechargePlaceView.swift in Sources */,
+				9536A78425F8CA2B00280E5C /* AssetDetailListCell.swift in Sources */,
 				53DF26742581FC9B00165247 /* FirstPageController.swift in Sources */,
 				53DF26722581FC9B00165247 /* AppDelegate+JPush.swift in Sources */,
 				53DF26BD2581FC9C00165247 /* EFTimingMethod.swift in Sources */,
@@ -3683,6 +3738,7 @@
 				53DF26B12581FC9C00165247 /* AYBubbleView.m in Sources */,
 				53DF25FD2581FC9900165247 /* SearchInputView.swift in Sources */,
 				53DF25822581FC9800165247 /* UploadRequestInfo.swift in Sources */,
+				9536A74925F8C3EC00280E5C /* AssetDetailPlaceView.swift in Sources */,
 				53DF256D2581FC9800165247 /* DateFormatter.swift in Sources */,
 				53DF25F82581FC9900165247 /* SearchViewController.swift in Sources */,
 				53DF26142581FC9A00165247 /* PublishVideoModel.swift in Sources */,
@@ -3698,6 +3754,7 @@
 				53DF26232581FC9A00165247 /* CommonAvatarView.swift in Sources */,
 				530B28E825AD48C900B8723E /* MiningDetailListCell.swift in Sources */,
 				530B28E325AD489F00B8723E /* MiningDetailHeaderView.swift in Sources */,
+				9536A74625F8C3EC00280E5C /* AssetDetailHomeController.swift in Sources */,
 				53DF26812581FC9B00165247 /* SmsCodeLoginInputView.swift in Sources */,
 				53DF25BA2581FC9800165247 /* GuideController.swift in Sources */,
 				53DF25622581FC9700165247 /* QRCodeUtil.swift in Sources */,
@@ -3714,11 +3771,14 @@
 				53AA78CC25F8AC2D0081D04A /* EquipmentDetailModel.swift in Sources */,
 				53DF253E2581FC9700165247 /* AdvertSpaceObject.swift in Sources */,
 				53DF254A2581FC9700165247 /* AccountDBManager.swift in Sources */,
+				9536A74725F8C3EC00280E5C /* AssetDetailHomeListController.swift in Sources */,
 				53DF26452581FC9A00165247 /* BaseView.swift in Sources */,
 				53DF262E2581FC9A00165247 /* SettingSectionHeader.swift in Sources */,
 				53DF263C2581FC9A00165247 /* BaseNavigationController.swift in Sources */,
+				9536A74825F8C3EC00280E5C /* AssetDetailPlaceModel.swift in Sources */,
 				53DF255E2581FC9700165247 /* CacheManager.swift in Sources */,
 				53DF25CD2581FC9900165247 /* TestPushController.swift in Sources */,
+				9536A74F25F8C4AD00280E5C /* AssetDetailTitleView.swift in Sources */,
 				53DF25B82581FC9800165247 /* AppConfig.swift in Sources */,
 				53AA78D025F8AC2D0081D04A /* EDUniversalSubjectView.swift in Sources */,
 				53DF25992581FC9800165247 /* ProjectColor.swift in Sources */,

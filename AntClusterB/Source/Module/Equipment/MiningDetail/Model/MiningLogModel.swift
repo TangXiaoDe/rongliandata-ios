@@ -67,7 +67,34 @@ class MiningLogModel: Mappable {
         target_user <- map["target_user"]
         target_type_value <- map["target_type"]
     }
-    
+    var action: AssetAction {
+        if let action = AssetAction.init(rawValue: self.action_value) {
+            return action
+        }
+        return AssetAction.income
+    }
+    /// 值标题
+    var valueTitle: String {
+        var title: String = ""
+        switch self.action {
+        case .income:
+            title = "+" + self.amount.decimalValidDigitsProcess(digits: 8)
+        case .outcome:
+            title = "-" + self.amount.decimalValidDigitsProcess(digits: 8)
+        }
+        return title
+    }
+    /// 值颜色
+    var valueColor: UIColor {
+        var color: UIColor = UIColor.init(hex: 0xF4CF4B)
+        switch self.action {
+        case .income:
+            color = UIColor.init(hex: 0xF04F0F)
+        case .outcome:
+            color = AppColor.mainText
+        }
+        return color
+    }
 }
 
 
