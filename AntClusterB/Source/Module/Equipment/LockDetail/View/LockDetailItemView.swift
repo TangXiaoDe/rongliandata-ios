@@ -13,7 +13,7 @@ class LockDetailItemView: UIView {
     static let viewHeight: CGFloat = 68
     // MARK: - Internal Property
     
-    var model: EquipmentListModel? {
+    var model: LockDetailLogModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -178,19 +178,16 @@ extension LockDetailItemView {
     }
     
     /// 数据加载
-    fileprivate func setupWithModel(_ model: EquipmentListModel?) -> Void {
-        self.setupAsDemo()
+    fileprivate func setupWithModel(_ model: LockDetailLogModel?) -> Void {
+        //self.setupAsDemo()
         guard let model = model else {
             return
         }
-        self.miningNumView.valueLabel.text = model.total_ming.decimalValidDigitsProcess(digits: 4)
-        self.fengzhuangNumView.valueLabel.text = model.seal_num.decimalValidDigitsProcess(digits: 2)
-        self.progressNumView.valueLabel.text = (model.fengcun_progress * 100).decimalValidDigitsProcess(digits: 2) + "%"
-        if model.zone == .ipfs {
-            self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
-        } else {
-            self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
-        }
+        self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
+        self.miningNumView.titleLabel.text = model.created_at.string(format: "yyyy-MM-dd HH:mm", timeZone: .current)
+        self.miningNumView.valueLabel.text = model.amount.decimalValidDigitsProcess(digits: 8)
+        self.fengzhuangNumView.valueLabel.text = model.strProgress
+        self.progressNumView.valueLabel.text = model.released.decimalValidDigitsProcess(digits: 8)
     }
     
 }

@@ -136,10 +136,10 @@ extension EquipmentNetworkManager {
         }
     }
     /// 锁仓线性释放
-    class func getEquipLinearRelease(order_id: String, offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ model: LockDetailListModel?) -> Void)) -> Void {
+    class func getEquipLinearRelease(id: Int, offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ model: LockDetailListModel?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = EquipmentRequestInfo.linear_release
-        requestInfo.urlPath = requestInfo.fullPathWith(replacers: ["\(order_id)"])
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: ["\(id)"])
         // 2.配置参数
         let parameter: [String: Any] = ["offset": offset, "limit": limit]
         requestInfo.parameter = parameter
