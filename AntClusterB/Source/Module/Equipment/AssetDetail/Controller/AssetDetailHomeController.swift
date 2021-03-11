@@ -14,6 +14,7 @@ class AssetDetailHomeController: BaseViewController {
     // MARK: - Internal Property
     fileprivate var model: EquipmentDetailModel
     // MARK: - Private Property
+    fileprivate let popView = AssetDetailFilterPopView.init()
     fileprivate let filterBtn = UIButton.init(type: .custom)
     fileprivate let titleView = AssetDetailTitleView.init(themeColor: AppColor.theme)
     fileprivate let scrollView: UIScrollView = UIScrollView()
@@ -146,8 +147,6 @@ extension AssetDetailHomeController {
 extension AssetDetailHomeController {
     //  分类选择界面
     fileprivate func enterCategorySelectPage(model: String?) -> Void {
-        // 弹窗显示
-        let popView = AssetDetailFilterPopView.init()
         popView.selectType = self.selectType
         popView.models = self.cateList
         popView.delegate = self
