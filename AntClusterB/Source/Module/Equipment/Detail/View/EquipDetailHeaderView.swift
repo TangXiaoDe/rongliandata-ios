@@ -47,6 +47,7 @@ class EquipDetailHeaderView: UIView
     fileprivate let centerViewHeight: CGFloat = 63
     fileprivate let leftMargin: CGFloat = 12
     fileprivate let rightMargin: CGFloat = 12
+    fileprivate let itemLrMargin: CGFloat = 12
     
 
     // MARK: - Initialize Function
@@ -216,19 +217,45 @@ extension EquipDetailHeaderView {
                     make.trailing.equalToSuperview()
                 }
             }
-            itemView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999), alignment: .center)
+            itemView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: UIColor.init(hex: 0x999999), alignment: .center)
             itemView.titleLabel.snp.remakeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.leading.greaterThanOrEqualToSuperview()
-                make.trailing.lessThanOrEqualToSuperview()
                 make.centerY.equalTo(centerView.snp.bottom).offset(-titleCenterYBottomMargin)
+                if 0 == index {
+                    make.leading.equalToSuperview().offset(self.itemLrMargin)
+                    make.trailing.lessThanOrEqualToSuperview()
+                } else if index == itemViews.count - 1 {
+                    make.trailing.equalToSuperview().offset(-self.itemLrMargin)
+                    make.leading.greaterThanOrEqualToSuperview()
+                } else {
+                    make.centerX.equalToSuperview()
+                    make.leading.greaterThanOrEqualToSuperview()
+                    make.trailing.lessThanOrEqualToSuperview()
+                }
             }
-            itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+            itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
             itemView.valueLabel.snp.remakeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.leading.greaterThanOrEqualToSuperview()
-                make.trailing.lessThanOrEqualToSuperview()
                 make.centerY.equalTo(centerView.snp.top).offset(valueCenterYTopMargin)
+                if 0 == index {
+                    make.leading.equalToSuperview().offset(self.itemLrMargin)
+                    make.trailing.lessThanOrEqualToSuperview()
+                } else if index == itemViews.count - 1 {
+                    make.trailing.equalToSuperview().offset(-self.itemLrMargin)
+                    make.leading.greaterThanOrEqualToSuperview()
+                } else {
+                    make.centerX.equalToSuperview()
+                    make.leading.greaterThanOrEqualToSuperview()
+                    make.trailing.lessThanOrEqualToSuperview()
+                }
+            }
+            if 0 == index {
+                itemView.titleLabel.textAlignment = .left
+                itemView.valueLabel.textAlignment = .left
+            } else if index == itemViews.count - 1 {
+                itemView.titleLabel.textAlignment = .right
+                itemView.valueLabel.textAlignment = .right
+            } else {
+                itemView.titleLabel.textAlignment = .center
+                itemView.valueLabel.textAlignment = .center
             }
             leftView = itemView
         }
