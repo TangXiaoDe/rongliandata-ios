@@ -216,8 +216,8 @@ extension EquipmentDetailController {
 
  
     /// 进入锁仓详情页
-    fileprivate func enterEquipLockDetailPage(with currency: CurrencyType = .fil) -> Void {
-        let detailVC = LockDetailController.init(currency: currency)
+    fileprivate func enterEquipLockDetailPage(with id: Int) -> Void {
+        let detailVC = LockDetailController.init(id: id)
         self.enterPageVC(detailVC)
     }
 
@@ -277,7 +277,10 @@ extension EquipmentDetailController: EquipmentDetailViewProtocol {
     /// 锁仓详情入口点击
     func detailView(_ detailView: EquipmentDetailView, didClickedLockDetail lockDetailView: UIView) -> Void {
         //print("EquipmentDetailController detailView didClickedLockDetail")
-        self.enterEquipLockDetailPage()
+//        guard let model = detailView.model else {
+//            return
+//        }
+        self.enterEquipLockDetailPage(with: self.id)
     }
 
 }

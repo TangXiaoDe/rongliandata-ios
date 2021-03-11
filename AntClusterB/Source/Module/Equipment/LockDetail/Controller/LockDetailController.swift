@@ -14,7 +14,7 @@ class LockDetailController: BaseViewController
 {
     // MARK: - Internal Property
     
-    fileprivate var currency: CurrencyType
+    fileprivate let id: Int?
     
     // MARK: - Private Property
     fileprivate let topBgView: UIImageView = UIImageView()
@@ -23,7 +23,8 @@ class LockDetailController: BaseViewController
     fileprivate let headerView: LockDetailHeaderView = LockDetailHeaderView.init()
     fileprivate let itemContainer: UIView = UIView.init()
     
-    fileprivate var sourceList: [EquipmentListModel] = []
+    fileprivate var detail: LockDetailListModel?
+    fileprivate var sourceList: [LockDetailLogModel] = []
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     
@@ -36,8 +37,8 @@ class LockDetailController: BaseViewController
     fileprivate let itemViewTagBase: Int = 250
 
     // MARK: - Initialize Function
-    init(currency: CurrencyType) {
-        self.currency = currency
+    init(id: Int? = nil) {
+        self.id = id
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder aDecoder: NSCoder) {
@@ -89,7 +90,7 @@ extension LockDetailController {
         }
         // 1.nav
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "锁仓\(self.currency.rawValue.uppercased())线性收益", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.navBar.titleLabel.set(text: "锁仓FIL线性收益", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
         self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in
@@ -138,13 +139,13 @@ extension LockDetailController {
     }
     
     /// 数据加载
-    fileprivate func setupItemContainer(with models: [EquipmentListModel]) -> Void {
+    fileprivate func setupItemContainer(with models: [LockDetailLogModel]) -> Void {
         self.itemContainer.removeAllSubviews()
         var topView: UIView = self.itemContainer
         for (index, model) in models.enumerated() {
             let itemView = LockDetailItemView.init()
             self.itemContainer.addSubview(itemView)
-            itemView.model = nil
+            itemView.model = model
             if index == 0 {
                 itemView.isFirst = true
             }
@@ -179,16 +180,18 @@ extension LockDetailController {
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
         self.scrollView.mj_header.beginRefreshing()
-        self.setupAsDemo()
+//        self.setupAsDemo()
     }
     ///
     fileprivate func setupAsDemo() -> Void {
-        for index in 0...20 {
-            let model = EquipmentListModel.init(no: "202039\(index)")
-            self.sourceList.append(model)
-        }
-        self.headerView.model = nil
-        self.setupItemContainer(with: self.sourceList)
+//        for index in 0...20 {
+//            let model = LockDetailLogModel.init()
+//            model.amount = 0.2342
+//            model.created_at = Date.init(timeInterval: -24.0 * 3600.0 * 5, since: Date.init())
+//            self.sourceList.append(model)
+//        }
+//        self.headerView.model = nil
+//        self.setupItemContainer(with: self.sourceList)
     }
 
 }
@@ -219,64 +222,46 @@ extension LockDetailController {
 
     /// 下拉刷新请求
     fileprivate func refreshRequest(complete: ((_ status: Bool, _ msg: String?, _ models: [EquipmentListModel]?) -> Void)? = nil) -> Void {
-        complete?(false, nil, nil)
-        self.scrollView.mj_header.endRefreshing()
-        self.scrollView.mj_footer.endRefreshing()
-//        let group = DispatchGroup()
-//        group.enter()
-//        MallNetworkManager.getEFPInfo { [weak self](status, msg, model) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            group.leave()
-//            guard status, let model = model else {
-//                Toast.showToast(title: msg)
-//                return
-//            }
-//            self.efpInfo = model
-//            self.headerView.model = model
-//        }
-//        group.enter()
-//        MallNetworkManager.getEFPOrderList(offset: 0, limit: self.limit) { [weak self](status, msg, models) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            group.leave()
-//            guard status, let models = models else {
-//                ToastUtil.showToast(title: msg)
-//                return
-//            }
-//            self.sourceList = models
-//            self.setupItemContainer(with: self.sourceList)
-//            self.offset = models.count
-//            self.scrollView.mj_footer?.isHidden = models.count < self.limit
-//        }
-//        group.notify(queue: DispatchQueue.global()) {
-//            self.scrollView.mj_header.endRefreshing()
-//        }
+        EquipmentNetworkManager.getEquipLinearRelease(id: self.id, offset: 0, limit: self.limit) { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            self.scrollView.mj_header.endRefreshing()
+            self.scrollView.mj_footer.state = .idle
+            guard status, let model = model else {
+                Toast.showToast(title: msg)
+                return
+            }
+            self.detail = model
+            self.headerView.model = model
+            self.sourceList = model.logs
+            self.setupItemContainer(with: self.sourceList)
+            self.offset = self.sourceList.count
+            self.scrollView.mj_footer.isHidden = model.logs.count < self.limit
+        }
     }
     
     /// 上拉加载更多请求
     fileprivate func loadMoreRequest() -> Void {
-        self.scrollView.mj_header.endRefreshing()
-        self.scrollView.mj_footer.endRefreshing()
-//        MallNetworkManager.getEFPOrderList(offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.scrollView.mj_footer?.endRefreshing()
-//            guard status, let models = models else {
-//                ToastUtil.showToast(title: msg)
-//                return
-//            }
-//            self.sourceList.append(contentsOf: models)
-//            self.offset = self.sourceList.count
-//            if models.count < self.limit {
-//                self.scrollView.mj_footer?.endRefreshingWithNoMoreData()
-//            }
-//            self.setupItemContainer(with: self.sourceList)
-//        }
+        EquipmentNetworkManager.getEquipLinearRelease(id: self.id, offset: self.offset, limit: self.limit) { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            self.scrollView.mj_footer.endRefreshing()
+            guard status, let model = model else {
+                Toast.showToast(title: msg)
+                self.scrollView.mj_footer.endRefreshingWithWeakNetwork()
+                return
+            }
+            self.sourceList.append(contentsOf: model.logs)
+            self.setupItemContainer(with: self.sourceList)
+            self.offset = self.sourceList.count
+            if model.logs.isEmpty {
+                self.scrollView.mj_footer.endRefreshingWithNoMoreData()
+            }
+        }
     }
+
 }
 
 // MARK: - Enter Page

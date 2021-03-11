@@ -15,7 +15,7 @@ class LockDetailHeaderView: UIView {
     
     static let viewHeight: CGFloat = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height - kNavigationStatusBarHeight
 
-    var model: EquipmentHomeModel? {
+    var model: LockDetailListModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -118,7 +118,7 @@ extension LockDetailHeaderView {
             make.centerY.equalTo(self.valueLabel.snp.centerY).offset(self.titleCenterYTopMargin)
         }
         mainView.addSubview(self.bottomView)
-        self.initialBottomView(self.bottomView, [])
+        self.initialBottomView(self.bottomView, [self.waitReleaseNumView, self.hasReleaseNumView])
         self.bottomView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(self.bottomViewHeight)
@@ -187,13 +187,15 @@ extension LockDetailHeaderView {
         self.hasReleaseNumView.valueLabel.text = "53.5423"
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: EquipmentHomeModel?) -> Void {
-        self.setupAsDemo()
+    fileprivate func setupWithModel(_ model: LockDetailListModel?) -> Void {
+        //self.setupAsDemo()
         guard let model = model else {
             return
         }
         // 子控件数据加载
         self.valueLabel.text = model.total.decimalValidDigitsProcess(digits: 8)
+        self.waitReleaseNumView.valueLabel.text = model.unrelease.decimalValidDigitsProcess(digits: 8)
+        self.hasReleaseNumView.valueLabel.text = model.already.decimalValidDigitsProcess(digits: 8)
     }
     
 }
