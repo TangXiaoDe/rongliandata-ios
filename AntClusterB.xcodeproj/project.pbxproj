@@ -4156,9 +4156,9 @@
 					"$(PROJECT_DIR)/iMeet/Source/Library/EMHelper/3rdParty/VoiceConvert",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chainone.antclusterb;
+				PRODUCT_BUNDLE_IDENTIFIER = io.comc.antclusterb;
 				PRODUCT_NAME = AntClusterB;
-				PROVISIONING_PROFILE_SPECIFIER = "AntClusterB-Development";
+				PROVISIONING_PROFILE_SPECIFIER = "MultipleApp-Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/SupportingFile/$(PRODUCT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4192,9 +4192,9 @@
 					"$(PROJECT_DIR)/iMeet/Source/Library/EMHelper/3rdParty/VoiceConvert",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chainone.antclusterb;
+				PRODUCT_BUNDLE_IDENTIFIER = io.comc.antclusterb;
 				PRODUCT_NAME = AntClusterB;
-				PROVISIONING_PROFILE_SPECIFIER = "AntClusterB-AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "MultipleApp-AdHoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/SupportingFile/$(PRODUCT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
