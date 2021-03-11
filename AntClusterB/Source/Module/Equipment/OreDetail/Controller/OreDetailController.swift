@@ -21,7 +21,7 @@ class OreDetailController: BaseViewController
     fileprivate let headerView: OreDetailHeaderView = OreDetailHeaderView.init()
     fileprivate let itemContainer: UIView = UIView.init()
     
-    fileprivate var sourceList: [MiningLogModel] = []
+    fileprivate var sourceList: [AssetListModel] = []
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     
@@ -129,6 +129,7 @@ extension OreDetailController {
         // 2. itemContainer
         scrollView.addSubview(self.itemContainer)
         self.itemContainer.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.headerView.snp.bottom).offset(self.itemTopMargin)
             make.bottom.equalToSuperview().offset(-itemBottomMargin)
@@ -136,7 +137,7 @@ extension OreDetailController {
     }
     
     /// 数据加载
-    fileprivate func setupItemContainer(with models: [MiningLogModel]) -> Void {
+    fileprivate func setupItemContainer(with models: [AssetListModel]) -> Void {
         self.itemContainer.removeAllSubviews()
         var topView: UIView = self.itemContainer
         for (index, model) in models.enumerated() {

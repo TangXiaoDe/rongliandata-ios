@@ -18,7 +18,7 @@ class AssetDetailListCell: UITableViewCell {
     /// 重用标识符
     static let identifier: String = "AssetDetailListCellReuseIdentifier"
 
-    var model: MiningLogModel? {
+    var model: AssetListModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -140,7 +140,7 @@ extension AssetDetailListCell {
 //        self.mainView.layoutIfNeeded()
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: MiningLogModel?) -> Void {
+    fileprivate func setupWithModel(_ model: AssetListModel?) -> Void {
         guard let model = model else {
             return
         }

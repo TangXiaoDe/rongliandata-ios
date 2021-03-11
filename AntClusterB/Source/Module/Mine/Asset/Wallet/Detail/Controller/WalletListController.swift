@@ -46,17 +46,25 @@ extension WalletListController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.hiddenNavBarShadow()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.showNavBarShadow(color: AppColor.navShadow)
+    }
 }
 
 // MARK: - UI
 extension WalletListController {
     override func initialUI() -> Void {
         super.initialUI()
-        self.view.backgroundColor = AppColor.pageBg
+        self.view.backgroundColor = UIColor.white
         // 1. navigationbar
         // 2. tableView
-        self.tableView.backgroundColor = AppColor.pageBg
+        self.tableView.backgroundColor = UIColor.white
         self.tableView.mj_header?.isHidden = false
         // 顶部位置 的版本适配
         if #available(iOS 11.0, *) {
@@ -176,7 +184,20 @@ extension WalletListController {
         cell.model = self.sourceList[indexPath.row]
         return cell
     }
-
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 0.01))
+        return header
+    }
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 0.01))
+        return footer
+    }
 }
 
 // MARK: - <UITableViewDelegate>
@@ -193,14 +214,6 @@ extension WalletListController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt\(indexPath.row)")
-        
-        let model = self.sourceList[indexPath.row]
-        switch model.type {
-        case .filWithDrawal:
-            self.enterFilWithdrawalDetailPage(with: model)
-        default:
-            break
-        }
     }
 
 }

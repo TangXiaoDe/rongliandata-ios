@@ -19,7 +19,7 @@ class MiningDetailListCell: UITableViewCell
     static let identifier: String = "MiningDetailListCellReuseIdentifier"
     
     var indexPath: IndexPath?
-    var model: MiningLogModel? {
+    var model: AssetListModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -277,7 +277,7 @@ extension MiningDetailListCell {
 
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: MiningLogModel?) -> Void {
+    fileprivate func setupWithModel(_ model: AssetListModel?) -> Void {
         //self.setupAsDemo()
         guard let model = model else {
             return

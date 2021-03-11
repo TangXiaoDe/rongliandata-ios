@@ -14,7 +14,7 @@ class AssetListCell: UITableViewCell {
 
     // MARK: - Internal Property
 
-    static let cellHeight: CGFloat = 65
+    static let cellHeight: CGFloat = 60
 
     /// 重用标识符
     static let identifier: String = "AssetListCellReuseIdentifier"
@@ -33,16 +33,13 @@ class AssetListCell: UITableViewCell {
 
     // MARK: - fileprivate Property
     fileprivate let mainView = UIView()
-    fileprivate let iconView: UIImageView = UIImageView()
     fileprivate let titleLabel: UILabel = UILabel()
     fileprivate let dateLabel: UILabel = UILabel()
     fileprivate let valueLabel: UILabel = UILabel()
-    fileprivate let statusLabel: UILabel = UILabel()
     fileprivate weak var bottomLine: UIView!
 
-    fileprivate let iconWH: CGFloat = 32
-    fileprivate let lrMargin: CGFloat = 20
-    fileprivate let titleLeftMargin: CGFloat = 68   // superView
+    fileprivate let lrMargin: CGFloat = 16
+    fileprivate let titleLeftMargin: CGFloat = 16   // superView
     fileprivate let valueW: CGFloat = 120
 
     // MARK: - Initialize Function
@@ -106,44 +103,27 @@ extension AssetListCell {
         mainView.backgroundColor = UIColor.white
         // 0.x - titleLabel约束依赖valueLabel，而valueLabel约束也依赖titleLabel；
         mainView.addSubview(self.valueLabel)
-        // 1. iconView
-        mainView.addSubview(self.iconView)
-        self.iconView.set(cornerRadius: self.iconWH * 0.5)
-        self.iconView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(self.iconWH)
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.centerY.equalToSuperview()
-        }
         // 2. titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14), textColor: AppColor.mainText)
+        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14, weight: .medium), textColor: AppColor.mainText)
         self.titleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.titleLeftMargin)
             make.trailing.lessThanOrEqualTo(self.valueLabel.snp.leading).offset(-3)
-            make.top.equalTo(self.iconView).offset(-2)
+            make.bottom.equalTo(mainView.snp.centerY).offset(-2)
         }
         // 3. dateLabel
         mainView.addSubview(self.dateLabel)
-        self.dateLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: UIColor(hex: 0x8C97AC))
+        self.dateLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: UIColor(hex: 0x999999))
         self.dateLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self.titleLabel)
-            make.bottom.equalTo(self.iconView).offset(2)
+            make.top.equalTo(mainView.snp.centerY).offset(2)
         }
         // 4. valueLabel
         // 0xF4CF4B ffffff
-        self.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 15), textColor: UIColor(hex: 0xF4CF4B), alignment: .right)
+        self.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText, alignment: .right)
         self.valueLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.titleLabel)
+            make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.width.equalTo(self.valueW)
-        }
-        // 5. statusLabel
-        mainView.addSubview(self.statusLabel)
-        self.statusLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.minorText, alignment: .right)
-        self.statusLabel.isHidden = true
-        self.statusLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.dateLabel)
-            make.trailing.equalToSuperview().offset(-lrMargin)
         }
         // 8. bottomLine
         self.bottomLine = mainView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 0.5, margin1: self.titleLeftMargin, margin2: 0)
@@ -155,36 +135,20 @@ extension AssetListCell {
     /// 重置
     fileprivate func resetSelf() -> Void {
         self.selectionStyle = .none
-        self.valueLabel.snp.updateConstraints { (make) in
-            make.width.equalTo(self.valueW)
-        }
-        self.mainView.layoutIfNeeded()
+//        self.valueLabel.snp.updateConstraints { (make) in
+//            make.width.equalTo(self.valueW)
+//        }
+//        self.mainView.layoutIfNeeded()
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: AssetListModel?) -> Void {
         guard let model = model else {
             return
         }
-        switch model.type {
-        case .tranferExpend:
-            self.iconView.kf.setImage(with: model.targetUser?.avatarUrl, placeholder: AppImage.PlaceHolder.avatar)
-        case .tranferIncome:
-            self.iconView.kf.setImage(with: model.targetUser?.avatarUrl, placeholder: AppImage.PlaceHolder.avatar)
-        default:
-            self.iconView.image = model.icon
-        }
-        self.titleLabel.text = (model.type == .tranferIncome || model.type == .tranferExpend) ? model.transferTitle : model.title
+        self.titleLabel.text = model.title
         self.dateLabel.text = model.createDate.string(format: "yyyy-MM-dd HH:mm", timeZone: TimeZone.current)
-        self.statusLabel.text = model.statusTitle
-        self.statusLabel.isHidden = false
-        self.statusLabel.textColor = model.statusColor
         self.valueLabel.text = model.valueTitle
         self.valueLabel.textColor = model.valueColor
-        self.valueLabel.snp.updateConstraints { (make) in
-            let valueW: CGFloat = model.valueTitle.size(maxSize: CGSize.init(width: CGFloat.max, height: CGFloat.max), font: UIFont.pingFangSCFont(size: 15)).width + 5.0
-            make.width.equalTo(valueW)
-        }
-        self.mainView.layoutIfNeeded()
     }
 
 }
