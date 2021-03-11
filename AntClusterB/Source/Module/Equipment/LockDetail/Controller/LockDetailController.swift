@@ -45,9 +45,9 @@ class LockDetailController: BaseViewController
         //super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return UIStatusBarStyle.lightContent
+//    }
 }
 
 // MARK: - Internal Function
@@ -90,7 +90,7 @@ extension LockDetailController {
         }
         // 1.nav
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "锁仓FIL线性收益", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.navBar.titleLabel.set(text: "锁仓FIL-线性收益", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
         self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in

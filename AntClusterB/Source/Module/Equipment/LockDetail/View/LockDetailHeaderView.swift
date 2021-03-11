@@ -34,7 +34,7 @@ class LockDetailHeaderView: UIView {
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let valueCenterYTopMargin: CGFloat = 30     // super.top
     fileprivate let titleCenterYTopMargin: CGFloat = 29  // title.centerY
-    fileprivate let bottomViewHeight = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height - 149
+    fileprivate let bottomViewHeight: CGFloat = 70
     
     // MARK: - Initialize Function
     init() {

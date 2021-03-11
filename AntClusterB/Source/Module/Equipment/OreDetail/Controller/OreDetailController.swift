@@ -129,6 +129,7 @@ extension OreDetailController {
         // 2. itemContainer
         scrollView.addSubview(self.itemContainer)
         self.itemContainer.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.headerView.snp.bottom).offset(self.itemTopMargin)
             make.bottom.equalToSuperview().offset(-itemBottomMargin)
