@@ -14,6 +14,14 @@ class EDBackAssetDetailView: UIView {
     
     // MARK: - Internal Property
 
+    var model: EquipmentDetailModel? {
+        didSet {
+            guard let model = model else {
+                return
+            }
+            self.formInterestLabel.text = "利息\(model.interest.decimalValidDigitsProcess(digits: 2))%"
+        }
+    }
     var models: [EDAssetReturnListModel]? {
         didSet {
             self.setupWithModels(models)
@@ -49,17 +57,18 @@ class EDBackAssetDetailView: UIView {
     fileprivate let itemInLrMargin: CGFloat = 12
     
     fileprivate let itemInMargin: CGFloat = 12
-    fileprivate let itemInLeftMargin: CGFloat = 12
-    fileprivate let itemInRightMargin: CGFloat = 0
-    
     fileprivate let itemHeight: CGFloat = 36
-    fileprivate let itemHorMargin: CGFloat = 0
     fileprivate let itemVerMargin: CGFloat = 12
     fileprivate let itemTopMargin: CGFloat = 5
     fileprivate let itemBottomMargin: CGFloat = 10
-    fileprivate let itemColNum: Int = 2
+    
+    fileprivate let itemInLeftMargin: CGFloat = 12
+    fileprivate let itemInRightMargin: CGFloat = 0
+    fileprivate let itemHorMargin: CGFloat = 5
+    fileprivate let itemColNum: Int = 4
     fileprivate lazy var itemWidth: CGFloat = {
-        let width: CGFloat = (kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
+        var width: CGFloat = (kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemInRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
+        width = CGFloat(floor(Double(width)))
         return width
     }()
 
@@ -181,8 +190,8 @@ extension EDBackAssetDetailView {
         //
         formView.removeAllSubviews()
         let itemViews: [UILabel] = [self.formDateLabel, self.formZhiyaLabel, self.formGasLabel, self.formInterestLabel]
-        let itemTitles: [String] = ["结算时间", "质押币", "Gas", "利息6%"]
-        let itemWidth: CGFloat = CGFloat(floor(Double((kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLrMargin * 2.0) / CGFloat(itemViews.count))))
+        let itemTitles: [String] = ["结算时间", "质押币", "Gas", "利息"]
+        let itemWidth: CGFloat = self.itemWidth
         var leftView: UIView = formView
         for (index, itemView) in itemViews.enumerated() {
             formView.addSubview(itemView)
@@ -191,12 +200,12 @@ extension EDBackAssetDetailView {
                 make.width.equalTo(itemWidth)
                 make.top.bottom.equalToSuperview()
                 if 0 == index {
-                    make.leading.equalToSuperview().offset(self.itemInLrMargin)
+                    make.leading.equalToSuperview().offset(self.itemInLeftMargin)
                 } else {
                     make.leading.equalTo(leftView.snp.trailing).offset(self.itemHorMargin)
                 }
                 if index == itemViews.count - 1 {
-                    make.trailing.equalToSuperview()
+                    make.trailing.equalToSuperview().offset(-self.itemInRightMargin)
                 }
             }
             leftView = itemView

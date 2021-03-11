@@ -46,8 +46,15 @@ class EDBackAssetDetailItemView: BaseView {
     fileprivate let gasValueLabel: UILabel = UILabel.init()       // Gas
     fileprivate let interestValueLabel: UILabel = UILabel.init()  // 利息
     
-    fileprivate let itemLrMargin: CGFloat = 12
-    fileprivate let itemHorMargin: CGFloat = 0
+    fileprivate let itemLeftMargin: CGFloat = 12
+    fileprivate let itemRightMargin: CGFloat = 0
+    fileprivate let itemHorMargin: CGFloat = 5
+    fileprivate let itemColNum: Int = 4
+    fileprivate lazy var itemWidth: CGFloat = {
+        var width: CGFloat = (self.viewWidth - self.itemLeftMargin - self.itemRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
+        width = CGFloat(floor(Double(width)))
+        return width
+    }()
 
     
     // MARK: - Initialize Function
@@ -114,7 +121,7 @@ extension EDBackAssetDetailItemView {
         //
         mainView.removeAllSubviews()
         let itemViews: [UILabel] = [self.dateValueLabel, self.zhiyaValueLabel, self.gasValueLabel, self.interestValueLabel]
-        let itemWidth: CGFloat = CGFloat(floor(Double((self.viewWidth - self.itemLrMargin * 2.0) / CGFloat(itemViews.count))))
+        let itemWidth: CGFloat = self.itemWidth
         var leftView: UIView = mainView
         for (index, itemView) in itemViews.enumerated() {
             mainView.addSubview(itemView)
@@ -123,12 +130,12 @@ extension EDBackAssetDetailItemView {
                 make.width.equalTo(itemWidth)
                 make.top.bottom.equalToSuperview()
                 if 0 == index {
-                    make.leading.equalToSuperview().offset(self.itemLrMargin)
+                    make.leading.equalToSuperview().offset(self.itemLeftMargin)
                 } else {
                     make.leading.equalTo(leftView.snp.trailing).offset(self.itemHorMargin)
                 }
                 if index == itemViews.count - 1 {
-                    make.trailing.equalToSuperview()
+                    make.trailing.equalToSuperview().offset(-self.itemRightMargin)
                 }
             }
             leftView = itemView
