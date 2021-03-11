@@ -186,6 +186,7 @@ extension EquipmentDetailView {
         self.unbackAssetView.zhiyaItemView.valueLabel.text = asset.wait_pledge.decimalValidDigitsProcess(digits: 8)
         self.unbackAssetView.xiaohaoItemView.valueLabel.text = asset.wait_gas.decimalValidDigitsProcess(digits: 8)
         
+        self.packageDetailView.status = model.status
         self.backAssetDetailView.model = model
         self.assetSurveyView.model = asset
     }

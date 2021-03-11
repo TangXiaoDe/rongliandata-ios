@@ -24,6 +24,14 @@ class EDUniversalSubjectView: UIView {
             self.setupWithModel(model)
         }
     }
+    var status: EquipmentStatus = .deploying {
+        didSet {
+            var statusAtts = NSAttributedString.textAttTuples()
+            statusAtts.append((str: "封装状态：", font: UIFont.pingFangSCFont(size: 12), color: UIColor.init(hex: 0x666666)))
+            statusAtts.append((str: status.title, font: UIFont.pingFangSCFont(size: 16, weight: .medium), color: status.titleColor))
+            self.statusView.attributedText = NSAttributedString.attribute(statusAtts)
+        }
+    }
     
     
     // MARK: - Private Property
@@ -238,11 +246,6 @@ extension EDUniversalSubjectView {
         case "封装详情":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_fengzhuang")
             self.statusView.isHidden = false
-            var statusAtts = NSAttributedString.textAttTuples()
-            statusAtts.append((str: "封装状态：", font: UIFont.pingFangSCFont(size: 12), color: UIColor.init(hex: 0x666666)))
-            statusAtts.append((str: "部署中", font: UIFont.pingFangSCFont(size: 16, weight: .medium), color: UIColor.init(hex: 0xE06236)))
-            self.statusView.attributedText = NSAttributedString.attribute(statusAtts)
-            
             zhiyaTitle = "使用质押币数量(FIL)"
             xiaohaoTitle = "Gas消耗数量(FIL)"
         case "借贷资本明细":
