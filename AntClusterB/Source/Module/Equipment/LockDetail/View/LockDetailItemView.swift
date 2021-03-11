@@ -124,15 +124,23 @@ extension LockDetailItemView {
         let titleCenterYBottomMargin: CGFloat = 21 // super.bottom
         let valueCenterYTopMargin: CGFloat = 20    // super.top
         var leftView: UIView = centerView
+        let leftWidth: CGFloat = kScreenWidth * 0.5 - 12 - 20   // 12(itemLeftMargin)
+        let centerWidth: CGFloat = (kScreenWidth * 0.5 + 20.0) * 0.5 - 20
+        let rightWidth: CGFloat = (kScreenWidth * 0.5 + 20.0) * 0.5 + 20
         for (index, itemView) in itemViews.enumerated() {
             centerView.addSubview(itemView)
             itemView.snp.makeConstraints { (make) in
                 if 0 == index {
                     make.leading.equalToSuperview().offset(12)
-                    make.width.equalTo(kScreenWidth * 0.5 - 12 - 20)
                 } else {
                     make.leading.equalTo(leftView.snp.trailing)
-                    make.width.equalTo((kScreenWidth * 0.5 + 20.0 - 12.0) * 0.5)
+                }
+                if 0 == index {
+                    make.width.equalTo(leftWidth)
+                } else if index == itemViews.count - 1 {
+                    make.width.equalTo(rightWidth)
+                } else {
+                    make.width.equalTo(centerWidth)
                 }
             }
             itemView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999), alignment: .center)
@@ -141,7 +149,7 @@ extension LockDetailItemView {
                 make.trailing.lessThanOrEqualToSuperview()
                 make.centerY.equalTo(centerView.snp.bottom).offset(-titleCenterYBottomMargin)
             }
-            itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText, alignment: .center)
+            itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText, alignment: .center)
             itemView.valueLabel.snp.remakeConstraints { (make) in
                 make.leading.equalToSuperview()
                 make.trailing.lessThanOrEqualToSuperview()

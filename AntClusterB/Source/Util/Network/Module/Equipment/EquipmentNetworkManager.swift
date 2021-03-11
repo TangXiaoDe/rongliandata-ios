@@ -163,6 +163,25 @@ extension EquipmentNetworkManager {
                 complete(false, failure.message, nil)
             case .success(let response):
                 complete(true, response.message, response.model)
+                
+//                // 临时测试代码
+//                if let model = response.model {
+//                    var models: [LockDetailLogModel] = []
+//                    for _ in 0...20 {
+//                        let item = LockDetailLogModel.init()
+//                        item.amount = 1.231232342835835
+//                        item.created_at = Date.init(timeInterval: -24.0 * 3600.0 * 5, since: Date.init())
+//                        models.append(item)
+//                    }
+//                    if offset > 65 {
+//                        models = []
+//                    }
+//                    model.logs = models
+//                    complete(true, response.message, model)
+//                } else {
+//                    complete(true, response.message, response.model)
+//                }
+                
             }
         }
     }
