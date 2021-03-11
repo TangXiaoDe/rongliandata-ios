@@ -168,8 +168,8 @@ extension WalletHomeController {
     }
     /// 进入锁仓明细页
     fileprivate func enterLockDetail() -> Void {
-//        let lockDetailVC = LockDetailController.init(currency: CurrencyType.fil)
-//        self.enterPageVC(lockDetailVC)
+        let lockDetailVC = LockDetailController.init()
+        self.enterPageVC(lockDetailVC)
     }
 }
 // MARK: - Delegate Function
