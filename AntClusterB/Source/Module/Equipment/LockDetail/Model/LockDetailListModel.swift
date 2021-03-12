@@ -57,13 +57,13 @@ class LockDetailLogModel: Mappable {
         let strCreateDay: String = self.created_at.string(format: "yyyy-MM-dd", timeZone: .current)
         let createDay = Date.dateWithString(strCreateDay + " 00:00:00", format: "yyyy-MM-dd HH:mm:ss", timeZone: .current)
         
-        var days: Int = 1
+        var days: Int = 0
         if let today = today, let createDay = createDay {
-            days = Int(today.timeIntervalSince(createDay) / (24.0 * 60.0 * 60.0)) + 1
+            days = Int(today.timeIntervalSince(createDay) / (24.0 * 60.0 * 60.0))
         } else {
-            days = Int(Date.init().timeIntervalSince(self.created_at) / (24.0 * 60.0 * 60.0)) + 1
+            days = Int(Date.init().timeIntervalSince(self.created_at) / (24.0 * 60.0 * 60.0))
         }
-        days = min(180, max(1, days))
+        days = min(180, max(0, days))
         return days
     }
     var strProgress: String {
