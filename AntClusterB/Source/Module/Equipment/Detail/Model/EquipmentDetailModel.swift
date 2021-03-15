@@ -185,9 +185,16 @@ class EquipmentDetailModel: Mappable {
 }
 extension EquipmentDetailModel {
 
-    var status: MiningMachineOrderStatus {
-        var status: MiningMachineOrderStatus = .waitpay
-        if let realStatus = MiningMachineOrderStatus.init(rawValue: self.status_value) {
+//    var status: MiningMachineOrderStatus {
+//        var status: MiningMachineOrderStatus = .waitpay
+//        if let realStatus = MiningMachineOrderStatus.init(rawValue: self.status_value) {
+//            status = realStatus
+//        }
+//        return status
+//    }
+    var status: EquipmentStatus {
+        var status: EquipmentStatus = .deploying
+        if let realStatus = EquipmentStatus.init(rawValue: self.status_value) {
             status = realStatus
         }
         return status

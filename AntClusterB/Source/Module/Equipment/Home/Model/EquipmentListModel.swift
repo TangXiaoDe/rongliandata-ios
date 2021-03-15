@@ -29,6 +29,20 @@ enum EquipmentStatus: Int {
         }
         return title
     }
+    
+    /// 状态标题颜色
+    var titleColor: UIColor {
+        var color: UIColor
+        switch self {
+        case .deploying:
+            color = UIColor.init(hex: 0x333333)
+        case .mining:
+            color = UIColor.init(hex: 0x00B8FF)
+        case .closed:
+            color = UIColor.init(hex: 0x999999)
+        }
+        return color
+    }
 
 }
 
