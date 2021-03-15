@@ -12,6 +12,7 @@ enum WalletBalanceType {
     case mortgage
     case lockUp
     case security
+    case frozen
     
     var icon: UIImage {
         var icon = UIImage()
@@ -24,6 +25,8 @@ enum WalletBalanceType {
             icon = UIImage.init(named: "IMG_wallet_icon_sc") ?? UIImage()
         case .security:
             icon = UIImage.init(named: "IMG_qb_fil_bzj") ?? UIImage()
+        case .frozen:
+            icon = UIImage.init(named: "IMG_qb_fil_ddongjie") ?? UIImage()
         }
         return icon
     }
@@ -37,6 +40,8 @@ enum WalletBalanceType {
         case .lockUp:
             progressColor = UIColor.init(hex: 0xEEF1FF)
         case .security:
+            progressColor = UIColor.init(hex: 0xEEF1FF)
+        case .frozen:
             progressColor = UIColor.init(hex: 0xEEF1FF)
         }
         return progressColor
@@ -52,6 +57,8 @@ enum WalletBalanceType {
             progressColor = UIColor.init(hex: 0x7C8EF3)
         case .security:
             progressColor = UIColor.init(hex: 0x7C8EF3)
+        case .frozen:
+            progressColor = UIColor.init(hex: 0x7C8EF3)
         }
         return progressColor
     }
@@ -66,6 +73,8 @@ enum WalletBalanceType {
             title = "锁仓金额(FIL)"
         case .security:
             title = "安全保障金(FIL)"
+        case .frozen:
+            title = "冻结金额(FIL)"
         }
         return title
     }
@@ -209,6 +218,8 @@ extension WalletBalanceItem {
         case .security:
             self.valueLabel.text = model.security.decimalProcess(digits: 8)
             self.progressView.setProgressBili(model.lock_bili)
+        case .frozen:
+            self.valueLabel.text = model.frozen.decimalValidDigitsProcess(digits: 8)
         }
         
     }
