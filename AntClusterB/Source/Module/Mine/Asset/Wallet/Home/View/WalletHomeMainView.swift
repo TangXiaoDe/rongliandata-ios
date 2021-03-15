@@ -59,6 +59,8 @@ class WalletHomeMainView: UIView {
     fileprivate let mortgageItem = WalletBalanceItem.init(type: .mortgage)
     fileprivate let lockUpItem = WalletBalanceItem.init(type: .lockUp)
     fileprivate let securityItem = WalletBalanceItem.init(type: .security)
+    fileprivate let frozenItem = WalletBalanceItem.init(type: .frozen)
+    
 
     fileprivate var topBgSize: CGSize = CGSize.init(width: 375, height: 190 - 20).scaleAspectForWidth(kScreenWidth)
     fileprivate let centerViewTopMargin: CGFloat = -44 // topView
@@ -309,6 +311,13 @@ extension WalletHomeMainView {
             make.height.equalTo(WalletBalanceItem.viewHeight)
 //            make.bottom.equalToSuperview()
         }
+        bottomView.addSubview(self.frozenItem)
+        self.frozenItem.snp.makeConstraints { (make) in
+            make.top.equalTo(self.securityItem.snp.bottom).offset(self.itemVerMargin)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(WalletBalanceItem.viewHeight)
+//            make.bottom.equalToSuperview()
+        }
     }
 
 }
@@ -341,6 +350,7 @@ extension WalletHomeMainView {
         self.mortgageItem.model = model
         self.lockUpItem.model = model
         self.securityItem.model = model
+        self.frozenItem.model = model
     }
 }
 
