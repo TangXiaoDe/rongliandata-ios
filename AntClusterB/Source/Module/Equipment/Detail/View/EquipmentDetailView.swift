@@ -52,7 +52,7 @@ class EquipmentDetailView: UIView
     /// 已归还
     fileprivate let backedAssetView: EDUniversalSubjectView = EDUniversalSubjectView.init()
     /// 待归还
-    fileprivate let unbackAssetView: EDUniversalSubjectView = EDUniversalSubjectView.init()
+    fileprivate let unbackAssetView: EDUnbackSubjectView = EDUnbackSubjectView.init()
     /// 归还资本明细
     fileprivate let backAssetDetailView: EDBackAssetDetailView = EDBackAssetDetailView.init()
     
@@ -183,9 +183,11 @@ extension EquipmentDetailView {
         self.loanCapitalView.xiaohaoItemView.valueLabel.text = asset.gas.decimalValidDigitsProcess(digits: 8)
         self.backedAssetView.zhiyaItemView.valueLabel.text = asset.return_pledge.decimalValidDigitsProcess(digits: 8)
         self.backedAssetView.xiaohaoItemView.valueLabel.text = asset.return_gas.decimalValidDigitsProcess(digits: 8)
+        //
         self.unbackAssetView.zhiyaItemView.valueLabel.text = asset.wait_pledge.decimalValidDigitsProcess(digits: 8)
         self.unbackAssetView.xiaohaoItemView.valueLabel.text = asset.wait_gas.decimalValidDigitsProcess(digits: 8)
-        
+        self.unbackAssetView.interestItemView.valueLabel.text = asset.interest.decimalValidDigitsProcess(digits: 8)
+        //
         self.packageDetailView.status = model.status
         self.backAssetDetailView.model = model
         self.assetSurveyView.model = asset

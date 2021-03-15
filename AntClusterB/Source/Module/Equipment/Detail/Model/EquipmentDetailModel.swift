@@ -295,6 +295,8 @@ class EDAssetModel: Mappable {
     var return_pledge: Double = 0
     /// 已归还Gas消耗数量
     var return_gas: Double = 0
+    /// 待归还累计欠款利息
+    var interest: Double = 0
 
     ///
     var createdDate: Date = Date.init()
@@ -327,6 +329,7 @@ class EDAssetModel: Mappable {
         gas <- (map["gas"], DoubleStringTransform.default)
         return_pledge <- (map["return_pledge"], DoubleStringTransform.default)
         return_gas <- (map["return_gas"], DoubleStringTransform.default)
+        interest <- (map["interest"], DoubleStringTransform.default)
 
         createdDate <- (map["created_at"], DateStringTransform.current)
         updatedDate <- (map["updated_at"], DateStringTransform.current)
