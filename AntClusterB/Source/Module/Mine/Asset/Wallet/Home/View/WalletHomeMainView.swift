@@ -339,9 +339,9 @@ extension WalletHomeMainView {
         self.totalMoneyView.bottomLabel.text = model.income.decimalProcess(digits: 8)
         self.balancelMoneyView.bottomLabel.text = model.fil_balance.decimalProcess(digits: 8)
         self.cnyValueLabel.text = "≈￥\(model.fil_to_cny.decimalProcess(digits: 2))"
-        self.withdrwalMoneyView.bottomLabel.text = model.withdrawable
-        self.withdrwalingView.bottomLabel.text = model.withdraw_ing
-        self.withdrwaledView.bottomLabel.text = model.withdraw_finish
+        self.withdrwalMoneyView.bottomLabel.text = model.withdrawable.decimalProcess(digits: 8)
+        self.withdrwalingView.bottomLabel.text = model.withdraw_ing.decimalProcess(digits: 8)
+        self.withdrwaledView.bottomLabel.text = model.withdraw_finish.decimalProcess(digits: 8)
 
         // tipLabel
 
