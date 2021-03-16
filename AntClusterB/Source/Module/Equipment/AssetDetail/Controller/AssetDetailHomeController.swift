@@ -18,7 +18,7 @@ class AssetDetailHomeController: BaseViewController {
     fileprivate let filterBtn = UIButton.init(type: .custom)
     fileprivate let titleView = AssetDetailTitleView.init(themeColor: AppColor.theme)
     fileprivate let scrollView: UIScrollView = UIScrollView()
-    fileprivate var cateList: [EquipmentAssetType] = [EquipmentAssetType.all, EquipmentAssetType.fil_pawn, EquipmentAssetType.fil_lock, EquipmentAssetType.fil_available]
+    fileprivate var cateList: [EquipmentAssetType] = [EquipmentAssetType.all, EquipmentAssetType.fil_pawn, EquipmentAssetType.fil_lock, EquipmentAssetType.fil_available, EquipmentAssetType.fil_frozen]
     fileprivate let titleViewH: CGFloat = AssetDetailTitleView.viewHeight
     fileprivate let topMargin: CGFloat = 10
     

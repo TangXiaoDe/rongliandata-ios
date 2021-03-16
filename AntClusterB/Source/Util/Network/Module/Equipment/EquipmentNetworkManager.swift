@@ -18,6 +18,8 @@ enum EquipmentAssetType: String {
     case miner_release = "miner:release"
     // b端挖矿
     case fil_issue = "fil:issue"
+    // 冻结
+    case fil_frozen = "fil:frozen"
     
     var title: String {
         var title = ""
@@ -34,6 +36,8 @@ enum EquipmentAssetType: String {
             title = "挖矿"
         case .fil_issue:
             title = "挖矿"
+        case .fil_frozen:
+            title = "冻结"
         }
         return title
     }
