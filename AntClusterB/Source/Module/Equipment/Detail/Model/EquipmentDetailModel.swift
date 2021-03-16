@@ -199,6 +199,29 @@ extension EquipmentDetailModel {
         }
         return status
     }
+    /// 封装状态
+    var pkg_status: EquipPackageStatus {
+        var status: EquipPackageStatus = EquipPackageStatus.deploying
+        switch self.status {
+        case .deploying:
+            status = .deploying
+        case .closed:
+            status = .closed
+        case .mining:
+            // 封装进度大于 72%，则显示已完成，否则显示进行中
+            status = self.fengcun_progress > 0.72 ? .done : .doing
+        }
+        return status
+    }
+    
+    /// 封存进度=封装数量 / 当期T数
+    var fengcun_progress: Double {
+        if self.t_num <= 0 {
+            return 0
+        }
+        let progress: Double = self.seal_num / Double(self.t_num)
+        return progress
+    }
     
     var voucher_url: URL? {
         return UrlManager.fileUrl(name: self.credential)

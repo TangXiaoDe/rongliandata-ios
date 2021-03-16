@@ -24,7 +24,7 @@ class EDUniversalSubjectView: UIView {
             self.setupWithModel(model)
         }
     }
-    var status: EquipmentStatus = .deploying {
+    var status: EquipPackageStatus = .deploying {
         didSet {
             var statusAtts = NSAttributedString.textAttTuples()
             statusAtts.append((str: "封装状态：", font: UIFont.pingFangSCFont(size: 12), color: UIColor.init(hex: 0x666666)))
