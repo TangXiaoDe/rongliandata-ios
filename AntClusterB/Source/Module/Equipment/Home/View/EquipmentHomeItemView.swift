@@ -279,7 +279,7 @@ extension EquipmentHomeItemView {
         }
         self.miningNumView.titleLabel.text = "挖矿总数"
         self.fengzhuangNumView.titleLabel.text = "封装数量"
-        self.progressNumView.titleLabel.text = "封存比例"
+        self.progressNumView.titleLabel.text = "封装比例"
         self.incomeNumView.titleLabel.text = "累计收益"
         self.yesterdayNumView.titleLabel.text = "昨日收益"
         self.huibenNumView.titleLabel.text = "回本进度"
