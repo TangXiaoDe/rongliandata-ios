@@ -263,7 +263,7 @@ extension EDUnbackSubjectView {
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_daiguihuan")
             zhiyaTitle = "质押币数量(FIL)"
             xiaohaoTitle = "Gas消耗数量(FIL)"
-            self.interestItemView.titleLabel.text = "使用欠款利息(FIL)"
+            self.interestItemView.titleLabel.text = "累计欠款利息(FIL)"
         default:
             break
         }
