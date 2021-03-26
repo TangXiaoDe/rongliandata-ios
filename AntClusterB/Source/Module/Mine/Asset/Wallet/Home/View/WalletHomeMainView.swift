@@ -7,9 +7,9 @@
 //
 
 protocol WalletHomeMainViewProtocol {
-    func mainView(view: WalletHomeMainView, didClickBondHelpImg imgView: UIImageView)
-    func mainView(view: WalletHomeMainView, didClickWithdrwalBtn btn: UIButton)
     func mainView(view: WalletHomeMainView, didClickRechargeBtn btn: UIButton)
+    func mainView(view: WalletHomeMainView, didClickWithdrwalBtn btn: UIButton)
+    func mainView(view: WalletHomeMainView, didClickLockDetailBtn btn: UIButton)
 }
 
 import UIKit
@@ -43,43 +43,35 @@ class WalletHomeMainView: UIView {
     /// 可提现
     fileprivate let withdrwalMoneyView = TopTitleBottomTitleControl()
     /// 提现中
-    fileprivate let withdrwalingLabel = UILabel()
+    fileprivate let withdrwalingView = TopTitleBottomTitleControl()
     /// 已提现
-    fileprivate let withdrwaledLabel = UILabel()
+    fileprivate let withdrwaledView = TopTitleBottomTitleControl()
     /// 充值按钮
     fileprivate let rechargeBtn = UIButton.init(type: .custom)
     /// 提现按钮
     fileprivate let withdrwalBtn = UIButton.init(type: .custom)
-
-    /// 保证金
-    fileprivate let bondView: UIView = UIView()
-    fileprivate let bondBgView: UIImageView = UIImageView()
-    fileprivate let bondBottomView: UIView = UIView()
-    fileprivate let bondLabel: UILabel = UILabel()
-    fileprivate let bondHelpImgView: UIImageView = UIImageView()
+    /// 设备列表按钮
+    fileprivate let lockDetailBtn = UIButton.init(type: .custom)
     
     fileprivate let bottomView: UIView = UIView()
     fileprivate let bottomTitleLabel: UILabel = UILabel()
     fileprivate let canUseItem = WalletBalanceItem.init(type: .canUse)
     fileprivate let mortgageItem = WalletBalanceItem.init(type: .mortgage)
-    fileprivate let lockUpItem = WalletBalanceItem.init(type: .LockUp)
-    // tipLabel
-    fileprivate let dataView = UIView()
-    fileprivate let dataTitleLabel = UILabel()
-    fileprivate let totalCunView = IconTitleValueView()
-    fileprivate let hasCunView = IconTitleValueView()
-    fileprivate let cunProgressView = IconTitleValueView()
+    fileprivate let lockUpItem = WalletBalanceItem.init(type: .lockUp)
+    fileprivate let securityItem = WalletBalanceItem.init(type: .security)
+    fileprivate let frozenItem = WalletBalanceItem.init(type: .frozen)
+    
 
     fileprivate var topBgSize: CGSize = CGSize.init(width: 375, height: 190 - 20).scaleAspectForWidth(kScreenWidth)
     fileprivate let centerViewTopMargin: CGFloat = -44 // topView
+    fileprivate let bottomViewTopMargin: CGFloat = -16 // topView
     fileprivate let centerViewHeight: CGFloat = CGSize.init(width: 375, height: 134).scaleAspectForWidth(kScreenWidth).height
-    fileprivate let bondViewHeight: CGFloat = CGSize.init(width: 375, height: 40).scaleAspectForWidth(kScreenWidth).height
-    fileprivate let bondBottomViewHeight: CGFloat = 30
+    
+    fileprivate let withdrawBtnSize: CGSize = CGSize.init(width: 64, height: 28)
+    fileprivate let lockDetailBtnSize: CGSize = CGSize.init(width: 64, height: 28)
     
     fileprivate let bgTopMargin: CGFloat = 0
     fileprivate let lrMargin: CGFloat = 15
-    fileprivate let titleViewHeight: CGFloat = 40
-    fileprivate let bottomMargin: CGFloat = 15
     fileprivate let itemVerMargin: CGFloat = 10
 
     // MARK: - Initialize Function
@@ -145,9 +137,10 @@ extension WalletHomeMainView {
         self.initialBottomView(self.bottomView)
         self.bottomView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.centerView.snp.bottom)
+            make.top.equalTo(self.centerView.snp.bottom).offset(bottomViewTopMargin)
             make.bottom.equalToSuperview()
         }
+        self.bottomView.setupCorners([UIRectCorner.topRight, UIRectCorner.topLeft], selfSize: CGSize.init(width: kScreenWidth, height: kScreenHeight - (self.topBgSize.height + kStatusBarHeight + centerViewTopMargin + self.centerViewHeight + bottomViewTopMargin)), cornerRadius: 16)
     }
     fileprivate func initialToptopBgView(_ topBgView: UIView) -> Void {
         // 0.totalMoneyView
@@ -200,7 +193,7 @@ extension WalletHomeMainView {
             make.bottom.equalToSuperview()
         }
         centerView.addSubview(self.withdrwalMoneyView)
-        self.withdrwalMoneyView.topLabel.set(text: "可提现金额(FIL)", font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: UIColor.init(hex: 0xFFF9F4), alignment: .left)
+        self.withdrwalMoneyView.topLabel.set(text: "可提现金额(FIL)", font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: UIColor.init(hex: 0xFFF9F4).withAlphaComponent(0.8), alignment: .left)
         self.withdrwalMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 20, weight: .medium), textColor: UIColor.white, alignment: .left)
         self.withdrwalMoneyView.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(lrMargin)
@@ -219,11 +212,11 @@ extension WalletHomeMainView {
         self.rechargeBtn.addTarget(self, action: #selector(rechargeBtnClick(_:)), for: .touchUpInside)
         self.rechargeBtn.set(font: UIFont.pingFangSCFont(size: 14, weight: .medium))
         self.rechargeBtn.setTitle("充币", for: .normal)
-        self.rechargeBtn.setTitleColor(UIColor.init(hex: 0x00B8FF), for: .normal)
+        self.rechargeBtn.setTitleColor(UIColor.init(hex: 0x19A8B1), for: .normal)
         self.rechargeBtn.backgroundColor = UIColor.white
-        self.rechargeBtn.set(cornerRadius: 14)
+        self.rechargeBtn.set(cornerRadius: 3)
         self.rechargeBtn.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize.init(width: 60, height: 28))
+            make.size.equalTo(self.withdrawBtnSize)
             make.trailing.equalToSuperview().offset(-lrMargin)
             make.centerY.equalTo(self.withdrwalMoneyView)
         }
@@ -231,35 +224,57 @@ extension WalletHomeMainView {
         self.withdrwalBtn.addTarget(self, action: #selector(withdrwalBtnClick(_:)), for: .touchUpInside)
         self.withdrwalBtn.set(font: UIFont.pingFangSCFont(size: 14, weight: .medium))
         self.withdrwalBtn.setTitle("提币", for: .normal)
-        self.withdrwalBtn.setTitleColor(UIColor.init(hex: 0x00B8FF), for: .normal)
+        self.withdrwalBtn.setTitleColor(UIColor.init(hex: 0x19A8B1), for: .normal)
         self.withdrwalBtn.backgroundColor = UIColor.white
-        self.withdrwalBtn.set(cornerRadius: 14)
+        self.withdrwalBtn.set(cornerRadius: 3)
         self.withdrwalBtn.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize.init(width: 60, height: 28))
+            make.size.equalTo(self.withdrawBtnSize)
             make.right.equalTo(self.rechargeBtn.snp.left).offset(-12)
             make.centerY.equalTo(self.withdrwalMoneyView)
         }
-        // 1.bondView
-        centerView.addSubview(self.bondView)
-        self.initialBondView(self.bondView)
-//        self.bondView.backgroundColor = UIColor.init(hex: 0x833C11).withAlphaComponent(0.5)
-//        self.bondView.setupCorners([UIRectCorner.topLeft, UIRectCorner.topRight], selfSize: CGSize.init(width: kScreenWidth, height: self.bondViewHeight), cornerRadius: 15)
-        self.bondView.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(self.bondViewHeight)
+        centerView.addSubview(self.withdrwalingView)
+        self.withdrwalingView.topLabel.set(text: "提现中(FIL)", font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: UIColor.init(hex: 0xFFF9F4).withAlphaComponent(0.8), alignment: .left)
+        self.withdrwalingView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: UIColor.white.withAlphaComponent(0.8), alignment: .left)
+        self.withdrwalingView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(lrMargin)
+            make.right.lessThanOrEqualTo(topBgView.snp.centerX).offset(0)
+            make.top.equalTo(centerView.snp.centerY)
+            make.width.greaterThanOrEqualTo(65)
         }
-        // 两个label 预约基于bondView 放最后
-        centerView.addSubview(self.withdrwalingLabel)
-        self.withdrwalingLabel.set(text: "提现中 0.00", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
-        self.withdrwalingLabel.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(lrMargin)
-            make.centerY.equalTo(self.bondView.snp.top).offset(-16)
+        self.withdrwalingView.bottomLabel.snp.remakeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(self.withdrwalingView.topLabel.snp.bottom).offset(6)
+            make.bottom.equalToSuperview().offset(0)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(16)
         }
-        centerView.addSubview(self.withdrwaledLabel)
-        self.withdrwaledLabel.set(text: "已提现 0.00", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
-        self.withdrwaledLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.withdrwalingLabel.snp.right).offset(20)
-            make.centerY.equalTo(self.withdrwalingLabel)
+        centerView.addSubview(self.withdrwaledView)
+        self.withdrwaledView.topLabel.set(text: "已提现(FIL)", font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: UIColor.init(hex: 0xFFF9F4).withAlphaComponent(0.8), alignment: .left)
+        self.withdrwaledView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: UIColor.white.withAlphaComponent(0.8), alignment: .left)
+        self.withdrwaledView.snp.makeConstraints { (make) in
+            make.left.equalTo(self.withdrwalingView.snp.right).offset(30)
+            make.right.lessThanOrEqualTo(topBgView.snp.centerX).offset(0)
+            make.centerY.equalTo(self.withdrwalingView.snp.centerY)
+            make.width.greaterThanOrEqualTo(65)
+        }
+        self.withdrwaledView.bottomLabel.snp.remakeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(self.withdrwaledView.topLabel.snp.bottom).offset(6)
+            make.bottom.equalToSuperview().offset(0)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(16)
+        }
+        centerView.addSubview(self.lockDetailBtn)
+        self.lockDetailBtn.addTarget(self, action: #selector(lockDetailBtnClick(_:)), for: .touchUpInside)
+        self.lockDetailBtn.set(font: UIFont.pingFangSCFont(size: 13, weight: .medium))
+        self.lockDetailBtn.setTitle("锁仓详情", for: .normal)
+        self.lockDetailBtn.setTitleColor(UIColor.init(hex: 0xE9C483), for: .normal)
+        self.lockDetailBtn.backgroundColor = UIColor.init(hex: 0x333333).withAlphaComponent(0.5)
+        self.lockDetailBtn.set(cornerRadius: 3)
+        self.lockDetailBtn.snp.makeConstraints { (make) in
+            make.size.equalTo(self.lockDetailBtnSize)
+            make.right.equalTo(self.rechargeBtn.snp.right)
+            make.centerY.equalTo(self.withdrwaledView)
         }
     }
     fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
@@ -269,11 +284,11 @@ extension WalletHomeMainView {
         self.bottomTitleLabel.set(text: "其他金额", font: UIFont.pingFangSCFont(size: 14, weight: .medium), textColor: UIColor.init(hex: 0x333333))
         self.bottomTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(lrMargin)
-            make.centerY.equalTo(bottomView.snp.top).offset(12)
+            make.centerY.equalTo(bottomView.snp.top).offset(27)
         }
         bottomView.addSubview(self.canUseItem)
         self.canUseItem.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(32)
+            make.top.equalTo(self.bottomTitleLabel.snp.centerY).offset(20)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(WalletBalanceItem.viewHeight)
         }
@@ -289,85 +304,20 @@ extension WalletHomeMainView {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(WalletBalanceItem.viewHeight)
         }
-        // dataView
-        bottomView.addSubview(self.dataView)
-        self.dataView.addLineWithSide(.inTop, color: AppColor.dividing, thickness: 0.4, margin1: lrMargin, margin2: lrMargin)
-        self.dataView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.lockUpItem.snp.bottom).offset(15)
+        bottomView.addSubview(self.securityItem)
+        self.securityItem.snp.makeConstraints { (make) in
+            make.top.equalTo(self.lockUpItem.snp.bottom).offset(self.itemVerMargin)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.height.equalTo(WalletBalanceItem.viewHeight)
+//            make.bottom.equalToSuperview()
         }
-        self.dataView.addSubview(self.dataTitleLabel)
-        self.dataTitleLabel.set(text: "数据概况", font: UIFont.pingFangSCFont(size: 14, weight: .medium), textColor: AppColor.mainText)
-        self.dataTitleLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.dataView.snp.top).offset(23)
-            make.leading.equalToSuperview().offset(lrMargin)
-        }
-        self.dataView.addSubview(self.totalCunView)
-        self.totalCunView.iconView.image = UIImage.init(named: "IMG_qb_icon_zcl")
-        self.totalCunView.titleLabel.text = "IPFS总存力"
-        self.totalCunView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.dataTitleLabel.snp.centerY).offset(29)
-            make.leading.equalToSuperview().offset(lrMargin)
-            make.trailing.equalToSuperview().offset(-lrMargin)
-            make.height.equalTo(28)
-        }
-        self.dataView.addSubview(self.hasCunView)
-        self.hasCunView.iconView.image = UIImage.init(named: "IMG_qb_icon_number")
-        self.hasCunView.titleLabel.text = "已封存数量"
-        self.hasCunView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.totalCunView.snp.centerY).offset(28)
-            make.leading.equalToSuperview().offset(lrMargin)
-            make.trailing.equalToSuperview().offset(-lrMargin)
-            make.height.equalTo(28)
-        }
-        self.dataView.addSubview(self.cunProgressView)
-        self.cunProgressView.iconView.image = UIImage.init(named: "IMG_qb_icon_jindu")
-        self.cunProgressView.titleLabel.text = "已封存进度"
-        self.cunProgressView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.hasCunView.snp.centerY).offset(28)
-            make.leading.equalToSuperview().offset(lrMargin)
-            make.trailing.equalToSuperview().offset(-lrMargin)
-            make.height.equalTo(28)
-        }
-
-    }
-    fileprivate func initialBondView(_ bondView: UIView) -> Void {
-        bondView.addSubview(self.bondBgView)
-        self.bondBgView.set(cornerRadius: 0)
-        self.bondBgView.image = UIImage.init(named: "IMG_qb_bz_bg")
-        self.bondBgView.set(cornerRadius: 0)
-        self.bondBgView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        // 2.bondBottomView
-        bondView.addSubview(self.bondBottomView)
-        self.bondBottomView.backgroundColor = UIColor.white
-        self.bondBottomView.setupCorners([UIRectCorner.topLeft, UIRectCorner.topRight], selfSize: CGSize.init(width: kScreenWidth, height: self.bondBottomViewHeight), cornerRadius: 15)
-        self.bondBottomView.snp.makeConstraints { (make) in
+        bottomView.addSubview(self.frozenItem)
+        self.frozenItem.snp.makeConstraints { (make) in
+            make.top.equalTo(self.securityItem.snp.bottom).offset(self.itemVerMargin)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(15)
-            make.height.equalTo(bondBottomViewHeight)
+            make.height.equalTo(WalletBalanceItem.viewHeight)
+//            make.bottom.equalToSuperview()
         }
-        bondView.addSubview(self.bondLabel)
-        self.bondLabel.set(text: "安全保障金：0.00", font: UIFont.pingFangSCFont(size: 11, weight: .medium), textColor: UIColor.init(hex: 0x1AF6CA))
-        self.bondLabel.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(lrMargin)
-            make.top.equalTo(self.bondBgView.snp.top)
-            make.bottom.equalTo(self.bondBottomView.snp.top)
-        }
-        bondView.addSubview(self.bondHelpImgView)
-        self.bondHelpImgView.isUserInteractionEnabled = true
-        self.bondHelpImgView.image = UIImage.init(named: "IMG_wallet_icon_help")
-        self.bondHelpImgView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(bondHelpImgViewTap(_:))))
-        self.bondHelpImgView.set(cornerRadius: 0)
-        self.bondHelpImgView.contentMode = .center
-        self.bondHelpImgView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(22)
-            make.left.equalTo(self.bondLabel.snp.right).offset(0)
-            make.centerY.equalTo(self.bondLabel)
-        }
-        self.bondHelpImgView.isHidden = true
     }
 
 }
@@ -386,32 +336,21 @@ extension WalletHomeMainView {
         guard let model = model else {
             return
         }
-        self.totalMoneyView.bottomLabel.text = model.income.decimalProcess(digits: 4)
-        self.balancelMoneyView.bottomLabel.text = model.fil_balance.decimalProcess(digits: 4)
+        self.totalMoneyView.bottomLabel.text = model.income.decimalProcess(digits: 8)
+        self.balancelMoneyView.bottomLabel.text = model.fil_balance.decimalProcess(digits: 8)
         self.cnyValueLabel.text = "≈￥\(model.fil_to_cny.decimalProcess(digits: 2))"
-        self.withdrwalMoneyView.bottomLabel.text = model.withdrawable.decimalProcess(digits: 4)
-        // withdrwalingLabel
-        let withdrwalingAtt: NSMutableAttributedString = NSMutableAttributedString.init()
-        withdrwalingAtt.append(NSAttributedString.init(string: "提现中", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0xFFF9F4)]))
-        withdrwalingAtt.append(NSAttributedString.init(string: " \(model.withdraw_ing.decimalProcess(digits: 4))FIL", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0xFFFFFFF)]))
-        self.withdrwalingLabel.attributedText = withdrwalingAtt
-        // withdrwaledLabel
-        let withdrwaledAtt: NSMutableAttributedString = NSMutableAttributedString.init()
-        withdrwaledAtt.append(NSAttributedString.init(string: "已提现", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0xFFF9F4)]))
-        withdrwaledAtt.append(NSAttributedString.init(string: " \(model.withdraw_finish.decimalProcess(digits: 4))FIL", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0xFFFFFFF)]))
-        self.withdrwaledLabel.attributedText = withdrwaledAtt
-        // bondLabel
-        self.bondLabel.text = "安全保障金：\(model.security.decimalProcess(digits: 4))"
+        self.withdrwalMoneyView.bottomLabel.text = model.withdrawable.decimalProcess(digits: 8)
+        self.withdrwalingView.bottomLabel.text = model.withdraw_ing.decimalProcess(digits: 8)
+        self.withdrwaledView.bottomLabel.text = model.withdraw_finish.decimalProcess(digits: 8)
+
         // tipLabel
 
         // item
         self.canUseItem.model = model
         self.mortgageItem.model = model
         self.lockUpItem.model = model
-        
-        self.totalCunView.valueLabel.text = "\(model.total_save_power)".decimalProcess(digits: 4) + "T"
-        self.hasCunView.valueLabel.text = "\(model.total_seal)".decimalProcess(digits: 4) + "T"
-        self.cunProgressView.valueLabel.text = "\(model.cunProgress)".decimalProcess(digits: 2) + "%"
+        self.securityItem.model = model
+        self.frozenItem.model = model
     }
 }
 
@@ -423,8 +362,8 @@ extension WalletHomeMainView {
     @objc fileprivate func rechargeBtnClick(_ btn: UIButton) {
         self.delegate?.mainView(view: self, didClickRechargeBtn: btn)
     }
-    @objc fileprivate func bondHelpImgViewTap(_ tap: UITapGestureRecognizer) {
-        self.delegate?.mainView(view: self, didClickBondHelpImg: self.bondHelpImgView)
+    @objc fileprivate func lockDetailBtnClick(_ btn: UIButton) {
+        self.delegate?.mainView(view: self, didClickLockDetailBtn: btn)
     }
 }
 

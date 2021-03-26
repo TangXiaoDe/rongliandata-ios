@@ -21,6 +21,8 @@ class WalletFilInfoModel: Mappable {
     var withdraw_ing: String = "0.0"
     /// 已提现金额
     var withdraw_finish: String = "0.0"
+    /// 冻结金额
+    var frozen: Double = 0
     /// 锁仓金额
     var lock: String = "0.0"
     /// 抵押金额
@@ -39,7 +41,7 @@ class WalletFilInfoModel: Mappable {
     /// Fil资产余额
     var fil_balance: String {
         if let withdrawable = Double(withdrawable), let lock = Double(lock), let pawn = Double(pawn), let security = Double(security) {
-            let balance = withdrawable + lock + pawn + security
+            let balance = withdrawable + lock + pawn + security + self.frozen
             return balance.decimalValidDigitsProcess(digits: 4)
         }
         return ""
@@ -123,6 +125,7 @@ class WalletFilInfoModel: Mappable {
         address <- map["address"]
         total_seal <- (map["total_seal"], DoubleStringTransform.default)
         total_save_power <- (map["total_save_power"], DoubleStringTransform.default)
+        frozen <- (map["frozen"], DoubleStringTransform.default)
     }
 
 }

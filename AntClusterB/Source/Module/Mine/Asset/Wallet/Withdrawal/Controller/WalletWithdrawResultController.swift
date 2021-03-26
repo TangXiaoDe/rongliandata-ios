@@ -224,8 +224,8 @@ extension WalletWithdrawResultController {
         self.withdrawalDateView.secondLabel.text = Date().string(format: "yyyy-MM-dd HH:mm:ss", timeZone: .current)
     }
     fileprivate func setupData(with model: WalletWithdrawResultModel) -> Void {
-        self.withdrawalAmountView.secondLabel.text = model.amount.decimalProcess(digits: 4) + model.currency.uppercased()
-        self.withdrawalFeeView.secondLabel.text = model.fee.decimalProcess(digits: 4) + model.currency.uppercased()
+        self.withdrawalAmountView.secondLabel.text = model.amount.decimalValidDigitsProcess(digits: 4) + model.currency.uppercased()
+        self.withdrawalFeeView.secondLabel.text = model.fee.decimalValidDigitsProcess(digits: 4) + model.currency.uppercased()
         self.withdrawalDateView.secondLabel.text = model.createdDate.string(format: "yyyy-MM-dd HH:mm:ss", timeZone: .current)
         switch model.status {
         case .applying:

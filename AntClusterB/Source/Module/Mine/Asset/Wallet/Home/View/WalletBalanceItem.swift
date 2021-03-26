@@ -10,7 +10,9 @@
 enum WalletBalanceType {
     case canUse
     case mortgage
-    case LockUp
+    case lockUp
+    case security
+    case frozen
     
     var icon: UIImage {
         var icon = UIImage()
@@ -19,8 +21,12 @@ enum WalletBalanceType {
             icon = UIImage.init(named: "IMG_wallet_icon_ky") ?? UIImage()
         case .mortgage:
             icon = UIImage.init(named: "IMG_wallet_icon_dy") ?? UIImage()
-        case .LockUp:
+        case .lockUp:
             icon = UIImage.init(named: "IMG_wallet_icon_sc") ?? UIImage()
+        case .security:
+            icon = UIImage.init(named: "IMG_qb_fil_bzj") ?? UIImage()
+        case .frozen:
+            icon = UIImage.init(named: "IMG_qb_fil_ddongjie") ?? UIImage()
         }
         return icon
     }
@@ -31,7 +37,11 @@ enum WalletBalanceType {
             progressColor = UIColor.init(hex: 0xF0F4FF)
         case .mortgage:
             progressColor = UIColor.init(hex: 0xF3EFFF)
-        case .LockUp:
+        case .lockUp:
+            progressColor = UIColor.init(hex: 0xEEF1FF)
+        case .security:
+            progressColor = UIColor.init(hex: 0xEEF1FF)
+        case .frozen:
             progressColor = UIColor.init(hex: 0xEEF1FF)
         }
         return progressColor
@@ -43,7 +53,11 @@ enum WalletBalanceType {
             progressColor = UIColor.init(hex: 0x3E5DBD)
         case .mortgage:
             progressColor = UIColor.init(hex: 0x9E79FF)
-        case .LockUp:
+        case .lockUp:
+            progressColor = UIColor.init(hex: 0x7C8EF3)
+        case .security:
+            progressColor = UIColor.init(hex: 0x7C8EF3)
+        case .frozen:
             progressColor = UIColor.init(hex: 0x7C8EF3)
         }
         return progressColor
@@ -55,8 +69,12 @@ enum WalletBalanceType {
             title = "可用金额(FIL)"
         case .mortgage:
             title = "抵押金额(FIL)"
-        case .LockUp:
+        case .lockUp:
             title = "锁仓金额(FIL)"
+        case .security:
+            title = "安全保障金(FIL)"
+        case .frozen:
+            title = "冻结金额(FIL)"
         }
         return title
     }
@@ -143,11 +161,12 @@ extension WalletBalanceItem {
         mainView.addSubview(self.titleLabel)
         self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: UIColor.init(hex: 0x333333))
         self.titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.iconImgView.snp.top).offset(5)
+            make.centerY.equalToSuperview()
             make.left.equalTo(self.iconImgView.snp.right).offset(self.titleLeftMargin)
         }
         // 2.progressView
         mainView.addSubview(self.progressView)
+        self.progressView.isHidden = true
         self.progressView.snp.makeConstraints { (make) in
             make.bottom.equalTo(self.iconImgView.snp.bottom).offset(-5)
             make.left.equalTo(self.titleLabel)
@@ -188,15 +207,21 @@ extension WalletBalanceItem {
         }
         switch self.type {
         case .canUse:
-            self.valueLabel.text = model.canUse_balance.decimalProcess(digits: 4)
+            self.valueLabel.text = model.canUse_balance.decimalProcess(digits: 8)
             self.progressView.setProgressBili(model.canUse_bili)
         case .mortgage:
-            self.valueLabel.text = model.pawn.decimalProcess(digits: 4)
+            self.valueLabel.text = model.pawn.decimalProcess(digits: 8)
             self.progressView.setProgressBili(model.pawn_bili)
-        case .LockUp:
-            self.valueLabel.text = model.lock.decimalProcess(digits: 4)
+        case .lockUp:
+            self.valueLabel.text = model.lock.decimalProcess(digits: 8)
             self.progressView.setProgressBili(model.lock_bili)
+        case .security:
+            self.valueLabel.text = model.security.decimalProcess(digits: 8)
+            self.progressView.setProgressBili(model.lock_bili)
+        case .frozen:
+            self.valueLabel.text = model.frozen.decimalValidDigitsProcess(digits: 8)
         }
+        
     }
 }
 

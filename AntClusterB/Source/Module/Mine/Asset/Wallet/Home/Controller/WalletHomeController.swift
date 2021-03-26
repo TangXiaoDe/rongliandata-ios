@@ -43,7 +43,7 @@ extension WalletHomeController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -166,6 +166,11 @@ extension WalletHomeController {
         let withdrawVC = RechargeHomeController.init(currency: "FIL", address: assetModel.address)
         self.enterPageVC(withdrawVC)
     }
+    /// 进入锁仓明细页
+    fileprivate func enterLockDetail() -> Void {
+        let lockDetailVC = LockDetailController.init()
+        self.enterPageVC(lockDetailVC)
+    }
 }
 // MARK: - Delegate Function
 extension WalletHomeController: AppHomeNavStatusViewProtocol {
@@ -180,8 +185,8 @@ extension WalletHomeController: AppHomeNavStatusViewProtocol {
 }
 // MARK: - WalletHomeMainViewProtocol
 extension WalletHomeController: WalletHomeMainViewProtocol {
-    func mainView(view: WalletHomeMainView, didClickBondHelpImg imgView: UIImageView) {
-        print("didClickBondHelpImg")
+    func mainView(view: WalletHomeMainView, didClickLockDetailBtn btn: UIButton) {
+        self.enterLockDetail()
     }
     func mainView(view: WalletHomeMainView, didClickWithdrwalBtn btn: UIButton) {
         print("didClickWithdrwalBtn")

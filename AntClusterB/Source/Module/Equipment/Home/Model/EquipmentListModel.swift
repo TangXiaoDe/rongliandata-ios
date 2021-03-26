@@ -9,6 +9,7 @@
 import Foundation
 import ObjectMapper
 
+/// 设备状态
 enum EquipmentStatus: Int {
     /// 部署中
     case deploying = 1
@@ -29,7 +30,66 @@ enum EquipmentStatus: Int {
         }
         return title
     }
+    
+    /// 状态标题颜色
+    var titleColor: UIColor {
+        var color: UIColor
+        switch self {
+        case .deploying:
+            color = UIColor.init(hex: 0x333333)
+        case .mining:
+            color = UIColor.init(hex: 0x00B8FF)
+        case .closed:
+            color = UIColor.init(hex: 0x999999)
+        }
+        return color
+    }
 
+}
+
+/// 封装状态
+enum EquipPackageStatus {
+    /// 部署中
+    case deploying
+    /// 进行中
+    case doing
+    /// 已完成
+    case done
+    /// 已关闭
+    case closed
+    
+    /// 封装标题
+    var title: String {
+        var title: String = ""
+        switch self {
+        case .deploying:
+            title = "部署中"
+        case .doing:
+            title = "进行中"
+        case .done:
+            title = "已完成"
+        case .closed:
+            title = "已关闭"
+        }
+        return title
+    }
+    
+    /// 状态标题颜色
+    var titleColor: UIColor {
+        var color: UIColor
+        switch self {
+        case .doing:
+            color = UIColor.init(hex: 0x00B8FF)
+        case .deploying:
+            fallthrough
+        case .done:
+            color = UIColor.init(hex: 0x333333)
+        case .closed:
+            color = UIColor.init(hex: 0x999999)
+        }
+        return color
+    }
+    
 }
 
 class EquipmentListModel: Mappable {
@@ -59,6 +119,15 @@ class EquipmentListModel: Mappable {
     var createdDate: Date = Date()
     ///
     var updatedDate: Date = Date()
+    
+    ///
+    var zoneValue: String = ""
+    var zone: ProductZone {
+        if let type = ProductZone(rawValue: self.zoneValue) {
+            return type
+        }
+        return ProductZone.ipfs
+    }
 
 
     init(no: String) {
@@ -81,13 +150,28 @@ class EquipmentListModel: Mappable {
         createdDate <- (map["created_at"], DateStringTransform.current)
         updatedDate <- (map["updated_at"], DateStringTransform.current)
         status_value <- map["status"]
+        zoneValue <- map["zone"]
     }
     
-    /// 状态
+    /// 设备状态
     var status: EquipmentStatus {
         var status: EquipmentStatus = EquipmentStatus.deploying
         if let realStatus = EquipmentStatus.init(rawValue: self.status_value) {
             status = realStatus
+        }
+        return status
+    }
+    /// 封装状态
+    var pkg_status: EquipPackageStatus {
+        var status: EquipPackageStatus = EquipPackageStatus.deploying
+        switch self.status {
+        case .deploying:
+            status = .deploying
+        case .closed:
+            status = .closed
+        case .mining:
+            // 封装进度大于 72%，则显示已完成，否则显示进行中
+            status = self.fengcun_progress > 0.72 ? .done : .doing
         }
         return status
     }
@@ -130,7 +214,7 @@ extension EquipmentListModel {
         case .deploying:
             color = UIColor.init(hex: 0x333333)
         case .mining:
-            color = UIColor.init(hex: 0x2381FB)
+            color = UIColor.init(hex: 0x00B8FF)
         case .closed:
             color = UIColor.init(hex: 0x999999)
         }

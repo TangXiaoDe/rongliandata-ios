@@ -24,9 +24,9 @@ class WalletWithdrawResultModel: Mappable
     /// 用户id
     var user_id: Int = 0
     /// 提现数量
-    var amount: String = ""
+    var amount: Double = 0
     /// 手续费
-    var fee: String = ""
+    var fee: Double = 0
     /// 订单号
     var pid: String = ""
     /// 状态：0待审核/1成功/2驳回
@@ -54,7 +54,7 @@ class WalletWithdrawResultModel: Mappable
     func mapping(map: Map) {
         id <- map["id"]
         user_id <- map["user_id"]
-        amount <- map["num"]
+        amount <- (map["num"], DoubleStringTransform.default)
         fee <- map["fee"]
         pid <- map["pid"]
         status_value <- map["status"]
@@ -66,7 +66,7 @@ class WalletWithdrawResultModel: Mappable
         data <- map["data"]
 
     }
-    init(amount: String, fee: String, status: Int, date: Date) {
+    init(amount: Double, fee: Double, status: Int, date: Date) {
         self.amount = amount
         self.fee = fee
         self.status_value = status
@@ -75,8 +75,8 @@ class WalletWithdrawResultModel: Mappable
     }
     init(model: AssetListModel, currency: String) {
         self.amount = model.amount
-        self.fee = model.filWithdrawalFee ?? "0"
-        self.status_value = model.satusValue
+        self.fee = model.extend?.filWithdrawalFee ?? 0
+        self.status_value = model.status_value
         self.createdDate = model.createDate
         self.updatedDate = model.updateDate
         self.currency = currency
