@@ -177,8 +177,8 @@ extension EquipmentDetailView {
             return
         }
         // 子控件数据加载
-        self.packageDetailView.zhiyaItemView.valueLabel.text = asset.pledge.decimalValidDigitsProcess(digits: 8)
-        self.packageDetailView.xiaohaoItemView.valueLabel.text = asset.gas.decimalValidDigitsProcess(digits: 8)
+        self.packageDetailView.zhiyaItemView.valueLabel.text = asset.used_pledge.decimalValidDigitsProcess(digits: 8)
+        self.packageDetailView.xiaohaoItemView.valueLabel.text = asset.used_gas.decimalValidDigitsProcess(digits: 8)
         self.loanCapitalView.zhiyaItemView.valueLabel.text = asset.pledge.decimalValidDigitsProcess(digits: 8)
         self.loanCapitalView.xiaohaoItemView.valueLabel.text = asset.gas.decimalValidDigitsProcess(digits: 8)
         self.backedAssetView.zhiyaItemView.valueLabel.text = asset.return_pledge.decimalValidDigitsProcess(digits: 8)
