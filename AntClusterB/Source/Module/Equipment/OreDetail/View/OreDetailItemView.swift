@@ -29,6 +29,9 @@ class OreDetailItemView: UIView {
     // fil
     fileprivate let miningNumView: TitleValueView = TitleValueView.init()   // 挖矿总数
     fileprivate let fengzhuangNumView: TitleValueView = TitleValueView.init()   // 封装数量
+    fileprivate let zhiyaNumView: TitleValueView = TitleValueView.init()   // 借贷质押币
+    fileprivate let gasNumView: TitleValueView = TitleValueView.init()   // 借贷GAS
+    
 
     fileprivate let topViewHeight: CGFloat = 32
     fileprivate let centerViewHeight: CGFloat = 66
@@ -137,7 +140,7 @@ extension OreDetailItemView {
     fileprivate func initialCenterView(_ centerView: UIView, _ itemViews: [TitleValueView]) -> Void {
         // itemViews: miningNumView/fengzhuangNumView/progressNumView
         centerView.removeAllSubviews()
-        let itemCenterYTBMargin: CGFloat = 21 // cenY to super bottom/top
+        let itemCenterYTBMargin: CGFloat = 20 // cenY to super bottom/top
         let itemVerMargin: CGFloat = 24 // cenY.to cenY
         var lastView: UIView = centerView
         for (index, itemView) in itemViews.enumerated() {
@@ -172,7 +175,9 @@ extension OreDetailItemView {
         self.miningNumView.titleLabel.text = "挖矿数"
         self.miningNumView.valueLabel.textColor = UIColor.init(hex: 0xE06236)
         self.fengzhuangNumView.titleLabel.text = "封装数"
-        self.fengzhuangNumView.valueLabel.textColor = AppColor.mainText
+        self.zhiyaNumView.titleLabel.text = "借贷质押币"
+        self.gasNumView.titleLabel.text = "借贷GAS"
+    
     }
 }
 // MARK: - UI Xib加载后处理
@@ -190,11 +195,13 @@ extension OreDetailItemView {
 
     ///
     fileprivate func setupAsDemo() -> Void {
-        self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView])
+        self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.zhiyaNumView, self.gasNumView])
 //        self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView])
         self.dateLabel.text = "2020年11月09日"
         self.miningNumView.valueLabel.text = "324.12345678"
         self.fengzhuangNumView.valueLabel.text = "46.45"
+        self.zhiyaNumView.valueLabel.text = 9.9945.decimalValidDigitsProcess(digits: 8)
+        self.gasNumView.valueLabel.text = 536.8464.decimalValidDigitsProcess(digits: 8)
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: AssetListModel?) -> Void {
@@ -203,7 +210,7 @@ extension OreDetailItemView {
             return
         }
 //        if model.currency == .fil {
-            self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView])
+        self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.zhiyaNumView, self.gasNumView])
 //        } else {
 //            self.initialCenterView(self.centerView, [self.miningNumView])
 //        }
@@ -212,6 +219,8 @@ extension OreDetailItemView {
         self.dateLabel.text = model.createDate.string(format: "yyyy年MM月dd日", timeZone: .current)
         self.miningNumView.valueLabel.text = model.amount.decimalValidDigitsProcess(digits: 8)
         self.fengzhuangNumView.valueLabel.text = model.extend?.fz_num.decimalValidDigitsProcess(digits: 8)
+        self.zhiyaNumView.valueLabel.text = model.extend?.pledge_amount.decimalValidDigitsProcess(digits: 8)
+        self.gasNumView.valueLabel.text = model.extend?.gas_amount.decimalValidDigitsProcess(digits: 8)
     }    
 }
 
