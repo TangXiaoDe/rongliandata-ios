@@ -50,17 +50,17 @@ open class UrlManager: NSObject {
     }
 
     /// 资源根地址：
-    static let resourceAddress: String = "http://resource.immeet.com/"
+    static let resourceAddress: String = AppConfig.share.serverAddr.address
     /// 用户协议链接
-    static let strAgreementUrl: String = UrlManager.resourceAddress + "imeet/agreement.html"
+    static let strAgreementUrl: String = UrlManager.resourceAddress + "agreement"
     /// 邀请规则链接
-    static let strInviteRuleUrl: String = UrlManager.resourceAddress + "imeet/invite-rule.html"
+    static let strInviteRuleUrl: String = UrlManager.resourceAddress + "invite-rule.html"
     /// 等级规则链接
-    static let strLevelRuleUrl: String = UrlManager.resourceAddress + "imeet/level-rule.html"
+    static let strLevelRuleUrl: String = UrlManager.resourceAddress + "level-rule.html"
     /// h5注册链接
-    static let strRegisterUrl: String = UrlManager.resourceAddress + "imeet/register.html"
+    static let strRegisterUrl: String = UrlManager.resourceAddress + "register.html"
     /// h5下载页链接
-    static let strDownloadUrl: String = UrlManager.resourceAddress + "imeet/download.html"
+    static let strDownloadUrl: String = UrlManager.resourceAddress + "download.html"
 
 
 }
