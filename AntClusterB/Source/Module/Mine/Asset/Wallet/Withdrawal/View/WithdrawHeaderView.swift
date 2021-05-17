@@ -20,7 +20,7 @@ protocol WithdrawHeaderViewProtocol: class {
 
 class WithdrawHeaderView: UIView {
     // MARK: - Internal Property
-    var configModel: WithdrawalConfigModel?
+    var configModel: WithdrawConfigModel?
     var assetInfoModel: AssetInfoModel? {
         didSet {
             self.setupWithAssetInfoModel(assetInfoModel)

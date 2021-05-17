@@ -118,7 +118,7 @@ class AssetInfoModel: Mappable {
     }
     /// 是否绑定提币地址
     var isBindWithdrawAddress: Bool {
-        if let address = self.withdrawal_address, !address.isEmpty {
+        if !self.withdrawAddress.isEmpty {
             return true
         }
         return false
@@ -226,15 +226,15 @@ class AssetInfoModel: Mappable {
         }
         switch self.currency {
         case .fil:
-            withdrawAddress = userModel.currencyAddress.fil_address
+            withdrawAddress = userModel.withdrawal_address
         case .usdt:
             if self.currencyType == .erc20 {
-                withdrawAddress = userModel.currencyAddress.erc_address
+                withdrawAddress = userModel.withdrawal_address
             } else {
-                withdrawAddress = userModel.currencyAddress.usdt_trx_address
+                withdrawAddress = userModel.withdrawal_address
             }
         case .chia:
-            withdrawAddress = userModel.currencyAddress.xch_address
+            withdrawAddress = userModel.withdrawal_address
         default:
             break
         }

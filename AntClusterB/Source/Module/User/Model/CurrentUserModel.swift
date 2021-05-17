@@ -144,6 +144,7 @@ class CurrentUserModel: NSObject, Mappable {
     var extra: UserExtraModel? = nil
     /// 提币地址
     var currencyAddress: CurrencyAddressModel = CurrencyAddressModel()
+    var withdrawal_address: String = ""
     /// tags
 //    var tags: [UserTagModel] = []
 
@@ -202,6 +203,8 @@ class CurrentUserModel: NSObject, Mappable {
         bio <- map["bio"]
         power <- map["power"]
         payPwdStatus <- map["paypass_status"]
+        currencyAddress <- map["currency_address"]
+        withdrawal_address <- map["withdrawal_address"]
 //        grade <- map["grade"]
         recommender <- map["parent"]
         extra <- map["extra"]
@@ -241,6 +244,10 @@ class CurrentUserModel: NSObject, Mappable {
 //        if let chain = object.chain {
 //            self.chain = UserUpChainModel.init(object: chain)
 //        }
+        
+        if let addressObject = object.currencyAddress {
+            self.currencyAddress = CurrencyAddressModel.init(object: addressObject)
+        }
     }
     func object() -> CurrentUserObject {
         let object = CurrentUserObject()
@@ -266,6 +273,8 @@ class CurrentUserModel: NSObject, Mappable {
 //        for tagModel in self.tags {
 //            object.tags.append(tagModel.object())
 //        }
+        
+        object.currencyAddress = self.currencyAddress.object()
         return object
     }
 

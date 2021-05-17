@@ -17,7 +17,7 @@ class WithdrawController: BaseViewController {
 
     fileprivate let currencyType: AssetCurrencyType
     fileprivate let assetModel: AssetInfoModel
-    fileprivate var configModel: WithdrawalConfigModel? = nil
+    fileprivate var configModel: WithdrawConfigModel? = nil
 
     fileprivate let statusNavBarView: AppHomeNavStatusView = AppHomeNavStatusView()
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
@@ -153,17 +153,30 @@ extension WithdrawController {
 
 // MARK: - Data(数据处理与加载)
 extension WithdrawController {
+    
     /// 默认数据加载
     fileprivate func getConfigModel() -> Void {
-        SystemNetworkManager.appServerConfig { (status, msg, model) in
-            guard status, let model = model else {
+        AssetNetworkManager.walletWithdrawalConfig { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            guard status, let model = model?.xchWithdrawConfigModel else {
                 Toast.showToast(title: msg)
                 return
             }
-            AppConfig.share.server = model
-            self.configModel = model.getWithdrawalConfig(with: self.assetModel.currency)
+            self.configModel = model
             self.initialDataSource()
         }
+        
+//        SystemNetworkManager.appServerConfig { (status, msg, model) in
+//            guard status, let model = model else {
+//                Toast.showToast(title: msg)
+//                return
+//            }
+//            AppConfig.share.server = model
+//            self.configModel = model.getWithdrawalConfig(with: self.assetModel.currency)
+//            self.initialDataSource()
+//        }
 //        AssetNetworkManager.walletWithdrawalConfig { [weak self](status, msg, model) in
 //            guard let `self` = self else {
 //                return

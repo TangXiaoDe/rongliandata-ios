@@ -35,6 +35,8 @@ class CurrentUserObject: Object {
     @objc dynamic var easemobPwd: String = ""
     /// 邀请码
     @objc dynamic var inviteCode: String = ""
+    /// 提币地址
+    @objc dynamic var currencyAddress: CurrencyAddressObject? = nil
     /// 简介
     @objc dynamic var bio: String = ""
     /// 矿力
