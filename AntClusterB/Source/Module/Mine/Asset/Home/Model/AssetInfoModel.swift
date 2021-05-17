@@ -118,8 +118,14 @@ class AssetInfoModel: Mappable {
     }
     /// 是否绑定提币地址
     var isBindWithdrawAddress: Bool {
-        if self.withdrawal_address != nil && !self.withdrawal_address!.isEmpty {
-            return true
+        if self.currency == .fil {
+            if self.withdrawal_address != nil && !self.withdrawal_address!.isEmpty {
+                return true
+            }
+        } else if self.currency == .chia {
+            if !self.withdrawAddress.isEmpty {
+                return true
+            }
         }
         return false
     }
