@@ -196,7 +196,8 @@ class EquipmentListModel: Mappable {
         if self.t_num <= 0 {
             return 0
         }
-        let progress: Double = self.seal_num / Double(self.t_num)
+        var progress: Double = self.seal_num / Double(self.t_num)
+        progress = min(progress, 1)
         return progress
     }
     
