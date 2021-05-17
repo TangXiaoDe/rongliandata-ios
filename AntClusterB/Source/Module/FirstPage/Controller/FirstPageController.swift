@@ -105,6 +105,8 @@ extension FirstPageController {
         }
         // 2. orePoolView
         scrollView.addSubview(self.orePoolView)
+        self.orePoolView.showTypeSelect = true
+        self.orePoolView.delegate = self
         self.orePoolView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.headerView.snp.bottom).offset(8)
@@ -192,6 +194,8 @@ extension FirstPageController {
             self.headerView.model = model
             self.orePoolView.model = model
             self.quotationView.model = model
+
+            self.orePoolView.type = .ipfs
         }
     }
 
@@ -203,7 +207,6 @@ extension FirstPageController {
     @objc fileprivate func headerRefresh() -> Void {
         self.refreshRequest()
     }
-    
 }
 
 // MARK: - Enter Page
@@ -229,7 +232,7 @@ extension FirstPageController {
 
 // MARK: - Extension Function
 extension FirstPageController {
-    
+
 }
 
 // MARK: - Delegate Function
@@ -253,7 +256,7 @@ extension FirstPageController: MallHomeStatusNavBarProtocol {
 extension FirstPageController: FPHomeHeaderViewProtocol {
     /// 通知内容点击回调
     func headerView(_ headerView: FPHomeHeaderView, didClickedNoticeContent contentView: UIView, with model: MessageListModel) -> Void {
-        
+
     }
     /// 通知右侧全部按钮点击回调
     func headerView(_ headerView: FPHomeHeaderView, didClickedNoticeAll allView: UIView) -> Void {
@@ -266,5 +269,38 @@ extension FirstPageController: FPHomeHeaderViewProtocol {
 
 }
 
+// MARK: - Enter Page
+extension FirstPageController {
+    /// 矿池数据类型选择
+    fileprivate func showOrePoolTypeSelectPage(with defaultType: FPOrePoolType?) -> Void {
+        let selectVC = FPOrePoolTypeSelectController.init()
+        selectVC.defaultType = defaultType
+        selectVC.delegate = self
+        RootManager.share.showRootVC.present(selectVC, animated: false, completion: nil)
+    }
 
+}
 
+// MARK: - <FPHomeOrePoolViewProtocol>
+extension FirstPageController: FPHomeOrePoolViewProtocol {
+    /// 矿池类型点击回调
+    func orePoolView(_ orePoolView: FPHomeOrePoolView, didClickedType typeView: FPHomeOrePoolTypeView) -> Void {
+        print("FirstPageController orePoolView didClickedType")
+        self.showOrePoolTypeSelectPage(with: typeView.type)
+    }
+
+}
+
+// MARK: - <FPOrePoolTypeSelectControllerProtocol>
+extension FirstPageController: FPOrePoolTypeSelectControllerProtocol {
+    ///
+    func typeSelectVC(_ selectVC: FPOrePoolTypeSelectController, didClickedClose closeView: UIView, with selectedType: FPOrePoolType) -> Void {
+
+    }
+
+    ///
+    func typeSelectVC(_ selectVC: FPOrePoolTypeSelectController, didClickedItem itemView: UIView, with selectedType: FPOrePoolType) -> Void {
+        self.orePoolView.type = selectedType
+    }
+
+}

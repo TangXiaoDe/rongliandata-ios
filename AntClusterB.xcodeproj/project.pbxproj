@@ -367,7 +367,6 @@
 		53DF26732581FC9B00165247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24BF2581FC9600165247 /* AppDelegate.swift */; };
 		53DF26742581FC9B00165247 /* FirstPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C22581FC9600165247 /* FirstPageController.swift */; };
 		53DF26752581FC9B00165247 /* FPHomeQuotationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C42581FC9600165247 /* FPHomeQuotationItemModel.swift */; };
-		53DF26762581FC9B00165247 /* FPHomeIPFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C52581FC9600165247 /* FPHomeIPFSModel.swift */; };
 		53DF26772581FC9B00165247 /* FirstPageHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C62581FC9600165247 /* FirstPageHomeModel.swift */; };
 		53DF26782581FC9B00165247 /* FPHomeOrePoolItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C82581FC9600165247 /* FPHomeOrePoolItemView.swift */; };
 		53DF26792581FC9B00165247 /* FPHomeQuotationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C92581FC9600165247 /* FPHomeQuotationItemView.swift */; };
@@ -444,6 +443,11 @@
 		9536A74A25F8C3EC00280E5C /* AssetDetailFilterPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74525F8C3EC00280E5C /* AssetDetailFilterPopView.swift */; };
 		9536A74F25F8C4AD00280E5C /* AssetDetailTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74E25F8C4AD00280E5C /* AssetDetailTitleView.swift */; };
 		9536A78425F8CA2B00280E5C /* AssetDetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A78325F8CA2B00280E5C /* AssetDetailListCell.swift */; };
+		A170725926520B9E0013FB47 /* FPHomeOrePoolTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170725826520B9E0013FB47 /* FPHomeOrePoolTypeView.swift */; };
+		A170725E26520C0A0013FB47 /* FPOrePoolItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170725D26520C0A0013FB47 /* FPOrePoolItemModel.swift */; };
+		A170726326520EDD0013FB47 /* FPHomeCurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */; };
+		A170726E265210AE0013FB47 /* FPOrePoolTypeSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170726D265210AE0013FB47 /* FPOrePoolTypeSelectController.swift */; };
+		A1707273265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1707272265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift */; };
 		C9D54A936C70BE6D1996E6A8 /* Pods_AntClusterBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -842,7 +846,6 @@
 		53DF24BF2581FC9600165247 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53DF24C22581FC9600165247 /* FirstPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageController.swift; sourceTree = "<group>"; };
 		53DF24C42581FC9600165247 /* FPHomeQuotationItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeQuotationItemModel.swift; sourceTree = "<group>"; };
-		53DF24C52581FC9600165247 /* FPHomeIPFSModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeIPFSModel.swift; sourceTree = "<group>"; };
 		53DF24C62581FC9600165247 /* FirstPageHomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageHomeModel.swift; sourceTree = "<group>"; };
 		53DF24C82581FC9600165247 /* FPHomeOrePoolItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeOrePoolItemView.swift; sourceTree = "<group>"; };
 		53DF24C92581FC9600165247 /* FPHomeQuotationItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeQuotationItemView.swift; sourceTree = "<group>"; };
@@ -930,6 +933,11 @@
 		9536A74525F8C3EC00280E5C /* AssetDetailFilterPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailFilterPopView.swift; sourceTree = "<group>"; };
 		9536A74E25F8C4AD00280E5C /* AssetDetailTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailTitleView.swift; sourceTree = "<group>"; };
 		9536A78325F8CA2B00280E5C /* AssetDetailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailListCell.swift; sourceTree = "<group>"; };
+		A170725826520B9E0013FB47 /* FPHomeOrePoolTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeOrePoolTypeView.swift; sourceTree = "<group>"; };
+		A170725D26520C0A0013FB47 /* FPOrePoolItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPOrePoolItemModel.swift; sourceTree = "<group>"; };
+		A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeCurrencyModel.swift; sourceTree = "<group>"; };
+		A170726D265210AE0013FB47 /* FPOrePoolTypeSelectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPOrePoolTypeSelectController.swift; sourceTree = "<group>"; };
+		A1707272265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPOrePoolTypeSelectItemView.swift; sourceTree = "<group>"; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2774,6 +2782,7 @@
 		53DF24C12581FC9600165247 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A170726D265210AE0013FB47 /* FPOrePoolTypeSelectController.swift */,
 				53DF24C22581FC9600165247 /* FirstPageController.swift */,
 			);
 			path = Controller;
@@ -2783,8 +2792,9 @@
 			isa = PBXGroup;
 			children = (
 				53DF24C42581FC9600165247 /* FPHomeQuotationItemModel.swift */,
-				53DF24C52581FC9600165247 /* FPHomeIPFSModel.swift */,
+				A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */,
 				53DF24C62581FC9600165247 /* FirstPageHomeModel.swift */,
+				A170725D26520C0A0013FB47 /* FPOrePoolItemModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2792,8 +2802,10 @@
 		53DF24C72581FC9600165247 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1707272265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift */,
 				53DF24C82581FC9600165247 /* FPHomeOrePoolItemView.swift */,
 				53DF24C92581FC9600165247 /* FPHomeQuotationItemView.swift */,
+				A170725826520B9E0013FB47 /* FPHomeOrePoolTypeView.swift */,
 				53DF24CA2581FC9600165247 /* MallHomeNavBar.swift */,
 				53DF24CB2581FC9600165247 /* FPHomeOrePoolView.swift */,
 				53DF24CC2581FC9600165247 /* XDMarqueeView.swift */,
@@ -3599,8 +3611,10 @@
 				530B28ED25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift in Sources */,
 				53DF26422581FC9A00165247 /* BaseControl.swift in Sources */,
 				53DF25B72581FC9800165247 /* ThirdChildConfig.swift in Sources */,
+				A170726326520EDD0013FB47 /* FPHomeCurrencyModel.swift in Sources */,
 				53DF255D2581FC9700165247 /* UITextField+Extension.swift in Sources */,
 				53DF25F92581FC9900165247 /* SearchHistoryController.swift in Sources */,
+				A170726E265210AE0013FB47 /* FPOrePoolTypeSelectController.swift in Sources */,
 				53DF266F2581FC9B00165247 /* AppDelegate+WxApi.swift in Sources */,
 				53DF269E2581FC9B00165247 /* LocalSettingModel.swift in Sources */,
 				53DF26A52581FC9C00165247 /* UserInfoControl.swift in Sources */,
@@ -3617,7 +3631,6 @@
 				53DF26472581FC9A00165247 /* MineHomeController.swift in Sources */,
 				53DF25662581FC9700165247 /* AppUtil.swift in Sources */,
 				53DF259C2581FC9800165247 /* Constant.swift in Sources */,
-				53DF26762581FC9B00165247 /* FPHomeIPFSModel.swift in Sources */,
 				53DF26122581FC9A00165247 /* IconTitleValueView.swift in Sources */,
 				53DF267E2581FC9B00165247 /* FPHomeHeaderView.swift in Sources */,
 				53DF260B2581FC9900165247 /* TitleIconView.swift in Sources */,
@@ -3639,6 +3652,7 @@
 				53DF25CC2581FC9900165247 /* XDPopAnimation.swift in Sources */,
 				53DF25BC2581FC9800165247 /* MeetGuideController.swift in Sources */,
 				53DF26512581FC9A00165247 /* AssetActionTitleView.swift in Sources */,
+				A1707273265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift in Sources */,
 				53DF26962581FC9B00165247 /* LoginPwdUpdateController.swift in Sources */,
 				53DF26362581FC9A00165247 /* PageDefaultErrorView.swift in Sources */,
 				53DF25D92581FC9900165247 /* RedDotBubbleView.swift in Sources */,
@@ -3665,11 +3679,13 @@
 				53DF26702581FC9B00165247 /* RootViewController.swift in Sources */,
 				53DF26772581FC9B00165247 /* FirstPageHomeModel.swift in Sources */,
 				53DF25972581FC9800165247 /* ProjectImage.swift in Sources */,
+				A170725E26520C0A0013FB47 /* FPOrePoolItemModel.swift in Sources */,
 				5394398B24F8A8A50097DCAA /* ResourcePlacePicture.swift in Sources */,
 				53DF26672581FC9B00165247 /* WithdrawAddressBindResultController.swift in Sources */,
 				53DF26542581FC9A00165247 /* AssetListCell.swift in Sources */,
 				53DF25FF2581FC9900165247 /* ReportTargetModel.swift in Sources */,
 				53DF25502581FC9700165247 /* SelectedAreaModel.swift in Sources */,
+				A170725926520B9E0013FB47 /* FPHomeOrePoolTypeView.swift in Sources */,
 				53DF26B42581FC9C00165247 /* HQImagePageControl.m in Sources */,
 				53DF25432581FC9700165247 /* UserExtraObject.swift in Sources */,
 				53DF26202581FC9A00165247 /* XDDashLineView.swift in Sources */,

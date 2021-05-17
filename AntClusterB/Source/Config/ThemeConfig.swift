@@ -64,6 +64,8 @@ class ThemeConfig {
     var detailTextColor: UIColor = UIColor.init(hex: 0x666666)
     /// 详情颜色
     var minorTextColor: UIColor = UIColor.init(hex: 0x8C97AC)
+    /// 灰色文字颜色
+    var grayTextColor: UIColor = UIColor.init(hex: 0x999999)  // 0x999999, 0x8C97AC
 
     /// 页面背景色(占位色)
     var pageBgColor: UIColor = UIColor.init(hex: 0xF1F2F6)

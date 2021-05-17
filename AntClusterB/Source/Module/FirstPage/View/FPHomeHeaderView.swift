@@ -16,41 +16,34 @@ protocol FPHomeHeaderViewProtocol: class {
     func headerView(_ headerView: FPHomeHeaderView, didClickedNoticeAll allView: UIView) -> Void
 }
 
-class FPHomeHeaderView: UIView
-{
-    
+class FPHomeHeaderView: UIView {
+
     // MARK: - Internal Property
-    
+
     var model: FirstPageHomeModel? {
         didSet {
             self.setupWithModel(model)
         }
     }
-    
+
     weak var delegate: FPHomeHeaderViewProtocol?
 
-    
     // MARK: - Private Property
-    
+
     fileprivate let mainView: UIView = UIView()
-    
+
     fileprivate let bannerView: AdvertBannerView = AdvertBannerView()
-    
+
     fileprivate let noticeView: UIView = UIView.init()
     fileprivate let noticeIconView: UIImageView = UIImageView.init()    // 通知图标
     //fileprivate let noticeContentView: UILabel = UILabel.init()         // 自动横向滚动
     fileprivate let noticeContentView: XDMarqueeView = XDMarqueeView.init()
     fileprivate let noticeMenuView: UIButton = UIButton.init(type: .custom) // 全部通知
-    
-    fileprivate let ipfsView: UIView = UIView.init()
-    fileprivate let totalPowerItemView: TitleValueView = TitleValueView.init()    // 全网总算力
-    fileprivate let activeMinersItemView: TitleValueView = TitleValueView.init()  // 活跃矿工人数
-    
-    
+
     fileprivate let bannerHeight: CGFloat = CGSize(width: 351, height: 140).scaleAspectForWidth(kScreenWidth - 24.0).height
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let bannerTopMargin: CGFloat = 12
-    
+
     fileprivate let noticeTopMargin: CGFloat = 16
     fileprivate let noticeViewHeight: CGFloat = 36
     fileprivate let noticeIconWH: CGFloat = 20
@@ -147,14 +140,7 @@ extension FPHomeHeaderView {
             make.trailing.equalToSuperview().offset(-self.lrMargin)
             make.top.equalTo(self.bannerView.snp.bottom).offset(self.noticeTopMargin)
             make.height.equalTo(self.noticeViewHeight)
-        }
-        // 3. ipfsView
-        mainView.addSubview(self.ipfsView)
-        self.initialIpfsView(self.ipfsView)
-        self.ipfsView.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.noticeView.snp.bottom).offset(0)
-            make.bottom.equalToSuperview().offset(0)
+            make.bottom.equalToSuperview()
         }
     }
     //
@@ -188,66 +174,12 @@ extension FPHomeHeaderView {
             make.trailing.equalTo(self.noticeMenuView.snp.leading).offset(-self.noticeContentLrMargin)
         }
     }
-    ///
-    fileprivate func initialIpfsView(_ ipfsView: UIView) -> Void {
-        let titleLrMargin: CGFloat = 20
-        let titleCenterYBottomMargin: CGFloat = 18  // super.bottom
-        let valueCenterYTopMargin: CGFloat = 18     // super.top
-        //
-        ipfsView.removeAllSubviews()
-        let itemViews: [TitleValueView] = [self.totalPowerItemView, self.activeMinersItemView]
-        let titles: [String] = ["全网有效算力(EIB)", "活跃矿工人数(人)"]
-        let bgImgNames: [String] = ["IMG_img_home_bg_pib", "IMG_img_home_bg_qkgd"]
-        for (index, itemView) in itemViews.enumerated() {
-            let row: Int = index / self.itemColCount
-            let col: Int = index % self.itemColCount
-            ipfsView.addSubview(itemView)
-            itemView.set(cornerRadius: 5)
-            itemView.snp.makeConstraints { (make) in
-                make.height.equalTo(self.itemHeight)
-                make.width.equalTo(self.itemWidth)
-                let leftMargin: CGFloat = self.lrMargin + (self.itemWidth + self.itemHorMargin) * CGFloat(col)
-                let topMargin: CGFloat = self.itemTopMargin + (self.itemHeight + self.itemVerMargin) * CGFloat(row)
-                let rightMargin: CGFloat = kScreenWidth - leftMargin - self.itemWidth
-                make.top.equalToSuperview().offset(topMargin)
-                make.leading.equalToSuperview().offset(leftMargin)
-                if index == itemViews.count - 1 {
-                    make.trailing.equalToSuperview().offset(-rightMargin)
-                    make.bottom.equalToSuperview().offset(-self.itemBottomMargin)
-                }
-            }
-            // 1. bg
-            let bgView: UIImageView = UIImageView.init()
-            itemView.addSubview(bgView)
-            itemView.sendSubviewToBack(bgView)
-            bgView.set(cornerRadius: 0)
-            bgView.image = UIImage.init(named: bgImgNames[index])
-            bgView.snp.makeConstraints { (make) in
-                make.edges.equalToSuperview()
-            }
-            // 2. title
-            itemView.titleLabel.set(text: titles[index], font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.white)
-            itemView.titleLabel.snp.remakeConstraints { (make) in
-                make.leading.equalToSuperview().offset(titleLrMargin)
-                make.trailing.lessThanOrEqualToSuperview()
-                make.centerY.equalTo(itemView.snp.bottom).offset(-titleCenterYBottomMargin)
-            }
-            // 3. value
-            itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: UIColor.white)
-            itemView.valueLabel.snp.remakeConstraints { (make) in
-                make.leading.equalToSuperview().offset(titleLrMargin)
-                make.trailing.lessThanOrEqualToSuperview()
-                make.centerY.equalTo(itemView.snp.top).offset(valueCenterYTopMargin)
-            }
-        }
-    }
-    
 }
 // MARK: - Private UI Xib加载后处理
 extension FPHomeHeaderView {
     /// awakeNib时的处理
     fileprivate func initialInAwakeNib() -> Void {
-        
+
     }
 
 }
@@ -259,8 +191,6 @@ extension FPHomeHeaderView {
         self.bannerView.backgroundColor = UIColor.random
         self.bannerView.models = []
         self.noticeContentView.text = "海马算力海马算力海马算力海马算力海马算力海马算力海马算力海马算力"
-        self.totalPowerItemView.valueLabel.text = "499200"
-        self.activeMinersItemView.valueLabel.text = "76251"
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: FirstPageHomeModel?) -> Void {
@@ -271,8 +201,6 @@ extension FPHomeHeaderView {
         // 子控件数据加载
         self.bannerView.models = model.averts
         self.noticeContentView.text = model.newstNotice?.content ?? ""
-        self.totalPowerItemView.valueLabel.text = model.ipfs?.total_power
-        self.activeMinersItemView.valueLabel.text = model.ipfs?.active_miners
         
         let showAdverts: Bool = !model.averts.isEmpty
         self.bannerView.isHidden = !showAdverts
@@ -282,7 +210,7 @@ extension FPHomeHeaderView {
             make.top.equalToSuperview().offset(topMargin)
             make.height.equalTo(height)
         }
-        
+
         let showNotice: Bool = model.newstNotice != nil
         self.noticeView.isHidden = !showNotice
         self.noticeView.snp.updateConstraints { (make) in
@@ -291,10 +219,9 @@ extension FPHomeHeaderView {
             make.top.equalTo(self.bannerView.snp.bottom).offset(topMargin)
             make.height.equalTo(height)
         }
-        
+
         self.mainView.layoutIfNeeded()
     }
-    
 }
 
 // MARK: - Event Function
@@ -309,17 +236,15 @@ extension FPHomeHeaderView {
 
 // MARK: - Extension Function
 extension FPHomeHeaderView {
-    
+
 }
 
 // MARK: - Delegate Function
 
 // MARK: - <XXXDelegate>
 extension FPHomeHeaderView {
-    
+
 }
-
-
 
 // MARK: - <AdvertBannerViewProtocol>
 extension FPHomeHeaderView: AdvertBannerViewProtocol {
