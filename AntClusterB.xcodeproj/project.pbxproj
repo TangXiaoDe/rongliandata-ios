@@ -460,6 +460,8 @@
 		A17072B7265271650013FB47 /* CurrencyAddressObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072B6265271650013FB47 /* CurrencyAddressObject.swift */; };
 		A17072BC265271FF0013FB47 /* WithdrawController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072BB265271FF0013FB47 /* WithdrawController.swift */; };
 		A17072C62652725A0013FB47 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072C52652725A0013FB47 /* WithdrawHeaderView.swift */; };
+		A17072D9265279840013FB47 /* EquipmentHomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072D8265279840013FB47 /* EquipmentHomeTitleView.swift */; };
+		A17072DE265279C90013FB47 /* EquipmentHomeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072DD265279C90013FB47 /* EquipmentHomeListController.swift */; };
 		C9D54A936C70BE6D1996E6A8 /* Pods_AntClusterBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -962,6 +964,8 @@
 		A17072B6265271650013FB47 /* CurrencyAddressObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyAddressObject.swift; sourceTree = "<group>"; };
 		A17072BB265271FF0013FB47 /* WithdrawController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawController.swift; sourceTree = "<group>"; };
 		A17072C52652725A0013FB47 /* WithdrawHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawHeaderView.swift; sourceTree = "<group>"; };
+		A17072D8265279840013FB47 /* EquipmentHomeTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeTitleView.swift; sourceTree = "<group>"; };
+		A17072DD265279C90013FB47 /* EquipmentHomeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeListController.swift; sourceTree = "<group>"; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1085,6 +1089,7 @@
 			isa = PBXGroup;
 			children = (
 				530B28C225AD483F00B8723E /* EquipmentHomeController.swift */,
+				A17072DD265279C90013FB47 /* EquipmentHomeListController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1105,6 +1110,7 @@
 				530B28C825AD483F00B8723E /* EquipmentHomeItemView.swift */,
 				530B28C925AD484000B8723E /* EquipmentHomeHeaderView.swift */,
 				530B28CA25AD484000B8723E /* EquipmentListCell.swift */,
+				A17072D8265279840013FB47 /* EquipmentHomeTitleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3615,6 +3621,7 @@
 				53DF26292581FC9A00165247 /* ContactEmptyPlaceHolderView.swift in Sources */,
 				53DF25DA2581FC9900165247 /* TestHomeController.swift in Sources */,
 				A170727826521F550013FB47 /* MineHomeIncomeInfoItemView.swift in Sources */,
+				A17072D9265279840013FB47 /* EquipmentHomeTitleView.swift in Sources */,
 				53DF262A2581FC9A00165247 /* OrderEmptyPlaceHolderView.swift in Sources */,
 				53DF25742581FC9800165247 /* MessageNetworkManager.swift in Sources */,
 				53DF26692581FC9B00165247 /* WithdrawAddressBindingHeaderView.swift in Sources */,
@@ -3639,6 +3646,7 @@
 				53AA78CE25F8AC2D0081D04A /* EDAssetSurveyView.swift in Sources */,
 				53DF25ED2581FC9900165247 /* LaunchAdvertController.swift in Sources */,
 				53DF25A22581FC9800165247 /* XDGifImageView.swift in Sources */,
+				A17072DE265279C90013FB47 /* EquipmentHomeListController.swift in Sources */,
 				53DF25812581FC9800165247 /* EquipmentRequestInfo.swift in Sources */,
 				A170729B2652686A0013FB47 /* AssetHomeTitleView.swift in Sources */,
 				53AA78CA25F8AC2D0081D04A /* EquipmentDetailController.swift in Sources */,

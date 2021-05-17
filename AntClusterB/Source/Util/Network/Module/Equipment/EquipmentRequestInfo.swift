@@ -17,6 +17,8 @@ class EquipmentRequestInfo {
     /// 挖矿日志
     static let miningLogs = RequestInfo<AssetListModel>.init(method: .get, path: "eqs/logs/{id}", replaceds: ["{id}"])
 
+    /// 设备列表
+    static let homeList = RequestInfo<EquipmentHomeModel>.init(method: .get, path: "eqs", replaceds: [])
     /// 设备详情
     static let equipmentDetail = RequestInfo<EquipmentDetailModel>.init(method: .get, path: "equipments/{order}", replaceds: ["{order}"])
     /// 设备资产归还明细流水

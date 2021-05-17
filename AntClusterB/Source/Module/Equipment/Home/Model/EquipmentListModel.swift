@@ -212,11 +212,11 @@ extension EquipmentListModel {
         var color: UIColor
         switch self.status {
         case .deploying:
-            color = UIColor.init(hex: 0x333333)
+            color = UIColor.init(hex: 0xC9A063)
         case .mining:
             color = UIColor.init(hex: 0x00B8FF)
         case .closed:
-            color = UIColor.init(hex: 0x999999)
+            color = UIColor.init(hex: 0x666666)
         }
         return color
     }
@@ -226,18 +226,18 @@ extension EquipmentListModel {
         var color: UIColor
         switch self.status {
         case .deploying:
-            color = UIColor.init(hex: 0xFF455E)
+            color = UIColor.init(hex: 0xD26C2F)
         case .mining:
-            color = UIColor.init(hex: 0x2280FB)
+            color = UIColor.init(hex: 0x2EA7E0)
         case .closed:
-            color = UIColor.init(hex: 0xDDDDDD)
+            color = UIColor.init(hex: 0x666666)
         }
         return color
     }
     
     ///
     var totalNumColor: UIColor {
-        let color: UIColor = self.status == .closed ? UIColor.init(hex: 0xFFB6C0) : UIColor.init(hex: 0xFF455E)
+        let color: UIColor = self.status == .closed ? UIColor.init(hex: 0xFFB6C0) : UIColor.init(hex: 0xD26C2F)
         return color
     }
     ///

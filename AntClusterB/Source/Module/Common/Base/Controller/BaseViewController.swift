@@ -54,6 +54,8 @@ class BaseViewController: UIViewController {
     
     /// 是否选中，用于多列表时的选中标记；默认选中，子列表选中交互可重写
     var isSelected: Bool = true
+    /// 是否第一次加载数据
+    var isFirstLoading: Bool = true
     
     var contentType: PageContentType = PageContentType.normal {
         didSet {

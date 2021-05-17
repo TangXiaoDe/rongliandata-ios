@@ -13,6 +13,7 @@ class EquipmentHomeModel: Mappable {
     
     var total: Double = 0
     var list: [EquipmentListModel] = []
+    var zone: ProductZone = .ipfs
     
     init() {
     }
