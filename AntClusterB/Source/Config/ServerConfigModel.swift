@@ -196,6 +196,8 @@ class WithdrawalConfigModel: Mappable {
     var usdt_trx_fee: Double = 0.0
     /// USDT提现服务费
     var usdt_erc_fee: Double = 0.0
+    /// xch提现服务费
+    var xch_fee: Double = 0.0
     /// 人民币提现账户信息
 //    var acccount_info: WithdrawalAccountModel?
     /// cny提现服务费
@@ -214,6 +216,7 @@ class WithdrawalConfigModel: Mappable {
         fil_fee <- (map["fil_fee"], DoubleStringTransform.default)
         usdt_trx_fee <- (map["usdt-trx_fee"], DoubleStringTransform.default)
         usdt_erc_fee <- (map["usdt_erc_fee"], DoubleStringTransform.default)
+        xch_fee <- (map["xch_fee"], DoubleStringTransform.default)
 //        acccount_info <- map["account_info"]
         service_charge <- (map["service_charge"], DoubleStringTransform.default)
     }

@@ -15,7 +15,9 @@ class WalletHomeController: BaseViewController {
     fileprivate let navBar: AppHomeNavStatusView = AppHomeNavStatusView.init()
     // MARK: - Initialize Function
     fileprivate let mainView: WalletHomeMainView = WalletHomeMainView()
-
+    
+    var assetModel: AssetInfoModel?
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -95,6 +97,7 @@ extension WalletHomeController {
                 return
             }
             self.mainView.model = model
+            self.assetModel = model
         }
         // 同步充值记录
         AssetNetworkManager.getRechargeRecords(currency: CurrencyType.fil.rawValue) { (status, msg) in
@@ -137,7 +140,7 @@ extension WalletHomeController {
         self.enterPageVC(WalletDetailHomeController())
     }
     /// 提币按钮点击判断处理
-    func enterWithdrawalProcess(assetModel: WalletFilInfoModel) {
+    func enterWithdrawalProcess(assetModel: AssetInfoModel) {
         // 1. 地址绑定判断
         if assetModel.isBindWithdrawAddress {
             self.enterWalletWithdrawPage(assetModel: assetModel)
@@ -153,16 +156,16 @@ extension WalletHomeController {
     }
     /// 进入提币地址绑定界面
     fileprivate func enterWithdrawAddressBindPage() -> Void {
-        let bindVC = WithdrawAddressBindingController.init(currency: CurrencyType.fil.rawValue, assetModel: AssetInfoModel())
+        let bindVC = WithdrawAddressBindingController.init(assetModel: self.assetModel!)
         self.enterPageVC(bindVC)
     }
     /// 进入Wallet提币界面
-    fileprivate func enterWalletWithdrawPage(assetModel: WalletFilInfoModel) -> Void {
+    fileprivate func enterWalletWithdrawPage(assetModel: AssetInfoModel) -> Void {
         let withdrawVC = FilWithdrawController.init(assetModel: assetModel)
         self.enterPageVC(withdrawVC)
     }
     /// 进入Wallet充币界面
-    fileprivate func enterWalletRecharPage(assetModel: WalletFilInfoModel) -> Void {
+    fileprivate func enterWalletRecharPage(assetModel: AssetInfoModel) -> Void {
         let withdrawVC = RechargeHomeController.init(currency: "FIL", address: assetModel.address)
         self.enterPageVC(withdrawVC)
     }

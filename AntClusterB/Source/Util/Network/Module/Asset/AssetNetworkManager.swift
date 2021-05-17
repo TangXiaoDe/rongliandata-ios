@@ -13,6 +13,7 @@ enum AssetCurrencyRequestType: String {
     case erc
     case eth
     case usdt
+    case chia = "xch"
     case usdtTrx = "usdt-trx"
 }
 enum AssetCurrencyType: String {
@@ -131,7 +132,8 @@ extension AssetNetworkManager {
         }
     }
     /// 获取fil资产信息
-    class func getWalletFilInfo(complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletFilInfoModel?) -> Void)) -> Void {
+    class func
+    getWalletFilInfo(complete: @escaping((_ status: Bool, _ msg: String?, _ model: AssetInfoModel?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = AssetRequestInfo.Wallet.filInfo
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
@@ -172,7 +174,7 @@ extension AssetNetworkManager {
         }
     }
     /// 刷新fil首页数据
-    class func refreshHomeList(complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletFilInfoModel?) -> Void)) -> Void {
+    class func refreshHomeList(complete: @escaping((_ status: Bool, _ msg: String?, _ model: AssetInfoModel?) -> Void)) -> Void {
         SystemNetworkManager.appServerConfig { (status, msg, model) in
             guard status, let model = model else {
                 complete(false, msg, nil)
@@ -185,7 +187,7 @@ extension AssetNetworkManager {
     /// 绑定提币地址(FIL/usdt/eoc)
     class func bindWithdrawAddress(address: String, currency: String, currencyType: AssetCurrencyType, complete: @escaping (( _ status: Bool, _ msg: String?) -> Void)) -> Void {
         // 1.请求 url
-        var requestInfo = AssetRequestInfo.Wallet.bindWithdrawAddress
+        var requestInfo = AssetRequestInfo.bindAddress
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
         var type: AssetCurrencyRequestType = .erc
         // 2.配置参数
@@ -195,8 +197,10 @@ extension AssetNetworkManager {
             type = .erc
         } else if currencyType == .trc20 && currency == CurrencyType.usdt.rawValue {
             type = .usdtTrx
+        } else if currency == CurrencyType.chia.rawValue {
+            type = .chia
         }
-        let parameter: [String: Any] = ["address": address, "type": type.rawValue]
+        let parameter: [String: Any] = ["address": address, "currency": type.rawValue]
         requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in

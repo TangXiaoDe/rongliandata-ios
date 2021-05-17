@@ -11,11 +11,9 @@ import UIKit
 import TZImagePickerController
 import YYKit
 
-class WithdrawAddressBindingController: BaseViewController
-{
+class WithdrawAddressBindingController: BaseViewController {
     // MARK: - Internal Property
     fileprivate let assetModel: AssetInfoModel
-    fileprivate let currency: String
     fileprivate let currencyType: AssetCurrencyType
     // MARK: - Private Property
     
@@ -39,10 +37,9 @@ class WithdrawAddressBindingController: BaseViewController
     
     
     // MARK: - Initialize Function
-    init(currency: String, assetModel: AssetInfoModel) {
+    init(assetModel: AssetInfoModel) {
         self.assetModel = assetModel
         self.currencyType = assetModel.currencyType
-        self.currency = currency
         super.init(nibName: nil, bundle: nil)
     }
     

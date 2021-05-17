@@ -339,7 +339,6 @@
 		53DF26572581FC9A00165247 /* ReceiptAccountInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24902581FC9500165247 /* ReceiptAccountInfoModel.swift */; };
 		53DF26582581FC9A00165247 /* RechargePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24922581FC9500165247 /* RechargePlaceView.swift */; };
 		53DF26592581FC9A00165247 /* WalletHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24962581FC9500165247 /* WalletHomeController.swift */; };
-		53DF265A2581FC9A00165247 /* WalletFilInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24982581FC9500165247 /* WalletFilInfoModel.swift */; };
 		53DF265B2581FC9A00165247 /* WalletBalanceProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF249A2581FC9500165247 /* WalletBalanceProgressView.swift */; };
 		53DF265C2581FC9B00165247 /* WalletHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF249B2581FC9500165247 /* WalletHomeHeaderView.swift */; };
 		53DF265D2581FC9B00165247 /* WalletHomeMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF249C2581FC9500165247 /* WalletHomeMainView.swift */; };
@@ -832,7 +831,6 @@
 		53DF24902581FC9500165247 /* ReceiptAccountInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptAccountInfoModel.swift; sourceTree = "<group>"; };
 		53DF24922581FC9500165247 /* RechargePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargePlaceView.swift; sourceTree = "<group>"; };
 		53DF24962581FC9500165247 /* WalletHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeController.swift; sourceTree = "<group>"; };
-		53DF24982581FC9500165247 /* WalletFilInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletFilInfoModel.swift; sourceTree = "<group>"; };
 		53DF249A2581FC9500165247 /* WalletBalanceProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletBalanceProgressView.swift; sourceTree = "<group>"; };
 		53DF249B2581FC9500165247 /* WalletHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeHeaderView.swift; sourceTree = "<group>"; };
 		53DF249C2581FC9500165247 /* WalletHomeMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeMainView.swift; sourceTree = "<group>"; };
@@ -2666,7 +2664,6 @@
 		53DF24972581FC9500165247 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				53DF24982581FC9500165247 /* WalletFilInfoModel.swift */,
 				A170728626524F040013FB47 /* WalletAllInfoModel.swift */,
 			);
 			path = Model;
@@ -3589,7 +3586,6 @@
 				53DF263A2581FC9A00165247 /* BaseViewController.swift in Sources */,
 				53DF26492581FC9A00165247 /* MineHomeOptionView.swift in Sources */,
 				53DF25C82581FC9900165247 /* TestPresentationController.swift in Sources */,
-				53DF265A2581FC9A00165247 /* WalletFilInfoModel.swift in Sources */,
 				53DF25B62581FC9800165247 /* ServerConfigModel.swift in Sources */,
 				53DF25642581FC9700165247 /* AppColor.swift in Sources */,
 				53DF258D2581FC9800165247 /* TZImagePickerHelper.swift in Sources */,

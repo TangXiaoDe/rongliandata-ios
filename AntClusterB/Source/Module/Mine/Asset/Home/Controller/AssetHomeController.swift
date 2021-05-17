@@ -356,7 +356,7 @@ extension AssetHomeController {
     }
     /// 进入提币地址绑定界面
     fileprivate func enterWithdrawAddressBindPage(assetModel: AssetInfoModel) -> Void {
-        let bindVC = WithdrawAddressBindingController.init(currency: "", assetModel: assetModel)
+        let bindVC = WithdrawAddressBindingController.init(assetModel: assetModel)
         self.enterPageVC(bindVC)
     }
     /// 进入提现页

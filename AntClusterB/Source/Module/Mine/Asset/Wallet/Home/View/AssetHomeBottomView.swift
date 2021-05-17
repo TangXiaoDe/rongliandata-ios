@@ -87,15 +87,13 @@ extension AssetHomeBottomView {
             self.horMargin = 20
         case .usdt:
             items = [self.withdrawalBtn, self.rechargeBtn]
-//        case .chia:
-//            items = []
-//            self.horMargin = 20
+        case .chia:
+            items = [self.withdrawalBtn]
+            self.horMargin = 20
         case .cny:
             items = [self.withdrawalBtn]
             self.horMargin = 10
             self.withdrawalBtn.set(title: "提现", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
-        default:
-            break
         }
         // 按钮宽度计算
         btnWidth = (kScreenWidth - 2 * self.lrMargin - CGFloat(items.count - 1) * self.horMargin) / CGFloat(items.count)

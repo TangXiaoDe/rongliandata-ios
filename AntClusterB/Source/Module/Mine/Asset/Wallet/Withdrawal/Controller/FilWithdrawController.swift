@@ -16,7 +16,7 @@ class FilWithdrawController: BaseViewController
     
     // MARK: - Private Property
     
-    fileprivate let assetModel: WalletFilInfoModel
+    fileprivate let assetModel: AssetInfoModel
     fileprivate var configModel: WithdrawConfigModel? = nil
     
     fileprivate let statusNavBarView: AppHomeNavStatusView = AppHomeNavStatusView()
@@ -39,7 +39,7 @@ class FilWithdrawController: BaseViewController
     
     // MARK: - Initialize Function
     
-    init(assetModel: WalletFilInfoModel) {
+    init(assetModel: AssetInfoModel) {
         self.assetModel = assetModel
         super.init(nibName: nil, bundle: nil)
     }

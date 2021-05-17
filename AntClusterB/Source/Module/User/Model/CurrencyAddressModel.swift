@@ -16,6 +16,7 @@ class CurrencyAddressModel: Mappable {
     var erc_address: String = ""
     var btc_address: String = ""
     var usdt_trx_address: String = ""
+    var xch_address: String = ""
 
     init() {
 
@@ -29,6 +30,7 @@ class CurrencyAddressModel: Mappable {
         erc_address <- map["erc_address"]
         btc_address <- map["btc_address"]
         usdt_trx_address <- map["usdt-trx_address"]
+        xch_address <- map["xch_address"]
     }
 
     // MARK: - Realm
