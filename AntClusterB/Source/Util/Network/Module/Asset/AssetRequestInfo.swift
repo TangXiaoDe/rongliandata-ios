@@ -22,11 +22,18 @@ class AssetRequestInfo {
     
     /// 钱包相关
     struct Wallet {
+        /// 绑定提币地址
+        static let bindWithdrawAddress = RequestInfo<Empty>.init(method: .post, path: "coin/address", replaceds: [])
         /// Fil信息
-        static let filInfo = RequestInfo<WalletFilInfoModel>.init(method: .get, path: "fil/wallet", replaceds: [])
+        static let walletAllInfo = RequestInfo<WalletAllInfoModel>.init(method: .get, path: "wallet/all", replaceds: [])
+        static let filInfo = RequestInfo<AssetInfoModel>.init(method: .get, path: "fil/wallet", replaceds: [])
         static let filWithdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "fil/withdrawal", replaceds: [])
         static let ercWithdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "erc/withdrawal", replaceds: [])
+        static let xchWithdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "xch/withdrawal", replaceds: [])
         static let config = RequestInfo<WalletWithdrawConfigModel>.init(method: .get, path: "fil/withdrawal-configs", replaceds: [])
+        
+        /// 申请 FIL/usdt/eth/btc 提币
+        static let withdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "withdrawal", replaceds: [])
     }
     /// 充值
     struct Recharge {

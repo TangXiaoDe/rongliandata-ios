@@ -11,10 +11,10 @@ import UIKit
 import TZImagePickerController
 import YYKit
 
-class WithdrawAddressBindingController: BaseViewController
-{
+class WithdrawAddressBindingController: BaseViewController {
     // MARK: - Internal Property
-    fileprivate let currency: String
+    fileprivate let assetModel: AssetInfoModel
+    fileprivate let currencyType: AssetCurrencyType
     // MARK: - Private Property
     
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
@@ -37,9 +37,9 @@ class WithdrawAddressBindingController: BaseViewController
     
     
     // MARK: - Initialize Function
-    
-    init(currency: String) {
-        self.currency = currency
+    init(assetModel: AssetInfoModel) {
+        self.assetModel = assetModel
+        self.currencyType = assetModel.currencyType
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -77,7 +77,7 @@ extension WithdrawAddressBindingController {
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = AppColor.pageBg
         // navbar
-        self.navigationItem.title = "绑定提现地址"
+        self.navigationItem.title = "绑定提币地址-\(self.assetModel.title)"
         // scrollView
         self.view.addSubview(self.scrollView)
         self.initialScrollView(self.scrollView)
@@ -155,7 +155,7 @@ extension WithdrawAddressBindingController {
 //            Toast.showToast(title: "提现地址应以0x开头")
 //            return
 //        }
-        self.withdrawAddressBindRequest(address: address, currency: self.currency)
+        self.withdrawAddressBindRequest(address: address, qrcode_filename: selectedQrcode.uploaded.filename)
     }
 
 }
@@ -184,10 +184,27 @@ extension WithdrawAddressBindingController {
 
 // MARK: - Extension Function
 extension WithdrawAddressBindingController {
+//    /// 绑定请求
+//    fileprivate func withdrawAddressBindRequest(address: String, currency: String) -> Void {
+//        self.view.isUserInteractionEnabled = false
+//        AssetNetworkManager.bindWithdrawAddress(address: address, currency: currency) { [weak self](status, msg) in
+//            guard let `self` = self else {
+//                return
+//            }
+//            self.view.isUserInteractionEnabled = true
+//            guard status else {
+//                Toast.showToast(title: msg)
+//                return
+//            }
+//            NotificationCenter.default.post(name: AppNotificationName.Fil.withdrawAdress, object: nil)
+//            self.enterBindResultPage()
+//        }
+//    }
+    
     /// 绑定请求
-    fileprivate func withdrawAddressBindRequest(address: String, currency: String) -> Void {
+    fileprivate func withdrawAddressBindRequest(address: String, qrcode_filename: String) -> Void {
         self.view.isUserInteractionEnabled = false
-        AssetNetworkManager.bindWithdrawAddress(address: address, currency: currency) { [weak self](status, msg) in
+        AssetNetworkManager.bindWithdrawAddress(address: address, currency: self.assetModel.currency.rawValue, currencyType: self.currencyType) { [weak self](status, msg) in
             guard let `self` = self else {
                 return
             }
@@ -196,7 +213,7 @@ extension WithdrawAddressBindingController {
                 Toast.showToast(title: msg)
                 return
             }
-            NotificationCenter.default.post(name: AppNotificationName.Fil.withdrawAdress, object: nil)
+            NotificationCenter.default.post(name: AppNotificationName.Asset.withdrawAdress, object: nil)
             self.enterBindResultPage()
         }
     }
@@ -208,6 +225,6 @@ extension WithdrawAddressBindingController {
 // MARK: - <WithdrawAddressBindingHeaderViewProtocol>
 extension WithdrawAddressBindingController: WithdrawAddressBindingHeaderViewProtocol {
     func headerView(_ view: WithdrawAddressBindingHeaderView, didClickBind address: String) {
-        self.withdrawAddressBindRequest(address: address, currency: self.currency)
+        self.withdrawAddressBindRequest(address: address, qrcode_filename: "")
     }
 }

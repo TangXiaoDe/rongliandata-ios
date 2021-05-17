@@ -17,6 +17,7 @@ enum CurrencyType: String {
     case usdt
     /// Fil
     case fil
+    case chia = "xch"
 
     /// 货币图标
     var icon: UIImage {
@@ -28,6 +29,8 @@ enum CurrencyType: String {
             image = UIImage.init(named: "") ?? UIImage()
         case .cny:
             image = UIImage.init(named: "IMG_mall_cny") ?? UIImage()
+        case .chia:
+            image = UIImage()
         }
         return image
     }
@@ -40,6 +43,8 @@ enum CurrencyType: String {
             title = "FIL"
         case .cny:
             title = "CNY"
+        case .chia:
+            title = "XCH"
         }
         return title
     }

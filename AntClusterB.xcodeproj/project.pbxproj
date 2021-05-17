@@ -339,7 +339,6 @@
 		53DF26572581FC9A00165247 /* ReceiptAccountInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24902581FC9500165247 /* ReceiptAccountInfoModel.swift */; };
 		53DF26582581FC9A00165247 /* RechargePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24922581FC9500165247 /* RechargePlaceView.swift */; };
 		53DF26592581FC9A00165247 /* WalletHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24962581FC9500165247 /* WalletHomeController.swift */; };
-		53DF265A2581FC9A00165247 /* WalletFilInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24982581FC9500165247 /* WalletFilInfoModel.swift */; };
 		53DF265B2581FC9A00165247 /* WalletBalanceProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF249A2581FC9500165247 /* WalletBalanceProgressView.swift */; };
 		53DF265C2581FC9B00165247 /* WalletHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF249B2581FC9500165247 /* WalletHomeHeaderView.swift */; };
 		53DF265D2581FC9B00165247 /* WalletHomeMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF249C2581FC9500165247 /* WalletHomeMainView.swift */; };
@@ -367,7 +366,6 @@
 		53DF26732581FC9B00165247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24BF2581FC9600165247 /* AppDelegate.swift */; };
 		53DF26742581FC9B00165247 /* FirstPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C22581FC9600165247 /* FirstPageController.swift */; };
 		53DF26752581FC9B00165247 /* FPHomeQuotationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C42581FC9600165247 /* FPHomeQuotationItemModel.swift */; };
-		53DF26762581FC9B00165247 /* FPHomeIPFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C52581FC9600165247 /* FPHomeIPFSModel.swift */; };
 		53DF26772581FC9B00165247 /* FirstPageHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C62581FC9600165247 /* FirstPageHomeModel.swift */; };
 		53DF26782581FC9B00165247 /* FPHomeOrePoolItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C82581FC9600165247 /* FPHomeOrePoolItemView.swift */; };
 		53DF26792581FC9B00165247 /* FPHomeQuotationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF24C92581FC9600165247 /* FPHomeQuotationItemView.swift */; };
@@ -444,6 +442,25 @@
 		9536A74A25F8C3EC00280E5C /* AssetDetailFilterPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74525F8C3EC00280E5C /* AssetDetailFilterPopView.swift */; };
 		9536A74F25F8C4AD00280E5C /* AssetDetailTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74E25F8C4AD00280E5C /* AssetDetailTitleView.swift */; };
 		9536A78425F8CA2B00280E5C /* AssetDetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A78325F8CA2B00280E5C /* AssetDetailListCell.swift */; };
+		A170725926520B9E0013FB47 /* FPHomeOrePoolTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170725826520B9E0013FB47 /* FPHomeOrePoolTypeView.swift */; };
+		A170725E26520C0A0013FB47 /* FPOrePoolItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170725D26520C0A0013FB47 /* FPOrePoolItemModel.swift */; };
+		A170726326520EDD0013FB47 /* FPHomeCurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */; };
+		A170726E265210AE0013FB47 /* FPOrePoolTypeSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170726D265210AE0013FB47 /* FPOrePoolTypeSelectController.swift */; };
+		A1707273265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1707272265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift */; };
+		A170727826521F550013FB47 /* MineHomeIncomeInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170727726521F550013FB47 /* MineHomeIncomeInfoItemView.swift */; };
+		A170728726524F040013FB47 /* WalletAllInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170728626524F040013FB47 /* WalletAllInfoModel.swift */; };
+		A170728C265268090013FB47 /* FPYesterdayIncomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170728B265268090013FB47 /* FPYesterdayIncomeModel.swift */; };
+		A17072912652681A0013FB47 /* FPIncreaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072902652681A0013FB47 /* FPIncreaseModel.swift */; };
+		A1707296265268560013FB47 /* AssetHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1707295265268560013FB47 /* AssetHomeHeaderView.swift */; };
+		A170729B2652686A0013FB47 /* AssetHomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170729A2652686A0013FB47 /* AssetHomeTitleView.swift */; };
+		A17072A02652687F0013FB47 /* AssetHomeBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170729F2652687F0013FB47 /* AssetHomeBottomView.swift */; };
+		A17072A5265268B70013FB47 /* AssetListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072A4265268B60013FB47 /* AssetListController.swift */; };
+		A17072B226526BB80013FB47 /* CurrencyAddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072B126526BB80013FB47 /* CurrencyAddressModel.swift */; };
+		A17072B7265271650013FB47 /* CurrencyAddressObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072B6265271650013FB47 /* CurrencyAddressObject.swift */; };
+		A17072BC265271FF0013FB47 /* WithdrawController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072BB265271FF0013FB47 /* WithdrawController.swift */; };
+		A17072C62652725A0013FB47 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072C52652725A0013FB47 /* WithdrawHeaderView.swift */; };
+		A17072D9265279840013FB47 /* EquipmentHomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072D8265279840013FB47 /* EquipmentHomeTitleView.swift */; };
+		A17072DE265279C90013FB47 /* EquipmentHomeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072DD265279C90013FB47 /* EquipmentHomeListController.swift */; };
 		C9D54A936C70BE6D1996E6A8 /* Pods_AntClusterBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -814,7 +831,6 @@
 		53DF24902581FC9500165247 /* ReceiptAccountInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptAccountInfoModel.swift; sourceTree = "<group>"; };
 		53DF24922581FC9500165247 /* RechargePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargePlaceView.swift; sourceTree = "<group>"; };
 		53DF24962581FC9500165247 /* WalletHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeController.swift; sourceTree = "<group>"; };
-		53DF24982581FC9500165247 /* WalletFilInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletFilInfoModel.swift; sourceTree = "<group>"; };
 		53DF249A2581FC9500165247 /* WalletBalanceProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletBalanceProgressView.swift; sourceTree = "<group>"; };
 		53DF249B2581FC9500165247 /* WalletHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeHeaderView.swift; sourceTree = "<group>"; };
 		53DF249C2581FC9500165247 /* WalletHomeMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeMainView.swift; sourceTree = "<group>"; };
@@ -842,7 +858,6 @@
 		53DF24BF2581FC9600165247 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53DF24C22581FC9600165247 /* FirstPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageController.swift; sourceTree = "<group>"; };
 		53DF24C42581FC9600165247 /* FPHomeQuotationItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeQuotationItemModel.swift; sourceTree = "<group>"; };
-		53DF24C52581FC9600165247 /* FPHomeIPFSModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeIPFSModel.swift; sourceTree = "<group>"; };
 		53DF24C62581FC9600165247 /* FirstPageHomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageHomeModel.swift; sourceTree = "<group>"; };
 		53DF24C82581FC9600165247 /* FPHomeOrePoolItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeOrePoolItemView.swift; sourceTree = "<group>"; };
 		53DF24C92581FC9600165247 /* FPHomeQuotationItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeQuotationItemView.swift; sourceTree = "<group>"; };
@@ -930,6 +945,25 @@
 		9536A74525F8C3EC00280E5C /* AssetDetailFilterPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailFilterPopView.swift; sourceTree = "<group>"; };
 		9536A74E25F8C4AD00280E5C /* AssetDetailTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailTitleView.swift; sourceTree = "<group>"; };
 		9536A78325F8CA2B00280E5C /* AssetDetailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailListCell.swift; sourceTree = "<group>"; };
+		A170725826520B9E0013FB47 /* FPHomeOrePoolTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeOrePoolTypeView.swift; sourceTree = "<group>"; };
+		A170725D26520C0A0013FB47 /* FPOrePoolItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPOrePoolItemModel.swift; sourceTree = "<group>"; };
+		A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeCurrencyModel.swift; sourceTree = "<group>"; };
+		A170726D265210AE0013FB47 /* FPOrePoolTypeSelectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPOrePoolTypeSelectController.swift; sourceTree = "<group>"; };
+		A1707272265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPOrePoolTypeSelectItemView.swift; sourceTree = "<group>"; };
+		A170727726521F550013FB47 /* MineHomeIncomeInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineHomeIncomeInfoItemView.swift; sourceTree = "<group>"; };
+		A170728626524F040013FB47 /* WalletAllInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAllInfoModel.swift; sourceTree = "<group>"; };
+		A170728B265268090013FB47 /* FPYesterdayIncomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPYesterdayIncomeModel.swift; sourceTree = "<group>"; };
+		A17072902652681A0013FB47 /* FPIncreaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPIncreaseModel.swift; sourceTree = "<group>"; };
+		A1707295265268560013FB47 /* AssetHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetHomeHeaderView.swift; sourceTree = "<group>"; };
+		A170729A2652686A0013FB47 /* AssetHomeTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetHomeTitleView.swift; sourceTree = "<group>"; };
+		A170729F2652687F0013FB47 /* AssetHomeBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetHomeBottomView.swift; sourceTree = "<group>"; };
+		A17072A4265268B60013FB47 /* AssetListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetListController.swift; sourceTree = "<group>"; };
+		A17072B126526BB80013FB47 /* CurrencyAddressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyAddressModel.swift; sourceTree = "<group>"; };
+		A17072B6265271650013FB47 /* CurrencyAddressObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyAddressObject.swift; sourceTree = "<group>"; };
+		A17072BB265271FF0013FB47 /* WithdrawController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawController.swift; sourceTree = "<group>"; };
+		A17072C52652725A0013FB47 /* WithdrawHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawHeaderView.swift; sourceTree = "<group>"; };
+		A17072D8265279840013FB47 /* EquipmentHomeTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeTitleView.swift; sourceTree = "<group>"; };
+		A17072DD265279C90013FB47 /* EquipmentHomeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeListController.swift; sourceTree = "<group>"; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1053,6 +1087,7 @@
 			isa = PBXGroup;
 			children = (
 				530B28C225AD483F00B8723E /* EquipmentHomeController.swift */,
+				A17072DD265279C90013FB47 /* EquipmentHomeListController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1073,6 +1108,7 @@
 				530B28C825AD483F00B8723E /* EquipmentHomeItemView.swift */,
 				530B28C925AD484000B8723E /* EquipmentHomeHeaderView.swift */,
 				530B28CA25AD484000B8723E /* EquipmentListCell.swift */,
+				A17072D8265279840013FB47 /* EquipmentHomeTitleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2113,6 +2149,8 @@
 		53DF23F12581FC9400165247 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A17072B6265271650013FB47 /* CurrencyAddressObject.swift */,
+				A17072B126526BB80013FB47 /* CurrencyAddressModel.swift */,
 				53DF23F22581FC9400165247 /* CurrentUserModel.swift */,
 				53DF23F32581FC9400165247 /* RecommenderModel.swift */,
 				53DF23F42581FC9400165247 /* RecommendUserModel.swift */,
@@ -2487,6 +2525,7 @@
 				53DF24782581FC9500165247 /* MineHomeOptionView.swift */,
 				53DF24792581FC9500165247 /* MineHomeHeaderView.swift */,
 				53DF247A2581FC9500165247 /* MineHomeIncomeInfoView.swift */,
+				A170727726521F550013FB47 /* MineHomeIncomeInfoItemView.swift */,
 				53DF247B2581FC9500165247 /* MineHomeOptionItemControl.swift */,
 			);
 			path = View;
@@ -2617,6 +2656,7 @@
 			isa = PBXGroup;
 			children = (
 				53DF24962581FC9500165247 /* WalletHomeController.swift */,
+				A17072A4265268B60013FB47 /* AssetListController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2624,7 +2664,7 @@
 		53DF24972581FC9500165247 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				53DF24982581FC9500165247 /* WalletFilInfoModel.swift */,
+				A170728626524F040013FB47 /* WalletAllInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2632,6 +2672,9 @@
 		53DF24992581FC9500165247 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A170729A2652686A0013FB47 /* AssetHomeTitleView.swift */,
+				A1707295265268560013FB47 /* AssetHomeHeaderView.swift */,
+				A170729F2652687F0013FB47 /* AssetHomeBottomView.swift */,
 				53DF249A2581FC9500165247 /* WalletBalanceProgressView.swift */,
 				53DF249B2581FC9500165247 /* WalletHomeHeaderView.swift */,
 				53DF249C2581FC9500165247 /* WalletHomeMainView.swift */,
@@ -2653,6 +2696,7 @@
 		53DF249F2581FC9500165247 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A17072BB265271FF0013FB47 /* WithdrawController.swift */,
 				53DF24A02581FC9500165247 /* FilWithdrawController.swift */,
 				53DF24A12581FC9600165247 /* WalletWithdrawResultController.swift */,
 			);
@@ -2672,6 +2716,7 @@
 		53DF24A62581FC9600165247 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A17072C52652725A0013FB47 /* WithdrawHeaderView.swift */,
 				53DF24A72581FC9600165247 /* WithdrawBindAddressPopView.swift */,
 				53DF24A82581FC9600165247 /* FilWithdrawHeaderView.swift */,
 			);
@@ -2774,6 +2819,7 @@
 		53DF24C12581FC9600165247 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A170726D265210AE0013FB47 /* FPOrePoolTypeSelectController.swift */,
 				53DF24C22581FC9600165247 /* FirstPageController.swift */,
 			);
 			path = Controller;
@@ -2782,9 +2828,12 @@
 		53DF24C32581FC9600165247 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A170728B265268090013FB47 /* FPYesterdayIncomeModel.swift */,
 				53DF24C42581FC9600165247 /* FPHomeQuotationItemModel.swift */,
-				53DF24C52581FC9600165247 /* FPHomeIPFSModel.swift */,
+				A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */,
 				53DF24C62581FC9600165247 /* FirstPageHomeModel.swift */,
+				A170725D26520C0A0013FB47 /* FPOrePoolItemModel.swift */,
+				A17072902652681A0013FB47 /* FPIncreaseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2792,8 +2841,10 @@
 		53DF24C72581FC9600165247 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1707272265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift */,
 				53DF24C82581FC9600165247 /* FPHomeOrePoolItemView.swift */,
 				53DF24C92581FC9600165247 /* FPHomeQuotationItemView.swift */,
+				A170725826520B9E0013FB47 /* FPHomeOrePoolTypeView.swift */,
 				53DF24CA2581FC9600165247 /* MallHomeNavBar.swift */,
 				53DF24CB2581FC9600165247 /* FPHomeOrePoolView.swift */,
 				53DF24CC2581FC9600165247 /* XDMarqueeView.swift */,
@@ -3535,7 +3586,6 @@
 				53DF263A2581FC9A00165247 /* BaseViewController.swift in Sources */,
 				53DF26492581FC9A00165247 /* MineHomeOptionView.swift in Sources */,
 				53DF25C82581FC9900165247 /* TestPresentationController.swift in Sources */,
-				53DF265A2581FC9A00165247 /* WalletFilInfoModel.swift in Sources */,
 				53DF25B62581FC9800165247 /* ServerConfigModel.swift in Sources */,
 				53DF25642581FC9700165247 /* AppColor.swift in Sources */,
 				53DF258D2581FC9800165247 /* TZImagePickerHelper.swift in Sources */,
@@ -3566,6 +3616,8 @@
 				53DF25A62581FC9800165247 /* PicturesThumbView.swift in Sources */,
 				53DF26292581FC9A00165247 /* ContactEmptyPlaceHolderView.swift in Sources */,
 				53DF25DA2581FC9900165247 /* TestHomeController.swift in Sources */,
+				A170727826521F550013FB47 /* MineHomeIncomeInfoItemView.swift in Sources */,
+				A17072D9265279840013FB47 /* EquipmentHomeTitleView.swift in Sources */,
 				53DF262A2581FC9A00165247 /* OrderEmptyPlaceHolderView.swift in Sources */,
 				53DF25742581FC9800165247 /* MessageNetworkManager.swift in Sources */,
 				53DF26692581FC9B00165247 /* WithdrawAddressBindingHeaderView.swift in Sources */,
@@ -3583,24 +3635,30 @@
 				53DF26352581FC9A00165247 /* PageDefaultNetErrorView.swift in Sources */,
 				53DF25672581FC9700165247 /* AppFont.swift in Sources */,
 				53DF26432581FC9A00165247 /* BaseTableView.swift in Sources */,
+				A170728726524F040013FB47 /* WalletAllInfoModel.swift in Sources */,
 				53DF26652581FC9B00165247 /* FilWithdrawHeaderView.swift in Sources */,
 				53DF25DB2581FC9900165247 /* LoadingAnimationTestController.swift in Sources */,
 				53DF25B42581FC9800165247 /* ServerAddressConfig.swift in Sources */,
 				53AA78CE25F8AC2D0081D04A /* EDAssetSurveyView.swift in Sources */,
 				53DF25ED2581FC9900165247 /* LaunchAdvertController.swift in Sources */,
 				53DF25A22581FC9800165247 /* XDGifImageView.swift in Sources */,
+				A17072DE265279C90013FB47 /* EquipmentHomeListController.swift in Sources */,
 				53DF25812581FC9800165247 /* EquipmentRequestInfo.swift in Sources */,
+				A170729B2652686A0013FB47 /* AssetHomeTitleView.swift in Sources */,
 				53AA78CA25F8AC2D0081D04A /* EquipmentDetailController.swift in Sources */,
 				53DF25772581FC9800165247 /* UserNetworkManager.swift in Sources */,
 				53DF25CF2581FC9900165247 /* XDPushPopAnimation.swift in Sources */,
 				53DF259F2581FC9800165247 /* PickerUtil.swift in Sources */,
+				A17072A02652687F0013FB47 /* AssetHomeBottomView.swift in Sources */,
 				530B28D025AD484000B8723E /* EquipmentHomeHeaderView.swift in Sources */,
 				53DF25AB2581FC9800165247 /* VerionUpdateController.swift in Sources */,
 				530B28ED25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift in Sources */,
 				53DF26422581FC9A00165247 /* BaseControl.swift in Sources */,
 				53DF25B72581FC9800165247 /* ThirdChildConfig.swift in Sources */,
+				A170726326520EDD0013FB47 /* FPHomeCurrencyModel.swift in Sources */,
 				53DF255D2581FC9700165247 /* UITextField+Extension.swift in Sources */,
 				53DF25F92581FC9900165247 /* SearchHistoryController.swift in Sources */,
+				A170726E265210AE0013FB47 /* FPOrePoolTypeSelectController.swift in Sources */,
 				53DF266F2581FC9B00165247 /* AppDelegate+WxApi.swift in Sources */,
 				53DF269E2581FC9B00165247 /* LocalSettingModel.swift in Sources */,
 				53DF26A52581FC9C00165247 /* UserInfoControl.swift in Sources */,
@@ -3617,7 +3675,7 @@
 				53DF26472581FC9A00165247 /* MineHomeController.swift in Sources */,
 				53DF25662581FC9700165247 /* AppUtil.swift in Sources */,
 				53DF259C2581FC9800165247 /* Constant.swift in Sources */,
-				53DF26762581FC9B00165247 /* FPHomeIPFSModel.swift in Sources */,
+				A17072B226526BB80013FB47 /* CurrencyAddressModel.swift in Sources */,
 				53DF26122581FC9A00165247 /* IconTitleValueView.swift in Sources */,
 				53DF267E2581FC9B00165247 /* FPHomeHeaderView.swift in Sources */,
 				53DF260B2581FC9900165247 /* TitleIconView.swift in Sources */,
@@ -3639,6 +3697,8 @@
 				53DF25CC2581FC9900165247 /* XDPopAnimation.swift in Sources */,
 				53DF25BC2581FC9800165247 /* MeetGuideController.swift in Sources */,
 				53DF26512581FC9A00165247 /* AssetActionTitleView.swift in Sources */,
+				A1707273265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift in Sources */,
+				A170728C265268090013FB47 /* FPYesterdayIncomeModel.swift in Sources */,
 				53DF26962581FC9B00165247 /* LoginPwdUpdateController.swift in Sources */,
 				53DF26362581FC9A00165247 /* PageDefaultErrorView.swift in Sources */,
 				53DF25D92581FC9900165247 /* RedDotBubbleView.swift in Sources */,
@@ -3665,11 +3725,13 @@
 				53DF26702581FC9B00165247 /* RootViewController.swift in Sources */,
 				53DF26772581FC9B00165247 /* FirstPageHomeModel.swift in Sources */,
 				53DF25972581FC9800165247 /* ProjectImage.swift in Sources */,
+				A170725E26520C0A0013FB47 /* FPOrePoolItemModel.swift in Sources */,
 				5394398B24F8A8A50097DCAA /* ResourcePlacePicture.swift in Sources */,
 				53DF26672581FC9B00165247 /* WithdrawAddressBindResultController.swift in Sources */,
 				53DF26542581FC9A00165247 /* AssetListCell.swift in Sources */,
 				53DF25FF2581FC9900165247 /* ReportTargetModel.swift in Sources */,
 				53DF25502581FC9700165247 /* SelectedAreaModel.swift in Sources */,
+				A170725926520B9E0013FB47 /* FPHomeOrePoolTypeView.swift in Sources */,
 				53DF26B42581FC9C00165247 /* HQImagePageControl.m in Sources */,
 				53DF25432581FC9700165247 /* UserExtraObject.swift in Sources */,
 				53DF26202581FC9A00165247 /* XDDashLineView.swift in Sources */,
@@ -3687,7 +3749,9 @@
 				53DF268A2581FC9B00165247 /* SettingHomeModel.swift in Sources */,
 				53DF26BB2581FC9C00165247 /* EFCountAdapter.swift in Sources */,
 				53DF265B2581FC9A00165247 /* WalletBalanceProgressView.swift in Sources */,
+				A17072BC265271FF0013FB47 /* WithdrawController.swift in Sources */,
 				53DF26412581FC9A00165247 /* BaseLabel.swift in Sources */,
+				A17072A5265268B70013FB47 /* AssetListController.swift in Sources */,
 				53DF264C2581FC9A00165247 /* MineHomeOptionItemControl.swift in Sources */,
 				53DF26192581FC9A00165247 /* AppHomeNavBar.swift in Sources */,
 				53DF25E82581FC9900165247 /* SimpleUserModel.swift in Sources */,
@@ -3710,6 +3774,7 @@
 				53DF266A2581FC9B00165247 /* WithdrawAddressPlaceView.swift in Sources */,
 				53DF261E2581FC9A00165247 /* CommonDoneBtn.swift in Sources */,
 				9536A73225F8BAB300280E5C /* OreDetailController.swift in Sources */,
+				A1707296265268560013FB47 /* AssetHomeHeaderView.swift in Sources */,
 				53DF26032581FC9900165247 /* IndicatorWindowTop.swift in Sources */,
 				53DF26902581FC9B00165247 /* AuthViewController.swift in Sources */,
 				53DF25B32581FC9800165247 /* ShieldConfig.swift in Sources */,
@@ -3717,6 +3782,7 @@
 				53DF26582581FC9A00165247 /* RechargePlaceView.swift in Sources */,
 				9536A78425F8CA2B00280E5C /* AssetDetailListCell.swift in Sources */,
 				53DF26742581FC9B00165247 /* FirstPageController.swift in Sources */,
+				A17072C62652725A0013FB47 /* WithdrawHeaderView.swift in Sources */,
 				53DF26722581FC9B00165247 /* AppDelegate+JPush.swift in Sources */,
 				53DF26BD2581FC9C00165247 /* EFTimingMethod.swift in Sources */,
 				530B28DE25AD487800B8723E /* MiningLogModel.swift in Sources */,
@@ -3858,6 +3924,7 @@
 				53DF256F2581FC9800165247 /* PasswordRequestInfo.swift in Sources */,
 				53DF261B2581FC9A00165247 /* CommonSearchView.swift in Sources */,
 				53DF25D62581FC9900165247 /* BubbleDrawTestView.swift in Sources */,
+				A17072912652681A0013FB47 /* FPIncreaseModel.swift in Sources */,
 				53DF26662581FC9B00165247 /* WithdrawAddressBindingController.swift in Sources */,
 				53DF26622581FC9B00165247 /* WalletWithdrawResultModel.swift in Sources */,
 				53DF25FB2581FC9900165247 /* SearchHistoryCell.swift in Sources */,
@@ -3871,6 +3938,7 @@
 				53DF25EF2581FC9900165247 /* AdvertHelper.swift in Sources */,
 				53DF25B02581FC9800165247 /* ThirdConfig.swift in Sources */,
 				53AA78EB25F8AEA40081D04A /* IconTitleIconView.swift in Sources */,
+				A17072B7265271650013FB47 /* CurrencyAddressObject.swift in Sources */,
 				53DF25AD2581FC9800165247 /* VersionManager.swift in Sources */,
 				53DF25C02581FC9800165247 /* NoviceGuideModel.swift in Sources */,
 				53DF25922581FC9800165247 /* XDTransformType.swift in Sources */,

@@ -8,333 +8,322 @@
 //  设备主页、设备列表页
 
 import UIKit
+import MonkeyKing
 
-typealias EquipmentListController = EquipmentHomeController
-class EquipmentHomeController: BaseViewController
-{
-
+class EquipmentHomeController: BaseViewController {
+    
     // MARK: - Internal Property
 
+    let showTabbar: Bool
+    
+    var defaultSelectedIndex: Int = 0
+
     // MARK: - Private Property
-    
-    //fileprivate let statusBar: UIView = UIView.init()
+    fileprivate let topBgView: UIImageView = UIImageView()
     fileprivate let navBar: AppHomeNavStatusView = AppHomeNavStatusView.init()
+    fileprivate let nestView: XDNestScrollContainerView = XDNestScrollContainerView()
     
-    fileprivate let topBgView: UIImageView = UIImageView.init()
-    
-    fileprivate let scrollView: UIScrollView = UIScrollView.init()
-    fileprivate let headerView: EquipmentHomeHeaderView = EquipmentHomeHeaderView.init()
-    fileprivate let itemContainer: UIView = UIView.init()
-    fileprivate let footerView: EquipmentHomeFooterView = EquipmentHomeFooterView.init()
-    
-    fileprivate var sourceList: [String] = []
-    fileprivate var model: EquipmentHomeModel = EquipmentHomeModel.init()
-    fileprivate var offset: Int = 0
-    fileprivate let limit: Int = 20
-    
-    fileprivate let topBgViewHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
-    
-    fileprivate let headerHeight: CGFloat = EquipmentHomeHeaderView.viewHeight
-    fileprivate let lrMargin: CGFloat = 12
-    fileprivate let itemHeight: CGFloat = EquipmentHomeItemView.viewHeight
-    fileprivate let itemVerMargin: CGFloat = 12
-    //fileprivate let itemTopMargin: CGFloat = EquipmentHomeHeaderView.valueBottomMargin     // -header.bottom
-    fileprivate let itemTopMargin: CGFloat = 0
-    fileprivate let itemViewTagBase: Int = 250
+    fileprivate let types: [ProductZone] = [.ipfs, .chia]
+    fileprivate lazy var titleView: EquipmentHomeTitleView = {
+        var titles: [String] = []
+        self.types.forEach { (item) in
+            titles.append(item.title)
+        }
+        return EquipmentHomeTitleView.init(titles: titles)
+    }()
 
-    fileprivate let footerHeight: CGFloat = 44
+    /// 明细列表
+    fileprivate let detailView: UIView = UIView()
+    fileprivate let horScrollView: UIScrollView = UIScrollView()
 
+    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height
+    fileprivate let titleViewHeight: CGFloat = EquipmentHomeTitleView.viewHeight
+    fileprivate var selectedIndex: Int = 0 {
+        didSet {
+            if oldValue == selectedIndex {
+                return
+            }
+            self.titleView.selectedIndex = selectedIndex
+            self.horScrollView.setContentOffset(CGPoint(x: CGFloat(selectedIndex) * kScreenWidth, y: 0), animated: true)
+            self.childVCList[oldValue].isSelected = false
+            self.childVCList[selectedIndex].isSelected = true
+        }
+    }
+    /// childVC列表
+    fileprivate var childVCList: [EquipmentHomeListController] = []
 
-    
+    /// 内容是否可以滑动
+    fileprivate var canContentScroll: Bool = false
+
     // MARK: - Initialize Function
-    init() {
+
+    init(showTabbar: Bool = false) {
+        self.showTabbar = showTabbar
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
+        //super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
-
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
 }
 
 // MARK: - Internal Function
 
-// MARK: - LifeCircle/Override Function
+// MARK: - LifeCircle Function
 extension EquipmentHomeController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initialUI()
         self.initialDataSource()
     }
 
-    /// 控制器的view将要显示
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-    /// 控制器的view即将消失
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
-
 }
 
-// MARK: - UI Function
+// MARK: - UI
 extension EquipmentHomeController {
-    /// 界面布局
+    /// 页面布局
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = AppColor.pageBg
-        // 1. topBg
+        // 0.topBgView
         self.view.addSubview(self.topBgView)
+        self.topBgView.set(cornerRadius: 0)
         self.topBgView.image = UIImage.init(named: "IMG_sb_top_bg")
-        //self.topBgView.backgroundColor = UIColor.init(hex: 0x282E42)
-        //self.topBgView.setupCorners(UIRectCorner.init([UIRectCorner.bottomLeft, UIRectCorner.bottomRight]), selfSize: CGSize.init(width: kScreenWidth, height: self.topBgViewHeight), cornerRadius: 50)
         self.topBgView.snp.makeConstraints { (make) in
-            make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(self.topBgViewHeight)
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(self.topBgHeight)
         }
-        // 2. navBar
+        // 1.nav
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "设备列表", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
-        self.navBar.leftItem.isHidden = true
-        self.navBar.rightItem.isHidden = true
+//        self.navBar.titleLabel.set(text: "FIL", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.white, alignment: .center)
+        self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(kNavigationStatusBarHeight)
         }
-        // 2. scrollView
-        self.view.addSubview(self.scrollView)
-        self.initialScrollView(self.scrollView)
-        self.scrollView.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
+        self.navBar.titleView.addSubview(self.titleView)
+        self.titleView.delegate = self
+        self.titleView.snp.makeConstraints { (make) in
+            make.left.greaterThanOrEqualTo(self.navBar.leftItem.snp.right)
+            make.right.lessThanOrEqualTo(self.navBar.rightItem.snp.left)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.equalTo(self.titleViewHeight)
+        }
+        // 2. nestView
+        self.view.addSubview(self.nestView)
+        self.initialNestView(self.nestView)
+        //self.nestView.delegate = self
+        //self.nestView.containerScrollHeight = self.topBgHeight - 66
+        self.nestView.containerScrollHeight = 0
+        self.nestView.canScroll = false
+        self.nestView.container.mj_header = XDRefreshHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
+        self.nestView.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(self.view.snp_bottomMargin)
+            //make.top.equalTo(self.view.snp_topMargin)
             make.top.equalTo(self.navBar.snp.bottom)
         }
-        // 顶部位置 的版本适配
-        if #available(iOS 11.0, *) {
-            self.scrollView.contentInsetAdjustmentBehavior = .never
-        } else if #available(iOS 9.0, *) {
-            self.automaticallyAdjustsScrollViewInsets = false
-        }
+        self.canContentScroll = true
+        self.view.bringSubviewToFront(self.navBar)
     }
-    ///
-    fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.delegate = self
-        scrollView.mj_header = XDRefreshHeader.init(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
-        scrollView.mj_footer = XDRefreshFooter.init(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
-        scrollView.mj_header.isHidden = false
-        scrollView.mj_footer.isHidden = true
-        // 1. headerView
-        scrollView.addSubview(self.headerView)
-        self.headerView.snp.makeConstraints { (make) in
-            make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(self.headerHeight)
+
+    fileprivate func initialNestView(_ nestView: XDNestScrollContainerView) -> Void {
+        let detailViewH: CGFloat = kScreenHeight - kNavigationStatusBarHeight - (showTabbar ? kTabBarHeight : kBottomHeight)
+        // 3. detailView
+        nestView.container.addSubview(self.detailView)
+        let childViews = self.initialBottomDetailView(self.detailView)
+        self.detailView.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(self.titleView.snp.bottom)
+            make.height.equalTo(detailViewH)
             make.width.equalTo(kScreenWidth)
         }
-        // 2. itemContainer
-        scrollView.addSubview(self.itemContainer)
-        self.itemContainer.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.headerView.snp.bottom).offset(-self.itemTopMargin)
-        }
-        // 3. footerView
-        scrollView.addSubview(self.footerView)
-        self.footerView.model = "没有更多数据"
-        self.footerView.isHidden = true     // 默认隐藏
-        self.footerView.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.itemContainer.snp.bottom).offset(0)
-            make.height.equalTo(self.footerHeight)
-        }
+        nestView.allowViews = childViews
     }
-    
-    /// 数据加载
-    fileprivate func setupItemContainer(with models: [EquipmentListModel]) -> Void {
-        self.itemContainer.removeAllSubviews()
-        var topView: UIView = self.itemContainer
-        for (index, model) in models.enumerated() {
-            let itemView = EquipmentHomeItemView.init()
-            self.itemContainer.addSubview(itemView)
-            itemView.model = model
-            itemView.delegate = self
-            itemView.set(cornerRadius: 10)
-            itemView.tag = self.itemViewTagBase + index
-            itemView.snp.makeConstraints { (make) in
-                make.leading.equalToSuperview().offset(self.lrMargin)
-                make.trailing.equalToSuperview().offset(-self.lrMargin)
-                make.height.equalTo(self.itemHeight)
-                if 0 == index {
-                    make.top.equalToSuperview()
-                } else {
-                    make.top.equalTo(topView.snp.bottom).offset(self.itemVerMargin)
-                }
-                if index == models.count - 1 {
-                    make.bottom.equalToSuperview()
+
+    /// 底部明细视图
+    fileprivate func initialBottomDetailView(_ bottomView: UIView) -> [UIView] {
+        let childViewH: CGFloat = kScreenHeight - kNavigationStatusBarHeight - (showTabbar ? kTabBarHeight : kBottomHeight)
+        // 1. horScroll
+        bottomView.addSubview(self.horScrollView)
+        self.horScrollView.isPagingEnabled = true
+        self.horScrollView.showsHorizontalScrollIndicator = false
+        self.horScrollView.delegate = self
+        self.horScrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+            make.height.equalTo(childViewH)
+        }
+        // 2. childs
+        var childTableViews: [UIScrollView] = []
+        for (index, type) in self.types.enumerated() {
+            let childVC = EquipmentHomeListController.init(zone: type)
+            let childView: UIView = UIView()
+            self.horScrollView.addSubview(childView)
+            childView.snp.makeConstraints { (make) in
+                make.width.equalTo(kScreenWidth)
+                make.height.equalTo(childViewH)
+                make.top.bottom.equalToSuperview()
+                let leftMargin: CGFloat = CGFloat(index) * kScreenWidth
+                make.leading.equalToSuperview().offset(leftMargin)
+                if index == self.types.count - 1 {
+                    make.trailing.equalToSuperview()
                 }
             }
-            topView = itemView
-            // tapGR
-            let tapGR: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGRProcess(_:)))
-            itemView.addGestureRecognizer(tapGR)
+            // childVC
+            self.addChild(childVC)
+            self.childVCList.append(childVC)
+            childView.addSubview(childVC.view)
+            childTableViews.append(childVC.scrollView)
+            childVC.view.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
         }
-        self.view.layoutIfNeeded()
+        return childTableViews
     }
-
 }
 
-// MARK: - Data Function
+// MARK: - Data(数据处理与加载)
 extension EquipmentHomeController {
-
-    // MARK: - Private  数据处理与加载
+    /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
-        self.scrollView.mj_header.beginRefreshing()
-        //self.setupAsDemo()
-        //self.headerView.model = nil
-    }
-    ///
-    fileprivate func setupAsDemo() -> Void {
-        for i in 0...25 {
-            self.sourceList.append("\(i)")
+        //  同步价格接口
+        FirstPageNetworkManager.getIncreases { (status, msg, model) in
+
         }
-        //self.setupItemContainer(with: self.sourceList)
+        FirstPageNetworkManager.getUsdtToRmb { (status, msg, price) in
+
+        }
+        //
+        if self.defaultSelectedIndex != self.selectedIndex {
+            self.selectedIndex = self.defaultSelectedIndex
+        } else {
+            self.titleView.selectedIndex = self.selectedIndex
+            self.horScrollView.setContentOffset(CGPoint(x: CGFloat(self.selectedIndex) * kScreenWidth, y: 0), animated: false)
+            self.childVCList[self.selectedIndex].isSelected = true
+        }
+        //self.refreshRequest(headerAnimation: true)
     }
+}
+
+// MARK: - Request
+extension EquipmentHomeController {
+    fileprivate func refreshRequest(headerAnimation: Bool = false) -> Void {
+//        /// 不是头部的下拉刷新，则直接请求
+//        if !headerAnimation {
+//            self.childVCList[self.selectedIndex].refreshData()
+//            return
+//        }
+//        /// 下拉刷新
+//        let group = DispatchGroup()
+//        group.enter()
+//        self.childVCList[self.selectedIndex].refreshData { (status, msg, models) in
+//            group.leave()
+//        }
+//        group.notify(queue: DispatchQueue.main) {
+//            self.nestView.container.mj_header?.endRefreshing()
+//        }
+    }
+
 
 }
 
-// MARK: - Event Function
+// MARK: - Event(事件响应)
 extension EquipmentHomeController {
-
-    /// 顶部刷新
     @objc fileprivate func headerRefresh() -> Void {
-        self.refreshRequest()
-    }
-    /// 底部记载更多
-    @objc fileprivate func footerLoadMore() -> Void {
-        self.loadMoreRequest()
-    }
-    
-    ///
-    @objc fileprivate func tapGRProcess(_ tapGR: UITapGestureRecognizer) -> Void {
-        guard tapGR.state == .recognized, let tapView = tapGR.view as? EquipmentHomeItemView, let model = tapView.model else {
-            return
-        }
-//        self.enterDetailPage(with: model)
-        //self.enterMiningDetailPage(with: model)
-        self.enterEquipmentDetailPage(with: model)
-    }
-    
-}
-
-// MARK: - Request Function
-extension EquipmentHomeController {
-
-    /// 下拉刷新请求
-    fileprivate func refreshRequest() -> Void {
-        EquipmentNetworkManager.getHomeData(offset: 0, limit: self.limit) { [weak self](status, msg, model) in
-            guard let `self` = self else {
-                return
-            }
-            self.scrollView.mj_header.endRefreshing()
-            self.scrollView.mj_footer.state = .idle
-            guard status, let model = model else {
-                ToastUtil.showToast(title: msg)
-                return
-            }
-            self.model = model
-            self.offset = self.model.list.count
-            self.headerView.model = self.model
-            self.setupItemContainer(with: self.model.list)
-            self.footerView.isHidden = model.list.isEmpty || model.list.count >= self.limit
-            self.scrollView.mj_footer.isHidden = model.list.count < self.limit
-        }
-    }
-    
-    /// 上拉加载更多请求
-    fileprivate func loadMoreRequest() -> Void {
-        EquipmentNetworkManager.getHomeData(offset: self.offset, limit: self.limit) { [weak self](status, msg, model) in
-            guard let `self` = self else {
-                return
-            }
-            self.scrollView.mj_footer.endRefreshing()
-            guard status, let model = model else {
-                ToastUtil.showToast(title: msg)
-                return
-            }
-            self.model.list.append(contentsOf: model.list)
-            self.offset = self.model.list.count
-            self.headerView.model = self.model
-            self.setupItemContainer(with: self.model.list)
-            if model.list.isEmpty || model.list.count >= self.limit {
-                self.footerView.isHidden = false
-                self.scrollView.mj_footer.isHidden = true
-            } else {
-                self.footerView.isHidden = true
-                self.scrollView.mj_footer.isHidden = false
-            }
-        }
-    }
-
-}
-
-// MARK: - Enter Page
-extension EquipmentHomeController {
-    /// 老版本挖坑明细
-//    fileprivate func enterOreDetailPage(with model: EquipmentListModel) -> Void {
-//        let detailVC = MiningDetailController.init(model: model)
-//        self.enterPageVC(detailVC)
-//    }
-    /// 挖坑明细
-    fileprivate func enterOreDetailPage(with model: EquipmentListModel) -> Void {
-        let oreDetailVC = OreDetailController.init(listModel: model)
-        self.enterPageVC(oreDetailVC)
-    }
-    /// 设备详情页
-    fileprivate func enterEquipmentDetailPage(with model: EquipmentListModel) -> Void {
-        let detailVC = EquipmentDetailController.init(model: model)
-        self.enterPageVC(detailVC)
+        self.refreshRequest(headerAnimation: true)
     }
 }
 
-// MARK: - Notification Function
+// MARK: - Notification
 extension EquipmentHomeController {
-    
+
+}
+
+// MARK: - Alert
+extension EquipmentHomeController {
+
 }
 
 // MARK: - Extension Function
 extension EquipmentHomeController {
-    
+
+
 }
 
 // MARK: - Delegate Function
 
+// MARK: - <EquipmentHomeTitleViewProtocol>
+extension EquipmentHomeController: EquipmentHomeTitleViewProtocol {
+    func titleView(_ titleView: EquipmentHomeTitleView, didClickedAt index: Int, with title: String) -> Void {
+        self.selectedIndex = index
+    }
+}
+
 // MARK: - <UIScrollViewDelegate>
 extension EquipmentHomeController: UIScrollViewDelegate {
-
-    ///
+    /// 滑动结束 回调
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == self.horScrollView {
+            let scrollIndex: Int = Int(scrollView.contentOffset.x / kScreenWidth)
+            self.selectedIndex = scrollIndex
+        }
+    }
+    /// 滑动回调
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let offset = scrollView.contentOffset
-//        if offset.y > self.headerHeight - self.itemTopMargin - kStatusBarHeight {
-//            self.statusBar.backgroundColor = AppColor.theme
-//        } else {
-//            self.statusBar.backgroundColor = UIColor.clear
-//        }
+        if scrollView == self.horScrollView {
+            return
+        }
+        if !self.canContentScroll {
+            // 这里通过固定contentOffset，来实现不滚动
+            scrollView.contentOffset = CGPoint.zero
+        } else if scrollView.contentOffset.y <= -0.1 {  // 不取0，因为有bounces效果可能导致不显示。
+            self.canContentScroll = false
+            // 通知容器可以开始滚动
+            self.nestView.canScroll = true
+            scrollView.contentOffset = CGPoint.zero
+        }
     }
 
 }
-extension EquipmentHomeController: EquipmentHomeItemViewProtocol {
-    /// 设备
-    func itemView(_ view: EquipmentHomeItemView, didClickEquipmentDetail btn: UIButton) {
-        guard let model = view.model else {
-            return
-        }
-        self.enterEquipmentDetailPage(with: model)
+
+// MARK: - <XDNestScrollContainerViewProtocol>
+extension EquipmentHomeController: XDNestScrollContainerViewProtocol {
+    // 当内容可以滚动时会调用
+    func nestingViewContentCanScroll(_ nestView: XDNestScrollContainerView) -> Void {
+        self.canContentScroll = true
+        // 当内容可以滚动时，关闭容器的状态栏点击滚动到顶部开关
+        nestView.container.scrollsToTop = false
     }
-    /// 挖坑
-    func itemView(_ view: EquipmentHomeItemView, didClickOreDetail btn: UIButton) {
-        guard let model = view.model else {
-            return
-        }
-        self.enterOreDetailPage(with: model)
+
+    // 当容器可以滚动时会调用
+    func nestingViewContainerCanScroll(_ nestView: XDNestScrollContainerView) -> Void {
+        // 当容器开始可以滚动时，将所有内容设置回到顶部
+
+        // 当容器可以滚动时，打开容器的状态栏点击滚动到顶部开关
+        nestView.container.scrollsToTop = true
+    }
+
+    // 当容器正在滚动时调用，参数scrollView就是充当容器
+    func nestingViewDidContainerScroll(_ scrollView: UIScrollView) -> Void {
+        // 监听容器的滚动，来设置NavigationBar的透明度
+    }
+}
+extension EquipmentHomeController: AppHomeNavStatusViewProtocol {
+    /// 导航栏左侧按钮点击回调
+    func homeBar(_ navBar: AppHomeNavStatusView, didClickedLeftItem itemView: UIButton) -> Void {
+        self.navigationController?.popViewController(animated: true)
+    }
+    /// 导航栏右侧按钮点击回调
+    func homeBar(_ navBar: AppHomeNavStatusView, didClickedRightItem itemView: UIButton) -> Void {
     }
 }

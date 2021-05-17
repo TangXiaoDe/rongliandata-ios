@@ -7,6 +7,21 @@
 //
 //  资产请求相关
 
+enum AssetCurrencyRequestType: String {
+    case fil
+    case btc
+    case erc
+    case eth
+    case usdt
+    case chia = "xch"
+    case usdtTrx = "usdt-trx"
+}
+enum AssetCurrencyType: String {
+    case none
+    case erc20 = "ERC20"
+    case trc20 = "TRC20"
+}
+
 import Foundation
 
 class AssetNetworkManager {
@@ -87,8 +102,38 @@ extension AssetNetworkManager {
 }
 /// 钱包相关
 extension AssetNetworkManager {
+    /// 申请 URC/FIL 提币
+    class func withdrawal(currency: String, amount: String, pay_pass: String, currencyType: AssetCurrencyType, complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletWithdrawResultModel?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = AssetRequestInfo.Wallet.withdrawal
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        var parameter: [String: Any] = ["num": amount, "pay_password": pay_pass.md5()]
+        var type: AssetCurrencyRequestType = .usdt
+        if currency == CurrencyType.fil.rawValue {
+            type = .fil
+        } else if currencyType == .erc20 && currency == CurrencyType.usdt.rawValue {
+            type = .usdt
+        } else if currencyType == .trc20 && currency == CurrencyType.usdt.rawValue {
+            type = .usdtTrx
+        }
+        parameter["currency"] = type.rawValue
+        requestInfo.parameter = parameter
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error".localized, nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, response.model)
+            }
+        }
+    }
     /// 获取fil资产信息
-    class func getWalletFilInfo(complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletFilInfoModel?) -> Void)) -> Void {
+    class func
+    getWalletFilInfo(complete: @escaping((_ status: Bool, _ msg: String?, _ model: AssetInfoModel?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = AssetRequestInfo.Wallet.filInfo
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
@@ -108,8 +153,28 @@ extension AssetNetworkManager {
             }
         }
     }
+    class func getWalletAllInfo(complete: @escaping((_ status: Bool, _ msg: String?, _ model: [WalletAllInfoModel]?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = AssetRequestInfo.Wallet.walletAllInfo
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        // 2.配置参数
+        let parameter: [String: Any] = [: ]
+        requestInfo.parameter = parameter
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error", nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, response.models)
+            }
+        }
+    }
     /// 刷新fil首页数据
-    class func refreshHomeList(complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletFilInfoModel?) -> Void)) -> Void {
+    class func refreshHomeList(complete: @escaping((_ status: Bool, _ msg: String?, _ model: AssetInfoModel?) -> Void)) -> Void {
         SystemNetworkManager.appServerConfig { (status, msg, model) in
             guard status, let model = model else {
                 complete(false, msg, nil)
@@ -120,16 +185,22 @@ extension AssetNetworkManager {
         }
     }
     /// 绑定提币地址(FIL/usdt/eoc)
-    class func bindWithdrawAddress(address: String, currency: String, complete: @escaping (( _ status: Bool, _ msg: String?) -> Void)) -> Void {
+    class func bindWithdrawAddress(address: String, currency: String, currencyType: AssetCurrencyType, complete: @escaping (( _ status: Bool, _ msg: String?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = AssetRequestInfo.bindAddress
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
-        var currency = currency
+        var type: AssetCurrencyRequestType = .erc
         // 2.配置参数
-        if currency != "fil" {
-            currency = "eth"
+        if currency == CurrencyType.fil.rawValue {
+            type = .fil
+        } else if (currencyType == .erc20 && currency == CurrencyType.usdt.rawValue) {
+            type = .erc
+        } else if currencyType == .trc20 && currency == CurrencyType.usdt.rawValue {
+            type = .usdtTrx
+        } else if currency == CurrencyType.chia.rawValue {
+            type = .chia
         }
-        let parameter: [String: Any] = ["address": address, "currency": currency]
+        let parameter: [String: Any] = ["address": address, "currency": type.rawValue]
         requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
@@ -170,6 +241,30 @@ extension AssetNetworkManager {
     class func ercWithdrawal(amount: String, pay_pass: String, currency: String, complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletWithdrawResultModel?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = AssetRequestInfo.Wallet.ercWithdrawal
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        // 2.配置参数
+        var parameter: [String: Any] = [:]
+        parameter["num"] = amount
+        parameter["pay_password"] = pay_pass
+        parameter["currency"] = currency
+        requestInfo.parameter = parameter
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error", nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, response.model)
+            }
+        }
+    }
+    /// xch提现结果
+    class func xchWithdrawal(amount: String, pay_pass: String, currency: String, complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletWithdrawResultModel?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = AssetRequestInfo.Wallet.xchWithdrawal
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
         // 2.配置参数
         // 2.配置参数

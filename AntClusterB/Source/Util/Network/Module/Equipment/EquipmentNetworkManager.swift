@@ -96,6 +96,27 @@ extension EquipmentNetworkManager {
 
 
 extension EquipmentNetworkManager {
+    /// 设备列表 IPFS:fil/ETH:eth/BTC:btc
+    class func getEquipmentHomeData(zone: ProductZone, offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ model: EquipmentHomeModel?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = EquipmentRequestInfo.homeList
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        let parameter: [String: Any] = ["zone": zone.rawValue, "offset": offset, "limit": limit]
+        requestInfo.parameter = parameter
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error".localized, nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                response.model?.zone = zone
+                complete(true, response.message, response.model)
+            }
+        }
+    }
 
     /// 设备详情
     class func getEquipmentDetail(id: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ model: EquipmentDetailModel?) -> Void)) -> Void {

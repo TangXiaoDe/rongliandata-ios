@@ -150,7 +150,7 @@ extension WalletListController {
     /// 进入FIL提现详情页
     fileprivate func enterFilWithdrawalDetailPage(with model: AssetListModel) -> Void {
         let result = WalletWithdrawResultModel.init(model: model, currency: CurrencyType.fil.rawValue)
-        let detailVC = WalletWithdrawResultController.init(result: result)
+        let detailVC = WalletWithdrawResultController.init(result: result, configModel: nil)
         self.enterPageVC(detailVC)
     }
 

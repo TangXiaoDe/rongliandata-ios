@@ -18,4 +18,9 @@ class FirstPageRequestInfo
     /// USDT兑人民币比例
     static let usdtToRmb = RequestInfo<Empty>.init(method: .get, path: "usdt/price", replaceds: [])
     
+    /// 昨日收益
+    static let incomes = RequestInfo<FPYesterdayIncomeModel>.init(method: .get, path: "incomes", replaceds: [])
+    /// 币价涨幅
+    static let increases = RequestInfo<FPIncreaseModel>.init(method: .get, path: "increases", replaceds: [])
+    
 }

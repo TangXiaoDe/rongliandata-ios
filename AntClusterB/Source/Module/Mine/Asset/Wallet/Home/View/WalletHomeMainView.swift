@@ -20,7 +20,7 @@ class WalletHomeMainView: UIView {
 
     static let viewHeight: CGFloat = 52 + CGSize.init(width: 351, height: 154).scaleAspectForWidth(kScreenWidth - 12.0 * 2.0).height // 12 + 128 + 40
 
-    var model: WalletFilInfoModel? {
+    var model: AssetInfoModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -332,7 +332,7 @@ extension WalletHomeMainView {
 // MARK: - Data Function
 extension WalletHomeMainView {
     /// 数据加载
-    fileprivate func setupWithModel(_ model: WalletFilInfoModel?) -> Void {
+    fileprivate func setupWithModel(_ model: AssetInfoModel?) -> Void {
         guard let model = model else {
             return
         }

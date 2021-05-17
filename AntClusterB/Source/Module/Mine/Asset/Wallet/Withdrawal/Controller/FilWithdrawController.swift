@@ -16,7 +16,7 @@ class FilWithdrawController: BaseViewController
     
     // MARK: - Private Property
     
-    fileprivate let assetModel: WalletFilInfoModel
+    fileprivate let assetModel: AssetInfoModel
     fileprivate var configModel: WithdrawConfigModel? = nil
     
     fileprivate let statusNavBarView: AppHomeNavStatusView = AppHomeNavStatusView()
@@ -39,7 +39,7 @@ class FilWithdrawController: BaseViewController
     
     // MARK: - Initialize Function
     
-    init(assetModel: WalletFilInfoModel) {
+    init(assetModel: AssetInfoModel) {
         self.assetModel = assetModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -256,7 +256,7 @@ extension FilWithdrawController {
 extension FilWithdrawController {
     /// 提现结果页
     fileprivate func enterWithdrawResultPage(_ model: WalletWithdrawResultModel) -> Void {
-        let resultVC = WalletWithdrawResultController.init(result: model)
+        let resultVC = WalletWithdrawResultController.init(result: model, configModel: self.configModel)
         self.navigationController?.pushViewController(resultVC, animated: true)
     }
     /// 支付密码重置界面

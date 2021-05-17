@@ -87,7 +87,7 @@ class WalletBalanceItem: UIView {
     // MARK: - Internal Property
     static let viewHeight: CGFloat = 60
     
-    var model: WalletFilInfoModel? {
+    var model: AssetInfoModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -201,7 +201,7 @@ extension WalletBalanceItem {
         self.progressView.progressView.backgroundColor = self.type.progressColor
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: WalletFilInfoModel?) -> Void {
+    fileprivate func setupWithModel(_ model: AssetInfoModel?) -> Void {
         guard let model = model else {
             return
         }

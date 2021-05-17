@@ -34,6 +34,8 @@ class AppColor {
     static let detailText: UIColor = AppConfig.share.theme.detailTextColor
     /// 辅助文字
     static let minorText: UIColor = AppConfig.share.theme.minorTextColor
+    /// 灰色文字
+    static let grayText: UIColor = AppConfig.share.theme.grayTextColor
     
 
     /// 页面背景色(占位色)

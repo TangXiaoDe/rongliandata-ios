@@ -24,7 +24,7 @@ class FilWithdrawHeaderView: UIView
     // MARK: - Internal Property
     static let viewHeight: CGFloat = 260 + 12 + 56
     var configModel: WithdrawConfigModel? 
-    var assetInfoModel: WalletFilInfoModel? {
+    var assetInfoModel: AssetInfoModel? {
         didSet {
             self.setupWithAssetInfoModel(assetInfoModel)
         }
@@ -292,7 +292,7 @@ extension FilWithdrawHeaderView {
 // MARK: - Data Function
 extension FilWithdrawHeaderView {
     /// 数据加载
-    fileprivate func setupWithAssetInfoModel(_ assetModel: WalletFilInfoModel?) {
+    fileprivate func setupWithAssetInfoModel(_ assetModel: AssetInfoModel?) {
         guard let configModel = self.configModel else {
             return
         }

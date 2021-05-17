@@ -1,20 +1,73 @@
 //
-//  FPHomeIPFSModel.swift
-//  HZProject
+//  FPHomeCurrencyModel.swift
+//  AntsCloudProject
 //
 //  Created by 小唐 on 2020/11/13.
-//  Copyright © 2020 ChainOne. All rights reserved.
+//  Copyright © 2021 ChainOne. All rights reserved.
 //
 //  首页IPFS数据模型
 
 import Foundation
 import ObjectMapper
 
-/// 首页行情子模型
-class FPHomeIPFSModel: Mappable
-{
+///
+class FPHomeCurrencyModel: Mappable {
+
+    /// 全网算力(MH/S)
+    var network_computing_power: String = ""
+    /// 当前算力难度(P)
+    var current_computing_difficulty: String = ""
+    /// 当前价格(CNY)
+    var current_currency_price: String = ""
+    /// 1M产出量/天
+    var every_m_output_per_day: String = ""
+
+    init() {
+
+    }
+    required init?(map: Map) {
+
+    }
+    func mapping(map: Map) {
+        network_computing_power <- map["network_computing_power"]
+        current_computing_difficulty <- map["current_computing_difficulty"]
+        current_currency_price <- map["current_currency_price"]
+        every_m_output_per_day <- map["every_m_output_per_day"]
+    }
+
+}
+
+///
+class FPHomeChiaModel: Mappable {
+
+    /// 区块高度
+    var height: String = ""
+    /// 全网地址数
+    var addressCount: String = ""
+    /// 全网总算力
+    var netspace: String = ""
+    /// 日产出
+    var xchPerDay: String = ""
     
-    /// 全网总算力(有效算力)
+    init() {
+
+    }
+    required init?(map: Map) {
+
+    }
+    func mapping(map: Map) {
+        height <- map["height"]
+        addressCount <- map["addressCount"]
+        netspace <- map["netspace"]
+        xchPerDay <- map["xchPerDay"]
+    }
+
+}
+
+/// 首页行情子模型
+class FPHomeIPFSModel: Mappable {
+
+    /// 全网总算力
     var total_power: String = ""
     /// 最新区块高度
     var tipset_height: String = ""
@@ -53,7 +106,7 @@ class FPHomeIPFSModel: Mappable
     var flow_rate: String = ""
     /// 24小时平均挖矿收益(T)
     var mining_income_str_one_day: String = ""
-    /// FIL总质押量
+    /// 总质压
     var pledge_collateral: String = ""
     /// 当前扇区质押量
     var now_pledge_collateral: String = ""
@@ -67,10 +120,10 @@ class FPHomeIPFSModel: Mappable
     var fil_destroy_total: String = ""
 
     init() {
-            
+
     }
     required init?(map: Map) {
-        
+
     }
     func mapping(map: Map) {
         total_power <- map["total_power"]
@@ -100,5 +153,5 @@ class FPHomeIPFSModel: Mappable
         add_power_cost <- map["add_power_cost"]
         fil_destroy_total <- map["fil_destroy_total"]
     }
-    
+
 }

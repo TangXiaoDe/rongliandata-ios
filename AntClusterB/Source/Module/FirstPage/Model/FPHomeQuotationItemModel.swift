@@ -17,6 +17,7 @@ enum QuotationSymbolType: String {
     case btc = "BTC"
     case eth = "ETH"
     case eos = "EOS"
+    case chia = "XCH"
     
     var icon: UIImage? {
         var name: String = ""
@@ -31,6 +32,8 @@ enum QuotationSymbolType: String {
             name = "IMG_home_icon_eth"
         case .eos:
             name = "IMG_home_icon_eos"
+        case .chia:
+            name = "IMG_home_icon_chia"
         }
         let image: UIImage? = UIImage.init(named: name)
         return image
@@ -39,9 +42,7 @@ enum QuotationSymbolType: String {
 }
 
 /// 首页行情子模型
-class FPHomeQuotationItemModel: Mappable
-{
-    
+class FPHomeQuotationItemModel: Mappable {
     /// 标识
     var symbol_value: String = ""
     /// usd价格
