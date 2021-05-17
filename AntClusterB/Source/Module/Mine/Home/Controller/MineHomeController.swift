@@ -308,7 +308,7 @@ extension MineHomeController: MineHomeIncomeInfoViewProtocol {
         if index == 0 {
             self.enterFilHomePage()
         } else if index == 1 {
-            self.enterSettingPage()
+            self.enterAssetPage()
         }
     }
 }
@@ -327,8 +327,8 @@ extension MineHomeController {
     }
     /// 我的资产
     fileprivate func enterAssetPage() -> Void {
-//        let assetVC = AssetHomeController()
-//        self.navigationController?.pushViewController(assetVC, animated: true)
+        let assetVC = AssetHomeController(currency: "xch")
+        self.navigationController?.pushViewController(assetVC, animated: true)
     }
     /// 设置
     fileprivate func enterSettingPage() -> Void {
@@ -340,7 +340,7 @@ extension MineHomeController {
         self.enterPageVC(CurrentUserInfoController())
     }
     /// 账户安全
-    fileprivate func enterAccountSecurityPage()  {
+    fileprivate func enterAccountSecurityPage(){
         self.enterPageVC(AccountSecurityHomeController())
     }
 }

@@ -28,6 +28,10 @@ class AssetInfoModel: Mappable {
     
     /// 资产余额
     var ore: Double = 0.0
+    // 手动赋值 判断地址
+    var currencyType: AssetCurrencyType = .none
+    /// 可提现金额
+    var withdrawable: Double = 0.0
     
     /// 币种
     var coinValue: String = ""
@@ -46,6 +50,9 @@ class AssetInfoModel: Mappable {
         }
         if self.coinValue == CurrencyType.fil.rawValue {
              title = "FIL"
+        }
+        if self.coinValue == CurrencyType.chia.rawValue {
+            title = "XCH"
         }
         return title
     }
@@ -69,6 +76,76 @@ class AssetInfoModel: Mappable {
         power <- map["power"]
         coinValue <- map["currency"]
         ore <- (map["balance"], DoubleStringTransform.default)
+        withdrawable <- (map["withdrawable"], DoubleStringTransform.default)
     }
-
+    // 提现手续费
+    var withdrawFee: Double {
+        var withdrawFee: Double = 0.0
+        guard let withdrawModel = AppConfig.share.server?.getWithdrawalConfig(with: self.currency) else {
+            return withdrawFee
+        }
+        switch self.currency {
+        case .fil:
+            withdrawFee = withdrawModel.fil_fee
+        case .usdt:
+            if self.currencyType == .erc20 {
+                withdrawFee = withdrawModel.usdt_erc_fee
+            } else {
+                withdrawFee = withdrawModel.usdt_trx_fee
+            }
+        default:
+            withdrawFee = withdrawModel.erc_fee
+        }
+        return withdrawFee
+    }
+    // 最低提现
+    var withdrawMin: Double {
+        var user_min: Double = 0.0
+        guard let withdrawModel = AppConfig.share.server?.getWithdrawalConfig(with: self.currency) else {
+            return user_min
+        }
+        switch self.currency {
+        case .fil:
+            user_min = withdrawModel.user_min
+        default:
+            user_min = withdrawModel.user_min
+        }
+        return user_min
+    }
+    var withdrawAddress: String {
+        var withdrawAddress: String = ""
+        guard let userModel = AccountManager.getCurrentInfo() else {
+            return withdrawAddress
+        }
+        switch self.currency {
+        case .fil:
+            withdrawAddress = userModel.currencyAddress.fil_address
+        case .usdt:
+            if self.currencyType == .erc20 {
+                withdrawAddress = userModel.currencyAddress.erc_address
+            } else {
+                withdrawAddress = userModel.currencyAddress.usdt_trx_address
+            }
+        default:
+            break
+        }
+        return withdrawAddress
+    }
+    /// 是否绑定提币地址
+    var isBindWithdrawAddress: Bool {
+        if !self.withdrawAddress.isEmpty {
+            return true
+        }
+        return false
+    }
+    /// 资产余额(fil和其他资产公用)
+    var lfbalance: Double {
+        var balance: Double = 0
+        if self.currency == .fil {
+            balance = self.withdrawable
+        } else {
+            balance = self.ore
+        }
+        return balance
+    }
 }

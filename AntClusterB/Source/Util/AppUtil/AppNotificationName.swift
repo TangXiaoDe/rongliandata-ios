@@ -13,6 +13,13 @@ typealias AppNotification = Notification.Name
 typealias AppNotificationName = Notification.Name
 extension Notification.Name {
 
+    struct Asset {
+        /// 资产刷新通知
+        static let refresh = NSNotification.Name(rawValue: "app.notification.name.Asset.refresh")
+        /// 绑定地址成功
+        static let withdrawAdress = NSNotification.Name(rawValue: "app.notification.name.Asset.withdrawAdress")
+    }
+    
     /// 消息
     struct Message {
         /// 未读消息

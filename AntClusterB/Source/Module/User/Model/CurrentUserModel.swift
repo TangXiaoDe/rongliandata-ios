@@ -142,6 +142,8 @@ class CurrentUserModel: NSObject, Mappable {
     var recommender: RecommenderModel?
     /// extra
     var extra: UserExtraModel? = nil
+    /// 提币地址
+    var currencyAddress: CurrencyAddressModel = CurrencyAddressModel()
     /// tags
 //    var tags: [UserTagModel] = []
 

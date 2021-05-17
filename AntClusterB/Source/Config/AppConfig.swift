@@ -64,7 +64,8 @@ class AppConfig {
 
     /// 数据库版本，每次数据库版本更新都应加1；
     let schemaVersion: UInt64 = 1
-
+    /// 货币价格
+    var currencyPrice: FPIncreaseModel?
     /// appId
     let appId: String
     /// app名称

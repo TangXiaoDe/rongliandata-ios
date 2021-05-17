@@ -27,6 +27,21 @@ class ServerConfigModel: Mappable {
 //    var isVersionControl: Bool = false
     /// fil配置信息
     var filConfig: FilConfigModel?
+    
+    /// 提现配置信息
+    var withdrawalConfigModel: WithdrawalConfigModel?
+    /// USDT提现配置信息
+    var usdt_withdrawal: WithdrawalConfigModel?
+//    /// ETH提现配置信息
+//    var eth_withdrawal: WithdrawalConfigModel?
+//    /// BTC提现配置信息
+//    var btc_withdrawal: WithdrawalConfigModel?
+    /// FIL提现配置信息
+    var fil_withdrawal: WithdrawalConfigModel?
+//    /// CNY提现配置信息
+//    var cny_withdrawal: WithdrawalConfigModel?
+    /// CHIA提现配置信息
+    var chia_withdrawal: WithdrawalConfigModel?
 
     required init?(map: Map) {
 
@@ -39,6 +54,31 @@ class ServerConfigModel: Mappable {
         register_protocol <- map["register_protocol"]
 //        isVersionControl <- map["start_version_control"]
         filConfig <- map["fil:issue"]
+        
+        
+        withdrawalConfigModel <- map["withdrawal"]
+        usdt_withdrawal <- map["usdt_withdrawal"]
+//        eth_withdrawal <- map["eth_withdrawal"]
+//        btc_withdrawal <- map["btc_withdrawal"]
+        fil_withdrawal <- map["fil_withdrawal"]
+//        cny_withdrawal <- map["cny_withdrawal"]
+        chia_withdrawal <- map["xch_withdrawal"]
+    }
+    
+    func getWithdrawalConfig(with currency: CurrencyType?) -> WithdrawalConfigModel? {
+        guard let currency = currency else {
+            return withdrawalConfigModel
+        }
+        var config: WithdrawalConfigModel? = nil
+        switch currency {
+        case .fil:
+            config = self.fil_withdrawal ?? self.withdrawalConfigModel
+        case .usdt:
+            config = self.usdt_withdrawal ?? self.withdrawalConfigModel
+        default:
+            break
+        }
+        return config
     }
 
 }
@@ -131,4 +171,51 @@ class FilConfigModel: Mappable {
         return value
     }
     
+}
+
+/// 提现配置数据模型
+class WithdrawalConfigModel: Mappable {
+
+    /// 最低提现额度 单位(元)
+    var user_min: Double = 0.0
+    /// 用户每日限额 单位(元)
+    var user_day_limit: Double = 0.0
+    /// 平台限额 单位(元)
+    var platform_day_limit: Double = 0.0
+    /// 提现说明
+    var instr: String = ""
+    /// 提现开关 on-开启 off-关闭
+    var switchValue: String = ""
+    /// ETH提现服务费
+    var erc_fee: Double = 0.0
+    /// btc提现服务费
+    var btc_fee: Double = 0.0
+    /// FIL提现服务费
+    var fil_fee: Double = 0.0
+    /// USDT提现服务费
+    var usdt_trx_fee: Double = 0.0
+    /// USDT提现服务费
+    var usdt_erc_fee: Double = 0.0
+    /// 人民币提现账户信息
+//    var acccount_info: WithdrawalAccountModel?
+    /// cny提现服务费
+    var service_charge: Double = 0.0
+
+    required init?(map: Map) {
+
+    }
+    func mapping(map: Map) {
+        user_min <- (map["user_min"], DoubleStringTransform.default)
+        user_day_limit <- (map["user_day_limit"], DoubleStringTransform.default)
+        instr <- map["instr"]
+        switchValue <- map["switch"]
+        erc_fee <- (map["erc_fee"], DoubleStringTransform.default)
+        btc_fee <- (map["btc_fee"], DoubleStringTransform.default)
+        fil_fee <- (map["fil_fee"], DoubleStringTransform.default)
+        usdt_trx_fee <- (map["usdt-trx_fee"], DoubleStringTransform.default)
+        usdt_erc_fee <- (map["usdt_erc_fee"], DoubleStringTransform.default)
+//        acccount_info <- map["account_info"]
+        service_charge <- (map["service_charge"], DoubleStringTransform.default)
+    }
+
 }

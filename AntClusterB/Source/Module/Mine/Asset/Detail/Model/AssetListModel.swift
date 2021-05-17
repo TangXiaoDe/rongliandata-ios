@@ -113,6 +113,8 @@ class AssetListModel: Mappable {
     var user_id: Int = 0
     /// 贡献的用户
     var target_user_id: Int = 0
+    /// 0-待处理 1-成功 2-失败
+    var statusValue: Int = 0
     ///
     var target_id: Int = 0
     /// 动作: 1-收入 2-支出
@@ -153,6 +155,7 @@ class AssetListModel: Mappable {
         updateDate <- (map["updated_at"], DateStringTransform.current)
         extend <- map["extend"]
         
+        statusValue <- map["status"]
         user <- map["user"]
         target_user <- map["target_user"]
         target_type_value <- map["target_type"]
@@ -184,6 +187,12 @@ class AssetListModel: Mappable {
             color = AppColor.mainText
         }
         return color
+    }
+    var status: AssetStatus {
+        if let status = AssetStatus.init(rawValue: self.statusValue) {
+            return status
+        }
+        return AssetStatus.wait
     }
 
 }

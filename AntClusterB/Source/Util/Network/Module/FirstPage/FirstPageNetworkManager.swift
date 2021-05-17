@@ -17,6 +17,45 @@ class FirstPageNetworkManager {
 
 extension FirstPageNetworkManager
 {
+    /// 币价涨幅
+    class func getIncreases(complete: @escaping((_ status: Bool, _ msg: String?, _ model: FPIncreaseModel?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = FirstPageRequestInfo.increases
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error".localized, nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, response.model)
+                if let model = response.model {
+                    AppConfig.share.currencyPrice = model
+                }
+            }
+        }
+    }
+    /// 昨日收益
+    class func getIncomes(complete: @escaping((_ status: Bool, _ msg: String?, _ model: FPYesterdayIncomeModel?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = FirstPageRequestInfo.incomes
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error".localized, nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, response.model)
+            }
+        }
+    }
     /// 主页相关信息
     class func getHomeData(complete: @escaping((_ status: Bool, _ msg: String?, _ model: FirstPageHomeModel?) -> Void)) -> Void {
         // 1.请求 url

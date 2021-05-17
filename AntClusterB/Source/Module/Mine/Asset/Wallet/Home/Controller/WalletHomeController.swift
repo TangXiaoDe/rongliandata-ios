@@ -153,7 +153,7 @@ extension WalletHomeController {
     }
     /// 进入提币地址绑定界面
     fileprivate func enterWithdrawAddressBindPage() -> Void {
-        let bindVC = WithdrawAddressBindingController.init(currency: CurrencyType.fil.rawValue)
+        let bindVC = WithdrawAddressBindingController.init(currency: CurrencyType.fil.rawValue, assetModel: AssetInfoModel())
         self.enterPageVC(bindVC)
     }
     /// 进入Wallet提币界面
