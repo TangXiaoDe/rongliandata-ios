@@ -314,7 +314,7 @@ extension EquipmentHomeItemView {
         self.equimentDetailBtn.backgroundColor = UIColor.init(hex: 0xFFFBED)
         self.equimentDetailBtn.addTarget(self, action: #selector(equipmentDetailBtnClick(_:)), for: .touchUpInside)
         // oreDetailBtn
-        self.oreDetailBtn.set(title: "挖矿详情", titleColor: UIColor.init(hex: 0x00B8FF), for: .normal)
+        self.oreDetailBtn.set(title: "挖矿明细", titleColor: UIColor.init(hex: 0x00B8FF), for: .normal)
         self.oreDetailBtn.set(font: UIFont.pingFangSCFont(size: 13, weight: .medium), cornerRadius: 4, borderWidth: 0.5, borderColor: UIColor.init(hex: 0x00B8FF))
         self.oreDetailBtn.backgroundColor = UIColor.init(hex: 0xEEF5FF)
         self.oreDetailBtn.addTarget(self, action: #selector(oreDetailBtnClick(_:)), for: .touchUpInside)
@@ -358,13 +358,13 @@ extension EquipmentHomeItemView {
         guard let model = model else {
             return
         }
-//        if model.zone == .ipfs {
+        if model.zone == .ipfs {
             self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
             self.initiaBottomView(self.bottomView, [self.equimentDetailBtn, self.oreDetailBtn])
-//        } else {
-//            self.initialCenterView(self.centerView, [self.incomeNumView, self.yesterdayNumView, self.huibenNumView])
-//            self.initiaBottomView(self.bottomView, [self.oreDetailBtn])
-//        }
+        } else {
+            self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
+            self.initiaBottomView(self.bottomView, [self.oreDetailBtn])
+        }
         // 子控件数据加载
         self.titleLabel.text = "第\(model.fil_level)期"
         self.titleLabel.textColor = model.titleColor
