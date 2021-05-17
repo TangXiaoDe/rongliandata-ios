@@ -108,6 +108,26 @@ extension AssetNetworkManager {
             }
         }
     }
+    class func getWalletAllInfo(complete: @escaping((_ status: Bool, _ msg: String?, _ model: [WalletAllInfoModel]?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = AssetRequestInfo.Wallet.walletAllInfo
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        // 2.配置参数
+        let parameter: [String: Any] = [: ]
+        requestInfo.parameter = parameter
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error", nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, response.models)
+            }
+        }
+    }
     /// 刷新fil首页数据
     class func refreshHomeList(complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletFilInfoModel?) -> Void)) -> Void {
         SystemNetworkManager.appServerConfig { (status, msg, model) in

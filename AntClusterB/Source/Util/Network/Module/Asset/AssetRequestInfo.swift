@@ -23,6 +23,7 @@ class AssetRequestInfo {
     /// 钱包相关
     struct Wallet {
         /// Fil信息
+        static let walletAllInfo = RequestInfo<WalletAllInfoModel>.init(method: .get, path: "wallet/all", replaceds: [])
         static let filInfo = RequestInfo<WalletFilInfoModel>.init(method: .get, path: "fil/wallet", replaceds: [])
         static let filWithdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "fil/withdrawal", replaceds: [])
         static let ercWithdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "erc/withdrawal", replaceds: [])

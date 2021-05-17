@@ -448,6 +448,8 @@
 		A170726326520EDD0013FB47 /* FPHomeCurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */; };
 		A170726E265210AE0013FB47 /* FPOrePoolTypeSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170726D265210AE0013FB47 /* FPOrePoolTypeSelectController.swift */; };
 		A1707273265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1707272265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift */; };
+		A170727826521F550013FB47 /* MineHomeIncomeInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170727726521F550013FB47 /* MineHomeIncomeInfoItemView.swift */; };
+		A170728726524F040013FB47 /* WalletAllInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170728626524F040013FB47 /* WalletAllInfoModel.swift */; };
 		C9D54A936C70BE6D1996E6A8 /* Pods_AntClusterBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -938,6 +940,8 @@
 		A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeCurrencyModel.swift; sourceTree = "<group>"; };
 		A170726D265210AE0013FB47 /* FPOrePoolTypeSelectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPOrePoolTypeSelectController.swift; sourceTree = "<group>"; };
 		A1707272265210B40013FB47 /* FPOrePoolTypeSelectItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPOrePoolTypeSelectItemView.swift; sourceTree = "<group>"; };
+		A170727726521F550013FB47 /* MineHomeIncomeInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineHomeIncomeInfoItemView.swift; sourceTree = "<group>"; };
+		A170728626524F040013FB47 /* WalletAllInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAllInfoModel.swift; sourceTree = "<group>"; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2495,6 +2499,7 @@
 				53DF24782581FC9500165247 /* MineHomeOptionView.swift */,
 				53DF24792581FC9500165247 /* MineHomeHeaderView.swift */,
 				53DF247A2581FC9500165247 /* MineHomeIncomeInfoView.swift */,
+				A170727726521F550013FB47 /* MineHomeIncomeInfoItemView.swift */,
 				53DF247B2581FC9500165247 /* MineHomeOptionItemControl.swift */,
 			);
 			path = View;
@@ -2633,6 +2638,7 @@
 			isa = PBXGroup;
 			children = (
 				53DF24982581FC9500165247 /* WalletFilInfoModel.swift */,
+				A170728626524F040013FB47 /* WalletAllInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3578,6 +3584,7 @@
 				53DF25A62581FC9800165247 /* PicturesThumbView.swift in Sources */,
 				53DF26292581FC9A00165247 /* ContactEmptyPlaceHolderView.swift in Sources */,
 				53DF25DA2581FC9900165247 /* TestHomeController.swift in Sources */,
+				A170727826521F550013FB47 /* MineHomeIncomeInfoItemView.swift in Sources */,
 				53DF262A2581FC9A00165247 /* OrderEmptyPlaceHolderView.swift in Sources */,
 				53DF25742581FC9800165247 /* MessageNetworkManager.swift in Sources */,
 				53DF26692581FC9B00165247 /* WithdrawAddressBindingHeaderView.swift in Sources */,
@@ -3595,6 +3602,7 @@
 				53DF26352581FC9A00165247 /* PageDefaultNetErrorView.swift in Sources */,
 				53DF25672581FC9700165247 /* AppFont.swift in Sources */,
 				53DF26432581FC9A00165247 /* BaseTableView.swift in Sources */,
+				A170728726524F040013FB47 /* WalletAllInfoModel.swift in Sources */,
 				53DF26652581FC9B00165247 /* FilWithdrawHeaderView.swift in Sources */,
 				53DF25DB2581FC9900165247 /* LoadingAnimationTestController.swift in Sources */,
 				53DF25B42581FC9800165247 /* ServerAddressConfig.swift in Sources */,

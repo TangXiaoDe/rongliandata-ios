@@ -12,7 +12,7 @@ import UIKit
 
 protocol MineHomeIncomeInfoViewProtocol: class {
     //点击全部
-    func incomeInfoView(_ view: MineHomeIncomeInfoView, clickAllIncomeControl: UIView) -> Void
+    func incomeInfoView(_ view: MineHomeIncomeInfoView, didTapPageAt index: Int) -> Void
 }
 
 class MineHomeIncomeInfoView: UIControl {
@@ -23,9 +23,9 @@ class MineHomeIncomeInfoView: UIControl {
     // MARK: - Internal Property
     let viewWidth: CGFloat
     
-    var model: WalletFilInfoModel? {
+    var models: [WalletAllInfoModel]? {
         didSet {
-            self.setupModel(model)
+            self.setupModels(models)
         }
     }
     weak var delegate: MineHomeIncomeInfoViewProtocol?
@@ -40,14 +40,14 @@ class MineHomeIncomeInfoView: UIControl {
     fileprivate var balanceMoneyView: TopTitleBottomTitleControl = TopTitleBottomTitleControl()
     
     fileprivate let moreIconView = UIImageView()
-
+    let pagedView: PagedFlowView = PagedFlowView()
     
     fileprivate let bottomMargin: CGFloat = 15
     
     fileprivate let lrMargin: CGFloat = 12
     
     fileprivate let bgViewSize: CGSize = CGSize.init(width: 351, height: 140).scaleAspectForWidth(kScreenWidth - 2 * 12)
-    
+
     fileprivate var itemMaxWidth: CGFloat {
         return (kScreenWidth - 2 * self.lrMargin)/3
     }
@@ -90,76 +90,21 @@ extension MineHomeIncomeInfoView {
             make.edges.equalToSuperview()
         }
     }
-    fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        mainView.backgroundColor = UIColor.white
-        mainView.set(cornerRadius: 10)
-        mainView.addSubview(self.bgImgView)
-        self.bgImgView.isUserInteractionEnabled = false
-        self.bgImgView.image = UIImage.init(named: "IMG_mine_fil_bg")
-        self.bgImgView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        self.bgImgView.isUserInteractionEnabled = true
-        self.bgImgView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(allIncomeBtnClick(_:))))
-
-        mainView.addSubview(self.totalMoneyView)
-        self.totalMoneyView.isUserInteractionEnabled = false
-        self.totalMoneyView.topLabel.set(text: "FIL累计收入", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0xDBEBFF), alignment: .left)
-        self.totalMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 28, weight: .regular), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
-        self.totalMoneyView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(lrMargin)
-            make.top.equalToSuperview().offset(20)
-        }
-        self.totalMoneyView.bottomLabel.snp.remakeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.centerY.equalTo(self.totalMoneyView.topLabel.snp.centerY).offset(21)
-            make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-        
-        mainView.addSubview(self.moreIconView)
-        self.moreIconView.image = UIImage.init(named: "IMG_mine_fil_arrow_go")
-        self.moreIconView.snp.makeConstraints { (make) in
-            make.left.equalTo(self.totalMoneyView.topLabel.snp.right).offset(6)
-            make.centerY.equalTo(self.totalMoneyView.topLabel)
-            make.width.equalTo(4)
-            make.height.equalTo(8)
-        }
-    
-        // soonMoneyView
-        mainView.addSubview(self.soonMoneyView)
-        self.soonMoneyView.isUserInteractionEnabled = false
-        self.soonMoneyView.topLabel.set(text: "可提现余额(FIL)", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0xDBEBFF), alignment: .left)
-        self.soonMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 18, weight: .regular), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
-        self.soonMoneyView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(lrMargin)
-            make.bottom.equalToSuperview().offset(-15)
-            make.width.equalTo(self.itemMaxWidth)
-        }
-        self.soonMoneyView.bottomLabel.snp.remakeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.centerY.equalTo(self.soonMoneyView.topLabel.snp.centerY).offset(21)
-            make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-        // balanceMoneyView
-        mainView.addSubview(self.balanceMoneyView)
-        self.balanceMoneyView.isUserInteractionEnabled = false
-        self.balanceMoneyView.topLabel.set(text: "资产余额(FIL)", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0xDBEBFF), alignment: .left)
-        self.balanceMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 18, weight: .regular), textColor: UIColor.init(hex: 0xFFFFFF), alignment: .left)
-        self.balanceMoneyView.snp.makeConstraints { (make) in
-            make.left.equalTo(self.soonMoneyView.snp.right)
-            make.width.equalTo(self.itemMaxWidth)
-            make.bottom.equalTo(self.soonMoneyView.snp.bottom)
-        }
-        self.balanceMoneyView.bottomLabel.snp.remakeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.centerY.equalTo(self.balanceMoneyView.topLabel.snp.centerY).offset(21)
-            make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
+    fileprivate func initialMainView(_ mainView: UIView) {
+        mainView.addSubview(self.pagedView)
+        self.pagedView.dataSource = self
+        self.pagedView.delegate = self
+        self.pagedView.minimumPageAlpha = 0.95
+        self.pagedView.minimumPageScale = 0.85
+        self.pagedView.orientation = PagedFlowViewOrientationHorizontal
+        self.pagedView.snp.makeConstraints { (make) in
+            //make.edges.equalToSuperview()
+            // edges约束总会让左侧看到一点左侧的图片，故左右减少1的间距
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(1)
+            make.trailing.equalToSuperview().offset(-1)
         }
     }
-
 }
 // MARK: - Private UI Xib加载后处理
 extension MineHomeIncomeInfoView {
@@ -171,26 +116,60 @@ extension MineHomeIncomeInfoView {
 
 // MARK: - Data Function
 extension MineHomeIncomeInfoView {
-    fileprivate func setupModel(_ model: WalletFilInfoModel?) -> Void {
-        guard let model = model else {
+    fileprivate func setupModels(_ models: [WalletAllInfoModel]?) -> Void {
+        guard let models = models else {
             return
         }
-        self.totalMoneyView.bottomLabel.text = model.income.decimalProcess(digits: 4)
-        self.soonMoneyView.bottomLabel.text = model.withdrawable.decimalProcess(digits: 4)
-        self.balanceMoneyView.bottomLabel.text = model.fil_balance.decimalProcess(digits: 4)
+        self.pagedView.reloadData()
     }
 }
 
 // MARK: - Event Function
-extension MineHomeIncomeInfoView {
-    /// 全部收入按钮点击
-    @objc fileprivate func allIncomeBtnClick(_ tapGR: UITapGestureRecognizer) -> Void {
-        guard  let view = tapGR.view else {
-            return
+//extension MineHomeIncomeInfoView {
+//    /// 全部收入按钮点击
+//    @objc fileprivate func allIncomeBtnClick(_ tapGR: UITapGestureRecognizer) -> Void {
+//        guard  let view = tapGR.view else {
+//            return
+//        }
+//        self.delegate?.incomeInfoView(self, clickAllIncomeControl: view)
+//    }
+//}
+// MARK: - <HQFlowViewDataSource>
+extension MineHomeIncomeInfoView: PagedFlowViewDataSource {
+    func numberOfPages(in flowView: PagedFlowView!) -> Int {
+        return self.models?.count ?? 0
+    }
+
+    func flowView(_ flowView: PagedFlowView!, cellForPageAt index: Int) -> UIView! {
+        var itemView = flowView.dequeueReusableCell() as? MineHomeIncomeInfoItemView
+        if itemView == nil {
+            itemView = MineHomeIncomeInfoItemView()
+            itemView?.layer.cornerRadius = 10
+            itemView?.backgroundColor = .black
         }
-        self.delegate?.incomeInfoView(self, clickAllIncomeControl: view)
+        var model: WalletAllInfoModel?
+        for i in 0..<self.models!.count {
+            let item = self.models?[i]
+            if item?.currency == "fil" && index == 0 {
+                model = item
+            } else if item?.currency == "xch" && index == 1 {
+                model = item
+            }
+        }
+        itemView?.model = model
+        return itemView
     }
 }
 
-
-// MARK: - Extension Function
+// MARK: - <HQFlowViewDelegate>
+extension MineHomeIncomeInfoView: PagedFlowViewDelegate {
+    func flowView(_ flowView: PagedFlowView!, didTapPageAt index: Int) {
+        self.delegate?.incomeInfoView(self, didTapPageAt: index)
+    }
+    
+    func sizeForPage(in flowView: PagedFlowView!) -> CGSize {
+        let height = CGSize.init(width: 280, height: 140).scaleAspectForWidth(kScreenWidth - 95).height
+        let size = CGSize.init(width: kScreenWidth - 95, height: height)
+        return size
+    }
+}

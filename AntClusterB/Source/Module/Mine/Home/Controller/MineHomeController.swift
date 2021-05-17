@@ -169,7 +169,7 @@ extension MineHomeController {
             }
             self.userInfo = model.user
             self.headerView.userModel = model.user
-            self.incomeInfoView.model = model.filModel
+            self.incomeInfoView.models = model.filModel
         }
     }
 
@@ -300,13 +300,16 @@ extension MineHomeController: MineHomeHeaderViewProtocol {
     func didClickedUserInfo(in headerView: MineHomeHeaderView) -> Void {
         self.enterUserInfoPage()
     }
-    
 }
 // MARK: - <MineHomeIncomeInfoViewProtocol>
 extension MineHomeController: MineHomeIncomeInfoViewProtocol {
     /// fil点击
-    func incomeInfoView(_ view: MineHomeIncomeInfoView, clickAllIncomeControl: UIView) {
-        self.enterFilHomePage()
+    func incomeInfoView(_ view: MineHomeIncomeInfoView, didTapPageAt index: Int) {
+        if index == 0 {
+            self.enterFilHomePage()
+        } else if index == 1 {
+            self.enterSettingPage()
+        }
     }
 }
 // MARK: - EnterPage

@@ -353,10 +353,10 @@
         // 重置_scrollView的contentSize
         switch (orientation) {
             case PagedFlowViewOrientationHorizontal://横向
-                _scrollView.frame = CGRectMake(0, 0, _pageSize.width, _pageSize.height);
+                _scrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
                 _scrollView.contentSize = CGSizeMake(_pageSize.width * _pageCount,_pageSize.height);
-                CGPoint theCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
-                _scrollView.center = theCenter;
+//                CGPoint theCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+//                _scrollView.center = theCenter;
                 break;
             case PagedFlowViewOrientationVertical:{
                 _scrollView.frame = CGRectMake(0, 0, _pageSize.width, _pageSize.height);
@@ -419,18 +419,19 @@
 #pragma mark hitTest
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    if ([self pointInside:point withEvent:event]) {
-        CGPoint newPoint = CGPointZero;
-        newPoint.x = point.x - _scrollView.frame.origin.x + _scrollView.contentOffset.x;
-        newPoint.y = point.y - _scrollView.frame.origin.y + _scrollView.contentOffset.y;
-        if ([_scrollView pointInside:newPoint withEvent:event]) {
-            return [_scrollView hitTest:newPoint withEvent:event];
+//    if ([self pointInside:point withEvent:event]) {
+//        CGPoint newPoint = CGPointZero;
+        UIView *cell = [_cells objectAtIndex:self.currentPageIndex];
+//        newPoint.x = point.x - _scrollView.frame.origin.x + _scrollView.contentOffset.x;
+//        newPoint.y = point.y - _scrollView.frame.origin.y + _scrollView.contentOffset.y;
+        if ([cell pointInside:point withEvent:event]) {
+            return [cell hitTest:point withEvent:event];
         }
         
-        return _scrollView;
-    }
-    
-    return nil;
+        return nil;
+//    }
+//    
+//    return nil;
 }
 
 
@@ -451,10 +452,10 @@
     
     switch (orientation) {
         case PagedFlowViewOrientationHorizontal:
-            pageIndex = floor(MAX(_scrollView.contentOffset.x, 0) / _pageSize.width);
+            pageIndex = ceil(MAX(_scrollView.contentOffset.x, 0) / _pageSize.width);
             break;
         case PagedFlowViewOrientationVertical:
-            pageIndex = floor(MAX(_scrollView.contentOffset.y, 0) / _pageSize.height);
+            pageIndex = ceil(MAX(_scrollView.contentOffset.y, 0) / _pageSize.height);
             break;
         default:
             break;

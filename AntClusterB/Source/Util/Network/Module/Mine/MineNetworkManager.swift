@@ -16,7 +16,7 @@ class MineNetworkManager {
 extension MineNetworkManager
 {
     /// 我的主页刷新数据请求
-    class func refreshHomeData(complete: @escaping((_ status: Bool, _ msg: String?, _ data: (user: CurrentUserModel, filModel: WalletFilInfoModel)?) -> Void)) -> Void {
+    class func refreshHomeData(complete: @escaping((_ status: Bool, _ msg: String?, _ data: (user: CurrentUserModel, filModel: [WalletAllInfoModel])?) -> Void)) -> Void {
         let group = DispatchGroup.init()
 
         var userStatus: Bool = false
@@ -24,7 +24,7 @@ extension MineNetworkManager
         var userModel: CurrentUserModel? = nil
         var assetStatus: Bool = false
         var assetMsg: String? = nil
-        var assetModel: WalletFilInfoModel? = nil
+        var assetModels: [WalletAllInfoModel]? = nil
 
         // 当前用户
         group.enter()
@@ -37,10 +37,10 @@ extension MineNetworkManager
 
         // 收益信息
         group.enter()
-        AssetNetworkManager.getWalletFilInfo { (status, msg, model) in
+        AssetNetworkManager.getWalletAllInfo { (status, msg, models) in
             assetStatus = status
             assetMsg = msg
-            assetModel = model
+            assetModels = models
             group.leave()
         }
 
@@ -52,9 +52,9 @@ extension MineNetworkManager
             } else if !assetStatus {
                 msg = assetMsg
             }
-            var data: (user: CurrentUserModel, filModel: WalletFilInfoModel)? = nil
-            if let userModel = userModel, let assetModel = assetModel {
-                data = (user: userModel, filModel: assetModel)
+            var data: (user: CurrentUserModel, filModel: [WalletAllInfoModel])? = nil
+            if let userModel = userModel, let assetModels = assetModels {
+                data = (user: userModel, filModel: assetModels)
             }
             complete(status, msg, data)
         }
