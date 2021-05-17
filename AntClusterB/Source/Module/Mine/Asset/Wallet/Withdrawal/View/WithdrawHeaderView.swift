@@ -326,7 +326,7 @@ extension WithdrawHeaderView {
         }
         self.limitSingleMinNum = configModel.user_min
         self.numField.attributedPlaceholder = NSAttributedString.init(string: "最低提币个数 " + "\(self.limitSingleMinNum)".decimalProcess(digits: 8), attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 20), NSAttributedString.Key.foregroundColor: AppColor.grayText])
-        self.feeValueLabel.text = "\(assetModel.withdrawFee)".decimalProcess(digits: 8) + " " + assetModel.currency.title
+        self.feeValueLabel.text = "\(configModel.service_charge)".decimalProcess(digits: 8) + " " + assetModel.currency.title
         self.addressLabel.text = assetModel.withdrawAddress
         self.progressConvertNum()
     }
