@@ -141,7 +141,7 @@ extension MineHomeIncomeInfoItemView {
         self.totalMoneyView.bottomLabel.text = model!.income.decimalProcess(digits: 4)
 
         self.soonMoneyView.topLabel.text = model?.currency == "fil" ? "可提现余额(FIL)" : "可提现余额(XCH)"
-        self.soonMoneyView.bottomLabel.text = model?.currency == "fil" ? model!.withdrawable.decimalProcess(digits: 4) : model!.expend.decimalProcess(digits: 4)
+        self.soonMoneyView.bottomLabel.text = model?.currency == "fil" ? model!.withdrawable.decimalProcess(digits: 4) : model!.balance.decimalProcess(digits: 4)
 
         self.balanceMoneyView.topLabel.text = model?.currency == "fil" ? "资产余额(FIL)" : "资产余额(XCH)"
         self.balanceMoneyView.bottomLabel.text = model!.balance.decimalProcess(digits: 4)
