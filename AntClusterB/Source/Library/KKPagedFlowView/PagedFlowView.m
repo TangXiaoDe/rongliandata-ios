@@ -353,14 +353,14 @@
         // 重置_scrollView的contentSize
         switch (orientation) {
             case PagedFlowViewOrientationHorizontal://横向
-                _scrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
                 _scrollView.contentSize = CGSizeMake(_pageSize.width * _pageCount,_pageSize.height);
+                _scrollView.frame = CGRectMake(0, 0, self.frame.size.width, _pageSize.height);
 //                CGPoint theCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 //                _scrollView.center = theCenter;
                 break;
             case PagedFlowViewOrientationVertical:{
-                _scrollView.frame = CGRectMake(0, 0, _pageSize.width, _pageSize.height);
                 _scrollView.contentSize = CGSizeMake(_pageSize.width ,_pageSize.height * _pageCount);
+                _scrollView.frame = CGRectMake(0, 0, _pageSize.width, _pageSize.height);
                 CGPoint theCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
                 _scrollView.center = theCenter;
                 break;
@@ -420,6 +420,9 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 //    if ([self pointInside:point withEvent:event]) {
+    if (event.type == UIEventTypeTouches) {
+        
+    }
         CGPoint newPoint = CGPointZero;
         UIView *cell = [_cells objectAtIndex:self.currentPageIndex];
         newPoint.x = point.x - cell.frame.origin.x + _scrollView.contentOffset.x;
