@@ -118,7 +118,7 @@ class AssetInfoModel: Mappable {
     }
     /// 是否绑定提币地址
     var isBindWithdrawAddress: Bool {
-        if !self.withdrawAddress.isEmpty {
+        if self.withdrawal_address != nil && !self.withdrawal_address!.isEmpty {
             return true
         }
         return false

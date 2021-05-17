@@ -56,13 +56,10 @@ extension MineHomeIncomeInfoItemView {
         mainView.backgroundColor = UIColor.white
         mainView.set(cornerRadius: 10)
         mainView.addSubview(self.bgImgView)
-//        self.bgImgView.isUserInteractionEnabled = false
         self.bgImgView.image = UIImage.init(named: "IMG_mine_fil_bg")
         self.bgImgView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-//        self.bgImgView.isUserInteractionEnabled = true
-//        self.bgImgView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(allIncomeBtnClick(_:))))
 
         mainView.addSubview(self.totalMoneyView)
         self.totalMoneyView.isUserInteractionEnabled = false
@@ -125,15 +122,6 @@ extension MineHomeIncomeInfoItemView {
 
 // MARK: - Event Function
 extension MineHomeIncomeInfoItemView {
-    /// 全部收入按钮点击
-    @objc fileprivate func allIncomeBtnClick(_ tapGR: UITapGestureRecognizer) {
-        guard  let view = tapGR.view else {
-            return
-        }
-        
-//        self.delegate?.incomeInfoView(self, clickAllIncomeControl: view)
-    }
-    
     fileprivate func setupModel(_ model: WalletAllInfoModel?) {
         self.bgImgView.image = UIImage(named: model?.currency == "fil" ? "IMG_mine_fil_bg" : "IMG_mine_xch_bg")
 
