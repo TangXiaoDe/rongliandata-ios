@@ -230,7 +230,7 @@ extension WithdrawController {
         guard let inputText = self.currentText, !inputText.isEmpty else {
             return
         }
-        AssetNetworkManager.withdrawal(currency: self.assetModel.currency.rawValue, amount: inputText, pay_pass: password, currencyType: self.currencyType) { [weak self](status, msg, model) in
+        AssetNetworkManager.xchWithdrawal(amount: inputText, pay_pass: password, currency: "xch") { [weak self](status, msg, model) in
             guard let `self` = self else {
                 return
             }
@@ -241,6 +241,17 @@ extension WithdrawController {
             self.enterWithdrawResultPage(model)
             NotificationCenter.default.post(name: AppNotificationName.Asset.refresh, object: nil)
         }
+//        AssetNetworkManager.withdrawal(currency: self.assetModel.currency.rawValue, amount: inputText, pay_pass: password, currencyType: self.currencyType) { [weak self](status, msg, model) in
+//            guard let `self` = self else {
+//                return
+//            }
+//            guard status, let model = model else {
+//                Toast.showToast(title: msg)
+//                return
+//            }
+//            self.enterWithdrawResultPage(model)
+//            NotificationCenter.default.post(name: AppNotificationName.Asset.refresh, object: nil)
+//        }
     }
 
 }

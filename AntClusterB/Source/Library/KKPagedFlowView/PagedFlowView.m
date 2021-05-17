@@ -420,12 +420,12 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 //    if ([self pointInside:point withEvent:event]) {
-//        CGPoint newPoint = CGPointZero;
+        CGPoint newPoint = CGPointZero;
         UIView *cell = [_cells objectAtIndex:self.currentPageIndex];
-//        newPoint.x = point.x - _scrollView.frame.origin.x + _scrollView.contentOffset.x;
-//        newPoint.y = point.y - _scrollView.frame.origin.y + _scrollView.contentOffset.y;
-        if ([cell pointInside:point withEvent:event]) {
-            return [cell hitTest:point withEvent:event];
+        newPoint.x = point.x - cell.frame.origin.x + _scrollView.contentOffset.x;
+        newPoint.y = point.y - cell.frame.origin.y + _scrollView.contentOffset.y;
+        if ([cell pointInside:newPoint withEvent:event]) {
+            return [cell hitTest:newPoint withEvent:event];
         }
         
         return nil;

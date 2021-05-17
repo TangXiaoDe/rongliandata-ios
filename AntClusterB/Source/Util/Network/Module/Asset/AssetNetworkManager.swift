@@ -261,6 +261,30 @@ extension AssetNetworkManager {
             }
         }
     }
+    /// xch提现结果
+    class func xchWithdrawal(amount: String, pay_pass: String, currency: String, complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletWithdrawResultModel?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = AssetRequestInfo.Wallet.xchWithdrawal
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        // 2.配置参数
+        var parameter: [String: Any] = [:]
+        parameter["num"] = amount
+        parameter["pay_password"] = pay_pass
+        parameter["currency"] = currency
+        requestInfo.parameter = parameter
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error", nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, response.model)
+            }
+        }
+    }
     /// FIL提现配置信息
     class func walletWithdrawalConfig(complete: @escaping((_ status: Bool, _ msg: String?, _ model: WalletWithdrawConfigModel?) -> Void)) -> Void {
         // 1.请求 url
