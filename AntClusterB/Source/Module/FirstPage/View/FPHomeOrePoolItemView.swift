@@ -169,7 +169,7 @@ extension FPHomeOrePoolItemView {
         self.iconView.image = model.icon
         self.valueLabel.text = model.value
         self.nameView.iconView.image = model.title_icon
-        let valueColor: UIColor = model.bg != nil ? UIColor.white : AppColor.themeYellow
+        let valueColor: UIColor = model.bg != nil ? UIColor.white : AppColor.theme
         let titleColor: UIColor = model.bg != nil ? UIColor.white : AppColor.mainText
         //let titleColor: UIColor = ["全网有效算力", "活跃矿工人数", "全网算力", "当前算力难度"].contains(model.title) ? UIColor.white : AppColor.mainText
         self.valueLabel.textColor = valueColor
