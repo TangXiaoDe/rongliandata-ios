@@ -145,7 +145,6 @@ extension MineHomeIncomeInfoView: PagedFlowViewDataSource {
         if itemView == nil {
             itemView = MineHomeIncomeInfoItemView()
             itemView?.layer.cornerRadius = 10
-            itemView?.backgroundColor = .black
         }
         var model: WalletAllInfoModel?
         for i in 0..<self.models!.count {
@@ -166,7 +165,7 @@ extension MineHomeIncomeInfoView: PagedFlowViewDelegate {
     func flowView(_ flowView: PagedFlowView!, didTapPageAt index: Int) {
         self.delegate?.incomeInfoView(self, didTapPageAt: index)
     }
-    
+
     func sizeForPage(in flowView: PagedFlowView!) -> CGSize {
         let height = CGSize.init(width: 280, height: 140).scaleAspectForWidth(kScreenWidth - 95).height
         let size = CGSize.init(width: kScreenWidth - 95, height: height)

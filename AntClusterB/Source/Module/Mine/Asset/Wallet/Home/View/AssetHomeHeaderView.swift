@@ -105,16 +105,17 @@ extension AssetHomeHeaderView {
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(self.topViewHeight)
+            make.bottom.equalToSuperview().offset(-10)
         }
-        // 2. bottomView
-        mainView.addSubview(self.bottomView)
-        self.initialBottomView(self.bottomView)
-        self.bottomView.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.topView.snp.bottom).offset(dividingViewHeight)
-            make.bottom.equalToSuperview()
-            make.height.equalTo(self.bottomViewHeight)
-        }
+//        // 2. bottomView
+//        mainView.addSubview(self.bottomView)
+//        self.initialBottomView(self.bottomView)
+//        self.bottomView.snp.makeConstraints { (make) in
+//            make.leading.trailing.equalToSuperview()
+//            make.top.equalTo(self.topView.snp.bottom).offset(dividingViewHeight)
+//            make.bottom.equalToSuperview()
+//            make.height.equalTo(self.bottomViewHeight)
+//        }
     }
     fileprivate func initialTopView(_ topView: UIView) -> Void {
         topView.backgroundColor = UIColor.white

@@ -291,7 +291,7 @@ extension WithdrawController {
 extension WithdrawController {
     /// 提现结果页
     fileprivate func enterWithdrawResultPage(_ model: WalletWithdrawResultModel) -> Void {
-        let resultVC = WalletWithdrawResultController.init(result: model)
+        let resultVC = WalletWithdrawResultController.init(result: model, configModel: self.configModel)
         self.navigationController?.pushViewController(resultVC, animated: true)
     }
     /// 支付密码重置界面

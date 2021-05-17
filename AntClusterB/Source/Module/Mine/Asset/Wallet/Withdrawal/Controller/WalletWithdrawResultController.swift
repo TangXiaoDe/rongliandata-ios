@@ -16,6 +16,7 @@ class WalletWithdrawResultController: BaseViewController
     // MARK: - Internal Property
     
     var model: WalletWithdrawResultModel?
+    var configModel: WithdrawConfigModel?
     
     // MARK: - Private Property
     
@@ -42,8 +43,9 @@ class WalletWithdrawResultController: BaseViewController
     
     // MARK: - Initialize Function
     
-    init(result: WalletWithdrawResultModel? = nil) {
+    init(result: WalletWithdrawResultModel? = nil, configModel: WithdrawConfigModel?) {
         self.model = result
+        self.configModel = configModel
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder aDecoder: NSCoder) {
@@ -206,8 +208,8 @@ extension WalletWithdrawResultController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
 //        self.setupAsDemo()
-        if let model = self.model {
-            self.setupData(with: model)
+        if let model = self.model, let configModel = self.configModel {
+            self.setupData(with: model, configModel: configModel)
         }
     }
     
@@ -223,9 +225,9 @@ extension WalletWithdrawResultController {
         self.withdrawalStatusView.secondLabel.backgroundColor = UIColor.init(hex: 0xF2F8FF) // 0xF2F8FF、0xF5F5F5、0xFFFBF7
         self.withdrawalDateView.secondLabel.text = Date().string(format: "yyyy-MM-dd HH:mm:ss", timeZone: .current)
     }
-    fileprivate func setupData(with model: WalletWithdrawResultModel) -> Void {
+    fileprivate func setupData(with model: WalletWithdrawResultModel, configModel: WithdrawConfigModel) -> Void {
         self.withdrawalAmountView.secondLabel.text = model.amount.decimalValidDigitsProcess(digits: 4) + model.currency.uppercased()
-        self.withdrawalFeeView.secondLabel.text = model.fee.decimalValidDigitsProcess(digits: 4) + model.currency.uppercased()
+        self.withdrawalFeeView.secondLabel.text = (Double(configModel.service_charge))!.decimalValidDigitsProcess(digits: 4) + model.currency.uppercased()
         self.withdrawalDateView.secondLabel.text = model.createdDate.string(format: "yyyy-MM-dd HH:mm:ss", timeZone: .current)
         switch model.status {
         case .applying:
