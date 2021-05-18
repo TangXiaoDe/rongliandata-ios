@@ -28,22 +28,37 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark Private Methods
--(void)handleTapGesture:(UIGestureRecognizer*)gestureRecognizer{
+- (void)handleTapGesture:(UIGestureRecognizer *)gestureRecognizer {
+    
+    NSInteger pageIndex = ceil(MAX(_scrollView.contentOffset.x, 0) / _pageSize.width);
+    _currentPageIndex = pageIndex;
     NSInteger tappedIndex = 0;
     CGPoint locationInScrollView = [gestureRecognizer locationInView:_scrollView];
     if (CGRectContainsPoint(_scrollView.bounds, locationInScrollView)) {
         tappedIndex = _currentPageIndex;
-        if ([self.delegate respondsToSelector:@selector(flowView:didTapPageAtIndex:)]) {
-            [self.delegate flowView:self didTapPageAtIndex:tappedIndex];
+        UIView *view = gestureRecognizer.view;
+        if (tappedIndex == 0) {
+            if (view.frame.origin.x <= 100) {
+                if ([self.delegate respondsToSelector:@selector(flowView:didTapPageAtIndex:)]) {
+                    [self.delegate flowView:self didTapPageAtIndex:tappedIndex];
+                }
+            }else {
+                [self scrollToPage:1];
+            }
+        }else {
+            if (view.frame.origin.x <= 100) {
+                [self scrollToPage:0];
+            }else {
+                if ([self.delegate respondsToSelector:@selector(flowView:didTapPageAtIndex:)]) {
+                    [self.delegate flowView:self didTapPageAtIndex:tappedIndex];
+                }
+            }
         }
     }
 }
 
 - (void)initialize{
     self.clipsToBounds = YES;
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
-    [self addGestureRecognizer:tapRecognizer];
     
     _needsReload = YES;
     _pageSize = self.bounds.size;
@@ -163,6 +178,8 @@
     
     if ((NSObject *)cell == [NSNull null]) {
         cell = [_dataSource flowView:self cellForPageAtIndex:pageIndex];
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+        [cell addGestureRecognizer:tapRecognizer];
         NSAssert(cell!=nil, @"datasource must not return nil");
         [_cells replaceObjectAtIndex:pageIndex withObject:cell];
         
@@ -353,7 +370,7 @@
         // 重置_scrollView的contentSize
         switch (orientation) {
             case PagedFlowViewOrientationHorizontal://横向
-                _scrollView.contentSize = CGSizeMake(_pageSize.width * _pageCount,_pageSize.height);
+                _scrollView.contentSize = CGSizeMake(_pageSize.width * _pageCount, _pageSize.height);
                 _scrollView.frame = CGRectMake(0, 0, self.frame.size.width, _pageSize.height);
 //                CGPoint theCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 //                _scrollView.center = theCenter;
@@ -402,8 +419,16 @@
 - (void)scrollToPage:(NSUInteger)pageNumber {
     if (pageNumber < _pageCount) {
         switch (orientation) {
-            case PagedFlowViewOrientationHorizontal:
-                [_scrollView setContentOffset:CGPointMake(_pageSize.width * pageNumber, 0) animated:YES];
+            case PagedFlowViewOrientationHorizontal:{
+                CGFloat offset = _scrollView.contentOffset.x;
+                UIView *cell = [_cells objectAtIndex:pageNumber];
+                CGFloat origin = cell.frame.origin.x;
+                CGFloat delta = fabs(origin - offset);
+                CGFloat pageScale = 1 - (delta / _pageSize.width) * (1 - _minimumPageScale);
+                
+                [_scrollView setContentOffset:CGPointMake((_pageSize.width - 20) * pageNumber * pageScale, 0) animated:YES];
+            }
+
                 break;
             case PagedFlowViewOrientationVertical:
                 [_scrollView setContentOffset:CGPointMake(0, _pageSize.height * pageNumber) animated:YES];
@@ -418,24 +443,24 @@
 #pragma mark -
 #pragma mark hitTest
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-//    if ([self pointInside:point withEvent:event]) {
-    if (event.type == UIEventTypeTouches) {
-        
-    }
-        CGPoint newPoint = CGPointZero;
-        UIView *cell = [_cells objectAtIndex:self.currentPageIndex];
-        newPoint.x = point.x - cell.frame.origin.x + _scrollView.contentOffset.x;
-        newPoint.y = point.y - cell.frame.origin.y + _scrollView.contentOffset.y;
-        if ([cell pointInside:newPoint withEvent:event]) {
-            return [cell hitTest:newPoint withEvent:event];
-        }
-        
-        return nil;
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+////    if ([self pointInside:point withEvent:event]) {
+//    if (event.type == UIEventTypeTouches) {
+//
 //    }
-//    
-//    return nil;
-}
+//        CGPoint newPoint = CGPointZero;
+//        UIView *cell = [_cells objectAtIndex:self.currentPageIndex];
+//        newPoint.x = point.x - cell.frame.origin.x + _scrollView.contentOffset.x;
+//        newPoint.y = point.y - cell.frame.origin.y + _scrollView.contentOffset.y;
+//        if ([cell pointInside:newPoint withEvent:event]) {
+//            return [cell hitTest:newPoint withEvent:event];
+//        }
+//
+//        return nil;
+////    }
+////
+////    return nil;
+//}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

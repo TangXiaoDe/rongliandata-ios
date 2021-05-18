@@ -57,7 +57,7 @@ class EquipmentHomeController: BaseViewController {
 
     // MARK: - Initialize Function
 
-    init(showTabbar: Bool = false) {
+    init(showTabbar: Bool = true) {
         self.showTabbar = showTabbar
         super.init(nibName: nil, bundle: nil)
     }
@@ -158,6 +158,7 @@ extension EquipmentHomeController {
         bottomView.addSubview(self.horScrollView)
         self.horScrollView.isPagingEnabled = true
         self.horScrollView.showsHorizontalScrollIndicator = false
+        self.horScrollView.showsVerticalScrollIndicator = false
         self.horScrollView.delegate = self
         self.horScrollView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
