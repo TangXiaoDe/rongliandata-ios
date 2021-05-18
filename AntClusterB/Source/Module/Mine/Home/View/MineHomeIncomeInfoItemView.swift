@@ -79,12 +79,12 @@ extension MineHomeIncomeInfoItemView {
         mainView.addSubview(self.moreIconView)
         self.moreIconView.image = UIImage.init(named: "IMG_mine_fil_arrow_go")
         self.moreIconView.snp.makeConstraints { (make) in
-            make.left.equalTo(self.totalMoneyView.topLabel.snp.right).offset(6)
+            make.left.equalTo(self.totalMoneyView.topLabel.snp.left).offset("XCH累计收入".size(maxSize: CGSize.max, font: UIFont.pingFangSCFont(size: 12, weight: .medium)).width + 5)
             make.centerY.equalTo(self.totalMoneyView.topLabel)
-            make.width.equalTo(4)
-            make.height.equalTo(8)
+//            make.width.equalTo(4)
+//            make.height.equalTo(8)
         }
-    
+
         // soonMoneyView
         mainView.addSubview(self.soonMoneyView)
         self.soonMoneyView.isUserInteractionEnabled = false
