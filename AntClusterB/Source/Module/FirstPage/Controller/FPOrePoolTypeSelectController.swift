@@ -71,7 +71,7 @@ class FPOrePoolTypeSelectController: UIViewController {
     fileprivate let itemVerMargin: CGFloat = 12
     fileprivate let itemTbMargin: CGFloat = 0
     fileprivate let itemHeight: CGFloat = 75
-    fileprivate let itemColNum: Int = 3
+    fileprivate let itemColNum: Int = 2
     fileprivate var itemWidth: CGFloat {
         let colnum: Int = self.itemColNum
         let width: CGFloat = (kScreenWidth - self.itemLrMargin * 2.0 - self.itemHorMargin * CGFloat(colnum - 1)) / CGFloat(colnum)

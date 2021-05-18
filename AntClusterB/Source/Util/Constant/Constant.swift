@@ -18,7 +18,7 @@ struct ScreenSize {
     static let maxlength = max(ScreenSize.width, ScreenSize.height)
 }
 
-public let kIsiPhoneXSeries: Bool = UIScreen.main.bounds.size.height / UIScreen.main.bounds.size.width * 100 == 216
+public let kIsiPhoneXSeries: Bool = floor(UIScreen.main.bounds.size.height / UIScreen.main.bounds.size.width * 100) == 216
 public let kScreenWidth: CGFloat = UIScreen.main.bounds.size.width
 public let kScreenHeight: CGFloat = UIScreen.main.bounds.size.height
 public let kStatusBarIsHidden: Bool = UIApplication.shared.isStatusBarHidden
