@@ -22,6 +22,7 @@
 		530B28E325AD489F00B8723E /* MiningDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28E225AD489F00B8723E /* MiningDetailHeaderView.swift */; };
 		530B28E825AD48C900B8723E /* MiningDetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28E725AD48C900B8723E /* MiningDetailListCell.swift */; };
 		530B28ED25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B28EC25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift */; };
+		533031C42660D78400FB07CC /* EquipDetailTermInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533031C32660D78400FB07CC /* EquipDetailTermInfoView.swift */; };
 		5394398924F8A8980097DCAA /* ResourcePlaceAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394398824F8A8980097DCAA /* ResourcePlaceAudio.swift */; };
 		5394398B24F8A8A50097DCAA /* ResourcePlacePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394398A24F8A8A50097DCAA /* ResourcePlacePicture.swift */; };
 		53A6F41524E0FA3500E8C9B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2CC24E0FA3200E8C9B4 /* Assets.xcassets */; };
@@ -501,6 +502,7 @@
 		530B28E225AD489F00B8723E /* MiningDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningDetailHeaderView.swift; sourceTree = "<group>"; };
 		530B28E725AD48C900B8723E /* MiningDetailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningDetailListCell.swift; sourceTree = "<group>"; };
 		530B28EC25AD83BD00B8723E /* CommonNoMoreDataFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNoMoreDataFooterView.swift; sourceTree = "<group>"; };
+		533031C32660D78400FB07CC /* EquipDetailTermInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipDetailTermInfoView.swift; sourceTree = "<group>"; };
 		5336D29C23169EDA0090FEAF /* ASIHTTPRequest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ASIHTTPRequest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5336D29E23169EEC0090FEAF /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5336D2A023169F350090FEAF /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1213,6 +1215,7 @@
 				53AA78C825F8AC2D0081D04A /* EDUniversalSubjectView.swift */,
 				53DC376325FF6CEA000D156C /* EDUnbackSubjectView.swift */,
 				53AA790025F8B6170081D04A /* EquipDetailHeaderView.swift */,
+				533031C32660D78400FB07CC /* EquipDetailTermInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3648,6 +3651,7 @@
 				53AA78CA25F8AC2D0081D04A /* EquipmentDetailController.swift in Sources */,
 				53DF25772581FC9800165247 /* UserNetworkManager.swift in Sources */,
 				53DF25CF2581FC9900165247 /* XDPushPopAnimation.swift in Sources */,
+				533031C42660D78400FB07CC /* EquipDetailTermInfoView.swift in Sources */,
 				53DF259F2581FC9800165247 /* PickerUtil.swift in Sources */,
 				A17072A02652687F0013FB47 /* AssetHomeBottomView.swift in Sources */,
 				530B28D025AD484000B8723E /* EquipmentHomeHeaderView.swift in Sources */,
