@@ -23,6 +23,7 @@ class EquipmentDetailController: BaseViewController
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
 
     fileprivate let topView: EquipDetailHeaderView = EquipDetailHeaderView.init()
+    fileprivate let infoView: EquipDetailTermInfoView = EquipDetailTermInfoView.init()
     
     fileprivate let detailView: EquipmentDetailView = EquipmentDetailView.init()
     
@@ -142,13 +143,19 @@ extension EquipmentDetailController {
             make.top.equalToSuperview().offset(self.topViewTopMargin)
             make.height.equalTo(self.topViewHeight)
         }
-        // 2. detailView
+        // 2. infoView
+        scrollView.addSubview(self.infoView)
+        self.infoView.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(self.topView)
+            make.top.equalTo(self.topView.snp.bottom)
+        }
+        // 3. detailView
         scrollView.addSubview(self.detailView)
         self.detailView.delegate = self
         self.detailView.backgroundColor = UIColor.white
         self.detailView.snp.makeConstraints { (make) in
             make.leading.trailing.width.bottom.equalToSuperview()
-            make.top.equalTo(self.topView.snp.bottom).offset(self.detailViewTopMargin)
+            make.top.equalTo(self.infoView.snp.bottom).offset(self.detailViewTopMargin)
         }
     }
 
@@ -182,6 +189,7 @@ extension EquipmentDetailController {
             self.detail = data.detail
             self.returns = data.returns
             self.topView.model = self.model
+            self.infoView.model = self.detail?.extend
             self.detailView.model = self.detail
             self.detailView.returns = self.returns
             self.offset = data.returns.count

@@ -81,6 +81,8 @@ class EquipmentDetailModel: Mappable {
     var assets: EDAssetModel? = nil
     ///
     var bank_info: Any? = nil
+    ///
+    var extend: EquipmentDetailExtendModel? = nil
 
     ///
     var admin_id: Int = 0
@@ -162,6 +164,7 @@ class EquipmentDetailModel: Mappable {
         product <- map["goods_order"]
         assets <- map["assets"]
         bank_info <- map["bank_info"]
+        extend <- map["extend"]
         
         admin_id <- map["admin_id"]
         order_type <- map["order_type"]
@@ -366,4 +369,25 @@ class EDAssetModel: Mappable {
 
 }
 
+
+class EquipmentDetailExtendModel: Mappable {
+    
+    var lock: Double = 0
+    var pawn: Double = 0
+    var frozen: Double = 0
+    var security: Double = 0
+    var withdrawable: Double = 0
+    
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        lock <- (map["lock"], DoubleStringTransform.default)
+        pawn <- (map["pawn"], DoubleStringTransform.default)
+        frozen <- (map["frozen"], DoubleStringTransform.default)
+        security <- (map["security"], DoubleStringTransform.default)
+        withdrawable <- (map["withdrawable"], DoubleStringTransform.default)
+    }
+    
+}
 
