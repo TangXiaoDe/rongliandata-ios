@@ -31,7 +31,7 @@ class OreDetailItemView: UIView {
     fileprivate let fengzhuangNumView: TitleValueView = TitleValueView.init()   // 封装数量
     fileprivate let zhiyaNumView: TitleValueView = TitleValueView.init()   // 借贷质押币
     fileprivate let gasNumView: TitleValueView = TitleValueView.init()   // 借贷GAS
-    
+    fileprivate let interestNumView: TitleValueView = TitleValueView.init()   // 利息
 
     fileprivate let topViewHeight: CGFloat = 32
     fileprivate let centerViewHeight: CGFloat = 66
@@ -177,8 +177,9 @@ extension OreDetailItemView {
         self.fengzhuangNumView.titleLabel.text = "封装数"
         self.zhiyaNumView.titleLabel.text = "借贷质押币"
         self.gasNumView.titleLabel.text = "借贷GAS"
-    
+        self.interestNumView.titleLabel.text = "利息"
     }
+
 }
 // MARK: - UI Xib加载后处理
 extension OreDetailItemView {
@@ -209,8 +210,12 @@ extension OreDetailItemView {
         guard let model = model else {
             return
         }
+        var itemViews: [TitleValueView] = [self.miningNumView, self.fengzhuangNumView, self.zhiyaNumView, self.gasNumView]
+        if let _ = model.extend?.interest {
+            itemViews.append(self.interestNumView)
+        }
 //        if model.currency == .fil {
-        self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.zhiyaNumView, self.gasNumView])
+        self.initialCenterView(self.centerView, itemViews)
 //        } else {
 //            self.initialCenterView(self.centerView, [self.miningNumView])
 //        }
@@ -221,6 +226,7 @@ extension OreDetailItemView {
         self.fengzhuangNumView.valueLabel.text = model.extend?.fz_num.decimalValidDigitsProcess(digits: 8)
         self.zhiyaNumView.valueLabel.text = model.extend?.pledge_amount.decimalValidDigitsProcess(digits: 8)
         self.gasNumView.valueLabel.text = model.extend?.gas_amount.decimalValidDigitsProcess(digits: 8)
+        self.interestNumView.valueLabel.text = model.extend?.interest?.decimalValidDigitsProcess(digits: 8)
     }    
 }
 
