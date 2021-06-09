@@ -17,6 +17,13 @@ class OreDetailItemView: UIView {
             self.setupWithModel(model)
         }
     }
+    
+    var type: EquipZhiyaType = .dianfu {
+        didSet {
+            self.setupWithType(type)
+        }
+    }
+    
     // MARK: - Private Property
 
     fileprivate let mainView: UIView = UIView.init()
@@ -210,15 +217,14 @@ extension OreDetailItemView {
         guard let model = model else {
             return
         }
-        var itemViews: [TitleValueView] = [self.miningNumView, self.fengzhuangNumView, self.zhiyaNumView, self.gasNumView]
+        var itemViews: [TitleValueView] = [self.miningNumView, self.fengzhuangNumView]
+        if let zone = model.zone, zone == .ipfs {
+            itemViews.append(contentsOf: [self.zhiyaNumView, self.gasNumView])
+        }
         if let _ = model.extend?.interest {
             itemViews.append(self.interestNumView)
         }
-//        if model.currency == .fil {
         self.initialCenterView(self.centerView, itemViews)
-//        } else {
-//            self.initialCenterView(self.centerView, [self.miningNumView])
-//        }
         // 子控件数据加载
         // 控件加载数据
         self.dateLabel.text = model.createDate.string(format: "yyyy年MM月dd日", timeZone: .current)
@@ -227,7 +233,20 @@ extension OreDetailItemView {
         self.zhiyaNumView.valueLabel.text = model.extend?.pledge_amount.decimalValidDigitsProcess(digits: 8)
         self.gasNumView.valueLabel.text = model.extend?.gas_amount.decimalValidDigitsProcess(digits: 8)
         self.interestNumView.valueLabel.text = model.extend?.interest?.decimalValidDigitsProcess(digits: 8)
-    }    
+    }
+    
+    ///
+    fileprivate func setupWithType(_ type: EquipZhiyaType) -> Void {
+        switch type {
+        case .dianfu:
+            self.zhiyaNumView.titleLabel.text = "借贷质押币"
+            self.gasNumView.titleLabel.text = "借贷GAS"
+        case .zifu:
+            self.zhiyaNumView.titleLabel.text = "使用质押币"
+            self.gasNumView.titleLabel.text = "使用GAS"
+        }
+    }
+    
 }
 
 // MARK: - Event Function

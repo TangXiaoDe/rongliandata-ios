@@ -115,6 +115,8 @@ class EquipmentDetailModel: Mappable {
     var dividend_ratio: Double = 0
     /// 利息
     var interest: Double = 0
+    /// `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '期数类型 0资本垫付 1自出币',
+    var type_value: Int = 0
     
 
     
@@ -182,7 +184,7 @@ class EquipmentDetailModel: Mappable {
         seal_num <- (map["seal_num"], DoubleStringTransform.default)
         dividend_ratio <- (map["dividend_ratio"], DoubleStringTransform.default)
         interest <- (map["interest"], DoubleStringTransform.default)
-        
+        type_value <- (map["type"], IntegerStringTransform.default)
     }
     
 }
@@ -289,6 +291,15 @@ extension EquipmentDetailModel {
 //        progress = max(0, progress)
 //        progress = min(1, progress)
 //        return progress
+    }
+    
+    /// 质押类型：资本垫付、自付
+    var zhiya_type: EquipZhiyaType {
+        var type: EquipZhiyaType = EquipZhiyaType.dianfu
+        if let realType = EquipZhiyaType.init(rawValue: self.type_value) {
+            type = realType
+        }
+        return type
     }
     
 }

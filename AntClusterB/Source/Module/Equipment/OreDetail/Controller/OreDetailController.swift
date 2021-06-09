@@ -144,6 +144,7 @@ extension OreDetailController {
             let itemView = OreDetailItemView.init()
             self.itemContainer.addSubview(itemView)
             itemView.model = model
+            itemView.type = self.listModel.zhiya_type
             itemView.set(cornerRadius: 10)
             itemView.tag = self.itemViewTagBase + index
             itemView.snp.makeConstraints { (make) in
@@ -225,6 +226,9 @@ extension OreDetailController {
                 ToastUtil.showToast(title: msg)
                 return
             }
+            for model in models {
+                model.zone = self.listModel.zone
+            }
             self.sourceList = models
             self.offset = self.sourceList.count
             self.setupItemContainer(with: self.sourceList)
@@ -242,6 +246,9 @@ extension OreDetailController {
             guard status, let models = models else {
                 ToastUtil.showToast(title: msg)
                 return
+            }
+            for model in models {
+                model.zone = self.listModel.zone
             }
             self.sourceList.append(contentsOf: models)
             self.offset = self.sourceList.count
