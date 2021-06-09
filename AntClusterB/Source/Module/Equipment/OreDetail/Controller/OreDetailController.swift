@@ -226,6 +226,9 @@ extension OreDetailController {
                 ToastUtil.showToast(title: msg)
                 return
             }
+            for model in models {
+                model.zone = self.listModel.zone
+            }
             self.sourceList = models
             self.offset = self.sourceList.count
             self.setupItemContainer(with: self.sourceList)
@@ -243,6 +246,9 @@ extension OreDetailController {
             guard status, let models = models else {
                 ToastUtil.showToast(title: msg)
                 return
+            }
+            for model in models {
+                model.zone = self.listModel.zone
             }
             self.sourceList.append(contentsOf: models)
             self.offset = self.sourceList.count

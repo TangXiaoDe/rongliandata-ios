@@ -26,6 +26,7 @@ class OreDetailHeaderView: UIView {
     fileprivate let topView: UIView = UIView.init()
     fileprivate let iconView: UIImageView = UIImageView.init()          // 左侧红色竖线
     fileprivate let titleLabel: UILabel = UILabel.init()                // 第xxx期
+    fileprivate let zhiYaImgView: UIImageView = UIImageView()           // 自付质押图片标记
     fileprivate let specView: TitleValueView = TitleValueView.init()    // 封装规格
     fileprivate let totalNumView: UILabel = UILabel.init()               // 规格数，xxT
     fileprivate let statusLabel: UILabel = UILabel.init()                // 状态
@@ -46,7 +47,8 @@ class OreDetailHeaderView: UIView {
     fileprivate let leftMargin: CGFloat = 12
     fileprivate let rightMargin: CGFloat = 12
     fileprivate let itemLrMargin: CGFloat = 12
-    
+    fileprivate let zhiYaImgSize: CGSize = CGSize.init(width: 64, height: 18)
+    fileprivate let zhiYaLeftMargin: CGFloat = 6
 
     // MARK: - Initialize Function
     init() {
@@ -152,6 +154,15 @@ extension OreDetailHeaderView {
         self.titleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.leftMargin)
             make.centerY.equalTo(topView.snp.top).offset(titleCenterYTopMargin)
+        }
+        topView.addSubview(self.zhiYaImgView)
+        self.zhiYaImgView.set(cornerRadius: 0)
+        self.zhiYaImgView.isHidden = true
+        self.zhiYaImgView.image = UIImage.init(named: "IMG_equip_icon_zfzy")
+        self.zhiYaImgView.snp.makeConstraints { (make) in
+            make.size.equalTo(self.zhiYaImgSize)
+            make.centerY.equalTo(self.titleLabel)
+            make.left.equalTo(self.titleLabel.snp.right).offset(self.zhiYaLeftMargin)
         }
         // 3. specView
         topView.addSubview(self.specView)
@@ -310,6 +321,7 @@ extension OreDetailHeaderView {
         // 子控件数据加载
         self.titleLabel.text = "第\(model.fil_level)期"
         self.titleLabel.textColor = model.titleColor
+        self.zhiYaImgView.isHidden = !(model.zhiya_type == .zifu && model.zone == .ipfs)
         self.specView.valueLabel.text = model.spec_level
         self.specView.valueLabel.textColor = model.titleColor
         self.miningNumView.valueLabel.text = model.total_ming.decimalValidDigitsProcess(digits: 8)

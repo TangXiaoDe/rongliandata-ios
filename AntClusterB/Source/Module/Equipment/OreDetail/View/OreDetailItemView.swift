@@ -217,15 +217,14 @@ extension OreDetailItemView {
         guard let model = model else {
             return
         }
-        var itemViews: [TitleValueView] = [self.miningNumView, self.fengzhuangNumView, self.zhiyaNumView, self.gasNumView]
+        var itemViews: [TitleValueView] = [self.miningNumView, self.fengzhuangNumView]
+        if let zone = model.zone, zone == .ipfs {
+            itemViews.append(contentsOf: [self.zhiyaNumView, self.gasNumView])
+        }
         if let _ = model.extend?.interest {
             itemViews.append(self.interestNumView)
         }
-//        if model.currency == .fil {
         self.initialCenterView(self.centerView, itemViews)
-//        } else {
-//            self.initialCenterView(self.centerView, [self.miningNumView])
-//        }
         // 子控件数据加载
         // 控件加载数据
         self.dateLabel.text = model.createDate.string(format: "yyyy年MM月dd日", timeZone: .current)

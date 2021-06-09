@@ -136,6 +136,9 @@ class AssetListModel: Mappable {
     var target_user: SimpleUserModel?
     /// 目标类型
     var target_type_value: String = ""
+    
+    /// 外界传入字段
+    var zone: ProductZone?
 
     required init?(map: Map) {
         
