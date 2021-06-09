@@ -92,6 +92,12 @@ enum EquipPackageStatus {
     
 }
 
+/// 设备质押类型：资本垫付、自付
+enum EquipZhiyaType: Int {
+    case dianfu = 0
+    case zifu = 1
+}
+
 class EquipmentListModel: Mappable {
     
     var id: Int = 0
@@ -119,6 +125,8 @@ class EquipmentListModel: Mappable {
     var createdDate: Date = Date()
     ///
     var updatedDate: Date = Date()
+    /// `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '期数类型 0资本垫付 1自出币',
+    var type_value: Int = 0
     
     ///
     var zoneValue: String = ""
@@ -151,6 +159,7 @@ class EquipmentListModel: Mappable {
         updatedDate <- (map["updated_at"], DateStringTransform.current)
         status_value <- map["status"]
         zoneValue <- map["zone"]
+        type_value <- (map["type"], IntegerStringTransform.default)
     }
     
     /// 设备状态
@@ -199,6 +208,15 @@ class EquipmentListModel: Mappable {
         var progress: Double = self.seal_num / Double(self.t_num)
         progress = min(progress, 1)
         return progress
+    }
+    
+    /// 质押类型：资本垫付、自付
+    var zhiya_type: EquipZhiyaType {
+        var type: EquipZhiyaType = EquipZhiyaType.dianfu
+        if let realType = EquipZhiyaType.init(rawValue: self.type_value) {
+            type = realType
+        }
+        return type
     }
     
 }

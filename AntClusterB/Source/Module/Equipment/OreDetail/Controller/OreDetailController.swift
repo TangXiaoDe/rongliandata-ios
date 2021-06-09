@@ -144,6 +144,7 @@ extension OreDetailController {
             let itemView = OreDetailItemView.init()
             self.itemContainer.addSubview(itemView)
             itemView.model = model
+            itemView.type = self.listModel.zhiya_type
             itemView.set(cornerRadius: 10)
             itemView.tag = self.itemViewTagBase + index
             itemView.snp.makeConstraints { (make) in

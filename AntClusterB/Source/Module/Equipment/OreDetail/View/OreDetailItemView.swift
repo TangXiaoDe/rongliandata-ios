@@ -17,6 +17,13 @@ class OreDetailItemView: UIView {
             self.setupWithModel(model)
         }
     }
+    
+    var type: EquipZhiyaType = .dianfu {
+        didSet {
+            self.setupWithType(type)
+        }
+    }
+    
     // MARK: - Private Property
 
     fileprivate let mainView: UIView = UIView.init()
@@ -227,7 +234,20 @@ extension OreDetailItemView {
         self.zhiyaNumView.valueLabel.text = model.extend?.pledge_amount.decimalValidDigitsProcess(digits: 8)
         self.gasNumView.valueLabel.text = model.extend?.gas_amount.decimalValidDigitsProcess(digits: 8)
         self.interestNumView.valueLabel.text = model.extend?.interest?.decimalValidDigitsProcess(digits: 8)
-    }    
+    }
+    
+    ///
+    fileprivate func setupWithType(_ type: EquipZhiyaType) -> Void {
+        switch type {
+        case .dianfu:
+            self.zhiyaNumView.titleLabel.text = "借贷质押币"
+            self.gasNumView.titleLabel.text = "借贷GAS"
+        case .zifu:
+            self.zhiyaNumView.titleLabel.text = "使用质押币"
+            self.gasNumView.titleLabel.text = "使用GAS"
+        }
+    }
+    
 }
 
 // MARK: - Event Function
