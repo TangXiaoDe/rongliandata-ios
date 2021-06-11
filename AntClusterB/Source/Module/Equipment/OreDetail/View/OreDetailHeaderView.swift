@@ -10,7 +10,9 @@ import UIKit
 
 class OreDetailHeaderView: UIView {
     
-    static let viewHeight: CGFloat = CGSize.init(width: 351, height: 146.5).scaleAspectForWidth(kScreenWidth - 2 * 12).height
+    static let noGroupViewHeight: CGFloat = CGSize.init(width: 351, height: 146.5).scaleAspectForWidth(kScreenWidth - 2 * 12).height
+    static let hasGroupViewHeight: CGFloat = CGSize.init(width: 351, height: 166).scaleAspectForWidth(kScreenWidth - 2 * 12).height
+
     // MARK: - Internal Property
     
     var model: EquipmentListModel? {
@@ -31,6 +33,7 @@ class OreDetailHeaderView: UIView {
     fileprivate let totalNumView: UILabel = UILabel.init()               // 规格数，xxT
     fileprivate let statusLabel: UILabel = UILabel.init()                // 状态
     fileprivate let topDashLine: XDDashLineView = XDDashLineView.init(lineColor: UIColor.init(hex: 0xECECEC), lengths: [3.0, 3.0])
+    fileprivate let groupView: TitleValueView = TitleValueView.init()   // 节点号
     
     fileprivate let centerView: UIView = UIView.init()
     // fil
@@ -42,7 +45,8 @@ class OreDetailHeaderView: UIView {
     fileprivate let yesterdayNumView: TitleValueView = TitleValueView.init()   // 昨日收益
     fileprivate let huibenNumView: TitleValueView = TitleValueView.init()   // 回本进度
 
-    fileprivate let topViewHeight: CGFloat = 72
+    fileprivate let noGroupTopViewHeight: CGFloat = 72
+    fileprivate let hasGroupTopViewHeight: CGFloat = 92
     fileprivate let centerViewHeight: CGFloat = 63
     fileprivate let leftMargin: CGFloat = 12
     fileprivate let rightMargin: CGFloat = 12
@@ -111,7 +115,7 @@ extension OreDetailHeaderView {
     /// mainView布局
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
         mainView.addSubview(self.bgImgView)
-        self.bgImgView.image = UIImage.init(named: "IMG_mine_sb_top_box")
+        self.bgImgView.image = UIImage.init(named: "IMG_mine_sb_top_box_group")
         self.bgImgView.set(cornerRadius: 0)
         self.bgImgView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -130,24 +134,15 @@ extension OreDetailHeaderView {
         self.topView.snp.makeConstraints { (make) in
             make.bottom.equalTo(self.centerView.snp.top)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(self.topViewHeight)
+            make.height.equalTo(self.hasGroupTopViewHeight)
         }
     }
     ///
     fileprivate func initialTopView(_ topView: UIView) -> Void {
         let iconSize: CGSize = CGSize.init(width: 3, height: 28)
-        let iconTopMargin: CGFloat = 10
         let titleCenterYTopMargin: CGFloat = 23     // super.top
         let specCenterYTopMargin: CGFloat = 23      // title.centerY
-        // 1. iconView
-        topView.addSubview(self.iconView)
-        self.iconView.set(cornerRadius: iconSize.width * 0.5)
-        self.iconView.backgroundColor = UIColor.init(hex: 0xFF455E)
-        self.iconView.snp.makeConstraints { (make) in
-            make.size.equalTo(iconSize)
-            make.leading.equalToSuperview().offset(0)
-            make.top.equalToSuperview().offset(iconTopMargin)
-        }
+        let groupCenterYTopMargin: CGFloat = 22     // spec.centerY
         // 2. titleLabel
         topView.addSubview(self.titleLabel)
         self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14, weight: .medium), textColor: UIColor.init(hex: 0x333333))
@@ -164,6 +159,15 @@ extension OreDetailHeaderView {
             make.centerY.equalTo(self.titleLabel)
             make.left.equalTo(self.titleLabel.snp.right).offset(self.zhiYaLeftMargin)
         }
+        // 1. iconView
+        topView.addSubview(self.iconView)
+        self.iconView.set(cornerRadius: iconSize.width * 0.5)
+        self.iconView.backgroundColor = UIColor.init(hex: 0xFF455E)
+        self.iconView.snp.makeConstraints { (make) in
+            make.size.equalTo(iconSize)
+            make.leading.equalToSuperview().offset(0)
+            make.centerY.equalTo(self.titleLabel)
+        }
         // 3. specView
         topView.addSubview(self.specView)
         self.specView.snp.makeConstraints { (make) in
@@ -178,7 +182,27 @@ extension OreDetailHeaderView {
         }
         self.specView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x333333))
         self.specView.valueLabel.snp.remakeConstraints { (make) in
-            make.leading.equalTo(self.specView.titleLabel.snp.trailing).offset(5)
+            make.leading.equalTo(self.specView.titleLabel.snp.trailing).offset(0)
+            make.trailing.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        // groupView
+        topView.addSubview(self.groupView)
+        self.groupView.snp.makeConstraints { (make) in
+            make.leading.equalTo(self.titleLabel)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.rightMargin)
+            make.centerY.equalTo(self.specView.snp.centerY).offset(groupCenterYTopMargin)
+        }
+        self.groupView.titleLabel.set(text: "节点号：", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999))
+        self.groupView.titleLabel.snp.remakeConstraints { (make) in
+            make.leading.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        self.groupView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999))
+        self.groupView.valueLabel.snp.remakeConstraints { (make) in
+            make.leading.equalTo(self.groupView.titleLabel.snp.trailing).offset(0)
             make.trailing.centerY.equalToSuperview()
             make.top.greaterThanOrEqualToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
@@ -330,11 +354,24 @@ extension OreDetailHeaderView {
         self.statusLabel.text = model.status.title
         self.statusLabel.textColor = model.statusColor
         self.iconView.backgroundColor = model.iconColor
+        self.groupView.valueLabel.text = model.group
+        self.setupGroupShow(!model.group.isEmpty)
 
         var totalNumAtts = NSAttributedString.textAttTuples()
         totalNumAtts.append((str: "\(model.t_num)", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: model.totalNumColor))
         totalNumAtts.append((str: " T", font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: model.totalNumColor))
         self.totalNumView.attributedText = NSAttributedString.attribute(totalNumAtts)
+    }
+    
+    ///
+    fileprivate func setupGroupShow(_ isShow: Bool) -> Void {
+        self.groupView.isHidden = !isShow
+        self.bgImgView.image = isShow ? UIImage.init(named: "IMG_mine_sb_top_box_group") : UIImage.init(named: "IMG_mine_sb_top_box")
+        self.topView.snp.updateConstraints { (make) in
+            let height: CGFloat = isShow ? self.hasGroupTopViewHeight : self.noGroupTopViewHeight
+            make.height.equalTo(height)
+        }
+        self.layoutIfNeeded()
     }
     
 }

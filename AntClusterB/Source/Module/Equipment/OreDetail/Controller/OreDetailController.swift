@@ -26,7 +26,8 @@ class OreDetailController: BaseViewController
     fileprivate let limit: Int = 20
     
     fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height
-    fileprivate let headerHeight: CGFloat = OreDetailHeaderView.viewHeight
+    fileprivate let headerViewNoGroupHeight: CGFloat = OreDetailHeaderView.noGroupViewHeight
+    fileprivate let headerViewHasGroupHeight: CGFloat = OreDetailHeaderView.hasGroupViewHeight
     fileprivate let headerViewTopMargin: CGFloat = 20
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let itemVerMargin: CGFloat = 12
@@ -124,7 +125,8 @@ extension OreDetailController {
             make.top.equalToSuperview().offset(headerViewTopMargin)
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.height.equalTo(self.headerHeight)
+            let height: CGFloat = self.listModel.group.isEmpty ? self.headerViewNoGroupHeight : self.headerViewHasGroupHeight
+            make.height.equalTo(height)
         }
         // 2. itemContainer
         scrollView.addSubview(self.itemContainer)

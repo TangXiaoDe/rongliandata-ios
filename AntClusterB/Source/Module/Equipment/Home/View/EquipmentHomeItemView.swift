@@ -18,7 +18,8 @@ import UIKit
 
 class EquipmentHomeItemView: UIView {
     
-    static let viewHeight: CGFloat = 178
+    //static let viewHeight: CGFloat = 178
+    
     // MARK: - Internal Property
     
     var model: EquipmentListModel? {
@@ -40,6 +41,7 @@ class EquipmentHomeItemView: UIView {
     fileprivate let totalNumView: UILabel = UILabel.init()               // 规格数，xxT
     fileprivate let statusLabel: UILabel = UILabel.init()                // 状态
     fileprivate let topDashLine: XDDashLineView = XDDashLineView.init(lineColor: UIColor.init(hex: 0xECECEC), lengths: [3.0, 3.0])
+    fileprivate let groupView: TitleValueView = TitleValueView.init()   // 节点号
     
     fileprivate let centerView: UIView = UIView.init()
     // fil
@@ -56,7 +58,8 @@ class EquipmentHomeItemView: UIView {
     fileprivate let equimentDetailBtn: UIButton = UIButton.init(type: .custom)
     fileprivate let oreDetailBtn: UIButton = UIButton.init(type: .custom)
 
-    fileprivate let topViewHeight: CGFloat = 71
+    fileprivate let noGroupTopViewHeight: CGFloat = 71
+    fileprivate let hasGroupTopViewHeight: CGFloat = 92
     fileprivate let centerViewHeight: CGFloat = 62
     fileprivate let bottomViewHeight: CGFloat = 44
     fileprivate let leftMargin: CGFloat = 12
@@ -134,7 +137,7 @@ extension EquipmentHomeItemView {
         self.initialTopView(self.topView)
         self.topView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(self.topViewHeight)
+            make.height.equalTo(self.hasGroupTopViewHeight)
         }
         // 2. centerView
         mainView.addSubview(self.centerView)
@@ -151,24 +154,16 @@ extension EquipmentHomeItemView {
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.centerView.snp.bottom)
             make.height.equalTo(self.bottomViewHeight)
+            make.bottom.equalToSuperview()
         }
     }
     ///
     fileprivate func initialTopView(_ topView: UIView) -> Void {
         
         let iconSize: CGSize = CGSize.init(width: 3, height: 28)
-        let iconTopMargin: CGFloat = 10
         let titleCenterYTopMargin: CGFloat = 23     // super.top
         let specCenterYTopMargin: CGFloat = 23      // title.centerY
-        // 1. iconView
-        topView.addSubview(self.iconView)
-        self.iconView.set(cornerRadius: iconSize.width * 0.5)
-        self.iconView.backgroundColor = UIColor.init(hex: 0xFF455E)
-        self.iconView.snp.makeConstraints { (make) in
-            make.size.equalTo(iconSize)
-            make.leading.equalToSuperview().offset(0)
-            make.top.equalToSuperview().offset(iconTopMargin)
-        }
+        let groupCenterYTopMargin: CGFloat = 22     // spec.centerY
         // 2. titleLabel
         topView.addSubview(self.titleLabel)
         self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14, weight: .medium), textColor: UIColor.init(hex: 0x333333))
@@ -185,6 +180,15 @@ extension EquipmentHomeItemView {
             make.centerY.equalTo(self.titleLabel)
             make.left.equalTo(self.titleLabel.snp.right).offset(self.zhiYaLeftMargin)
         }
+        // 1. iconView
+        topView.addSubview(self.iconView)
+        self.iconView.set(cornerRadius: iconSize.width * 0.5)
+        self.iconView.backgroundColor = UIColor.init(hex: 0xFF455E)
+        self.iconView.snp.makeConstraints { (make) in
+            make.size.equalTo(iconSize)
+            make.leading.equalToSuperview().offset(0)
+            make.centerY.equalTo(self.titleLabel)
+        }
         // 3. specView
         topView.addSubview(self.specView)
         self.specView.snp.makeConstraints { (make) in
@@ -199,7 +203,27 @@ extension EquipmentHomeItemView {
         }
         self.specView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x333333))
         self.specView.valueLabel.snp.remakeConstraints { (make) in
-            make.leading.equalTo(self.specView.titleLabel.snp.trailing).offset(5)
+            make.leading.equalTo(self.specView.titleLabel.snp.trailing).offset(0)
+            make.trailing.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        // groupView
+        topView.addSubview(self.groupView)
+        self.groupView.snp.makeConstraints { (make) in
+            make.leading.equalTo(self.titleLabel)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.rightMargin)
+            make.centerY.equalTo(self.specView.snp.centerY).offset(groupCenterYTopMargin)
+        }
+        self.groupView.titleLabel.set(text: "节点号：", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999))
+        self.groupView.titleLabel.snp.remakeConstraints { (make) in
+            make.leading.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        self.groupView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999))
+        self.groupView.valueLabel.snp.remakeConstraints { (make) in
+            make.leading.equalTo(self.groupView.titleLabel.snp.trailing).offset(0)
             make.trailing.centerY.equalToSuperview()
             make.top.greaterThanOrEqualToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
@@ -389,11 +413,23 @@ extension EquipmentHomeItemView {
         self.statusLabel.text = model.status.title
         self.statusLabel.textColor = model.statusColor
         self.iconView.backgroundColor = model.iconColor
+        self.groupView.valueLabel.text = model.group
+        self.setupGroupShow(!model.group.isEmpty)
 
         var totalNumAtts = NSAttributedString.textAttTuples()
         totalNumAtts.append((str: "\(model.t_num)", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: model.totalNumColor))
         totalNumAtts.append((str: " T", font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: model.totalNumColor))
         self.totalNumView.attributedText = NSAttributedString.attribute(totalNumAtts)
+    }
+    
+    ///
+    fileprivate func setupGroupShow(_ isShow: Bool) -> Void {
+        self.groupView.isHidden = !isShow
+        self.topView.snp.updateConstraints { (make) in
+            let height: CGFloat = isShow ? self.hasGroupTopViewHeight : self.noGroupTopViewHeight
+            make.height.equalTo(height)
+        }
+        self.layoutIfNeeded()
     }
     
 }

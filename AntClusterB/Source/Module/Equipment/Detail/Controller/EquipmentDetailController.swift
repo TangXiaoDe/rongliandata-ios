@@ -29,7 +29,8 @@ class EquipmentDetailController: BaseViewController
     
     fileprivate let topBgViewHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
     
-    fileprivate let topViewHeight: CGFloat = EquipDetailHeaderView.viewHeight
+    fileprivate let topViewNoGroupHeight: CGFloat = EquipDetailHeaderView.noGroupViewHeight
+    fileprivate let topViewHasGroupHeight: CGFloat = EquipDetailHeaderView.hasGroupViewHeight
     fileprivate let topViewLrMargin: CGFloat = 12
     fileprivate let topViewTopMargin: CGFloat = 20
     
@@ -141,7 +142,8 @@ extension EquipmentDetailController {
             make.leading.equalToSuperview().offset(self.topViewLrMargin)
             make.trailing.equalToSuperview().offset(-self.topViewLrMargin)
             make.top.equalToSuperview().offset(self.topViewTopMargin)
-            make.height.equalTo(self.topViewHeight)
+            let height: CGFloat = self.model.group.isEmpty ? self.topViewNoGroupHeight : self.topViewHasGroupHeight
+            make.height.equalTo(height)
         }
         // 2. infoView
         scrollView.addSubview(self.infoView)
