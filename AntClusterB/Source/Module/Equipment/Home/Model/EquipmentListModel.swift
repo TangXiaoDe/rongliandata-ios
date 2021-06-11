@@ -127,6 +127,8 @@ class EquipmentListModel: Mappable {
     var updatedDate: Date = Date()
     /// `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '期数类型 0资本垫付 1自出币',
     var type_value: Int = 0
+    /// 节点号，可以为空，为空则不显示
+    var group: String = ""
     
     ///
     var zoneValue: String = ""
@@ -160,6 +162,7 @@ class EquipmentListModel: Mappable {
         status_value <- map["status"]
         zoneValue <- map["zone"]
         type_value <- (map["type"], IntegerStringTransform.default)
+        group <- map["group"]
     }
     
     /// 设备状态

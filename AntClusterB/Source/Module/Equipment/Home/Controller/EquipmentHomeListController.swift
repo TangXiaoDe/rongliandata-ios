@@ -33,7 +33,6 @@ class EquipmentHomeListController: BaseViewController {
 
     fileprivate let headerHeight: CGFloat = EquipmentHomeHeaderView.viewHeight
     fileprivate let lrMargin: CGFloat = 12
-    fileprivate let itemHeight: CGFloat = EquipmentHomeItemView.viewHeight
     fileprivate let itemVerMargin: CGFloat = 12
     fileprivate let itemTopMargin: CGFloat = 219 - 200
     fileprivate let itemBottomMargin: CGFloat = 12
@@ -157,7 +156,6 @@ extension EquipmentHomeListController {
             itemView.snp.makeConstraints { (make) in
                 make.leading.equalToSuperview().offset(self.lrMargin)
                 make.trailing.equalToSuperview().offset(-self.lrMargin)
-                make.height.equalTo(self.itemHeight)
                 if 0 == index {
                     make.top.equalToSuperview()
                 } else {
@@ -232,7 +230,7 @@ extension EquipmentHomeListController {
             guard status, let model = model else {
                 ToastUtil.showToast(title: msg)
                 return
-            }
+            }            
             self.headerView.model = model
             self.sourceList = model.list
             self.offset = self.sourceList.count
