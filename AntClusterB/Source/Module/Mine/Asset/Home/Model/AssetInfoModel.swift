@@ -234,9 +234,9 @@ class AssetInfoModel: Mappable {
         }
         switch self.currency {
         case .fil:
-            break
+            withdrawAddress = self.withdrawal_address ?? ""
         case .bzz:
-            break
+            withdrawAddress = self.withdrawal_address ?? ""
         case .usdt:
             if self.currencyType == .erc20 {
                 withdrawAddress = userModel.withdrawal_address
@@ -250,11 +250,21 @@ class AssetInfoModel: Mappable {
         }
         return withdrawAddress
     }
-    /// 资产余额(fil和其他资产公用)
+    /// 可提现余额(fil和其他资产公用)
     var lfbalance: Double {
         var balance: Double = 0
         if self.currency == .fil || self.currency == .bzz {
             balance = Double(self.withdrawable) ?? 0
+        } else {
+            balance = self.ore
+        }
+        return balance
+    }
+    /// 资产余额
+    var realBalance: Double {
+        var balance: Double = 0
+        if self.currency == .fil || self.currency == .bzz {
+            balance = Double(self.fil_balance) ?? 0
         } else {
             balance = self.ore
         }

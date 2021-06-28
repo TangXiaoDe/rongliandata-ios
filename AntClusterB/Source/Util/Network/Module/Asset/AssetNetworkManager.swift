@@ -15,6 +15,7 @@ enum AssetCurrencyRequestType: String {
     case usdt
     case chia = "xch"
     case usdtTrx = "usdt-trx"
+    case bzz
 }
 enum AssetCurrencyType: String {
     case none
@@ -116,6 +117,8 @@ extension AssetNetworkManager {
             type = .usdt
         } else if currencyType == .trc20 && currency == CurrencyType.usdt.rawValue {
             type = .usdtTrx
+        } else if currency == CurrencyType.bzz.rawValue {
+            type = .bzz
         }
         parameter["currency"] = type.rawValue
         requestInfo.parameter = parameter
@@ -132,14 +135,13 @@ extension AssetNetworkManager {
         }
     }
     /// 获取fil资产信息
-    class func
-    getWalletFilInfo(complete: @escaping((_ status: Bool, _ msg: String?, _ model: AssetInfoModel?) -> Void)) -> Void {
+    class func getWalletFilInfo(currency: String, complete: @escaping((_ status: Bool, _ msg: String?, _ model: AssetInfoModel?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = AssetRequestInfo.Wallet.filInfo
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
         // 2.配置参数
         // 2.配置参数
-        var parameter: [String: Any] = [: ]
+        var parameter: [String: Any] = ["currency": currency]
         requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
@@ -181,7 +183,7 @@ extension AssetNetworkManager {
                 return
             }
             AppConfig.share.server = model
-            Self.getWalletFilInfo(complete: complete)
+            Self.getWalletFilInfo(currency: "fil", complete: complete)
         }
     }
     /// 绑定提币地址(FIL/usdt/eoc)
@@ -199,6 +201,8 @@ extension AssetNetworkManager {
             type = .usdtTrx
         } else if currency == CurrencyType.chia.rawValue {
             type = .chia
+        } else if currency == CurrencyType.bzz.rawValue {
+            type = .bzz
         }
         let parameter: [String: Any] = ["address": address, "currency": type.rawValue]
         requestInfo.parameter = parameter

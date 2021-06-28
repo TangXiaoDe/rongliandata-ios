@@ -202,7 +202,7 @@ extension AssetHomeHeaderView {
             return
         }
         self.currencyTypeLabel.text = model.currency.title
-        self.balanceItemView.bottomLabel.text = model.balance.decimalProcess(digits: 8)
+        self.balanceItemView.bottomLabel.text = model.realBalance.decimalValidDigitsProcess(digits: 8)
         if model.currency == .usdt || model.currency == .cny {
             self.incomeItemView.isHidden = true
         } else {
@@ -264,7 +264,7 @@ extension AssetHomeHeaderView {
             break
         }
         if let cnyPriceValue = Double(cnyPriceStr) {
-            let currencyNum: NSDecimalNumber = NSDecimalNumber.init(value: model.ore)
+            let currencyNum: NSDecimalNumber = NSDecimalNumber.init(value: model.realBalance)
             let ratioNum: NSDecimalNumber = NSDecimalNumber.init(value: cnyPriceValue)
             let resultNum: NSDecimalNumber = currencyNum.multiplying(by: ratioNum)
             let decimalValue = resultNum.doubleValue.decimalValidDigitsProcess(digits: 2)

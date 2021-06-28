@@ -161,6 +161,10 @@ extension WithdrawAddressBindResultController {
                 self.navigationController?.popToViewController(childVC, animated: true)
                 return
             }
+            if let childVC = childVC as? AssetHomeController {
+                self.navigationController?.popToViewController(childVC, animated: true)
+                return
+            }
         }
         self.navigationController?.popToRootViewController(animated: true)
     }
