@@ -227,7 +227,10 @@ extension EquipmentDetailController {
  
     /// 进入锁仓详情页
     fileprivate func enterEquipLockDetailPage(with id: Int) -> Void {
-        let detailVC = LockDetailController.init(id: id)
+        guard let detail = self.detail else {
+            return
+        }
+        let detailVC = LockDetailController.init(id: id, zone: detail.zone)
         self.enterPageVC(detailVC)
     }
 

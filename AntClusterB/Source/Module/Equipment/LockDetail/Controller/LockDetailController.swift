@@ -15,6 +15,7 @@ class LockDetailController: BaseViewController
     // MARK: - Internal Property
     
     fileprivate let id: Int?
+    fileprivate let zone: ProductZone
     
     // MARK: - Private Property
     fileprivate let topBgView: UIImageView = UIImageView()
@@ -37,8 +38,9 @@ class LockDetailController: BaseViewController
     fileprivate let itemViewTagBase: Int = 250
 
     // MARK: - Initialize Function
-    init(id: Int? = nil) {
+    init(id: Int? = nil, zone: ProductZone = .ipfs) {
         self.id = id
+        self.zone = zone
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder aDecoder: NSCoder) {
@@ -90,7 +92,7 @@ extension LockDetailController {
         }
         // 1.nav
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "锁仓FIL-线性收益", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.navBar.titleLabel.set(text: "锁仓\(self.zone.rawValue.uppercased())-线性收益", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
         self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in
@@ -180,6 +182,7 @@ extension LockDetailController {
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
         self.scrollView.mj_header.beginRefreshing()
+        self.headerView.zone = self.zone
 //        self.setupAsDemo()
     }
     ///

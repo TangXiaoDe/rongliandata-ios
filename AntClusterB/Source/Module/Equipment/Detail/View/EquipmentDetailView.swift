@@ -142,11 +142,6 @@ extension EquipmentDetailView {
             topView = itemView
         }
         //
-        self.packageDetailView.title = "封装详情"
-        self.loanCapitalView.title = "借贷资本明细"
-        self.backedAssetView.title = "已归还"
-        self.unbackAssetView.title = "待归还"
-        //
         self.assetSurveyView.model = nil
         self.assetSurveyView.delegate = self
         self.backAssetDetailView.models = nil
@@ -190,7 +185,14 @@ extension EquipmentDetailView {
         //
         self.packageDetailView.status = model.pkg_status
         self.backAssetDetailView.model = model
-        self.assetSurveyView.model = asset
+        self.assetSurveyView.model = (asset, model.zone)
+        
+        //
+        //
+        self.packageDetailView.model = ("封装详情", model.zone)
+        self.loanCapitalView.model = ("借贷资本明细", model.zone)
+        self.backedAssetView.model = ("已归还", model.zone)
+        self.unbackAssetView.model = ("待归还", model.zone)
     }
     
 }

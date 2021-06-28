@@ -14,16 +14,16 @@ class EDUnbackSubjectView: UIView {
     
     // MARK: - Internal Property
     
-    var title: String? {
-        didSet {
-            self.setupWithTitle(title)
-        }
-    }
-    var model: String? {
+    var model: (title: String, zone: ProductZone)? {
         didSet {
             self.setupWithModel(model)
         }
     }
+//    var model: String? {
+//        didSet {
+//            self.setupWithModel(model)
+//        }
+//    }
     var status: EquipPackageStatus = .deploying {
         didSet {
             var statusAtts = NSAttributedString.textAttTuples()
@@ -229,13 +229,13 @@ extension EDUnbackSubjectView {
         
     }
     /// 数据加载
-    fileprivate func setupWithTitle(_ title: String?) -> Void {
+    fileprivate func setupWithModel(_ model: (title: String, zone: ProductZone)?) -> Void {
 //        self.setupAsDemo()
-        guard let title = title else {
+        guard let model = model else {
             return
         }
         // 子控件数据加载
-        self.titleView.titleLabel.text = title
+        self.titleView.titleLabel.text = model.title
 
         self.zhiyaItemView.backgroundColor = UIColor.init(hex: 0xFDC818).withAlphaComponent(0.08)
         self.xiaohaoItemView.backgroundColor = UIColor.init(hex: 0xFDC818).withAlphaComponent(0.08)
@@ -243,40 +243,40 @@ extension EDUnbackSubjectView {
         
         var zhiyaTitle: String = ""
         var xiaohaoTitle: String = ""
-        switch title {
+        switch model.title {
         case "封装详情":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_fengzhuang")
             self.statusView.isHidden = false
-            zhiyaTitle = "使用质押币数量(FIL)"
-            xiaohaoTitle = "Gas消耗数量(FIL)"
+            zhiyaTitle = "使用质押币数量(\(model.zone.rawValue.uppercased()))"
+            xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         case "借贷资本明细":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_jiedai")
-            zhiyaTitle = "借贷质押币数量(FIL)"
-            xiaohaoTitle = "借贷Gas消耗数量(FIL)"
+            zhiyaTitle = "借贷质押币数量(\(model.zone.rawValue.uppercased()))"
+            xiaohaoTitle = "借贷Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         case "已归还":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_yiguihuan")
             self.zhiyaItemView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.08)
             self.xiaohaoItemView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.08)
-            zhiyaTitle = "质押币数量(FIL)"
-            xiaohaoTitle = "Gas消耗数量(FIL)"
+            zhiyaTitle = "质押币数量(\(model.zone.rawValue.uppercased()))"
+            xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         case "待归还":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_daiguihuan")
-            zhiyaTitle = "质押币数量(FIL)"
-            xiaohaoTitle = "Gas消耗数量(FIL)"
-            self.interestItemView.titleLabel.text = "累计欠款利息(FIL)"
+            zhiyaTitle = "质押币数量(\(model.zone.rawValue.uppercased()))"
+            xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"
+            self.interestItemView.titleLabel.text = "累计欠款利息(\(model.zone.rawValue.uppercased()))"
         default:
             break
         }
         self.zhiyaItemView.titleLabel.text = zhiyaTitle
         self.xiaohaoItemView.titleLabel.text = xiaohaoTitle
     }
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
+//    fileprivate func setupWithModel(_ model: String?) -> Void {
+//        self.setupAsDemo()
 //        guard let model = model else {
 //            return
 //        }
 //        // 子控件数据加载
-    }
+//    }
 
 }
 
