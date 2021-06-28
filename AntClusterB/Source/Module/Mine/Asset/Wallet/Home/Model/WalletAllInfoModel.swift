@@ -34,6 +34,20 @@ class WalletAllInfoModel: Mappable {
     }
 }
 
+extension WalletAllInfoModel {
+    var currencyType: CurrencyType {
+        var type: CurrencyType = .fil
+        if self.currency == "fil" {
+            type = .fil
+        } else if self.currency == "xch" {
+            type = .chia
+        } else if self.currency == "bzz" {
+            type = .bzz
+        }
+        return type
+    }
+}
+
 //class WalletFilModel: Mappable {
 //    var id: Int = 0
 //    var user_id: Int = 0

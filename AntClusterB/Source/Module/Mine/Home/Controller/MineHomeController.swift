@@ -309,6 +309,8 @@ extension MineHomeController: MineHomeIncomeInfoViewProtocol {
             self.enterFilHomePage()
         } else if index == 1 {
             self.enterAssetPage()
+        } else if index == 2 {
+            self.enterAssetPage()
         }
     }
 }
