@@ -230,6 +230,10 @@ extension AssetHomeHeaderView {
 //            incomeStr = incomeModel.eth
         case .fil:
             incomeStr = incomeModel.fil
+        case .chia:
+            incomeStr = incomeModel.chia
+        case .bzz:
+            incomeStr = incomeModel.bzz
         default:
             break
         }
@@ -252,6 +256,10 @@ extension AssetHomeHeaderView {
             cnyPriceStr = priceModel.ipfs?.price.decimalValidDigitsProcess(digits: 2) ?? ""
         case .usdt:
             cnyPriceStr = priceModel.usdt?.price.decimalValidDigitsProcess(digits: 2) ?? ""
+        case .chia:
+            cnyPriceStr = priceModel.chia?.price.decimalValidDigitsProcess(digits: 2) ?? ""
+        case .bzz:
+            cnyPriceStr = priceModel.bzz?.price.decimalValidDigitsProcess(digits: 2) ?? ""
         default:
             break
         }

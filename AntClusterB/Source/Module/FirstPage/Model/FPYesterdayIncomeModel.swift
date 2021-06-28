@@ -19,6 +19,10 @@ class FPYesterdayIncomeModel: Mappable {
     var btc: String = ""
     ///
     var eth: String = ""
+    ///
+    var chia: String = ""
+    ///
+    var bzz: String = ""
 
 
     required init?(map: Map) {
@@ -28,6 +32,8 @@ class FPYesterdayIncomeModel: Mappable {
         fil <- map["fil"]
         btc <- map["btc"]
         eth <- map["eth"]
+        chia <- map["xch"]
+        bzz <- map["bzz"]
     }
 
 }

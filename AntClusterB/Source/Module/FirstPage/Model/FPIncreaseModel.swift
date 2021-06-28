@@ -23,6 +23,8 @@ class FPIncreaseModel: Mappable {
     var usdt: FPCurrencyIncreaseModel?
     ///
     var chia: FPCurrencyIncreaseModel?
+    ///
+    var bzz: FPCurrencyIncreaseModel?
 
 
     required init?(map: Map) {
@@ -34,6 +36,7 @@ class FPIncreaseModel: Mappable {
         ipfs <- map["fil"]  // map["ipfs"]
         usdt <- map["usdt"]
         chia <- map["xch"]  // map["chia"]
+        bzz <- map["bzz"]
         self.commonInit()
     }
 
@@ -44,6 +47,7 @@ class FPIncreaseModel: Mappable {
         self.ipfs?.type = .ipfs
         self.usdt?.type = .usdt
         self.chia?.type = .chia
+        self.bzz?.type = .bzz
     }
 
 }
@@ -56,6 +60,7 @@ enum FPCurrencyType: String {
     case ipfs
     case usdt
     case chia
+    case bzz
 }
 /// 首页单个币价涨幅数据模型
 class FPCurrencyIncreaseModel: Mappable {
