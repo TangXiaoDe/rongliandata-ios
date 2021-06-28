@@ -131,10 +131,10 @@ extension MineHomeIncomeInfoItemView {
         self.totalMoneyView.topLabel.text = "\(model.currency.uppercased())累计收入"
         self.totalMoneyView.bottomLabel.text = model.income.decimalProcess(digits: 4)
 
-        self.soonMoneyView.topLabel.text = "可提现余额(\(model.currency.uppercased())"
-        self.soonMoneyView.bottomLabel.text = model.currency == "fil" ? model.withdrawable.decimalProcess(digits: 4) : model.balance.decimalProcess(digits: 4)
+        self.soonMoneyView.topLabel.text = "可提现余额(\(model.currency.uppercased()))"
+        self.soonMoneyView.bottomLabel.text = (model.currency == "fil" || model.currency == "bzz") ? model.withdrawable.decimalProcess(digits: 4) : model.balance.decimalProcess(digits: 4)
 
-        self.balanceMoneyView.topLabel.text = "资产余额(\(model.currency.uppercased())"
+        self.balanceMoneyView.topLabel.text = "资产余额(\(model.currency.uppercased()))"
         self.balanceMoneyView.bottomLabel.text = model.balance.decimalProcess(digits: 4)
     }
 }
