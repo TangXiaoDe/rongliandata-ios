@@ -21,6 +21,8 @@ enum ProductZone: String {
     case ipfs = "fil"
     ///
     case chia = "xch"
+    ///
+    case bzz = "bzz"
     
     var title: String {
         var title: String = self.rawValue.uppercased()
@@ -33,6 +35,8 @@ enum ProductZone: String {
             title = "IPFS"
         case .chia:
             title = "CHIA"
+        case .bzz:
+            title = "BZZ"
         }
         return title
     }
@@ -48,6 +52,8 @@ enum ProductZone: String {
         case .ipfs:
             unit = "T"
         case .chia:
+            unit = "T"
+        case .bzz:
             unit = "T"
         }
         return unit
@@ -400,6 +406,8 @@ extension ProductDetailModel {
             unit = "T"
         case .chia:
             unit = "T"
+        case .bzz:
+            unit = "T"
         }
         return unit
     }
@@ -415,6 +423,8 @@ extension ProductDetailModel {
         case .chia:
             fallthrough
         case .ipfs:
+            desc = "\(self.spec) T"
+        case .bzz:
             desc = "\(self.spec) T"
         }
         return desc
@@ -520,6 +530,8 @@ extension ProductDetailModel {
         case .btc:
             color = UIColor.init(hex: 0xDF8929)
         case .chia:
+            color = UIColor.init(hex: 0x3FAC5D)
+        case .bzz:
             color = UIColor.init(hex: 0x3FAC5D)
         }
         return color

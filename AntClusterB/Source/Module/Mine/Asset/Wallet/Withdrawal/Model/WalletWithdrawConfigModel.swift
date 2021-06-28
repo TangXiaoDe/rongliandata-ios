@@ -13,6 +13,8 @@ import ObjectMapper
 class WalletWithdrawConfigModel: Mappable {
     /// erc提现配置
     var xchWithdrawConfigModel: WithdrawConfigModel?
+    /// bzz提现配置
+    var bzzWithdrawConfigModel: WithdrawConfigModel?
     /// fil提现配置
     var filWithdrawConfigModel: WithdrawConfigModel?
 
@@ -22,6 +24,7 @@ class WalletWithdrawConfigModel: Mappable {
     func mapping(map: Map) {
         xchWithdrawConfigModel <- map["xch"]
         filWithdrawConfigModel <- map["fil"]
+        bzzWithdrawConfigModel <- map["bzz"]
     }
 
 }
