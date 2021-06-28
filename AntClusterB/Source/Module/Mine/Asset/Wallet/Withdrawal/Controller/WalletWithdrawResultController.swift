@@ -250,7 +250,7 @@ extension WalletWithdrawResultController {
             // 提现失败
             self.promptIconView.image = UIImage.init(named: "IMG_wallet_tixian_fail")    // IMG_wallet_tixian_succese
             self.promptTitleLabel.text = "提现失败" // 提交成功、提现成功、提现失败、
-            self.promptInfoLabel.text = "提现失败，FIL自动返回可提现余额"  // 提现已成功到账、审核未通过，提现失败，自动返回可提现余额
+            self.promptInfoLabel.text = "提现失败，\(model.currency.uppercased())自动返回可提现余额"  // 提现已成功到账、审核未通过，提现失败，自动返回可提现余额
             self.withdrawalStatusView.secondLabel.text = "提现失败"  // 审核中、提现成功、提现失败
             self.withdrawalStatusView.secondLabel.textColor = UIColor.init(hex: 0xE68E40)   // 0x007FFF、0x333333、0xE68E40
             self.withdrawalStatusView.secondLabel.backgroundColor = UIColor.init(hex: 0xFFFBF7) // 0xF2F8FF、0xF5F5F5、0xFFFBF7
@@ -278,6 +278,10 @@ extension WalletWithdrawResultController {
                 return
             }
             if let childVC = childVC as? WalletHomeController {
+                self.navigationController?.popToViewController(childVC, animated: true)
+                return
+            }
+            if let childVC = childVC as? AssetHomeController {
                 self.navigationController?.popToViewController(childVC, animated: true)
                 return
             }

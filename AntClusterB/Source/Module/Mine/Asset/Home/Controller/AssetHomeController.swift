@@ -76,6 +76,8 @@ extension AssetHomeController {
         self.initialUI()
         self.initialDataSource()
         NotificationCenter.default.addObserver(self, selector: #selector(userRefreshNotificationProcess(_:)), name: AppNotificationName.Asset.withdrawAdress, object: nil)
+        /// bzz绑定地址刷新资产才行
+        NotificationCenter.default.addObserver(self, selector: #selector(assetRefreshNotificationProcess(_:)), name: AppNotificationName.Fil.withdrawAdress, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(assetRefreshNotificationProcess(_:)), name: AppNotificationName.Asset.refresh, object: nil)
     }
 
@@ -243,19 +245,36 @@ extension AssetHomeController {
 
     /// 获取当前总资产
     fileprivate func getCurrentAsset(complete: ((_ status: Bool, _ msg: String?, _ model: AssetInfoModel?) -> Void)? = nil) -> Void {
-        AssetNetworkManager.getAssetInfo(self.currency) { [weak self](status, msg, model) in
-            guard let `self` = self else {
-                return
+        if self.currency == CurrencyType.chia.rawValue {
+            AssetNetworkManager.getAssetInfo(self.currency) { [weak self](status, msg, model) in
+                guard let `self` = self else {
+                    return
+                }
+                guard status, let model = model else {
+                    complete?(status, msg, nil)
+                    return
+                }
+                self.assetModel = model
+                self.headerView.model = model
+                self.bottomView.model = model
+                complete?(status, msg, model)
             }
-            guard status, let model = model else {
-                complete?(status, msg, nil)
-                return
+        } else if self.currency == CurrencyType.bzz.rawValue {
+            AssetNetworkManager.getWalletFilInfo(currency: self.currency) { [weak self](status, msg, model) in
+                guard let `self` = self else {
+                    return
+                }
+                guard status, let model = model else {
+                    complete?(status, msg, nil)
+                    return
+                }
+                self.assetModel = model
+                self.headerView.model = model
+                self.bottomView.model = model
+                complete?(status, msg, model)
             }
-            self.assetModel = model
-            self.headerView.model = model
-            self.bottomView.model = model
-            complete?(status, msg, model)
         }
+
     }
     /// 昨日收益
     fileprivate func getIncomes(complete: @escaping((_ status: Bool, _ msg: String?, _ model: FPYesterdayIncomeModel?) -> Void)) -> Void {

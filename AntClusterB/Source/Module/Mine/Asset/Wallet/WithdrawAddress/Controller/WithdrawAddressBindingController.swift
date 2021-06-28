@@ -213,6 +213,7 @@ extension WithdrawAddressBindingController {
                 Toast.showToast(title: msg)
                 return
             }
+            NotificationCenter.default.post(name: AppNotificationName.Fil.withdrawAdress, object: nil)
             NotificationCenter.default.post(name: AppNotificationName.Asset.withdrawAdress, object: nil)
             self.enterBindResultPage()
         }
