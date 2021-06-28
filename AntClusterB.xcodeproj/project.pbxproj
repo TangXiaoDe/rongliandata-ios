@@ -446,6 +446,8 @@
 		9536A74A25F8C3EC00280E5C /* AssetDetailFilterPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74525F8C3EC00280E5C /* AssetDetailFilterPopView.swift */; };
 		9536A74F25F8C4AD00280E5C /* AssetDetailTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A74E25F8C4AD00280E5C /* AssetDetailTitleView.swift */; };
 		9536A78425F8CA2B00280E5C /* AssetDetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A78325F8CA2B00280E5C /* AssetDetailListCell.swift */; };
+		95F4ABA32689D468001719BC /* BrandRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F4ABA22689D468001719BC /* BrandRequestInfo.swift */; };
+		95F4ABA82689D476001719BC /* BrandNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F4ABA72689D476001719BC /* BrandNetworkManager.swift */; };
 		A170725926520B9E0013FB47 /* FPHomeOrePoolTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170725826520B9E0013FB47 /* FPHomeOrePoolTypeView.swift */; };
 		A170725E26520C0A0013FB47 /* FPOrePoolItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170725D26520C0A0013FB47 /* FPOrePoolItemModel.swift */; };
 		A170726326520EDD0013FB47 /* FPHomeCurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */; };
@@ -953,6 +955,8 @@
 		9536A74525F8C3EC00280E5C /* AssetDetailFilterPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailFilterPopView.swift; sourceTree = "<group>"; };
 		9536A74E25F8C4AD00280E5C /* AssetDetailTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailTitleView.swift; sourceTree = "<group>"; };
 		9536A78325F8CA2B00280E5C /* AssetDetailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailListCell.swift; sourceTree = "<group>"; };
+		95F4ABA22689D468001719BC /* BrandRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandRequestInfo.swift; sourceTree = "<group>"; };
+		95F4ABA72689D476001719BC /* BrandNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandNetworkManager.swift; sourceTree = "<group>"; };
 		A170725826520B9E0013FB47 /* FPHomeOrePoolTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeOrePoolTypeView.swift; sourceTree = "<group>"; };
 		A170725D26520C0A0013FB47 /* FPOrePoolItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPOrePoolItemModel.swift; sourceTree = "<group>"; };
 		A170726226520EDD0013FB47 /* FPHomeCurrencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPHomeCurrencyModel.swift; sourceTree = "<group>"; };
@@ -1647,6 +1651,7 @@
 		53DF23442581FC9300165247 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				95F4ABA12689D443001719BC /* Brand */,
 				53DF23452581FC9300165247 /* Password */,
 				53DF23482581FC9300165247 /* Asset */,
 				53DF234B2581FC9300165247 /* Advert */,
@@ -3348,6 +3353,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		95F4ABA12689D443001719BC /* Brand */ = {
+			isa = PBXGroup;
+			children = (
+				95F4ABA22689D468001719BC /* BrandRequestInfo.swift */,
+				95F4ABA72689D476001719BC /* BrandNetworkManager.swift */,
+			);
+			path = Brand;
+			sourceTree = "<group>";
+		};
 		F04D23F0F385BDC908419D96 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3955,6 +3969,7 @@
 				53BF60252689D351005D62E3 /* BrandListCell.swift in Sources */,
 				53DF25C12581FC9800165247 /* TestTextView.swift in Sources */,
 				53DF25592581FC9700165247 /* UIFont+Extension.swift in Sources */,
+				95F4ABA32689D468001719BC /* BrandRequestInfo.swift in Sources */,
 				53DF25F32581FC9900165247 /* AdvertBannerView.swift in Sources */,
 				53DF26102581FC9900165247 /* TitleValueControl.swift in Sources */,
 				53DF265E2581FC9B00165247 /* WalletBalanceItem.swift in Sources */,
@@ -3998,6 +4013,7 @@
 				53DF26952581FC9B00165247 /* PhoneBindUpdateController.swift in Sources */,
 				53DF268C2581FC9B00165247 /* SettingHomeBtnCell.swift in Sources */,
 				53DF25DD2581FC9900165247 /* LabelCopyTestController.swift in Sources */,
+				95F4ABA82689D476001719BC /* BrandNetworkManager.swift in Sources */,
 				53DF261D2581FC9A00165247 /* CommonSmsCodeView.swift in Sources */,
 				53DF265F2581FC9B00165247 /* FilWithdrawController.swift in Sources */,
 				53DF25EC2581FC9900165247 /* LaunchAdvertItemView.swift in Sources */,
