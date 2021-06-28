@@ -49,7 +49,7 @@ class MineHomeIncomeInfoView: UIControl {
     fileprivate let bgViewSize: CGSize = CGSize.init(width: 351, height: 140).scaleAspectForWidth(kScreenWidth - 2 * 12)
 
     fileprivate var itemMaxWidth: CGFloat {
-        return (kScreenWidth - 2 * self.lrMargin)/3
+        return (kScreenWidth - 2 * self.lrMargin) / 3
     }
 
     // MARK: - Private Property
