@@ -346,7 +346,7 @@ extension EquipDetailHeaderView {
         
         self.titleLabel.text = "第\(model.fil_level)期"
         self.titleLabel.textColor = model.titleColor
-        self.zhiYaImgView.isHidden = !(model.zhiya_type == .zifu && model.zone == .ipfs)
+        self.zhiYaImgView.isHidden = !(model.zhiya_type == .zifu && (model.zone == .ipfs || model.zone == .bzz))
         self.specView.valueLabel.text = model.spec_level
         self.specView.valueLabel.textColor = model.titleColor
         self.miningNumView.valueLabel.text = model.total_ming.decimalValidDigitsProcess(digits: 8)
