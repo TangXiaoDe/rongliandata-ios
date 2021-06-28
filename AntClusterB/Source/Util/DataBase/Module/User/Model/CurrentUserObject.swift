@@ -55,6 +55,8 @@ class CurrentUserObject: Object {
     @objc dynamic var certStatusValue: String = ""
     /// 上链信息
     @objc dynamic var chain: UserUpChainObject? = nil
+    ///
+    @objc dynamic var user_type: Int = 0
 
 
     /// 设置主键

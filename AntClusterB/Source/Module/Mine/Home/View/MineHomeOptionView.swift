@@ -17,6 +17,8 @@ protocol MineHomeOptionViewProtocol: class {
     func optionView(_ optionView: MineHomeOptionView, didSelectedAccount itemView: MineHomeOptionItemControl) -> Void
     /// 个人资料
     func optionView(_ optionView: MineHomeOptionView, didSelectedUserInfo itemView: MineHomeOptionItemControl) -> Void
+    /// 个人资料
+    func optionView(_ optionView: MineHomeOptionView, didSelectedMyBrandBusiness itemView: MineHomeOptionItemControl) -> Void
     /// 清除缓存
     func optionView(_ optionView: MineHomeOptionView, didSelectedClearCache itemView: MineHomeOptionItemControl) -> Void
     /// 退出登录
@@ -37,7 +39,7 @@ class MineHomeOptionView: UIView {
             guard let cacheSize = cacheSize  else {
                 return
             }
-            let strCache = String(format: "%d.0 M", cacheSize / (1024 * 1024) )
+            let strCache = String(format: "%d.0 M", cacheSize / (1024 * 1024))
             self.cacheItemControl.detail = strCache
         }
     }
@@ -97,12 +99,17 @@ extension MineHomeOptionView {
 
     // 界面布局
     fileprivate func initialUI() -> Void {
-        let accountItem: [String: String] = ["title":"账户安全", "image":"IMG_mine_icon_zhaq"]
-        let userInfoItem: [String: String] = ["title":"个人资料", "image":"IMG_mine_icon_zl"]
-        let clearItem: [String: String] = ["title":"清除缓存", "image":"IMG_mine_icon_qc"]
-        let logoutItem: [String: String] = ["title":"退出登录", "image":"IMG_mine_icon_tc"]
-        let normalItems: [[[String: String]]] = [[accountItem, userInfoItem], [clearItem, logoutItem]]
-        let shieldItems: [[[String: String]]] = [[accountItem, userInfoItem], [clearItem, logoutItem]]
+        let accountItem: [String: String] = ["title": "账户安全", "image": "IMG_mine_icon_zhaq"]
+        let userInfoItem: [String: String] = ["title": "个人资料", "image": "IMG_mine_icon_zl"]
+        let brandInfoItem: [String: String] = ["title": "我的品牌商", "image": "IMG_mine_icon_pps"]
+        let clearItem: [String: String] = ["title": "清除缓存", "image": "IMG_mine_icon_qc"]
+        let logoutItem: [String: String] = ["title": "退出登录", "image": "IMG_mine_icon_tc"]
+        var firstItems: [[String: String]] = [accountItem, userInfoItem]
+        if AccountManager.share.currentAccountInfo?.userInfo?.user_type == 1 {
+            firstItems.append(brandInfoItem)
+        }
+        let normalItems: [[[String: String]]] = [firstItems, [clearItem, logoutItem]]
+        let shieldItems: [[[String: String]]] = [firstItems, [clearItem, logoutItem]]
         self.sections = AppConfig.share.shield.currentNeedShield ? shieldItems : normalItems
         self.setupWithSections(self.sections)
     }
@@ -158,7 +165,7 @@ extension MineHomeOptionView {
                 jTopView = itemControl
                 itemIndex += 1
             }
-            self.cacheItemControl = sectionView.viewWithTag(self.itemTagBase + 2) as? MineHomeOptionItemControl
+            self.cacheItemControl = sectionView.viewWithTag(self.itemTagBase + 3) as? MineHomeOptionItemControl
         }
         
     }
@@ -183,6 +190,8 @@ extension MineHomeOptionView {
             self.delegate?.optionView(self, didSelectedAccount: itemControl)
         case "个人资料":
             self.delegate?.optionView(self, didSelectedUserInfo: itemControl)
+        case "我的品牌商":
+            self.delegate?.optionView(self, didSelectedMyBrandBusiness: itemControl)
         case "清除缓存":
             self.delegate?.optionView(self, didSelectedClearCache: itemControl)
         case "退出登录":

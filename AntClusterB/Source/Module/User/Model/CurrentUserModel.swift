@@ -142,6 +142,8 @@ class CurrentUserModel: NSObject, Mappable {
     var recommender: RecommenderModel?
     /// extra
     var extra: UserExtraModel? = nil
+    /// 用户类型
+    var user_type: Int = 0
     /// 提币地址
     var currencyAddress: CurrencyAddressModel = CurrencyAddressModel()
     var withdrawal_address: String = ""
@@ -208,6 +210,7 @@ class CurrentUserModel: NSObject, Mappable {
 //        grade <- map["grade"]
         recommender <- map["parent"]
         extra <- map["extra"]
+        user_type <- map["user_type"]
 //        tags <- map["tags"]
 //        chain <- map["upper_chain"]
     }
@@ -229,6 +232,7 @@ class CurrentUserModel: NSObject, Mappable {
         self.power = object.power
         self.payPwdStatus = object.payPwdStatus
         self.certStatusValue = object.certStatusValue
+        self.user_type = object.user_type
         if let extra = object.extra {
             self.extra = UserExtraModel.init(object: extra)
         }
@@ -266,6 +270,7 @@ class CurrentUserModel: NSObject, Mappable {
         object.power = self.power
         object.payPwdStatus = self.payPwdStatus
         object.extra = self.extra?.object()
+        object.user_type = self.user_type
         object.recommender = self.recommender?.object()
 //        object.grade = self.grade?.object()
         object.certStatusValue = self.certStatusValue

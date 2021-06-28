@@ -274,6 +274,9 @@ extension MineHomeController: MineHomeOptionViewProtocol {
     func optionView(_ optionView: MineHomeOptionView, didSelectedUserInfo itemView: MineHomeOptionItemControl) -> Void {
         self.enterUserInfoPage()
     }
+    func optionView(_ optionView: MineHomeOptionView, didSelectedMyBrandBusiness itemView: MineHomeOptionItemControl) {
+        
+    }
     /// 清除缓存
     func optionView(_ optionView: MineHomeOptionView, didSelectedClearCache itemView: MineHomeOptionItemControl) -> Void {
         self.showClearCacheAlert()
