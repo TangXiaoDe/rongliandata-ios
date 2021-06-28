@@ -19,7 +19,7 @@ class BrandListCell: UITableViewCell
     static let identifier: String = "BrandListCellReuseIdentifier"
     
     var indexPath: IndexPath?
-    var model: String? {
+    var model: BrandModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -131,7 +131,7 @@ extension BrandListCell {
 
     // 界面布局
     fileprivate func initialUI() -> Void {
-        //self.contentView.backgroundColor = UIColor.white
+        self.contentView.backgroundColor = AppColor.pageBg
         // mainView - 整体布局，便于扩展，特别是针对分割、背景色、四周间距
         self.contentView.addSubview(mainView)
         self.initialMainView(self.mainView)
@@ -174,7 +174,7 @@ extension BrandListCell {
     ///
     fileprivate func initialTopView(_ topView: UIView) -> Void {
         // 1. iconView
-        mainView.addSubview(self.iconView)
+        topView.addSubview(self.iconView)
         self.iconView.set(cornerRadius: self.iconWH * 0.5)
         self.iconView.image = UIImage.init(named: "")
         self.iconView.snp.makeConstraints { (make) in
@@ -183,13 +183,15 @@ extension BrandListCell {
             make.width.height.equalTo(self.iconWH)
         }
         // 2. titleLabel
-        mainView.addSubview(self.titleLabel)
+        topView.addSubview(self.titleLabel)
         self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.subMainText)
         self.titleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self.iconView.snp.trailing).offset(self.titleIconMargin)
             make.centerY.equalToSuperview()
             make.trailing.lessThanOrEqualToSuperview().offset(-self.mainInLrMargin)
         }
+        // 3. bottomLine
+        topView.addLineWithSide(.inBottom, color: AppColor.disable, thickness: 0.5, margin1: self.mainInLrMargin, margin2: self.mainInLrMargin)
     }
     ///
     fileprivate func initialItemContainer(_ itemContainer: UIView) -> Void {
@@ -256,14 +258,17 @@ extension BrandListCell {
         self.iconView.backgroundColor = UIColor.random
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-        guard let _ = model else {
+    fileprivate func setupWithModel(_ model: BrandModel?) -> Void {
+        //self.setupAsDemo()
+        guard let model = model else {
             return
         }
         // 控件加载数据
-        
-        
+        self.iconView.kf.setImage(with: model.avatarUrl, placeholder: AppImage.PlaceHolder.avatar)
+        self.titleLabel.text = model.name
+        self.filItemView.model = model.fil
+        self.xchItemView.model = model.xch
+        self.bzzItemView.model = model.bzz
     }
 
 }

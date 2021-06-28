@@ -59,6 +59,41 @@ enum ProductZone: String {
         return unit
     }
 
+    ///
+    var icon: UIImage? {
+        var image: UIImage? = nil
+        switch self {
+        case .btc:
+            image = UIImage.init(named: "IMG_home_icon_btc")
+        case .eth:
+            image = UIImage.init(named: "IMG_home_icon_eth")
+        case .ipfs:
+            image = UIImage.init(named: "IMG_home_icon_fil")
+        case .chia:
+            image = UIImage.init(named: "IMG_home_icon_chia")
+        case .bzz:
+            image = UIImage.init(named: "IMG_home_icon_bzz")
+        }
+        return image
+    }
+    ///
+    var brand_promt: String? {
+        var text: String = "采购总量(T)"
+        switch self {
+        case .btc:
+            text = "采购总量(T)"
+        case .eth:
+            text = "采购总量(T)"
+        case .ipfs:
+            text = "采购总量(T)"
+        case .chia:
+            text = "采购总量(T)"
+        case .bzz:
+            text = "节点数"
+        }
+        return text
+    }
+    
 }
 
 /// 商品类型 —— Special

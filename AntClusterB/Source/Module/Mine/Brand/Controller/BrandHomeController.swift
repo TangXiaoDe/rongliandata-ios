@@ -18,7 +18,7 @@ class BrandHomeController: BaseViewController
     
     fileprivate let tableView: BaseTableView = BaseTableView(frame: CGRect.zero, style: .plain)
     
-    fileprivate var sourceList: [String] = []
+    fileprivate var sourceList: [BrandModel] = []
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     
@@ -72,7 +72,7 @@ extension BrandHomeController {
         self.tableView.tableFooterView = UIView()
         self.tableView.estimatedRowHeight = 250
         self.tableView.showsVerticalScrollIndicator = false
-        self.tableView.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = AppColor.pageBg
         self.tableView.mj_header = XDRefreshHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         self.tableView.mj_footer = XDRefreshFooter(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
         self.tableView.mj_header.isHidden = false
@@ -95,15 +95,15 @@ extension BrandHomeController {
 
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
-        //self.tableView.mj_header.beginRefreshing()
-        self.setupAsDemo()
+        self.tableView.mj_header.beginRefreshing()
+        //self.setupAsDemo()
     }
     ///
     fileprivate func setupAsDemo() -> Void {
-        for i in 0...25 {
-            self.sourceList.append("\(i)")
-        }
-        self.tableView.reloadData()
+//        for i in 0...25 {
+//            self.sourceList.append("\(i)")
+//        }
+//        self.tableView.reloadData()
     }
 
 }
@@ -137,43 +137,43 @@ extension BrandHomeController {
 
     /// 下拉刷新请求
     fileprivate func refreshRequest() -> Void {
-//        MessageNetworkManager.getMessageList(offset: 0, limit: self.limit) { [weak self](status, msg, models) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.tableView.mj_header.endRefreshing()
-//            self.tableView.mj_footer.state = .idle
-//            guard status, let models = models else {
-//                ToastUtil.showToast(title: msg)
-//                self.tableView.showDefaultEmpty = self.sourceList.isEmpty
-//                return
-//            }
-//            self.sourceList = models
-//            self.offset = self.sourceList.count
-//            self.tableView.mj_footer.isHidden = models.count < self.limit
-//            self.tableView.showDefaultEmpty = self.sourceList.isEmpty
-//            self.tableView.reloadData()
-//        }
+        BrandNetworkManager.getBrandList(offset: 0, limit: self.limit) { [weak self](status, msg, models) in
+            guard let `self` = self else {
+                return
+            }
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.state = .idle
+            guard status, let models = models else {
+                ToastUtil.showToast(title: msg)
+                self.tableView.showDefaultEmpty = self.sourceList.isEmpty
+                return
+            }
+            self.sourceList = models
+            self.offset = self.sourceList.count
+            self.tableView.mj_footer.isHidden = models.count < self.limit
+            self.tableView.showDefaultEmpty = self.sourceList.isEmpty
+            self.tableView.reloadData()
+        }
     }
     
     /// 上拉加载更多请求
     fileprivate func loadMoreRequest() -> Void {
-//        MessageNetworkManager.getMessageList(offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.tableView.mj_footer.endRefreshing()
-//            guard status, let models = models else {
-//                self.tableView.mj_footer.endRefreshingWithWeakNetwork()
-//                return
-//            }
-//            if models.count < self.limit {
-//                self.tableView.mj_footer.endRefreshingWithNoMoreData()
-//            }
-//            self.sourceList += models
-//            self.offset = self.sourceList.count
-//            self.tableView.reloadData()
-//        }
+        BrandNetworkManager.getBrandList(offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
+            guard let `self` = self else {
+                return
+            }
+            self.tableView.mj_footer.endRefreshing()
+            guard status, let models = models else {
+                self.tableView.mj_footer.endRefreshingWithWeakNetwork()
+                return
+            }
+            if models.count < self.limit {
+                self.tableView.mj_footer.endRefreshingWithNoMoreData()
+            }
+            self.sourceList += models
+            self.offset = self.sourceList.count
+            self.tableView.reloadData()
+        }
     }
 
 }
@@ -212,6 +212,9 @@ extension BrandHomeController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = BrandListCell.cellInTableView(tableView, at: indexPath)
         cell.model = self.sourceList[indexPath.row]
+        cell.showTopMargin = true
+        cell.showBottomMargin = true
+        cell.showBottomLine = false
         return cell
     }
     

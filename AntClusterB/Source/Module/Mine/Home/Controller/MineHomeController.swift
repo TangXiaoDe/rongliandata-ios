@@ -276,7 +276,7 @@ extension MineHomeController: MineHomeOptionViewProtocol {
     }
     /// 我的品牌商
     func optionView(_ optionView: MineHomeOptionView, didSelectedMyBrandBusiness itemView: MineHomeOptionItemControl) {
-        
+        self.enterMyBrandPage()
     }
     /// 清除缓存
     func optionView(_ optionView: MineHomeOptionView, didSelectedClearCache itemView: MineHomeOptionItemControl) -> Void {
@@ -354,4 +354,10 @@ extension MineHomeController {
     fileprivate func enterAccountSecurityPage(){
         self.enterPageVC(AccountSecurityHomeController())
     }
+    /// 我的品牌商界面
+    fileprivate func enterMyBrandPage(){
+        let brandVC = BrandHomeController.init()
+        self.enterPageVC(brandVC)
+    }
+    
 }

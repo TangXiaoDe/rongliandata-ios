@@ -16,7 +16,7 @@ class BrandProcurementItemView: UIView
     
     static let viewHeight: CGFloat = 62
     
-    var model: String? {
+    var model: Double? {
         didSet {
             self.setupWithModel(model)
         }
@@ -121,10 +121,10 @@ extension BrandProcurementItemView {
         }
         // 2. titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: AppColor.subMainText)
+        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14, weight: .medium), textColor: AppColor.subMainText)
         self.titleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self.iconView.snp.trailing).offset(self.iconTitleMargin)
-            make.bottom.equalTo(self.iconView.snp.centerY).offset(-3)
+            make.bottom.equalTo(self.iconView.snp.centerY).offset(0)
         }
         // 3. promptLabel
         mainView.addSubview(self.promptLabel)
@@ -140,7 +140,16 @@ extension BrandProcurementItemView {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-self.lrMargin)
         }
-
+        // 5. bottomLine
+        mainView.addSubview(self.bottomLine)
+        self.bottomLine.backgroundColor = AppColor.dividing
+        self.bottomLine.isHidden = true
+        self.bottomLine.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.height.equalTo(0.5)
+        }
     }
     
 }
@@ -165,15 +174,18 @@ extension BrandProcurementItemView {
     }
     ///
     fileprivate func setupWithZone(_ zone: ProductZone) -> Void {
-        
+        self.iconView.image = zone.icon
+        self.titleLabel.text = zone.rawValue.uppercased()
+        self.promptLabel.text = zone.brand_promt
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-        guard let _ = model else {
-            return
-        }
+    fileprivate func setupWithModel(_ model: Double?) -> Void {
+        //self.setupAsDemo()
+//        guard let _ = model else {
+//            return
+//        }
         // 子控件数据加载
+        self.valueLabel.text = model?.decimalValidDigitsProcess(digits: 2)
     }
     
 }
