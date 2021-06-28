@@ -218,7 +218,7 @@ extension OreDetailItemView {
             return
         }
         var itemViews: [TitleValueView] = [self.miningNumView, self.fengzhuangNumView]
-        if let zone = model.zone, zone == .ipfs {
+        if let zone = model.zone, zone == .ipfs || zone == .bzz {
             itemViews.append(contentsOf: [self.zhiyaNumView, self.gasNumView])
         }
         if let _ = model.extend?.interest {
