@@ -17,7 +17,7 @@ protocol MineHomeOptionViewProtocol: class {
     func optionView(_ optionView: MineHomeOptionView, didSelectedAccount itemView: MineHomeOptionItemControl) -> Void
     /// 个人资料
     func optionView(_ optionView: MineHomeOptionView, didSelectedUserInfo itemView: MineHomeOptionItemControl) -> Void
-    /// 个人资料
+    /// 我的品牌商
     func optionView(_ optionView: MineHomeOptionView, didSelectedMyBrandBusiness itemView: MineHomeOptionItemControl) -> Void
     /// 清除缓存
     func optionView(_ optionView: MineHomeOptionView, didSelectedClearCache itemView: MineHomeOptionItemControl) -> Void
