@@ -126,15 +126,15 @@ extension MineHomeIncomeInfoItemView {
         guard let model = model else {
             return
         }
-        self.bgImgView.image = UIImage(named: model.currency == "fil" ? "IMG_mine_fil_bg" : "IMG_mine_xch_bg")
+        self.bgImgView.image = model.bgImage
 
-        self.totalMoneyView.topLabel.text = model.currency == "fil" ? "FIL累计收入" : "XCH累计收入"
+        self.totalMoneyView.topLabel.text = "\(model.currency.uppercased())累计收入"
         self.totalMoneyView.bottomLabel.text = model.income.decimalProcess(digits: 4)
 
-        self.soonMoneyView.topLabel.text = model.currency == "fil" ? "可提现余额(FIL)" : "可提现余额(XCH)"
+        self.soonMoneyView.topLabel.text = "可提现余额(\(model.currency.uppercased())"
         self.soonMoneyView.bottomLabel.text = model.currency == "fil" ? model.withdrawable.decimalProcess(digits: 4) : model.balance.decimalProcess(digits: 4)
 
-        self.balanceMoneyView.topLabel.text = model.currency == "fil" ? "资产余额(FIL)" : "资产余额(XCH)"
+        self.balanceMoneyView.topLabel.text = "资产余额(\(model.currency.uppercased())"
         self.balanceMoneyView.bottomLabel.text = model.balance.decimalProcess(digits: 4)
     }
 }

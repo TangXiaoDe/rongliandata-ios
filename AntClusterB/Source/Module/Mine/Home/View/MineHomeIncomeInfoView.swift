@@ -153,6 +153,8 @@ extension MineHomeIncomeInfoView: PagedFlowViewDataSource {
                 model = item
             } else if item?.currency == "xch" && index == 1 {
                 model = item
+            } else if item?.currency == "bzz" && index == 2 {
+                model = item
             }
         }
         itemView?.model = model

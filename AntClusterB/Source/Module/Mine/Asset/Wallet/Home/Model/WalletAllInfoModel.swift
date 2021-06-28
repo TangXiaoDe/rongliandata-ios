@@ -46,6 +46,21 @@ extension WalletAllInfoModel {
         }
         return type
     }
+    
+    var bgImage: UIImage {
+        var imgStr: String = "IMG_mine_fil_bg"
+        switch self.currencyType {
+        case .fil:
+            imgStr = "IMG_mine_fil_bg"
+        case .chia:
+            imgStr = "IMG_mine_xch_bg"
+        case .bzz:
+            imgStr = "IMG_mine_bzz_bg"
+        default:
+            break
+        }
+        return UIImage(named: imgStr)!
+    }
 }
 
 //class WalletFilModel: Mappable {
