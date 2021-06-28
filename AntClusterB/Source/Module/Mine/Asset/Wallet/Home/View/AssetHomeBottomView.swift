@@ -90,6 +90,9 @@ extension AssetHomeBottomView {
         case .chia:
             items = [self.withdrawalBtn]
             self.horMargin = 20
+        case .bzz:
+            items = [self.withdrawalBtn]
+            self.horMargin = 20
         case .cny:
             items = [self.withdrawalBtn]
             self.horMargin = 10

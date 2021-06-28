@@ -30,6 +30,7 @@ class AssetRequestInfo {
         static let filWithdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "fil/withdrawal", replaceds: [])
         static let ercWithdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "erc/withdrawal", replaceds: [])
         static let xchWithdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "xch/withdrawal", replaceds: [])
+        static let bzzWithdrawal = RequestInfo<WalletWithdrawResultModel>.init(method: .post, path: "bzz/withdrawal", replaceds: [])
         static let config = RequestInfo<WalletWithdrawConfigModel>.init(method: .get, path: "fil/withdrawal-configs", replaceds: [])
         
         /// 申请 FIL/usdt/eth/btc 提币

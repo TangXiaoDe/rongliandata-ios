@@ -192,6 +192,8 @@ class WithdrawalConfigModel: Mappable {
     var btc_fee: Double = 0.0
     /// FIL提现服务费
     var fil_fee: Double = 0.0
+    /// BZZ提现服务费
+    var bzz_fee: Double = 0.0
     /// USDT提现服务费
     var usdt_trx_fee: Double = 0.0
     /// USDT提现服务费
@@ -214,6 +216,7 @@ class WithdrawalConfigModel: Mappable {
         erc_fee <- (map["erc_fee"], DoubleStringTransform.default)
         btc_fee <- (map["btc_fee"], DoubleStringTransform.default)
         fil_fee <- (map["fil_fee"], DoubleStringTransform.default)
+        bzz_fee <- (map["bzz_fee"], DoubleStringTransform.default)
         usdt_trx_fee <- (map["usdt-trx_fee"], DoubleStringTransform.default)
         usdt_erc_fee <- (map["usdt_erc_fee"], DoubleStringTransform.default)
         xch_fee <- (map["xch_fee"], DoubleStringTransform.default)
