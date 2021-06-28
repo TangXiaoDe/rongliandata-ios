@@ -121,7 +121,7 @@ extension AssetHomeHeaderView {
         topView.backgroundColor = UIColor.white
         // currencyTypeLabel
         topView.addSubview(self.currencyTypeLabel)
-        self.currencyTypeLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 28, weight: .medium), textColor: AppColor.theme)
+        self.currencyTypeLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 28, weight: .medium), textColor: AppColor.mainText)
         self.currencyTypeLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.centerY.equalTo(topView.snp.top).offset(currencyCenterYMargin)
