@@ -267,6 +267,8 @@ extension EquipmentListModel {
         let color: UIColor = self.status == .closed ? UIColor.init(hex: 0x999999) : UIColor.init(hex: 0x333333)
         return color
     }
-     
-    
+
+    var totalUnit: String {
+        return self.zone == .bzz ? " 节点" : " T"
+    }
 }
