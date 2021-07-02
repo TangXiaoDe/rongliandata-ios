@@ -63,9 +63,9 @@ extension FirstPageHomeModel {
                         FPOrePoolItemModel.init(title: "全网有效算力", icon: nil, bg: UIImage.init(named: "IMG_img_home_bg_pib"), title_unit: "PIB", title_icon: UIImage.init(named: "IMG_home_icon_youxiao"), value: self.ipfs?.total_power),
                         FPOrePoolItemModel.init(title: "最新区块高度", icon: nil, bg: UIImage.init(named: "IMG_img_home_bg_qkgd"), title_unit: nil, title_icon: UIImage.init(named: "IMG_home_icon_nandu"), value: self.ipfs?.tipset_height),
                         FPOrePoolItemModel.init(title: "24h平均挖矿收益", icon: UIImage.init(named: "IMG_img_home_bg_reward"), bg: nil, title_unit: "FIL/TiB", title_icon: UIImage.init(named: "IMG_home_icon_reward"), value: self.ipfs?.mining_income_str_one_day),
-                        FPOrePoolItemModel.init(title: "近24h产出量", icon: UIImage.init(named: "IMG_img_home_bg_chengben"), bg: nil, title_unit: "FIL", title_icon: UIImage.init(named: "IMG_home_icon_time"), value: self.ipfs?.one_day_fil_str),
-                        FPOrePoolItemModel.init(title: "活跃旷工数", icon: UIImage.init(named: "IMG_img_home_bg_shanxing"), bg: nil, title_unit: "人", title_icon: UIImage.init(named: "IMG_home_icon_number"), value: self.ipfs?.active_miners),
-                        FPOrePoolItemModel.init(title: "流通总量", icon: UIImage.init(named: "IMG_img_home_bg_zhiya"), bg: nil, title_unit: "FIL", title_icon: UIImage.init(named: "IMG_home_icon_liutong"), value: self.ipfs?.current_fil_str)
+                        FPOrePoolItemModel.init(title: "近24h产出量", icon: UIImage.init(named: "IMG_img_home_bg_time"), bg: nil, title_unit: "FIL", title_icon: UIImage.init(named: "IMG_home_icon_time"), value: self.ipfs?.one_day_fil_str),
+                        FPOrePoolItemModel.init(title: "活跃矿工数", icon: UIImage.init(named: "IMG_img_home_bg_number"), bg: nil, title_unit: "人", title_icon: UIImage.init(named: "IMG_home_icon_number"), value: self.ipfs?.active_miners),
+                        FPOrePoolItemModel.init(title: "流通总量", icon: UIImage.init(named: "IMG_img_home_bg_liutong"), bg: nil, title_unit: "FIL", title_icon: UIImage.init(named: "IMG_home_icon_liutong"), value: self.ipfs?.current_fil_str)
         ])
         return models
     }
