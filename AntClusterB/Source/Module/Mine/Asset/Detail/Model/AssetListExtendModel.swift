@@ -21,8 +21,10 @@ class AssetListExtendModel: Mappable {
     var pledge_amount: Double = 0
     /// 借贷GSA
     var gas_amount: Double = 0
-    /// 利息
+    /// 应还利息
     var interest: Double?
+    /// 欠款利息
+    var arrears: Double?
 
     required init?(map: Map) {
 
@@ -34,6 +36,7 @@ class AssetListExtendModel: Mappable {
         pledge_amount <- (map["pledge_amount"], DoubleStringTransform.default)
         gas_amount <- (map["gas_amount"], DoubleStringTransform.default)
         interest <- (map["interest"], DoubleStringTransform.default)
+        arrears <- (map["arrears"], DoubleStringTransform.default)
     }
 
 }

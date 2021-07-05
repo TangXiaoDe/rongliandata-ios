@@ -38,7 +38,8 @@ class OreDetailItemView: UIView {
     fileprivate let fengzhuangNumView: TitleValueView = TitleValueView.init()   // 封装数量
     fileprivate let zhiyaNumView: TitleValueView = TitleValueView.init()   // 借贷质押币
     fileprivate let gasNumView: TitleValueView = TitleValueView.init()   // 借贷GAS
-    fileprivate let interestNumView: TitleValueView = TitleValueView.init()   // 利息
+    fileprivate let interestNumView: TitleValueView = TitleValueView.init()   // 应还利息
+    fileprivate let arrearsNumView: TitleValueView = TitleValueView.init()   // 欠款利息
 
     fileprivate let topViewHeight: CGFloat = 32
     fileprivate let centerViewHeight: CGFloat = 66
@@ -184,7 +185,8 @@ extension OreDetailItemView {
         self.fengzhuangNumView.titleLabel.text = "封装数"
         self.zhiyaNumView.titleLabel.text = "借贷质押币"
         self.gasNumView.titleLabel.text = "借贷GAS"
-        self.interestNumView.titleLabel.text = "利息"
+        self.interestNumView.titleLabel.text = "应还利息"
+        self.arrearsNumView.titleLabel.text = "欠款利息"
     }
 
 }
@@ -224,6 +226,9 @@ extension OreDetailItemView {
         if let _ = model.extend?.interest {
             itemViews.append(self.interestNumView)
         }
+        if let _ = model.extend?.arrears {
+            itemViews.append(self.arrearsNumView)
+        }
         self.initialCenterView(self.centerView, itemViews)
         // 子控件数据加载
         // 控件加载数据
@@ -233,6 +238,7 @@ extension OreDetailItemView {
         self.zhiyaNumView.valueLabel.text = model.extend?.pledge_amount.decimalValidDigitsProcess(digits: 8)
         self.gasNumView.valueLabel.text = model.extend?.gas_amount.decimalValidDigitsProcess(digits: 8)
         self.interestNumView.valueLabel.text = model.extend?.interest?.decimalValidDigitsProcess(digits: 8)
+        self.arrearsNumView.valueLabel.text = model.extend?.arrears?.decimalValidDigitsProcess(digits: 8)
     }
     
     ///
