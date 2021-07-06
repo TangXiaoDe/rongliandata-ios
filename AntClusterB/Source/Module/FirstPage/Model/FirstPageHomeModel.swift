@@ -65,7 +65,7 @@ extension FirstPageHomeModel {
                         FPOrePoolItemModel.init(title: "24h平均挖矿收益", icon: UIImage.init(named: "IMG_img_home_bg_reward"), bg: nil, title_unit: "FIL/TiB", title_icon: UIImage.init(named: "IMG_home_icon_reward"), value: self.ipfs?.mining_income_str_one_day),
                         FPOrePoolItemModel.init(title: "近24h产出量", icon: UIImage.init(named: "IMG_img_home_bg_time"), bg: nil, title_unit: "FIL", title_icon: UIImage.init(named: "IMG_home_icon_time"), value: self.ipfs?.one_day_fil_str),
                         FPOrePoolItemModel.init(title: "活跃矿工数", icon: UIImage.init(named: "IMG_img_home_bg_number"), bg: nil, title_unit: "人", title_icon: UIImage.init(named: "IMG_home_icon_number"), value: self.ipfs?.active_miners),
-                        FPOrePoolItemModel.init(title: "流通总量", icon: UIImage.init(named: "IMG_img_home_bg_number"), bg: nil, title_unit: "FIL", title_icon: UIImage.init(named: "IMG_home_icon_liutong"), value: self.ipfs?.current_fil_str)
+                        FPOrePoolItemModel.init(title: "流通总量", icon: UIImage.init(named: "IMG_img_home_bg_liutong"), bg: nil, title_unit: "FIL", title_icon: UIImage.init(named: "IMG_home_icon_liutong"), value: self.ipfs?.current_fil_str)
         ])
         return models
     }
