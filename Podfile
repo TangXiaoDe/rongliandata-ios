@@ -24,7 +24,7 @@ pod 'XiaoDeKit-Swift', :git => 'https://github.com/TangXiaoDe/XiaoDeKit-Swift.gi
 
 pod 'SwiftyJSON', '5.0.0'                 # json 解析
 pod 'ObjectMapper', '3.4.2'               # 数据转模型
-pod 'CryptoSwift', '1.0.0'                # 加密
+pod 'CryptoSwift', '1.3.8'                # 加密
 pod 'RealmSwift', '3.19.0'                # 本地数据库
 pod 'STRegex', '2.1.0'                    # regex 处理
 pod 'KeychainAccess', '3.2.0'             # 钥匙串管理
