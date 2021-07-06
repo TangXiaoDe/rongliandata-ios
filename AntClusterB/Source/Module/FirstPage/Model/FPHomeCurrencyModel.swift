@@ -48,6 +48,8 @@ class FPHomeChiaModel: Mappable {
     var netspace: String = ""
     /// 日产出
     var xchPerDay: String = ""
+    /// 24H爆块
+    var block_count_day: String = ""
     
     init() {
 
@@ -60,6 +62,7 @@ class FPHomeChiaModel: Mappable {
         addressCount <- map["addressCount"]
         netspace <- map["netspace"]
         xchPerDay <- map["xchPerDay"]
+        block_count_day <- map["block_count_day"]
     }
 
 }
