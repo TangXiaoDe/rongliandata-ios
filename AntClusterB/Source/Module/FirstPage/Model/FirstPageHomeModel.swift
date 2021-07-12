@@ -95,10 +95,10 @@ extension FirstPageHomeModel {
     var chia_orepool_models: [FPOrePoolItemModel] {
         var models: [FPOrePoolItemModel] = []
         models.append(contentsOf: [
-            FPOrePoolItemModel.init(title: "全网算力", icon: nil, bg: UIImage.init(named: "IMG_img_home_bg_pib"), title_unit: "MH/S", title_icon: UIImage.init(named: "IMG_home_icon_youxiao"), value: self.chia?.netspace),
+            FPOrePoolItemModel.init(title: "全网总算力", icon: nil, bg: UIImage.init(named: "IMG_img_home_bg_pib"), title_unit: "PiB", title_icon: UIImage.init(named: "IMG_home_icon_youxiao"), value: self.chia?.netspace),
             FPOrePoolItemModel.init(title: "区块高度", icon: nil, bg: UIImage.init(named: "IMG_img_home_bg_qkgd"), title_unit: nil, title_icon: UIImage.init(named: "IMG_home_icon_nandu"), value: self.chia?.height),
-            FPOrePoolItemModel.init(title: "全网地址数", icon: UIImage.init(named: "IMG_img_home_bg_jiage"), bg: nil, title_unit: nil, title_icon: UIImage.init(named: "IMG_home_icon_jiage"), value: self.chia?.addressCount),
-            FPOrePoolItemModel.init(title: "产出XCH/1T/天", icon: UIImage.init(named: "IMG_img_home_bg_chanchu"), bg: nil, title_unit: nil, title_icon: UIImage.init(named: "IMG_home_icon_chanchu"), value: self.chia?.xchPerDay)
+            FPOrePoolItemModel.init(title: "24H爆块", icon: UIImage.init(named: "IMG_img_home_bg_jiage"), bg: nil, title_unit: nil, title_icon: UIImage.init(named: "IMG_home_icon_jiage"), value: self.chia?.block_count_day),
+            FPOrePoolItemModel.init(title: "产出XCH/1PiB/天", icon: UIImage.init(named: "IMG_img_home_bg_chanchu"), bg: nil, title_unit: nil, title_icon: UIImage.init(named: "IMG_home_icon_chanchu"), value: self.chia?.xchPerDay)
         ])
         return models
     }
