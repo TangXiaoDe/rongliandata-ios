@@ -23,7 +23,7 @@ class EquipmentHomeController: BaseViewController {
     fileprivate let navBar: AppHomeNavStatusView = AppHomeNavStatusView.init()
     fileprivate let nestView: XDNestScrollContainerView = XDNestScrollContainerView()
     
-    fileprivate let types: [ProductZone] = [.ipfs, .chia, .bzz]
+    fileprivate var types: [ProductZone] = [.ipfs, .chia]
     fileprivate lazy var titleView: EquipmentHomeTitleView = {
         var titles: [String] = []
         self.types.forEach { (item) in
@@ -76,6 +76,9 @@ class EquipmentHomeController: BaseViewController {
 extension EquipmentHomeController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        if AppConfig.share.showBzz {
+            self.types.append(.bzz)
+        }
         self.initialUI()
         self.initialDataSource()
     }
