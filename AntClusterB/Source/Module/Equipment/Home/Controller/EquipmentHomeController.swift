@@ -107,6 +107,7 @@ extension EquipmentHomeController {
         }
         // 1.nav
         self.view.addSubview(self.navBar)
+        self.navBar.leftItem.isHidden = true
 //        self.navBar.titleLabel.set(text: "FIL", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.white, alignment: .center)
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in

@@ -184,6 +184,7 @@ extension BrandHomeController {
     /// 进入渠道分红页
     fileprivate func enterBonusPage(with model: BrandModel, at index: Int = 0) -> Void {
         let bonusVC = BrandBonusHomeController.init()
+        bonusVC.brand_id = model.id
         self.enterPageVC(bonusVC)
     }
     

@@ -35,4 +35,24 @@ extension BrandNetworkManager {
         }
     }
 
+    /// 获取品牌商列表
+    class func getBrandDetailList(brand_id: Int, currency: CurrencyType, offset: Int, limit: Int, complete: @escaping((_ status: Bool, _ msg: String?, _ model: BrandBonusModel?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = BrandRequestInfo.bonusList
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        let parameter: [String: Any] = ["brand_id": brand_id, "currency": currency, "offset": offset, "limit": limit]
+        requestInfo.parameter = parameter
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "网络不可用，请检查！", nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, response.model)
+            }
+        }
+    }
 }
