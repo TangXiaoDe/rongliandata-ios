@@ -142,7 +142,7 @@ extension BrandBonusListHeaderView {
             return
         }
         // 子控件数据加载
-        self.valueLabel.text = model.total.decimalValidDigitsProcess(digits: 2)
+        self.valueLabel.text = model.total.decimalValidDigitsProcess(digits: 8)
     }
 }
 
