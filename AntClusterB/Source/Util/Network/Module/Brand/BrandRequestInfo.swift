@@ -12,5 +12,5 @@ import Foundation
 /// 品牌商相关请求信息
 class BrandRequestInfo {
     /// 获取品牌商列表
-    static let list = RequestInfo<BrandModel>.init(method: .get, path: "market/brands", replaceds: [])
+    static let list = RequestInfo<BrandModel>.init(method: .get, path: "markets/brands", replaceds: [])
 }
