@@ -346,7 +346,7 @@ extension EquipDetailHeaderView {
         
         self.titleLabel.text = "第\(model.fil_level)期"
         self.titleLabel.textColor = model.titleColor
-        self.zhiYaImgView.isHidden = !(model.zhiya_type == .zifu && model.zone == .ipfs)
+        self.zhiYaImgView.isHidden = !(model.zhiya_type == .zifu && (model.zone == .ipfs || model.zone == .bzz))
         self.specView.valueLabel.text = model.spec_level
         self.specView.valueLabel.textColor = model.titleColor
         self.miningNumView.valueLabel.text = model.total_ming.decimalValidDigitsProcess(digits: 8)
@@ -360,7 +360,7 @@ extension EquipDetailHeaderView {
 
         var totalNumAtts = NSAttributedString.textAttTuples()
         totalNumAtts.append((str: "\(model.t_num)", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: model.totalNumColor))
-        totalNumAtts.append((str: " T", font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: model.totalNumColor))
+        totalNumAtts.append((str: model.totalUnit, font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: model.totalNumColor))
         self.totalNumView.attributedText = NSAttributedString.attribute(totalNumAtts)
 
     }

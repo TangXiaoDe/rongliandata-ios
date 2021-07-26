@@ -63,7 +63,7 @@ class AppConfig {
     let bundle: BundleInfoModel = Mapper<BundleInfoModel>().map(JSONObject: Bundle.main.infoDictionary) ?? BundleInfoModel()
 
     /// 数据库版本，每次数据库版本更新都应加1；
-    let schemaVersion: UInt64 = 3
+    let schemaVersion: UInt64 = 4
     /// 货币价格
     var currencyPrice: FPIncreaseModel?
     /// appId
@@ -85,5 +85,9 @@ class AppConfig {
 
     /// 显示测试界面
     var showTest: Bool = false
+    
+    /// 是否显示BZZ，当前版本不显示
+    let isShowBzz: Bool = false
+    
 
 }

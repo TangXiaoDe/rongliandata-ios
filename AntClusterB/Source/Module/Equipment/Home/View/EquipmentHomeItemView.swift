@@ -394,7 +394,7 @@ extension EquipmentHomeItemView {
         guard let model = model else {
             return
         }
-        if model.zone == .ipfs {
+        if model.zone == .ipfs || model.zone == .bzz {
             self.initialCenterView(self.centerView, [self.miningNumView, self.fengzhuangNumView, self.progressNumView])
             self.initiaBottomView(self.bottomView, [self.equimentDetailBtn, self.oreDetailBtn])
         } else {
@@ -404,7 +404,7 @@ extension EquipmentHomeItemView {
         // 子控件数据加载
         self.titleLabel.text = "第\(model.fil_level)期"
         self.titleLabel.textColor = model.titleColor
-        self.zhiYaImgView.isHidden = !(model.zhiya_type == .zifu && model.zone == .ipfs)
+        self.zhiYaImgView.isHidden = !(model.zhiya_type == .zifu && (model.zone == .ipfs || model.zone == .bzz))
         self.specView.valueLabel.text = model.spec_level
         self.specView.valueLabel.textColor = model.titleColor
         self.miningNumView.valueLabel.text = model.total_ming.decimalValidDigitsProcess(digits: 8)
@@ -418,7 +418,7 @@ extension EquipmentHomeItemView {
 
         var totalNumAtts = NSAttributedString.textAttTuples()
         totalNumAtts.append((str: "\(model.t_num)", font: UIFont.pingFangSCFont(size: 22, weight: .medium), color: model.totalNumColor))
-        totalNumAtts.append((str: " T", font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: model.totalNumColor))
+        totalNumAtts.append((str: model.totalUnit, font: UIFont.pingFangSCFont(size: 14, weight: .medium), color: model.totalNumColor))
         self.totalNumView.attributedText = NSAttributedString.attribute(totalNumAtts)
     }
     

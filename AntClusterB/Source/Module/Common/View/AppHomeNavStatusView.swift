@@ -98,7 +98,7 @@ class AppHomeNavStatusView: UIView {
         }
         // leftItem
         barView.addSubview(self.leftItem)
-        self.leftItem.setImage(UIImage.init(named: "IMG_icon_profile_back"), for: .normal)
+        self.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
         self.leftItem.addTarget(self, action: #selector(leftItemClick(_:)), for: .touchUpInside)
         self.leftItem.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(12)

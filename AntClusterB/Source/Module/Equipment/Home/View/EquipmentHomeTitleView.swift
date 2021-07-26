@@ -112,7 +112,7 @@ extension EquipmentHomeTitleView {
             let button = UIButton.init(type: .custom)
             titleView.addSubview(button)
             button.titleLabel?.font = UIFont.pingFangSCFont(size: 16, weight: .regular)
-            button.set(title: title, titleColor: UIColor(hex: 0xFEF4DA), for: .normal)
+            button.set(title: title, titleColor: AppColor.mainText.withAlphaComponent(0.5), for: .normal)
             button.set(title: title, titleColor: AppColor.mainText, for: .selected)
             button.tag = self.titleBtnTagBase + index
             button.addTarget(self, action: #selector(titleBtnClick(_:)), for: .touchUpInside)

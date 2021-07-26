@@ -15,6 +15,13 @@ class LockDetailHeaderView: UIView {
     
     static let viewHeight: CGFloat = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height - kNavigationStatusBarHeight
 
+    var zone: ProductZone = .ipfs {
+        didSet {
+            self.titleLabel.text = "累计收益(\(zone.rawValue.uppercased()))"
+            self.waitReleaseNumView.titleLabel.text = "待释放(\(zone.rawValue.uppercased()))"
+            self.hasReleaseNumView.titleLabel.text = "已释放(\(zone.rawValue.uppercased()))"
+        }
+    }
     var model: LockDetailListModel? {
         didSet {
             self.setupWithModel(model)

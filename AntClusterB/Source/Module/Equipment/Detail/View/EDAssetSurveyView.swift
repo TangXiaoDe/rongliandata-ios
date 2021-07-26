@@ -23,7 +23,7 @@ class EDAssetSurveyView: UIView {
     
     // MARK: - Internal Property
     
-    var model: EDAssetModel? {
+    var model: (asset: EDAssetModel, zone: ProductZone)? {
         didSet {
             self.setupWithModel(model)
         }
@@ -47,7 +47,7 @@ class EDAssetSurveyView: UIView {
     
     fileprivate let lockDetailView: TitleIconControl = TitleIconControl.init()  // 锁仓详情入口
     
-    fileprivate let itemTitles: [String] = ["可用数量(FIL)", "抵押数量(FIL)", "锁仓数量(FIL)", "冻结数量(FIL)"]
+    fileprivate var itemTitles: [String] = ["可用数量(FIL)", "抵押数量(FIL)", "锁仓数量(FIL)", "冻结数量(FIL)"]
     
     
     fileprivate let titleLeftMargin: CGFloat = 12
@@ -277,16 +277,18 @@ extension EDAssetSurveyView {
    
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: EDAssetModel?) -> Void {
+    fileprivate func setupWithModel(_ model: (asset: EDAssetModel, zone: ProductZone)?) -> Void {
         //self.setupAsDemo()
         guard let model = model else {
             return
         }
         // 子控件数据加载
-        self.canUseItemView.valueLabel.text = model.available.decimalValidDigitsProcess(digits: 8)
-        self.diyaItemView.valueLabel.text = model.pawn.decimalValidDigitsProcess(digits: 8)
-        self.lockItemView.valueLabel.text = model.lock.decimalValidDigitsProcess(digits: 8)
-        self.frozenItemView.valueLabel.text = model.frozen.decimalValidDigitsProcess(digits: 8)
+        self.itemTitles = ["可用数量(\(model.zone.rawValue.uppercased()))", "抵押数量(\(model.zone.rawValue.uppercased()))", "锁仓数量(\(model.zone.rawValue.uppercased()))", "冻结数量(\(model.zone.rawValue.uppercased()))"]
+        self.initialContainer(self.container)
+        self.canUseItemView.valueLabel.text = model.asset.available.decimalValidDigitsProcess(digits: 8)
+        self.diyaItemView.valueLabel.text = model.asset.pawn.decimalValidDigitsProcess(digits: 8)
+        self.lockItemView.valueLabel.text = model.asset.lock.decimalValidDigitsProcess(digits: 8)
+        self.frozenItemView.valueLabel.text = model.asset.frozen.decimalValidDigitsProcess(digits: 8)
     }
 
 }

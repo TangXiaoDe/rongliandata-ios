@@ -19,7 +19,7 @@ class EDBackAssetDetailView: UIView {
             guard let model = model else {
                 return
             }
-            self.formInterestLabel.text = "利息\(model.interest.decimalValidDigitsProcess(digits: 2))%"
+            self.formShouldInterestLabel.text = "应还利息\n\(model.interest.decimalValidDigitsProcess(digits: 2))%"
         }
     }
     var models: [EDAssetReturnListModel]? {
@@ -35,15 +35,18 @@ class EDBackAssetDetailView: UIView {
     
     let titleView: TitleIconView = TitleIconView.init()     // 标题
     
+    fileprivate let bottomView: UIView = UIView.init()      // contentView
+    fileprivate let scrollView: UIScrollView = UIScrollView.init()
     fileprivate let formView: UIView = UIView.init()
     
     fileprivate let formTitleView: UIView = UIView.init()
     fileprivate let formDateLabel: UILabel = UILabel.init()      // 日期
     fileprivate let formZhiyaLabel: UILabel = UILabel.init()     // 质押币
     fileprivate let formGasLabel: UILabel = UILabel.init()       // Gas
-    fileprivate let formInterestLabel: UILabel = UILabel.init()  // 利息
+    fileprivate let formShouldInterestLabel: UILabel = UILabel.init()  // 应还利息
+    fileprivate let formRealInterestLabel: UILabel = UILabel.init()  // 实还利息
     
-    fileprivate let formContainer: UIView = UIView.init()
+    fileprivate let formContentContainer: UIView = UIView.init()
 
     
     fileprivate let titleLeftMargin: CGFloat = 12
@@ -57,25 +60,27 @@ class EDBackAssetDetailView: UIView {
     fileprivate let itemInLrMargin: CGFloat = 12
     
     fileprivate let itemInMargin: CGFloat = 12
+    fileprivate let titleItemHeight: CGFloat = 44
     fileprivate let itemHeight: CGFloat = 36
     fileprivate let itemVerMargin: CGFloat = 12
     fileprivate let itemTopMargin: CGFloat = 5
     fileprivate let itemBottomMargin: CGFloat = 10
     
     fileprivate let itemInLeftMargin: CGFloat = 12
-    fileprivate let itemInRightMargin: CGFloat = 0
+    fileprivate let itemInRightMargin: CGFloat = 12
     fileprivate let itemHorMargin: CGFloat = 5
-    fileprivate let itemColNum: Int = 4
-    fileprivate lazy var itemWidth: CGFloat = {
-        var width: CGFloat = (kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemInRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
-        width = CGFloat(floor(Double(width)))
-        return width
-    }()
+    fileprivate let itemColNum: Int = 5
+    fileprivate let itemWidth: CGFloat = 80
+//    fileprivate lazy var itemWidth: CGFloat = {
+//        var width: CGFloat = (kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemInRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
+//        width = CGFloat(floor(Double(width)))
+//        return width
+//    }()
 
     fileprivate let formTitleHeight: CGFloat = 36
     
-    fileprivate let formContainerTopMargin: CGFloat = 0
-    fileprivate let formContainerBottomMargin: CGFloat = 25
+    fileprivate let formContentContainerTopMargin: CGFloat = 0
+    fileprivate let formContentContainerBottomMargin: CGFloat = 25
     
     
     
@@ -158,39 +163,60 @@ extension EDBackAssetDetailView {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        // 2. form
-        mainView.addSubview(self.formView)
-        self.formView.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
-        self.formView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.titleView.snp.bottom)
-            make.bottom.equalToSuperview().offset(-self.formBottomMargin)
+        // 2. bottomView
+        mainView.addSubview(self.bottomView)
+        self.initialBottomView(self.bottomView)
+        self.bottomView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.itemOutLrMargin)
             make.trailing.equalToSuperview().offset(-self.itemOutLrMargin)
+            make.top.equalTo(self.titleView.snp.bottom)
+            make.bottom.equalToSuperview().offset(-self.formBottomMargin)
         }
+    }
+    
+    ///
+    fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
+        bottomView.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
+        // scrollView
+        bottomView.addSubview(self.scrollView)
+        self.scrollView.showsHorizontalScrollIndicator = false
+        self.scrollView.bounces = false
+        self.scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        // 2. form
+        self.scrollView.addSubview(self.formView)
+        self.initialFormView(self.formView)
+        self.formView.snp.makeConstraints { (make) in
+            make.edges.height.equalToSuperview()
+        }
+    }
+    ///
+    fileprivate func initialFormView(_ formView: UIView) -> Void {
         // 2.1 formTitle
         self.formView.addSubview(self.formTitleView)
         self.initialformTitleView(self.formTitleView)
         self.formTitleView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(self.itemHeight)
+            make.height.equalTo(self.titleItemHeight)
         }
-        // 2.2 formContainer
-        self.formView.addSubview(self.formContainer)
-        self.formContainer.snp.makeConstraints { (make) in
+        // 2.2 formContentContainer
+        self.formView.addSubview(self.formContentContainer)
+        self.formContentContainer.snp.makeConstraints { (make) in
             make.top.equalTo(self.formTitleView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
-    
+
     ///
     fileprivate func initialformTitleView(_ formView: UIView) -> Void {
         //
         formView.backgroundColor = AppColor.pageBg
-        formView.setupCorners(UIRectCorner.init([UIRectCorner.topLeft, UIRectCorner.topRight]), selfSize: CGSize.init(width: kScreenWidth - self.itemOutLrMargin * 2.0, height: self.formTitleHeight), cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
+        //formView.setupCorners(UIRectCorner.init([UIRectCorner.topLeft, UIRectCorner.topRight]), selfSize: CGSize.init(width: kScreenWidth - self.itemOutLrMargin * 2.0, height: self.formTitleHeight), cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
         //
         formView.removeAllSubviews()
-        let itemViews: [UILabel] = [self.formDateLabel, self.formZhiyaLabel, self.formGasLabel, self.formInterestLabel]
-        let itemTitles: [String] = ["结算时间", "质押币", "Gas", "利息"]
+        let itemViews: [UILabel] = [self.formDateLabel, self.formZhiyaLabel, self.formGasLabel, self.formShouldInterestLabel, self.formRealInterestLabel]
+        let itemTitles: [String] = ["结算时间", "质押币", "Gas", "应还利息", "实还利息"]
         let itemWidth: CGFloat = self.itemWidth
         var leftView: UIView = formView
         for (index, itemView) in itemViews.enumerated() {
@@ -210,17 +236,18 @@ extension EDBackAssetDetailView {
             }
             leftView = itemView
         }
-        
+        //
+        self.formShouldInterestLabel.numberOfLines = 2
     }
 
     ///
-    fileprivate func setupformContainer(with models: [EDAssetReturnListModel]) -> Void {
-        self.formContainer.removeAllSubviews()
+    fileprivate func setupformContentContainer(with models: [EDAssetReturnListModel]) -> Void {
+        self.formContentContainer.removeAllSubviews()
         //
-        var topView: UIView = self.formContainer
+        var topView: UIView = self.formContentContainer
         for (index, model) in models.enumerated() {
             let itemView = EDBackAssetDetailItemView.init(viewWidth: kScreenWidth - self.itemOutLrMargin * 2.0)
-            self.formContainer.addSubview(itemView)
+            self.formContentContainer.addSubview(itemView)
             itemView.model = model
             itemView.isLast = index == models.count - 1
             itemView.snp.makeConstraints { (make) in
@@ -243,13 +270,13 @@ extension EDBackAssetDetailView {
 //        let itemTitleCenterYTopMargin: CGFloat = 20     // super.top
 //        let itemValueCenterYBottomMargin: CGFloat = 22  // super.bottom
 //
-//        formContainer.removeAllSubviews()
+//        formContentContainer.removeAllSubviews()
 //        //
 //        let itemViews: [TitleValueView] = [self.zhiyaItemView, self.xiaohaoItemView]
 //        for (index, itemView) in itemViews.enumerated() {
 //            let row: Int = index / self.itemColNum
 //            let col: Int = index % self.itemColNum
-//            formContainer.addSubview(itemView)
+//            formContentContainer.addSubview(itemView)
 //            itemView.backgroundColor = UIColor.init(hex: 0xFDC818).withAlphaComponent(0.08)
 //            itemView.set(cornerRadius: 5)
 //            itemView.snp.makeConstraints { (make) in
@@ -300,7 +327,7 @@ extension EDBackAssetDetailView {
         //self.titleView.iconView.backgroundColor = UIColor.red
 //        self.titleView.titleLabel.text = "我是标题"
         
-        self.setupformContainer(with: [])
+        self.setupformContentContainer(with: [])
         
 //
 //        self.statusView.isHidden = false
@@ -359,7 +386,7 @@ extension EDBackAssetDetailView {
             return
         }
         // 子控件数据加载
-        self.setupformContainer(with: models)
+        self.setupformContentContainer(with: models)
     }
 
 }

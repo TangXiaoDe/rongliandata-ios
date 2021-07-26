@@ -160,11 +160,15 @@ extension WithdrawController {
             guard let `self` = self else {
                 return
             }
-            guard status, let model = model?.xchWithdrawConfigModel else {
+            guard status else {
                 Toast.showToast(title: msg)
                 return
             }
-            self.configModel = model
+            if let xchConfigModel = model?.xchWithdrawConfigModel, self.assetModel.currency == .chia {
+                self.configModel = xchConfigModel
+            } else if let bzzConfigModel = model?.bzzWithdrawConfigModel, self.assetModel.currency == .bzz {
+                self.configModel = bzzConfigModel
+            }
             self.initialDataSource()
         }
         
@@ -199,7 +203,7 @@ extension WithdrawController {
         self.limitSingleMaxNum = assetModel.lfbalance
         self.tipsLabel.text = "温馨提示：\n" + configModel.instr
         self.limitSingleMinNum = configModel.user_min
-        self.feeNum = self.assetModel.withdrawFee
+        self.feeNum = Double(configModel.service_charge) ?? 0
         self.couldDoneProcess()
     }
 
@@ -230,17 +234,32 @@ extension WithdrawController {
         guard let inputText = self.currentText, !inputText.isEmpty else {
             return
         }
-        AssetNetworkManager.xchWithdrawal(amount: inputText, pay_pass: password, currency: "xch") { [weak self](status, msg, model) in
-            guard let `self` = self else {
-                return
+        if self.assetModel.currency == .chia {
+            AssetNetworkManager.xchWithdrawal(amount: inputText, pay_pass: password, currency: "xch") { [weak self](status, msg, model) in
+                guard let `self` = self else {
+                    return
+                }
+                guard status, let model = model else {
+                    Toast.showToast(title: msg)
+                    return
+                }
+                self.enterWithdrawResultPage(model)
+                NotificationCenter.default.post(name: AppNotificationName.Asset.refresh, object: nil)
             }
-            guard status, let model = model else {
-                Toast.showToast(title: msg)
-                return
+        } else if self.assetModel.currency == .bzz {
+            AssetNetworkManager.bzzWithdrawal(amount: inputText, pay_pass: password, currency: "bzz") { [weak self](status, msg, model) in
+                guard let `self` = self else {
+                    return
+                }
+                guard status, let model = model else {
+                    Toast.showToast(title: msg)
+                    return
+                }
+                self.enterWithdrawResultPage(model)
+                NotificationCenter.default.post(name: AppNotificationName.Asset.refresh, object: nil)
             }
-            self.enterWithdrawResultPage(model)
-            NotificationCenter.default.post(name: AppNotificationName.Asset.refresh, object: nil)
         }
+
 //        AssetNetworkManager.withdrawal(currency: self.assetModel.currency.rawValue, amount: inputText, pay_pass: password, currencyType: self.currencyType) { [weak self](status, msg, model) in
 //            guard let `self` = self else {
 //                return

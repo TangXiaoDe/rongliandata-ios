@@ -34,7 +34,7 @@ class EquipmentHomeListController: BaseViewController {
     fileprivate let headerHeight: CGFloat = EquipmentHomeHeaderView.viewHeight
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let itemVerMargin: CGFloat = 12
-    fileprivate let itemTopMargin: CGFloat = 219 - 200
+    fileprivate let itemTopMargin: CGFloat = 0
     fileprivate let itemBottomMargin: CGFloat = 12
     fileprivate let itemViewTagBase: Int = 250
 
@@ -129,14 +129,14 @@ extension EquipmentHomeListController {
         scrollView.addSubview(self.itemContainer)
         self.itemContainer.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.headerView.snp.bottom).offset(-self.itemTopMargin)
+            make.top.equalTo(self.headerView.snp.bottom).offset(self.itemTopMargin)
             make.bottom.lessThanOrEqualToSuperview().offset(-itemBottomMargin)
         }
         scrollView.addSubview(self.emptyDefaultView)
         self.emptyDefaultView.isHidden = true
         self.emptyDefaultView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.top.equalTo(self.headerView.snp.bottom).offset(-self.itemTopMargin)
+            make.top.top.equalTo(self.headerView.snp.bottom).offset(self.itemTopMargin)
             make.height.equalTo(kScreenWidth)
             make.bottom.lessThanOrEqualToSuperview().offset(-itemBottomMargin)
         }

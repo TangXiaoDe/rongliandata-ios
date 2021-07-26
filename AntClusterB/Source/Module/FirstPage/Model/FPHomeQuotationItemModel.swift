@@ -18,6 +18,7 @@ enum QuotationSymbolType: String {
     case eth = "ETH"
     case eos = "EOS"
     case chia = "XCH"
+    case bzz = "BZZ"
     
     var icon: UIImage? {
         var name: String = ""
@@ -34,6 +35,8 @@ enum QuotationSymbolType: String {
             name = "IMG_home_icon_eos"
         case .chia:
             name = "IMG_home_icon_chia"
+        case .bzz:
+            name = "IMG_home_icon_bzz"
         }
         let image: UIImage? = UIImage.init(named: name)
         return image

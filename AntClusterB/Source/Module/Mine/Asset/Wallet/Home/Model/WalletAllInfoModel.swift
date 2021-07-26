@@ -34,6 +34,35 @@ class WalletAllInfoModel: Mappable {
     }
 }
 
+extension WalletAllInfoModel {
+    var currencyType: CurrencyType {
+        var type: CurrencyType = .fil
+        if self.currency == "fil" {
+            type = .fil
+        } else if self.currency == "xch" {
+            type = .chia
+        } else if self.currency == "bzz" {
+            type = .bzz
+        }
+        return type
+    }
+    
+    var bgImage: UIImage {
+        var imgStr: String = "IMG_mine_fil_bg"
+        switch self.currencyType {
+        case .fil:
+            imgStr = "IMG_mine_fil_bg"
+        case .chia:
+            imgStr = "IMG_mine_xch_bg"
+        case .bzz:
+            imgStr = "IMG_mine_bzz_bg"
+        default:
+            break
+        }
+        return UIImage(named: imgStr)!
+    }
+}
+
 //class WalletFilModel: Mappable {
 //    var id: Int = 0
 //    var user_id: Int = 0

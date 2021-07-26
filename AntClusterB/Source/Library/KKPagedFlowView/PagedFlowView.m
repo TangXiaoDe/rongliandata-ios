@@ -29,32 +29,35 @@
 #pragma mark -
 #pragma mark Private Methods
 - (void)handleTapGesture:(UIGestureRecognizer *)gestureRecognizer {
-    
-    NSInteger pageIndex = ceil(MAX(_scrollView.contentOffset.x, 0) / _pageSize.width);
-    _currentPageIndex = pageIndex;
-    NSInteger tappedIndex = 0;
-    CGPoint locationInScrollView = [gestureRecognizer locationInView:_scrollView];
-    if (CGRectContainsPoint(_scrollView.bounds, locationInScrollView)) {
-        tappedIndex = _currentPageIndex;
-        UIView *view = gestureRecognizer.view;
-        if (tappedIndex == 0) {
-            if (view.frame.origin.x <= 100) {
-                if ([self.delegate respondsToSelector:@selector(flowView:didTapPageAtIndex:)]) {
-                    [self.delegate flowView:self didTapPageAtIndex:tappedIndex];
-                }
-            }else {
-                [self scrollToPage:1];
-            }
-        }else {
-            if (view.frame.origin.x <= 100) {
-                [self scrollToPage:0];
-            }else {
-                if ([self.delegate respondsToSelector:@selector(flowView:didTapPageAtIndex:)]) {
-                    [self.delegate flowView:self didTapPageAtIndex:tappedIndex];
-                }
-            }
-        }
+    NSInteger index = [_cells indexOfObject:gestureRecognizer.view];
+//    NSInteger pageIndex = ceil(MAX(_scrollView.contentOffset.x, 0) / _pageSize.width);
+//    _currentPageIndex = pageIndex;
+    if ([self.delegate respondsToSelector:@selector(flowView:didTapPageAtIndex:)]) {
+        [self.delegate flowView:self didTapPageAtIndex:index];
     }
+//    NSInteger tappedIndex = 0;
+//    CGPoint locationInScrollView = [gestureRecognizer locationInView:_scrollView];
+//    if (CGRectContainsPoint(_scrollView.bounds, locationInScrollView)) {
+//        tappedIndex = _currentPageIndex;
+//        UIView *view = gestureRecognizer.view;
+//        if (tappedIndex == 0) {
+//            if (view.frame.origin.x <= 100) {
+//                if ([self.delegate respondsToSelector:@selector(flowView:didTapPageAtIndex:)]) {
+//                    [self.delegate flowView:self didTapPageAtIndex:tappedIndex];
+//                }
+//            }else {
+//                [self scrollToPage:1];
+//            }
+//        }else {
+//            if (view.frame.origin.x <= 100) {
+//                [self scrollToPage:0];
+//            }else {
+//                if ([self.delegate respondsToSelector:@selector(flowView:didTapPageAtIndex:)]) {
+//                    [self.delegate flowView:self didTapPageAtIndex:tappedIndex];
+//                }
+//            }
+//        }
+//    }
 }
 
 - (void)initialize{
@@ -75,7 +78,7 @@
     
     _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     _scrollView.delegate = self;
-    _scrollView.pagingEnabled = YES;
+//    _scrollView.pagingEnabled = YES;
     _scrollView.clipsToBounds = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
@@ -130,7 +133,7 @@
                 CGFloat origin = cell.frame.origin.x;
                 CGFloat delta = fabs(origin - offset);
                                                 
-                [UIView beginAnimations:@"CellAnimation" context:nil];
+//                [UIView beginAnimations:@"CellAnimation" context:nil];
                 if (delta < _pageSize.width) {
                     cell.alpha = 1 - (delta / _pageSize.width) * (1 - _minimumPageAlpha);
                     
@@ -140,7 +143,7 @@
                     cell.alpha = _minimumPageAlpha;
                     cell.layer.transform = CATransform3DMakeScale(_minimumPageScale, _minimumPageScale, 1);
                 }
-                [UIView commitAnimations];
+//                [UIView commitAnimations];
             }
             break;   
         }
@@ -420,13 +423,13 @@
     if (pageNumber < _pageCount) {
         switch (orientation) {
             case PagedFlowViewOrientationHorizontal:{
-                CGFloat offset = _scrollView.contentOffset.x;
-                UIView *cell = [_cells objectAtIndex:pageNumber];
-                CGFloat origin = cell.frame.origin.x;
-                CGFloat delta = fabs(origin - offset);
-                CGFloat pageScale = 1 - (delta / _pageSize.width) * (1 - _minimumPageScale);
+//                CGFloat offset = _scrollView.contentOffset.x;
+//                UIView *cell = [_cells objectAtIndex:pageNumber];
+//                CGFloat origin = cell.frame.origin.x;
+//                CGFloat delta = fabs(origin - offset);
+                CGFloat pageScale = 0.8;
                 
-                [_scrollView setContentOffset:CGPointMake((_pageSize.width - 20) * pageNumber * pageScale, 0) animated:YES];
+                [_scrollView setContentOffset:CGPointMake(pageNumber == 0 ? 0 : ((_pageSize.width - 20) * pageScale + _pageSize.width*(pageNumber-1)), 0) animated:YES];
             }
 
                 break;
@@ -434,7 +437,7 @@
                 [_scrollView setContentOffset:CGPointMake(0, _pageSize.height * pageNumber) animated:YES];
                 break;
         }
-        [self setPagesAtContentOffset:_scrollView.contentOffset];
+//        [self setPagesAtContentOffset:_scrollView.contentOffset];
         [self refreshVisibleCellAppearance];
     }
 }
@@ -468,7 +471,34 @@
 #pragma mark UIScrollView Delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self setPagesAtContentOffset:scrollView.contentOffset];
+    CGPoint vel = [scrollView.panGestureRecognizer velocityInView:scrollView];
+    if (vel.x < -5) {
+        //向右拖动
+        NSInteger pageIndex = 0;
+        if (scrollView.contentOffset.x < 100) {
+            pageIndex = 1;
+        }else if (scrollView.contentOffset.x > 100 && scrollView.contentOffset.x < 300) {
+            pageIndex = 2;
+        }else {
+            return;
+        }
+        [self scrollToPage:pageIndex];
+    }else if (vel.x > 5) {
+        //向左拖动
+        NSInteger pageIndex = 0;
+        if (scrollView.contentOffset.x > 300) {
+            pageIndex = 1;
+        }else if (scrollView.contentOffset.x < 300) {
+            pageIndex = 0;
+        }else {
+            return;;
+        }
+        [self scrollToPage:pageIndex];
+    }else if (vel.x == 0) {
+        //停止拖拽
+    }
+    
+//    [self setPagesAtContentOffset:scrollView.contentOffset];
     [self refreshVisibleCellAppearance];
 }
 

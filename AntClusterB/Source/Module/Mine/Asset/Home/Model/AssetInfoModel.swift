@@ -118,7 +118,7 @@ class AssetInfoModel: Mappable {
     }
     /// 是否绑定提币地址
     var isBindWithdrawAddress: Bool {
-        if self.currency == .fil {
+        if self.currency == .fil || self.currency == .bzz {
             if self.withdrawal_address != nil && !self.withdrawal_address!.isEmpty {
                 return true
             }
@@ -189,42 +189,44 @@ class AssetInfoModel: Mappable {
         total_save_power <- (map["total_save_power"], DoubleStringTransform.default)
         frozen <- (map["frozen"], DoubleStringTransform.default)
     }
-    // 提现手续费
-    var withdrawFee: Double {
-        var withdrawFee: Double = 0.0
-        guard let withdrawModel = AppConfig.share.server?.getWithdrawalConfig(with: self.currency) else {
-            return withdrawFee
-        }
-        switch self.currency {
-        case .fil:
-            withdrawFee = withdrawModel.fil_fee
-        case .usdt:
-            if self.currencyType == .erc20 {
-                withdrawFee = withdrawModel.usdt_erc_fee
-            } else {
-                withdrawFee = withdrawModel.usdt_trx_fee
-            }
-        case .chia:
-            withdrawFee = withdrawModel.xch_fee
-        default:
-            withdrawFee = withdrawModel.erc_fee
-        }
-        return withdrawFee
-    }
-    // 最低提现
-    var withdrawMin: Double {
-        var user_min: Double = 0.0
-        guard let withdrawModel = AppConfig.share.server?.getWithdrawalConfig(with: self.currency) else {
-            return user_min
-        }
-        switch self.currency {
-        case .fil:
-            user_min = withdrawModel.user_min
-        default:
-            user_min = withdrawModel.user_min
-        }
-        return user_min
-    }
+//    // 提现手续费
+//    var withdrawFee: Double {
+//        var withdrawFee: Double = 0.0
+//        guard let withdrawModel = AppConfig.share.server?.getWithdrawalConfig(with: self.currency) else {
+//            return withdrawFee
+//        }
+//        switch self.currency {
+//        case .fil:
+//            withdrawFee = withdrawModel.fil_fee
+//        case .bzz:
+//            withdrawFee = withdrawModel.fil_fee
+//        case .usdt:
+//            if self.currencyType == .erc20 {
+//                withdrawFee = withdrawModel.usdt_erc_fee
+//            } else {
+//                withdrawFee = withdrawModel.usdt_trx_fee
+//            }
+//        case .chia:
+//            withdrawFee = withdrawModel.xch_fee
+//        default:
+//            withdrawFee = withdrawModel.erc_fee
+//        }
+//        return withdrawFee
+//    }
+//    // 最低提现
+//    var withdrawMin: Double {
+//        var user_min: Double = 0.0
+//        guard let withdrawModel = AppConfig.share.server?.getWithdrawalConfig(with: self.currency) else {
+//            return user_min
+//        }
+//        switch self.currency {
+//        case .fil:
+//            user_min = withdrawModel.user_min
+//        default:
+//            user_min = withdrawModel.user_min
+//        }
+//        return user_min
+//    }
     var withdrawAddress: String {
         var withdrawAddress: String = ""
         guard let userModel = AccountManager.getCurrentInfo() else {
@@ -232,7 +234,9 @@ class AssetInfoModel: Mappable {
         }
         switch self.currency {
         case .fil:
-            withdrawAddress = userModel.withdrawal_address
+            withdrawAddress = self.withdrawal_address ?? ""
+        case .bzz:
+            withdrawAddress = self.withdrawal_address ?? ""
         case .usdt:
             if self.currencyType == .erc20 {
                 withdrawAddress = userModel.withdrawal_address
@@ -246,11 +250,21 @@ class AssetInfoModel: Mappable {
         }
         return withdrawAddress
     }
-    /// 资产余额(fil和其他资产公用)
+    /// 可提现余额(fil和其他资产公用)
     var lfbalance: Double {
         var balance: Double = 0
-        if self.currency == .fil {
+        if self.currency == .fil || self.currency == .bzz {
             balance = Double(self.withdrawable) ?? 0
+        } else {
+            balance = self.ore
+        }
+        return balance
+    }
+    /// 资产余额
+    var realBalance: Double {
+        var balance: Double = 0
+        if self.currency == .fil || self.currency == .bzz {
+            balance = Double(self.fil_balance) ?? 0
         } else {
             balance = self.ore
         }

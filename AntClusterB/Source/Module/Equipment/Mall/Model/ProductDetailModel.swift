@@ -21,6 +21,8 @@ enum ProductZone: String {
     case ipfs = "fil"
     ///
     case chia = "xch"
+    ///
+    case bzz = "bzz"
     
     var title: String {
         var title: String = self.rawValue.uppercased()
@@ -33,6 +35,8 @@ enum ProductZone: String {
             title = "IPFS"
         case .chia:
             title = "CHIA"
+        case .bzz:
+            title = "BZZ"
         }
         return title
     }
@@ -49,10 +53,47 @@ enum ProductZone: String {
             unit = "T"
         case .chia:
             unit = "T"
+        case .bzz:
+            unit = "T"
         }
         return unit
     }
 
+    ///
+    var icon: UIImage? {
+        var image: UIImage? = nil
+        switch self {
+        case .btc:
+            image = UIImage.init(named: "IMG_home_icon_btc")
+        case .eth:
+            image = UIImage.init(named: "IMG_home_icon_eth")
+        case .ipfs:
+            image = UIImage.init(named: "IMG_home_icon_fil")
+        case .chia:
+            image = UIImage.init(named: "IMG_home_icon_chia")
+        case .bzz:
+            image = UIImage.init(named: "IMG_home_icon_bzz")
+        }
+        return image
+    }
+    ///
+    var brand_promt: String? {
+        var text: String = "采购总量(T)"
+        switch self {
+        case .btc:
+            text = "采购总量(T)"
+        case .eth:
+            text = "采购总量(T)"
+        case .ipfs:
+            text = "采购总量(T)"
+        case .chia:
+            text = "采购总量(T)"
+        case .bzz:
+            text = "节点数"
+        }
+        return text
+    }
+    
 }
 
 /// 商品类型 —— Special
@@ -400,6 +441,8 @@ extension ProductDetailModel {
             unit = "T"
         case .chia:
             unit = "T"
+        case .bzz:
+            unit = "T"
         }
         return unit
     }
@@ -415,6 +458,8 @@ extension ProductDetailModel {
         case .chia:
             fallthrough
         case .ipfs:
+            desc = "\(self.spec) T"
+        case .bzz:
             desc = "\(self.spec) T"
         }
         return desc
@@ -520,6 +565,8 @@ extension ProductDetailModel {
         case .btc:
             color = UIColor.init(hex: 0xDF8929)
         case .chia:
+            color = UIColor.init(hex: 0x3FAC5D)
+        case .bzz:
             color = UIColor.init(hex: 0x3FAC5D)
         }
         return color

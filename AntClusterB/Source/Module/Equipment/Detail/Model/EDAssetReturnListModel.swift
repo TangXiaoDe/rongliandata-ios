@@ -19,8 +19,10 @@ class EDAssetReturnListModel: Mappable {
     var pledge: Double = 0
     /// gas
     var gas: Double = 0
-    /// 利息6%
+    /// 实还利息
     var interest: Double = 0
+    ///
+    var back_interest: Double = 0
     ///
     var createdDate: Date = Date.init()
     ///
@@ -39,8 +41,14 @@ class EDAssetReturnListModel: Mappable {
         pledge <- (map["pledge"], DoubleStringTransform.default)
         gas <- (map["gas"], DoubleStringTransform.default)
         interest <- (map["interest"], DoubleStringTransform.default)
+        back_interest <- (map["back_interest"], DoubleStringTransform.default)
         createdDate <- (map["created_at"], DateStringTransform.current)
         updatedDate <- (map["updated_at"], DateStringTransform.current)
+    }
+    
+    /// 应还利息：interest+back_interest
+    var should_interest: Double {
+        return self.interest + self.back_interest
     }
 
 }

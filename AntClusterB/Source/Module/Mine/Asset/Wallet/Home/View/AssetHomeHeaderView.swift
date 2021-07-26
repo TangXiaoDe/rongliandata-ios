@@ -121,7 +121,7 @@ extension AssetHomeHeaderView {
         topView.backgroundColor = UIColor.white
         // currencyTypeLabel
         topView.addSubview(self.currencyTypeLabel)
-        self.currencyTypeLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 28, weight: .medium), textColor: AppColor.theme)
+        self.currencyTypeLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 28, weight: .medium), textColor: AppColor.mainText)
         self.currencyTypeLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.centerY.equalTo(topView.snp.top).offset(currencyCenterYMargin)
@@ -202,7 +202,7 @@ extension AssetHomeHeaderView {
             return
         }
         self.currencyTypeLabel.text = model.currency.title
-        self.balanceItemView.bottomLabel.text = model.balance.decimalProcess(digits: 8)
+        self.balanceItemView.bottomLabel.text = model.realBalance.decimalValidDigitsProcess(digits: 8)
         if model.currency == .usdt || model.currency == .cny {
             self.incomeItemView.isHidden = true
         } else {
@@ -230,6 +230,10 @@ extension AssetHomeHeaderView {
 //            incomeStr = incomeModel.eth
         case .fil:
             incomeStr = incomeModel.fil
+        case .chia:
+            incomeStr = incomeModel.chia
+        case .bzz:
+            incomeStr = incomeModel.bzz
         default:
             break
         }
@@ -252,11 +256,15 @@ extension AssetHomeHeaderView {
             cnyPriceStr = priceModel.ipfs?.price.decimalValidDigitsProcess(digits: 2) ?? ""
         case .usdt:
             cnyPriceStr = priceModel.usdt?.price.decimalValidDigitsProcess(digits: 2) ?? ""
+        case .chia:
+            cnyPriceStr = priceModel.chia?.price.decimalValidDigitsProcess(digits: 2) ?? ""
+        case .bzz:
+            cnyPriceStr = priceModel.bzz?.price.decimalValidDigitsProcess(digits: 2) ?? ""
         default:
             break
         }
         if let cnyPriceValue = Double(cnyPriceStr) {
-            let currencyNum: NSDecimalNumber = NSDecimalNumber.init(value: model.ore)
+            let currencyNum: NSDecimalNumber = NSDecimalNumber.init(value: model.realBalance)
             let ratioNum: NSDecimalNumber = NSDecimalNumber.init(value: cnyPriceValue)
             let resultNum: NSDecimalNumber = currencyNum.multiplying(by: ratioNum)
             let decimalValue = resultNum.doubleValue.decimalValidDigitsProcess(digits: 2)

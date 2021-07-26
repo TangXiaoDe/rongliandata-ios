@@ -119,6 +119,14 @@ class EquipmentDetailModel: Mappable {
     var type_value: Int = 0
     /// 节点号，可以为空，为空则不显示
     var group: String = ""
+    ///
+    var zoneValue: String = ""
+    var zone: ProductZone {
+        if let type = ProductZone(rawValue: self.zoneValue) {
+            return type
+        }
+        return ProductZone.ipfs
+    }
 
     
     /// 请求时间
@@ -148,6 +156,7 @@ class EquipmentDetailModel: Mappable {
         yesterday_output <- (map["yesterday_output"], DoubleStringTransform.default)
 
         status_value <- map["status"]
+        zoneValue <- map["zone"]
 
         digStartDate <- (map["dig_start_time"], DateStringTransform.current)
         digEndDate <- (map["dig_end_time"], DateStringTransform.current)

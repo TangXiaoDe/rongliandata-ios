@@ -23,7 +23,11 @@ class EquipmentHomeController: BaseViewController {
     fileprivate let navBar: AppHomeNavStatusView = AppHomeNavStatusView.init()
     fileprivate let nestView: XDNestScrollContainerView = XDNestScrollContainerView()
     
-    fileprivate let types: [ProductZone] = [.ipfs, .chia]
+
+    fileprivate lazy var types: [ProductZone] = {
+        let types: [ProductZone] = AppConfig.share.isShowBzz ? [.ipfs, .chia, .bzz] : [.ipfs, .chia]
+        return types
+    }()
     fileprivate lazy var titleView: EquipmentHomeTitleView = {
         var titles: [String] = []
         self.types.forEach { (item) in
@@ -104,6 +108,7 @@ extension EquipmentHomeController {
         }
         // 1.nav
         self.view.addSubview(self.navBar)
+        self.navBar.leftItem.isHidden = true
 //        self.navBar.titleLabel.set(text: "FIL", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.white, alignment: .center)
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in

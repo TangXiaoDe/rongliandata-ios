@@ -49,7 +49,7 @@ class MineHomeIncomeInfoView: UIControl {
     fileprivate let bgViewSize: CGSize = CGSize.init(width: 351, height: 140).scaleAspectForWidth(kScreenWidth - 2 * 12)
 
     fileprivate var itemMaxWidth: CGFloat {
-        return (kScreenWidth - 2 * self.lrMargin)/3
+        return (kScreenWidth - 2 * self.lrMargin) / 3
     }
 
     // MARK: - Private Property
@@ -152,6 +152,8 @@ extension MineHomeIncomeInfoView: PagedFlowViewDataSource {
             if item?.currency == "fil" && index == 0 {
                 model = item
             } else if item?.currency == "xch" && index == 1 {
+                model = item
+            } else if item?.currency == "bzz" && index == 2 {
                 model = item
             }
         }
