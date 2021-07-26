@@ -20,6 +20,8 @@ enum EquipmentAssetType: String {
     case fil_issue = "fil:issue"
     // 冻结
     case fil_frozen = "fil:frozen"
+    // 其他
+    case admin_assets = "admin:assets"
     
     var title: String {
         var title = ""
@@ -38,6 +40,8 @@ enum EquipmentAssetType: String {
             title = "挖矿"
         case .fil_frozen:
             title = "冻结"
+        case .admin_assets:
+            title = "其他"
         }
         return title
     }
