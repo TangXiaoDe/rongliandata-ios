@@ -55,10 +55,17 @@
 		53AA78F725F8AFAB0081D04A /* PayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA78F625F8AFAB0081D04A /* PayType.swift */; };
 		53AA78FC25F8B05E0081D04A /* MiningMachineOrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA78FB25F8B05E0081D04A /* MiningMachineOrderStatus.swift */; };
 		53AA790125F8B6170081D04A /* EquipDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA790025F8B6170081D04A /* EquipDetailHeaderView.swift */; };
-		53BF601B2689D2C1005D62E3 /* BrandHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BF601A2689D2C1005D62E3 /* BrandHomeController.swift */; };
-		53BF60202689D2E6005D62E3 /* BrandModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BF601F2689D2E6005D62E3 /* BrandModel.swift */; };
-		53BF60252689D351005D62E3 /* BrandListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BF60242689D351005D62E3 /* BrandListCell.swift */; };
-		53BF602D2689D671005D62E3 /* BrandProcurementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BF602C2689D671005D62E3 /* BrandProcurementItemView.swift */; };
+		53B19A3026AE56DB003A3F2A /* BrandHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A2A26AE56DB003A3F2A /* BrandHomeController.swift */; };
+		53B19A3126AE56DB003A3F2A /* BrandModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A2C26AE56DB003A3F2A /* BrandModel.swift */; };
+		53B19A3226AE56DB003A3F2A /* BrandListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A2E26AE56DB003A3F2A /* BrandListCell.swift */; };
+		53B19A3326AE56DB003A3F2A /* BrandProcurementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A2F26AE56DB003A3F2A /* BrandProcurementItemView.swift */; };
+		53B19A3C26AE57A5003A3F2A /* BrandBonusHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A3B26AE57A5003A3F2A /* BrandBonusHomeController.swift */; };
+		53B19A4426AE5867003A3F2A /* BrandBonusListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A4326AE5867003A3F2A /* BrandBonusListController.swift */; };
+		53B19A4926AE58E1003A3F2A /* BrandBonusHomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A4826AE58E1003A3F2A /* BrandBonusHomeTitleView.swift */; };
+		53B19A4E26AE5907003A3F2A /* BrandBonusListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A4D26AE5907003A3F2A /* BrandBonusListModel.swift */; };
+		53B19A5326AE5A88003A3F2A /* BrandBonusListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A5226AE5A88003A3F2A /* BrandBonusListHeaderView.swift */; };
+		53B19A5826AE5A99003A3F2A /* BrandBonusListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A5726AE5A99003A3F2A /* BrandBonusListCell.swift */; };
+		53B19A5D26AE5AAD003A3F2A /* BrandBonusListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A5C26AE5AAD003A3F2A /* BrandBonusListItemView.swift */; };
 		53DC376425FF6CEA000D156C /* EDUnbackSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DC376325FF6CEA000D156C /* EDUnbackSubjectView.swift */; };
 		53DF253E2581FC9700165247 /* AdvertSpaceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF22F92581FC9200165247 /* AdvertSpaceObject.swift */; };
 		53DF253F2581FC9700165247 /* AdvertObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF22FA2581FC9200165247 /* AdvertObject.swift */; };
@@ -554,10 +561,17 @@
 		53AA78F625F8AFAB0081D04A /* PayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayType.swift; sourceTree = "<group>"; };
 		53AA78FB25F8B05E0081D04A /* MiningMachineOrderStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningMachineOrderStatus.swift; sourceTree = "<group>"; };
 		53AA790025F8B6170081D04A /* EquipDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipDetailHeaderView.swift; sourceTree = "<group>"; };
-		53BF601A2689D2C1005D62E3 /* BrandHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandHomeController.swift; sourceTree = "<group>"; };
-		53BF601F2689D2E6005D62E3 /* BrandModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandModel.swift; sourceTree = "<group>"; };
-		53BF60242689D351005D62E3 /* BrandListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandListCell.swift; sourceTree = "<group>"; };
-		53BF602C2689D671005D62E3 /* BrandProcurementItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandProcurementItemView.swift; sourceTree = "<group>"; };
+		53B19A2A26AE56DB003A3F2A /* BrandHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandHomeController.swift; sourceTree = "<group>"; };
+		53B19A2C26AE56DB003A3F2A /* BrandModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandModel.swift; sourceTree = "<group>"; };
+		53B19A2E26AE56DB003A3F2A /* BrandListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandListCell.swift; sourceTree = "<group>"; };
+		53B19A2F26AE56DB003A3F2A /* BrandProcurementItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandProcurementItemView.swift; sourceTree = "<group>"; };
+		53B19A3B26AE57A5003A3F2A /* BrandBonusHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusHomeController.swift; sourceTree = "<group>"; };
+		53B19A4326AE5867003A3F2A /* BrandBonusListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusListController.swift; sourceTree = "<group>"; };
+		53B19A4826AE58E1003A3F2A /* BrandBonusHomeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusHomeTitleView.swift; sourceTree = "<group>"; };
+		53B19A4D26AE5907003A3F2A /* BrandBonusListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusListModel.swift; sourceTree = "<group>"; };
+		53B19A5226AE5A88003A3F2A /* BrandBonusListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusListHeaderView.swift; sourceTree = "<group>"; };
+		53B19A5726AE5A99003A3F2A /* BrandBonusListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusListCell.swift; sourceTree = "<group>"; };
+		53B19A5C26AE5AAD003A3F2A /* BrandBonusListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusListItemView.swift; sourceTree = "<group>"; };
 		53DC376325FF6CEA000D156C /* EDUnbackSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDUnbackSubjectView.swift; sourceTree = "<group>"; };
 		53DF22F92581FC9200165247 /* AdvertSpaceObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertSpaceObject.swift; sourceTree = "<group>"; };
 		53DF22FA2581FC9200165247 /* AdvertObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertObject.swift; sourceTree = "<group>"; };
@@ -1287,39 +1301,86 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		53BF60162689D2A6005D62E3 /* Brand */ = {
+		53B19A2826AE56DB003A3F2A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				53BF60172689D2A6005D62E3 /* Controller */,
-				53BF60182689D2A6005D62E3 /* Model */,
-				53BF60192689D2A6005D62E3 /* View */,
+				53B19A2926AE56DB003A3F2A /* Controller */,
+				53B19A2B26AE56DB003A3F2A /* Model */,
+				53B19A2D26AE56DB003A3F2A /* View */,
 			);
-			path = Brand;
+			path = Home;
 			sourceTree = "<group>";
 		};
-		53BF60172689D2A6005D62E3 /* Controller */ = {
+		53B19A2926AE56DB003A3F2A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				53BF601A2689D2C1005D62E3 /* BrandHomeController.swift */,
+				53B19A2A26AE56DB003A3F2A /* BrandHomeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		53BF60182689D2A6005D62E3 /* Model */ = {
+		53B19A2B26AE56DB003A3F2A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				53BF601F2689D2E6005D62E3 /* BrandModel.swift */,
+				53B19A2C26AE56DB003A3F2A /* BrandModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		53BF60192689D2A6005D62E3 /* View */ = {
+		53B19A2D26AE56DB003A3F2A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				53BF60242689D351005D62E3 /* BrandListCell.swift */,
-				53BF602C2689D671005D62E3 /* BrandProcurementItemView.swift */,
+				53B19A2E26AE56DB003A3F2A /* BrandListCell.swift */,
+				53B19A2F26AE56DB003A3F2A /* BrandProcurementItemView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		53B19A3726AE5748003A3F2A /* Bonus */ = {
+			isa = PBXGroup;
+			children = (
+				53B19A3826AE5748003A3F2A /* Controller */,
+				53B19A3926AE5748003A3F2A /* Model */,
+				53B19A3A26AE5748003A3F2A /* View */,
+			);
+			path = Bonus;
+			sourceTree = "<group>";
+		};
+		53B19A3826AE5748003A3F2A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				53B19A3B26AE57A5003A3F2A /* BrandBonusHomeController.swift */,
+				53B19A4326AE5867003A3F2A /* BrandBonusListController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		53B19A3926AE5748003A3F2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				53B19A4D26AE5907003A3F2A /* BrandBonusListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		53B19A3A26AE5748003A3F2A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				53B19A4826AE58E1003A3F2A /* BrandBonusHomeTitleView.swift */,
+				53B19A5226AE5A88003A3F2A /* BrandBonusListHeaderView.swift */,
+				53B19A5726AE5A99003A3F2A /* BrandBonusListCell.swift */,
+				53B19A5C26AE5AAD003A3F2A /* BrandBonusListItemView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		53BF60162689D2A6005D62E3 /* Brand */ = {
+			isa = PBXGroup;
+			children = (
+				53B19A3726AE5748003A3F2A /* Bonus */,
+				53B19A2826AE56DB003A3F2A /* Home */,
+			);
+			path = Brand;
 			sourceTree = "<group>";
 		};
 		53DF22F32581FC9200165247 /* Source */ = {
@@ -3650,7 +3711,6 @@
 				53DF25B62581FC9800165247 /* ServerConfigModel.swift in Sources */,
 				53DF25642581FC9700165247 /* AppColor.swift in Sources */,
 				53DF258D2581FC9800165247 /* TZImagePickerHelper.swift in Sources */,
-				53BF602D2689D671005D62E3 /* BrandProcurementItemView.swift in Sources */,
 				53DF254B2581FC9700165247 /* DataBaseManager.swift in Sources */,
 				53DF260C2581FC9900165247 /* TitleValueView.swift in Sources */,
 				53DF26752581FC9B00165247 /* FPHomeQuotationItemModel.swift in Sources */,
@@ -3664,6 +3724,7 @@
 				53DF263D2581FC9A00165247 /* BaseTabBar.swift in Sources */,
 				53DF26A22581FC9C00165247 /* UserDescUpdateController.swift in Sources */,
 				53DF25612581FC9700165247 /* AppLimit.swift in Sources */,
+				53B19A5D26AE5AAD003A3F2A /* BrandBonusListItemView.swift in Sources */,
 				53DF25712581FC9800165247 /* AssetNetworkManager.swift in Sources */,
 				53DF26022581FC9900165247 /* SharePopView.swift in Sources */,
 				53DF25452581FC9700165247 /* RecommenderObject.swift in Sources */,
@@ -3709,6 +3770,7 @@
 				A170729B2652686A0013FB47 /* AssetHomeTitleView.swift in Sources */,
 				53AA78CA25F8AC2D0081D04A /* EquipmentDetailController.swift in Sources */,
 				53DF25772581FC9800165247 /* UserNetworkManager.swift in Sources */,
+				53B19A5826AE5A99003A3F2A /* BrandBonusListCell.swift in Sources */,
 				53DF25CF2581FC9900165247 /* XDPushPopAnimation.swift in Sources */,
 				533031C42660D78400FB07CC /* EquipDetailTermInfoView.swift in Sources */,
 				53DF259F2581FC9800165247 /* PickerUtil.swift in Sources */,
@@ -3753,9 +3815,12 @@
 				53DF26572581FC9A00165247 /* ReceiptAccountInfoModel.swift in Sources */,
 				53DF25A12581FC9800165247 /* PhoneUtil.swift in Sources */,
 				53DF26732581FC9B00165247 /* AppDelegate.swift in Sources */,
+				53B19A3026AE56DB003A3F2A /* BrandHomeController.swift in Sources */,
+				53B19A4E26AE5907003A3F2A /* BrandBonusListModel.swift in Sources */,
 				53DF25FE2581FC9900165247 /* ReportViewController.swift in Sources */,
 				53DF26442581FC9A00165247 /* BaseTextField.swift in Sources */,
 				53DF25CB2581FC9900165247 /* XDPresentationController.swift in Sources */,
+				53B19A4926AE58E1003A3F2A /* BrandBonusHomeTitleView.swift in Sources */,
 				530B28CB25AD484000B8723E /* EquipmentHomeController.swift in Sources */,
 				53DF25CC2581FC9900165247 /* XDPopAnimation.swift in Sources */,
 				53DF25BC2581FC9800165247 /* MeetGuideController.swift in Sources */,
@@ -3789,6 +3854,7 @@
 				53DF26772581FC9B00165247 /* FirstPageHomeModel.swift in Sources */,
 				53DF25972581FC9800165247 /* ProjectImage.swift in Sources */,
 				A170725E26520C0A0013FB47 /* FPOrePoolItemModel.swift in Sources */,
+				53B19A3326AE56DB003A3F2A /* BrandProcurementItemView.swift in Sources */,
 				5394398B24F8A8A50097DCAA /* ResourcePlacePicture.swift in Sources */,
 				53DF26672581FC9B00165247 /* WithdrawAddressBindResultController.swift in Sources */,
 				53DF26542581FC9A00165247 /* AssetListCell.swift in Sources */,
@@ -3810,6 +3876,7 @@
 				530B28D125AD484000B8723E /* EquipmentListCell.swift in Sources */,
 				53DF25982581FC9800165247 /* ProjectFont.swift in Sources */,
 				53DF268A2581FC9B00165247 /* SettingHomeModel.swift in Sources */,
+				53B19A5326AE5A88003A3F2A /* BrandBonusListHeaderView.swift in Sources */,
 				53DF26BB2581FC9C00165247 /* EFCountAdapter.swift in Sources */,
 				53DF265B2581FC9A00165247 /* WalletBalanceProgressView.swift in Sources */,
 				A17072BC265271FF0013FB47 /* WithdrawController.swift in Sources */,
@@ -3905,7 +3972,6 @@
 				53DF253E2581FC9700165247 /* AdvertSpaceObject.swift in Sources */,
 				53DF254A2581FC9700165247 /* AccountDBManager.swift in Sources */,
 				9536A74725F8C3EC00280E5C /* AssetDetailHomeListController.swift in Sources */,
-				53BF601B2689D2C1005D62E3 /* BrandHomeController.swift in Sources */,
 				53DF26452581FC9A00165247 /* BaseView.swift in Sources */,
 				53DF262E2581FC9A00165247 /* SettingSectionHeader.swift in Sources */,
 				53DF263C2581FC9A00165247 /* BaseNavigationController.swift in Sources */,
@@ -3970,7 +4036,6 @@
 				53DF26152581FC9A00165247 /* FileUploadModel.swift in Sources */,
 				53DF26B32581FC9C00165247 /* HQIndexBannerSubview.m in Sources */,
 				53AA78DF25F8AD640081D04A /* LockDetailController.swift in Sources */,
-				53BF60252689D351005D62E3 /* BrandListCell.swift in Sources */,
 				53DF25C12581FC9800165247 /* TestTextView.swift in Sources */,
 				53DF25592581FC9700165247 /* UIFont+Extension.swift in Sources */,
 				95F4ABA32689D468001719BC /* BrandRequestInfo.swift in Sources */,
@@ -3984,6 +4049,7 @@
 				53DF26052581FC9900165247 /* ToastView.swift in Sources */,
 				53DF268B2581FC9B00165247 /* SettingHomeCell.swift in Sources */,
 				53DF269F2581FC9B00165247 /* CurrentUserInfoController.swift in Sources */,
+				53B19A4426AE5867003A3F2A /* BrandBonusListController.swift in Sources */,
 				53AA78E125F8AD640081D04A /* LockDetailListModel.swift in Sources */,
 				53DF25A72581FC9800165247 /* PictureThumbItemView.swift in Sources */,
 				53DF261C2581FC9A00165247 /* CommonSwitchView.swift in Sources */,
@@ -3995,9 +4061,11 @@
 				53DF26622581FC9B00165247 /* WalletWithdrawResultModel.swift in Sources */,
 				53DF25FB2581FC9900165247 /* SearchHistoryCell.swift in Sources */,
 				53DF260F2581FC9900165247 /* TitleIconControl.swift in Sources */,
+				53B19A3226AE56DB003A3F2A /* BrandListCell.swift in Sources */,
 				53DF25E22581FC9900165247 /* MessageHomeListCell.swift in Sources */,
 				53DF265D2581FC9B00165247 /* WalletHomeMainView.swift in Sources */,
 				53DF25632581FC9700165247 /* AppConstant.swift in Sources */,
+				53B19A3C26AE57A5003A3F2A /* BrandBonusHomeController.swift in Sources */,
 				53DF25512581FC9700165247 /* AreaPicker.swift in Sources */,
 				53DF258A2581FC9800165247 /* RequestInfo.swift in Sources */,
 				53DF26132581FC9A00165247 /* TitleContainer.swift in Sources */,
@@ -4028,7 +4096,6 @@
 				53DF26522581FC9A00165247 /* AssetListModel.swift in Sources */,
 				53DF268F2581FC9B00165247 /* PhoneVerityController.swift in Sources */,
 				53DF26782581FC9B00165247 /* FPHomeOrePoolItemView.swift in Sources */,
-				53BF60202689D2E6005D62E3 /* BrandModel.swift in Sources */,
 				53DF264A2581FC9A00165247 /* MineHomeHeaderView.swift in Sources */,
 				53DF26482581FC9A00165247 /* MineHomePlaceModel.swift in Sources */,
 				53DF25D22581FC9900165247 /* TestPopInteractiveController.swift in Sources */,
@@ -4040,6 +4107,7 @@
 				53DF261A2581FC9A00165247 /* TopTitleBottomTitleControl.swift in Sources */,
 				53DF25802581FC9800165247 /* EquipmentNetworkManager.swift in Sources */,
 				53DF25562581FC9700165247 /* String+QRCode.swift in Sources */,
+				53B19A3126AE56DB003A3F2A /* BrandModel.swift in Sources */,
 				53DF25842581FC9800165247 /* AppReachability.swift in Sources */,
 				53DF25B22581FC9800165247 /* BundleInfoModel.swift in Sources */,
 				53DF26B72581FC9C00165247 /* PagedFlowView.m in Sources */,

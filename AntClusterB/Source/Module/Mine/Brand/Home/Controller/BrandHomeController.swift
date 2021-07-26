@@ -181,6 +181,12 @@ extension BrandHomeController {
 // MARK: - Enter Page
 extension BrandHomeController {
     
+    /// 进入渠道分红页
+    fileprivate func enterBonusPage(with model: BrandModel, at index: Int = 0) -> Void {
+        let bonusVC = BrandBonusHomeController.init()
+        self.enterPageVC(bonusVC)
+    }
+    
 }
 
 // MARK: - Notification Function
@@ -215,6 +221,7 @@ extension BrandHomeController: UITableViewDataSource {
         cell.showTopMargin = true
         cell.showBottomMargin = true
         cell.showBottomLine = false
+        cell.delegate = self
         return cell
     }
     
@@ -235,4 +242,15 @@ extension BrandHomeController: UITableViewDelegate {
     }
     
 }
+
+// MARK: - <BrandListCellProtocol>
+extension BrandHomeController: BrandListCellProtocol {
+
+    /// 渠道分红点击回调
+    func brandCell(_ cell: BrandListCell, didClickedBonus bonusView: UIView, with model: BrandModel) -> Void {
+        self.enterBonusPage(with: model, at: 0)
+    }
+    
+}
+
 

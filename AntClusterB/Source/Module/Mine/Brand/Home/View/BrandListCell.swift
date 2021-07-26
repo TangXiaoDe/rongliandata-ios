@@ -9,6 +9,13 @@
 
 import UIKit
 
+protocol BrandListCellProtocol: class {
+    
+    /// 渠道分红点击回调
+    func brandCell(_ cell: BrandListCell, didClickedBonus bonusView: UIView, with model: BrandModel) -> Void
+
+}
+
 class BrandListCell: UITableViewCell
 {
     
@@ -26,7 +33,7 @@ class BrandListCell: UITableViewCell
     }
     
     /// 回调
-
+    weak var delegate: BrandListCellProtocol?
     
     var showBottomLine: Bool = true {
         didSet {
@@ -53,6 +60,8 @@ class BrandListCell: UITableViewCell
     fileprivate let topView: UIView = UIView.init()
     fileprivate let iconView: UIImageView = UIImageView.init()
     fileprivate let titleLabel: UILabel = UILabel.init()
+    fileprivate let bonusView: TitleIconControl = TitleIconControl.init() // 渠道分红
+    
     
     fileprivate let itemContainer: UIView = UIView.init()
     fileprivate let filItemView: BrandProcurementItemView = BrandProcurementItemView.init()
@@ -190,7 +199,30 @@ extension BrandListCell {
             make.centerY.equalToSuperview()
             make.trailing.lessThanOrEqualToSuperview().offset(-self.mainInLrMargin)
         }
-        // 3. bottomLine
+        // 3. bonusView
+        topView.addSubview(self.bonusView)
+        self.bonusView.addTarget(self, action: #selector(bonusViewClick(_:)), for: .touchUpInside)
+        self.bonusView.snp.makeConstraints { (make) in
+            make.trailing.equalToSuperview().offset(-self.mainInLrMargin)
+            make.centerY.equalToSuperview()
+        }
+        self.bonusView.titleLabel.set(text: "渠道分红", font: UIFont.pingFangSCFont(size: 14), textColor: AppColor.mainText)
+        self.bonusView.titleLabel.snp.remakeConstraints { (make) in
+            make.centerY.leading.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        self.bonusView.iconView.set(cornerRadius: 0)
+        self.bonusView.iconView.image = UIImage.init(named: "IMG_icon_arrow_right_gray")
+        self.bonusView.iconView.snp.remakeConstraints { (make) in
+            let iconSize: CGSize = CGSize.init(width: 6, height: 11)
+            make.size.equalTo(iconSize)
+            make.trailing.centerY.equalToSuperview()
+            make.leading.equalTo(self.bonusView.titleLabel.snp.trailing).offset(5)
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        // 4. bottomLine
         topView.addLineWithSide(.inBottom, color: AppColor.disable, thickness: 0.5, margin1: self.mainInLrMargin, margin2: self.mainInLrMargin)
     }
     ///
@@ -282,6 +314,14 @@ extension BrandListCell {
         guard let model = self.model else {
             return
         }
+    }
+    
+    /// 渠道分红点击
+    @objc fileprivate func bonusViewClick(_ bonusView: TitleIconControl) -> Void {
+        guard let model = self.model else {
+            return
+        }
+        self.delegate?.brandCell(self, didClickedBonus: bonusView, with: model)
     }
     
 }
