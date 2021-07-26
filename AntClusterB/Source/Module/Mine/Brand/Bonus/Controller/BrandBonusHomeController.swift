@@ -24,8 +24,10 @@ class BrandBonusHomeController: BaseViewController {
     fileprivate let topBgView: UIImageView = UIImageView()
     fileprivate let navBar: AppHomeNavStatusView = AppHomeNavStatusView.init()
     fileprivate let nestView: XDNestScrollContainerView = XDNestScrollContainerView()
-    
-    fileprivate var types: [CurrencyType] = [.fil, .chia]
+    fileprivate lazy var types: [CurrencyType] = {
+        let types: [CurrencyType] = AppConfig.share.isShowBzz ? [.fil, .chia, .bzz] : [.fil, .chia]
+        return types
+    }()
     fileprivate lazy var titleView: EquipmentHomeTitleView = {
         var titles: [String] = []
         self.types.forEach { (item) in
@@ -78,9 +80,6 @@ class BrandBonusHomeController: BaseViewController {
 extension BrandBonusHomeController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        if AppConfig.share.showBzz {
-            self.types.append(.bzz)
-        }
         self.initialUI()
         self.initialDataSource()
     }

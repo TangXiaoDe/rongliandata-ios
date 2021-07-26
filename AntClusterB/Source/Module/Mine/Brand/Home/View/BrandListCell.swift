@@ -230,10 +230,9 @@ extension BrandListCell {
         itemContainer.removeAllSubviews()
         //
         var topView: UIView = itemContainer
-        var itemViews: [BrandProcurementItemView] = [self.filItemView, self.xchItemView]
-        if AppConfig.share.showBzz {
-            itemViews.append(self.bzzItemView)
-        }
+        let bzzItemViews: [BrandProcurementItemView] = [self.filItemView, self.xchItemView, self.bzzItemView]
+        let nobzzItemViews: [BrandProcurementItemView] = [self.filItemView, self.xchItemView]
+        let itemViews: [BrandProcurementItemView] = AppConfig.share.isShowBzz ? bzzItemViews : nobzzItemViews
         for (index, itemView) in itemViews.enumerated() {
             itemContainer.addSubview(itemView)
             itemView.showBottomLine = index != itemViews.count - 1
