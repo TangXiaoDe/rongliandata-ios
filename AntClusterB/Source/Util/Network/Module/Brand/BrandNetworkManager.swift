@@ -41,7 +41,7 @@ extension BrandNetworkManager {
         var requestInfo = BrandRequestInfo.bonusList
         requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
         // 2.配置参数
-        let parameter: [String: Any] = ["brand_id": brand_id, "currency": currency, "offset": offset, "limit": limit]
+        let parameter: [String: Any] = ["brand_id": brand_id, "currency": currency.rawValue, "offset": offset, "limit": limit]
         requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in

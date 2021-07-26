@@ -147,7 +147,7 @@ extension BrandBonusListCell {
         self.titleLabel.text = model.title
         self.dateLabel.text = model.created_at
 //        string(format: "yyyy-MM-dd HH:mm", timeZone: TimeZone.current)
-        self.valueLabel.text = model.amount.decimalValidDigitsProcess(digits: 2)
+        self.valueLabel.text = model.amount.decimalValidDigitsProcess(digits: 8)
     }
 
 }
