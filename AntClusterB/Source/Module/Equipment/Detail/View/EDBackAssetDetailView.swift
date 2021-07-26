@@ -19,7 +19,7 @@ class EDBackAssetDetailView: UIView {
             guard let model = model else {
                 return
             }
-            self.formInterestLabel.text = "利息\(model.interest.decimalValidDigitsProcess(digits: 2))%"
+            self.formShouldInterestLabel.text = "应还利息\n\(model.interest.decimalValidDigitsProcess(digits: 2))%"
         }
     }
     var models: [EDAssetReturnListModel]? {
@@ -35,13 +35,15 @@ class EDBackAssetDetailView: UIView {
     
     let titleView: TitleIconView = TitleIconView.init()     // 标题
     
+    fileprivate let scrollView: UIScrollView = UIScrollView.init()
     fileprivate let formView: UIView = UIView.init()
     
     fileprivate let formTitleView: UIView = UIView.init()
     fileprivate let formDateLabel: UILabel = UILabel.init()      // 日期
     fileprivate let formZhiyaLabel: UILabel = UILabel.init()     // 质押币
     fileprivate let formGasLabel: UILabel = UILabel.init()       // Gas
-    fileprivate let formInterestLabel: UILabel = UILabel.init()  // 利息
+    fileprivate let formShouldInterestLabel: UILabel = UILabel.init()  // 应还利息
+    fileprivate let formRealInterestLabel: UILabel = UILabel.init()  // 实还利息
     
     fileprivate let formContainer: UIView = UIView.init()
 
@@ -57,20 +59,22 @@ class EDBackAssetDetailView: UIView {
     fileprivate let itemInLrMargin: CGFloat = 12
     
     fileprivate let itemInMargin: CGFloat = 12
+    fileprivate let titleItemHeight: CGFloat = 44
     fileprivate let itemHeight: CGFloat = 36
     fileprivate let itemVerMargin: CGFloat = 12
     fileprivate let itemTopMargin: CGFloat = 5
     fileprivate let itemBottomMargin: CGFloat = 10
     
     fileprivate let itemInLeftMargin: CGFloat = 12
-    fileprivate let itemInRightMargin: CGFloat = 0
+    fileprivate let itemInRightMargin: CGFloat = 12
     fileprivate let itemHorMargin: CGFloat = 5
-    fileprivate let itemColNum: Int = 4
-    fileprivate lazy var itemWidth: CGFloat = {
-        var width: CGFloat = (kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemInRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
-        width = CGFloat(floor(Double(width)))
-        return width
-    }()
+    fileprivate let itemColNum: Int = 5
+    fileprivate let itemWidth: CGFloat = 80
+//    fileprivate lazy var itemWidth: CGFloat = {
+//        var width: CGFloat = (kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemInRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
+//        width = CGFloat(floor(Double(width)))
+//        return width
+//    }()
 
     fileprivate let formTitleHeight: CGFloat = 36
     
@@ -158,21 +162,30 @@ extension EDBackAssetDetailView {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        // 2. form
-        mainView.addSubview(self.formView)
-        self.formView.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
-        self.formView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.titleView.snp.bottom)
-            make.bottom.equalToSuperview().offset(-self.formBottomMargin)
+        // scrollView
+        mainView.addSubview(self.scrollView)
+        self.scrollView.showsHorizontalScrollIndicator = false
+        self.scrollView.bounces = false
+        self.scrollView.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
+        self.scrollView.snp.makeConstraints { (make) in
+            //make.edges.equalToSuperview()
             make.leading.equalToSuperview().offset(self.itemOutLrMargin)
             make.trailing.equalToSuperview().offset(-self.itemOutLrMargin)
+            make.top.equalTo(self.titleView.snp.bottom)
+            make.bottom.equalToSuperview().offset(-self.formBottomMargin)
+        }
+        // 2. form
+        self.scrollView.addSubview(self.formView)
+        //self.formView.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
+        self.formView.snp.makeConstraints { (make) in
+            make.edges.height.equalToSuperview()
         }
         // 2.1 formTitle
         self.formView.addSubview(self.formTitleView)
         self.initialformTitleView(self.formTitleView)
         self.formTitleView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(self.itemHeight)
+            make.height.equalTo(self.titleItemHeight)
         }
         // 2.2 formContainer
         self.formView.addSubview(self.formContainer)
@@ -186,11 +199,11 @@ extension EDBackAssetDetailView {
     fileprivate func initialformTitleView(_ formView: UIView) -> Void {
         //
         formView.backgroundColor = AppColor.pageBg
-        formView.setupCorners(UIRectCorner.init([UIRectCorner.topLeft, UIRectCorner.topRight]), selfSize: CGSize.init(width: kScreenWidth - self.itemOutLrMargin * 2.0, height: self.formTitleHeight), cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
+        //formView.setupCorners(UIRectCorner.init([UIRectCorner.topLeft, UIRectCorner.topRight]), selfSize: CGSize.init(width: kScreenWidth - self.itemOutLrMargin * 2.0, height: self.formTitleHeight), cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
         //
         formView.removeAllSubviews()
-        let itemViews: [UILabel] = [self.formDateLabel, self.formZhiyaLabel, self.formGasLabel, self.formInterestLabel]
-        let itemTitles: [String] = ["结算时间", "质押币", "Gas", "利息"]
+        let itemViews: [UILabel] = [self.formDateLabel, self.formZhiyaLabel, self.formGasLabel, self.formShouldInterestLabel, self.formRealInterestLabel]
+        let itemTitles: [String] = ["结算时间", "质押币", "Gas", "应还利息", "实还利息"]
         let itemWidth: CGFloat = self.itemWidth
         var leftView: UIView = formView
         for (index, itemView) in itemViews.enumerated() {
@@ -210,7 +223,8 @@ extension EDBackAssetDetailView {
             }
             leftView = itemView
         }
-        
+        //
+        self.formShouldInterestLabel.numberOfLines = 2
     }
 
     ///

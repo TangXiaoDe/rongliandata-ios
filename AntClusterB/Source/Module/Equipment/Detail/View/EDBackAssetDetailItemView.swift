@@ -44,17 +44,19 @@ class EDBackAssetDetailItemView: BaseView {
     fileprivate let dateValueLabel: UILabel = UILabel.init()      // 日期
     fileprivate let zhiyaValueLabel: UILabel = UILabel.init()     // 质押币
     fileprivate let gasValueLabel: UILabel = UILabel.init()       // Gas
-    fileprivate let interestValueLabel: UILabel = UILabel.init()  // 利息
+    fileprivate let interestShouldLabel: UILabel = UILabel.init()  // 应还利息
+    fileprivate let interestRealLabel: UILabel = UILabel.init()  // 实还利息
     
     fileprivate let itemLeftMargin: CGFloat = 12
-    fileprivate let itemRightMargin: CGFloat = 0
+    fileprivate let itemRightMargin: CGFloat = 12
     fileprivate let itemHorMargin: CGFloat = 5
-    fileprivate let itemColNum: Int = 4
-    fileprivate lazy var itemWidth: CGFloat = {
-        var width: CGFloat = (self.viewWidth - self.itemLeftMargin - self.itemRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
-        width = CGFloat(floor(Double(width)))
-        return width
-    }()
+    fileprivate let itemColNum: Int = 5
+    fileprivate let itemWidth: CGFloat =  80
+//    fileprivate lazy var itemWidth: CGFloat = {
+//        var width: CGFloat = (self.viewWidth - self.itemLeftMargin - self.itemRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
+//        width = CGFloat(floor(Double(width)))
+//        return width
+//    }()
 
     
     // MARK: - Initialize Function
@@ -120,7 +122,7 @@ extension EDBackAssetDetailItemView {
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
         //
         mainView.removeAllSubviews()
-        let itemViews: [UILabel] = [self.dateValueLabel, self.zhiyaValueLabel, self.gasValueLabel, self.interestValueLabel]
+        let itemViews: [UILabel] = [self.dateValueLabel, self.zhiyaValueLabel, self.gasValueLabel, self.interestShouldLabel, interestRealLabel]
         let itemWidth: CGFloat = self.itemWidth
         var leftView: UIView = mainView
         for (index, itemView) in itemViews.enumerated() {
@@ -161,7 +163,8 @@ extension EDBackAssetDetailItemView {
         self.dateValueLabel.text = "2020.05.01"
         self.zhiyaValueLabel.text = "25.2142"
         self.gasValueLabel.text = "10.1514"
-        self.interestValueLabel.text = "1.021"
+        self.interestShouldLabel.text = "1.021"
+        self.interestRealLabel.text = "1.021"
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: EDAssetReturnListModel?) -> Void {
@@ -173,12 +176,13 @@ extension EDBackAssetDetailItemView {
         self.dateValueLabel.text = model.createdDate.string(format: "yyyy.MM.dd", timeZone: .current)
         self.zhiyaValueLabel.text = model.pledge.decimalValidDigitsProcess(digits: 8)
         self.gasValueLabel.text = model.gas.decimalValidDigitsProcess(digits: 8)
-        self.interestValueLabel.text = model.interest.decimalValidDigitsProcess(digits: 8)
+        self.interestShouldLabel.text = model.should_interest.decimalValidDigitsProcess(digits: 8)
+        self.interestRealLabel.text = model.interest.decimalValidDigitsProcess(digits: 8)
     }
     
     ///
 //    fileprivate func updateLayout() -> Void {
-//        let itemViews: [UILabel] = [self.dateValueLabel, self.zhiyaValueLabel, self.gasValueLabel, self.interestValueLabel]
+//        let itemViews: [UILabel] = [self.dateValueLabel, self.zhiyaValueLabel, self.gasValueLabel, self.interestShouldLabel]
 //        let itemWidth: CGFloat = CGFloat(floor(Double((self.viewWidth - self.itemLrMargin * 2.0) / CGFloat(itemViews.count))))
 //        for (_, itemView) in itemViews.enumerated() {
 //            itemView.snp.updateConstraints { (make) in
