@@ -145,7 +145,7 @@ extension OreDetailItemView {
         self.copyBtn.set(title: "复制", titleColor: UIColor.init(hex: 0x666666), for: .highlighted)
         self.copyBtn.addTarget(self, action: #selector(copyBtnClick(_:)), for: .touchUpInside)
         self.copyBtn.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview().offset(self.rightMargin)
+            make.trailing.equalToSuperview().offset(-self.rightMargin)
             make.centerY.equalToSuperview()
             make.size.equalTo(self.copyViewSize)
         }
