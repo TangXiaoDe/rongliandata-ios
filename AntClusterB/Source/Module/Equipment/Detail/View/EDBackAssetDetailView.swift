@@ -35,6 +35,7 @@ class EDBackAssetDetailView: UIView {
     
     let titleView: TitleIconView = TitleIconView.init()     // 标题
     
+    fileprivate let bottomView: UIView = UIView.init()      // contentView
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
     fileprivate let formView: UIView = UIView.init()
     
@@ -45,7 +46,7 @@ class EDBackAssetDetailView: UIView {
     fileprivate let formShouldInterestLabel: UILabel = UILabel.init()  // 应还利息
     fileprivate let formRealInterestLabel: UILabel = UILabel.init()  // 实还利息
     
-    fileprivate let formContainer: UIView = UIView.init()
+    fileprivate let formContentContainer: UIView = UIView.init()
 
     
     fileprivate let titleLeftMargin: CGFloat = 12
@@ -78,8 +79,8 @@ class EDBackAssetDetailView: UIView {
 
     fileprivate let formTitleHeight: CGFloat = 36
     
-    fileprivate let formContainerTopMargin: CGFloat = 0
-    fileprivate let formContainerBottomMargin: CGFloat = 25
+    fileprivate let formContentContainerTopMargin: CGFloat = 0
+    fileprivate let formContentContainerBottomMargin: CGFloat = 25
     
     
     
@@ -162,24 +163,36 @@ extension EDBackAssetDetailView {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        // scrollView
-        mainView.addSubview(self.scrollView)
-        self.scrollView.showsHorizontalScrollIndicator = false
-        self.scrollView.bounces = false
-        self.scrollView.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
-        self.scrollView.snp.makeConstraints { (make) in
-            //make.edges.equalToSuperview()
+        // 2. bottomView
+        mainView.addSubview(self.bottomView)
+        self.initialBottomView(self.bottomView)
+        self.bottomView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.itemOutLrMargin)
             make.trailing.equalToSuperview().offset(-self.itemOutLrMargin)
             make.top.equalTo(self.titleView.snp.bottom)
             make.bottom.equalToSuperview().offset(-self.formBottomMargin)
         }
+    }
+    
+    ///
+    fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
+        bottomView.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
+        // scrollView
+        bottomView.addSubview(self.scrollView)
+        self.scrollView.showsHorizontalScrollIndicator = false
+        self.scrollView.bounces = false
+        self.scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
         // 2. form
         self.scrollView.addSubview(self.formView)
-        //self.formView.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
+        self.initialFormView(self.formView)
         self.formView.snp.makeConstraints { (make) in
             make.edges.height.equalToSuperview()
         }
+    }
+    ///
+    fileprivate func initialFormView(_ formView: UIView) -> Void {
         // 2.1 formTitle
         self.formView.addSubview(self.formTitleView)
         self.initialformTitleView(self.formTitleView)
@@ -187,14 +200,14 @@ extension EDBackAssetDetailView {
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(self.titleItemHeight)
         }
-        // 2.2 formContainer
-        self.formView.addSubview(self.formContainer)
-        self.formContainer.snp.makeConstraints { (make) in
+        // 2.2 formContentContainer
+        self.formView.addSubview(self.formContentContainer)
+        self.formContentContainer.snp.makeConstraints { (make) in
             make.top.equalTo(self.formTitleView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
-    
+
     ///
     fileprivate func initialformTitleView(_ formView: UIView) -> Void {
         //
@@ -228,13 +241,13 @@ extension EDBackAssetDetailView {
     }
 
     ///
-    fileprivate func setupformContainer(with models: [EDAssetReturnListModel]) -> Void {
-        self.formContainer.removeAllSubviews()
+    fileprivate func setupformContentContainer(with models: [EDAssetReturnListModel]) -> Void {
+        self.formContentContainer.removeAllSubviews()
         //
-        var topView: UIView = self.formContainer
+        var topView: UIView = self.formContentContainer
         for (index, model) in models.enumerated() {
             let itemView = EDBackAssetDetailItemView.init(viewWidth: kScreenWidth - self.itemOutLrMargin * 2.0)
-            self.formContainer.addSubview(itemView)
+            self.formContentContainer.addSubview(itemView)
             itemView.model = model
             itemView.isLast = index == models.count - 1
             itemView.snp.makeConstraints { (make) in
@@ -257,13 +270,13 @@ extension EDBackAssetDetailView {
 //        let itemTitleCenterYTopMargin: CGFloat = 20     // super.top
 //        let itemValueCenterYBottomMargin: CGFloat = 22  // super.bottom
 //
-//        formContainer.removeAllSubviews()
+//        formContentContainer.removeAllSubviews()
 //        //
 //        let itemViews: [TitleValueView] = [self.zhiyaItemView, self.xiaohaoItemView]
 //        for (index, itemView) in itemViews.enumerated() {
 //            let row: Int = index / self.itemColNum
 //            let col: Int = index % self.itemColNum
-//            formContainer.addSubview(itemView)
+//            formContentContainer.addSubview(itemView)
 //            itemView.backgroundColor = UIColor.init(hex: 0xFDC818).withAlphaComponent(0.08)
 //            itemView.set(cornerRadius: 5)
 //            itemView.snp.makeConstraints { (make) in
@@ -314,7 +327,7 @@ extension EDBackAssetDetailView {
         //self.titleView.iconView.backgroundColor = UIColor.red
 //        self.titleView.titleLabel.text = "我是标题"
         
-        self.setupformContainer(with: [])
+        self.setupformContentContainer(with: [])
         
 //
 //        self.statusView.isHidden = false
@@ -373,7 +386,7 @@ extension EDBackAssetDetailView {
             return
         }
         // 子控件数据加载
-        self.setupformContainer(with: models)
+        self.setupformContentContainer(with: models)
     }
 
 }
