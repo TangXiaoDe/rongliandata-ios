@@ -30,6 +30,7 @@ class OreDetailItemView: UIView {
     
     fileprivate let topView: UIView = UIView.init()
     fileprivate let dateLabel: UILabel = UILabel.init()
+    fileprivate let copyBtn: UIButton = UIButton.init(type: .custom)
     fileprivate let topDashLine: XDDashLineView = XDDashLineView.init(lineColor: UIColor.init(hex: 0xECECEC), lengths: [3.0, 3.0])
     
     fileprivate let centerView: UIView = UIView.init()
@@ -42,6 +43,7 @@ class OreDetailItemView: UIView {
     fileprivate let arrearsNumView: TitleValueView = TitleValueView.init()   // 欠款利息
 
     fileprivate let topViewHeight: CGFloat = 32
+    fileprivate let copyViewSize: CGSize = CGSize.init(width: 36, height: 18)
     fileprivate let centerViewHeight: CGFloat = 66
     fileprivate let leftMargin: CGFloat = 12
     fileprivate let rightMargin: CGFloat = 12
@@ -128,12 +130,24 @@ extension OreDetailItemView {
     ///
     fileprivate func initialTopView(_ topView: UIView) -> Void {
         let titleLeftMargin: CGFloat = 12     // super.left
-        // 2. titleLabel
+        // 1. titleLabel
         topView.addSubview(self.dateLabel)
         self.dateLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999))
         self.dateLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(titleLeftMargin)
             make.centerY.equalToSuperview()
+        }
+        // 2. copyBtn
+        topView.addSubview(self.copyBtn)
+        self.copyBtn.backgroundColor = UIColor.init(hex: 0xeeeeee)
+        self.copyBtn.set(font: UIFont.pingFangSCFont(size: 12), cornerRadius: self.copyViewSize.height * 0.5)
+        self.copyBtn.set(title: "复制", titleColor: UIColor.init(hex: 0x666666), for: .normal)
+        self.copyBtn.set(title: "复制", titleColor: UIColor.init(hex: 0x666666), for: .highlighted)
+        self.copyBtn.addTarget(self, action: #selector(copyBtnClick(_:)), for: .touchUpInside)
+        self.copyBtn.snp.makeConstraints { (make) in
+            make.trailing.equalToSuperview().offset(self.rightMargin)
+            make.centerY.equalToSuperview()
+            make.size.equalTo(self.copyViewSize)
         }
         // 6. dashLine
         topView.addSubview(self.topDashLine)
@@ -258,6 +272,28 @@ extension OreDetailItemView {
 // MARK: - Event Function
 extension OreDetailItemView {
 
+    /// 复制按钮响应
+    @objc fileprivate func copyBtnClick(_ button: UIButton) -> Void {
+        guard let model = model else {
+            return
+        }
+        var content: String = "挖矿数: \(model.amount.decimalValidDigitsProcess(digits: 8))\n"
+        if let extend = model.extend {
+            content += "封装数: \(extend.fz_num.decimalValidDigitsProcess(digits: 8))\n"
+            if let zone = model.zone, zone == .ipfs || zone == .bzz {
+                content += "借贷质押币: \(extend.pledge_amount.decimalValidDigitsProcess(digits: 8))\n"
+                content += "借贷GAS: \(extend.gas_amount.decimalValidDigitsProcess(digits: 8))\n"
+            }
+            if let interest = extend.interest {
+                content += "应还利息: \(interest.decimalValidDigitsProcess(digits: 8))\n"
+            }
+            if let arrears = extend.arrears {
+                content += "欠款利息: \(arrears.decimalValidDigitsProcess(digits: 8))"
+            }
+        }
+        AppUtil.copyToPasteProcess(content, indicatorMsg: "复制成功") // "复制成功"
+    }
+    
 }
 
 // MARK: - Notification Function
