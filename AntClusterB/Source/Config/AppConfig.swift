@@ -85,5 +85,9 @@ class AppConfig {
 
     /// 显示测试界面
     var showTest: Bool = false
+    
+    /// 是否显示BZZ，当前版本不显示
+    let isShowBzz: Bool = false
+    
 
 }
