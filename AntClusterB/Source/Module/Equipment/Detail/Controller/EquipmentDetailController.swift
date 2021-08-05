@@ -239,6 +239,19 @@ extension EquipmentDetailController {
         let assetVC = AssetDetailHomeController.init(model: model)
         self.enterPageVC(assetVC)
     }
+    
+    /// 提前还币界面
+    fileprivate func enterPreReturnPage(with model: EDAssetModel) -> Void {
+        let returnVC = PreReturnHomeController.init(model: model)
+        self.enterPageVC(returnVC)
+    }
+
+    /// 归还流水界面
+    fileprivate func enterReturnListPage() -> Void {
+        let detailVC = ReturnListController.init()
+        self.enterPageVC(detailVC)
+    }
+
 
 }
 
@@ -295,6 +308,36 @@ extension EquipmentDetailController: EquipmentDetailViewProtocol {
 //        }
         self.enterEquipLockDetailPage(with: self.id)
     }
+    
+    /// 提前还币点击回调
+    func detailView(_ detailView: EquipmentDetailView, didClickedPreReturn returnView: UIView) -> Void {
+        // 引导弹窗
+//        let guideVC = PreReturnGuideController.init()
+//        self.present(guideVC, animated: false, completion: nil)
+        //
+        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets else {
+            return
+        }
+        self.enterPreReturnPage(with: asset)
+        //
+//        guard let model = self.detail, let product = model.product, product.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
+//            return
+//        }
+//        self.enterPreReturnPage(with: asset)
+//        switch model.pkg_status {
+//        case .deploying, .doing, .closed:
+//            Toast.showToast(title: "当前封装未完成，\n暂时无法提前还币")
+//        case .done:
+//            self.enterPreReturnPage(with: asset)
+//        }
+    }
+    
+    /// 归还流水点击回调
+    func detailView(_ detailView: EquipmentDetailView, didClickedReturnDetail returnDetailView: UIView) -> Void {
+        print("EquipmentDetailController detailView didClickedReturnDetail")
+        self.enterReturnListPage()
+    }
+
 
 }
 

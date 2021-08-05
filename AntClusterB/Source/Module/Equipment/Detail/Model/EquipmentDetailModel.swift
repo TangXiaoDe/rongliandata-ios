@@ -363,6 +363,10 @@ class EDAssetModel: Mappable {
         return self.gas - self.return_gas
     }
 
+    /// 待归还总计
+    var wait_total: Double {
+        return self.wait_pledge + self.wait_gas + self.interest
+    }
 
     required init?(map: Map) {
         

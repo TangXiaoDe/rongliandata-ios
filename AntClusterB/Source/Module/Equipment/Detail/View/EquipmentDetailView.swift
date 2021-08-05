@@ -15,7 +15,11 @@ protocol EquipmentDetailViewProtocol: class {
     func detailView(_ detailView: EquipmentDetailView, didClickedAssetDetail addetDetailView: UIView) -> Void
     /// 锁仓详情入口点击
     func detailView(_ detailView: EquipmentDetailView, didClickedLockDetail lockDetailView: UIView) -> Void
-    
+    /// 提前还币点击回调
+    func detailView(_ detailView: EquipmentDetailView, didClickedPreReturn returnView: UIView) -> Void
+    /// 归还流水点击回调
+    func detailView(_ detailView: EquipmentDetailView, didClickedReturnDetail returnDetailView: UIView) -> Void
+
 }
 
 class EquipmentDetailView: UIView
@@ -145,6 +149,7 @@ extension EquipmentDetailView {
         self.assetSurveyView.model = nil
         self.assetSurveyView.delegate = self
         self.backAssetDetailView.models = nil
+        self.unbackAssetView.delegate = self
     }
     
 }
@@ -179,20 +184,16 @@ extension EquipmentDetailView {
         self.backedAssetView.zhiyaItemView.valueLabel.text = asset.return_pledge.decimalValidDigitsProcess(digits: 8)
         self.backedAssetView.xiaohaoItemView.valueLabel.text = asset.return_gas.decimalValidDigitsProcess(digits: 8)
         //
-        self.unbackAssetView.zhiyaItemView.valueLabel.text = asset.wait_pledge.decimalValidDigitsProcess(digits: 8)
-        self.unbackAssetView.xiaohaoItemView.valueLabel.text = asset.wait_gas.decimalValidDigitsProcess(digits: 8)
-        self.unbackAssetView.interestItemView.valueLabel.text = asset.interest.decimalValidDigitsProcess(digits: 8)
-        //
         self.packageDetailView.status = model.pkg_status
         self.backAssetDetailView.model = model
         self.assetSurveyView.model = (asset, model.zone)
-        
         //
+        self.unbackAssetView.model = model
         //
         self.packageDetailView.model = ("封装详情", model.zone)
         self.loanCapitalView.model = ("借贷资本明细", model.zone)
         self.backedAssetView.model = ("已归还", model.zone)
-        self.unbackAssetView.model = ("待归还", model.zone)
+        
     }
     
 }
@@ -228,6 +229,26 @@ extension EquipmentDetailView: EDAssetSurveyViewProtocol {
         self.delegate?.detailView(self, didClickedLockDetail: lockDetailView)
     }
 
+}
+
+// MARK: - <EDUnbackSubjectViewProtocol>
+extension EquipmentDetailView: EDUnbackSubjectViewProtocol {
+    
+    /// 提前还币点击回调
+    func unbackView(_ unbackView: EDUnbackSubjectView, didClickedPreReturn returnView: UIView) -> Void {
+        self.delegate?.detailView(self, didClickedPreReturn: returnView)
+    }
+    
+}
+
+// MARK: - <EDBackAssetDetailViewProtocol>
+extension EquipmentDetailView: EDBackAssetDetailViewProtocol {
+    
+    /// 归还流水点击回调
+    func assetDetailView(_ detailView: EDBackAssetDetailView, didClickedReturnDetail returnDetailView: UIView) -> Void {
+        self.delegate?.detailView(self, didClickedReturnDetail: detailView)
+    }
+    
 }
 
 
