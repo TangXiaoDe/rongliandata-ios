@@ -12,7 +12,7 @@ import UIKit
 class PreReturnResultController: BaseViewController {
     // MARK: - Internal Property
 
-    var model: String?
+    let model: PreReturnResultModel
 
     // MARK: - Private Property
 
@@ -46,8 +46,8 @@ class PreReturnResultController: BaseViewController {
 
     // MARK: - Initialize Function
 
-    init(result: String? = nil) {
-        self.model = result
+    init(model: PreReturnResultModel) {
+        self.model = model
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder aDecoder: NSCoder) {
@@ -224,15 +224,19 @@ extension PreReturnResultController {
 extension PreReturnResultController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
-        self.setupAsDemo()
-//        if let model = self.model {
-//            self.setupData(with: model)
-//        }
+//        self.setupAsDemo()
+        
+        //
+        self.promptIconView.image = UIImage.init(named: "IMG_wallet_tixian_succese")
+        self.promptTitleLabel.text = "还币成功"
+        self.setupWithModel(self.model)
     }
-
+    
+    
+    ///
     fileprivate func setupAsDemo() -> Void {
         //
-        self.promptIconView.image = UIImage.init(named: "IMG_common_acc_icon")
+        self.promptIconView.image = UIImage.init(named: "IMG_wallet_tixian_succese")
         self.promptTitleLabel.text = "还币成功"
         self.promptInfoLabel.text = "52.00015FIL"
         //
@@ -244,39 +248,35 @@ extension PreReturnResultController {
         self.typeItemView.valueLabel.text = "归还全部"
         self.dateItemView.valueLabel.text = "2019-10-12 13:20:45"
     }
-    fileprivate func setupData(with model: String) -> Void {
-        self.setupAsDemo()
-        
-//        self.withdrawalAmountView.secondLabel.text = model.amount.decimalValidDigitsProcess(digits: 8) + " " + model.currency.uppercased()
-//        self.withdrawalFeeView.secondLabel.text = model.fee.decimalValidDigitsProcess(digits: 8) + " " + model.currency.uppercased()
-//        self.withdrawalDateView.secondLabel.text = model.createdDate.string(format: "yyyy-MM-dd HH:mm:ss", timeZone: .current)
-//        switch model.status {
-//        case .applying:
-//            // 审核中
-//            self.promptIconView.image = UIImage.init(named: "IMG_common_acc_icon")    // IMG_wallet_tixian_fail
-//            self.promptTitleLabel.text = "提交成功" // 提交成功、提现成功、提现失败、
-//            self.promptInfoLabel.text = "提币申请已提交，等待审核"  // 提现已成功到账、审核未通过，提现失败，自动返回可提现余额
-////            self.withdrawalStatusView.secondLabel.text = "审核中"  // 审核中、提现成功、提现失败
-////            self.withdrawalStatusView.secondLabel.textColor = UIColor.init(hex: 0x007FFF)   // 0x007FFF、0x333333、E68E40
-////            self.withdrawalStatusView.secondLabel.backgroundColor = UIColor.init(hex: 0xF2F8FF) // 0xF2F8FF、0xF5F5F5、0xFFFBF7
-//        case .success:
-//            // 提现成功
-//            self.promptIconView.image = UIImage.init(named: "IMG_common_acc_icon")    // IMG_common_acc_icon/IMG_wallet_tixian_fail
-//            self.promptTitleLabel.text = "提币成功" // 提交成功、提现成功、提现失败、
-//            self.promptInfoLabel.text = "提币\(model.currency.uppercased())已成功到账"  // 提现已成功到账、审核未通过，提现失败，自动返回可提现余额
-////            self.withdrawalStatusView.secondLabel.text = "提币成功"  // 审核中、提现成功、提现失败
-////            self.withdrawalStatusView.secondLabel.textColor = AppColor.mainText   // 0x007FFF、0x333333、E68E40
-////            self.withdrawalStatusView.secondLabel.backgroundColor = AppColor.pageBg // 0xF2F8FF、0xF5F5F5、0xFFFBF7
-//        case .fail:
-//            // 提现失败
-//            self.promptIconView.image = UIImage.init(named: "IMG_wallet_tixian_fail")    // IMG_common_acc_icon
-//            self.promptTitleLabel.text = "提币失败" // 提交成功、提现成功、提现失败、
-//            self.promptInfoLabel.text = "提币失败，FIL自动返回可提现余额"  // 提现已成功到账、审核未通过，提现失败，自动返回可提现余额
-////            self.withdrawalStatusView.secondLabel.text = "提币失败"  // 审核中、提现成功、提现失败
-////            self.withdrawalStatusView.secondLabel.textColor = UIColor.init(hex: 0xE68E40)   // 0x007FFF、0x333333、0xE68E40
-////            self.withdrawalStatusView.secondLabel.backgroundColor = UIColor.init(hex: 0xFFFBF7) // 0xF2F8FF、0xF5F5F5、0xFFFBF7
-//        }
+    
+    ///
+    fileprivate func setupWithModel(_ model: PreReturnResultModel?) -> Void {
+        guard let model = model else {
+            return
+        }
+        //
+        self.promptInfoLabel.text = model.totalReturnAmount.decimalValidDigitsProcess(digits: 8)
+        //
+        var itemViews: [UIView] = []
+        switch model.type {
+        case .all:
+            itemViews = [self.waitPledgeItemView, self.waitGasItemView, self.waitInterestItemView, self.interestItemView, self.typeItemView, self.dateItemView]
+        case .gas:
+            itemViews = [self.waitGasItemView, self.interestItemView, self.typeItemView, self.dateItemView]
+        case .mortgage:
+            itemViews = [self.waitPledgeItemView, self.interestItemView, self.typeItemView, self.dateItemView]
+        case .interest:
+            itemViews = [self.waitInterestItemView, self.typeItemView, self.dateItemView]
+        }
+        self.setupInfoContainer(with: itemViews)
+        self.waitPledgeItemView.valueLabel.text = "\(model.pledge.decimalValidDigitsProcess(digits: 8))  FIL"
+        self.waitGasItemView.valueLabel.text = "\(model.gas.decimalValidDigitsProcess(digits: 8))  FIL"
+        self.waitInterestItemView.valueLabel.text = "\(model.interest.decimalValidDigitsProcess(digits: 8))  FIL"
+        self.interestItemView.valueLabel.text = "\(model.interest.decimalValidDigitsProcess(digits: 8)) FIL"
+        self.typeItemView.valueLabel.text = model.type.title
+        self.dateItemView.valueLabel.text = model.createdDate.string(format: "yyyy-MM-dd HH:mm:ss", timeZone: TimeZone.current)
     }
+    
 
 }
 
@@ -284,30 +284,6 @@ extension PreReturnResultController {
 extension PreReturnResultController {
     
     @objc fileprivate func navLeftItemClick() -> Void {
-//        // 1. 优先处理通过present方式弹出的
-//        if let _ = self.navigationController?.presentingViewController {
-//            self.navigationController?.dismiss(animated: false, completion: nil)
-//            return
-//        }
-//        guard let childVCList = self.navigationController?.children else {
-//            return
-//        }
-//        // 2.2 判断指定界面push过来的
-//        for (_, childVC) in childVCList.reversed().enumerated() {
-//            // 集合：[MineHomeController/AssetDetailController
-//            if let childVC = childVC as? WalletDetailHomeController {
-//                self.navigationController?.popToViewController(childVC, animated: true)
-//                return
-//            }
-//            if let childVC = childVC as? WalletHomeController {
-//                self.navigationController?.popToViewController(childVC, animated: true)
-//                return
-//            }
-//            if let childVC = childVC as? AssetHomeController {
-//                self.navigationController?.popToViewController(childVC, animated: true)
-//                return
-//            }
-//        }
         self.navigationController?.popToRootViewController(animated: true)
     }
     

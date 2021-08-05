@@ -13,7 +13,7 @@ import ChainOneKit
 protocol PreReturnInputMainViewProtocol: class {
     
     ///
-    func inputMainView(_ inputMainView: PreReturnInputMainView, didClickedDone doneView: UIButton) -> Void
+    func didUpdateDoneBtnEnable(with inputMainView: PreReturnInputMainView) -> Void
     
 }
 
@@ -21,13 +21,77 @@ protocol PreReturnInputMainViewProtocol: class {
 class PreReturnInputMainView: UIView {
     
     // MARK: - Internal Property
+
+    var model: EquipmentDetailModel?
     
-    var model: String? {
+    var type: PreReturnType = .all {
         didSet {
-            self.setupWithModel(model)
+            self.setupWithType(type)
+        }
+    }
+    // Fil总资产
+    var totalFil: Double = 0 {
+        didSet {
+            self.totalAmountLabel.text = "可用FIL " + totalFil.decimalValidDigitsProcess(digits: 8)
+            self.setupWithType(self.type)
         }
     }
 
+    fileprivate var waitReturnAmount: Double = 0
+
+    var inputValue: Double? {
+        guard let strInput = self.textField.text, let inputValue = Double(strInput) else {
+            return nil
+        }
+        return inputValue
+    }
+    
+    // 利息比例(利息计算公式：本金 * 利率 / 30 * 本月开始与当前时间天数差值 )
+    fileprivate var interestRatio: Double {
+        return self.model?.interestRatio ?? 0
+    }
+    ///
+    fileprivate var intereset: Double {
+        guard let model = self.model, let asset = model.assets else {
+            return 0
+        }
+        var value: Double = 0
+        switch self.type {
+        case .interest:
+            value = 0
+        case .all:
+            value = (asset.wait_gas + asset.wait_pledge) * self.interestRatio
+        case .gas, .mortgage:
+            if let inputValue = self.inputValue, inputValue <= self.waitReturnAmount, inputValue > 0 {
+                value = inputValue * self.interestRatio
+            }
+        }
+        return value
+    }
+    
+    var totalReturnAmount: Double {
+        var returnAmount: Double = 0
+        switch self.type {
+        case .all:
+            returnAmount = self.waitReturnAmount
+        case .gas, .mortgage, .interest:
+            if let inputValue = self.inputValue, inputValue <= self.waitReturnAmount, inputValue > 0 {
+                returnAmount = inputValue
+            }
+        }
+        return returnAmount + self.intereset
+    }
+    
+    var couldDone: Bool {
+        var flag: Bool = true
+        guard let strInput = self.textField.text, let inputValue = Double(strInput) else {
+            return false
+        }
+        flag = inputValue > 0 && inputValue <= self.totalFil && inputValue <= self.waitReturnAmount && self.totalReturnAmount <= self.totalFil
+        return flag
+    }
+
+    
     /// 回调处理
     weak var delegate: PreReturnInputMainViewProtocol?
     
@@ -395,44 +459,77 @@ extension PreReturnInputMainView {
     fileprivate func setupAsDemo() -> Void {
 
     }
-    /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-        guard let _ = model else {
+    
+    ///
+    fileprivate func setupWithType(_ type: PreReturnType?) -> Void {
+        guard let type = type else {
             return
         }
-        // 子控件数据加载
+        //
+        self.returnAllBtn.isEnabled = type != .all
+        self.textField.isUserInteractionEnabled = type != .all
+        self.waitReturnAmount = self.model?.waitReturnAmount(for: self.type) ?? 0
+        self.waitReturnView.valueLabel.text = self.waitReturnAmount.decimalValidDigitsProcess(digits: 8)
+        //
+        var itemViews: [UIView] = []
+        switch type {
+        case .all:
+            self.textField.text = self.waitReturnAmount.decimalValidDigitsProcess(digits: 8)
+            itemViews = [self.totalWaitItemView, self.interestItemView]
+        case .gas:
+            self.textField.text = min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
+            itemViews = [self.gasItemView, self.interestItemView]
+        case .mortgage:
+            self.textField.text = min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
+            itemViews = [self.pledgeItemView, self.interestItemView]
+        case .interest:
+            self.textField.text = min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
+            itemViews = [self.interestWaitItemView, UIView.init()]
+        }
+        self.setupItemContainer(with: itemViews)
+        //[self.totalWaitItemView, self.interestWaitItemView, self.interestItemView, self.gasItemView, self.pledgeItemView]
+        if let model = self.model, let asset = model.assets {
+            self.totalWaitItemView.valueLabel.text = "\(asset.wait_total.decimalValidDigitsProcess(digits: 8))FIL"
+        }
+        if let inputValue = self.inputValue {
+            self.interestWaitItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+            self.gasItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+            self.pledgeItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+        }
+        self.interestItemView.valueLabel.text = "\(self.intereset.decimalValidDigitsProcess(digits: 8))FIL"
+        self.totalNumView.label.text = "\(self.totalReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+        //
+        self.updateTips()
+        self.delegate?.didUpdateDoneBtnEnable(with: self)
     }
-    
     
     ///
     fileprivate func updateTips() -> Void {
         // Tips:
-//        var tipsColor: UIColor = AppColor.grayText
-//        var tips: String = ""
-//        switch self.type {
-//        case .all:
-//            if self.waitReturnAmount <= self.totalFil {
-//                tips = "*还币类型为全部还清，不可修改还币数量"
-//            } else {
-//                tips = "*全部待归还数量超过可用FIL数"
-//                tipsColor = AppColor.themeRed
-//            }
-//        case .gas, .mortgage, .interest:
-//            if let strInput = self.textField.text, let inputValue = Double(strInput) {
-//                if inputValue > self.waitReturnAmount {
-//                    tips = "*您当前输入的还币数量已超过待还数量，请重新输入"
-//                    tipsColor = AppColor.themeRed
-//                } else if inputValue > self.totalFil {
-//                    tips = "*输入金额超过可用FIL数，请重新输入"
-//                    tipsColor = AppColor.themeRed
-//                }
-//            }
-//        }
-//        self.tipsLabel.text = tips
-//        self.tipsLabel.textColor = tipsColor
+        var tipsColor: UIColor = AppColor.grayText
+        var tips: String = ""
+        switch self.type {
+        case .all:
+            if self.totalReturnAmount <= self.totalFil {
+                tips = "*还币类型为全部还清，不可修改还币数量"
+            } else {
+                tips = "*全部待归还数量超过可用FIL数"
+                tipsColor = AppColor.themeRed
+            }
+        case .gas, .mortgage, .interest:
+            if let inputValue = self.inputValue {
+                if inputValue > self.waitReturnAmount {
+                    tips = "*您当前输入的还币数量已超过待还数量，请重新输入"
+                    tipsColor = AppColor.themeRed
+                } else if inputValue > self.totalFil {
+                    tips = "*输入金额超过可用FIL数，请重新输入"
+                    tipsColor = AppColor.themeRed
+                }
+            }
+        }
+        self.tipsLabel.text = tips
+        self.tipsLabel.textColor = tipsColor
     }
-
     
 }
 
@@ -441,25 +538,33 @@ extension PreReturnInputMainView {
     
     /// 
     @objc func textFieldValueChanged(_ textField: UITextField) {
-//        self.couldDoneProcess()
+        if let inputValue = self.inputValue {
+            self.interestWaitItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+            self.gasItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+            self.pledgeItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+        }
+        self.interestItemView.valueLabel.text = "\(self.intereset.decimalValidDigitsProcess(digits: 8))FIL"
+        self.totalNumView.label.text = "\(self.totalReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+        self.updateTips()
+        self.delegate?.didUpdateDoneBtnEnable(with: self)
     }
     
     ///
     @objc fileprivate func returnAllBtnClick(_ button: UIButton) -> Void {
-        
+        switch self.type {
+        case .all:
+            break
+        case .gas, .mortgage, .interest:
+            self.textField.text = self.waitReturnAmount.decimalValidDigitsProcess(digits: 8)
+            self.interestWaitItemView.valueLabel.text = "\(self.waitReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+            self.gasItemView.valueLabel.text = "\(self.waitReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+            self.pledgeItemView.valueLabel.text = "\(self.waitReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+            self.interestItemView.valueLabel.text = "\(self.intereset.decimalValidDigitsProcess(digits: 8))FIL"
+            self.totalNumView.label.text = "\(self.totalReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+            self.updateTips()
+        }
+        self.delegate?.didUpdateDoneBtnEnable(with: self)
     }
-    
-    
-    //    ///
-    //    @objc fileprivate func returnAllBtnClick(_ button: UIButton) -> Void {
-    //        switch self.type {
-    //        case .all:
-    //            break
-    //        case .gas, .mortgage, .interest:
-    //            self.textField.text = self.waitReturnAmount.decimalValidDigitsProcess(digits: 8)
-    //        }
-    //        self.couldDoneProcess()
-    //    }
 
 
 }

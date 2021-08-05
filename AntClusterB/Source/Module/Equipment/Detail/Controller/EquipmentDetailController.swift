@@ -241,7 +241,7 @@ extension EquipmentDetailController {
     }
     
     /// 提前还币界面
-    fileprivate func enterPreReturnPage(with model: EDAssetModel) -> Void {
+    fileprivate func enterPreReturnPage(with model: EquipmentDetailModel) -> Void {
         let returnVC = PreReturnHomeController.init(model: model)
         self.enterPageVC(returnVC)
     }
@@ -315,10 +315,15 @@ extension EquipmentDetailController: EquipmentDetailViewProtocol {
 //        let guideVC = PreReturnGuideController.init()
 //        self.present(guideVC, animated: false, completion: nil)
         //
-        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets else {
+        guard let model = self.detail, model.zone == .ipfs else {
             return
         }
-        self.enterPreReturnPage(with: asset)
+        
+        model.assets?.interest = 100
+        model.assets?.pledge = 200
+        model.assets?.gas = 300
+        self.enterPreReturnPage(with: model)
+        
         //
 //        guard let model = self.detail, let product = model.product, product.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
 //            return

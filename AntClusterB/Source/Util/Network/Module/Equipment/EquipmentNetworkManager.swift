@@ -348,12 +348,12 @@ extension EquipmentNetworkManager {
     //    return_type    string    无    是    还款类型，all/pledge/gas/interest
     //    amount    string    无    是    还币数量
     //    pay_password    string    无    是    支付密码
-    class func preReturn(orderId: String, returnType: PreReturnType, amount: String, payPwd: String, complete: @escaping((_ status: Bool, _ msg: String?, _ model: String?) -> Void)) -> Void {
+    class func preReturn(orderId: String, returnType: PreReturnType, amount: String, payPwd: String, complete: @escaping((_ status: Bool, _ msg: String?, _ model: PreReturnResultModel?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = EquipmentRequestInfo.preReturn
-        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [orderId])
         // 2.配置参数
-        let parameter: [String: Any] = ["order_id": orderId, "return_type": returnType.rawValue, "amount": amount, "pay_password": payPwd]
+        let parameter: [String: Any] = ["type": returnType.rawValue, "num": amount, "pay_password": payPwd]
         requestInfo.parameter = parameter
         // 3.发起请求
         NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
@@ -363,7 +363,7 @@ extension EquipmentNetworkManager {
             case .failure(let failure):
                 complete(false, failure.message, nil)
             case .success(let response):
-                complete(true, response.message, response.message)
+                complete(true, response.message, response.model)
             }
         }
     }

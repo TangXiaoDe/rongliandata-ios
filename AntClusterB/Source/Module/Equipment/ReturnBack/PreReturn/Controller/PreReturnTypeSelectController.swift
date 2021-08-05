@@ -126,7 +126,7 @@ extension PreReturnTypeSelectController {
         mainView.addSubview(self.typeContainer)
         self.initialTypeContainer(self.typeContainer)
         self.typeContainer.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.titleView.snp.bottom)
         }
         // 3. bottomView
@@ -134,7 +134,7 @@ extension PreReturnTypeSelectController {
         self.bottomView.backgroundColor = UIColor.white
         self.bottomView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.typeContainer.snp.bottom)
+            make.top.equalTo(self.typeContainer.snp.bottom).offset(self.bottomViewTopMargin)
         }
         self.bottomView.addSubview(self.cancelBtn)
         self.cancelBtn.set(title: "取消", titleColor: AppColor.grayText, for: .normal)
@@ -152,11 +152,12 @@ extension PreReturnTypeSelectController {
         containerView.backgroundColor = UIColor.white
         containerView.removeAllSubviews()
         //
-        let itemViews: [TitleIconControl] = [self.allItemView, self.gasItemView, self.pledgeItemView, self.interestItemView]
+        let itemViews: [TitleIconControl] = [self.allItemView, self.pledgeItemView, self.gasItemView, self.interestItemView]
         let itemTitles: [String] = ["归还全部", "归还质押币", "归还GAS消耗", "归还累计欠款利息"]
         var lastView: UIView = containerView
         for (index, itemView) in itemViews.enumerated() {
             containerView.addSubview(itemView)
+            itemView.addTarget(self, action: #selector(itemViewClick(_:)), for: .touchUpInside)
             itemView.snp.makeConstraints { (make) in
                 make.leading.trailing.equalToSuperview()
                 make.height.equalTo(self.itemViewHeight)
@@ -236,7 +237,9 @@ extension PreReturnTypeSelectController {
         }
         //
         self.dismiss(animated: false) {
-            self.delegate?.returnTypeSelectVC(self, didSelected: selectedType)
+            DispatchQueue.main.async {
+                self.delegate?.returnTypeSelectVC(self, didSelected: selectedType)
+            }
         }
     }
 

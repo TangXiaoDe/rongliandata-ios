@@ -19,6 +19,22 @@ enum PreReturnType: String {
     case mortgage = "pledge"
     /// 累计欠款利息
     case interest
+    
+    var title: String {
+        var value: String = ""
+        switch self {
+        case .all:
+            value = "归还全部"
+        case .gas:
+            value = "归还GAS消耗"
+        case .mortgage:
+            value = "归还质押币"
+        case .interest:
+            value = "归还累计欠款利息"
+        }
+        return value
+    }
+    
 }
 
 class PreReturnHomeController: BaseViewController
@@ -26,7 +42,7 @@ class PreReturnHomeController: BaseViewController
 
     // MARK: - Internal Property
     
-    let model: EDAssetModel
+    let model: EquipmentDetailModel
     
     // MARK: - Private Property
     
@@ -70,10 +86,7 @@ class PreReturnHomeController: BaseViewController
     
     // MARK: - Initialize Function
     
-    init(model: EDAssetModel) {
-        
-        model.interest = 100
-        
+    init(model: EquipmentDetailModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
@@ -293,12 +306,15 @@ extension PreReturnHomeController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         //self.setupAsDemo()
-        self.gasItemView.value = self.model.wait_gas
-        self.mortgageItemView.value = self.model.wait_pledge
-        self.interestItemView.value = self.model.interest
+        guard let asset = self.model.assets else {
+            return
+        }
+        self.gasItemView.value = asset.wait_gas
+        self.mortgageItemView.value = asset.wait_pledge
+        self.interestItemView.value = asset.interest
         //
-        self.totalWaitReturnView.valueLabel.text = self.model.wait_total.decimalValidDigitsProcess(digits: 8)
-        self.returnAllBtn.isEnabled = self.model.wait_total > 0
+        self.totalWaitReturnView.valueLabel.text = asset.wait_total.decimalValidDigitsProcess(digits: 8)
+        self.returnAllBtn.isEnabled = asset.wait_total > 0
         self.returnAllBtn.backgroundColor = self.returnAllBtn.isEnabled ? AppColor.theme : AppColor.disable
     }
     ///
@@ -335,7 +351,7 @@ extension PreReturnHomeController {
     
     ///
     @objc fileprivate func returnAllBtnClick(_ button: UIButton) -> Void {
-        self.enterReturnInputPage(type: .all, maxReturn: self.model.wait_total)
+        self.enterReturnInputPage(type: .all, model: self.model)
     }
 
 }
@@ -349,8 +365,8 @@ extension PreReturnHomeController {
 extension PreReturnHomeController {
     
     /// 进入还款输入界面
-    fileprivate func enterReturnInputPage(type: PreReturnType, maxReturn: Double) -> Void {
-        let inputVC = PreReturnInputController.init(type: type, amount: maxReturn)
+    fileprivate func enterReturnInputPage(type: PreReturnType, model: EquipmentDetailModel) -> Void {
+        let inputVC = PreReturnInputController.init(type: type, model: model)
         self.enterPageVC(inputVC)
     }
     
@@ -392,11 +408,11 @@ extension PreReturnHomeController: PRWaitReturnItemViewProtocol {
 
         switch itemView {
         case self.gasItemView:
-            self.enterReturnInputPage(type: .gas, maxReturn: self.model.wait_gas)
+            self.enterReturnInputPage(type: .gas, model: self.model)
         case self.mortgageItemView:
-            self.enterReturnInputPage(type: .mortgage, maxReturn: self.model.wait_pledge)
+            self.enterReturnInputPage(type: .mortgage, model: self.model)
         case self.interestItemView:
-            self.enterReturnInputPage(type: .interest, maxReturn: self.model.interest)
+            self.enterReturnInputPage(type: .interest, model: self.model)
         default:
             break
         }

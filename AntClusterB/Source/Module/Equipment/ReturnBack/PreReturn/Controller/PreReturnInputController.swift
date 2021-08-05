@@ -13,11 +13,8 @@ class PreReturnInputController: BaseViewController {
 
     // MARK: - Internal Property
     
-    let type: PreReturnType
-    let waitReturnAmount: Double
-    //let model: EquipmentDetailModel
-    
-    
+    var type: PreReturnType
+    let model: EquipmentDetailModel
     var totalFil: Double = 0
     
     // MARK: - Private Property
@@ -42,9 +39,9 @@ class PreReturnInputController: BaseViewController {
     
     // MARK: - Initialize Function
     
-    init(type: PreReturnType, amount: Double) {
+    init(type: PreReturnType, model: EquipmentDetailModel) {
         self.type = type
-        self.waitReturnAmount = amount
+        self.model = model
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder aDecoder: NSCoder) {
@@ -144,7 +141,7 @@ extension PreReturnInputController {
         }
         // 2. centerView
         mainView.addSubview(self.centerView)
-        //self.centerView.delegate = self
+        self.centerView.delegate = self
         self.centerView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.trailing.equalToSuperview().offset(-self.lrMargin)
@@ -185,73 +182,47 @@ extension PreReturnInputController {
         //
         let tips: String = "温馨提示： \n输入还币本金，当还币类型中有利息时，则本次还币数量为输入本金的本息总计和"
         self.tipsLabel.text = tips
+        self.centerView.model = self.model
+        self.setupWithType(self.type)
         self.requestForFilAsset()
         self.couldDoneProcess()
-        
-//        self.waitReturnView.valueLabel.text = self.waitReturnAmount.decimalValidDigitsProcess(digits: 8)
-//        self.returnAllBtn.isEnabled = self.type != .all
-//        self.textField.isUserInteractionEnabled = self.type != .all
-//        self.updateTips()
+    }
 
+    ///
+    fileprivate func setupWithType(_ type: PreReturnType) -> Void {
+        self.typeView.valueLabel.text = type.title
+        self.centerView.type = type
     }
     
     ///
     fileprivate func couldDone() -> Bool {
-        var flag: Bool = true
-//        guard let strInput = self.textField.text, let inputValue = Double(strInput) else {
-//            return false
-//        }
-//        flag = inputValue > 0 && inputValue <= self.totalFil && inputValue <= self.waitReturnAmount
-        return flag
+        return self.centerView.couldDone
     }
     ///
     fileprivate func couldDoneProcess() -> Void {
         self.doneBtn.isEnabled = self.couldDone()
         self.doneBtn.backgroundColor = self.doneBtn.isEnabled ? AppColor.theme : AppColor.disable
-        self.updateTips()
-    }
-
-    ///
-    fileprivate func updateTips() -> Void {
-        // Tips:
-//        var tipsColor: UIColor = AppColor.grayText
-//        var tips: String = ""
-//        switch self.type {
-//        case .all:
-//            if self.waitReturnAmount <= self.totalFil {
-//                tips = "*还币类型为全部还清，不可修改还币数量"
-//            } else {
-//                tips = "*全部待归还数量超过可用FIL数"
-//                tipsColor = AppColor.themeRed
-//            }
-//        case .gas, .mortgage, .interest:
-//            if let strInput = self.textField.text, let inputValue = Double(strInput) {
-//                if inputValue > self.waitReturnAmount {
-//                    tips = "*您当前输入的还币数量已超过待还数量，请重新输入"
-//                    tipsColor = AppColor.themeRed
-//                } else if inputValue > self.totalFil {
-//                    tips = "*输入金额超过可用FIL数，请重新输入"
-//                    tipsColor = AppColor.themeRed
-//                }
-//            }
-//        }
-//        self.tipsLabel.text = tips
-//        self.tipsLabel.textColor = tipsColor
     }
     
     ///
     fileprivate func doneBtnClickProcess() -> Void {
-//        guard let strInput = self.textField.text, let inputValue = Double(strInput), let user = AccountManager.share.currentAccountInfo?.userInfo else {
-//            return
-//        }
-//        // 1. 认证判断
-//        // 2. 密码设置判断
-//        if !user.payPwdStatus {
-//            self.showPayPwdInitialAlert(account: user.phone)
-//            return
-//        }
-//        // 3. 弹出密码输入框
-//        self.enterPayPage()
+        guard let inputValue = self.centerView.inputValue, let user = AccountManager.share.currentAccountInfo?.userInfo else {
+            return
+        }
+        // 1. 认证判断
+        // 2. 密码设置判断
+        if !user.payPwdStatus {
+            self.showPayPwdInitialAlert(account: user.phone)
+            return
+        }
+        // 3. 弹出密码输入框
+        let inputView: InputPasswordWithKeyBoardView = InputPasswordWithKeyBoardView()
+        inputView.delegate = self
+        inputView.tag = 5_000
+        UIApplication.shared.keyWindow?.addSubview(inputView)
+        inputView.snp.makeConstraints({ (make) in
+            make.top.left.right.bottom.equalToSuperview()
+        })
     }
 
 }
@@ -268,26 +239,12 @@ extension PreReturnInputController {
         self.view.endEditing(true)
         self.enterTypeSelectPage()
     }
-    
-    
-    
-    
-    
 
-    
     ///
     @objc fileprivate func doneBtnClick(_ button: UIButton) -> Void {
         self.view.endEditing(true)
-//        self.doneBtnClickProcess()
-        
-        self.enterResultPage()
-        
+        self.doneBtnClickProcess()
     }
-    
-//    //限制文字输入，处理按钮点击状态
-//    @objc func textFieldValueChanged(_ textField: UITextField) {
-//        self.couldDoneProcess()
-//    }
     
 }
 
@@ -296,20 +253,6 @@ extension PreReturnInputController {
     
     /// FIL资产请求
     fileprivate func requestForFilAsset() -> Void {
-//        AssetNetworkManager.getAssetInfo(CurrencyType.fil.rawValue) { [weak self](status, msg, model) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            guard status, let model = model else {
-//                Toast.showToast(title: msg)
-//                return
-//            }
-//            self.totalFil = model.lfbalance
-////            self.totalAmountLabel.text = "可用FIL " + self.totalFil.decimalValidDigitsProcess(digits: 8)
-//
-//            self.couldDoneProcess()
-//        }
-        
         AssetNetworkManager.getWalletAllInfo { [weak self](status, msg, models) in
             guard let `self` = self else {
                 return
@@ -320,13 +263,32 @@ extension PreReturnInputController {
             }
             models.forEach { (model) in
                 if model.currencyType == .fil {
+                    
+                    model.balance = "10000"
+                    
                     self.totalFil = model.lfbalance
-//                    self.totalAmountLabel.text = "可用FIL " + self.totalFil.decimalValidDigitsProcess(digits: 8)
+                    self.centerView.totalFil = self.totalFil
                     self.couldDoneProcess()
                 }
             }
         }
-        
+    }
+    
+    /// 获取结果
+    fileprivate func submitRequest(with password: String) {
+        guard let inputValue = self.centerView.inputValue else {
+            return
+        }
+        EquipmentNetworkManager.preReturn(orderId: self.model.order_no, returnType: self.type, amount: inputValue.decimalValidDigitsProcess(digits: 8), payPwd: password) { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            guard status, let model = model else {
+                Toast.showToast(title: msg)
+                return
+            }
+            self.enterResultPage(with: model)
+        }
     }
     
 }
@@ -351,27 +313,24 @@ extension PreReturnInputController {
         verifyNC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(verifyNC, animated: false, completion: nil)
     }
-    
-    /// 进入支付界面
-    fileprivate func enterPayPage() -> Void {
-        // 进入支付密码输入界面
-//        let payVC = PayViewController.init(type: .mall)
-//        payVC.mallOrderSubmitInfo = submitInfo
-//        payVC.delegate = self
-//        self.present(payVC, animated: false, completion: nil)
-    }
-    
+
     ///
     fileprivate func enterTypeSelectPage() -> Void {
         let selectVC = PreReturnTypeSelectController.init()
-        //selectVC.delegate = self
+        selectVC.delegate = self
         self.present(selectVC, animated: false, completion: nil)
     }
     
     ///
-    fileprivate func enterResultPage() -> Void {
-        let resultVC = PreReturnResultController.init()
+    fileprivate func enterResultPage(with model: PreReturnResultModel) -> Void {
+        let resultVC = PreReturnResultController.init(model: model)
         self.enterPageVC(resultVC)
+    }
+    
+    /// 支付密码重置界面
+    fileprivate func enterPayPwdPage() -> Void {
+        let verifyVC = PhoneVerityController.init(type: .payPwdReset)
+        self.enterPageVC(verifyVC)
     }
     
 }
@@ -381,8 +340,6 @@ extension PreReturnInputController {
     
     /// 键盘将要显示
     @objc fileprivate func keyboardWillShowNotificationProcess(_ notification: Notification) -> Void {
-        
-        
         let confirmMaxY: CGFloat = self.doneBtn.convert(CGPoint.init(x: 0, y: self.doneBtnHeight), to: nil).y + 5
         guard let userInfo = notification.userInfo, let kdBounds = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect, let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else {
             return
@@ -405,7 +362,6 @@ extension PreReturnInputController {
         }, completion: nil)
     }
 
-    
 }
 
 // MARK: - Extension Function
@@ -415,8 +371,44 @@ extension PreReturnInputController {
 
 // MARK: - Delegate Function
 
-// MARK: - <>
-extension PreReturnInputController {
+// MARK: - <PreReturnTypeSelectControllerProtocol>
+extension PreReturnInputController: PreReturnTypeSelectControllerProtocol {
+
+    ///
+    func returnTypeSelectVC(_ selectVC: PreReturnTypeSelectController, didSelected type: PreReturnType) -> Void {
+        self.type = type
+        self.setupWithType(self.type)
+        self.couldDoneProcess()
+    }
     
 }
 
+// MARK: - <PreReturnInputMainViewProtocol>
+extension PreReturnInputController: PreReturnInputMainViewProtocol {
+    
+    ///
+    func didUpdateDoneBtnEnable(with inputMainView: PreReturnInputMainView) -> Void {
+        self.couldDoneProcess()
+    }
+
+}
+
+// MARK: - <InputPayPasswordViewProtocol>
+extension PreReturnInputController: InputPayPasswordViewProtocol {
+    
+    func inputPayView(_ view: InputPasswordWithKeyBoardView, cancel button: UIButton) {
+        view.removeFromSuperview()
+    }
+
+    func inputPayView(_ view: InputPasswordWithKeyBoardView, finish text: String) {
+        view.removeFromSuperview()
+        /// 发起请求
+        self.submitRequest(with: text)
+    }
+
+    func inputPayView(_ view: InputPasswordWithKeyBoardView, forget button: UIButton) {
+        /// 跳转忘记密码
+        self.enterPayPwdPage()
+    }
+
+}

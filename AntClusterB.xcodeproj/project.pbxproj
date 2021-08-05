@@ -25,7 +25,6 @@
 		53230E6626BBBC31006920A0 /* PreReturnResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53230E5426BBBC31006920A0 /* PreReturnResultController.swift */; };
 		53230E6726BBBC31006920A0 /* PreReturnInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53230E5526BBBC31006920A0 /* PreReturnInputController.swift */; };
 		53230E6826BBBC31006920A0 /* PreReturnHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53230E5626BBBC31006920A0 /* PreReturnHomeController.swift */; };
-		53230E6926BBBC31006920A0 /* PreReturnPlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53230E5826BBBC31006920A0 /* PreReturnPlaceModel.swift */; };
 		53230E6A26BBBC31006920A0 /* PRWaitReturnItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53230E5A26BBBC31006920A0 /* PRWaitReturnItemView.swift */; };
 		53230E6C26BBBC31006920A0 /* ReturnListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53230E5E26BBBC31006920A0 /* ReturnListController.swift */; };
 		53230E6D26BBBC31006920A0 /* ReturnListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53230E6026BBBC31006920A0 /* ReturnListModel.swift */; };
@@ -39,6 +38,7 @@
 		533031C42660D78400FB07CC /* EquipDetailTermInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533031C32660D78400FB07CC /* EquipDetailTermInfoView.swift */; };
 		5394398924F8A8980097DCAA /* ResourcePlaceAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394398824F8A8980097DCAA /* ResourcePlaceAudio.swift */; };
 		5394398B24F8A8A50097DCAA /* ResourcePlacePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394398A24F8A8A50097DCAA /* ResourcePlacePicture.swift */; };
+		539B5B9026BC4053003336A8 /* PreReturnResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B5B8F26BC4053003336A8 /* PreReturnResultModel.swift */; };
 		53A6F41524E0FA3500E8C9B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2CC24E0FA3200E8C9B4 /* Assets.xcassets */; };
 		53A6F41624E0FA3500E8C9B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2CE24E0FA3200E8C9B4 /* README.md */; };
 		53A6F41724E0FA3500E8C9B4 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2D024E0FA3200E8C9B4 /* LaunchScreen.strings */; };
@@ -533,7 +533,6 @@
 		53230E5426BBBC31006920A0 /* PreReturnResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreReturnResultController.swift; sourceTree = "<group>"; };
 		53230E5526BBBC31006920A0 /* PreReturnInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreReturnInputController.swift; sourceTree = "<group>"; };
 		53230E5626BBBC31006920A0 /* PreReturnHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreReturnHomeController.swift; sourceTree = "<group>"; };
-		53230E5826BBBC31006920A0 /* PreReturnPlaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreReturnPlaceModel.swift; sourceTree = "<group>"; };
 		53230E5A26BBBC31006920A0 /* PRWaitReturnItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRWaitReturnItemView.swift; sourceTree = "<group>"; };
 		53230E5E26BBBC31006920A0 /* ReturnListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnListController.swift; sourceTree = "<group>"; };
 		53230E6026BBBC31006920A0 /* ReturnListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnListModel.swift; sourceTree = "<group>"; };
@@ -552,6 +551,7 @@
 		5336D2A42316A2C60090FEAF /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5394398824F8A8980097DCAA /* ResourcePlaceAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcePlaceAudio.swift; sourceTree = "<group>"; };
 		5394398A24F8A8A50097DCAA /* ResourcePlacePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcePlacePicture.swift; sourceTree = "<group>"; };
+		539B5B8F26BC4053003336A8 /* PreReturnResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreReturnResultModel.swift; sourceTree = "<group>"; };
 		53A6F2CC24E0FA3200E8C9B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53A6F2CD24E0FA3200E8C9B4 /* AntClusterB.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = AntClusterB.entitlements; sourceTree = "<group>"; };
 		53A6F2CE24E0FA3200E8C9B4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1204,7 +1204,7 @@
 		53230E5726BBBC31006920A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				53230E5826BBBC31006920A0 /* PreReturnPlaceModel.swift */,
+				539B5B8F26BC4053003336A8 /* PreReturnResultModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3866,7 +3866,6 @@
 				53DF259B2581FC9800165247 /* XDNestScrollView.swift in Sources */,
 				53DF26462581FC9A00165247 /* BaseButton.swift in Sources */,
 				53DF259E2581FC9800165247 /* PickerPopView.swift in Sources */,
-				53230E6926BBBC31006920A0 /* PreReturnPlaceModel.swift in Sources */,
 				53DF25402581FC9700165247 /* AdvertDBManager.swift in Sources */,
 				53DF25D82581FC9900165247 /* UnreadNumBubbleView.swift in Sources */,
 				53DF263F2581FC9A00165247 /* BaseTextView.swift in Sources */,
@@ -4254,6 +4253,7 @@
 				53DF25552581FC9700165247 /* UIImage+QRCode.swift in Sources */,
 				53DF26A72581FC9C00165247 /* MainTabBarController+Extension.swift in Sources */,
 				53DF25DF2581FC9900165247 /* MessageListController.swift in Sources */,
+				539B5B9026BC4053003336A8 /* PreReturnResultModel.swift in Sources */,
 				53DF255A2581FC9700165247 /* UIImage+Extension.swift in Sources */,
 				53DF25C42581FC9900165247 /* XDPresentDismissAnimation.swift in Sources */,
 				53DF267B2581FC9B00165247 /* FPHomeOrePoolView.swift in Sources */,
