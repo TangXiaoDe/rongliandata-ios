@@ -81,12 +81,13 @@ class EDBackAssetDetailView: UIView {
     fileprivate let itemInRightMargin: CGFloat = 12
     fileprivate let itemHorMargin: CGFloat = 5
     fileprivate let itemColNum: Int = 5
-    fileprivate let itemWidth: CGFloat = 80
-//    fileprivate lazy var itemWidth: CGFloat = {
-//        var width: CGFloat = (kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemInRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
-//        width = CGFloat(floor(Double(width)))
-//        return width
-//    }()
+    fileprivate lazy var itemWidth: CGFloat = {
+        // 总共有5个item，要求第4个item的正中间显示一半
+        let totalWidth: CGFloat = kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemHorMargin * CGFloat(self.itemColNum - 2)
+        let showNum: CGFloat = CGFloat(self.itemColNum - 2) + 0.25
+        var width: CGFloat = totalWidth / showNum
+        return width
+    }()
 
     fileprivate let formTitleHeight: CGFloat = 36
     
