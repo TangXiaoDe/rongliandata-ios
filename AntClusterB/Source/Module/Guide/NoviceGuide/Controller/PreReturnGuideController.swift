@@ -46,7 +46,7 @@ class PreReturnGuideController: BaseViewController
     
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let skipBtnTopMargin: CGFloat = 54
-    fileprivate let pageViewCenterYMultiply: CGFloat = (517.0 / (812.0 * 0.5))
+    fileprivate let pageViewCenterYMultiply: CGFloat = (517.0 / 812.0)
     fileprivate let doneBtnTopMargin: CGFloat = 25
     
     
@@ -142,7 +142,8 @@ extension PreReturnGuideController {
         self.pageControl.snp.makeConstraints { (make) in
             make.size.equalTo(self.pageViewSize)
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().multipliedBy(self.pageViewCenterYMultiply)
+            let topMargin: CGFloat = kScreenHeight * self.pageViewCenterYMultiply + 45
+            make.centerY.equalTo(self.view.snp.top).offset(topMargin)
         }
         // doneBtn
         self.view.addSubview(self.doneBtn)
@@ -178,11 +179,13 @@ extension PreReturnGuideController {
 
     /// 跳过/关闭
     @objc fileprivate func skipBtnClick() -> Void {
+        NoviceGuideManager.share.setGuideCompleteState(true, for: .equipPreReturn)
         print("PreReturnGuideController navBarLeftItemClick")
         self.dismiss(animated: false, completion: nil)
     }
     /// 完成/确定/马上体验
     @objc fileprivate func doneBtnClick() -> Void {
+        NoviceGuideManager.share.setGuideCompleteState(true, for: .equipPreReturn)
         print("PreReturnGuideController navBarRightItemClick")
         self.dismiss(animated: false, completion: nil)
     }

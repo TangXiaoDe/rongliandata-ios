@@ -255,7 +255,7 @@ extension PreReturnResultController {
             return
         }
         //
-        self.promptInfoLabel.text = model.totalReturnAmount.decimalValidDigitsProcess(digits: 8)
+        self.promptInfoLabel.text = model.totalReturnAmount.decimalValidDigitsProcess(digits: 8) + " FIL"
         //
         var itemViews: [UIView] = []
         switch model.type {
@@ -271,7 +271,7 @@ extension PreReturnResultController {
         self.setupInfoContainer(with: itemViews)
         self.waitPledgeItemView.valueLabel.text = "\(model.pledge.decimalValidDigitsProcess(digits: 8))  FIL"
         self.waitGasItemView.valueLabel.text = "\(model.gas.decimalValidDigitsProcess(digits: 8))  FIL"
-        self.waitInterestItemView.valueLabel.text = "\(model.interest.decimalValidDigitsProcess(digits: 8))  FIL"
+        self.waitInterestItemView.valueLabel.text = "\(model.arrears_interest.decimalValidDigitsProcess(digits: 8))  FIL"
         self.interestItemView.valueLabel.text = "\(model.interest.decimalValidDigitsProcess(digits: 8)) FIL"
         self.typeItemView.valueLabel.text = model.type.title
         self.dateItemView.valueLabel.text = model.createdDate.string(format: "yyyy-MM-dd HH:mm:ss", timeZone: TimeZone.current)

@@ -263,9 +263,6 @@ extension PreReturnInputController {
             }
             models.forEach { (model) in
                 if model.currencyType == .fil {
-                    
-                    model.balance = "10000"
-                    
                     self.totalFil = model.lfbalance
                     self.centerView.totalFil = self.totalFil
                     self.couldDoneProcess()
@@ -279,7 +276,7 @@ extension PreReturnInputController {
         guard let inputValue = self.centerView.inputValue else {
             return
         }
-        EquipmentNetworkManager.preReturn(orderId: self.model.order_no, returnType: self.type, amount: inputValue.decimalValidDigitsProcess(digits: 8), payPwd: password) { [weak self](status, msg, model) in
+        EquipmentNetworkManager.preReturn(orderId: "\(self.model.id)", returnType: self.type, amount: inputValue.decimalValidDigitsProcess(digits: 8), payPwd: password) { [weak self](status, msg, model) in
             guard let `self` = self else {
                 return
             }
@@ -407,6 +404,7 @@ extension PreReturnInputController: InputPayPasswordViewProtocol {
     }
 
     func inputPayView(_ view: InputPasswordWithKeyBoardView, forget button: UIButton) {
+        view.removeFromSuperview()
         /// 跳转忘记密码
         self.enterPayPwdPage()
     }

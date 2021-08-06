@@ -72,8 +72,8 @@ class ThemeConfig {
     /// 图片背景色(占位色)
     var imgBgColor: UIColor = UIColor.init(hex: 0x000000).withAlphaComponent(0.3)
 
-    /// 不可用颜色
-    var disableColor: UIColor = UIColor.init(hex: 0xC7CED8)
+    /// 不可用颜色 CCCCCC
+    var disableColor: UIColor = UIColor.init(hex: 0xCCCCCC) // 0xC7CED8 0xCCCCCC
     /// 文字不可用颜色
     var disableTitleColor: UIColor = UIColor.init(hex: 0x8C97AC)
 

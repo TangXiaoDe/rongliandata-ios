@@ -265,15 +265,15 @@ extension PreReturnInputMainView {
         }
         // 2. returnAll
         centerView.addSubview(self.returnAllBtn)
-        self.returnAllBtn.set(title: "还全部", titleColor: AppColor.theme, for: .normal)
-        self.returnAllBtn.set(title: "还全部", titleColor: AppColor.theme, for: .highlighted)
-        self.returnAllBtn.set(title: "还全部", titleColor: AppColor.disable, for: .disabled)
+        self.returnAllBtn.set(title: "还全部", titleColor: UIColor.init(hex: 0x52B5F9), for: .normal)
+        self.returnAllBtn.set(title: "还全部", titleColor: UIColor.init(hex: 0x52B5F9), for: .highlighted)
+        self.returnAllBtn.set(title: "还全部", titleColor: UIColor.init(hex: 0xCCCCCC), for: .disabled)
         self.returnAllBtn.set(font: UIFont.systemFont(ofSize: 12))
         self.returnAllBtn.addTarget(self, action: #selector(returnAllBtnClick(_:)), for: .touchUpInside)
         self.returnAllBtn.contentHorizontalAlignment = .right
         self.returnAllBtn.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.centerY.equalTo(self.waitReturnView.valueLabel.snp.centerY)
+            make.centerY.equalTo(self.centerTitleLabel.snp.centerY)
         }
         // 3. input
         centerView.addSubview(self.inputContainer)
@@ -310,7 +310,7 @@ extension PreReturnInputMainView {
         // 5. tips
         centerView.addSubview(self.tipsLabel)
         self.tipsLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.detailText)
-        self.tipsLabel.isHidden = true  // 默认隐藏
+        //self.tipsLabel.isHidden = true  // 默认隐藏
         self.tipsLabel.snp.remakeConstraints { (make) in
             make.top.equalTo(self.totalAmountLabel.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(self.lrMargin)
@@ -514,17 +514,21 @@ extension PreReturnInputMainView {
                 tips = "*还币类型为全部还清，不可修改还币数量"
             } else {
                 tips = "*全部待归还数量超过可用FIL数"
-                tipsColor = AppColor.themeRed
+                tipsColor = UIColor.init(hex: 0xE06236)
             }
         case .gas, .mortgage, .interest:
             if let inputValue = self.inputValue {
                 if inputValue > self.waitReturnAmount {
                     tips = "*您当前输入的还币数量已超过待还数量，请重新输入"
-                    tipsColor = AppColor.themeRed
+                    tipsColor = UIColor.init(hex: 0xE06236)
                 } else if inputValue > self.totalFil {
                     tips = "*输入金额超过可用FIL数，请重新输入"
-                    tipsColor = AppColor.themeRed
+                    tipsColor = UIColor.init(hex: 0xE06236)
                 }
+            }
+            if tips.isEmpty && self.totalReturnAmount > self.totalFil {
+                tips = "*总计还款金额超过可用FIL数，请重新输入"
+                tipsColor = UIColor.init(hex: 0xE06236)
             }
         }
         self.tipsLabel.text = tips

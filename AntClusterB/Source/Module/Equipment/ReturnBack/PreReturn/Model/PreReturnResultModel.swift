@@ -20,6 +20,8 @@ class PreReturnResultModel: Mappable {
     var gas: Double = 0
     ///
     var interest: Double = 0
+    ///
+    var arrears_interest: Double = 0
 
     ///
     var createdDate: Date = Date.init()
@@ -36,6 +38,7 @@ class PreReturnResultModel: Mappable {
         pledge <- (map["pledge"], DoubleStringTransform.default)
         gas <- (map["gas"], DoubleStringTransform.default)
         interest <- (map["interest"], DoubleStringTransform.default)
+        arrears_interest <- (map["arrears_interest"], DoubleStringTransform.default)
         createdDate <- (map["time"], DateStringTransform.current)
     }
     

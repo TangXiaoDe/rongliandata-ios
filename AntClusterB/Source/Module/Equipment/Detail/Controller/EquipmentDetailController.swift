@@ -165,12 +165,12 @@ extension EquipmentDetailController {
 
 // MARK: - Data(数据处理与加载)
 extension EquipmentDetailController {
+    
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         self.topView.model = self.model
         self.scrollView.mj_header.beginRefreshing()
     }
-
 
 }
 
@@ -220,6 +220,29 @@ extension EquipmentDetailController {
     }
     
 }
+extension EquipmentDetailController {
+    
+    ///
+    fileprivate func preReturnClickProcess() -> Void {
+        //
+        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
+            return
+        }
+        // 第一次 则显示引导视图
+        if !NoviceGuideManager.share.isGuideComplete(for: .equipPreReturn) {
+            self.enterPreReturnGuidePage()
+            return
+        }
+        //
+        switch model.pkg_status {
+        case .deploying, .doing, .closed:
+            Toast.showToast(title: "当前封装未完成，\n暂时无法提前还币")
+        case .done:
+            self.enterPreReturnPage(with: model)
+        }
+    }
+    
+}
 
 // MARK: - Enter Page
 extension EquipmentDetailController {
@@ -251,7 +274,12 @@ extension EquipmentDetailController {
         let detailVC = ReturnListController.init()
         self.enterPageVC(detailVC)
     }
-
+    
+    // 引导弹窗
+    fileprivate func enterPreReturnGuidePage() -> Void {
+        let guideVC = PreReturnGuideController.init()
+        self.present(guideVC, animated: false, completion: nil)
+    }
 
 }
 
@@ -311,30 +339,7 @@ extension EquipmentDetailController: EquipmentDetailViewProtocol {
     
     /// 提前还币点击回调
     func detailView(_ detailView: EquipmentDetailView, didClickedPreReturn returnView: UIView) -> Void {
-        // 引导弹窗
-//        let guideVC = PreReturnGuideController.init()
-//        self.present(guideVC, animated: false, completion: nil)
-        //
-        guard let model = self.detail, model.zone == .ipfs else {
-            return
-        }
-        
-        model.assets?.interest = 100
-        model.assets?.pledge = 200
-        model.assets?.gas = 300
-        self.enterPreReturnPage(with: model)
-        
-        //
-//        guard let model = self.detail, let product = model.product, product.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
-//            return
-//        }
-//        self.enterPreReturnPage(with: asset)
-//        switch model.pkg_status {
-//        case .deploying, .doing, .closed:
-//            Toast.showToast(title: "当前封装未完成，\n暂时无法提前还币")
-//        case .done:
-//            self.enterPreReturnPage(with: asset)
-//        }
+        self.preReturnClickProcess()
     }
     
     /// 归还流水点击回调

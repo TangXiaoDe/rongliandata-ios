@@ -305,8 +305,7 @@ extension EDUnbackSubjectView {
         self.xiaohaoItemView.valueLabel.text = asset.wait_gas.decimalValidDigitsProcess(digits: 8)
         self.interestItemView.valueLabel.text = asset.interest.decimalValidDigitsProcess(digits: 8)
         
-        //self.preReturnView.isHidden = asset.wait_total <= 0
-        self.preReturnView.isHidden = false
+        self.preReturnView.isHidden = asset.wait_total <= 0
         var imgname: String = ""
         switch model.pkg_status {
         case .deploying, .doing, .closed:

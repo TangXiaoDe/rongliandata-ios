@@ -18,7 +18,7 @@ enum PreReturnType: String {
     /// 质押
     case mortgage = "pledge"
     /// 累计欠款利息
-    case interest
+    case interest = "arrears"
     
     var title: String {
         var value: String = ""
