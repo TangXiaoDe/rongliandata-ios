@@ -477,13 +477,13 @@ extension PreReturnInputMainView {
             self.textField.text = self.waitReturnAmount.decimalValidDigitsProcess(digits: 8)
             itemViews = [self.totalWaitItemView, self.interestItemView]
         case .gas:
-            self.textField.text = min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
+            self.textField.text = nil //min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
             itemViews = [self.gasItemView, self.interestItemView]
         case .mortgage:
-            self.textField.text = min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
+            self.textField.text = nil //min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
             itemViews = [self.pledgeItemView, self.interestItemView]
         case .interest:
-            self.textField.text = min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
+            self.textField.text = nil //min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
             itemViews = [self.interestWaitItemView, UIView.init()]
         }
         self.setupItemContainer(with: itemViews)
