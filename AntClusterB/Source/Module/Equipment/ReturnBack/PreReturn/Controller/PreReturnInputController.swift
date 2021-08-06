@@ -263,7 +263,7 @@ extension PreReturnInputController {
             }
             models.forEach { (model) in
                 if model.currencyType == .fil {
-                    self.totalFil = model.lfbalance
+                    self.totalFil = model.lfwithdrawable
                     self.centerView.totalFil = self.totalFil
                     self.couldDoneProcess()
                 }

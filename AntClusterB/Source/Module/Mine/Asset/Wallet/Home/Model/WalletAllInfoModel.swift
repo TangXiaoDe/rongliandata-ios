@@ -65,6 +65,9 @@ extension WalletAllInfoModel {
     var lfbalance: Double {
         return Double(self.balance) ?? 0
     }
+    var lfwithdrawable: Double {
+        return Double(self.withdrawable) ?? 0
+    }
     
 }
 
