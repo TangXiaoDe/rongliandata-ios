@@ -225,7 +225,7 @@ extension EquipmentDetailController {
     ///
     fileprivate func preReturnClickProcess() -> Void {
         //
-        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
+        guard let model = self.detail, model.zone == .ipfs, let _ = model.assets else {
             return
         }
         // 第一次 则显示引导视图

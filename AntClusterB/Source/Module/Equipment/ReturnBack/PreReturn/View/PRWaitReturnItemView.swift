@@ -31,8 +31,8 @@ class PRWaitReturnItemView: UIView {
     var value: Double = 0 {
         didSet {
             self.valueLabel.text = value.decimalValidDigitsProcess(digits: 8)
-            self.doneBtn.isEnabled = value > 0
-            self.doneBtn.backgroundColor = self.doneBtn.isEnabled ? AppColor.theme : AppColor.disable
+            //self.doneBtn.isEnabled = value > 0
+            //self.doneBtn.backgroundColor = self.doneBtn.isEnabled ? AppColor.theme : AppColor.disable
         }
     }
 

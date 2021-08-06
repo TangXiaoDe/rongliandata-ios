@@ -314,8 +314,8 @@ extension PreReturnHomeController {
         self.interestItemView.value = asset.interest
         //
         self.totalWaitReturnView.valueLabel.text = asset.wait_total.decimalValidDigitsProcess(digits: 8)
-        self.returnAllBtn.isEnabled = asset.wait_total > 0
-        self.returnAllBtn.backgroundColor = self.returnAllBtn.isEnabled ? AppColor.theme : AppColor.disable
+        //self.returnAllBtn.isEnabled = asset.wait_total > 0
+        //self.returnAllBtn.backgroundColor = self.returnAllBtn.isEnabled ? AppColor.theme : AppColor.disable
     }
     ///
     fileprivate func setupAsDemo() -> Void {
@@ -351,6 +351,10 @@ extension PreReturnHomeController {
     
     ///
     @objc fileprivate func returnAllBtnClick(_ button: UIButton) -> Void {
+        if self.model.waitReturnAmount(for: .all) <= 0 {
+            Toast.showToast(title: "已还清")
+            return
+        }
         self.enterReturnInputPage(type: .all, model: self.model)
     }
 
@@ -405,17 +409,26 @@ extension PreReturnHomeController: PRWaitReturnItemViewProtocol {
     /// 去还款按钮点击回调
     func itemView(_ itemView: PRWaitReturnItemView, didClickedGoReturn returnView: UIButton) -> Void {
         print("PreReturnHomeController itemView didClickedGoReturn")
-
+        
+        var type: PreReturnType? = nil
         switch itemView {
         case self.gasItemView:
-            self.enterReturnInputPage(type: .gas, model: self.model)
+            type = .gas
         case self.mortgageItemView:
-            self.enterReturnInputPage(type: .mortgage, model: self.model)
+            type = .mortgage
         case self.interestItemView:
-            self.enterReturnInputPage(type: .interest, model: self.model)
+            type = .interest
         default:
             break
         }
+        guard let realType = type else {
+            return
+        }
+        if self.model.waitReturnAmount(for: realType) <= 0 {
+            Toast.showToast(title: "已还清")
+            return
+        }
+        self.enterReturnInputPage(type: realType, model: self.model)
     }
     
 }
