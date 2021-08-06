@@ -278,6 +278,7 @@ extension EquipmentDetailController {
     // 引导弹窗
     fileprivate func enterPreReturnGuidePage() -> Void {
         let guideVC = PreReturnGuideController.init()
+        guideVC.delegate = self
         self.present(guideVC, animated: false, completion: nil)
     }
 
@@ -351,4 +352,22 @@ extension EquipmentDetailController: EquipmentDetailViewProtocol {
 
 }
 
+// MARK: - <PreReturnGuideControllerProtocol>
+extension EquipmentDetailController: PreReturnGuideControllerProtocol {
 
+    /// skip / close
+    func guideVC(_ guideVC: PreReturnGuideController, didClickedSkip skipView: UIButton) -> Void {
+        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
+            return
+        }
+        self.enterPreReturnPage(with: model)
+    }
+    /// done
+    func guideVC(_ guideVC: PreReturnGuideController, didClickedDone doneView: UIButton) -> Void {
+        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
+            return
+        }
+        self.enterPreReturnPage(with: model)
+    }
+    
+}

@@ -9,11 +9,22 @@
 
 import UIKit
 
+protocol PreReturnGuideControllerProtocol: class {
+    
+    /// skip / close
+    func guideVC(_ guideVC: PreReturnGuideController, didClickedSkip skipView: UIButton) -> Void
+    /// done
+    func guideVC(_ guideVC: PreReturnGuideController, didClickedDone doneView: UIButton) -> Void
+    
+}
+
 typealias EquipPreReturnGuideController = PreReturnGuideController
 class PreReturnGuideController: BaseViewController
 {
 
     // MARK: - Internal Property
+    
+    weak var delegate: PreReturnGuideControllerProtocol?
     
     fileprivate var selectedIndex: Int = 0 {
         didSet {
@@ -129,7 +140,7 @@ extension PreReturnGuideController {
         self.view.addSubview(self.skipBtn)
         self.skipBtn.setBackgroundImage(UIImage.init(named: "IMG_shebei_button_zhiyin_tiaoguo"), for: .normal)
         self.skipBtn.setBackgroundImage(UIImage.init(named: "IMG_shebei_button_zhiyin_tiaoguo"), for: .highlighted)
-        self.skipBtn.addTarget(self, action: #selector(skipBtnClick), for: .touchUpInside)
+        self.skipBtn.addTarget(self, action: #selector(skipBtnClick(_:)), for: .touchUpInside)
         self.skipBtn.snp.makeConstraints { (make) in
             make.size.equalTo(self.skipBtnSize)
             make.trailing.equalToSuperview().offset(-self.lrMargin)
@@ -149,7 +160,7 @@ extension PreReturnGuideController {
         self.view.addSubview(self.doneBtn)
         self.doneBtn.setBackgroundImage(UIImage.init(named: "IMG_shebei_button_zhiyin_go"), for: .normal)
         self.doneBtn.setBackgroundImage(UIImage.init(named: "IMG_shebei_button_zhiyin_go"), for: .highlighted)
-        self.doneBtn.addTarget(self, action: #selector(doneBtnClick), for: .touchUpInside)
+        self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)
         self.doneBtn.isHidden = true        // 默认隐藏
         self.doneBtn.snp.makeConstraints { (make) in
             make.size.equalTo(self.doneBtnSize)
@@ -178,16 +189,25 @@ extension PreReturnGuideController {
 extension PreReturnGuideController {
 
     /// 跳过/关闭
-    @objc fileprivate func skipBtnClick() -> Void {
+    @objc fileprivate func skipBtnClick(_ button: UIButton) -> Void {
         NoviceGuideManager.share.setGuideCompleteState(true, for: .equipPreReturn)
         print("PreReturnGuideController navBarLeftItemClick")
         self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: false) {
+            DispatchQueue.main.async {
+                self.delegate?.guideVC(self, didClickedSkip: button)
+            }
+        }
     }
     /// 完成/确定/马上体验
-    @objc fileprivate func doneBtnClick() -> Void {
+    @objc fileprivate func doneBtnClick(_ button: UIButton) -> Void {
         NoviceGuideManager.share.setGuideCompleteState(true, for: .equipPreReturn)
         print("PreReturnGuideController navBarRightItemClick")
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: false) {
+            DispatchQueue.main.async {
+                self.delegate?.guideVC(self, didClickedDone: button)
+            }
+        }
     }
 
 }
