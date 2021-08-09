@@ -228,16 +228,16 @@ extension EquipmentDetailController {
         guard let model = self.detail, model.zone == .ipfs, let _ = model.assets else {
             return
         }
-        // 第一次 则显示引导视图
-        if !NoviceGuideManager.share.isGuideComplete(for: .equipPreReturn) {
-            self.enterPreReturnGuidePage()
-            return
-        }
         //
         switch model.pkg_status {
         case .deploying, .doing, .closed:
             Toast.showToast(title: "当前封装未完成，\n暂时无法提前还币")
         case .done:
+            // 第一次 则显示引导视图
+            if !NoviceGuideManager.share.isGuideComplete(for: .equipPreReturn) {
+                self.enterPreReturnGuidePage()
+                return
+            }
             self.enterPreReturnPage(with: model)
         }
     }

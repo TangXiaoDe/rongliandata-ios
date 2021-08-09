@@ -130,9 +130,9 @@ extension PreReturnGuideController {
             }
             //
             itemView.iconView.image = UIImage.init(named: "IMG_shebei_img_zhiyin_step\(index + 1)")
-            itemView.iconView.contentMode = .top
+            itemView.iconView.contentMode = .scaleToFill
             itemView.iconView.snp.remakeConstraints { (make) in
-                make.leading.trailing.top.equalToSuperview()
+                make.leading.trailing.width.top.equalToSuperview()
             }
         }
         scrollView.contentSize = CGSize.init(width: kScreenWidth * CGFloat(self.itemCount), height: scrollViewH)
