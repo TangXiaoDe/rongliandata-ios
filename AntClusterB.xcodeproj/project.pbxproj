@@ -490,6 +490,7 @@
 		A17072C62652725A0013FB47 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072C52652725A0013FB47 /* WithdrawHeaderView.swift */; };
 		A17072D9265279840013FB47 /* EquipmentHomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072D8265279840013FB47 /* EquipmentHomeTitleView.swift */; };
 		A17072DE265279C90013FB47 /* EquipmentHomeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17072DD265279C90013FB47 /* EquipmentHomeListController.swift */; };
+		A1943A0226C3E16E000E2A8F /* Date+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1943A0126C3E16E000E2A8F /* Date+Category.swift */; };
 		C9D54A936C70BE6D1996E6A8 /* Pods_AntClusterBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -1022,6 +1023,7 @@
 		A17072C52652725A0013FB47 /* WithdrawHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawHeaderView.swift; sourceTree = "<group>"; };
 		A17072D8265279840013FB47 /* EquipmentHomeTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeTitleView.swift; sourceTree = "<group>"; };
 		A17072DD265279C90013FB47 /* EquipmentHomeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquipmentHomeListController.swift; sourceTree = "<group>"; };
+		A1943A0126C3E16E000E2A8F /* Date+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Category.swift"; sourceTree = "<group>"; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1813,6 +1815,7 @@
 			children = (
 				53DF23412581FC9300165247 /* DateFormatterManager.swift */,
 				53DF23422581FC9300165247 /* DateFormatter.swift */,
+				A1943A0126C3E16E000E2A8F /* Date+Category.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -4247,6 +4250,7 @@
 				53DF25952581FC9800165247 /* AlipayResultModel.swift in Sources */,
 				53DF265C2581FC9B00165247 /* WalletHomeHeaderView.swift in Sources */,
 				53DF25A82581FC9800165247 /* PicturePreviewItemView.swift in Sources */,
+				A1943A0226C3E16E000E2A8F /* Date+Category.swift in Sources */,
 				53DF260E2581FC9900165247 /* IconTitleValueControl.swift in Sources */,
 				53230E6826BBBC31006920A0 /* PreReturnHomeController.swift in Sources */,
 				53DF255C2581FC9700165247 /* UIView+Corner.swift in Sources */,

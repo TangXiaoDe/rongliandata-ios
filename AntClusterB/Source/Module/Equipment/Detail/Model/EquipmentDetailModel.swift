@@ -316,9 +316,9 @@ extension EquipmentDetailModel {
 
     /// 利息比例
     var interestRatio: Double {
-        // 本金 * 利率 / 30 * (本月开始与当前时间天数差值)
+        // 本金 * 利率 / 当前月总天数 * (本月开始与当前时间天数差值)
         let day: Int = Date.init().getMonthDay(timeZone: TimeZone.current).day
-        let ratio: Double = self.interest * 0.01 / 30.0 * Double(day)
+        let ratio: Double = self.interest * 0.01 / Double(Date.init().getDaysInCurrentMonth()) * Double(day)
         return ratio
     }
     
