@@ -180,7 +180,7 @@ extension PreReturnInputController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         //
-        let tips: String = "还Fil提醒：\n输入还Fil本金，当还Fil类型有利息时，则本次归还数量为输入本金的本息总计。欠款利息部分不再计算利息。"
+        let tips: String = "温馨提示：\n输入还Fil本金，当还Fil类型有利息时，则本次归还数量为输入本金的本息总计。欠款利息部分不再计算利息。"
         self.tipsLabel.text = tips
         self.centerView.model = self.model
         self.setupWithType(self.type)
