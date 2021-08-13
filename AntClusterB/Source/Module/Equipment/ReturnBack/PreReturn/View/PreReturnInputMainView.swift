@@ -288,7 +288,7 @@ extension PreReturnInputMainView {
         }
         self.inputContainer.addSubview(self.textField)
         self.textField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 24, weight: .medium), textColor: AppColor.theme)
-        self.textField.setPlaceHolder("请输入还币本金", font: UIFont.pingFangSCFont(size: 20, weight: .medium), color: AppColor.inputPlaceHolder)
+        self.textField.setPlaceHolder("请输入还FIL本金", font: UIFont.pingFangSCFont(size: 20, weight: .medium), color: AppColor.inputPlaceHolder)
         self.textField.addTarget(self, action: #selector(textFieldValueChanged(_:)), for: .editingChanged)
         self.textField.clearButtonMode = .whileEditing
         self.textField.keyboardType = .decimalPad

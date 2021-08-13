@@ -82,7 +82,7 @@ class EDBackAssetDetailView: UIView {
     fileprivate let itemHorMargin: CGFloat = 5
     fileprivate let itemColNum: Int = 5
     fileprivate lazy var itemWidth: CGFloat = {
-        // 总共有5个item，要求第4个item的正中间显示一半
+        // 总共有5个item，要求第4个item的正中间 显示一半/或标题显示一半
         let totalWidth: CGFloat = kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemHorMargin * CGFloat(self.itemColNum - 2)
         let showNum: CGFloat = CGFloat(self.itemColNum - 2) + 0.25
         var width: CGFloat = totalWidth / showNum

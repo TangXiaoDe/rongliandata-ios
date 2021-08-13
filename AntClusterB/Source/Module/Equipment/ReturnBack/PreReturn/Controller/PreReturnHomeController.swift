@@ -285,7 +285,7 @@ extension PreReturnHomeController {
 
     ///
     fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
-        let tips: String = "温馨提示： \n当设备封装比例达到72%时可选择部分借贷金额进行还款，选择总计待归还时只能进行归还全部借贷。"
+        let tips: String = "温馨提示:\n当设备封装完成之后才可进行还款。可全部还款，也可选择部分金额进行还款。还款之后，将自动计算扣除还款部分已经生成的利息。已还款部分后期不再计算利息。"
         //
         bottomView.addSubview(self.tipsLabel)
         self.tipsLabel.set(text: tips, font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.grayText, alignment: .left)
