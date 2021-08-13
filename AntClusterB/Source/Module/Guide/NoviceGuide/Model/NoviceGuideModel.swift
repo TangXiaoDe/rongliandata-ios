@@ -24,6 +24,8 @@ enum NoviceGuideType {
     case userCenter
     /// 挖矿入口更新
     case miningEntranceUpdate
+    /// 设备提前还币
+    case equipPreReturn
 
     /// UserDefaults里存取的标志
     var identifier: String {
@@ -41,6 +43,8 @@ enum NoviceGuideType {
             identifier = "app.identifier.userCenter"
         case .miningEntranceUpdate:
             identifier = "app.identifier.miningEntranceUpdate"
+        case .equipPreReturn:
+            identifier = "app.identifier.equipPreReturn"
         }
         return identifier
     }

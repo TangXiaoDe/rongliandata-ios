@@ -9,6 +9,13 @@
 
 import UIKit
 
+protocol EDBackAssetDetailViewProtocol: class {
+    
+    /// 归还流水点击回调
+    func assetDetailView(_ detailView: EDBackAssetDetailView, didClickedReturnDetail returnDetailView: UIView) -> Void
+    
+}
+
 ///
 class EDBackAssetDetailView: UIView {
     
@@ -28,12 +35,16 @@ class EDBackAssetDetailView: UIView {
         }
     }
     
+    ///
+    weak var delegate: EDBackAssetDetailViewProtocol?
+
     
     // MARK: - Private Property
     
     fileprivate let mainView: UIView = UIView.init()
     
     let titleView: TitleIconView = TitleIconView.init()     // 标题
+    fileprivate let returnDetailView: TitleIconControl = TitleIconControl.init()  // 归还流水入口
     
     fileprivate let bottomView: UIView = UIView.init()      // contentView
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
@@ -70,12 +81,13 @@ class EDBackAssetDetailView: UIView {
     fileprivate let itemInRightMargin: CGFloat = 12
     fileprivate let itemHorMargin: CGFloat = 5
     fileprivate let itemColNum: Int = 5
-    fileprivate let itemWidth: CGFloat = 80
-//    fileprivate lazy var itemWidth: CGFloat = {
-//        var width: CGFloat = (kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemInRightMargin - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
-//        width = CGFloat(floor(Double(width)))
-//        return width
-//    }()
+    fileprivate lazy var itemWidth: CGFloat = {
+        // 总共有5个item，要求第4个item的正中间 显示一半/或标题显示一半
+        let totalWidth: CGFloat = kScreenWidth - self.itemOutLrMargin * 2.0 - self.itemInLeftMargin - self.itemHorMargin * CGFloat(self.itemColNum - 2)
+        let showNum: CGFloat = CGFloat(self.itemColNum - 2) + 0.25
+        var width: CGFloat = totalWidth / showNum
+        return width
+    }()
 
     fileprivate let formTitleHeight: CGFloat = 36
     
@@ -163,7 +175,30 @@ extension EDBackAssetDetailView {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        // 2. bottomView
+        // 2. returnDetailView
+        mainView.addSubview(self.returnDetailView)
+        self.returnDetailView.addTarget(self, action: #selector(returnDetailViewClick(_:)), for: .touchUpInside)
+        self.returnDetailView.isHidden = true   // 隐藏，不予显示
+        self.returnDetailView.snp.makeConstraints { (make) in
+            make.trailing.equalToSuperview().offset(-self.itemOutLrMargin)
+            make.centerY.equalTo(self.titleView)
+        }
+        self.returnDetailView.iconView.set(cornerRadius: 0)
+        self.returnDetailView.iconView.image = UIImage.init(named: "IMG_common_icon_next")
+        self.returnDetailView.iconView.snp.remakeConstraints { (make) in
+            make.trailing.centerY.equalToSuperview()
+            make.size.equalTo(CGSize.init(width: 6, height: 11))
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        self.returnDetailView.titleLabel.set(text: "归还流水", font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: AppColor.mainText, alignment: .right)
+        self.returnDetailView.titleLabel.snp.remakeConstraints { (make) in
+            make.trailing.equalTo(self.returnDetailView.iconView.snp.leading).offset(-3)
+            make.leading.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        // 3. bottomView
         mainView.addSubview(self.bottomView)
         self.initialBottomView(self.bottomView)
         self.bottomView.snp.makeConstraints { (make) in
@@ -394,6 +429,11 @@ extension EDBackAssetDetailView {
 // MARK: - Event Function
 extension EDBackAssetDetailView {
 
+    ///
+    @objc fileprivate func returnDetailViewClick(_ detailView: UIControl) -> Void {
+        self.delegate?.assetDetailView(self, didClickedReturnDetail: detailView)
+    }
+    
 }
 
 // MARK: - Notification Function

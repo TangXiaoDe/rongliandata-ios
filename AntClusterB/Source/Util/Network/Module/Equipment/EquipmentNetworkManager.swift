@@ -313,3 +313,59 @@ extension EquipmentNetworkManager {
     }
     
 }
+
+extension EquipmentNetworkManager {
+    
+    /// 归还流水
+    class func getReturnList(offset: Int, limit: Int, startDate: Date?, endDate: Date?, complete: @escaping((_ status: Bool, _ msg: String?, _ models: [String]?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = EquipmentRequestInfo.returnList
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        var parameter: [String: Any] = ["offset": offset, "limit": limit]
+        if let startDate = startDate {
+            parameter["start-time"] = startDate.string(format: "yyyy-MM-dd", timeZone: .current)
+        }
+        if let endDate = endDate {
+            parameter["end-time"] = endDate.string(format: "yyyy-MM-dd", timeZone: .current)
+        }
+        requestInfo.parameter = parameter
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error".localized, nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, [])
+            }
+        }
+    }
+    
+    /// 提前归还
+    //    order_id    string    无    是    订单id
+    //    return_type    string    无    是    还款类型，all/pledge/gas/interest
+    //    amount    string    无    是    还币数量
+    //    pay_password    string    无    是    支付密码
+    class func preReturn(orderId: String, returnType: PreReturnType, amount: String, payPwd: String, complete: @escaping((_ status: Bool, _ msg: String?, _ model: PreReturnResultModel?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = EquipmentRequestInfo.preReturn
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [orderId])
+        // 2.配置参数
+        let parameter: [String: Any] = ["type": returnType.rawValue, "num": amount, "pay_password": payPwd]
+        requestInfo.parameter = parameter
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error".localized, nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                complete(true, response.message, response.model)
+            }
+        }
+    }
+    
+}

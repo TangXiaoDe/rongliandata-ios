@@ -312,7 +312,36 @@ extension EquipmentDetailModel {
         }
         return type
     }
+
+
+    /// 利息比例
+    var interestRatio: Double {
+        // 本金 * 利率 / 当前月总天数 * (本月开始与当前时间天数差值)
+        let day: Int = Date.init().getMonthDay(timeZone: TimeZone.current).day
+        let ratio: Double = self.interest * 0.01 / Double(Date.init().getDaysInCurrentMonth()) * Double(day)
+        return ratio
+    }
     
+    ///
+    func waitReturnAmount(for type: PreReturnType) -> Double {
+        var amount: Double = 0
+        guard let asset = self.assets else {
+            return amount
+        }
+        switch type {
+        case .all:
+            amount = asset.wait_total
+        case .gas:
+            amount = asset.wait_gas
+        case .mortgage:
+            amount = asset.wait_pledge
+        case .interest:
+            amount = asset.interest
+        }
+        return amount
+    }
+
+
 }
 
 ///
@@ -363,6 +392,10 @@ class EDAssetModel: Mappable {
         return self.gas - self.return_gas
     }
 
+    /// 待归还总计
+    var wait_total: Double {
+        return self.wait_pledge + self.wait_gas + self.interest
+    }
 
     required init?(map: Map) {
         

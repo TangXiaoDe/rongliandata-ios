@@ -113,7 +113,8 @@ class InputPasswordWithKeyBoardView: UIView {
         // forgetBtn
         forgetBtn.addTarget(self, action: #selector(forgetBtnClick(_:)), for: .touchUpInside)
         forgetBtn.setTitle("忘记密码？", for: .normal)
-        forgetBtn.setTitleColor(AppColor.theme, for: .normal)
+        //forgetBtn.setTitleColor(AppColor.theme, for: .normal)
+        forgetBtn.setTitleColor(UIColor.init(hex: 0x58AED7), for: .normal)
         forgetBtn.set(font: UIFont.systemFont(ofSize: 12))
         mainView.addSubview(forgetBtn)
         forgetBtn.snp.makeConstraints { (make) in

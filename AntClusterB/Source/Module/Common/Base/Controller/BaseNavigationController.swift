@@ -24,7 +24,12 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         if !self.viewControllers.isEmpty {
             let backBarItem = UIBarButtonItem(image: UIImage(named: "IMG_navbar_back"), style: .plain, target: self, action: #selector(leftPopBackItemClick))
             viewController.navigationItem.leftBarButtonItem = backBarItem
-            viewController.hidesBottomBarWhenPushed = true
+            // // 当前导航栏, 只有第一个viewController push的时候设置隐藏
+            if self.viewControllers.count == 1 {
+                viewController.hidesBottomBarWhenPushed = true
+            }
+        } else {
+            viewController.hidesBottomBarWhenPushed = false
         }
         super.pushViewController(viewController, animated: animated)
     }

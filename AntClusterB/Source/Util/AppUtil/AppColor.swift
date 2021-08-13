@@ -36,7 +36,6 @@ class AppColor {
     static let minorText: UIColor = AppConfig.share.theme.minorTextColor
     /// 灰色文字
     static let grayText: UIColor = AppConfig.share.theme.grayTextColor
-    
 
     /// 页面背景色(占位色)
     static let pageBg: UIColor = AppConfig.share.theme.pageBgColor

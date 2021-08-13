@@ -61,6 +61,14 @@ extension WalletAllInfoModel {
         }
         return UIImage(named: imgStr)!
     }
+    
+    var lfbalance: Double {
+        return Double(self.balance) ?? 0
+    }
+    var lfwithdrawable: Double {
+        return Double(self.withdrawable) ?? 0
+    }
+    
 }
 
 //class WalletFilModel: Mappable {

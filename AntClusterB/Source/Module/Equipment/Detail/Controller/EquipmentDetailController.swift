@@ -165,12 +165,12 @@ extension EquipmentDetailController {
 
 // MARK: - Data(数据处理与加载)
 extension EquipmentDetailController {
+    
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         self.topView.model = self.model
         self.scrollView.mj_header.beginRefreshing()
     }
-
 
 }
 
@@ -220,6 +220,29 @@ extension EquipmentDetailController {
     }
     
 }
+extension EquipmentDetailController {
+    
+    ///
+    fileprivate func preReturnClickProcess() -> Void {
+        //
+        guard let model = self.detail, model.zone == .ipfs, let _ = model.assets else {
+            return
+        }
+        //
+        switch model.pkg_status {
+        case .deploying, .doing, .closed:
+            Toast.showToast(title: "当前封装未完成，\n暂时无法提前还币")
+        case .done:
+            // 第一次 则显示引导视图
+            if !NoviceGuideManager.share.isGuideComplete(for: .equipPreReturn) {
+                self.enterPreReturnGuidePage()
+                return
+            }
+            self.enterPreReturnPage(with: model)
+        }
+    }
+    
+}
 
 // MARK: - Enter Page
 extension EquipmentDetailController {
@@ -238,6 +261,25 @@ extension EquipmentDetailController {
     fileprivate func enterAssetDetail(with model: EquipmentDetailModel) {
         let assetVC = AssetDetailHomeController.init(model: model)
         self.enterPageVC(assetVC)
+    }
+    
+    /// 提前还币界面
+    fileprivate func enterPreReturnPage(with model: EquipmentDetailModel) -> Void {
+        let returnVC = PreReturnHomeController.init(model: model)
+        self.enterPageVC(returnVC)
+    }
+
+    /// 归还流水界面
+    fileprivate func enterReturnListPage() -> Void {
+        let detailVC = ReturnListController.init()
+        self.enterPageVC(detailVC)
+    }
+    
+    // 引导弹窗
+    fileprivate func enterPreReturnGuidePage() -> Void {
+        let guideVC = PreReturnGuideController.init()
+        guideVC.delegate = self
+        self.present(guideVC, animated: false, completion: nil)
     }
 
 }
@@ -295,7 +337,37 @@ extension EquipmentDetailController: EquipmentDetailViewProtocol {
 //        }
         self.enterEquipLockDetailPage(with: self.id)
     }
+    
+    /// 提前还币点击回调
+    func detailView(_ detailView: EquipmentDetailView, didClickedPreReturn returnView: UIView) -> Void {
+        self.preReturnClickProcess()
+    }
+    
+    /// 归还流水点击回调
+    func detailView(_ detailView: EquipmentDetailView, didClickedReturnDetail returnDetailView: UIView) -> Void {
+        print("EquipmentDetailController detailView didClickedReturnDetail")
+        self.enterReturnListPage()
+    }
+
 
 }
 
+// MARK: - <PreReturnGuideControllerProtocol>
+extension EquipmentDetailController: PreReturnGuideControllerProtocol {
 
+    /// skip / close
+    func guideVC(_ guideVC: PreReturnGuideController, didClickedSkip skipView: UIButton) -> Void {
+        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
+            return
+        }
+        self.enterPreReturnPage(with: model)
+    }
+    /// done
+    func guideVC(_ guideVC: PreReturnGuideController, didClickedDone doneView: UIButton) -> Void {
+        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
+            return
+        }
+        self.enterPreReturnPage(with: model)
+    }
+    
+}

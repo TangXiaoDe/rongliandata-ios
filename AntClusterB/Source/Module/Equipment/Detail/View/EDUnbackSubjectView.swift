@@ -9,21 +9,29 @@
 
 import UIKit
 
+protocol EDUnbackSubjectViewProtocol: class {
+    
+    /// 提前还币点击回调
+    func unbackView(_ unbackView: EDUnbackSubjectView, didClickedPreReturn returnView: UIView) -> Void
+    
+}
+
 ///
 class EDUnbackSubjectView: UIView {
     
     // MARK: - Internal Property
     
-    var model: (title: String, zone: ProductZone)? {
+    var titleZone: (title: String, zone: ProductZone)? {
+        didSet {
+            self.setupWithTitleZone(titleZone)
+        }
+    }
+    var model: EquipmentDetailModel? {
         didSet {
             self.setupWithModel(model)
         }
     }
-//    var model: String? {
-//        didSet {
-//            self.setupWithModel(model)
-//        }
-//    }
+    
     var status: EquipPackageStatus = .deploying {
         didSet {
             var statusAtts = NSAttributedString.textAttTuples()
@@ -33,6 +41,7 @@ class EDUnbackSubjectView: UIView {
         }
     }
     
+    weak var delegate: EDUnbackSubjectViewProtocol?
     
     // MARK: - Private Property
     
@@ -40,6 +49,7 @@ class EDUnbackSubjectView: UIView {
     
     let titleView: TitleIconView = TitleIconView.init()     // 标题
     let statusView: UILabel = UILabel.init()  // 状态
+    let preReturnView: UIButton = UIButton.init()   // 提前还币
     
     fileprivate let container: UIView = UIView.init()
     let zhiyaItemView: TitleValueView = TitleValueView.init()       // 质押币数量
@@ -49,6 +59,7 @@ class EDUnbackSubjectView: UIView {
     fileprivate let titleLeftMargin: CGFloat = 12
     fileprivate let titleViewHeight: CGFloat = 44
     fileprivate let titleIconWH: CGFloat = 14
+    fileprivate let preReturnViewSize: CGSize = CGSize.init(width: 80, height: 24)
 
     fileprivate let itemLrMargin: CGFloat = 24
     fileprivate let itemHeight: CGFloat = 66
@@ -150,6 +161,16 @@ extension EDUnbackSubjectView {
             make.trailing.equalToSuperview().offset(-self.itemLrMargin)
             make.centerY.equalTo(self.titleView)
         }
+        // 3. preReturnView [E06236 | CCCCCC]
+        mainView.addSubview(self.preReturnView)
+        self.preReturnView.addTarget(self, action: #selector(preReturnViewClick(_:)), for: .touchUpInside)
+        self.preReturnView.setBackgroundImage(UIImage.init(named: "IMG_shebei_prereturnbtn_disable"), for: .normal)
+        self.preReturnView.isHidden = true
+        self.preReturnView.snp.makeConstraints { (make) in
+            make.size.equalTo(self.preReturnViewSize)
+            make.trailing.equalToSuperview().offset(-self.itemLrMargin)
+            make.centerY.equalTo(self.titleView)
+        }
         // 3. container
         mainView.addSubview(self.container)
         self.initialContainer(self.container)
@@ -229,7 +250,7 @@ extension EDUnbackSubjectView {
         
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: (title: String, zone: ProductZone)?) -> Void {
+    fileprivate func setupWithTitleZone(_ model: (title: String, zone: ProductZone)?) -> Void {
 //        self.setupAsDemo()
         guard let model = model else {
             return
@@ -270,19 +291,43 @@ extension EDUnbackSubjectView {
         self.zhiyaItemView.titleLabel.text = zhiyaTitle
         self.xiaohaoItemView.titleLabel.text = xiaohaoTitle
     }
-//    fileprivate func setupWithModel(_ model: String?) -> Void {
-//        self.setupAsDemo()
-//        guard let model = model else {
-//            return
-//        }
-//        // 子控件数据加载
-//    }
+    
+    ///
+    fileprivate func setupWithModel(_ model: EquipmentDetailModel?) -> Void {
+        //self.setupAsDemo()
+        self.preReturnView.isHidden = true
+        guard let model = model, let asset = model.assets else {
+            return
+        }
+        self.titleZone = ("待归还", model.zone)
+        // 子控件数据加载
+        self.zhiyaItemView.valueLabel.text = asset.wait_pledge.decimalValidDigitsProcess(digits: 8)
+        self.xiaohaoItemView.valueLabel.text = asset.wait_gas.decimalValidDigitsProcess(digits: 8)
+        self.interestItemView.valueLabel.text = asset.interest.decimalValidDigitsProcess(digits: 8)
+        
+        //self.preReturnView.isHidden = asset.wait_total <= 0
+        self.preReturnView.isHidden = model.zone != .ipfs || model.zhiya_type == .zifu
+        var imgname: String = ""
+        switch model.pkg_status {
+        case .deploying, .doing, .closed:
+            imgname = "IMG_shebei_prereturnbtn_disable"
+        case .done:
+            imgname = "IMG_shebei_prereturnbtn_normal"
+        }
+        self.preReturnView.setBackgroundImage(UIImage.init(named: imgname), for: .normal)
+        self.preReturnView.setBackgroundImage(UIImage.init(named: imgname), for: .highlighted)
+    }
 
 }
 
 // MARK: - Event Function
 extension EDUnbackSubjectView {
 
+    /// 提前还款点击响应
+    @objc fileprivate func preReturnViewClick(_ returnView: TitleIconControl) -> Void {
+        self.delegate?.unbackView(self, didClickedPreReturn: returnView)
+    }
+    
 }
 
 // MARK: - Notification Function
