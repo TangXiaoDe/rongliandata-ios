@@ -167,8 +167,10 @@ extension MineHomeOptionView {
                 }
                 jTopView = itemControl
                 itemIndex += 1
+                if dict["title"] == "清除缓存" {
+                    self.cacheItemControl = itemControl
+                }
             }
-            self.cacheItemControl = sectionView.viewWithTag(self.itemTagBase + 3) as? MineHomeOptionItemControl
         }
         
     }
