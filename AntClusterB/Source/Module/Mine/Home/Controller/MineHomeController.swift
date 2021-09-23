@@ -262,6 +262,13 @@ extension MineHomeController {
             self.optionView.cacheSize = cacheSize
         }
     }
+    ///
+    fileprivate func showMyApiKeyPopView() -> Void {
+        let popVC = MyApiKeyController.init()
+        DispatchQueue.main.async {
+            RootManager.share.showRootVC.present(popVC, animated: false, completion: nil)
+        }
+    }
 }
 
 // MARK: - <MineHomeOptionViewProtocol>
@@ -285,6 +292,10 @@ extension MineHomeController: MineHomeOptionViewProtocol {
     /// 退出登录
     func optionView(_ optionView: MineHomeOptionView, didSelectedLogout itemView: MineHomeOptionItemControl) -> Void {
         self.showLogoutAlert()
+    }
+    /// 我的APIKEY
+    func optionView(_ optionView: MineHomeOptionView, didSelectedMyApiKey itemView: MineHomeOptionItemControl) -> Void {
+        self.showMyApiKeyPopView()
     }
 }
 

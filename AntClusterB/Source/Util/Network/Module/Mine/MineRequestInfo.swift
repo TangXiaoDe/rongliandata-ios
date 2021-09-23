@@ -11,4 +11,7 @@ import Foundation
 
 class MineRequestInfo {
 
+    /// 我的APIKEY
+    static let myApiKey = RequestInfo<MyApiKeyModel>.init(method: .get, path: "api_key", replaceds: [])
+    
 }

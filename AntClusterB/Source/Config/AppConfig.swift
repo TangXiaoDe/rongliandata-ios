@@ -82,6 +82,9 @@ class AppConfig {
 
     /// 服务器配置(来自服务器的配置，本地有默认配置，每次启动app时会请求并更新本地配置)
     var server: ServerConfigModel?
+    
+    /// ApiKey
+    var apiKey: MyApiKeyModel?
 
     /// 显示测试界面
     var showTest: Bool = false
