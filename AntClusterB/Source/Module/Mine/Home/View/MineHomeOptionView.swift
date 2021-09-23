@@ -111,8 +111,8 @@ extension MineHomeOptionView {
         if AccountManager.share.currentAccountInfo?.userInfo?.user_type == 1 {
             firstItems.append(brandInfoItem)
         }
-        let normalItems: [[[String: String]]] = [firstItems, [clearItem, apiKeyItem, logoutItem]]
-        let shieldItems: [[[String: String]]] = [firstItems, [clearItem, apiKeyItem, logoutItem]]
+        let normalItems: [[[String: String]]] = [firstItems, [apiKeyItem, clearItem, logoutItem]]
+        let shieldItems: [[[String: String]]] = [firstItems, [apiKeyItem, clearItem, logoutItem]]
         self.sections = AppConfig.share.shield.currentNeedShield ? shieldItems : normalItems
         self.setupWithSections(self.sections)
     }
