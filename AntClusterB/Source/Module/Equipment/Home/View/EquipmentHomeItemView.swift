@@ -350,7 +350,7 @@ extension EquipmentHomeItemView {
         self.equimentDetailBtn.backgroundColor = UIColor.init(hex: 0xFFFBED)
         self.equimentDetailBtn.addTarget(self, action: #selector(equipmentDetailBtnClick(_:)), for: .touchUpInside)
         // oreDetailBtn
-        self.oreDetailBtn.set(title: "收益收益", titleColor: UIColor.init(hex: 0x00B8FF), for: .normal)
+        self.oreDetailBtn.set(title: "收益明细", titleColor: UIColor.init(hex: 0x00B8FF), for: .normal)
         self.oreDetailBtn.set(font: UIFont.pingFangSCFont(size: 13, weight: .medium), cornerRadius: 4, borderWidth: 0.5, borderColor: UIColor.init(hex: 0x00B8FF))
         self.oreDetailBtn.backgroundColor = UIColor.init(hex: 0xEEF5FF)
         self.oreDetailBtn.addTarget(self, action: #selector(oreDetailBtnClick(_:)), for: .touchUpInside)

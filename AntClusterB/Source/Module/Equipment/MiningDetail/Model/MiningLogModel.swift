@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/1/12.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  收益收益模型 - 部分参考AssetListModel
+//  收益明细模型 - 部分参考AssetListModel
 
 import Foundation
 import ObjectMapper

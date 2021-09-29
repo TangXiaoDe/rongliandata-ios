@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/1/12.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  收益收益列表Cell
+//  收益明细列表Cell
 
 import UIKit
 
