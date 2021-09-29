@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/1/12.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  收益收益界面头视图
+//  收益明细界面头视图
 
 import UIKit
 
