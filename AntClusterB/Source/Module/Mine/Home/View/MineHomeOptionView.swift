@@ -23,6 +23,8 @@ protocol MineHomeOptionViewProtocol: class {
     func optionView(_ optionView: MineHomeOptionView, didSelectedClearCache itemView: MineHomeOptionItemControl) -> Void
     /// 退出登录
     func optionView(_ optionView: MineHomeOptionView, didSelectedLogout itemView: MineHomeOptionItemControl) -> Void
+    /// 我的APIKEY
+    func optionView(_ optionView: MineHomeOptionView, didSelectedMyApiKey itemView: MineHomeOptionItemControl) -> Void
 }
 extension MineHomeOptionViewProtocol {
 
@@ -103,13 +105,14 @@ extension MineHomeOptionView {
         let userInfoItem: [String: String] = ["title": "个人资料", "image": "IMG_mine_icon_zl"]
         let brandInfoItem: [String: String] = ["title": "我的品牌商", "image": "IMG_mine_icon_pps"]
         let clearItem: [String: String] = ["title": "清除缓存", "image": "IMG_mine_icon_qc"]
+        let apiKeyItem: [String: String] = ["title": "我的APIKEY", "image": "IMG_mine_icon_api"]
         let logoutItem: [String: String] = ["title": "退出登录", "image": "IMG_mine_icon_tc"]
         var firstItems: [[String: String]] = [accountItem, userInfoItem]
         if AccountManager.share.currentAccountInfo?.userInfo?.user_type == 1 {
             firstItems.append(brandInfoItem)
         }
-        let normalItems: [[[String: String]]] = [firstItems, [clearItem, logoutItem]]
-        let shieldItems: [[[String: String]]] = [firstItems, [clearItem, logoutItem]]
+        let normalItems: [[[String: String]]] = [firstItems, [apiKeyItem, clearItem, logoutItem]]
+        let shieldItems: [[[String: String]]] = [firstItems, [apiKeyItem, clearItem, logoutItem]]
         self.sections = AppConfig.share.shield.currentNeedShield ? shieldItems : normalItems
         self.setupWithSections(self.sections)
     }
@@ -164,8 +167,10 @@ extension MineHomeOptionView {
                 }
                 jTopView = itemControl
                 itemIndex += 1
+                if dict["title"] == "清除缓存" {
+                    self.cacheItemControl = itemControl
+                }
             }
-            self.cacheItemControl = sectionView.viewWithTag(self.itemTagBase + 3) as? MineHomeOptionItemControl
         }
         
     }
@@ -196,6 +201,8 @@ extension MineHomeOptionView {
             self.delegate?.optionView(self, didSelectedClearCache: itemControl)
         case "退出登录":
             self.delegate?.optionView(self, didSelectedLogout: itemControl)
+        case "我的APIKEY":
+            self.delegate?.optionView(self, didSelectedMyApiKey: itemControl)
         default:
             break
         }

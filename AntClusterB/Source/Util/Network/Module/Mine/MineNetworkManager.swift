@@ -13,6 +13,32 @@ class MineNetworkManager {
 
 }
 
+extension MineNetworkManager {
+    
+    /// 获取我的ApiKey
+    class func getMyApiKey(complete: @escaping((_ status: Bool, _ msg: String?, _ model: MyApiKeyModel?) -> Void)) -> Void {
+        // 1.请求 url
+        var requestInfo = MineRequestInfo.myApiKey
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        // 2.配置参数
+        // 3.发起请求
+        NetworkManager.share.request(requestInfo: requestInfo) { (networkResult) in
+            switch networkResult {
+            case .error(_):
+                complete(false, "prompt.network.error".localized, nil)
+            case .failure(let failure):
+                complete(false, failure.message, nil)
+            case .success(let response):
+                if let model = response.model {
+                    AppConfig.share.apiKey = model
+                }
+                complete(true, response.message, response.model)
+            }
+        }
+    }
+    
+}
+
 extension MineNetworkManager
 {
     /// 我的主页刷新数据请求

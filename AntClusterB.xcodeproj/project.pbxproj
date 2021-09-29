@@ -456,6 +456,9 @@
 		53DF26BB2581FC9C00165247 /* EFCountAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF253B2581FC9700165247 /* EFCountAdapter.swift */; };
 		53DF26BC2581FC9C00165247 /* EFCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF253C2581FC9700165247 /* EFCount.swift */; };
 		53DF26BD2581FC9C00165247 /* EFTimingMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF253D2581FC9700165247 /* EFTimingMethod.swift */; };
+		53F5A06D26FC225F009DCC43 /* MyApiKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5A06C26FC225F009DCC43 /* MyApiKeyController.swift */; };
+		53F5A06F26FC227B009DCC43 /* MyApiKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5A06E26FC227B009DCC43 /* MyApiKeyModel.swift */; };
+		53F5A07226FC25AB009DCC43 /* MyApiKeyItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5A07126FC25AB009DCC43 /* MyApiKeyItemView.swift */; };
 		9536A73225F8BAB300280E5C /* OreDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A72B25F8BAB300280E5C /* OreDetailController.swift */; };
 		9536A73325F8BAB300280E5C /* OreDetailPlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A72D25F8BAB300280E5C /* OreDetailPlaceModel.swift */; };
 		9536A73425F8BAB300280E5C /* OreDetailPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9536A72F25F8BAB300280E5C /* OreDetailPlaceView.swift */; };
@@ -986,6 +989,9 @@
 		53DF253B2581FC9700165247 /* EFCountAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFCountAdapter.swift; sourceTree = "<group>"; };
 		53DF253C2581FC9700165247 /* EFCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFCount.swift; sourceTree = "<group>"; };
 		53DF253D2581FC9700165247 /* EFTimingMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFTimingMethod.swift; sourceTree = "<group>"; };
+		53F5A06C26FC225F009DCC43 /* MyApiKeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApiKeyController.swift; sourceTree = "<group>"; };
+		53F5A06E26FC227B009DCC43 /* MyApiKeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApiKeyModel.swift; sourceTree = "<group>"; };
+		53F5A07126FC25AB009DCC43 /* MyApiKeyItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApiKeyItemView.swift; sourceTree = "<group>"; };
 		588CD34ABF9B40BEA4DB4824 /* Pods_AntClusterB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AntClusterB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1E5CD8394F813688A173B2 /* Pods_AntClusterBTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AntClusterBTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F9ADBDE1A95C1FDD464985 /* Pods-AntClusterB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterB.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterB/Pods-AntClusterB.release.xcconfig"; sourceTree = "<group>"; };
@@ -2403,6 +2409,7 @@
 		53DF23FA2581FC9400165247 /* MiniModule */ = {
 			isa = PBXGroup;
 			children = (
+				53F5A06826FC2244009DCC43 /* ApiKey */,
 				53DF23FB2581FC9400165247 /* Advert */,
 				53DF240C2581FC9400165247 /* Search */,
 				53DF24162581FC9500165247 /* Report */,
@@ -3449,6 +3456,40 @@
 			path = EFCountingLabel;
 			sourceTree = "<group>";
 		};
+		53F5A06826FC2244009DCC43 /* ApiKey */ = {
+			isa = PBXGroup;
+			children = (
+				53F5A07026FC2597009DCC43 /* View */,
+				53F5A06926FC2244009DCC43 /* Controller */,
+				53F5A06A26FC2244009DCC43 /* Model */,
+			);
+			path = ApiKey;
+			sourceTree = "<group>";
+		};
+		53F5A06926FC2244009DCC43 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				53F5A06C26FC225F009DCC43 /* MyApiKeyController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		53F5A06A26FC2244009DCC43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				53F5A06E26FC227B009DCC43 /* MyApiKeyModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		53F5A07026FC2597009DCC43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				53F5A07126FC25AB009DCC43 /* MyApiKeyItemView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7CE3DDFBB3BEE90065106194 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -3891,6 +3932,7 @@
 				53AA78CA25F8AC2D0081D04A /* EquipmentDetailController.swift in Sources */,
 				53DF25772581FC9800165247 /* UserNetworkManager.swift in Sources */,
 				53B19A5826AE5A99003A3F2A /* BrandBonusListCell.swift in Sources */,
+				53F5A06F26FC227B009DCC43 /* MyApiKeyModel.swift in Sources */,
 				53DF25CF2581FC9900165247 /* XDPushPopAnimation.swift in Sources */,
 				533031C42660D78400FB07CC /* EquipDetailTermInfoView.swift in Sources */,
 				53DF259F2581FC9800165247 /* PickerUtil.swift in Sources */,
@@ -3911,6 +3953,7 @@
 				53AA78E325F8AD640081D04A /* LockDetailPlaceView.swift in Sources */,
 				53DF26992581FC9B00165247 /* LoginPwdResetController.swift in Sources */,
 				53DF25692581FC9700165247 /* AccountModel.swift in Sources */,
+				53F5A07226FC25AB009DCC43 /* MyApiKeyItemView.swift in Sources */,
 				53DF257B2581FC9800165247 /* MineNetworkManager.swift in Sources */,
 				53DF25BB2581FC9800165247 /* MiningEnterGuideController.swift in Sources */,
 				53DF266C2581FC9B00165247 /* WalletDetailHomeController.swift in Sources */,
@@ -3960,6 +4003,7 @@
 				53DF25912581FC9800165247 /* TCWebCodesResultModel.swift in Sources */,
 				53DF26282581FC9A00165247 /* BasePlaceHolder.swift in Sources */,
 				9536A74A25F8C3EC00280E5C /* AssetDetailFilterPopView.swift in Sources */,
+				53F5A06D26FC225F009DCC43 /* MyApiKeyController.swift in Sources */,
 				53DF25702581FC9800165247 /* AssetRequestInfo.swift in Sources */,
 				53AA78EA25F8AEA40081D04A /* IconTitleIconControl.swift in Sources */,
 				53AA78E425F8AD640081D04A /* LockDetailHeaderView.swift in Sources */,
