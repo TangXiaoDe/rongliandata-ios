@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/8/5.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  还币类型选择界面
+//  归还类型选择界面
 
 import UIKit
 
@@ -118,7 +118,7 @@ extension PreReturnTypeSelectController {
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(self.titleViewHeight)
         }
-        self.titleView.label.set(text: "选择还币类型", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText, alignment: .center)
+        self.titleView.label.set(text: "选择归还类型", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText, alignment: .center)
         self.titleView.label.snp.remakeConstraints { (make) in
             make.center.equalToSuperview()
         }
@@ -153,7 +153,7 @@ extension PreReturnTypeSelectController {
         containerView.removeAllSubviews()
         //
         let itemViews: [TitleIconControl] = [self.allItemView, self.pledgeItemView, self.gasItemView, self.interestItemView]
-        let itemTitles: [String] = ["归还全部", "归还质押币", "归还GAS消耗", "归还累计欠款利息"]
+        let itemTitles: [String] = ["归还全部", "归还质押数量", "归还GAS消耗", "归还累计欠款利息"]
         var lastView: UIView = containerView
         for (index, itemView) in itemViews.enumerated() {
             containerView.addSubview(itemView)

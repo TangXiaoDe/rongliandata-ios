@@ -164,7 +164,7 @@ extension WalletHomeController {
         let withdrawVC = FilWithdrawController.init(assetModel: assetModel)
         self.enterPageVC(withdrawVC)
     }
-    /// 进入Wallet充币界面
+    /// 进入Wallet充值界面
     fileprivate func enterWalletRecharPage(assetModel: AssetInfoModel) -> Void {
         let withdrawVC = RechargeHomeController.init(currency: "FIL", address: assetModel.address)
         self.enterPageVC(withdrawVC)

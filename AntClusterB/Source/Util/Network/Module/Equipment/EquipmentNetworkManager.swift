@@ -345,8 +345,8 @@ extension EquipmentNetworkManager {
     
     /// 提前归还
     //    order_id    string    无    是    订单id
-    //    return_type    string    无    是    还款类型，all/pledge/gas/interest
-    //    amount    string    无    是    还币数量
+    //    return_type    string    无    是    归还类型，all/pledge/gas/interest
+    //    amount    string    无    是    归还数量
     //    pay_password    string    无    是    支付密码
     class func preReturn(orderId: String, returnType: PreReturnType, amount: String, payPwd: String, complete: @escaping((_ status: Bool, _ msg: String?, _ model: PreReturnResultModel?) -> Void)) -> Void {
         // 1.请求 url

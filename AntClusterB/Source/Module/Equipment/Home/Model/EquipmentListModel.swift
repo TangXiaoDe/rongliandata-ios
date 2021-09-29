@@ -13,7 +13,7 @@ import ObjectMapper
 enum EquipmentStatus: Int {
     /// 部署中
     case deploying = 1
-    /// 挖矿中
+    /// 运行中
     case mining
     /// 已关闭
     case closed
@@ -24,7 +24,7 @@ enum EquipmentStatus: Int {
         case .deploying:
             title = "部署中"
         case .mining:
-            title = "挖矿中"
+            title = "运行中"
         case .closed:
             title = "已关闭"
         }
@@ -107,7 +107,7 @@ class EquipmentListModel: Mappable {
     var t_num: Int = 0
     ///
     var user_id: Int = 0
-    /// 挖矿总数
+    /// 累计收益
     var total_ming: Double = 0
     /// 抵押金额
     var mortgage_fee: Double = 0
@@ -119,7 +119,7 @@ class EquipmentListModel: Mappable {
     var fil_level: String = ""
     /// 规格，如：1个月
     var spec_level: String = ""
-    /// 状态 1部署中  2挖矿中 3关闭
+    /// 状态 1部署中  2运行中 3关闭
     var status_value: Int = 0
     ///
     var createdDate: Date = Date()
@@ -228,7 +228,7 @@ class EquipmentListModel: Mappable {
 extension EquipmentListModel {
 
     
-    /// 0x2381FB挖矿中 | 0x333333部署中 | 0x999999已关闭
+    /// 0x2381FB运行中 | 0x333333部署中 | 0x999999已关闭
     /// 状态标题颜色
     var statusColor: UIColor {
         var color: UIColor

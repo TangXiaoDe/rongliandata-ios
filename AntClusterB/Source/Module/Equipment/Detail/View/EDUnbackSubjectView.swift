@@ -11,7 +11,7 @@ import UIKit
 
 protocol EDUnbackSubjectViewProtocol: class {
     
-    /// 提前还币点击回调
+    /// 提前归还点击回调
     func unbackView(_ unbackView: EDUnbackSubjectView, didClickedPreReturn returnView: UIView) -> Void
     
 }
@@ -49,10 +49,10 @@ class EDUnbackSubjectView: UIView {
     
     let titleView: TitleIconView = TitleIconView.init()     // 标题
     let statusView: UILabel = UILabel.init()  // 状态
-    let preReturnView: UIButton = UIButton.init()   // 提前还币
+    let preReturnView: UIButton = UIButton.init()   // 提前归还
     
     fileprivate let container: UIView = UIView.init()
-    let zhiyaItemView: TitleValueView = TitleValueView.init()       // 质押币数量
+    let zhiyaItemView: TitleValueView = TitleValueView.init()       // 质押数量
     let xiaohaoItemView: TitleValueView = TitleValueView.init()     // Gas消耗数量
     let interestItemView: TitleValueView = TitleValueView.init()     // 累计欠款利息
     
@@ -268,21 +268,21 @@ extension EDUnbackSubjectView {
         case "封装详情":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_fengzhuang")
             self.statusView.isHidden = false
-            zhiyaTitle = "使用质押币数量(\(model.zone.rawValue.uppercased()))"
+            zhiyaTitle = "使用质押数量(\(model.zone.rawValue.uppercased()))"
             xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         case "借贷资本明细":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_jiedai")
-            zhiyaTitle = "借贷质押币数量(\(model.zone.rawValue.uppercased()))"
+            zhiyaTitle = "借贷质押数量(\(model.zone.rawValue.uppercased()))"
             xiaohaoTitle = "借贷Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         case "已归还":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_yiguihuan")
             self.zhiyaItemView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.08)
             self.xiaohaoItemView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.08)
-            zhiyaTitle = "质押币数量(\(model.zone.rawValue.uppercased()))"
+            zhiyaTitle = "质押数量(\(model.zone.rawValue.uppercased()))"
             xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         case "待归还":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_daiguihuan")
-            zhiyaTitle = "质押币数量(\(model.zone.rawValue.uppercased()))"
+            zhiyaTitle = "质押数量(\(model.zone.rawValue.uppercased()))"
             xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"
             self.interestItemView.titleLabel.text = "累计欠款利息(\(model.zone.rawValue.uppercased()))"
         default:
@@ -323,7 +323,7 @@ extension EDUnbackSubjectView {
 // MARK: - Event Function
 extension EDUnbackSubjectView {
 
-    /// 提前还款点击响应
+    /// 提前归还点击响应
     @objc fileprivate func preReturnViewClick(_ returnView: TitleIconControl) -> Void {
         self.delegate?.unbackView(self, didClickedPreReturn: returnView)
     }

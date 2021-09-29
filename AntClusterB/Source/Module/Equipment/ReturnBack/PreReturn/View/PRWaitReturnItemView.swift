@@ -5,13 +5,13 @@
 //  Created by 小唐 on 2021/7/28.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  提前还币主页中待归还类型下的子视图
+//  提前归还主页中待归还类型下的子视图
 
 import UIKit
 
 protocol PRWaitReturnItemViewProtocol: class {
     
-    /// 去还款按钮点击回调
+    /// 去归还按钮点击回调
     func itemView(_ itemView: PRWaitReturnItemView, didClickedGoReturn returnView: UIButton) -> Void
     
 }
@@ -43,7 +43,7 @@ class PRWaitReturnItemView: UIView {
     // MARK: - Private Property
     
     fileprivate let mainView: UIView = UIView.init()
-    fileprivate let doneBtn: UIButton = UIButton.init(type: .custom)    // 去还款
+    fileprivate let doneBtn: UIButton = UIButton.init(type: .custom)    // 去归还
     fileprivate let titleLabel: UILabel = UILabel.init()    // 标题
     fileprivate let valueLabel: UILabel = UILabel.init()    // 值
     
@@ -116,9 +116,9 @@ extension PRWaitReturnItemView {
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
         // 1. doneBtn
         mainView.addSubview(self.doneBtn)
-        self.doneBtn.set(title: "去还款", titleColor: UIColor.white, for: .normal)
-        self.doneBtn.set(title: "去还款", titleColor: UIColor.white, for: .highlighted)
-        self.doneBtn.set(title: "去还款", titleColor: UIColor.white, for: .disabled)
+        self.doneBtn.set(title: "去归还", titleColor: UIColor.white, for: .normal)
+        self.doneBtn.set(title: "去归还", titleColor: UIColor.white, for: .highlighted)
+        self.doneBtn.set(title: "去归还", titleColor: UIColor.white, for: .disabled)
         self.doneBtn.set(font: UIFont.systemFont(ofSize: 13), cornerRadius: self.doneBtnSize.height * 0.5)
         self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)
         self.doneBtn.backgroundColor = AppColor.theme

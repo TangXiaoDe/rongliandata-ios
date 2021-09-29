@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/8/5.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  提前还款结果数据模型
+//  提前归还结果数据模型
 
 import Foundation
 import ObjectMapper
@@ -14,7 +14,7 @@ class PreReturnResultModel: Mappable {
     
     ///
     var type_value: String = ""
-    /// 质押币
+    /// 质押数量
     var pledge: Double = 0
     /// gas
     var gas: Double = 0

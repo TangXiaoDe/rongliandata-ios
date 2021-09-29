@@ -5,11 +5,11 @@
 //  Created by 小唐 on 2021/7/27.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  提前还币主页
+//  提前归还主页
 
 import UIKit
 
-/// 提前还币类型
+/// 提前归还类型
 enum PreReturnType: String {
     /// 归还全部
     case all
@@ -28,7 +28,7 @@ enum PreReturnType: String {
         case .gas:
             value = "归还GAS消耗"
         case .mortgage:
-            value = "归还质押币"
+            value = "归还质押数量"
         case .interest:
             value = "归还累计欠款利息"
         }
@@ -60,7 +60,7 @@ class PreReturnHomeController: BaseViewController
     fileprivate let returnTitleLabel: UILabel = UILabel.init()  // 选择归还类型
     fileprivate let returnContainer: UIView = UIView.init()     //
     fileprivate let gasItemView: PRWaitReturnItemView = PRWaitReturnItemView.init()         // Gas消耗数量(FIL)
-    fileprivate let mortgageItemView: PRWaitReturnItemView = PRWaitReturnItemView.init()    // 质押币数量(FIL)
+    fileprivate let mortgageItemView: PRWaitReturnItemView = PRWaitReturnItemView.init()    // 质押数量(FIL)
     fileprivate let interestItemView: PRWaitReturnItemView = PRWaitReturnItemView.init()    // 累计欠款利息(FIL)
     
     
@@ -140,7 +140,7 @@ extension PreReturnHomeController {
         }
         // navBar
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "提前还币", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText, alignment: .center)
+        self.navBar.titleLabel.set(text: "提前归还", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText, alignment: .center)
         self.navBar.leftItem.isHidden = false
         self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
         self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .highlighted)
@@ -258,7 +258,7 @@ extension PreReturnHomeController {
     fileprivate func initialReturnContainer(_ container: UIView) -> Void {
         //
         let itemViews: [PRWaitReturnItemView] = [self.gasItemView, self.mortgageItemView, self.interestItemView]
-        let itemTitles: [String] = ["Gas消耗数量(FIL)", "质押币数量(FIL)", "累计欠款利息(FIL)"]
+        let itemTitles: [String] = ["Gas消耗数量(FIL)", "质押数量(FIL)", "累计欠款利息(FIL)"]
         var lastView: UIView = container
         for (index, itemView) in itemViews.enumerated() {
             container.addSubview(itemView)
@@ -285,7 +285,7 @@ extension PreReturnHomeController {
 
     ///
     fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
-        let tips: String = "温馨提示:\n当设备封装完成之后才可进行还款。可全部还款，也可选择部分金额进行还款。还款之后，将自动计算扣除还款部分已经生成的利息。已还款部分后期不再计算利息。"
+        let tips: String = "温馨提示:\n当设备封装完成之后才可进行归还。可全部归还，也可选择部分金额进行归还。归还之后，将自动计算扣除归还部分已经生成的利息。已归还部分后期不再计算利息。"
         //
         bottomView.addSubview(self.tipsLabel)
         self.tipsLabel.set(text: tips, font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.grayText, alignment: .left)
@@ -368,7 +368,7 @@ extension PreReturnHomeController {
 // MARK: - Enter Page
 extension PreReturnHomeController {
     
-    /// 进入还款输入界面
+    /// 进入归还输入界面
     fileprivate func enterReturnInputPage(type: PreReturnType, model: EquipmentDetailModel) -> Void {
         let inputVC = PreReturnInputController.init(type: type, model: model)
         self.enterPageVC(inputVC)
@@ -406,7 +406,7 @@ extension PreReturnHomeController: AppHomeNavStatusViewProtocol {
 // MARK: - <PRWaitReturnItemViewProtocol>
 extension PreReturnHomeController: PRWaitReturnItemViewProtocol {
     
-    /// 去还款按钮点击回调
+    /// 去归还按钮点击回调
     func itemView(_ itemView: PRWaitReturnItemView, didClickedGoReturn returnView: UIButton) -> Void {
         print("PreReturnHomeController itemView didClickedGoReturn")
         

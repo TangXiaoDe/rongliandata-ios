@@ -35,9 +35,9 @@ class OreDetailItemView: UIView {
     
     fileprivate let centerView: UIView = UIView.init()
     // fil
-    fileprivate let miningNumView: TitleValueView = TitleValueView.init()   // 挖矿总数
+    fileprivate let miningNumView: TitleValueView = TitleValueView.init()   // 累计收益
     fileprivate let fengzhuangNumView: TitleValueView = TitleValueView.init()   // 封装数量
-    fileprivate let zhiyaNumView: TitleValueView = TitleValueView.init()   // 借贷质押币
+    fileprivate let zhiyaNumView: TitleValueView = TitleValueView.init()   // 借贷质押数量
     fileprivate let gasNumView: TitleValueView = TitleValueView.init()   // 借贷GAS
     fileprivate let interestNumView: TitleValueView = TitleValueView.init()   // 应还利息
     fileprivate let arrearsNumView: TitleValueView = TitleValueView.init()   // 欠款利息
@@ -194,10 +194,10 @@ extension OreDetailItemView {
             }
             lastView = itemView
         }
-        self.miningNumView.titleLabel.text = "挖矿数"
+        self.miningNumView.titleLabel.text = "收益数"
         self.miningNumView.valueLabel.textColor = UIColor.init(hex: 0xE06236)
         self.fengzhuangNumView.titleLabel.text = "封装数"
-        self.zhiyaNumView.titleLabel.text = "借贷质押币"
+        self.zhiyaNumView.titleLabel.text = "借贷质押数量"
         self.gasNumView.titleLabel.text = "借贷GAS"
         self.interestNumView.titleLabel.text = "应还利息"
         self.arrearsNumView.titleLabel.text = "欠款利息"
@@ -259,10 +259,10 @@ extension OreDetailItemView {
     fileprivate func setupWithType(_ type: EquipZhiyaType) -> Void {
         switch type {
         case .dianfu:
-            self.zhiyaNumView.titleLabel.text = "借贷质押币"
+            self.zhiyaNumView.titleLabel.text = "借贷质押数量"
             self.gasNumView.titleLabel.text = "借贷GAS"
         case .zifu:
-            self.zhiyaNumView.titleLabel.text = "使用质押币"
+            self.zhiyaNumView.titleLabel.text = "使用质押数量"
             self.gasNumView.titleLabel.text = "使用GAS"
         }
     }
@@ -277,11 +277,11 @@ extension OreDetailItemView {
         guard let model = model else {
             return
         }
-        var content: String = "挖矿数: \(model.amount.decimalValidDigitsProcess(digits: 8))\n"
+        var content: String = "收益数: \(model.amount.decimalValidDigitsProcess(digits: 8))\n"
         if let extend = model.extend {
             content += "封装数: \(extend.fz_num.decimalValidDigitsProcess(digits: 8))\n"
             if let zone = model.zone, zone == .ipfs || zone == .bzz {
-                content += "借贷质押币: \(extend.pledge_amount.decimalValidDigitsProcess(digits: 8))\n"
+                content += "借贷质押数量: \(extend.pledge_amount.decimalValidDigitsProcess(digits: 8))\n"
                 content += "借贷GAS: \(extend.gas_amount.decimalValidDigitsProcess(digits: 8))\n"
             }
             if let interest = extend.interest {

@@ -42,7 +42,7 @@ class EDUniversalSubjectView: UIView {
     let statusView: UILabel = UILabel.init()  // 状态
     
     fileprivate let container: UIView = UIView.init()
-    let zhiyaItemView: TitleValueView = TitleValueView.init()       // 质押币数量
+    let zhiyaItemView: TitleValueView = TitleValueView.init()       // 质押数量
     let xiaohaoItemView: TitleValueView = TitleValueView.init()     // Gas消耗数量
     
     fileprivate let titleLeftMargin: CGFloat = 12
@@ -246,21 +246,21 @@ extension EDUniversalSubjectView {
         case "封装详情":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_fengzhuang")
             self.statusView.isHidden = false
-            zhiyaTitle = "使用质押币数量(\(model.zone.rawValue.uppercased()))"
+            zhiyaTitle = "使用质押数量(\(model.zone.rawValue.uppercased()))"
             xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         case "借贷资本明细":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_jiedai")
-            zhiyaTitle = "借贷质押币数量(\(model.zone.rawValue.uppercased()))"
+            zhiyaTitle = "借贷质押数量(\(model.zone.rawValue.uppercased()))"
             xiaohaoTitle = "借贷Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         case "已归还":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_yiguihuan")
             self.zhiyaItemView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.08)
             self.xiaohaoItemView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.08)
-            zhiyaTitle = "质押币数量(\(model.zone.rawValue.uppercased()))"
+            zhiyaTitle = "质押数量(\(model.zone.rawValue.uppercased()))"
             xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         case "待归还":
             self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_daiguihuan")
-            zhiyaTitle = "质押币数量(\(model.zone.rawValue.uppercased()))"
+            zhiyaTitle = "质押数量(\(model.zone.rawValue.uppercased()))"
             xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"
         default:
             break

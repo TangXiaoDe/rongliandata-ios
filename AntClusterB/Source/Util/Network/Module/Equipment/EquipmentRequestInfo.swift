@@ -31,7 +31,7 @@ class EquipmentRequestInfo {
     /// 资产详情
     static let assetDetail = RequestInfo<AssetListModel>.init(method: .get, path: "equipments/miner_log/{order_id}", replaceds: ["{order_id}"])
     
-    /// 提前还币
+    /// 提前归还
     static let preReturn = RequestInfo<PreReturnResultModel>.init(method: .post, path: "equipments/prepayment/{order_id}", replaceds: ["{order_id}"])
     /// 归还流水
     static let returnList = RequestInfo<Empty>.init(method: .get, path: "", replaceds: [])

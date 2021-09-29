@@ -28,7 +28,7 @@ class AssetInfoModel: Mappable {
     var pawn: String = "0.0"
     /// Fil资产余额折算人民币金额
     var fil_to_cny: String = "0.0"
-    // fil 充币地址
+    // fil 充值地址
     var address: String = ""
     /// 提币地址:null未绑定
     var withdrawal_address: String?

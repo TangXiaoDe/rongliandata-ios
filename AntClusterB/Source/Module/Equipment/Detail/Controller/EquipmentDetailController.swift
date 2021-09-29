@@ -231,7 +231,7 @@ extension EquipmentDetailController {
         //
         switch model.pkg_status {
         case .deploying, .doing, .closed:
-            Toast.showToast(title: "当前封装未完成，\n暂时无法提前还币")
+            Toast.showToast(title: "当前封装未完成，\n暂时无法提前归还")
         case .done:
             // 第一次 则显示引导视图
             if !NoviceGuideManager.share.isGuideComplete(for: .equipPreReturn) {
@@ -263,7 +263,7 @@ extension EquipmentDetailController {
         self.enterPageVC(assetVC)
     }
     
-    /// 提前还币界面
+    /// 提前归还界面
     fileprivate func enterPreReturnPage(with model: EquipmentDetailModel) -> Void {
         let returnVC = PreReturnHomeController.init(model: model)
         self.enterPageVC(returnVC)
@@ -338,7 +338,7 @@ extension EquipmentDetailController: EquipmentDetailViewProtocol {
         self.enterEquipLockDetailPage(with: self.id)
     }
     
-    /// 提前还币点击回调
+    /// 提前归还点击回调
     func detailView(_ detailView: EquipmentDetailView, didClickedPreReturn returnView: UIView) -> Void {
         self.preReturnClickProcess()
     }

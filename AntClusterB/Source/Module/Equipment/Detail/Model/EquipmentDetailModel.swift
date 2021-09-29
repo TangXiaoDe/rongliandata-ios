@@ -43,7 +43,7 @@ class EquipmentDetailModel: Mappable {
     var total_output: Double = 0
     /// 昨日产出
     var yesterday_output: Double = 0
-    /// 0-待支付,1-已支付(待确认)，2-已确认(部署中),3-挖矿中,4-挖矿已结束，5-已关闭
+    /// 0-待支付,1-已支付(待确认)，2-已确认(部署中),3-运行中,4-挖矿已结束，5-已关闭
     var status_value: Int = 0
 
     /// 挖矿开始时间
@@ -352,7 +352,7 @@ class EDAssetModel: Mappable {
     ///
     var order_id: Int = 0
 
-    /// 挖矿总数
+    /// 累计收益
     var total_ming: Double = 0
     /// 可用数量
     var available: Double = 0
@@ -364,11 +364,11 @@ class EDAssetModel: Mappable {
     var pawn: Double = 0
     /// 封装数
     var fz_num: Double = 0
-    /// 使用质押币数量
+    /// 使用质押数量
     var pledge: Double = 0
     /// Gas消耗数量
     var gas: Double = 0
-    /// 已归还质押币数量
+    /// 已归还质押数量
     var return_pledge: Double = 0
     /// 已归还Gas消耗数量
     var return_gas: Double = 0
