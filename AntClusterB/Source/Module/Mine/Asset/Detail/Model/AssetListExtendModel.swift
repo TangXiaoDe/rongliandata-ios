@@ -11,13 +11,13 @@ import Foundation
 import ObjectMapper
 
 class AssetListExtendModel: Mappable {
-    /// 挖矿数
+    /// 收益数
     var amount: Double = 0
     /// 封装数
     var fz_num: Double = 0
     ///
     var filWithdrawalFee: Double = 0
-    /// 借贷质押币
+    /// 借贷质押数量
     var pledge_amount: Double = 0
     /// 借贷GSA
     var gas_amount: Double = 0

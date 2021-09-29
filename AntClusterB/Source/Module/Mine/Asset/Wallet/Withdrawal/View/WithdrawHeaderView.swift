@@ -208,7 +208,7 @@ extension WithdrawHeaderView {
         }
         // 6. addressPrompt
         topView.addSubview(self.addressPromptLabel)
-        self.addressPromptLabel.set(text: "提币地址", font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.mainText)
+        self.addressPromptLabel.set(text: "提现地址", font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.mainText)
         self.addressPromptLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.centerY.equalTo(self.balanceControl.snp.centerY).offset(self.addressPromptCenterYTopMargin)
@@ -288,7 +288,7 @@ extension WithdrawHeaderView {
         numInputView.addSubview(self.numField)
         self.numField.keyboardType = .decimalPad
         self.numField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 20), textColor: AppColor.mainText)
-        self.numField.attributedPlaceholder = NSAttributedString.init(string: "最低提币个数 1", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 20), NSAttributedString.Key.foregroundColor: AppColor.grayText])
+        self.numField.attributedPlaceholder = NSAttributedString.init(string: "最低提现个数 1", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 20), NSAttributedString.Key.foregroundColor: AppColor.grayText])
         self.numField.addTarget(self, action: #selector(numFieldValueChanged(_:)), for: .editingChanged)
         self.numField.snp.makeConstraints { (make) in
             make.height.equalTo(self.fieldHeight)
@@ -316,16 +316,16 @@ extension WithdrawHeaderView {
             return
         }
         // 子控件数据加载
-        self.numInputPromptLabel.text = "请输入提币数量"
+        self.numInputPromptLabel.text = "请输入提现数量"
         let balance: String = assetModel.lfbalance.decimalValidDigitsProcess(digits: 8)
-        self.balanceControl.topLabel.text = "可提币\(assetModel.currency.title)"
+        self.balanceControl.topLabel.text = "可提现\(assetModel.currency.title)"
         self.balanceControl.bottomLabel.text = balance
         self.limitSingleMaxNum = Double(balance) ?? 0.0
         guard let configModel = self.configModel else {
             return
         }
         self.limitSingleMinNum = configModel.user_min
-        self.numField.attributedPlaceholder = NSAttributedString.init(string: "最低提币个数 " + "\(self.limitSingleMinNum)".decimalProcess(digits: 8), attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 20), NSAttributedString.Key.foregroundColor: AppColor.grayText])
+        self.numField.attributedPlaceholder = NSAttributedString.init(string: "最低提现个数 " + "\(self.limitSingleMinNum)".decimalProcess(digits: 8), attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 20), NSAttributedString.Key.foregroundColor: AppColor.grayText])
         self.feeValueLabel.text = "\(configModel.service_charge)".decimalProcess(digits: 8) + " " + assetModel.currency.title
         self.addressLabel.text = assetModel.withdrawAddress
         self.progressConvertNum()

@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2020/7/6.
 //  Copyright © 2020 ChainOne. All rights reserved.
 //
-//  提币地址绑定界面
+//  提现地址绑定界面
 
 import UIKit
 import TZImagePickerController
@@ -77,7 +77,7 @@ extension WithdrawAddressBindingController {
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = AppColor.pageBg
         // navbar
-        self.navigationItem.title = "绑定提币地址-\(self.assetModel.title)"
+        self.navigationItem.title = "绑定提现地址-\(self.assetModel.title)"
         // scrollView
         self.view.addSubview(self.scrollView)
         self.initialScrollView(self.scrollView)

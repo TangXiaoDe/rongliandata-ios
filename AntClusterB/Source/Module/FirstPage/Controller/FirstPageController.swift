@@ -21,7 +21,7 @@ class FirstPageController: BaseViewController
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
     
     fileprivate let headerView: FPHomeHeaderView = FPHomeHeaderView.init()          // 头部视图：banner、消息、ipfs数据
-    fileprivate let orePoolView: FPHomeOrePoolView = FPHomeOrePoolView.init()         // 矿池数据
+    fileprivate let orePoolView: FPHomeOrePoolView = FPHomeOrePoolView.init()         // 区块数据
     fileprivate let quotationView: FPHomeQuotationView = FPHomeQuotationView.init()       // 实时行情
 
     fileprivate let footerView: UIView = UIView.init()
@@ -271,7 +271,7 @@ extension FirstPageController: FPHomeHeaderViewProtocol {
 
 // MARK: - Enter Page
 extension FirstPageController {
-    /// 矿池数据类型选择
+    /// 区块数据类型选择
     fileprivate func showOrePoolTypeSelectPage(with defaultType: FPOrePoolType?) -> Void {
         let selectVC = FPOrePoolTypeSelectController.init()
         selectVC.defaultType = defaultType

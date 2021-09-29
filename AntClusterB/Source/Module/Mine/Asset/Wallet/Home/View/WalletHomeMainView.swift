@@ -211,7 +211,7 @@ extension WalletHomeMainView {
         centerView.addSubview(self.rechargeBtn)
         self.rechargeBtn.addTarget(self, action: #selector(rechargeBtnClick(_:)), for: .touchUpInside)
         self.rechargeBtn.set(font: UIFont.pingFangSCFont(size: 14, weight: .medium))
-        self.rechargeBtn.setTitle("充币", for: .normal)
+        self.rechargeBtn.setTitle("充值", for: .normal)
         self.rechargeBtn.setTitleColor(UIColor.init(hex: 0x19A8B1), for: .normal)
         self.rechargeBtn.backgroundColor = UIColor.white
         self.rechargeBtn.set(cornerRadius: 3)
@@ -223,7 +223,7 @@ extension WalletHomeMainView {
         centerView.addSubview(self.withdrwalBtn)
         self.withdrwalBtn.addTarget(self, action: #selector(withdrwalBtnClick(_:)), for: .touchUpInside)
         self.withdrwalBtn.set(font: UIFont.pingFangSCFont(size: 14, weight: .medium))
-        self.withdrwalBtn.setTitle("提币", for: .normal)
+        self.withdrwalBtn.setTitle("提现", for: .normal)
         self.withdrwalBtn.setTitleColor(UIColor.init(hex: 0x19A8B1), for: .normal)
         self.withdrwalBtn.backgroundColor = UIColor.white
         self.withdrwalBtn.set(cornerRadius: 3)

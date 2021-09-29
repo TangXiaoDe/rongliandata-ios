@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/7/27.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  提前还币结果页
+//  提前归还结果页
 
 import UIKit
 
@@ -82,7 +82,7 @@ extension PreReturnResultController {
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = UIColor.white
         // navbar
-        self.navigationItem.title = "还币成功"
+        self.navigationItem.title = "归还成功"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "IMG_navbar_back"), style: .plain, target: self, action: #selector(navLeftItemClick))
         // scrollView
         self.view.addSubview(self.scrollView)
@@ -150,7 +150,7 @@ extension PreReturnResultController {
         containerView.removeAllSubviews()
         //
         let itemViews: [TitleValueView] = [self.waitGasItemView, self.waitPledgeItemView, self.waitInterestItemView, self.interestItemView, self.typeItemView, self.statusItemView, self.dateItemView]
-        let itemTitles: [String] = ["归还本金（GAS消耗）", "归还本金（质押币）", "归还本金（欠款利息）", "归还利息", "还币类型", "还币状态", "还币时间"]
+        let itemTitles: [String] = ["归还本金（GAS消耗）", "归还本金（质押数量）", "归还本金（欠款利息）", "归还利息", "归还类型", "归还状态", "归还时间"]
         var lastView: UIView = containerView
         for (index, itemView) in itemViews.enumerated() {
             containerView.addSubview(itemView)
@@ -228,7 +228,7 @@ extension PreReturnResultController {
         
         //
         self.promptIconView.image = UIImage.init(named: "IMG_wallet_tixian_succese")
-        self.promptTitleLabel.text = "还币成功"
+        self.promptTitleLabel.text = "归还成功"
         self.setupWithModel(self.model)
     }
     
@@ -237,7 +237,7 @@ extension PreReturnResultController {
     fileprivate func setupAsDemo() -> Void {
         //
         self.promptIconView.image = UIImage.init(named: "IMG_wallet_tixian_succese")
-        self.promptTitleLabel.text = "还币成功"
+        self.promptTitleLabel.text = "归还成功"
         self.promptInfoLabel.text = "52.00015FIL"
         //
         self.setupInfoContainer(with: [self.waitPledgeItemView, self.waitGasItemView, self.waitInterestItemView, self.interestItemView, self.typeItemView, self.dateItemView])

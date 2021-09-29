@@ -62,7 +62,7 @@ extension RechargeHomeController {
 // MARK: - UI
 extension RechargeHomeController {
     fileprivate func initialUI() -> Void {
-        self.title = "充币"
+        self.title = "充值"
         self.view.backgroundColor = AppColor.pageBg
         // mainView - 整体布局，便于扩展，特别是针对分割、背景色、四周间距
         self.view.addSubview(mainView)

@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/8/5.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  提前还款输入主界面
+//  提前归还输入主界面
 
 import UIKit
 import ChainOneKit
@@ -258,7 +258,7 @@ extension PreReturnInputMainView {
         centerView.set(cornerRadius: 10)
         // 1. title
         centerView.addSubview(self.centerTitleLabel)
-        self.centerTitleLabel.set(text: "本次还币本金数量", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText)
+        self.centerTitleLabel.set(text: "本次归还本金数量", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText)
         self.centerTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.centerY.equalTo(centerView.snp.top).offset(self.centerTitleCenterYTopMargin)
@@ -375,7 +375,7 @@ extension PreReturnInputMainView {
         containerView.removeAllSubviews()
         //
         let itemViews: [TitleValueView] = [self.totalWaitItemView, self.interestWaitItemView, self.interestItemView, self.gasItemView, self.pledgeItemView]
-        let itemTitles: [String] = ["全部待归还数量", "本次归还累计欠款利息数量", "利息数量", "本次归还GAS消耗数量", "本次归还质押币数量"]
+        let itemTitles: [String] = ["全部待归还数量", "本次归还累计欠款利息数量", "利息数量", "本次归还GAS消耗数量", "本次归还质押数量"]
         var topView: UIView = containerView
         for (index, itemView) in itemViews.enumerated() {
             containerView.addSubview(itemView)
@@ -511,7 +511,7 @@ extension PreReturnInputMainView {
         switch self.type {
         case .all:
             if self.totalReturnAmount <= self.totalFil {
-                tips = "*还币类型为全部还清，不可修改还币数量"
+                tips = "*归还类型为全部还清，不可修改归还数量"
             } else {
                 tips = "*全部待归还数量超过可用FIL数"
                 tipsColor = UIColor.init(hex: 0xE06236)
@@ -519,7 +519,7 @@ extension PreReturnInputMainView {
         case .gas, .mortgage, .interest:
             if let inputValue = self.inputValue {
                 if inputValue > self.waitReturnAmount {
-                    tips = "*您当前输入的还币数量已超过待还数量，请重新输入"
+                    tips = "*您当前输入的归还数量已超过待还数量，请重新输入"
                     tipsColor = UIColor.init(hex: 0xE06236)
                 } else if inputValue > self.totalFil {
                     tips = "*输入金额超过可用FIL数，请重新输入"
@@ -527,7 +527,7 @@ extension PreReturnInputMainView {
                 }
             }
             if tips.isEmpty && self.totalReturnAmount > self.totalFil {
-                tips = "*总计还款金额超过可用FIL数，请重新输入"
+                tips = "*总计归还金额超过可用FIL数，请重新输入"
                 tipsColor = UIColor.init(hex: 0xE06236)
             }
         }

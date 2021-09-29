@@ -15,7 +15,7 @@ protocol EquipmentDetailViewProtocol: class {
     func detailView(_ detailView: EquipmentDetailView, didClickedAssetDetail addetDetailView: UIView) -> Void
     /// 锁仓详情入口点击
     func detailView(_ detailView: EquipmentDetailView, didClickedLockDetail lockDetailView: UIView) -> Void
-    /// 提前还币点击回调
+    /// 提前归还点击回调
     func detailView(_ detailView: EquipmentDetailView, didClickedPreReturn returnView: UIView) -> Void
     /// 归还流水点击回调
     func detailView(_ detailView: EquipmentDetailView, didClickedReturnDetail returnDetailView: UIView) -> Void
@@ -234,7 +234,7 @@ extension EquipmentDetailView: EDAssetSurveyViewProtocol {
 // MARK: - <EDUnbackSubjectViewProtocol>
 extension EquipmentDetailView: EDUnbackSubjectViewProtocol {
     
-    /// 提前还币点击回调
+    /// 提前归还点击回调
     func unbackView(_ unbackView: EDUnbackSubjectView, didClickedPreReturn returnView: UIView) -> Void {
         self.delegate?.detailView(self, didClickedPreReturn: returnView)
     }

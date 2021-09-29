@@ -24,7 +24,7 @@ enum NoviceGuideType {
     case userCenter
     /// 挖矿入口更新
     case miningEntranceUpdate
-    /// 设备提前还币
+    /// 设备提前归还
     case equipPreReturn
 
     /// UserDefaults里存取的标志

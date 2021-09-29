@@ -87,7 +87,7 @@ extension WithdrawController {
         self.view.addSubview(self.statusNavBarView)
         self.statusNavBarView.backgroundColor = UIColor.white
         self.statusNavBarView.delegate = self
-        self.statusNavBarView.title = "提币-\(self.assetModel.title)"
+        self.statusNavBarView.title = "提现-\(self.assetModel.title)"
         self.statusNavBarView.titleLabel.textColor = AppColor.mainText
         self.statusNavBarView.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
         self.statusNavBarView.rightItem.isHidden = true
@@ -120,8 +120,8 @@ extension WithdrawController {
         }
         // 2. doneBtn
         scrollView.addSubview(self.doneBtn)
-        self.doneBtn.set(title: "确认提币", titleColor: UIColor.white, for: .normal)
-        self.doneBtn.set(title: "确认提币", titleColor: UIColor.white, for: .highlighted)
+        self.doneBtn.set(title: "确认提现", titleColor: UIColor.white, for: .normal)
+        self.doneBtn.set(title: "确认提现", titleColor: UIColor.white, for: .highlighted)
         self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: self.doneBtnHeight * 0.5)
         self.doneBtn.backgroundColor = AppColor.disable
         self.doneBtn.gradientLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.lrMargin * 2.0, height: self.doneBtnHeight)

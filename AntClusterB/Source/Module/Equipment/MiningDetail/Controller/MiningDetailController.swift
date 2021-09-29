@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/1/12.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  挖矿明细界面
+//  收益收益界面
 
 import UIKit
 
@@ -81,7 +81,7 @@ extension MiningDetailController {
         }
         // 1. navBar
         self.view.addSubview(self.navBar)
-        self.navBar.title = "挖矿明细"
+        self.navBar.title = "收益收益"
         self.navBar.leftItem.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .normal)
         self.navBar.leftItem.isHidden = false
         self.navBar.rightItem.isHidden = true

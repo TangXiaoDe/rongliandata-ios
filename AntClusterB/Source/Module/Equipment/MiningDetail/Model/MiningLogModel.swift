@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/1/12.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  挖矿明细模型 - 部分参考AssetListModel
+//  收益收益模型 - 部分参考AssetListModel
 
 import Foundation
 import ObjectMapper
@@ -101,7 +101,7 @@ typealias MiningLogModel = AssetListModel
 //
 //class MiningLogExtendModel: Mappable {
 //
-//    /// 挖矿数
+//    /// 收益数
 //    var amount: Double = 0
 //    /// 封装数
 //    var fz_num: Double = 0

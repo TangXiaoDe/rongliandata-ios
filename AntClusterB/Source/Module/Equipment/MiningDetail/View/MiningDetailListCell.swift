@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/1/12.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  挖矿明细列表Cell
+//  收益收益列表Cell
 
 import UIKit
 
@@ -56,7 +56,7 @@ class MiningDetailListCell: UITableViewCell
     fileprivate let dashLine: XDDashLineView = XDDashLineView.init(lineColor: AppColor.dividing, lengths: [3.0, 3.0])
     
     fileprivate let bottomView: UIView = UIView.init()
-    fileprivate let miningNumView: TitleValueView = TitleValueView.init()   // 挖矿数
+    fileprivate let miningNumView: TitleValueView = TitleValueView.init()   // 收益数
     fileprivate let fenzuaNumView: TitleValueView = TitleValueView.init()   // 封装数
     
     fileprivate let lrMargin: CGFloat = 12
@@ -211,7 +211,7 @@ extension MiningDetailListCell {
             make.height.equalTo(self.itemViewHeight)
             make.top.equalToSuperview().offset(self.itemViewTopMargin)
         }
-        self.miningNumView.titleLabel.set(text: "挖矿数", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x666666))
+        self.miningNumView.titleLabel.set(text: "收益数", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x666666))
         self.miningNumView.titleLabel.snp.remakeConstraints { (make) in
             make.leading.equalToSuperview()
             make.centerY.equalToSuperview()

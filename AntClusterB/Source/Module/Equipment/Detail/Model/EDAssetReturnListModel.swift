@@ -15,7 +15,7 @@ class EDAssetReturnListModel: Mappable {
     var id: Int = 0
     ///
     var order_id: Int = 0
-    /// 质押币
+    /// 质押数量
     var pledge: Double = 0
     /// gas
     var gas: Double = 0

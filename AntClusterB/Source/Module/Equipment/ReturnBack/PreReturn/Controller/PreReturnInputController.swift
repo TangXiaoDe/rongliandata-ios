@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2021/7/27.
 //  Copyright © 2021 ChainOne. All rights reserved.
 //
-//  提前还币输入页
+//  提前归还输入页
 
 import UIKit
 
@@ -93,7 +93,7 @@ extension PreReturnInputController {
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = AppColor.pageBg
         // 1. navBar
-        self.navigationItem.title = "提前还币"
+        self.navigationItem.title = "提前归还"
         // scrollView
         self.view.addSubview(self.scrollView)
         self.scrollView.showsVerticalScrollIndicator = false
@@ -122,7 +122,7 @@ extension PreReturnInputController {
             make.top.equalToSuperview().offset(self.verMargin)
             make.height.equalTo(self.typeViewHeight)
         }
-        self.typeView.titleLabel.set(text: "还币类型", font: UIFont.pingFangSCFont(size: 15), textColor: AppColor.detailText)
+        self.typeView.titleLabel.set(text: "归还类型", font: UIFont.pingFangSCFont(size: 15), textColor: AppColor.detailText)
         self.typeView.titleLabel.snp.remakeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(self.lrMargin)
@@ -149,8 +149,8 @@ extension PreReturnInputController {
         }
         // 3. doneBtn
         mainView.addSubview(self.doneBtn)
-        self.doneBtn.set(title: "确认还币", titleColor: UIColor.white, for: .normal)
-        self.doneBtn.set(title: "确认还币", titleColor: UIColor.white, for: .highlighted)
+        self.doneBtn.set(title: "确认归还", titleColor: UIColor.white, for: .normal)
+        self.doneBtn.set(title: "确认归还", titleColor: UIColor.white, for: .highlighted)
         self.doneBtn.set(font: UIFont.systemFont(ofSize: 18, weight: .medium), cornerRadius: self.doneBtnHeight * 0.5)
         self.doneBtn.backgroundColor = AppColor.disable
         self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)

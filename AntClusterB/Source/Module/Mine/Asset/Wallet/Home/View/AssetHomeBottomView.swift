@@ -11,7 +11,7 @@ import UIKit
 protocol AssetHomeBottomViewProtocol: class {
     /// 提币按钮点击回调
     func bottomView(_ bottomView: AssetHomeBottomView, didClickedWithdraw withdrawView: UIButton, with model: AssetInfoModel) -> Void
-    /// 充币按钮点击回调
+    /// 充值按钮点击回调
     func bottomView(_ bottomView: AssetHomeBottomView, didClickedRecharge rechargeView: UIButton, with model: AssetInfoModel) -> Void
     /// 兑换按钮点击回调
     func bottomView(_ bottomView: AssetHomeBottomView, didClickedExchange exchangeView: UIButton, with model: AssetInfoModel) -> Void
@@ -63,7 +63,7 @@ extension AssetHomeBottomView {
         // 1. rechargeBtn
         self.rechargeBtn.set(title: "充值", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
         // 2. withdrawalBtn
-        self.withdrawalBtn.set(title: "提币", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
+        self.withdrawalBtn.set(title: "提现", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
         // 3. withdrawalBtn
         self.exchangeBtn.set(title: "兑换", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
     }

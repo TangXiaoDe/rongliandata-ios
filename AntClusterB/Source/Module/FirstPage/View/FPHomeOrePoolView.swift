@@ -5,7 +5,7 @@
 //  Created by 小唐 on 2020/11/13.
 //  Copyright © 2020 ChainOne. All rights reserved.
 //
-//  首页矿池数据视图
+//  首页区块数据视图
 
 import UIKit
 
@@ -49,7 +49,7 @@ class FPHomeOrePoolView: UIView
     fileprivate let typeView: FPHomeOrePoolTypeView = FPHomeOrePoolTypeView.init()
     
     fileprivate let container: UIView = UIView.init()
-    fileprivate let miningIncomeOneDayItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 24h平均挖矿收益(FIL/TiB)
+    fileprivate let miningIncomeOneDayItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 24h平均提供存储服务收益(FIL/TiB)
     fileprivate let addPowerCostItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 新增算力成本(FIL/TiB)
     fileprivate let nowNledgeCollateralItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // 当前扇区质押量(FiL/32GiB)
     fileprivate let totalPledgeCollateralItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // FIL质押量(FIL)
@@ -138,7 +138,7 @@ extension FPHomeOrePoolView {
             make.top.equalToSuperview().offset(0)
             make.height.equalTo(self.titleViewHeight)
         }
-        self.titleView.label.set(text: "矿池数据", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333))
+        self.titleView.label.set(text: "区块数据", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333))
         self.titleView.label.snp.remakeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(self.lrMargin)
@@ -162,7 +162,7 @@ extension FPHomeOrePoolView {
 //    fileprivate func initialContainer(_ container: UIView) -> Void {
 //        self.container.removeAllSubviews()
 //        let itemViews: [FPHomeOrePoolItemView] = [self.miningIncomeOneDayItemView, self.addPowerCostItemView, self.nowNledgeCollateralItemView, self.totalPledgeCollateralItemView]
-//        let titels: [String] = ["24h平均挖矿收益(FIL/TiB)", "新增算力成本(FIL/TIB)", "当前扇区质押量(FIL/32GiB)", "FIL质押量(FIL)"]
+//        let titels: [String] = ["24h平均提供存储服务收益(FIL/TiB)", "新增算力成本(FIL/TIB)", "当前扇区质押量(FIL/32GiB)", "FIL质押量(FIL)"]
 //        let iconNames: [String] = ["IMG_img_home_bg_reward", "IMG_img_home_bg_chengben", "IMG_img_home_bg_shanxing", "IMG_img_home_bg_zhiya"]
 //        let nameIconNames: [String] = ["IMG_home_icon_reward", "IMG_home_icon_chengben", "IMG_home_icon_shanxing", "IMG_home_icon_zhiya"]
 //        for (index, itemView) in itemViews.enumerated() {

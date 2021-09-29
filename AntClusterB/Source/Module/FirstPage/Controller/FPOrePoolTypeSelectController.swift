@@ -165,7 +165,7 @@ extension FPOrePoolTypeSelectController {
         topView.setupCorners(UIRectCorner.init([UIRectCorner.topLeft, UIRectCorner.topRight]), selfSize: CGSize.init(width: kScreenWidth, height: self.titleViewHeight), cornerRadius: 10)
         // 1. titleLabel
         topView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "切换矿池数据", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText, alignment: .center)
+        self.titleLabel.set(text: "切换区块数据", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText, alignment: .center)
         self.titleLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
         }

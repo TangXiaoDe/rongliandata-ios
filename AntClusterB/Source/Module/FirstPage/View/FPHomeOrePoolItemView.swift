@@ -171,12 +171,27 @@ extension FPHomeOrePoolItemView {
         self.nameView.iconView.image = model.title_icon
         let valueColor: UIColor = model.bg != nil ? UIColor.white : AppColor.theme
         let titleColor: UIColor = model.bg != nil ? UIColor.white : AppColor.mainText
-        //let titleColor: UIColor = ["全网有效算力", "活跃矿工人数", "全网算力", "当前算力难度"].contains(model.title) ? UIColor.white : AppColor.mainText
+        //let titleColor: UIColor = ["全网有效算力", "活跃存储提供者", "全网算力", "当前算力难度"].contains(model.title) ? UIColor.white : AppColor.mainText
         self.valueLabel.textColor = valueColor
         var titleAtts = NSAttributedString.textAttTuples()
         titleAtts.append((str: model.title, font: UIFont.pingFangSCFont(size: 12), color: titleColor))
         titleAtts.append((str: model.strTitleUnit, font: UIFont.pingFangSCFont(size: 9), color: titleColor))
         self.nameView.titleLabel.attributedText = NSAttributedString.attribute(titleAtts)
+        if model.title == "24h平均提供存储服务收益" {
+            self.nameView.titleLabel.numberOfLines = 2
+            self.nameView.titleLabel.snp.remakeConstraints { (make) in
+                make.top.equalTo(self.nameView.iconView).offset(-5)
+                make.leading.equalTo(self.nameView.iconView.snp.trailing).offset(self.nameViewHorMargin)
+                make.trailing.lessThanOrEqualToSuperview()
+            }
+        } else {
+            self.nameView.titleLabel.numberOfLines = 1
+            self.nameView.titleLabel.snp.remakeConstraints { (make) in
+                make.centerY.trailing.equalToSuperview()
+                make.leading.equalTo(self.nameView.iconView.snp.trailing).offset(self.nameViewHorMargin)
+            }
+        }
+        self.layoutIfNeeded()
     }
 
 }

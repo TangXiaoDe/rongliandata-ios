@@ -9,7 +9,7 @@
 import Foundation
 
 
-/// 0-待支付,1-已支付(待确认)，2-已确认(部署中),3-挖矿中,4-挖矿已结束，5-已关闭, 6-欠电费
+/// 0-待支付,1-已支付(待确认)，2-已确认(部署中),3-运行中,4-挖矿已结束，5-已关闭, 6-欠电费
 typealias MallOrderStatus = MiningMachineOrderStatus
 enum MiningMachineOrderStatus: Int {
     /// 待支付
@@ -18,7 +18,7 @@ enum MiningMachineOrderStatus: Int {
     case waitensure
     /// 已确认(部署中)
     case deploying
-    /// 挖矿中
+    /// 运行中
     case digging
     /// 挖矿已结束
     case digged
@@ -29,7 +29,7 @@ enum MiningMachineOrderStatus: Int {
     
     
     var title: String {
-        // 已结束(0x29313D)、挖矿中(0x335DF6)、待付款|待商家确认|部署中(0xE06236)、交易关闭(0xCE586E)、
+        // 已结束(0x29313D)、运行中(0x335DF6)、待付款|待商家确认|部署中(0xE06236)、交易关闭(0xCE586E)、
         var title: String = ""
         switch self {
         case .waitpay:
@@ -39,7 +39,7 @@ enum MiningMachineOrderStatus: Int {
         case .deploying:
             title = "部署中"
         case .digging:
-            title = "挖矿中"
+            title = "运行中"
         case .digged:
             title = "已结束"
         case .closed:
@@ -53,7 +53,7 @@ enum MiningMachineOrderStatus: Int {
     /// 详情页状态图标
     var icon: UIImage? {
         // 待支付(IMG_order_icon_wait)、待商家确认(IMG_order_icon_wait)、部署中(IMG_order_icon_deploy)、
-        // 挖矿中(IMG_order_icon_wakuang)、已结束(IMG_order_icon_end)、订单关闭(IMG_order_icon_close)
+        // 运行中(IMG_order_icon_wakuang)、已结束(IMG_order_icon_end)、订单关闭(IMG_order_icon_close)
         var image: UIImage? = nil
         switch self {
         case .waitpay:

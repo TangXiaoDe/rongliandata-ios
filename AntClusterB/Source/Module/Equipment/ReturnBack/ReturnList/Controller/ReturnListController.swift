@@ -165,7 +165,7 @@ extension ReturnListController {
         print("TemplateUIViewController navBarRightItemClick")
         
         let popView = ReturnListTipsPopVew.init()
-        popView.content = "利息算法为待归还借贷本金*日利率，每日进行统计一次，一半放到累计欠款利息，一半直接进行统计等待月初进行还款，当归还金额低于应归还利息时，剩余未归还金额放至累计欠款利息中等待借贷本金还完进行二次还款，归还借贷本金可点击提前还币按钮进行提前归还借贷本金，本金减少后利息也会适当下降。"
+        popView.content = "利息算法为待归还借贷本金*日利率，每日进行统计一次，一半放到累计欠款利息，一半直接进行统计等待月初进行归还，当归还金额低于应归还利息时，剩余未归还金额放至累计欠款利息中等待借贷本金还完进行二次归还，归还借贷本金可点击提前归还按钮进行提前归还借贷本金，本金减少后利息也会适当下降。"
         PopViewUtil.showPopView(popView)
         
     }

@@ -42,7 +42,7 @@ class EDBackAssetDetailItemView: BaseView {
     fileprivate let mainView: UIView = UIView.init()
     
     fileprivate let dateValueLabel: UILabel = UILabel.init()      // 日期
-    fileprivate let zhiyaValueLabel: UILabel = UILabel.init()     // 质押币
+    fileprivate let zhiyaValueLabel: UILabel = UILabel.init()     // 质押数量
     fileprivate let gasValueLabel: UILabel = UILabel.init()       // Gas
     fileprivate let interestShouldLabel: UILabel = UILabel.init()  // 应还利息
     fileprivate let interestRealLabel: UILabel = UILabel.init()  // 实还利息

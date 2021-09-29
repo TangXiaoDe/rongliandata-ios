@@ -37,7 +37,7 @@ class LockDetailItemView: UIView {
     fileprivate let mainView: UIView = UIView.init()
     fileprivate let centerView: UIView = UIView.init()
     // fil
-    fileprivate let miningNumView: TitleValueView = TitleValueView.init()   // 挖矿总数
+    fileprivate let miningNumView: TitleValueView = TitleValueView.init()   // 累计收益
     fileprivate let fengzhuangNumView: TitleValueView = TitleValueView.init()   // 封装数量
     fileprivate let progressNumView: TitleValueView = TitleValueView.init()   // 封装比例
     fileprivate weak var bottomLine: UIView!

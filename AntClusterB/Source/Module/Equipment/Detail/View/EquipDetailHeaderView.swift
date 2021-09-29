@@ -39,7 +39,7 @@ class EquipDetailHeaderView: UIView
     
     fileprivate let centerView: UIView = UIView.init()
     // fil
-    fileprivate let miningNumView: TitleValueView = TitleValueView.init()   // 挖矿总数
+    fileprivate let miningNumView: TitleValueView = TitleValueView.init()   // 累计收益
     fileprivate let fengzhuangNumView: TitleValueView = TitleValueView.init()   // 封装数量
     fileprivate let progressNumView: TitleValueView = TitleValueView.init()   // 封装比例
     // btc/eth
@@ -295,7 +295,7 @@ extension EquipDetailHeaderView {
             }
             leftView = itemView
         }
-        self.miningNumView.titleLabel.text = "挖矿总数"
+        self.miningNumView.titleLabel.text = "累计收益"
         self.fengzhuangNumView.titleLabel.text = "封装数量"
         self.progressNumView.titleLabel.text = "封装比例"
         self.incomeNumView.titleLabel.text = "累计收益"
@@ -324,8 +324,8 @@ extension EquipDetailHeaderView {
         self.miningNumView.valueLabel.text = "324.12345678"
         self.fengzhuangNumView.valueLabel.text = "46.45"
         self.progressNumView.valueLabel.text = "14.20%"
-        // 0x2381FB挖矿中 | 0x333333部署中 | 0x999999已关闭
-        self.statusLabel.text = "挖矿中"
+        // 0x2381FB运行中 | 0x333333部署中 | 0x999999已关闭
+        self.statusLabel.text = "运行中"
         self.statusLabel.textColor = UIColor.init(hex: 0x2381FB)
         
         var totalNumAtts = NSAttributedString.textAttTuples()

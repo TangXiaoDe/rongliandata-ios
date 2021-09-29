@@ -52,7 +52,7 @@ class EDBackAssetDetailView: UIView {
     
     fileprivate let formTitleView: UIView = UIView.init()
     fileprivate let formDateLabel: UILabel = UILabel.init()      // 日期
-    fileprivate let formZhiyaLabel: UILabel = UILabel.init()     // 质押币
+    fileprivate let formZhiyaLabel: UILabel = UILabel.init()     // 质押数量
     fileprivate let formGasLabel: UILabel = UILabel.init()       // Gas
     fileprivate let formShouldInterestLabel: UILabel = UILabel.init()  // 应还利息
     fileprivate let formRealInterestLabel: UILabel = UILabel.init()  // 实还利息
@@ -251,7 +251,7 @@ extension EDBackAssetDetailView {
         //
         formView.removeAllSubviews()
         let itemViews: [UILabel] = [self.formDateLabel, self.formZhiyaLabel, self.formGasLabel, self.formShouldInterestLabel, self.formRealInterestLabel]
-        let itemTitles: [String] = ["结算时间", "质押币", "Gas", "应还利息", "实还利息"]
+        let itemTitles: [String] = ["结算时间", "质押资产", "Gas", "应还利息", "实还利息"]
         let itemWidth: CGFloat = self.itemWidth
         var leftView: UIView = formView
         for (index, itemView) in itemViews.enumerated() {
@@ -396,18 +396,18 @@ extension EDBackAssetDetailView {
 //            statusAtts.append((str: "部署中", font: UIFont.pingFangSCFont(size: 16, weight: .medium), color: UIColor.init(hex: 0xE06236)))
 //            self.statusView.attributedText = NSAttributedString.attribute(statusAtts)
 //
-//            zhiyaTitle = "使用质押币数量(FIL)"
+//            zhiyaTitle = "使用质押数量(FIL)"
 //            xiaohaoTitle = "Gas消耗数量(FIL)"
 //        case "借贷资本明细":
-//            zhiyaTitle = "借贷质押币数量(FIL)"
+//            zhiyaTitle = "借贷质押数量(FIL)"
 //            xiaohaoTitle = "借贷Gas消耗数量(FIL)"
 //        case "已归还":
 //            self.zhiyaItemView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.08)
 //            self.xiaohaoItemView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.08)
-//            zhiyaTitle = "质押币数量(FIL)"
+//            zhiyaTitle = "质押数量(FIL)"
 //            xiaohaoTitle = "Gas消耗数量(FIL)"
 //        case "待归还":
-//            zhiyaTitle = "质押币数量(FIL)"
+//            zhiyaTitle = "质押数量(FIL)"
 //            xiaohaoTitle = "Gas消耗数量(FIL)"
 //        default:
 //            break
