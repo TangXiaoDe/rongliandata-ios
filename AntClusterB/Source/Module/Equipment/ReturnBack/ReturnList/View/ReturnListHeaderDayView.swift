@@ -105,8 +105,7 @@ extension ReturnListHeaderDayView {
         // 3. updownView
         self.addSubview(self.updownView)
         self.updownView.set(cornerRadius: 0)
-        self.updownView.image = UIImage.init(named: "")
-        self.updownView.backgroundColor = UIColor.random
+        self.updownView.image = UIImage.init(named: "IMG_shebei_guihuan_date_icon")
         self.updownView.snp.makeConstraints { (make) in
             make.size.equalTo(self.updownIconSize)
             make.centerY.equalToSuperview()

@@ -20,12 +20,14 @@ class ReturnListController: BaseViewController
     
     // MARK: - Internal Property
 
+    let model: EquipmentDetailModel
+    
     // MARK: - Private Property
     
     fileprivate let headerView: ReturnListHeader = ReturnListHeader.init()
     fileprivate let tableView: BaseTableView = BaseTableView(frame: CGRect.zero, style: .plain)
     
-    fileprivate var sourceList: [String] = []
+    fileprivate var sourceList: [ReturnListModel] = []
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     
@@ -37,12 +39,13 @@ class ReturnListController: BaseViewController
     
     
     // MARK: - Initialize Function
-    init() {
+    init(model: EquipmentDetailModel) {
+        self.model = model
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
+        //super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
 
 }
@@ -123,15 +126,20 @@ extension ReturnListController {
 
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
-        //self.tableView.mj_header.beginRefreshing()
-        self.setupAsDemo()
+        //self.selectedStartDate = self.model.createdDate
+        self.selectedStartDate = Date.init(timeIntervalSinceNow: -3_600 * 24 * 30)
+        self.selectedEndDate = Date.init()
+        self.headerView.startDate = self.selectedStartDate
+        self.headerView.endDate = self.selectedEndDate
+        self.tableView.mj_header.beginRefreshing()
+        //self.setupAsDemo()
     }
     ///
     fileprivate func setupAsDemo() -> Void {
-        for i in 0...25 {
-            self.sourceList.append("\(i)")
-        }
-        self.tableView.reloadData()
+//        for i in 0...25 {
+//            self.sourceList.append("\(i)")
+//        }
+//        self.tableView.reloadData()
     }
     
     ///
@@ -147,7 +155,7 @@ extension ReturnListController {
             self.selectedEndDate = date
             self.headerView.endDate = date
         }
-        //self.tableView.mj_header.beginRefreshing()
+        self.tableView.mj_header.beginRefreshing()
     }
 
 }
@@ -163,11 +171,7 @@ extension ReturnListController {
     /// 导航栏 右侧侧按钮点击响应
     @objc fileprivate func navBarRightItemClick() -> Void {
         print("TemplateUIViewController navBarRightItemClick")
-        
-        let popView = ReturnListTipsPopVew.init()
-        popView.content = "利息算法为待归还借贷本金*日利率，每日进行统计一次，一半放到累计欠款利息，一半直接进行统计等待月初进行归还，当归还金额低于应归还利息时，剩余未归还金额放至累计欠款利息中等待借贷本金还完进行二次归还，归还借贷本金可点击提前归还按钮进行提前归还借贷本金，本金减少后利息也会适当下降。"
-        PopViewUtil.showPopView(popView)
-        
+        self.enterTipsPage()
     }
 
     /// 顶部刷新
@@ -186,43 +190,43 @@ extension ReturnListController {
 
     /// 下拉刷新请求
     fileprivate func refreshRequest() -> Void {
-//        MessageNetworkManager.getMessageList(offset: 0, limit: self.limit) { [weak self](status, msg, models) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.tableView.mj_header.endRefreshing()
-//            self.tableView.mj_footer.state = .idle
-//            guard status, let models = models else {
-//                ToastUtil.showToast(title: msg)
-//                self.tableView.showDefaultEmpty = self.sourceList.isEmpty
-//                return
-//            }
-//            self.sourceList = models
-//            self.offset = self.sourceList.count
-//            self.tableView.mj_footer.isHidden = models.count < self.limit
-//            self.tableView.showDefaultEmpty = self.sourceList.isEmpty
-//            self.tableView.reloadData()
-//        }
+        EquipmentNetworkManager.getReturnList(id: "\(self.model.id)", offset: 0, limit: self.limit, startDate: self.selectedStartDate, endDate: self.selectedEndDate) { [weak self](status, msg, models) in
+            guard let `self` = self else {
+                return
+            }
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.state = .idle
+            guard status, let models = models else {
+                ToastUtil.showToast(title: msg)
+                self.tableView.showDefaultEmpty = self.sourceList.isEmpty
+                return
+            }
+            self.sourceList = models
+            self.offset = self.sourceList.count
+            self.tableView.mj_footer.isHidden = models.count < self.limit
+            self.tableView.showDefaultEmpty = self.sourceList.isEmpty
+            self.tableView.reloadData()
+        }
     }
     
     /// 上拉加载更多请求
     fileprivate func loadMoreRequest() -> Void {
-//        MessageNetworkManager.getMessageList(offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.tableView.mj_footer.endRefreshing()
-//            guard status, let models = models else {
-//                self.tableView.mj_footer.endRefreshingWithWeakNetwork()
-//                return
-//            }
-//            if models.count < self.limit {
-//                self.tableView.mj_footer.endRefreshingWithNoMoreData()
-//            }
-//            self.sourceList += models
-//            self.offset = self.sourceList.count
-//            self.tableView.reloadData()
-//        }
+        EquipmentNetworkManager.getReturnList(id: "\(self.model.id)", offset: self.offset, limit: self.limit, startDate: self.selectedStartDate, endDate: self.selectedEndDate) { [weak self](status, msg, models) in
+            guard let `self` = self else {
+                return
+            }
+            self.tableView.mj_footer.endRefreshing()
+            guard status, let models = models else {
+                self.tableView.mj_footer.endRefreshingWithWeakNetwork()
+                return
+            }
+            if models.count < self.limit {
+                self.tableView.mj_footer.endRefreshingWithNoMoreData()
+            }
+            self.sourceList += models
+            self.offset = self.sourceList.count
+            self.tableView.reloadData()
+        }
     }
 
 }
@@ -238,10 +242,15 @@ extension ReturnListController {
         // 设置地区: zh-中国
         datePicker.locale = Locale.init(identifier: "zh_CN")
         // 设置当前显示时间
-        datePicker.setDate(Date.init(), animated: false)
+        if let selectedDate = selectedDate {
+            datePicker.setDate(selectedDate, animated: false)
+        } else {
+            datePicker.setDate(Date.init(), animated: false)
+        }
         // 设置日期范围：最大显示时间、最小显示时间
-        datePicker.minimumDate = Date.dateWithString("2021-06-01 00:00:00")    // yyyy-MM-dd HH:mm:ss
-        datePicker.maximumDate = Date.dateWithString("2022-01-01 00:00:00")    // yyyy-MM-dd HH:mm:ss
+        //datePicker.minimumDate = self.model.createdDate
+        datePicker.minimumDate = Date.init(timeIntervalSinceNow: -3_600 * 24 * 30)
+        datePicker.maximumDate = Date.init()
         // 设置日期模式(time、date、dateAndTime、countDownTimer)
         datePicker.datePickerMode = UIDatePicker.Mode.date
         // 版本兼容处理，13.4之后默认需加载到UIController中，点击弹出新的非UIPickerView样式的日期选择控件
@@ -262,6 +271,18 @@ extension ReturnListController {
         PickerUtil.showPickerPopView(pickerView)
     }
     
+    /// 进入说明界面
+    fileprivate func enterTipsPage() -> Void {
+        let tipsVC = ReturnListTipsController.init()
+        self.enterPageVC(tipsVC)
+    }
+    ///
+    fileprivate func showTipsPopView() -> Void {
+        let popView = ReturnListTipsPopVew.init()
+        popView.content = "利息算法为待归还借贷本金*日利率，每日进行统计一次，一半放到累计欠款利息，一半直接进行统计等待月初进行归还，当归还金额低于应归还利息时，剩余未归还金额放至累计欠款利息中等待借贷本金还完进行二次归还，归还借贷本金可点击提前归还按钮进行提前归还借贷本金，本金减少后利息也会适当下降。"
+        PopViewUtil.showPopView(popView)
+    }
+
 }
 
 // MARK: - Notification Function

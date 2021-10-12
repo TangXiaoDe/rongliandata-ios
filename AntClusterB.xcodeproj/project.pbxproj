@@ -80,6 +80,7 @@
 		53B19A5326AE5A88003A3F2A /* BrandBonusListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A5226AE5A88003A3F2A /* BrandBonusListHeaderView.swift */; };
 		53B19A5826AE5A99003A3F2A /* BrandBonusListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A5726AE5A99003A3F2A /* BrandBonusListCell.swift */; };
 		53B19A5D26AE5AAD003A3F2A /* BrandBonusListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B19A5C26AE5AAD003A3F2A /* BrandBonusListItemView.swift */; };
+		53D8FE64271576F600FB2731 /* ReturnListTipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D8FE63271576F600FB2731 /* ReturnListTipsController.swift */; };
 		53DC376425FF6CEA000D156C /* EDUnbackSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DC376325FF6CEA000D156C /* EDUnbackSubjectView.swift */; };
 		53DF253E2581FC9700165247 /* AdvertSpaceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF22F92581FC9200165247 /* AdvertSpaceObject.swift */; };
 		53DF253F2581FC9700165247 /* AdvertObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF22FA2581FC9200165247 /* AdvertObject.swift */; };
@@ -605,6 +606,7 @@
 		53B19A5226AE5A88003A3F2A /* BrandBonusListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusListHeaderView.swift; sourceTree = "<group>"; };
 		53B19A5726AE5A99003A3F2A /* BrandBonusListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusListCell.swift; sourceTree = "<group>"; };
 		53B19A5C26AE5AAD003A3F2A /* BrandBonusListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandBonusListItemView.swift; sourceTree = "<group>"; };
+		53D8FE63271576F600FB2731 /* ReturnListTipsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnListTipsController.swift; sourceTree = "<group>"; };
 		53DC376325FF6CEA000D156C /* EDUnbackSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDUnbackSubjectView.swift; sourceTree = "<group>"; };
 		53DF22F92581FC9200165247 /* AdvertSpaceObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertSpaceObject.swift; sourceTree = "<group>"; };
 		53DF22FA2581FC9200165247 /* AdvertObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertObject.swift; sourceTree = "<group>"; };
@@ -1240,6 +1242,7 @@
 			isa = PBXGroup;
 			children = (
 				53230E5E26BBBC31006920A0 /* ReturnListController.swift */,
+				53D8FE63271576F600FB2731 /* ReturnListTipsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4295,6 +4298,7 @@
 				53DF265C2581FC9B00165247 /* WalletHomeHeaderView.swift in Sources */,
 				53DF25A82581FC9800165247 /* PicturePreviewItemView.swift in Sources */,
 				A1943A0226C3E16E000E2A8F /* Date+Category.swift in Sources */,
+				53D8FE64271576F600FB2731 /* ReturnListTipsController.swift in Sources */,
 				53DF260E2581FC9900165247 /* IconTitleValueControl.swift in Sources */,
 				53230E6826BBBC31006920A0 /* PreReturnHomeController.swift in Sources */,
 				53DF255C2581FC9700165247 /* UIView+Corner.swift in Sources */,

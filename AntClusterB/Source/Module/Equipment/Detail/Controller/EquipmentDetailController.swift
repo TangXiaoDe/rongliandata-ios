@@ -271,7 +271,10 @@ extension EquipmentDetailController {
 
     /// 归还流水界面
     fileprivate func enterReturnListPage() -> Void {
-        let detailVC = ReturnListController.init()
+        guard let model = self.detail else {
+            return
+        }
+        let detailVC = ReturnListController.init(model: model)
         self.enterPageVC(detailVC)
     }
     
@@ -357,14 +360,14 @@ extension EquipmentDetailController: PreReturnGuideControllerProtocol {
 
     /// skip / close
     func guideVC(_ guideVC: PreReturnGuideController, didClickedSkip skipView: UIButton) -> Void {
-        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
+        guard let model = self.detail, model.zone == .ipfs, let _ = model.assets else {
             return
         }
         self.enterPreReturnPage(with: model)
     }
     /// done
     func guideVC(_ guideVC: PreReturnGuideController, didClickedDone doneView: UIButton) -> Void {
-        guard let model = self.detail, model.zone == .ipfs, let asset = model.assets, asset.wait_total > 0 else {
+        guard let model = self.detail, model.zone == .ipfs, let _ = model.assets else {
             return
         }
         self.enterPreReturnPage(with: model)

@@ -150,6 +150,7 @@ extension EquipmentDetailView {
         self.assetSurveyView.delegate = self
         self.backAssetDetailView.models = nil
         self.unbackAssetView.delegate = self
+        self.backAssetDetailView.delegate = self
     }
     
 }

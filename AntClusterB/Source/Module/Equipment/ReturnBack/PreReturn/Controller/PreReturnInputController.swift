@@ -164,6 +164,7 @@ extension PreReturnInputController {
         mainView.addSubview(self.tipsLabel)
         self.tipsLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.grayText)
         self.tipsLabel.numberOfLines = 0
+        self.tipsLabel.isHidden = true  // 该版本不显示Tips
         self.tipsLabel.snp.remakeConstraints { (make) in
             make.top.equalTo(self.doneBtn.snp.bottom).offset(self.tipsTopMargin)
             make.leading.equalToSuperview().offset(self.lrMargin)
@@ -180,8 +181,6 @@ extension PreReturnInputController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         //
-        let tips: String = "温馨提示：\n输入还Fil本金，当还Fil类型有利息时，则本次归还数量为输入本金的本息总计。欠款利息部分不再计算利息。"
-        self.tipsLabel.text = tips
         self.centerView.model = self.model
         self.setupWithType(self.type)
         self.requestForFilAsset()

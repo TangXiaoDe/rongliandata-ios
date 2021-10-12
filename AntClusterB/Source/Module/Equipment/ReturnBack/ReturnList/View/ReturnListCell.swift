@@ -18,7 +18,7 @@ class ReturnListCell: UITableViewCell
     static let identifier: String = "ReturnListCellReuseIdentifier"
     
     var indexPath: IndexPath?
-    var model: String? {
+    var model: ReturnListModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -257,13 +257,19 @@ extension ReturnListCell {
         self.returnTotalInterestView.valueLabel.text = "13.5781"
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-        guard let _ = model else {
+    fileprivate func setupWithModel(_ model: ReturnListModel?) -> Void {
+//        self.setupAsDemo()
+        guard let model = model else {
             return
         }
         // 控件加载数据
-        
+        self.dateLabel.text = model.created_at.string(format: "yyyy-MM-dd HH:mm", timeZone: .current)
+        self.returnAmountView.valueLabel.text = model.amount.decimalValidDigitsProcess(digits: 8)
+        self.shouldReturnInterestView.valueLabel.text = model.should_interest.decimalValidDigitsProcess(digits: 8)
+        self.newInterestView.valueLabel.text = model.interest.decimalValidDigitsProcess(digits: 8)
+        self.returnMortgageView.valueLabel.text = model.pledge.decimalValidDigitsProcess(digits: 8)
+        self.returnGasView.valueLabel.text = model.gas.decimalValidDigitsProcess(digits: 8)
+        self.returnTotalInterestView.valueLabel.text = model.arrears_interest.decimalValidDigitsProcess(digits: 8)
     }
 
 }
