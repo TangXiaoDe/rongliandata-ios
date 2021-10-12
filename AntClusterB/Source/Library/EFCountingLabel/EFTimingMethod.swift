@@ -24,6 +24,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+import CoreGraphics
+
 public enum EFTimingFunction: EFTiming {
     case linear
     case easeIn(easingRate: CGFloat)
