@@ -26,6 +26,7 @@ class EDBackAssetDetailView: UIView {
             guard let model = model else {
                 return
             }
+            self.returnDetailView.isHidden = model.product?.zone != .ipfs || model.zhiya_type == .zifu
             self.formShouldInterestLabel.text = "应还利息\n\(model.interest.decimalValidDigitsProcess(digits: 2))%"
         }
     }
