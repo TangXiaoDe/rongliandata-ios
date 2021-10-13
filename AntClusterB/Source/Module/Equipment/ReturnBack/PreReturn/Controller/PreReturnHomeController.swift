@@ -28,7 +28,7 @@ enum PreReturnType: String {
         case .gas:
             value = "归还GAS消耗"
         case .mortgage:
-            value = "归还质押数量"
+            value = "归还质押"
         case .interest:
             value = "归还累计欠款利息"
         }
