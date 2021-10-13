@@ -266,10 +266,10 @@ extension ReturnListCell {
         self.dateLabel.text = model.created_at.string(format: "yyyy-MM-dd HH:mm", timeZone: .current)
         self.returnAmountView.valueLabel.text = model.amount.decimalValidDigitsProcess(digits: 8)
         self.shouldReturnInterestView.valueLabel.text = model.should_interest.decimalValidDigitsProcess(digits: 8)
-        self.newInterestView.valueLabel.text = model.interest.decimalValidDigitsProcess(digits: 8)
+        self.newInterestView.valueLabel.text = model.arrears_interest.decimalValidDigitsProcess(digits: 8)
         self.returnMortgageView.valueLabel.text = model.pledge.decimalValidDigitsProcess(digits: 8)
         self.returnGasView.valueLabel.text = model.gas.decimalValidDigitsProcess(digits: 8)
-        self.returnTotalInterestView.valueLabel.text = model.arrears_interest.decimalValidDigitsProcess(digits: 8)
+        self.returnTotalInterestView.valueLabel.text = model.interest.decimalValidDigitsProcess(digits: 8)
     }
 
 }
