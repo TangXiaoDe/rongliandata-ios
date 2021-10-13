@@ -54,4 +54,13 @@ class ReturnListModel: Mappable {
         updated_at <- (map["updated_at"], DateStringTransform.current)
     }
     
+    /// 实还利息
+    var real_return_interest: Double {
+        return interest > should_interest ? should_interest : interest
+    }
+    /// 归还累计欠款利息：
+    var return_arrears_interest: Double {
+        return interest > should_interest ? interest - should_interest : 0
+    }
+    
 }
