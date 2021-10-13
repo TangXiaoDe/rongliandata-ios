@@ -50,24 +50,24 @@ class PreReturnInputMainView: UIView {
     fileprivate var interestRatio: Double {
         return self.model?.interestRatio ?? 0
     }
-    ///
-    fileprivate var intereset: Double {
-        guard let model = self.model, let asset = model.assets else {
-            return 0
-        }
-        var value: Double = 0
-        switch self.type {
-        case .interest:
-            value = 0
-        case .all:
-            value = (asset.wait_gas + asset.wait_pledge) * self.interestRatio
-        case .gas, .mortgage:
-            if let inputValue = self.inputValue, inputValue <= self.waitReturnAmount, inputValue > 0 {
-                value = inputValue * self.interestRatio
-            }
-        }
-        return value
-    }
+//    ///
+//    fileprivate var intereset: Double {
+//        guard let model = self.model, let asset = model.assets else {
+//            return 0
+//        }
+//        var value: Double = 0
+//        switch self.type {
+//        case .interest:
+//            value = 0
+//        case .all:
+//            value = (asset.wait_gas + asset.wait_pledge) * self.interestRatio
+//        case .gas, .mortgage:
+//            if let inputValue = self.inputValue, inputValue <= self.waitReturnAmount, inputValue > 0 {
+//                value = inputValue * self.interestRatio
+//            }
+//        }
+//        return value
+//    }
     
     var totalReturnAmount: Double {
         var returnAmount: Double = 0
@@ -79,7 +79,8 @@ class PreReturnInputMainView: UIView {
                 returnAmount = inputValue
             }
         }
-        return returnAmount + self.intereset
+//        return returnAmount + self.intereset
+        return returnAmount
     }
     
     var couldDone: Bool {
@@ -527,10 +528,10 @@ extension PreReturnInputMainView {
                     tipsColor = UIColor.init(hex: 0xE06236)
                 }
             }
-            if tips.isEmpty && self.totalReturnAmount > self.totalFil {
-                tips = "*总计归还金额超过可用FIL数，请重新输入"
-                tipsColor = UIColor.init(hex: 0xE06236)
-            }
+//            if tips.isEmpty && self.totalReturnAmount > self.totalFil {
+//                tips = "*总计归还金额超过可用FIL数，请重新输入"
+//                tipsColor = UIColor.init(hex: 0xE06236)
+//            }
         }
         self.waitReturnView.titleLabel.text = self.type.tips + "(FIL)"
         self.tipsLabel.text = tips
