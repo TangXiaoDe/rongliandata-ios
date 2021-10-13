@@ -327,7 +327,7 @@ extension PreReturnHomeController {
         }
         self.gasItemView.value = asset.wait_gas
         self.mortgageItemView.value = asset.wait_pledge
-        self.interestItemView.value = asset.interest
+        self.interestItemView.value = asset.wait_interest
         //
         self.totalWaitReturnView.valueLabel.text = asset.wait_total.decimalValidDigitsProcess(digits: 8)
         //self.returnAllBtn.isEnabled = asset.wait_total > 0

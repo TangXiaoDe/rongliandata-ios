@@ -336,7 +336,7 @@ extension EquipmentDetailModel {
         case .mortgage:
             amount = asset.wait_pledge
         case .interest:
-            amount = asset.interest
+            amount = asset.wait_interest
         }
         return amount
     }
@@ -368,10 +368,6 @@ class EDAssetModel: Mappable {
     var pledge: Double = 0
     /// Gas消耗数量
     var gas: Double = 0
-    /// 已归还质押数量
-    var return_pledge: Double = 0
-    /// 已归还Gas消耗数量
-    var return_gas: Double = 0
     /// 待归还累计欠款利息
     var interest: Double = 0
     /// 自付gas
@@ -383,18 +379,55 @@ class EDAssetModel: Mappable {
     var createdDate: Date = Date.init()
     ///
     var updatedDate: Date = Date.init()
+  
+//    /// 已归还质押数量
+//    var return_pledge: Double = 0
+//    /// 已归还Gas消耗数量
+//    var return_gas: Double = 0
     
-    /// 待归还
-    var wait_pledge: Double {
-        return self.pledge - self.return_pledge
+    ///
+    var wait_pledge: Double = 0
+    ///
+    var wait_gas: Double = 0
+    ///
+    var wait_interest: Double = 0
+    
+//    /// 待归还
+//    var wait_pledge: Double {
+//        return self.pledge - self.return_pledge
+//    }
+//    var wait_gas: Double {
+//        return self.gas - self.return_gas
+//    }
+    
+    /// 版本1: 计算
+    var return_pledge: Double {
+        let pledgeNum: NSDecimalNumber = NSDecimalNumber.init(value: self.pledge)
+        let waitPledgeNum: NSDecimalNumber = NSDecimalNumber.init(value: self.wait_pledge)
+        let resultNum: NSDecimalNumber = pledgeNum.subtracting(waitPledgeNum)
+        return resultNum.doubleValue
+//        return self.pledge - self.wait_pledge
     }
-    var wait_gas: Double {
-        return self.gas - self.return_gas
+    var return_gas: Double {
+        let gasNum: NSDecimalNumber = NSDecimalNumber.init(value: self.gas)
+        let waitGasNum: NSDecimalNumber = NSDecimalNumber.init(value: self.wait_gas)
+        let resultNum: NSDecimalNumber = gasNum.subtracting(waitGasNum)
+        return resultNum.doubleValue
+//        return self.gas - self.wait_gas
     }
-
+    
+//    /// 待归还总计
+//    var wait_total: Double {
+//        return self.wait_pledge + self.wait_gas + self.interest
+//    }
     /// 待归还总计
     var wait_total: Double {
-        return self.wait_pledge + self.wait_gas + self.interest
+        let waitPledgeNum: NSDecimalNumber = NSDecimalNumber.init(value: self.wait_pledge)
+        let waitGasNum: NSDecimalNumber = NSDecimalNumber.init(value: self.wait_gas)
+        let waitInterestNum: NSDecimalNumber = NSDecimalNumber.init(value: self.wait_interest)
+        let resultNum: NSDecimalNumber = waitPledgeNum.adding(waitGasNum).adding(waitInterestNum)
+        return resultNum.doubleValue
+//        return self.wait_pledge + self.wait_gas + self.wait_interest
     }
 
     required init?(map: Map) {
@@ -412,11 +445,17 @@ class EDAssetModel: Mappable {
         fz_num <- (map["fz_num"], DoubleStringTransform.default)
         pledge <- (map["pledge"], DoubleStringTransform.default)
         gas <- (map["gas"], DoubleStringTransform.default)
-        return_pledge <- (map["return_pledge"], DoubleStringTransform.default)
-        return_gas <- (map["return_gas"], DoubleStringTransform.default)
         interest <- (map["interest"], DoubleStringTransform.default)
         used_gas <- (map["used_gas"], DoubleStringTransform.default)
         used_pledge <- (map["used_pledge"], DoubleStringTransform.default)
+        
+//        return_pledge <- (map["return_pledge"], DoubleStringTransform.default)
+//        return_gas <- (map["return_gas"], DoubleStringTransform.default)
+        
+        wait_pledge <- (map["per_pledge"], DoubleStringTransform.default)
+        wait_gas <- (map["per_gas"], DoubleStringTransform.default)
+        wait_interest <- (map["per_interest"], DoubleStringTransform.default)
+        //wait_interest <- (map["interest"], DoubleStringTransform.default)
 
         createdDate <- (map["created_at"], DateStringTransform.current)
         updatedDate <- (map["updated_at"], DateStringTransform.current)
