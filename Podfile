@@ -18,7 +18,7 @@ pod 'NVActivityIndicatorView', '4.7.0'    # 进度指示器
 # Swift (部分版本待定)
 
 # 公司私有组件库
-pod 'ChainOneKit-Swift', :git => 'https://github.com/CommunityChain/ChainOneKit-Swift.git', :tag => '0.1.1.1'
+pod 'ChainOneKit-Swift', :git => 'https://github.com/CommunityChain/ChainOneKit-Swift.git', :tag => '0.1.1.2'
 ## 个人公开组件库
 pod 'XiaoDeKit-Swift', :git => 'https://github.com/TangXiaoDe/XiaoDeKit-Swift.git', :tag => '0.1.1.1'
 
