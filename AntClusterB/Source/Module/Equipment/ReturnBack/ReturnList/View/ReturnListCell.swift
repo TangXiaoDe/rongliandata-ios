@@ -18,7 +18,7 @@ class ReturnListCell: UITableViewCell
     static let identifier: String = "ReturnListCellReuseIdentifier"
     
     var indexPath: IndexPath?
-    var model: String? {
+    var model: ReturnListModel? {
         didSet {
             self.setupWithModel(model)
         }
@@ -51,7 +51,7 @@ class ReturnListCell: UITableViewCell
     
     fileprivate let bottomView: UIView = UIView.init()
     fileprivate let returnAmountView: TitleValueView = TitleValueView.init()    // 归还金额(FIL)
-    fileprivate let shouldReturnInterestView: TitleValueView = TitleValueView.init()    // 应归还利息(FIL)
+    fileprivate let realReturnInterestView: TitleValueView = TitleValueView.init()    // 实还利息(FIL)
     fileprivate let newInterestView: TitleValueView = TitleValueView.init()    // 新增欠款利息(FIL)
     fileprivate let returnMortgageView: TitleValueView = TitleValueView.init()    // 归还抵押(FIL)
     fileprivate let returnGasView: TitleValueView = TitleValueView.init()    // 归还GAS(FIL)
@@ -182,8 +182,8 @@ extension ReturnListCell {
         bottomView.backgroundColor = UIColor.white
         bottomView.removeAllSubviews()
         //
-        let itemViews: [TitleValueView] = [self.returnAmountView, self.shouldReturnInterestView, self.newInterestView, self.returnMortgageView, self.returnGasView, self.returnTotalInterestView]
-        let itemTitles: [String] = ["归还金额(FIL)", "应归还利息(FIL)", "新增欠款利息(FIL)", "归还抵押(FIL)", "归还GAS(FIL)", "归还累计欠款利息(FIL)"]
+        let itemViews: [TitleValueView] = [self.returnAmountView, self.realReturnInterestView, self.newInterestView, self.returnMortgageView, self.returnGasView, self.returnTotalInterestView]
+        let itemTitles: [String] = ["归还金额(FIL)", "实还利息(FIL)", "新增欠款利息(FIL)", "归还抵押(FIL)", "归还GAS(FIL)", "归还累计欠款利息(FIL)"]
         var lastView: UIView = bottomView
         for (index, itemView) in itemViews.enumerated() {
             bottomView.addSubview(itemView)
@@ -250,20 +250,26 @@ extension ReturnListCell {
     fileprivate func setupAsDemo() -> Void {
         self.dateLabel.text = "2021-02-04 12:00"
         self.returnAmountView.valueLabel.text = "0.1528"
-        self.shouldReturnInterestView.valueLabel.text = "0.1224"
+        self.realReturnInterestView.valueLabel.text = "0.1224"
         self.newInterestView.valueLabel.text = "1.24"
         self.returnMortgageView.valueLabel.text = "0"
         self.returnGasView.valueLabel.text = "0"
         self.returnTotalInterestView.valueLabel.text = "13.5781"
     }
     /// 数据加载
-    fileprivate func setupWithModel(_ model: String?) -> Void {
-        self.setupAsDemo()
-        guard let _ = model else {
+    fileprivate func setupWithModel(_ model: ReturnListModel?) -> Void {
+//        self.setupAsDemo()
+        guard let model = model else {
             return
         }
         // 控件加载数据
-        
+        self.dateLabel.text = model.created_at.string(format: "yyyy-MM-dd HH:mm", timeZone: .current)
+        self.returnAmountView.valueLabel.text = model.amount.decimalValidDigitsProcess(digits: 8)
+        self.realReturnInterestView.valueLabel.text = model.real_return_interest.decimalValidDigitsProcess(digits: 8)
+        self.newInterestView.valueLabel.text = model.arrears_interest.decimalValidDigitsProcess(digits: 8)
+        self.returnMortgageView.valueLabel.text = model.pledge.decimalValidDigitsProcess(digits: 8)
+        self.returnGasView.valueLabel.text = model.gas.decimalValidDigitsProcess(digits: 8)
+        self.returnTotalInterestView.valueLabel.text = model.return_arrears_interest.decimalValidDigitsProcess(digits: 8)
     }
 
 }

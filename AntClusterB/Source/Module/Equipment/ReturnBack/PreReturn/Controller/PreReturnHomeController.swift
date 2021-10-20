@@ -28,9 +28,25 @@ enum PreReturnType: String {
         case .gas:
             value = "归还GAS消耗"
         case .mortgage:
-            value = "归还质押数量"
+            value = "归还质押"
         case .interest:
             value = "归还累计欠款利息"
+        }
+        return value
+    }
+    
+    ///
+    var tips: String {
+        var value: String = ""
+        switch self {
+        case .all:
+            value = "全部待归还数量"
+        case .gas:
+            value = "待归还GAS消耗数量"
+        case .mortgage:
+            value = "待归还质押数量"
+        case .interest:
+            value = "待归还欠款利息数量"
         }
         return value
     }
@@ -285,7 +301,7 @@ extension PreReturnHomeController {
 
     ///
     fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
-        let tips: String = "温馨提示:\n当设备封装完成之后才可进行归还。可全部归还，也可选择部分金额进行归还。归还之后，将自动计算扣除归还部分已经生成的利息。已归还部分后期不再计算利息。"
+        let tips: String = "温馨提示： \n当设备封装比例达到72%时可选择部分借贷金额进行归还，选择总计待归还时只能进行归还全部借贷。"
         //
         bottomView.addSubview(self.tipsLabel)
         self.tipsLabel.set(text: tips, font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.grayText, alignment: .left)
@@ -311,7 +327,7 @@ extension PreReturnHomeController {
         }
         self.gasItemView.value = asset.wait_gas
         self.mortgageItemView.value = asset.wait_pledge
-        self.interestItemView.value = asset.interest
+        self.interestItemView.value = asset.wait_interest
         //
         self.totalWaitReturnView.valueLabel.text = asset.wait_total.decimalValidDigitsProcess(digits: 8)
         //self.returnAllBtn.isEnabled = asset.wait_total > 0

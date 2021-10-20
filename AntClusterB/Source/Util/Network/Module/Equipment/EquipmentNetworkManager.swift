@@ -317,17 +317,17 @@ extension EquipmentNetworkManager {
 extension EquipmentNetworkManager {
     
     /// 归还流水
-    class func getReturnList(offset: Int, limit: Int, startDate: Date?, endDate: Date?, complete: @escaping((_ status: Bool, _ msg: String?, _ models: [String]?) -> Void)) -> Void {
+    class func getReturnList(id: String, offset: Int, limit: Int, startDate: Date?, endDate: Date?, complete: @escaping((_ status: Bool, _ msg: String?, _ models: [ReturnListModel]?) -> Void)) -> Void {
         // 1.请求 url
         var requestInfo = EquipmentRequestInfo.returnList
-        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [])
+        requestInfo.urlPath = requestInfo.fullPathWith(replacers: [id])
         // 2.配置参数
         var parameter: [String: Any] = ["offset": offset, "limit": limit]
         if let startDate = startDate {
-            parameter["start-time"] = startDate.string(format: "yyyy-MM-dd", timeZone: .current)
+            parameter["start_time"] = startDate.string(format: "yyyy-MM-dd", timeZone: .current)
         }
         if let endDate = endDate {
-            parameter["end-time"] = endDate.string(format: "yyyy-MM-dd", timeZone: .current)
+            parameter["end_time"] = endDate.string(format: "yyyy-MM-dd", timeZone: .current)
         }
         requestInfo.parameter = parameter
         // 3.发起请求
@@ -338,7 +338,7 @@ extension EquipmentNetworkManager {
             case .failure(let failure):
                 complete(false, failure.message, nil)
             case .success(let response):
-                complete(true, response.message, [])
+                complete(true, response.message, response.models)
             }
         }
     }

@@ -33,7 +33,7 @@ class PreReturnGuideController: BaseViewController
             }
             let bgImgName: String = selectedIndex < self.itemCount - 1 ? "IMG_shebei_button_zhiyin_tiaoguo" : "IMG_shebei_button_zhiyin_close"
             self.skipBtn.setBackgroundImage(UIImage.init(named: bgImgName), for: .normal)
-            self.skipBtn.setBackgroundImage(UIImage.init(named: bgImgName), for: .normal)
+            self.skipBtn.setBackgroundImage(UIImage.init(named: bgImgName), for: .highlighted)
             self.pageControl.image = UIImage.init(named: "IMG_shebei_icon_zhiyin_step\(selectedIndex + 1)")
             self.doneBtn.isHidden = selectedIndex < self.itemCount - 1
         }
@@ -47,7 +47,7 @@ class PreReturnGuideController: BaseViewController
     fileprivate let pageControl: UIImageView = UIImageView.init()       //
     fileprivate let doneBtn: UIButton = UIButton.init(type: .custom)    // 立即体验
     
-    fileprivate let itemCount: Int = 3
+    fileprivate let itemCount: Int = 2
     fileprivate let itemTagBase: Int = 250
     
     

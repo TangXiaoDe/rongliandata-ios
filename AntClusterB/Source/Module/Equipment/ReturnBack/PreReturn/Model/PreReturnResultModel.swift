@@ -52,7 +52,7 @@ class PreReturnResultModel: Mappable {
     }
     
     var totalReturnAmount: Double {
-        return self.pledge + self.gas + self.interest + self.arrears_interest
+        return self.pledge + self.gas + self.interest
     }
 
 }

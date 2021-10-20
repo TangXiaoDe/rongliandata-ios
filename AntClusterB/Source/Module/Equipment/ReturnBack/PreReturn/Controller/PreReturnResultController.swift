@@ -25,10 +25,9 @@ class PreReturnResultController: BaseViewController {
     fileprivate let promptInfoLabel: UILabel = UILabel.init()
 
     fileprivate let infoContainer: UIView = UIView()
-    fileprivate let waitGasItemView: TitleValueView = TitleValueView.init()    // GAS
-    fileprivate let waitInterestItemView: TitleValueView = TitleValueView.init()    // 累计欠款利息
-    fileprivate let waitPledgeItemView: TitleValueView = TitleValueView.init()    // 质押
-    fileprivate let interestItemView: TitleValueView = TitleValueView.init()    // 利息
+    fileprivate let gasItemView: TitleValueView = TitleValueView.init()         // GAS
+    fileprivate let pledgeItemView: TitleValueView = TitleValueView.init()      // 质押
+    fileprivate let interestItemView: TitleValueView = TitleValueView.init()    // 累计欠款利息
     //fileprivate let amountItemView: TitleValueView = TitleValueView.init()    // 数量
     fileprivate let typeItemView: TitleValueView = TitleValueView.init()       // 类型
     fileprivate let statusItemView: TitleValueView = TitleValueView.init()    // 状态
@@ -149,8 +148,8 @@ extension PreReturnResultController {
     fileprivate func initialInfoContainer(_ containerView: UIView) -> Void {
         containerView.removeAllSubviews()
         //
-        let itemViews: [TitleValueView] = [self.waitGasItemView, self.waitPledgeItemView, self.waitInterestItemView, self.interestItemView, self.typeItemView, self.statusItemView, self.dateItemView]
-        let itemTitles: [String] = ["归还本金（GAS消耗）", "归还本金（质押数量）", "归还本金（欠款利息）", "归还利息", "归还类型", "归还状态", "归还时间"]
+        let itemViews: [TitleValueView] = [self.gasItemView, self.pledgeItemView, self.interestItemView, self.typeItemView, self.statusItemView, self.dateItemView]
+        let itemTitles: [String] = ["归还GAS消耗", "归还质押数量", "归还欠款利息", "归还类型", "归还状态", "归还时间"]
         var lastView: UIView = containerView
         for (index, itemView) in itemViews.enumerated() {
             containerView.addSubview(itemView)
@@ -240,10 +239,9 @@ extension PreReturnResultController {
         self.promptTitleLabel.text = "归还成功"
         self.promptInfoLabel.text = "52.00015FIL"
         //
-        self.setupInfoContainer(with: [self.waitPledgeItemView, self.waitGasItemView, self.waitInterestItemView, self.interestItemView, self.typeItemView, self.dateItemView])
-        self.waitPledgeItemView.valueLabel.text = "52.00015 FIL"
-        self.waitGasItemView.valueLabel.text = "52.00015 FIL"
-        self.waitInterestItemView.valueLabel.text = "52.00015 FIL"
+        self.setupInfoContainer(with: [self.pledgeItemView, self.gasItemView, self.interestItemView, self.typeItemView, self.dateItemView])
+        self.pledgeItemView.valueLabel.text = "52.00015 FIL"
+        self.gasItemView.valueLabel.text = "52.00015 FIL"
         self.interestItemView.valueLabel.text = "52.00015 FIL"
         self.typeItemView.valueLabel.text = "归还全部"
         self.dateItemView.valueLabel.text = "2019-10-12 13:20:45"
@@ -260,19 +258,22 @@ extension PreReturnResultController {
         var itemViews: [UIView] = []
         switch model.type {
         case .all:
-            itemViews = [self.waitPledgeItemView, self.waitGasItemView, self.waitInterestItemView, self.interestItemView, self.typeItemView, self.dateItemView]
+            itemViews = [self.pledgeItemView, self.gasItemView, self.interestItemView, self.typeItemView, self.dateItemView]
         case .gas:
-            itemViews = [self.waitGasItemView, self.interestItemView, self.typeItemView, self.dateItemView]
+            itemViews = [self.gasItemView, self.typeItemView, self.dateItemView]
         case .mortgage:
-            itemViews = [self.waitPledgeItemView, self.interestItemView, self.typeItemView, self.dateItemView]
+            itemViews = [self.pledgeItemView, self.typeItemView, self.dateItemView]
         case .interest:
-            itemViews = [self.waitInterestItemView, self.typeItemView, self.dateItemView]
+            itemViews = [self.interestItemView, self.typeItemView, self.dateItemView]
         }
         self.setupInfoContainer(with: itemViews)
-        self.waitPledgeItemView.valueLabel.text = "\(model.pledge.decimalValidDigitsProcess(digits: 8))  FIL"
-        self.waitGasItemView.valueLabel.text = "\(model.gas.decimalValidDigitsProcess(digits: 8))  FIL"
-        self.waitInterestItemView.valueLabel.text = "\(model.arrears_interest.decimalValidDigitsProcess(digits: 8))  FIL"
+        self.pledgeItemView.valueLabel.text = "\(model.pledge.decimalValidDigitsProcess(digits: 8))  FIL"
+        self.gasItemView.valueLabel.text = "\(model.gas.decimalValidDigitsProcess(digits: 8))  FIL"
+        
+        // TODO: - 启用数据待确认
+        self.interestItemView.valueLabel.text = "\(model.arrears_interest.decimalValidDigitsProcess(digits: 8))  FIL"
         self.interestItemView.valueLabel.text = "\(model.interest.decimalValidDigitsProcess(digits: 8)) FIL"
+        
         self.typeItemView.valueLabel.text = model.type.title
         self.dateItemView.valueLabel.text = model.createdDate.string(format: "yyyy-MM-dd HH:mm:ss", timeZone: TimeZone.current)
     }

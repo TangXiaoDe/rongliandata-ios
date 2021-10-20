@@ -153,7 +153,7 @@ extension PreReturnTypeSelectController {
         containerView.removeAllSubviews()
         //
         let itemViews: [TitleIconControl] = [self.allItemView, self.pledgeItemView, self.gasItemView, self.interestItemView]
-        let itemTitles: [String] = ["归还全部", "归还质押数量", "归还GAS消耗", "归还累计欠款利息"]
+        let itemTitles: [String] = ["归还全部", "归还质押", "归还GAS消耗", "归还累计欠款利息"]
         var lastView: UIView = containerView
         for (index, itemView) in itemViews.enumerated() {
             containerView.addSubview(itemView)

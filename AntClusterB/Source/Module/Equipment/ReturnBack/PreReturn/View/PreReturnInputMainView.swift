@@ -50,24 +50,24 @@ class PreReturnInputMainView: UIView {
     fileprivate var interestRatio: Double {
         return self.model?.interestRatio ?? 0
     }
-    ///
-    fileprivate var intereset: Double {
-        guard let model = self.model, let asset = model.assets else {
-            return 0
-        }
-        var value: Double = 0
-        switch self.type {
-        case .interest:
-            value = 0
-        case .all:
-            value = (asset.wait_gas + asset.wait_pledge) * self.interestRatio
-        case .gas, .mortgage:
-            if let inputValue = self.inputValue, inputValue <= self.waitReturnAmount, inputValue > 0 {
-                value = inputValue * self.interestRatio
-            }
-        }
-        return value
-    }
+//    ///
+//    fileprivate var intereset: Double {
+//        guard let model = self.model, let asset = model.assets else {
+//            return 0
+//        }
+//        var value: Double = 0
+//        switch self.type {
+//        case .interest:
+//            value = 0
+//        case .all:
+//            value = (asset.wait_gas + asset.wait_pledge) * self.interestRatio
+//        case .gas, .mortgage:
+//            if let inputValue = self.inputValue, inputValue <= self.waitReturnAmount, inputValue > 0 {
+//                value = inputValue * self.interestRatio
+//            }
+//        }
+//        return value
+//    }
     
     var totalReturnAmount: Double {
         var returnAmount: Double = 0
@@ -79,7 +79,8 @@ class PreReturnInputMainView: UIView {
                 returnAmount = inputValue
             }
         }
-        return returnAmount + self.intereset
+//        return returnAmount + self.intereset
+        return returnAmount
     }
     
     var couldDone: Bool {
@@ -111,15 +112,15 @@ class PreReturnInputMainView: UIView {
     fileprivate let totalAmountLabel: UILabel = UILabel.init()              // 可用FIL
     fileprivate let tipsLabel: UILabel = UILabel.init()                     // 提示标签，颜色变动
     
-    fileprivate let bottomView: UIView = UIView.init()
-    fileprivate let bottomTitleLabel: UILabel = UILabel.init()
-    fileprivate let itemContainer: UIView = UIView.init()                   //
-    fileprivate let totalWaitItemView: TitleValueView = TitleValueView.init()   // 全部待归还
-    fileprivate let interestWaitItemView: TitleValueView = TitleValueView.init()   // 累计利息
-    fileprivate let interestItemView: TitleValueView = TitleValueView.init()   // 利息数量
-    fileprivate let gasItemView: TitleValueView = TitleValueView.init()   // GAS
-    fileprivate let pledgeItemView: TitleValueView = TitleValueView.init()   // 质押
-    fileprivate let totalNumView: TitleContainer = TitleContainer.init()    // 总计
+//    fileprivate let bottomView: UIView = UIView.init()
+//    fileprivate let bottomTitleLabel: UILabel = UILabel.init()
+//    fileprivate let itemContainer: UIView = UIView.init()                   //
+//    fileprivate let totalWaitItemView: TitleValueView = TitleValueView.init()   // 全部待归还
+//    fileprivate let interestWaitItemView: TitleValueView = TitleValueView.init()   // 累计利息
+//    fileprivate let interestItemView: TitleValueView = TitleValueView.init()   // 利息数量
+//    fileprivate let gasItemView: TitleValueView = TitleValueView.init()   // GAS
+//    fileprivate let pledgeItemView: TitleValueView = TitleValueView.init()   // 质押
+//    fileprivate let totalNumView: TitleContainer = TitleContainer.init()    // 总计
     
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let topViewHeight: CGFloat = 56
@@ -129,13 +130,13 @@ class PreReturnInputMainView: UIView {
     fileprivate let inputContainerHeight: CGFloat = 56
     fileprivate let inputContainerBottomMargin: CGFloat = 64
 
-    fileprivate let bottomTitleHeight: CGFloat = 45
-    fileprivate let itemViewHeight: CGFloat = 14
-    fileprivate let itemViewVerMargin: CGFloat = 10
-    fileprivate let itemViewTopMargin: CGFloat = 0
-    fileprivate let itemViewBottomMargin: CGFloat = 15
-    
-    fileprivate let totalNumHeight: CGFloat = 44
+//    fileprivate let bottomTitleHeight: CGFloat = 45
+//    fileprivate let itemViewHeight: CGFloat = 14
+//    fileprivate let itemViewVerMargin: CGFloat = 10
+//    fileprivate let itemViewTopMargin: CGFloat = 0
+//    fileprivate let itemViewBottomMargin: CGFloat = 15
+//
+//    fileprivate let totalNumHeight: CGFloat = 44
 
     
     // MARK: - Initialize Function
@@ -211,14 +212,15 @@ extension PreReturnInputMainView {
         self.centerView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.topView.snp.bottom)
+            make.bottom.equalToSuperview()
         }
-        // 3. bottomView
-        mainView.addSubview(self.bottomView)
-        self.initialBottomView(self.bottomView)
-        self.bottomView.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.centerView.snp.bottom)
-        }
+//        // 3. bottomView
+//        mainView.addSubview(self.bottomView)
+//        self.initialBottomView(self.bottomView)
+//        self.bottomView.snp.makeConstraints { (make) in
+//            make.leading.trailing.bottom.equalToSuperview()
+//            make.top.equalTo(self.centerView.snp.bottom)
+//        }
     }
     
     ///
@@ -258,7 +260,7 @@ extension PreReturnInputMainView {
         centerView.set(cornerRadius: 10)
         // 1. title
         centerView.addSubview(self.centerTitleLabel)
-        self.centerTitleLabel.set(text: "本次归还本金数量", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText)
+        self.centerTitleLabel.set(text: "归还数量", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText)
         self.centerTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.centerY.equalTo(centerView.snp.top).offset(self.centerTitleCenterYTopMargin)
@@ -287,8 +289,8 @@ extension PreReturnInputMainView {
             make.bottom.equalToSuperview().offset(-self.inputContainerBottomMargin)
         }
         self.inputContainer.addSubview(self.textField)
-        self.textField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 24, weight: .medium), textColor: AppColor.theme)
-        self.textField.setPlaceHolder("请输入还FIL本金", font: UIFont.pingFangSCFont(size: 20, weight: .medium), color: AppColor.inputPlaceHolder)
+        self.textField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 24, weight: .medium), textColor: AppColor.mainText)
+        self.textField.setPlaceHolder("请输入归还数量", font: UIFont.pingFangSCFont(size: 20, weight: .medium), color: UIColor.init(hex: 0xCCCCCC))
         self.textField.addTarget(self, action: #selector(textFieldValueChanged(_:)), for: .editingChanged)
         self.textField.clearButtonMode = .whileEditing
         self.textField.keyboardType = .decimalPad
@@ -316,129 +318,129 @@ extension PreReturnInputMainView {
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.trailing.lessThanOrEqualToSuperview()
         }
-        // 6. dashLine
-        let dashLine: XDDashLineView = XDDashLineView.init(lineColor: AppColor.dividing, lengths: [3.0, 3.0])
-        centerView.addSubview(dashLine)
-        dashLine.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview()
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.height.equalTo(0.5)
-        }
+//        // 6. dashLine
+//        let dashLine: XDDashLineView = XDDashLineView.init(lineColor: AppColor.dividing, lengths: [3.0, 3.0])
+//        centerView.addSubview(dashLine)
+//        dashLine.snp.makeConstraints { (make) in
+//            make.bottom.equalToSuperview()
+//            make.leading.equalToSuperview().offset(self.lrMargin)
+//            make.trailing.equalToSuperview().offset(-self.lrMargin)
+//            make.height.equalTo(0.5)
+//        }
     }
 
-    ///
-    fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
-        bottomView.backgroundColor = UIColor.white
-        bottomView.set(cornerRadius: 10)
-        // 1. title
-        bottomView.addSubview(self.bottomTitleLabel)
-        self.bottomTitleLabel.set(text: "当前类型归还明细", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText)
-        self.bottomTitleLabel.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.trailing.lessThanOrEqualToSuperview()
-            make.top.equalToSuperview()
-            make.height.equalTo(self.bottomTitleHeight)
-        }
-        // 2. contaienr
-        bottomView.addSubview(self.itemContainer)
-        self.initialItemContainer(self.itemContainer)
-        self.itemContainer.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.bottomTitleLabel.snp.bottom)
-        }
-        // 3. dashLine
-        let dashLine: XDDashLineView = XDDashLineView.init(lineColor: AppColor.dividing, lengths: [3.0, 3.0])
-        bottomView.addSubview(dashLine)
-        dashLine.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.height.equalTo(0.5)
-            make.top.equalTo(self.itemContainer.snp.bottom)
-        }
-        // 4. totalNum
-        bottomView.addSubview(self.totalNumView)
-        self.totalNumView.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(dashLine.snp.bottom)
-            make.height.equalTo(self.totalNumHeight)
-        }
-        self.totalNumView.label.set(text: "总计: 0FIL", font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: AppColor.mainText, alignment: .right)
-        self.totalNumView.label.snp.remakeConstraints { (make) in
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.centerY.equalToSuperview()
-            make.leading.greaterThanOrEqualToSuperview()
-        }
-    }
-    ///
-    fileprivate func initialItemContainer(_ containerView: UIView) -> Void {
-        containerView.removeAllSubviews()
-        //
-        let itemViews: [TitleValueView] = [self.totalWaitItemView, self.interestWaitItemView, self.interestItemView, self.gasItemView, self.pledgeItemView]
-        let itemTitles: [String] = ["全部待归还数量", "本次归还累计欠款利息数量", "利息数量", "本次归还GAS消耗数量", "本次归还质押数量"]
-        var topView: UIView = containerView
-        for (index, itemView) in itemViews.enumerated() {
-            containerView.addSubview(itemView)
-            self.initialItemView(itemView, with: itemTitles[index])
-            itemView.snp.makeConstraints { (make) in
-                make.leading.trailing.equalToSuperview()
-                make.height.equalTo(self.itemViewHeight)
-                if 0 == index {
-                    make.top.equalToSuperview().offset(self.itemViewTopMargin)
-                } else {
-                    make.top.equalTo(topView.snp.bottom).offset(self.itemViewVerMargin)
-                }
-                if index == itemViews.count - 1 {
-                    make.bottom.equalToSuperview().offset(-self.itemViewBottomMargin)
-                }
-            }
-            topView = itemView
-            //
-        }
-    }
-    ///
-    fileprivate func initialItemView(_ itemView: TitleValueView, with title: String) -> Void {
-        //
-        itemView.titleLabel.set(text: title, font: UIFont.pingFangSCFont(size: 13), textColor: AppColor.grayText)
-        itemView.titleLabel.snp.remakeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(self.lrMargin)
-        }
-        //
-        itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: AppColor.grayText, alignment: .right)
-        itemView.valueLabel.snp.remakeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
-        }
-    }
+//    ///
+//    fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
+//        bottomView.backgroundColor = UIColor.white
+//        bottomView.set(cornerRadius: 10)
+//        // 1. title
+//        bottomView.addSubview(self.bottomTitleLabel)
+//        self.bottomTitleLabel.set(text: "当前类型归还明细", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.mainText)
+//        self.bottomTitleLabel.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(self.lrMargin)
+//            make.trailing.lessThanOrEqualToSuperview()
+//            make.top.equalToSuperview()
+//            make.height.equalTo(self.bottomTitleHeight)
+//        }
+//        // 2. contaienr
+//        bottomView.addSubview(self.itemContainer)
+//        self.initialItemContainer(self.itemContainer)
+//        self.itemContainer.snp.makeConstraints { (make) in
+//            make.leading.trailing.equalToSuperview()
+//            make.top.equalTo(self.bottomTitleLabel.snp.bottom)
+//        }
+//        // 3. dashLine
+//        let dashLine: XDDashLineView = XDDashLineView.init(lineColor: AppColor.dividing, lengths: [3.0, 3.0])
+//        bottomView.addSubview(dashLine)
+//        dashLine.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(self.lrMargin)
+//            make.trailing.equalToSuperview().offset(-self.lrMargin)
+//            make.height.equalTo(0.5)
+//            make.top.equalTo(self.itemContainer.snp.bottom)
+//        }
+//        // 4. totalNum
+//        bottomView.addSubview(self.totalNumView)
+//        self.totalNumView.snp.makeConstraints { (make) in
+//            make.leading.trailing.bottom.equalToSuperview()
+//            make.top.equalTo(dashLine.snp.bottom)
+//            make.height.equalTo(self.totalNumHeight)
+//        }
+//        self.totalNumView.label.set(text: "总计: 0FIL", font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: AppColor.mainText, alignment: .right)
+//        self.totalNumView.label.snp.remakeConstraints { (make) in
+//            make.trailing.equalToSuperview().offset(-self.lrMargin)
+//            make.centerY.equalToSuperview()
+//            make.leading.greaterThanOrEqualToSuperview()
+//        }
+//    }
+//    ///
+//    fileprivate func initialItemContainer(_ containerView: UIView) -> Void {
+//        containerView.removeAllSubviews()
+//        //
+//        let itemViews: [TitleValueView] = [self.totalWaitItemView, self.interestWaitItemView, self.interestItemView, self.gasItemView, self.pledgeItemView]
+//        let itemTitles: [String] = ["全部待归还数量", "本次归还累计欠款利息数量", "利息数量", "本次归还GAS消耗数量", "本次归还质押数量"]
+//        var topView: UIView = containerView
+//        for (index, itemView) in itemViews.enumerated() {
+//            containerView.addSubview(itemView)
+//            self.initialItemView(itemView, with: itemTitles[index])
+//            itemView.snp.makeConstraints { (make) in
+//                make.leading.trailing.equalToSuperview()
+//                make.height.equalTo(self.itemViewHeight)
+//                if 0 == index {
+//                    make.top.equalToSuperview().offset(self.itemViewTopMargin)
+//                } else {
+//                    make.top.equalTo(topView.snp.bottom).offset(self.itemViewVerMargin)
+//                }
+//                if index == itemViews.count - 1 {
+//                    make.bottom.equalToSuperview().offset(-self.itemViewBottomMargin)
+//                }
+//            }
+//            topView = itemView
+//            //
+//        }
+//    }
+//    ///
+//    fileprivate func initialItemView(_ itemView: TitleValueView, with title: String) -> Void {
+//        //
+//        itemView.titleLabel.set(text: title, font: UIFont.pingFangSCFont(size: 13), textColor: AppColor.grayText)
+//        itemView.titleLabel.snp.remakeConstraints { (make) in
+//            make.centerY.equalToSuperview()
+//            make.leading.equalToSuperview().offset(self.lrMargin)
+//        }
+//        //
+//        itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: AppColor.grayText, alignment: .right)
+//        itemView.valueLabel.snp.remakeConstraints { (make) in
+//            make.centerY.equalToSuperview()
+//            make.trailing.equalToSuperview().offset(-self.lrMargin)
+//        }
+//    }
 
     
 }
 extension PreReturnInputMainView {
     
-    ///
-    fileprivate func setupItemContainer(with itemViews: [UIView]) -> Void {
-        self.itemContainer.removeAllSubviews()
-        //
-        var topView: UIView = self.itemContainer
-        for (index, itemView) in itemViews.enumerated() {
-            self.itemContainer.addSubview(itemView)
-            itemView.snp.makeConstraints { (make) in
-                make.leading.trailing.equalToSuperview()
-                make.height.equalTo(self.itemViewHeight)
-                if 0 == index {
-                    make.top.equalToSuperview().offset(self.itemViewTopMargin)
-                } else {
-                    make.top.equalTo(topView.snp.bottom).offset(self.itemViewVerMargin)
-                }
-                if index == itemViews.count - 1 {
-                    make.bottom.equalToSuperview().offset(-self.itemViewBottomMargin)
-                }
-            }
-            topView = itemView
-            //
-        }
-    }
+//    ///
+//    fileprivate func setupItemContainer(with itemViews: [UIView]) -> Void {
+//        self.itemContainer.removeAllSubviews()
+//        //
+//        var topView: UIView = self.itemContainer
+//        for (index, itemView) in itemViews.enumerated() {
+//            self.itemContainer.addSubview(itemView)
+//            itemView.snp.makeConstraints { (make) in
+//                make.leading.trailing.equalToSuperview()
+//                make.height.equalTo(self.itemViewHeight)
+//                if 0 == index {
+//                    make.top.equalToSuperview().offset(self.itemViewTopMargin)
+//                } else {
+//                    make.top.equalTo(topView.snp.bottom).offset(self.itemViewVerMargin)
+//                }
+//                if index == itemViews.count - 1 {
+//                    make.bottom.equalToSuperview().offset(-self.itemViewBottomMargin)
+//                }
+//            }
+//            topView = itemView
+//            //
+//        }
+//    }
     
 }
 
@@ -471,33 +473,33 @@ extension PreReturnInputMainView {
         self.waitReturnAmount = self.model?.waitReturnAmount(for: self.type) ?? 0
         self.waitReturnView.valueLabel.text = self.waitReturnAmount.decimalValidDigitsProcess(digits: 8)
         //
-        var itemViews: [UIView] = []
+//        var itemViews: [UIView] = []
         switch type {
         case .all:
             self.textField.text = self.waitReturnAmount.decimalValidDigitsProcess(digits: 8)
-            itemViews = [self.totalWaitItemView, self.interestItemView]
+//            itemViews = [self.totalWaitItemView, self.interestItemView]
         case .gas:
             self.textField.text = nil //min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
-            itemViews = [self.gasItemView, self.interestItemView]
+//            itemViews = [self.gasItemView, self.interestItemView]
         case .mortgage:
             self.textField.text = nil //min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
-            itemViews = [self.pledgeItemView, self.interestItemView]
+//            itemViews = [self.pledgeItemView, self.interestItemView]
         case .interest:
             self.textField.text = nil //min(self.waitReturnAmount, self.totalFil).decimalValidDigitsProcess(digits: 8)
-            itemViews = [self.interestWaitItemView, UIView.init()]
+//            itemViews = [self.interestWaitItemView, UIView.init()]
         }
-        self.setupItemContainer(with: itemViews)
+//        self.setupItemContainer(with: itemViews)
         //[self.totalWaitItemView, self.interestWaitItemView, self.interestItemView, self.gasItemView, self.pledgeItemView]
-        if let model = self.model, let asset = model.assets {
-            self.totalWaitItemView.valueLabel.text = "\(asset.wait_total.decimalValidDigitsProcess(digits: 8))FIL"
-        }
-        if let inputValue = self.inputValue {
-            self.interestWaitItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
-            self.gasItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
-            self.pledgeItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
-        }
-        self.interestItemView.valueLabel.text = "\(self.intereset.decimalValidDigitsProcess(digits: 8))FIL"
-        self.totalNumView.label.text = "\(self.totalReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+//        if let model = self.model, let asset = model.assets {
+//            self.totalWaitItemView.valueLabel.text = "\(asset.wait_total.decimalValidDigitsProcess(digits: 8))FIL"
+//        }
+//        if let inputValue = self.inputValue {
+//            self.interestWaitItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.gasItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.pledgeItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+//        }
+//        self.interestItemView.valueLabel.text = "\(self.intereset.decimalValidDigitsProcess(digits: 8))FIL"
+//        self.totalNumView.label.text = "\(self.totalReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
         //
         self.updateTips()
         self.delegate?.didUpdateDoneBtnEnable(with: self)
@@ -526,11 +528,12 @@ extension PreReturnInputMainView {
                     tipsColor = UIColor.init(hex: 0xE06236)
                 }
             }
-            if tips.isEmpty && self.totalReturnAmount > self.totalFil {
-                tips = "*总计归还金额超过可用FIL数，请重新输入"
-                tipsColor = UIColor.init(hex: 0xE06236)
-            }
+//            if tips.isEmpty && self.totalReturnAmount > self.totalFil {
+//                tips = "*总计归还金额超过可用FIL数，请重新输入"
+//                tipsColor = UIColor.init(hex: 0xE06236)
+//            }
         }
+        self.waitReturnView.titleLabel.text = self.type.tips + "(FIL)"
         self.tipsLabel.text = tips
         self.tipsLabel.textColor = tipsColor
     }
@@ -543,12 +546,12 @@ extension PreReturnInputMainView {
     /// 
     @objc func textFieldValueChanged(_ textField: UITextField) {
         if let inputValue = self.inputValue {
-            self.interestWaitItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
-            self.gasItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
-            self.pledgeItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.interestWaitItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.gasItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.pledgeItemView.valueLabel.text = "\(inputValue.decimalValidDigitsProcess(digits: 8))FIL"
         }
-        self.interestItemView.valueLabel.text = "\(self.intereset.decimalValidDigitsProcess(digits: 8))FIL"
-        self.totalNumView.label.text = "\(self.totalReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+//        self.interestItemView.valueLabel.text = "\(self.intereset.decimalValidDigitsProcess(digits: 8))FIL"
+//        self.totalNumView.label.text = "\(self.totalReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
         self.updateTips()
         self.delegate?.didUpdateDoneBtnEnable(with: self)
     }
@@ -560,11 +563,11 @@ extension PreReturnInputMainView {
             break
         case .gas, .mortgage, .interest:
             self.textField.text = self.waitReturnAmount.decimalValidDigitsProcess(digits: 8)
-            self.interestWaitItemView.valueLabel.text = "\(self.waitReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
-            self.gasItemView.valueLabel.text = "\(self.waitReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
-            self.pledgeItemView.valueLabel.text = "\(self.waitReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
-            self.interestItemView.valueLabel.text = "\(self.intereset.decimalValidDigitsProcess(digits: 8))FIL"
-            self.totalNumView.label.text = "\(self.totalReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.interestWaitItemView.valueLabel.text = "\(self.waitReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.gasItemView.valueLabel.text = "\(self.waitReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.pledgeItemView.valueLabel.text = "\(self.waitReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.interestItemView.valueLabel.text = "\(self.intereset.decimalValidDigitsProcess(digits: 8))FIL"
+//            self.totalNumView.label.text = "\(self.totalReturnAmount.decimalValidDigitsProcess(digits: 8))FIL"
             self.updateTips()
         }
         self.delegate?.didUpdateDoneBtnEnable(with: self)

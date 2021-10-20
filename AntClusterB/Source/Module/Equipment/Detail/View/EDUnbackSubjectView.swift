@@ -303,7 +303,7 @@ extension EDUnbackSubjectView {
         // 子控件数据加载
         self.zhiyaItemView.valueLabel.text = asset.wait_pledge.decimalValidDigitsProcess(digits: 8)
         self.xiaohaoItemView.valueLabel.text = asset.wait_gas.decimalValidDigitsProcess(digits: 8)
-        self.interestItemView.valueLabel.text = asset.interest.decimalValidDigitsProcess(digits: 8)
+        self.interestItemView.valueLabel.text = asset.wait_interest.decimalValidDigitsProcess(digits: 8)
         
         //self.preReturnView.isHidden = asset.wait_total <= 0
         self.preReturnView.isHidden = model.zone != .ipfs || model.zhiya_type == .zifu

@@ -26,6 +26,7 @@ class EDBackAssetDetailView: UIView {
             guard let model = model else {
                 return
             }
+            self.returnDetailView.isHidden = model.zone != .ipfs || model.zhiya_type == .zifu
             self.formShouldInterestLabel.text = "应还利息\n\(model.interest.decimalValidDigitsProcess(digits: 2))%"
         }
     }
@@ -178,13 +179,12 @@ extension EDBackAssetDetailView {
         // 2. returnDetailView
         mainView.addSubview(self.returnDetailView)
         self.returnDetailView.addTarget(self, action: #selector(returnDetailViewClick(_:)), for: .touchUpInside)
-        self.returnDetailView.isHidden = true   // 隐藏，不予显示
         self.returnDetailView.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-self.itemOutLrMargin)
             make.centerY.equalTo(self.titleView)
         }
         self.returnDetailView.iconView.set(cornerRadius: 0)
-        self.returnDetailView.iconView.image = UIImage.init(named: "IMG_common_icon_next")
+        self.returnDetailView.iconView.image = UIImage.init(named: "IMG_common_detail")
         self.returnDetailView.iconView.snp.remakeConstraints { (make) in
             make.trailing.centerY.equalToSuperview()
             make.size.equalTo(CGSize.init(width: 6, height: 11))
