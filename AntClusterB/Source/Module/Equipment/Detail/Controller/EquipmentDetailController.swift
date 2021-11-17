@@ -23,7 +23,8 @@ class EquipmentDetailController: BaseViewController
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
 
     fileprivate let topView: EquipDetailHeaderView = EquipDetailHeaderView.init()
-    fileprivate let infoView: EquipDetailTermInfoView = EquipDetailTermInfoView.init()
+    fileprivate let termInfoView: EquipDetailTermInfoView = EquipDetailTermInfoView.init() //期数配置说明
+    fileprivate let interestInfoView: EquipDetailInterestInfoView = EquipDetailInterestInfoView.init() //利息配置说明
     
     fileprivate let detailView: EquipmentDetailView = EquipmentDetailView.init()
     
@@ -145,19 +146,26 @@ extension EquipmentDetailController {
             let height: CGFloat = self.model.group.isEmpty ? self.topViewNoGroupHeight : self.topViewHasGroupHeight
             make.height.equalTo(height)
         }
-        // 2. infoView
-        scrollView.addSubview(self.infoView)
-        self.infoView.snp.makeConstraints { (make) in
+        // 2. termInfoView
+        scrollView.addSubview(self.termInfoView)
+        self.termInfoView.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(self.topView)
             make.top.equalTo(self.topView.snp.bottom)
         }
-        // 3. detailView
+        // 3. interestInfoView
+        scrollView.addSubview(self.interestInfoView)
+        self.interestInfoView.isHidden = true   // 资本垫付才显示，自负自押不显示
+        self.interestInfoView.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(self.topView)
+            make.top.equalTo(self.termInfoView.snp.bottom)
+        }
+        // 4. detailView
         scrollView.addSubview(self.detailView)
         self.detailView.delegate = self
         self.detailView.backgroundColor = UIColor.white
         self.detailView.snp.makeConstraints { (make) in
             make.leading.trailing.width.bottom.equalToSuperview()
-            make.top.equalTo(self.infoView.snp.bottom).offset(self.detailViewTopMargin)
+            make.top.equalTo(self.termInfoView.snp.bottom).offset(self.detailViewTopMargin)
         }
     }
 
@@ -191,11 +199,19 @@ extension EquipmentDetailController {
             self.detail = data.detail
             self.returns = data.returns
             self.topView.model = self.model
-            self.infoView.model = self.detail?.extend
+            self.termInfoView.model = self.detail?.extend
+            self.interestInfoView.model = self.detail?.extend
+            self.interestInfoView.isHidden = data.detail.zhiya_type != .dianfu
             self.detailView.model = self.detail
             self.detailView.returns = self.returns
             self.offset = data.returns.count
             self.scrollView.mj_footer.isHidden = data.returns.count < self.limit
+            self.detailView.snp.remakeConstraints { make in
+                let topView: UIView = data.detail.zhiya_type == .dianfu ? self.interestInfoView : self.termInfoView
+                make.leading.trailing.width.bottom.equalToSuperview()
+                make.top.equalTo(topView.snp.bottom).offset(self.detailViewTopMargin)
+            }
+            self.view.layoutIfNeeded()
         }
     }
     ///
