@@ -154,6 +154,7 @@ extension EquipmentDetailController {
         }
         // 3. interestInfoView
         scrollView.addSubview(self.interestInfoView)
+        self.interestInfoView.isHidden = true   // 资本垫付才显示，自负自押不显示
         self.interestInfoView.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(self.topView)
             make.top.equalTo(self.termInfoView.snp.bottom)
@@ -164,7 +165,7 @@ extension EquipmentDetailController {
         self.detailView.backgroundColor = UIColor.white
         self.detailView.snp.makeConstraints { (make) in
             make.leading.trailing.width.bottom.equalToSuperview()
-            make.top.equalTo(self.interestInfoView.snp.bottom).offset(self.detailViewTopMargin)
+            make.top.equalTo(self.termInfoView.snp.bottom).offset(self.detailViewTopMargin)
         }
     }
 
@@ -200,10 +201,17 @@ extension EquipmentDetailController {
             self.topView.model = self.model
             self.termInfoView.model = self.detail?.extend
             self.interestInfoView.model = self.detail?.extend
+            self.interestInfoView.isHidden = data.detail.zhiya_type != .dianfu
             self.detailView.model = self.detail
             self.detailView.returns = self.returns
             self.offset = data.returns.count
             self.scrollView.mj_footer.isHidden = data.returns.count < self.limit
+            self.detailView.snp.remakeConstraints { make in
+                let topView: UIView = data.detail.zhiya_type == .dianfu ? self.interestInfoView : self.termInfoView
+                make.leading.trailing.width.bottom.equalToSuperview()
+                make.top.equalTo(topView.snp.bottom).offset(self.detailViewTopMargin)
+            }
+            self.view.layoutIfNeeded()
         }
     }
     ///
