@@ -471,6 +471,10 @@ class EquipmentDetailExtendModel: Mappable {
     var frozen: Double = 0
     var security: Double = 0
     var withdrawable: Double = 0
+    /// 应还比例
+    var should_radio: Double = 0
+    /// 欠款比例
+    var arrears_radio: Double = 0
     
     required init?(map: Map) {
         
@@ -481,6 +485,8 @@ class EquipmentDetailExtendModel: Mappable {
         frozen <- (map["frozen"], DoubleStringTransform.default)
         security <- (map["security"], DoubleStringTransform.default)
         withdrawable <- (map["withdrawable"], DoubleStringTransform.default)
+        should_radio <- (map["should_radio"], DoubleStringTransform.default)
+        arrears_radio <- (map["arrears_radio"], DoubleStringTransform.default)
     }
     
 }
