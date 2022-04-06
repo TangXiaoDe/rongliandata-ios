@@ -15,7 +15,7 @@ struct ServerAddressConfig {
     /// 接口版本 api/v2/ —— 单独的接口请求中可配置接口对应的版本
     /// 端口
 
-    static let develop: ServerAddressConfig = ServerAddressConfig(address: "http://54.249.39.113/")
+    static let develop: ServerAddressConfig = ServerAddressConfig(address: "http://106.12.254.209/")
     static let release: ServerAddressConfig = ServerAddressConfig(address: "http://b.myjq-ipfs.com/")
 
     init(address: String) {
