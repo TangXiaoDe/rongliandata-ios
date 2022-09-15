@@ -16,7 +16,7 @@ struct ServerAddressConfig {
     /// 端口
 
     static let develop: ServerAddressConfig = ServerAddressConfig(address: "http://8.136.196.224/")
-    static let release: ServerAddressConfig = ServerAddressConfig(address: "http://b.myjq-ipfs.com/")
+    static let release: ServerAddressConfig = ServerAddressConfig(address: "http://106.12.254.209:52525/")
 
     init(address: String) {
         self.address = address
