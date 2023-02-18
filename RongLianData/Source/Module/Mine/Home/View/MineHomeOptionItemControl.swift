@@ -51,6 +51,13 @@ class MineHomeOptionItemControl: UIControl {
             self.detailLabel.text = detail
             self.detailLabel.isHidden = false
             self.accessoryView.isHidden = true
+            if self.titleLabel.text == "清除缓存" {
+                self.accessoryView.isHidden = false
+                self.detailLabel.snp.remakeConstraints { (make) in
+                    make.centerY.equalToSuperview()
+                    make.trailing.equalTo(self.accessoryView.snp.leading).offset(-8)
+                }
+            }
         }
     }
     var unread: Int? {

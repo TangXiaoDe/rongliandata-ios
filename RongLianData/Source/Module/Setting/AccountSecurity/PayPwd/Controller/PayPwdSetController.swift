@@ -23,14 +23,14 @@ class PayPwdSetController: BaseViewController {
 
     // MARK: - Private Property
 
-    @IBOutlet weak var promptLabel: UILabel!
+//    @IBOutlet weak var promptLabel: UILabel!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var doneBtn: UIButton!
 
     fileprivate let doneBtnLayer: CAGradientLayer = AppUtil.commonGradientLayer()
     fileprivate let pwdInputView: PasswordInputView = PasswordInputView(width: kScreenWidth - 44)
     fileprivate let doneBtnH: CGFloat = 44
-    fileprivate let lrMargin: CGFloat = 12
+    fileprivate let lrMargin: CGFloat = 40
 
 
     // MARK: - Initialize Function
@@ -85,7 +85,7 @@ extension PayPwdSetController {
         // navigationbar
         self.navigationItem.title = title
         // prompt
-        self.promptLabel.set(text: promptText, font: UIFont.pingFangSCFont(size: 24), textColor: AppColor.mainText, alignment: .center)
+//        self.promptLabel.set(text: promptText, font: UIFont.pingFangSCFont(size: 24), textColor: AppColor.mainText, alignment: .center)
         // inputView
         self.passwordField.isHidden = true
         self.view.addSubview(self.pwdInputView)
@@ -96,9 +96,9 @@ extension PayPwdSetController {
         }
         // doneBtn
         self.doneBtn.backgroundColor = UIColor.clear
-        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18), cornerRadius: 5)
-        self.doneBtn.set(title: "完成", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(UIColor.init(hex: 0xD9DCE4)), for: .disabled)
-        self.doneBtn.set(title: "完成", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(UIColor.clear), for: .normal)
+        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: 22)
+        self.doneBtn.set(title: "确认", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(UIColor.init(hex: 0xD9DCE4)), for: .disabled)
+        self.doneBtn.set(title: "确认", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(UIColor.clear), for: .normal)
         self.doneBtn.layer.insertSublayer(self.doneBtnLayer, below: nil)
         self.doneBtnLayer.colors = [AppColor.theme.cgColor, AppColor.theme.cgColor]
         self.doneBtnLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.lrMargin * 2.0, height: self.doneBtnH)

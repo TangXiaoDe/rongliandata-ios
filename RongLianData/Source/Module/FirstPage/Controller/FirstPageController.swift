@@ -252,7 +252,7 @@ extension FirstPageController: MallHomeStatusNavBarProtocol {
     /// 导航栏右侧按钮点击回调
     func homeBar(_ navBar: MallHomeStatusNavBar, didClickedRightItem itemView: UIView) -> Void {
         if AccountManager.share.isLogin {
-            let messageVC = MessageHomeController.init()
+            let messageVC = MessageListController.init(type: .system)
             self.enterPageVC(messageVC)
         } else {
             AppUtil.presentLoginPage()

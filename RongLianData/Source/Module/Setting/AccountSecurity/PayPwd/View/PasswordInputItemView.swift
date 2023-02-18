@@ -3,25 +3,43 @@
 //  iMeet
 //
 //  Created by 小唐 on 2019/1/16.
-//  Copyright © 2019 ChainOne. All rights reserved.
+//  Copyright © 2021 ChainOne. All rights reserved.
 //
 //  方框密码输入item视图
 
 import UIKit
 
+// TODO: - 兼容其他输入
+
 class PasswordInputItemView: UIView {
 
     enum Style {
+        // TODO: - 添加none类型
         case bottomLine
         case border
+        case round
     }
 
     var style: PasswordInputItemView.Style = .bottomLine {
         didSet {
-            self.bottomLine.isHidden = false
-            self.topLine.isHidden = style == .bottomLine
-            self.leftLine.isHidden = style == .bottomLine
-            self.rightLine.isHidden = style == .bottomLine
+            // TODO: - 添加none类型
+            switch style {
+            case .bottomLine:
+                self.bottomLine.isHidden = false//false
+                self.topLine.isHidden = true//style == .bottomLine
+                self.leftLine.isHidden = true//style == .bottomLine
+                self.rightLine.isHidden = true//style == .bottomLine
+            case .border:
+                self.bottomLine.isHidden = false//false
+                self.topLine.isHidden = false//style == .bottomLine
+                self.leftLine.isHidden = false//style == .bottomLine
+                self.rightLine.isHidden = false//style == .bottomLine
+            case .round:
+                self.bottomLine.isHidden = true//false
+                self.topLine.isHidden = true//style == .bottomLine
+                self.leftLine.isHidden = true//style == .bottomLine
+                self.rightLine.isHidden = true//style == .bottomLine
+            }
         }
     }
 
@@ -32,7 +50,7 @@ class PasswordInputItemView: UIView {
         }
     }
 
-    var secureTextColor: UIColor = AppColor.theme {
+    var secureTextColor: UIColor = AppColor.mainText {
         didSet {
             if self.content == nil || self.content!.isEmpty {
                 self.imageView.image = nil
@@ -41,7 +59,7 @@ class PasswordInputItemView: UIView {
             }
         }
     }
-    var lineColor: UIColor = AppColor.theme {
+    var lineColor: UIColor = UIColor.init(hex: 0xCCCCCC) {
         didSet {
             self.topLine.backgroundColor = lineColor
             self.bottomLine.backgroundColor = lineColor
@@ -57,6 +75,11 @@ class PasswordInputItemView: UIView {
                 self.imageView.image = nil
             } else {
                 self.imageView.image = UIImage.imageWithColor(self.secureTextColor)
+            }
+            if let content = content, !content.isEmpty {
+                self.lineColor = AppColor.theme
+            } else {
+                self.lineColor = UIColor.init(hex: 0xCCCCCC)
             }
         }
     }
@@ -81,23 +104,24 @@ class PasswordInputItemView: UIView {
     }
 
     fileprivate func initialUI() -> Void {
+        self.backgroundColor = .white
         // 1. bgView
-        self.addSubview(bgView)
+        self.addSubview(self.bgView)
         self.bgView.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
         // 2. titleLabel
-        self.addSubview(titleLabel)
-        titleLabel.set(text: nil, font: UIFont.systemFont(ofSize: 18), textColor: self.secureTextColor, alignment: .center)
-        titleLabel.snp.makeConstraints { (make) in
+        self.addSubview(self.titleLabel)
+        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14, weight: .regular), textColor: self.secureTextColor, alignment: .center)
+        self.titleLabel.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
             make.center.equalTo(self)
         }
         // 3. imageView
         let iconWH: CGFloat = 10
-        self.addSubview(imageView)
-        imageView.set(cornerRadius: iconWH * 0.5)
-        imageView.snp.makeConstraints { (make) in
+        self.addSubview(self.imageView)
+        self.imageView.set(cornerRadius: iconWH * 0.5)
+        self.imageView.snp.makeConstraints { (make) in
             make.center.equalTo(self)
             make.width.height.equalTo(iconWH)
         }

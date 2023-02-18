@@ -97,6 +97,11 @@ extension Notification.Name {
         static let login = NSNotification.Name(rawValue: "app.notification.name.user.login")
         /// 用户登录 - 登录页是present出来的方式登录，需更新tabbarVC的tabbarItem
         static let dismissLogin = NSNotification.Name(rawValue: "app.notification.name.user.dismissLogin")
+        
+        /// 需要实名认证
+        static let needCert = NSNotification.Name(rawValue: "app.notification.name.user.needCert")
+        /// 别人需要实名认证
+        static let otherNeedCert = NSNotification.Name(rawValue: "app.notification.name.user.otherNeedCert")
     }
 
     /// 支付密码

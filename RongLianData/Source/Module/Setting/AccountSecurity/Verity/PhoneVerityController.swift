@@ -31,9 +31,12 @@ class PhoneVerityController: BaseViewController {
 
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var smsCodeView: UIView!
-    @IBOutlet weak var codeField: UITextField!
     @IBOutlet weak var sendSmsBtn: UIButton!
     @IBOutlet weak var nextBtn: GradientLayerButton!
+    fileprivate let codeInputView: PasswordInputView = PasswordInputView.init(width: 30 * 6.0 + 10.0 * 5.0, itemWidth: 30, itemStyle: .round)
+    
+    fileprivate let accessoryView: CommonKeyboardInputAccessoryView = CommonKeyboardInputAccessoryView.init()
+    fileprivate let accessoryViewHeight: CGFloat = CommonKeyboardInputAccessoryView.viewHeight
 
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let smsCodeSize: CGSize = CGSize.init(width: 84, height: 28)
@@ -47,6 +50,7 @@ class PhoneVerityController: BaseViewController {
     fileprivate var timer: Timer? = nil
     fileprivate let countdownLabel: UILabel = UILabel()
     fileprivate let btnLrMargin: CGFloat = 12
+    fileprivate let codeInputHeight: CGFloat = 30
     
 
     // MARK: - Initialize Function
@@ -92,25 +96,34 @@ extension PhoneVerityController {
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = UIColor.white
         // navbar
-        self.navigationItem.title = "验证手机号"
-        // xib
-        //self.smsCodeView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 1, margin1: 0, margin2: 0)
-        self.codeField.set(placeHolder: nil, text: nil, font: UIFont.pingFangSCFont(size: 18), textColor: AppColor.mainText)
-        self.codeField.attributedPlaceholder = NSAttributedString.init(string: "请输入验证码", attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
-        self.codeField.addTarget(self, action: #selector(codeFieldValueChanged(_:)), for: .editingChanged)
-        self.codeField.keyboardType = .asciiCapable
-        self.sendSmsBtn.set(font: UIFont.pingFangSCFont(size: 12), cornerRadius: 5, borderWidth: 1, borderColor: AppColor.theme)
-        self.sendSmsBtn.set(title: "获取验证码", titleColor: AppColor.theme, image: nil, bgImage: UIImage.imageWithColor(UIColor.white), for: .normal)
-        self.sendSmsBtn.set(title: "获取验证码", titleColor: AppColor.theme, image: nil, bgImage: UIImage.imageWithColor(UIColor.white), for: .highlighted)
+        self.navigationItem.title = "账号验证"
+        // 4. codeInput
+        self.smsCodeView.addSubview(self.codeInputView)
+        self.codeInputView.secureTextEntry = false
+        self.codeInputView.delegate = self
+        self.accessoryView.bounds = CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.accessoryViewHeight)
+        self.accessoryView.doneBtnClickAction = { (accessoryView, doneBtn) -> Void in
+            self.view.endEditing(true)
+        }
+        self.codeInputView.textField.inputAccessoryView = self.accessoryView
+        self.codeInputView.snp.makeConstraints { (make) in
+            make.centerX.top.equalToSuperview()
+            make.width.equalTo(30 * 6.0 + 10.0 * 5.0)
+            make.height.equalTo(self.codeInputHeight)
+        }
+        //
+//        self.sendSmsBtn.set(font: UIFont.pingFangSCFont(size: 12), cornerRadius: 5, borderWidth: 1, borderColor: AppColor.theme)
+//        self.sendSmsBtn.set(title: "获取验证码", titleColor: AppColor.theme, image: nil, bgImage: UIImage.imageWithColor(UIColor.white), for: .normal)
+//        self.sendSmsBtn.set(title: "获取验证码", titleColor: AppColor.theme, image: nil, bgImage: UIImage.imageWithColor(UIColor.white), for: .highlighted)
         self.nextBtn.backgroundColor = UIColor.clear
-        self.nextBtn.set(font: UIFont.pingFangSCFont(size: 18), cornerRadius: 5)
+        self.nextBtn.set(font: UIFont.pingFangSCFont(size: 18), cornerRadius: 22)
         self.nextBtn.set(title: "下一步", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
         self.nextBtn.set(title: "下一步", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .highlighted)
         self.nextBtn.set(title: "下一步", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.disable), for: .disabled)
         // countLabel
         self.view.addSubview(self.countdownLabel)
-        self.countdownLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.minorText, alignment: .center)
-        self.countdownLabel.set(cornerRadius: 5, borderWidth: 1, borderColor: AppColor.minorText)
+        self.countdownLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14), textColor: UIColor(hex: 0x666666), alignment: .center)
+//        self.countdownLabel.set(cornerRadius: 5, borderWidth: 1, borderColor: AppColor.minorText)
         self.countdownLabel.isHidden = true // 默认隐藏
         self.countdownLabel.snp.makeConstraints { (make) in
             make.edges.equalTo(self.sendSmsBtn)
@@ -123,12 +136,12 @@ extension PhoneVerityController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         self.couldDoneProcess()
-        self.phoneLabel.text = AccountManager.share.currentAccountInfo?.userInfo?.phone
+        self.phoneLabel.text = "验证码将发送至手机“" + (AccountManager.share.currentAccountInfo?.userInfo?.phone ?? "") + "“"
     }
 
     fileprivate func couldDone() -> Bool {
         var doneFlag: Bool = false
-        guard let code = self.codeField.text else {
+        guard let code = self.codeInputView.password else {
             return doneFlag
         }
         doneFlag = !code.isEmpty
@@ -181,7 +194,7 @@ extension PhoneVerityController {
     }
     /// 验证完成处理
     fileprivate func codeVerifyCompleted() -> Void {
-        guard let code = self.codeField.text, !code.isEmpty else {
+        guard let code = self.codeInputView.password, !code.isEmpty else {
             return
         }
         switch self.type {
@@ -212,7 +225,7 @@ extension PhoneVerityController {
 
     @IBAction func nextBtnClick(_ sender: GradientLayerButton) {
         self.view.endEditing(true)
-        guard let code = self.codeField.text, !code.isEmpty else {
+        guard let code = self.codeInputView.password, !code.isEmpty else {
             return
         }
         self.codeVerifyRequest(code)
@@ -280,5 +293,14 @@ extension PhoneVerityController {
 
 // MARK: - <>
 extension PhoneVerityController {
+    
+}
+
+// MARK: - <PasswordInputViewProtocol>
+extension PhoneVerityController: PasswordInputViewProtocol {
+
+    func pwdInputView(_ pwdInputView: PasswordInputView, didPasswordChanged password: String) {
+        self.couldDoneProcess()
+    }
     
 }

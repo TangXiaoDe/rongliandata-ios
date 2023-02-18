@@ -508,6 +508,17 @@
 		A17FCCE129A0914800B06F23 /* InviteRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCDF29A0914800B06F23 /* InviteRequestInfo.swift */; };
 		A17FCCE229A0914800B06F23 /* InviteNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE029A0914800B06F23 /* InviteNetworkManager.swift */; };
 		A17FCCE429A0B25B00B06F23 /* CurrentUserEditNamePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE329A0B25B00B06F23 /* CurrentUserEditNamePopView.swift */; };
+		A17FCCE629A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE529A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift */; };
+		A17FCCE829A0E27A00B06F23 /* CommonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE729A0E27A00B06F23 /* CommonAlertView.swift */; };
+		A17FCCEA29A0E87A00B06F23 /* MessageSystemTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE929A0E87A00B06F23 /* MessageSystemTabCell.swift */; };
+		A17FCCEC29A0F2F300B06F23 /* MessageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCEB29A0F2F300B06F23 /* MessageDetailController.swift */; };
+		A17FCCF529A0FC5600B06F23 /* RealNameCertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCEF29A0FC5600B06F23 /* RealNameCertController.swift */; };
+		A17FCCF629A0FC5600B06F23 /* RealNameCertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCF129A0FC5600B06F23 /* RealNameCertModel.swift */; };
+		A17FCCF729A0FC5600B06F23 /* RealNameCertSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCF329A0FC5600B06F23 /* RealNameCertSuccessView.swift */; };
+		A17FCCF829A0FC5600B06F23 /* RealNameCertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCF429A0FC5600B06F23 /* RealNameCertView.swift */; };
+		A17FCCFA29A0FD1900B06F23 /* CertPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCF929A0FD1900B06F23 /* CertPopView.swift */; };
+		A17FCCFE29A0FE4800B06F23 /* CertificationRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCFC29A0FE4800B06F23 /* CertificationRequestInfo.swift */; };
+		A17FCCFF29A0FE4800B06F23 /* CertificationNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCFD29A0FE4800B06F23 /* CertificationNetworkManager.swift */; };
 		A38D7434E3928A0C480E5D70 /* Pods_RongLianDataTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEC8B66C20118199FDF9BBE /* Pods_RongLianDataTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -1061,6 +1072,17 @@
 		A17FCCDF29A0914800B06F23 /* InviteRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteRequestInfo.swift; sourceTree = "<group>"; };
 		A17FCCE029A0914800B06F23 /* InviteNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteNetworkManager.swift; sourceTree = "<group>"; };
 		A17FCCE329A0B25B00B06F23 /* CurrentUserEditNamePopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserEditNamePopView.swift; sourceTree = "<group>"; };
+		A17FCCE529A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonKeyboardInputAccessoryView.swift; sourceTree = "<group>"; };
+		A17FCCE729A0E27A00B06F23 /* CommonAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAlertView.swift; sourceTree = "<group>"; };
+		A17FCCE929A0E87A00B06F23 /* MessageSystemTabCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSystemTabCell.swift; sourceTree = "<group>"; };
+		A17FCCEB29A0F2F300B06F23 /* MessageDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailController.swift; sourceTree = "<group>"; };
+		A17FCCEF29A0FC5600B06F23 /* RealNameCertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealNameCertController.swift; sourceTree = "<group>"; };
+		A17FCCF129A0FC5600B06F23 /* RealNameCertModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealNameCertModel.swift; sourceTree = "<group>"; };
+		A17FCCF329A0FC5600B06F23 /* RealNameCertSuccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealNameCertSuccessView.swift; sourceTree = "<group>"; };
+		A17FCCF429A0FC5600B06F23 /* RealNameCertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealNameCertView.swift; sourceTree = "<group>"; };
+		A17FCCF929A0FD1900B06F23 /* CertPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertPopView.swift; sourceTree = "<group>"; };
+		A17FCCFC29A0FE4800B06F23 /* CertificationRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificationRequestInfo.swift; sourceTree = "<group>"; };
+		A17FCCFD29A0FE4800B06F23 /* CertificationNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificationNetworkManager.swift; sourceTree = "<group>"; };
 		A42B7198B32A0313DF58D827 /* Pods_RongLianData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RongLianData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1468,6 +1490,7 @@
 		535DDF2A29A067D400E8E90C /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				A17FCCFB29A0FE4800B06F23 /* Certification */,
 				A17FCCDE29A0914800B06F23 /* Invite */,
 				535DDF2B29A067D400E8E90C /* Password */,
 				535DDF2E29A067D400E8E90C /* Asset */,
@@ -1982,6 +2005,7 @@
 			children = (
 				535DDFD029A067D400E8E90C /* MessageHomeController.swift */,
 				535DDFD129A067D400E8E90C /* MessageListController.swift */,
+				A17FCCEB29A0F2F300B06F23 /* MessageDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2000,6 +2024,7 @@
 			children = (
 				535DDFD629A067D400E8E90C /* MessageHomeListCell.swift */,
 				535DDFD729A067D400E8E90C /* MessageListCell.swift */,
+				A17FCCE929A0E87A00B06F23 /* MessageSystemTabCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2259,6 +2284,7 @@
 		535DE01A29A067D400E8E90C /* PopView */ = {
 			isa = PBXGroup;
 			children = (
+				A17FCCF929A0FD1900B06F23 /* CertPopView.swift */,
 				535DE01B29A067D400E8E90C /* PopViewUtil.swift */,
 				535DE01C29A067D400E8E90C /* BasePopView.swift */,
 			);
@@ -2305,8 +2331,10 @@
 				535DE03429A067D400E8E90C /* CommonSearchView.swift */,
 				535DE03529A067D400E8E90C /* CommonSwitchView.swift */,
 				535DE03629A067D400E8E90C /* CommonSmsCodeView.swift */,
+				A17FCCE729A0E27A00B06F23 /* CommonAlertView.swift */,
 				535DE03729A067D400E8E90C /* CommonDoneBtn.swift */,
 				535DE03829A067D400E8E90C /* InputPasswordWithKeyBoardView.swift */,
+				A17FCCE529A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift */,
 				535DE03929A067D400E8E90C /* XDDashLineView.swift */,
 				535DE03A29A067D400E8E90C /* GradientLayerButton.swift */,
 				535DE03B29A067D400E8E90C /* CommonShowToastView.swift */,
@@ -2402,6 +2430,7 @@
 				535DE07229A067D400E8E90C /* Asset */,
 				535DE0B629A067D400E8E90C /* Brand */,
 				A17FCCA429A089E700B06F23 /* Invite */,
+				A17FCCED29A0FC5600B06F23 /* RealName */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -3745,6 +3774,50 @@
 			path = Invite;
 			sourceTree = "<group>";
 		};
+		A17FCCED29A0FC5600B06F23 /* RealName */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCEE29A0FC5600B06F23 /* Controller */,
+				A17FCCF029A0FC5600B06F23 /* Model */,
+				A17FCCF229A0FC5600B06F23 /* View */,
+			);
+			path = RealName;
+			sourceTree = "<group>";
+		};
+		A17FCCEE29A0FC5600B06F23 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCEF29A0FC5600B06F23 /* RealNameCertController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A17FCCF029A0FC5600B06F23 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCF129A0FC5600B06F23 /* RealNameCertModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A17FCCF229A0FC5600B06F23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCF329A0FC5600B06F23 /* RealNameCertSuccessView.swift */,
+				A17FCCF429A0FC5600B06F23 /* RealNameCertView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A17FCCFB29A0FE4800B06F23 /* Certification */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCFC29A0FE4800B06F23 /* CertificationRequestInfo.swift */,
+				A17FCCFD29A0FE4800B06F23 /* CertificationNetworkManager.swift */,
+			);
+			path = Certification;
+			sourceTree = "<group>";
+		};
 		F04D23F0F385BDC908419D96 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -4065,6 +4138,7 @@
 				535DE2A529A067D600E8E90C /* SettingItemCell.swift in Sources */,
 				535DE25529A067D600E8E90C /* UserPlaceController.swift in Sources */,
 				535DE2D629A067D600E8E90C /* AssetHomeHeaderView.swift in Sources */,
+				A17FCCF629A0FC5600B06F23 /* RealNameCertModel.swift in Sources */,
 				535DE2E829A067D600E8E90C /* WithdrawAddressBindingHeaderView.swift in Sources */,
 				535DE2DB29A067D600E8E90C /* WalletBalanceItem.swift in Sources */,
 				535DE26A29A067D600E8E90C /* AdvertBannerItemView.swift in Sources */,
@@ -4199,9 +4273,11 @@
 				535DE27C29A067D600E8E90C /* ToastUtil.swift in Sources */,
 				535DE36429A067D700E8E90C /* EDAssetReturnListModel.swift in Sources */,
 				535DE2A929A067D600E8E90C /* SettingSectionFooter.swift in Sources */,
+				A17FCCFE29A0FE4800B06F23 /* CertificationRequestInfo.swift in Sources */,
 				A17FCCC729A089E700B06F23 /* InviteCountModel.swift in Sources */,
 				535DE1DB29A067D500E8E90C /* DateFormatter.swift in Sources */,
 				535DE29229A067D600E8E90C /* TopTitleBottomTitleControl.swift in Sources */,
+				A17FCCF729A0FC5600B06F23 /* RealNameCertSuccessView.swift in Sources */,
 				535DE36829A067D700E8E90C /* EDBackAssetDetailView.swift in Sources */,
 				535DE22A29A067D500E8E90C /* GuideController.swift in Sources */,
 				A17FCCD029A089E700B06F23 /* InviteFriendBottomView.swift in Sources */,
@@ -4210,6 +4286,7 @@
 				535DE22229A067D500E8E90C /* BundleInfoModel.swift in Sources */,
 				535DE37E29A067D700E8E90C /* PagedFlowView.m in Sources */,
 				535DE23E29A067D600E8E90C /* TestPushController.swift in Sources */,
+				A17FCCEA29A0E87A00B06F23 /* MessageSystemTabCell.swift in Sources */,
 				535DE21229A067D500E8E90C /* XDGifImageView.swift in Sources */,
 				535DE37A29A067D700E8E90C /* HQIndexBannerSubview.m in Sources */,
 				535DE1F929A067D500E8E90C /* RequetsResultCode.swift in Sources */,
@@ -4261,6 +4338,7 @@
 				535DE2BD29A067D600E8E90C /* BaseView.swift in Sources */,
 				535DE3A829A07E7100E8E90C /* LoginTypeView.swift in Sources */,
 				535DE26E29A067D600E8E90C /* SearchHistoryCell.swift in Sources */,
+				A17FCCEC29A0F2F300B06F23 /* MessageDetailController.swift in Sources */,
 				535DE2E629A067D600E8E90C /* WithdrawAddressBindResultController.swift in Sources */,
 				535DE29529A067D600E8E90C /* CommonSmsCodeView.swift in Sources */,
 				535DE1C829A067D500E8E90C /* UIViewController+Extension.swift in Sources */,
@@ -4288,6 +4366,7 @@
 				535DE1C529A067D500E8E90C /* NSAttributedString+Extension.swift in Sources */,
 				535DE23B29A067D600E8E90C /* TestPushInteractiveController.swift in Sources */,
 				535DE1D529A067D500E8E90C /* AccountLoginModel.swift in Sources */,
+				A17FCCF829A0FC5600B06F23 /* RealNameCertView.swift in Sources */,
 				535DE30D29A067D700E8E90C /* FPHomeOrePoolTypeView.swift in Sources */,
 				535DE1B429A067D500E8E90C /* AccountObject.swift in Sources */,
 				535DE37929A067D700E8E90C /* HQFlowView.m in Sources */,
@@ -4308,6 +4387,7 @@
 				535DE39E29A07E7000E8E90C /* LoginHomeController.swift in Sources */,
 				535DE1AB29A067D500E8E90C /* AdvertSpaceObject.swift in Sources */,
 				535DE34529A067D700E8E90C /* AssetDetailHomeListController.swift in Sources */,
+				A17FCCF529A0FC5600B06F23 /* RealNameCertController.swift in Sources */,
 				535DE30C29A067D700E8E90C /* FPOrePoolTypeSelectItemView.swift in Sources */,
 				535DE2E029A067D600E8E90C /* WalletWithdrawResultModel.swift in Sources */,
 				535DE22F29A067D500E8E90C /* MomentGuideController.swift in Sources */,
@@ -4324,6 +4404,7 @@
 				535DE33A29A067D700E8E90C /* TabbarItemModel.swift in Sources */,
 				535DE24529A067D600E8E90C /* BubbleTestController.swift in Sources */,
 				535DE30F29A067D700E8E90C /* FPHomeHeaderView.swift in Sources */,
+				A17FCCFA29A0FD1900B06F23 /* CertPopView.swift in Sources */,
 				535DE24B29A067D600E8E90C /* TestHomeController.swift in Sources */,
 				535DE1FD29A067D500E8E90C /* TZImagePickerHelper.swift in Sources */,
 				535DE29B29A067D600E8E90C /* CommonAvatarView.swift in Sources */,
@@ -4339,6 +4420,7 @@
 				535DE35D29A067D700E8E90C /* ReturnListTipsPopVew.swift in Sources */,
 				535DE2A329A067D600E8E90C /* AddressEmptyPlaceHolderView.swift in Sources */,
 				535DE23F29A067D600E8E90C /* TestDismissController.swift in Sources */,
+				A17FCCFF29A0FE4800B06F23 /* CertificationNetworkManager.swift in Sources */,
 				535DE2D429A067D600E8E90C /* WalletAllInfoModel.swift in Sources */,
 				535DE30129A067D700E8E90C /* FPHomeQuotationItemModel.swift in Sources */,
 				535DE2AF29A067D600E8E90C /* PageDefaultEmptyView.swift in Sources */,
@@ -4394,6 +4476,7 @@
 				535DE32729A067D700E8E90C /* LoginPwdUpdateController.swift in Sources */,
 				535DE2DC29A067D600E8E90C /* WithdrawController.swift in Sources */,
 				535DE34329A067D700E8E90C /* EquipmentListCell.swift in Sources */,
+				A17FCCE629A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift in Sources */,
 				535DE37129A067D700E8E90C /* LockDetailListModel.swift in Sources */,
 				535DE2A129A067D600E8E90C /* ContactEmptyPlaceHolderView.swift in Sources */,
 				535DE2A229A067D600E8E90C /* OrderEmptyPlaceHolderView.swift in Sources */,
@@ -4425,6 +4508,7 @@
 				535DE22729A067D500E8E90C /* ThirdChildConfig.swift in Sources */,
 				535DE1C929A067D500E8E90C /* UIView+Corner.swift in Sources */,
 				535DE31E29A067D700E8E90C /* SettingCenterTitleCell.swift in Sources */,
+				A17FCCE829A0E27A00B06F23 /* CommonAlertView.swift in Sources */,
 				535DE3A629A07E7100E8E90C /* RegisterFirstController.swift in Sources */,
 				535DE2B929A067D600E8E90C /* BaseLabel.swift in Sources */,
 				535DE33029A067D700E8E90C /* CurrentUserInfoController.swift in Sources */,
