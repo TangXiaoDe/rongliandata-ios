@@ -5,12 +5,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "IMG_launch_bg_bottom@2x.png",
+      "filename" : "IMG_startup_img_bg@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "IMG_launch_bg_bottom@3x.png",
+      "filename" : "IMG_startup_img_bg@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

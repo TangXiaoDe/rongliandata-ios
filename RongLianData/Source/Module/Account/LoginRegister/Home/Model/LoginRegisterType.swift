@@ -1,9 +1,9 @@
 //
 //  LoginRegisterType.swift
-//  iMeet
+//  ChuangYe
 //
 //  Created by 小唐 on 2019/5/30.
-//  Copyright © 2019 iMeet. All rights reserved.
+//  Copyright © 2021 ChainOne. All rights reserved.
 //
 //  登录注册类型
 
@@ -28,8 +28,13 @@ enum LoginRegisterType {
 
 /// 登录类型
 enum LoginType {
+    
+    ///
     case password
+    /// 
     case smscode
+    
+    ///
     var title: String {
         var title: String = ""
         switch self {
@@ -40,4 +45,5 @@ enum LoginType {
         }
         return title
     }
+    
 }

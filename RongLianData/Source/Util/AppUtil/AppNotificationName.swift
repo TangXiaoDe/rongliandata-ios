@@ -125,6 +125,8 @@ extension Notification.Name {
 
         /// 获取系统配置
         static let getSystemConfig = NSNotification.Name(rawValue: "app.notification.name.app.getsystemconfig")
+        /// 版本更新
+        static let versionNeedUpate = NSNotification.Name(rawValue: "app.notification.name.app.versionneedupdate")
     }
 
     /// 邀请
