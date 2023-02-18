@@ -57,6 +57,10 @@ extension MainTabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(notificationProcess(_:)), name: AppNotification.NetWork.reachabilityChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(notificationProcess(_:)), name: AppNotification.Message.refresh, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(notificationProcess(_:)), name: AppNotificationName.Network.Illicit, object: nil)
+        /// 需要实名认证弹框
+        NotificationCenter.default.addObserver(self, selector: #selector(needCertNotificationProcess(_:)), name: AppNotificationName.User.needCert, object: nil)
+        /// 其他人需要实名认证弹框
+        NotificationCenter.default.addObserver(self, selector: #selector(otherNeedCertNotificationProcess(_:)), name: AppNotificationName.User.otherNeedCert, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {

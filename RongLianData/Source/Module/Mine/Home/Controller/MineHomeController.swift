@@ -400,7 +400,8 @@ extension MineHomeController {
     }
     /// 实名认证
     fileprivate func enterAccountCertPage(){
-        self.enterPageVC(AccountSecurityHomeController())
+        let vc = RealNameCertController.init()
+        self.enterPageVC(vc)
     }
     /// 我的品牌商界面
     fileprivate func enterMyBrandPage(){

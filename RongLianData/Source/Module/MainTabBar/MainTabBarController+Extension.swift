@@ -39,7 +39,14 @@ extension MainTabBarController {
             break
         }
     }
-    
+    // 需要实名认证
+    @objc func needCertNotificationProcess(_ notification: Notification) -> Void {
+        self.showUncertRealNameAlert()
+    }
+    //
+    @objc func otherNeedCertNotificationProcess(_ notification: Notification) -> Void {
+        self.showOtherUncertRealNameAlert()
+    }
 }
 
 // MARK: - 具体通知详细处理
@@ -151,7 +158,24 @@ extension MainTabBarController {
             selectedNC.pushViewController(webVC, animated: true)
         }
     }
-
+    /// 显示未实名认证弹窗
+    func showUncertRealNameAlert() -> Void {
+        // CertPopView
+        let popView = CertPopView.init(type: .mine)
+        popView.delegate = self
+        PopViewUtil.showPopView(popView)
+    }
+    /// 显示其他人未实名认证弹窗
+    func showOtherUncertRealNameAlert() -> Void {
+        let popView = CertPopView.init(type: .other)
+        popView.delegate = self
+        PopViewUtil.showPopView(popView)
+    }
+    /// 显示实名认证界面
+    func pushEnterRealNameCertPage() -> Void {
+        let certVC = RealNameCertController.init()
+        AppUtil.topViewController()?.navigationController?.pushViewController(certVC, animated: true)
+    }
 }
 extension MainTabBarController {
     /// 未读消息
@@ -167,4 +191,13 @@ extension MainTabBarController {
         }
     }
     
+}
+
+extension MainTabBarController: CertPopViewProtocol {
+    //  确定按钮点击回调
+    func popView(_ popView: CertPopView, didClickedDone doneView: UIButton) {
+        if popView.type == .mine {
+            self.pushEnterRealNameCertPage()
+        }
+    }
 }
