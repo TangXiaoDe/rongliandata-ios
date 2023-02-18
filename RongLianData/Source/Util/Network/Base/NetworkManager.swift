@@ -38,7 +38,7 @@ class NetworkManager {
     }
 
     /// 是否显示日志
-    var isShowLog: Bool = false
+    var isShowLog: Bool = true
 
     /// 跟路径
     fileprivate var rootURL: String?
