@@ -59,11 +59,11 @@ extension WalletHomeController {
         // navigation
         // 1.nav
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "FIL", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.white, alignment: .center)
-        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .normal)
-        self.navBar.rightItem.setTitle("FIL明细", for: .normal)
-        self.navBar.rightItem.setTitleColor(UIColor.white, for: .normal)
-        self.navBar.rightItem.set(font: UIFont.pingFangSCFont(size: 16))
+//        self.navBar.titleLabel.set(text: "FIL", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.white, alignment: .center)
+        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
+//        self.navBar.rightItem.setTitle("FIL明细", for: .normal)
+//        self.navBar.rightItem.setTitleColor(UIColor.white, for: .normal)
+//        self.navBar.rightItem.set(font: UIFont.pingFangSCFont(size: 16))
         self.navBar.rightItem.snp.remakeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-12)
             make.centerY.equalToSuperview()
