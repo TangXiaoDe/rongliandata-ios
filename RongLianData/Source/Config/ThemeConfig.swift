@@ -45,7 +45,7 @@ class ThemeConfig {
     }
 
     /// 主题色
-    var themeColor: UIColor = UIColor.init(hex: 0xF5BE41)
+    var themeColor: UIColor = UIColor.init(hex: 0x4444FF)
     /// 辅助色/次要色
     var minorColor: UIColor = UIColor.init(hex: 0xFFFFFF)
     /// 分割线颜色
@@ -53,7 +53,7 @@ class ThemeConfig {
     /// 主题红色
     var themeRedColor: UIColor = UIColor.init(hex: 0xCE586E)
     /// 主题黄色
-    var themeYellowColor: UIColor = UIColor.init(hex: 0xFF8068)
+    var themeYellowColor: UIColor = UIColor.init(hex: 0xFF8068) // 0xF5BE41
 
     /// 标题色(页面)
     var titleColor: UIColor = UIColor.init(hex: 0x29313D)
