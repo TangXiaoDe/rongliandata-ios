@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,34 +16,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_launch_bg" translatesAutoresizingMaskIntoConstraints="NO" id="eKZ-FT-gDZ" userLabel="BgView">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_startup_img_bg" translatesAutoresizingMaskIntoConstraints="NO" id="eKZ-FT-gDZ" userLabel="BgView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_launch_logo" translatesAutoresizingMaskIntoConstraints="NO" id="P35-IP-bQl" userLabel="TopLogo">
-                                <rect key="frame" x="138.66666666666666" y="132" width="136.99999999999997" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_startup_img_logo" translatesAutoresizingMaskIntoConstraints="NO" id="P35-IP-bQl" userLabel="TopLogo">
+                                <rect key="frame" x="145" y="250" width="124" height="141"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="JdW-mX-JE8"/>
-                                    <constraint firstAttribute="width" constant="137" id="Y3o-wW-nj3"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_launch_bg_bottom" translatesAutoresizingMaskIntoConstraints="NO" id="aF8-Rw-d0j" userLabel="BottomView">
-                                <rect key="frame" x="38.666666666666657" y="424" width="337" height="302"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="337" id="Kxg-LN-rV8"/>
-                                    <constraint firstAttribute="height" constant="302" id="ozh-T9-Hpc"/>
+                                    <constraint firstAttribute="height" constant="141" id="JdW-mX-JE8"/>
+                                    <constraint firstAttribute="width" constant="124" id="Y3o-wW-nj3"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="P35-IP-bQl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="132" id="90p-d0-8sc"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aF8-Rw-d0j" secondAttribute="bottom" constant="10" id="Iak-Vm-yXN"/>
+                            <constraint firstItem="P35-IP-bQl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="250" id="90p-d0-8sc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eKZ-FT-gDZ" secondAttribute="trailing" id="SLh-Co-zs7"/>
                             <constraint firstItem="eKZ-FT-gDZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SxR-Ok-adP"/>
                             <constraint firstAttribute="bottom" secondItem="eKZ-FT-gDZ" secondAttribute="bottom" id="Tfl-9K-d5v"/>
                             <constraint firstItem="eKZ-FT-gDZ" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="YAC-X9-Qg5"/>
-                            <constraint firstItem="aF8-Rw-d0j" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wTH-az-GKp"/>
                             <constraint firstItem="P35-IP-bQl" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wiK-BD-Z8b"/>
                         </constraints>
                     </view>
@@ -54,8 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="IMG_launch_bg" width="375" height="667"/>
-        <image name="IMG_launch_bg_bottom" width="337.66665649414062" height="302"/>
-        <image name="IMG_launch_logo" width="137" height="128"/>
+        <image name="IMG_startup_img_bg" width="375.5" height="812"/>
+        <image name="IMG_startup_img_logo" width="124.5" height="141.5"/>
     </resources>
 </document>
