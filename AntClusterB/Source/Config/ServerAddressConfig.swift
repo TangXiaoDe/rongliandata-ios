@@ -15,8 +15,8 @@ struct ServerAddressConfig {
     /// 接口版本 api/v2/ —— 单独的接口请求中可配置接口对应的版本
     /// 端口
 
-    static let develop: ServerAddressConfig = ServerAddressConfig(address: "http://8.136.196.224/")
-    static let release: ServerAddressConfig = ServerAddressConfig(address: "http://106.12.254.209:52525/")
+    static let develop: ServerAddressConfig = ServerAddressConfig(address: "https://rldata.ronglian.pro/")
+    static let release: ServerAddressConfig = ServerAddressConfig(address: "https://rldata.ronglian.pro/")
 
     init(address: String) {
         self.address = address
