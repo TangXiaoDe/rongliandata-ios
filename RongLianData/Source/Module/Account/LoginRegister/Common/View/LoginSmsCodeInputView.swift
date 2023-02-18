@@ -81,7 +81,7 @@ class LoginSmsCodeInputView: UIView {
     
     fileprivate let fieldBottomMargin: CGFloat = 0
     fileprivate let fieldLeftMargin: CGFloat = 16
-    fileprivate let fieldRightMargin: CGFloat = 100 + 18 //+ 16  //154
+    fileprivate let fieldRightMargin: CGFloat = 80 + 16  //154
     fileprivate let codeBtnSize: CGSize = CGSize.init(width: 100, height: 50)
 
     /// 定时器相关
@@ -220,7 +220,7 @@ extension LoginSmsCodeInputView {
         }
         // textField
         self.fieldContainer.addSubview(self.textField)
-        self.textField.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
+        //self.textField.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
         //self.textField.set(cornerRadius: 8, borderWidth: 0.5, borderColor: AppColor.dividing)
         //self.textField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText)
         self.textField.setPlaceHolder("请输入验证码", font: UIFont.pingFangSCFont(size: 18, weight: .medium), color: AppColor.inputPlaceHolder)

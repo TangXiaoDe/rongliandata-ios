@@ -33,7 +33,7 @@ class LoginPwdResetController: BaseViewController {
     fileprivate var captchaView: DXCaptchaView!
     
     
-    fileprivate let navBar: AppHomeNavBar = AppHomeNavBar.init()
+    fileprivate let navBar: AppHomeNavStatusView = AppHomeNavStatusView.init()
     fileprivate let bgView: UIImageView = UIImageView.init()
     
     fileprivate let mainView: UIView = UIView.init()
@@ -78,7 +78,7 @@ class LoginPwdResetController: BaseViewController {
     fileprivate var timer: Timer? = nil
 
     /// 长度限制
-    fileprivate let accountLen: Int = 11
+    fileprivate let accountMaxLen: Int = 11
     fileprivate let passwordMaxLen: Int = 20
     fileprivate let passwordMinLen: Int = 6
     fileprivate let smsCodeMaxLen: Int = 6
@@ -89,7 +89,7 @@ class LoginPwdResetController: BaseViewController {
 
     init(scene: LoginPwdForgetScene) {
         self.scene = scene
-        super.init(nibName: "LoginPwdResetController", bundle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     required init?(coder aDecoder: NSCoder) {
         //super.init(coder: aDecoder)
@@ -140,6 +140,8 @@ extension LoginPwdResetController {
         self.view.addSubview(self.navBar)
         self.navBar.titleLabel.set(text: "重置密码", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.white, alignment: .center)
         self.navBar.delegate = self
+        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .normal)
+        self.navBar.leftItem.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .highlighted)
         self.navBar.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(kNavigationStatusBarHeight)
@@ -222,7 +224,7 @@ extension LoginPwdResetController {
     fileprivate func initialInputContainer(_ container: UIView) -> Void {
         // 1. phone
         container.addSubview(self.phoneView)
-        self.phoneView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
+        self.phoneView.textField.addTarget(self, action: #selector(textFieldValueChanged(_:)), for: .editingChanged)
         self.phoneView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(self.singleInfoHeight)
@@ -230,7 +232,7 @@ extension LoginPwdResetController {
         // 2. smsCode
         container.addSubview(self.smsCodeView)
         //self.smsCodeView.delegate = self
-        self.smsCodeView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
+        self.smsCodeView.textField.addTarget(self, action: #selector(textFieldValueChanged(_:)), for: .editingChanged)
         self.smsCodeView.codeBtn.addTarget(self, action: #selector(sendSmsCodeBtnClick(_:)), for: .touchUpInside)
         self.smsCodeView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
@@ -241,7 +243,7 @@ extension LoginPwdResetController {
         container.addSubview(self.setPwdView)
         self.setPwdView.title = "设置密码"
         self.setPwdView.placeholder = "请设置登录密码"
-        self.setPwdView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
+        self.setPwdView.textField.addTarget(self, action: #selector(textFieldValueChanged(_:)), for: .editingChanged)
         self.setPwdView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.smsCodeView.snp.bottom).offset(self.infoVerMargin)
@@ -251,7 +253,7 @@ extension LoginPwdResetController {
         container.addSubview(self.ensurePwdView)
         self.ensurePwdView.title = "确认密码"
         self.ensurePwdView.placeholder = "请再次输入密码"
-        self.ensurePwdView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
+        self.ensurePwdView.textField.addTarget(self, action: #selector(textFieldValueChanged(_:)), for: .editingChanged)
         self.ensurePwdView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.setPwdView.snp.bottom).offset(self.infoVerMargin)
@@ -337,7 +339,7 @@ extension LoginPwdResetController {
 //        self.captchaView = DXCaptchaView.init(config: config, delegate: self, frame: captchaFrame)
 //        UIApplication.shared.keyWindow?.addSubview(self.captchaView)
         // 发送验证码请求
-        self.sendSmsCodeRequest(account: account, ticket: "", randStr: "")
+        self.sendSmsCodeRequest(account: account, ticket: "", randStr: "", token: "")
     }
 
     /// 设置密码按钮点击
@@ -402,7 +404,7 @@ extension LoginPwdResetController {
                 return
             }
             Toast.showToast(title: "验证码已经发送到您的手机")
-            self.startTimer()
+            self.smsCodeView.startTimer(leftSecond: self.maxLeftSecond)
         }
     }
 
@@ -460,7 +462,7 @@ extension LoginPwdResetController: DXCaptchaDelegate {
         print("RegisterView captchaView didReceive arg")
         switch eventType {
         case DXCaptchaEventSuccess:
-            guard let token = dict["token"] as? String, let account = self.accountField.text else {
+            guard let token = dict["token"] as? String, let account = self.phoneView.textField.text else {
                 ToastUtil.showToast(title: "验证失败")
                 view.removeFromSuperview()
                 self.coverBtn.removeFromSuperview()
@@ -478,4 +480,18 @@ extension LoginPwdResetController: DXCaptchaDelegate {
         }
     }
 
+}
+
+// MARK: - <AppHomeNavStatusViewProtocol>
+extension LoginPwdResetController: AppHomeNavStatusViewProtocol {
+
+    /// 导航栏左侧按钮点击回调
+    func homeBar(_ navBar: AppHomeNavStatusView, didClickedLeftItem itemView: UIButton) -> Void {
+        self.navigationController?.popViewController(animated: true)
+    }
+    /// 导航栏右侧按钮点击回调
+    func homeBar(_ navBar: AppHomeNavStatusView, didClickedRightItem itemView: UIButton) -> Void {
+        
+    }
+    
 }
