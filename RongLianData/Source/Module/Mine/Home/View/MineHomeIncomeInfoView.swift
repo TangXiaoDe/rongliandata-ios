@@ -18,7 +18,7 @@ protocol MineHomeIncomeInfoViewProtocol: class {
 class MineHomeIncomeInfoView: UIControl {
 
     static var viewHeight: CGFloat {
-        return CGSize.init(width: 351, height: 140).scaleAspectForWidth(kScreenWidth - 2 * 12).height
+        return CGSize.init(width: 345, height: 140).scaleAspectForWidth(kScreenWidth - 2 * 15).height
     }
     // MARK: - Internal Property
     let viewWidth: CGFloat
@@ -169,8 +169,8 @@ extension MineHomeIncomeInfoView: PagedFlowViewDelegate {
     }
 
     func sizeForPage(in flowView: PagedFlowView!) -> CGSize {
-        let height = CGSize.init(width: 280, height: 140).scaleAspectForWidth(kScreenWidth - 95).height
-        let size = CGSize.init(width: kScreenWidth - 95, height: height)
-        return size
+//        let height = CGSize.init(width: 280, height: 140).scaleAspectForWidth(kScreenWidth - 95).height
+//        let size = CGSize.init(width: kScreenWidth - 95, height: height)
+        return CGSize.init(width: 345, height: 140).scaleAspectForWidth(kScreenWidth - 2 * 15)
     }
 }

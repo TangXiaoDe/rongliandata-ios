@@ -48,14 +48,14 @@ extension WalletAllInfoModel {
     }
     
     var bgImage: UIImage {
-        var imgStr: String = "IMG_mine_fil_bg"
+        var imgStr: String = "IMG_mine_img_fil"
         switch self.currencyType {
         case .fil:
-            imgStr = "IMG_mine_fil_bg"
+            imgStr = "IMG_mine_img_fil"
         case .chia:
-            imgStr = "IMG_mine_xch_bg"
+            imgStr = "IMG_mine_img_fil"
         case .bzz:
-            imgStr = "IMG_mine_bzz_bg"
+            imgStr = "IMG_mine_img_fil"
         default:
             break
         }

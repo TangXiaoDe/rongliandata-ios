@@ -17,7 +17,7 @@ class MineHomeController: BaseViewController {
 
     fileprivate let statusView: UIView = UIView()
     fileprivate let scrollView: UIScrollView = UIScrollView()
-    fileprivate let incomeInfoView = MineHomeIncomeInfoView.init(viewWidth: kScreenWidth - 12.0 * 2.0)
+    fileprivate let incomeInfoView = MineHomeIncomeInfoView.init(viewWidth: kScreenWidth - 15.0 * 2.0)
     fileprivate let optionView = MineHomeOptionView()
     fileprivate let headerView: MineHomeHeaderView = MineHomeHeaderView()
     
@@ -130,7 +130,7 @@ extension MineHomeController {
         scrollView.addSubview(self.incomeInfoView)
         self.incomeInfoView.delegate = self
         self.incomeInfoView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.headerView.snp.bottom).offset(0)
+            make.top.equalTo(self.headerView.snp.bottom).offset(15)
             make.leading.equalToSuperview().offset(lrMargin)
             make.trailing.equalToSuperview().offset(-lrMargin)
             make.height.equalTo(MineHomeIncomeInfoView.viewHeight)
