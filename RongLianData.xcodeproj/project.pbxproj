@@ -509,6 +509,7 @@
 		A17FCCE129A0914800B06F23 /* InviteRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCDF29A0914800B06F23 /* InviteRequestInfo.swift */; };
 		A17FCCE229A0914800B06F23 /* InviteNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE029A0914800B06F23 /* InviteNetworkManager.swift */; };
 		A17FCCE429A0B25B00B06F23 /* CurrentUserEditNamePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE329A0B25B00B06F23 /* CurrentUserEditNamePopView.swift */; };
+		A17FCCE629A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE529A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift */; };
 		A38D7434E3928A0C480E5D70 /* Pods_RongLianDataTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEC8B66C20118199FDF9BBE /* Pods_RongLianDataTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -1063,6 +1064,7 @@
 		A17FCCDF29A0914800B06F23 /* InviteRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteRequestInfo.swift; sourceTree = "<group>"; };
 		A17FCCE029A0914800B06F23 /* InviteNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteNetworkManager.swift; sourceTree = "<group>"; };
 		A17FCCE329A0B25B00B06F23 /* CurrentUserEditNamePopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserEditNamePopView.swift; sourceTree = "<group>"; };
+		A17FCCE529A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonKeyboardInputAccessoryView.swift; sourceTree = "<group>"; };
 		A42B7198B32A0313DF58D827 /* Pods_RongLianData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RongLianData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -2309,6 +2311,7 @@
 				535DE03629A067D400E8E90C /* CommonSmsCodeView.swift */,
 				535DE03729A067D400E8E90C /* CommonDoneBtn.swift */,
 				535DE03829A067D400E8E90C /* InputPasswordWithKeyBoardView.swift */,
+				A17FCCE529A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift */,
 				535DE03929A067D400E8E90C /* XDDashLineView.swift */,
 				535DE03A29A067D400E8E90C /* GradientLayerButton.swift */,
 				535DE03B29A067D400E8E90C /* CommonShowToastView.swift */,
@@ -4398,6 +4401,7 @@
 				535DE32729A067D700E8E90C /* LoginPwdUpdateController.swift in Sources */,
 				535DE2DC29A067D600E8E90C /* WithdrawController.swift in Sources */,
 				535DE34329A067D700E8E90C /* EquipmentListCell.swift in Sources */,
+				A17FCCE629A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift in Sources */,
 				535DE37129A067D700E8E90C /* LockDetailListModel.swift in Sources */,
 				535DE2A129A067D600E8E90C /* ContactEmptyPlaceHolderView.swift in Sources */,
 				535DE2A229A067D600E8E90C /* OrderEmptyPlaceHolderView.swift in Sources */,
