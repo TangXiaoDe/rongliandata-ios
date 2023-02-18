@@ -15,13 +15,12 @@ class CurrentUserInfoController: BaseViewController {
 
     // MARK: - Private Property
 
+    @IBOutlet weak var nickLabel: UILabel!
     @IBOutlet weak var phoneDetailLabel: UILabel!
     @IBOutlet weak var headIcon: UIImageView!
-
-    fileprivate let iconWH: CGFloat = 40
-    fileprivate let rightViewLeftMargin: CGFloat = 80
-    fileprivate let lrMargin: CGFloat = 12
-    fileprivate let descRightMargin: CGFloat = 30
+    @IBOutlet weak var headBtn: UIButton!
+    
+    fileprivate let iconWH: CGFloat = 100
 
     fileprivate var model: CurrentUserModel? {
         didSet {
@@ -68,9 +67,13 @@ extension CurrentUserInfoController {
         self.navigationItem.title = "个人资料"
         // icon
         self.headIcon.set(cornerRadius: self.iconWH * 0.5)
+        self.headBtn.setTitle("", for: .normal)
+        self.headBtn.setTitle("", for: .highlighted)
         // detailLabel
-        self.phoneDetailLabel.font = UIFont.pingFangSCFont(size: 15, weight: .medium)
+        self.phoneDetailLabel.font = UIFont.pingFangSCFont(size: 14, weight: .regular)
         self.phoneDetailLabel.text = nil
+        self.nickLabel.font = UIFont.pingFangSCFont(size: 14, weight: .regular)
+        self.nickLabel.text = nil
     }
 }
 
@@ -91,6 +94,7 @@ extension CurrentUserInfoController {
         }
         self.headIcon.kf.setImage(with: model.avatarUrl, placeholder: kPlaceHolderAvatar, options: nil, progressBlock: nil, completionHandler: nil)
         self.phoneDetailLabel.text = model.phone
+        self.nickLabel.text = model.name
     }
 }
 
@@ -110,6 +114,9 @@ extension CurrentUserInfoController {
             self.initialDataSource()
         }
         self.navigationController?.pushViewController(nameUpdateVC, animated: true)
+    }
+    
+    @IBAction func phoneOnClicked(_ sender: UIButton) {
     }
 }
 
