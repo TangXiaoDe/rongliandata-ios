@@ -281,6 +281,12 @@ extension MineHomeController {
 
 // MARK: - <MineHomeOptionViewProtocol>
 extension MineHomeController: MineHomeOptionViewProtocol {
+    func optionView(_ optionView: MineHomeOptionView, didSelectedCert itemView: MineHomeOptionItemControl) {
+        self.enterAccountCertPage()
+    }
+    func optionView(_ optionView: MineHomeOptionView, didSelectedInvite itemView: MineHomeOptionItemControl) {
+        self.enterAccountInvitePage()
+    }
     /// 账户安全
     func optionView(_ optionView: MineHomeOptionView, didSelectedAccount itemView: MineHomeOptionItemControl) -> Void {
         self.enterAccountSecurityPage()
@@ -371,6 +377,14 @@ extension MineHomeController {
     }
     /// 账户安全
     fileprivate func enterAccountSecurityPage(){
+        self.enterPageVC(AccountSecurityHomeController())
+    }
+    /// 邀请好友
+    fileprivate func enterAccountInvitePage(){
+        self.enterPageVC(InviteFriendHomeController())
+    }
+    /// 实名认证
+    fileprivate func enterAccountCertPage(){
         self.enterPageVC(AccountSecurityHomeController())
     }
     /// 我的品牌商界面

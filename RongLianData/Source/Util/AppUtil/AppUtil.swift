@@ -377,5 +377,24 @@ extension AppUtil {
         }
         UIApplication.shared.openURL(url)
     }
-
+    /// present出系统分享界面
+    class func systemSharePage(shareImage: UIImage? = nil, shareUrl: URL? = nil) -> Void {
+        var activityItems: [Any] = []
+        if let shareImage = shareImage {
+            activityItems.append(shareImage)
+        }
+        if let shareUrl = shareUrl {
+            activityItems.append(shareUrl)
+        }
+        let activityVc = UIActivityViewController.init(activityItems: activityItems, applicationActivities: nil)
+        activityVc.completionWithItemsHandler = { (type, flag, array, error) -> Swift.Void in
+            print(type ?? "")
+            if type == .some(.saveToCameraRoll) {
+                Toast.showToast(title: "图片已保存到相册")
+            } else if type == .some(.copyToPasteboard) {
+                Toast.showToast(title: "已复制到粘贴板")
+            }
+        }
+        AppUtil.topViewController()?.present(activityVc, animated: true, completion: nil)
+    }
 }

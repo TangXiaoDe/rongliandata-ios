@@ -15,6 +15,10 @@ import UIKit
 protocol MineHomeOptionViewProtocol: class {
     /// 账户安全
     func optionView(_ optionView: MineHomeOptionView, didSelectedAccount itemView: MineHomeOptionItemControl) -> Void
+    /// 实名认证
+    func optionView(_ optionView: MineHomeOptionView, didSelectedCert itemView: MineHomeOptionItemControl) -> Void
+    /// 邀请好友
+    func optionView(_ optionView: MineHomeOptionView, didSelectedInvite itemView: MineHomeOptionItemControl) -> Void
     /// 个人资料
     func optionView(_ optionView: MineHomeOptionView, didSelectedUserInfo itemView: MineHomeOptionItemControl) -> Void
     /// 我的品牌商
@@ -189,7 +193,6 @@ extension MineHomeOptionView {
                 }
             }
         }
-        
     }
 
     fileprivate func initialInAwakeNib() -> Void {
@@ -210,6 +213,10 @@ extension MineHomeOptionView {
         switch title {
         case "账户安全":
             self.delegate?.optionView(self, didSelectedAccount: itemControl)
+        case "邀请好友":
+            self.delegate?.optionView(self, didSelectedInvite: itemControl)
+        case "实名认证":
+            self.delegate?.optionView(self, didSelectedCert: itemControl)
         case "个人资料":
             self.delegate?.optionView(self, didSelectedUserInfo: itemControl)
         case "我的品牌商":
