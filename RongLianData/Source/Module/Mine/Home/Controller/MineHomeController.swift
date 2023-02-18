@@ -235,24 +235,39 @@ extension MineHomeController {
     }
     /// 退出登录弹窗
     fileprivate func showLogoutAlert() -> Void {
-        let alertVC = UIAlertController.init(title: nil, message: "退出登录?", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-        alertVC.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (action) in
+        let alertView = CommonAlertView.init(title: "确认退出", content: "是否确认退出登录")
+        alertView.doneBtnClickAction = { (alertView, doneBtn) in
             self.logout()
-        }))
-        DispatchQueue.main.async {
-            // 若遇到此处问题，请记录机型、系统、问题描述，可尝试使用RootManager.share下的 .rootVC .showRootVC；
-            self.present(alertVC, animated: false, completion: nil)
         }
+        PopViewUtil.showPopView(alertView)
+//        let alertVC = UIAlertController.init(title: nil, message: "退出登录?", preferredStyle: .alert)
+//        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+//        alertVC.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (action) in
+//            self.logout()
+//        }))
+//        DispatchQueue.main.async {
+//            // 若遇到此处问题，请记录机型、系统、问题描述，可尝试使用RootManager.share下的 .rootVC .showRootVC；
+//            self.present(alertVC, animated: false, completion: nil)
+//        }
     }
     /// 缓存清理
     fileprivate func showClearCacheAlert() -> Void {
-        let alertVC = UIAlertController.init(title: nil, message: "是否清理缓存?", preferredStyle: .actionSheet)
-        alertVC.addAction(UIAlertAction.init(title: "确定", style: .destructive, handler: { (action) in
+        guard let cacheSize = self.optionView.cacheSize else {
+            Toast.showToast(title: "暂无缓存")
+            return
+        }
+        let strCache = String(format: "%d.0M", cacheSize / (1_024 * 1_024))
+        let alertView = CommonAlertView.init(title: "清除缓存", content: "是否确认清除缓存\(strCache)")
+        alertView.doneBtnClickAction = { (alertView, doneBtn) in
             self.clearCache()
-        }))
-        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
+        }
+        PopViewUtil.showPopView(alertView)
+//        let alertVC = UIAlertController.init(title: nil, message: "是否清理缓存?", preferredStyle: .actionSheet)
+//        alertVC.addAction(UIAlertAction.init(title: "确定", style: .destructive, handler: { (action) in
+//            self.clearCache()
+//        }))
+//        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+//        self.present(alertVC, animated: true, completion: nil)
     }
     fileprivate func clearCache() -> Void {
         // Kingfisher 缓存
