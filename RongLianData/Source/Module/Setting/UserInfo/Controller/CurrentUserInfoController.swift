@@ -106,14 +106,7 @@ extension CurrentUserInfoController {
     }
     /// 昵称点击
     @IBAction func nameBtnClick(_ sender: UIButton) {
-        guard let model = self.model else {
-            return
-        }
-        let nameUpdateVC = UserNameUpdateController(user: model)
-        nameUpdateVC.updateSuccessAction = { () in
-            self.initialDataSource()
-        }
-        self.navigationController?.pushViewController(nameUpdateVC, animated: true)
+        self.showEditNickAlert()
     }
     
     @IBAction func phoneOnClicked(_ sender: UIButton) {
@@ -127,6 +120,16 @@ extension CurrentUserInfoController {
 
 // MARK: - Extension Function
 extension CurrentUserInfoController {
+    /// 修改昵称弹框
+    fileprivate func showEditNickAlert() -> Void {
+        guard let user = AccountManager.share.currentAccountInfo?.userInfo else {
+            return
+        }
+        let popView = CurrentUserEditNamePopView.init()
+        popView.delegate = self
+        popView.model = user.name
+        PopViewUtil.showPopView(popView)
+    }
     /// 显示头像选择弹窗
     fileprivate func showAvatarPicker() -> Void {
         guard let imagePickerVC = TZImagePickerController(maxImagesCount: 1, columnNumber: 4, delegate: self)
@@ -176,6 +179,26 @@ extension CurrentUserInfoController {
             AccountManager.share.updateCurrentAccount(userInfo: model)
         }
     }
+    /// 修改昵称
+    fileprivate func updateNameRequest(_ name: String) -> Void {
+        self.view.isUserInteractionEnabled = false
+        let indicator = AppLoadingView.init()
+        indicator.show()
+        UserNetworkManager.updateCurrentUser(name: name) { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            self.view.isUserInteractionEnabled = true
+            indicator.dismiss()
+            guard status, let model = model else {
+                Toast.showToast(title: msg)
+                return
+            }
+            self.model = model
+            AccountManager.share.updateCurrentAccount(userInfo: model)
+            self.initialDataSource()
+        }
+    }
 }
 
 // MARK: - Delegate Function
@@ -191,4 +214,20 @@ extension CurrentUserInfoController: TZImagePickerControllerDelegate {
         self.updateAvatarRequest(image)
     }
 
+}
+
+// MARK: - <CurrentUserEditNamePopViewProtocol>
+extension CurrentUserInfoController: CurrentUserEditNamePopViewProtocol {
+    func popView(_ popView: CurrentUserEditNamePopView, didClickedSave saveBtn: UIButton, name: String?) {
+        guard let name = name, !name.isEmpty, let user = AccountManager.share.currentAccountInfo?.userInfo, user.name != name else {
+            return
+        }
+        self.updateNameRequest(name)
+    }
+
+    func popView(_ popView: CurrentUserEditNamePopView, didClickedCover cover: UIButton) {
+
+    }
+    func popView(_ popView: CurrentUserEditNamePopView, didClickedCancel doneBtn: UIButton) {
+    }
 }
