@@ -362,7 +362,7 @@ extension MineHomeController: MineHomeIncomeInfoViewProtocol {
 extension MineHomeController {
     /// 未读消息
     fileprivate func enterMessagePage() -> Void {
-        let messageVC = MessageHomeController()
+        let messageVC = MessageListController.init(type: .system)
         self.navigationController?.pushViewController(messageVC, animated: true)
     }
 

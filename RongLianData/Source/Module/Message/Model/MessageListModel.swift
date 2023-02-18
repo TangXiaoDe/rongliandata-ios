@@ -32,6 +32,10 @@ class MessageListModel: Mappable {
     var read_status: Int = 0
     /// 消息发送时间
     var createDate: Date = Date()
+    /// 是否是富文本
+    var is_rich: Bool = false
+    /// 不带标签的内容
+    var intro: String = ""
 
     var type: MessageType {
         var type: MessageType = MessageType.system
@@ -58,6 +62,8 @@ class MessageListModel: Mappable {
         content <- map["content"]
         read_status <- map["read_status"]
         createDate <- (map["created_at"], DateStringTransform.current)
+        is_rich <- map["is_rich"]
+        intro <- map["intro"]
     }
 
 }

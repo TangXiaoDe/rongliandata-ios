@@ -511,6 +511,8 @@
 		A17FCCE429A0B25B00B06F23 /* CurrentUserEditNamePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE329A0B25B00B06F23 /* CurrentUserEditNamePopView.swift */; };
 		A17FCCE629A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE529A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift */; };
 		A17FCCE829A0E27A00B06F23 /* CommonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE729A0E27A00B06F23 /* CommonAlertView.swift */; };
+		A17FCCEA29A0E87A00B06F23 /* MessageSystemTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE929A0E87A00B06F23 /* MessageSystemTabCell.swift */; };
+		A17FCCEC29A0F2F300B06F23 /* MessageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCEB29A0F2F300B06F23 /* MessageDetailController.swift */; };
 		A38D7434E3928A0C480E5D70 /* Pods_RongLianDataTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEC8B66C20118199FDF9BBE /* Pods_RongLianDataTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -1067,6 +1069,8 @@
 		A17FCCE329A0B25B00B06F23 /* CurrentUserEditNamePopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserEditNamePopView.swift; sourceTree = "<group>"; };
 		A17FCCE529A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonKeyboardInputAccessoryView.swift; sourceTree = "<group>"; };
 		A17FCCE729A0E27A00B06F23 /* CommonAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAlertView.swift; sourceTree = "<group>"; };
+		A17FCCE929A0E87A00B06F23 /* MessageSystemTabCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSystemTabCell.swift; sourceTree = "<group>"; };
+		A17FCCEB29A0F2F300B06F23 /* MessageDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailController.swift; sourceTree = "<group>"; };
 		A42B7198B32A0313DF58D827 /* Pods_RongLianData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RongLianData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1988,6 +1992,7 @@
 			children = (
 				535DDFD029A067D400E8E90C /* MessageHomeController.swift */,
 				535DDFD129A067D400E8E90C /* MessageListController.swift */,
+				A17FCCEB29A0F2F300B06F23 /* MessageDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2006,6 +2011,7 @@
 			children = (
 				535DDFD629A067D400E8E90C /* MessageHomeListCell.swift */,
 				535DDFD729A067D400E8E90C /* MessageListCell.swift */,
+				A17FCCE929A0E87A00B06F23 /* MessageSystemTabCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4220,6 +4226,7 @@
 				535DE22229A067D500E8E90C /* BundleInfoModel.swift in Sources */,
 				535DE37E29A067D700E8E90C /* PagedFlowView.m in Sources */,
 				535DE23E29A067D600E8E90C /* TestPushController.swift in Sources */,
+				A17FCCEA29A0E87A00B06F23 /* MessageSystemTabCell.swift in Sources */,
 				535DE21229A067D500E8E90C /* XDGifImageView.swift in Sources */,
 				535DE37A29A067D700E8E90C /* HQIndexBannerSubview.m in Sources */,
 				535DE1F929A067D500E8E90C /* RequetsResultCode.swift in Sources */,
@@ -4271,6 +4278,7 @@
 				535DE2BD29A067D600E8E90C /* BaseView.swift in Sources */,
 				535DE3A829A07E7100E8E90C /* LoginTypeView.swift in Sources */,
 				535DE26E29A067D600E8E90C /* SearchHistoryCell.swift in Sources */,
+				A17FCCEC29A0F2F300B06F23 /* MessageDetailController.swift in Sources */,
 				535DE2E629A067D600E8E90C /* WithdrawAddressBindResultController.swift in Sources */,
 				535DE29529A067D600E8E90C /* CommonSmsCodeView.swift in Sources */,
 				535DE1C829A067D500E8E90C /* UIViewController+Extension.swift in Sources */,
