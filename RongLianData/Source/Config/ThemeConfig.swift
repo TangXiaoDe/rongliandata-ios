@@ -45,7 +45,7 @@ class ThemeConfig {
     }
 
     /// 主题色
-    var themeColor: UIColor = UIColor.init(hex: 0xF5BE41)
+    var themeColor: UIColor = UIColor.init(hex: 0x4444FF)
     /// 辅助色/次要色
     var minorColor: UIColor = UIColor.init(hex: 0xFFFFFF)
     /// 分割线颜色
