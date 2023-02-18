@@ -56,8 +56,8 @@ class MallHomeStatusNavBar: UIView {
     fileprivate let statusHeight: CGFloat = kStatusBarHeight
     fileprivate let navbarHeight: CGFloat = kNavigationBarHeight
     fileprivate let titleLrMargin: CGFloat = 80
-    fileprivate let leftItemLeftMargin: CGFloat = 15
-    fileprivate let leftItemSize: CGSize = CGSize.init(width: 112, height: 27)
+    fileprivate let leftItemLeftMargin: CGFloat = 16
+    fileprivate let leftItemSize: CGSize = CGSize.init(width: 137, height: 38)
     fileprivate let rightItemRightMargin: CGFloat = 6
     fileprivate let rightItemIconWH: CGFloat = 20
     fileprivate let rightItemTitleWH: CGFloat = 15
@@ -119,8 +119,8 @@ class MallHomeStatusNavBar: UIView {
         // leftItem
         barView.addSubview(self.leftItem)
         self.leftItem.addTarget(self, action: #selector(leftItemClick(_:)), for: .touchUpInside)
-        self.leftItem.setBackgroundImage(UIImage.init(named: "IMG_home_icon_applogo"), for: .normal)
-        self.leftItem.setBackgroundImage(UIImage.init(named: "IMG_home_icon_applogo"), for: .highlighted)
+        self.leftItem.setBackgroundImage(UIImage.init(named: "IMG_home_icon_logo"), for: .normal)
+        self.leftItem.setBackgroundImage(UIImage.init(named: "IMG_home_icon_logo"), for: .highlighted)
         self.leftItem.isUserInteractionEnabled = false
         self.leftItem.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.leftItemLeftMargin)
@@ -130,6 +130,7 @@ class MallHomeStatusNavBar: UIView {
         // rightItem
         barView.addSubview(self.rightItem)
         self.rightItem.addTarget(self, action: #selector(rightItemClick(_:)), for: .touchUpInside)
+        self.rightItem.isHidden = true
         self.rightItem.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-self.rightItemRightMargin)
             make.centerY.equalToSuperview()

@@ -45,7 +45,7 @@ class FPHomeOrePoolView: UIView
     
     fileprivate let mainView: UIView = UIView()
     
-    fileprivate let titleView: TitleView = TitleView.init()
+    fileprivate let titleView: IconContainer = IconContainer.init()
     fileprivate let typeView: FPHomeOrePoolTypeView = FPHomeOrePoolTypeView.init()
     
     fileprivate let container: UIView = UIView.init()
@@ -55,7 +55,7 @@ class FPHomeOrePoolView: UIView
     fileprivate let totalPledgeCollateralItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // FIL质押量(FIL)
 
     
-    fileprivate let titleViewHeight: CGFloat = 40
+    fileprivate let titleViewHeight: CGFloat = 44
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let itemHeight: CGFloat = FPHomeOrePoolItemView.viewHeight
     fileprivate let itemVerMargin: CGFloat = 8
@@ -138,19 +138,23 @@ extension FPHomeOrePoolView {
             make.top.equalToSuperview().offset(0)
             make.height.equalTo(self.titleViewHeight)
         }
-        self.titleView.label.set(text: "区块数据", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333))
-        self.titleView.label.snp.remakeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
+        self.titleView.iconView.image = UIImage.init(named: "IMG_home_icon_title")
+        self.titleView.iconView.snp.remakeConstraints { make in
+            make.center.equalToSuperview()
         }
-        // 2. typeView
-        mainView.addSubview(self.typeView)
-        self.typeView.addTarget(self, action: #selector(typeViewClick(_:)), for: .touchUpInside)
-        self.typeView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.titleView)
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
-        }
+//        self.titleView.label.set(text: "区块数据", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333))
+//        self.titleView.label.snp.remakeConstraints { (make) in
+//            make.centerY.equalToSuperview()
+//            make.leading.equalToSuperview().offset(self.lrMargin)
+//            make.trailing.equalToSuperview().offset(-self.lrMargin)
+//        }
+//        // 2. typeView
+//        mainView.addSubview(self.typeView)
+//        self.typeView.addTarget(self, action: #selector(typeViewClick(_:)), for: .touchUpInside)
+//        self.typeView.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(self.titleView)
+//            make.trailing.equalToSuperview().offset(-self.lrMargin)
+//        }
         // 3. container
         mainView.addSubview(self.container)
         self.container.snp.makeConstraints { (make) in
@@ -158,6 +162,7 @@ extension FPHomeOrePoolView {
             make.top.equalTo(self.titleView.snp.bottom)
         }
     }
+    
     ///
 //    fileprivate func initialContainer(_ container: UIView) -> Void {
 //        self.container.removeAllSubviews()
