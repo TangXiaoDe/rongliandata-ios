@@ -45,7 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="IMG_startup_img_bg" width="375.5" height="812"/>
-        <image name="IMG_startup_img_logo" width="124.5" height="141.5"/>
+        <image name="IMG_startup_img_bg" width="375.66665649414062" height="812"/>
+        <image name="IMG_startup_img_logo" width="124.66666412353516" height="141.66667175292969"/>
     </resources>
 </document>
