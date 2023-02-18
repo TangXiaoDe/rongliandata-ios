@@ -9,6 +9,7 @@
 import Foundation
 import Qiniu
 import Photos
+import AliyunOSSiOS
 
 class UploadManager {
     static let share = UploadManager()
@@ -18,12 +19,12 @@ class UploadManager {
     func uploadImages(_ images: [UIImage], ModuleName: String, complete: @escaping((_ status: Bool, _ msg: String?, _ results: [PublishImageModel]?) -> Void)) {
 
         UploadNetworkManager.getUploadToken { (status, msg, uploadTokenModel) in
-            guard let uploadToken = uploadTokenModel?.uploadToken else {
+            guard let uploadModel = uploadTokenModel else {
                 complete(false, msg, nil)
                 return
             }
             var objectKeyArray: [String] = []
-            let QNManager = QNUploadManager()
+//            let QNManager = QNUploadManager()
             var currentIndex = 0
             var results: [PublishImageModel] = []
             for image in images {
@@ -42,25 +43,65 @@ class UploadManager {
                 publishImageModel.height = image.size.height
                 results.append(publishImageModel)
                 // 七牛
-                QNManager?.put(data, key: objectName, token: uploadToken, complete: { (info, key, AnyHashable) in
-                    if info?.isOK == true {
-                        currentIndex += 1
-                        //这里是代表全部上传完了 不用else
-                        if (currentIndex == images.count) {
-                            complete(true, "上传成功", results)
+//                QNManager?.put(data, key: objectName, token: uploadToken, complete: { (info, key, AnyHashable) in
+//                    if info?.isOK == true {
+//                        currentIndex += 1
+//                        //这里是代表全部上传完了 不用else
+//                        if (currentIndex == images.count) {
+//                            complete(true, "上传成功", results)
+//                        }
+//                    } else {
+//                        complete(false, info?.error.localizedDescription, nil)
+//                    }
+//                }, option: uploadOption)
+                // OSS上传
+                let mProvider = OSSFederationCredentialProvider.init(federationTokenGetter: { () -> OSSFederationToken? in
+                    let token = OSSFederationToken.init()
+                    // 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。
+                    token.tAccessKey = uploadModel.AccessKeyId
+                    token.tSecretKey = uploadModel.AccessKeySecret
+                    // 从STS服务获取的安全令牌（SecurityToken）。
+                    token.tToken = uploadModel.SecurityToken
+                    token.expirationTimeInGMTFormat = uploadModel.Expiration
+                    return token
+                })
+                let mClient = OSSClient(endpoint: uploadModel.EndPoint, credentialProvider: mProvider)
+                let put = OSSPutObjectRequest.init()
+                put.bucketName = uploadModel.BucketName
+                put.objectKey = objectName
+                if let data = data {
+                    put.uploadingData = data
+                }
+                DispatchQueue.global().async {
+                    let putTask = mClient.putObject(put)
+                    putTask.continue({ (task) -> Any? in
+                        DispatchQueue.main.async {
+                            if task.error != nil {
+                                let error: NSError = (task.error)! as NSError
+                                print("error", error.description)
+                                complete(false, error.description, nil)
+                            } else {
+                                let result = task.result as? OSSPutObjectResult
+                                print("notice", result?.description ?? "")
+                                currentIndex += 1
+                                //这里是代表全部上传完了 不用else
+                                if currentIndex == images.count {
+                                    complete(true, "上传成功", results)
+                                }
+                            }
                         }
-                    } else {
-                        complete(false, info?.error.localizedDescription, nil)
-                    }
-                }, option: uploadOption)
+                        return nil
+                    }).waitUntilFinished()
+                }
+
             }
         }
     }
 
     @available(iOS 9.1, *)
     func uploadVideo(asset: PHAsset, ModuleName: String, complete: @escaping((_ status: Bool, _ msg: String?, _ results: PublishVideoModel?) -> Void)) {
-        UploadNetworkManager.getUploadToken(policy: "video") { (status, msg, uploadTokenModel) in
-            guard let uploadToken = uploadTokenModel?.uploadToken else {
+        UploadNetworkManager.getUploadToken { (status, msg, uploadTokenModel) in
+            guard let uploadToken = uploadTokenModel?.SecurityToken else {
                 complete(false, msg, nil)
                 return
             }
@@ -86,8 +127,8 @@ class UploadManager {
     }
 
     func uploadVideo(filePath: String, ModuleName: String, width: CGFloat, height: CGFloat, complete: @escaping((_ status: Bool, _ msg: String?, _ results: PublishVideoModel?) -> Void)) {
-        UploadNetworkManager.getUploadToken(policy: "video") { (status, msg, uploadTokenModel) in
-            guard let uploadToken = uploadTokenModel?.uploadToken else {
+        UploadNetworkManager.getUploadToken { (status, msg, uploadTokenModel) in
+            guard let uploadToken = uploadTokenModel?.SecurityToken else {
                 complete(false, msg, nil)
                 return
             }

@@ -194,11 +194,11 @@ extension MineHomeHeaderView {
         }
         // 3. nameLabel
         infoView.addSubview(self.nameLabel)
-        self.nameLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 15, weight: .medium), textColor: AppColor.mainText)
+        self.nameLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 15, weight: .medium), textColor: .white)
         self.nameLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(iconContainer.snp.trailing).offset(nameLeftMargin)
             make.trailing.equalToSuperview()
-            make.top.equalTo(iconContainer).offset(10)
+            make.top.equalToSuperview().offset(10)
         }
         //
         infoView.addSubview(self.certLabel)
@@ -242,11 +242,11 @@ extension MineHomeHeaderView {
         self.iconView.kf.setImage(with: model.avatarUrl, placeholder: kPlaceHolderAvatar, options: nil, progressBlock: nil, completionHandler: nil)
         self.certLabel.text = "认证状态：" + model.certStatus.title
 //        self.vipImgView.isHidden = true
-        self.nameLabel.snp.remakeConstraints { (make) in
-            make.leading.equalTo(iconContainer.snp.trailing).offset(nameLeftMargin)
-            make.trailing.equalToSuperview()
-            make.centerY.equalTo(iconContainer.snp.centerY).offset(0)
-        }
+//        self.nameLabel.snp.remakeConstraints { (make) in
+//            make.leading.equalTo(iconContainer.snp.trailing).offset(nameLeftMargin)
+//            make.trailing.equalToSuperview()
+//            make.centerY.equalTo(iconContainer.snp.centerY).offset(0)
+//        }
     }
     
     fileprivate func setupunReadNum(_ num: Int?) -> Void {

@@ -48,6 +48,7 @@ pod 'WechatOpenSDK', '1.8.6.2'            # 微信打开回调
 pod 'Masonry'                             # 约束布局
 pod 'MBProgressHUD', '~> 1.1.0'           # 进度指示器
 pod 'Qiniu', '~> 7.1'                     # 七牛云存储
+pod 'AliyunOSSiOS'      # 阿里云存储
 # 友盟统计
 pod 'UMCCommon', '2.0.1'                  # UM基础库
 pod 'UMCAnalytics', '6.0.3'               # UM统计
