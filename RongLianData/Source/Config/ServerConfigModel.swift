@@ -27,6 +27,8 @@ class ServerConfigModel: Mappable {
 //    var isVersionControl: Bool = false
     /// fil配置信息
     var filConfig: FilConfigModel?
+    /// 邀请配置信息
+    var inviteInfoModel: InviteInfoModel?
     
     /// 提现配置信息
     var withdrawalConfigModel: WithdrawalConfigModel?
@@ -54,6 +56,7 @@ class ServerConfigModel: Mappable {
         register_protocol <- map["register_protocol"]
 //        isVersionControl <- map["start_version_control"]
         filConfig <- map["fil:issue"]
+        inviteInfoModel <- map["invite"]
         
         
         withdrawalConfigModel <- map["withdrawal"]

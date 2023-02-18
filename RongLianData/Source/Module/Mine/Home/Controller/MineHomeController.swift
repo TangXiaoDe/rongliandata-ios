@@ -17,7 +17,7 @@ class MineHomeController: BaseViewController {
 
     fileprivate let statusView: UIView = UIView()
     fileprivate let scrollView: UIScrollView = UIScrollView()
-    fileprivate let incomeInfoView = MineHomeIncomeInfoView.init(viewWidth: kScreenWidth - 12.0 * 2.0)
+    fileprivate let incomeInfoView = MineHomeIncomeInfoView.init(viewWidth: kScreenWidth - 15.0 * 2.0)
     fileprivate let optionView = MineHomeOptionView()
     fileprivate let headerView: MineHomeHeaderView = MineHomeHeaderView()
     
@@ -75,7 +75,7 @@ extension MineHomeController {
 // MARK: - UI
 extension MineHomeController {
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor(hex: 0x4444FF)
         // 1. navigationbar
         self.navigationItem.title = "我的"
         // 3.statusView
@@ -93,7 +93,7 @@ extension MineHomeController {
         self.scrollView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview()
-            make.bottom.equalTo(self.view.snp_bottomMargin)
+            make.bottom.equalToSuperview()
         }
         // 顶部位置 的版本适配
         if #available(iOS 11.0, *) {
@@ -108,6 +108,14 @@ extension MineHomeController {
     /// 滚动视图布局
     fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = .white
+        //
+        let bgImgV = UIImageView.init(image: UIImage(named: "IMG_mine_img_bg"))
+        scrollView.addSubview(bgImgV)
+        bgImgV.snp.makeConstraints { make in
+            make.leading.top.equalToSuperview()
+            make.width.equalTo(kScreenWidth)
+        }
 //        scrollView.delegate = self
         self.scrollView.mj_header = XDRefreshHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         // headerView
@@ -122,7 +130,7 @@ extension MineHomeController {
         scrollView.addSubview(self.incomeInfoView)
         self.incomeInfoView.delegate = self
         self.incomeInfoView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.headerView.snp.bottom).offset(0)
+            make.top.equalTo(self.headerView.snp.bottom).offset(15)
             make.leading.equalToSuperview().offset(lrMargin)
             make.trailing.equalToSuperview().offset(-lrMargin)
             make.height.equalTo(MineHomeIncomeInfoView.viewHeight)
@@ -273,6 +281,12 @@ extension MineHomeController {
 
 // MARK: - <MineHomeOptionViewProtocol>
 extension MineHomeController: MineHomeOptionViewProtocol {
+    func optionView(_ optionView: MineHomeOptionView, didSelectedCert itemView: MineHomeOptionItemControl) {
+        self.enterAccountCertPage()
+    }
+    func optionView(_ optionView: MineHomeOptionView, didSelectedInvite itemView: MineHomeOptionItemControl) {
+        self.enterAccountInvitePage()
+    }
     /// 账户安全
     func optionView(_ optionView: MineHomeOptionView, didSelectedAccount itemView: MineHomeOptionItemControl) -> Void {
         self.enterAccountSecurityPage()
@@ -363,6 +377,14 @@ extension MineHomeController {
     }
     /// 账户安全
     fileprivate func enterAccountSecurityPage(){
+        self.enterPageVC(AccountSecurityHomeController())
+    }
+    /// 邀请好友
+    fileprivate func enterAccountInvitePage(){
+        self.enterPageVC(InviteFriendHomeController())
+    }
+    /// 实名认证
+    fileprivate func enterAccountCertPage(){
         self.enterPageVC(AccountSecurityHomeController())
     }
     /// 我的品牌商界面

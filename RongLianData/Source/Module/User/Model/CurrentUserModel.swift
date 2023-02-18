@@ -93,13 +93,13 @@ enum UserCertificationStatus: String {
         var title: String = ""
         switch self {
         case .unCertified:
-            title = "未认证"
+            title = "未实名"
         case .waiting:
             title = "审核中"
         case .failure:
-            title = "认证失败"
+            title = "实名失败"
         case .certified:
-            title = "已认证"
+            title = "已实名"
         }
         return title
     }

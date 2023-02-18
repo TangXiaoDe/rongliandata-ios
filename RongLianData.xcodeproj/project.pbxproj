@@ -499,6 +499,16 @@
 		53A6F41C24E0FA3500E8C9B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2E024E0FA3200E8C9B4 /* Main.storyboard */; };
 		53A6F43E24E0FA3500E8C9B4 /* ProductDetail.css in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F30724E0FA3200E8C9B4 /* ProductDetail.css */; };
 		53A6F45C24E121EF00E8C9B4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F45B24E121EF00E8C9B4 /* Info.plist */; };
+		A17FCCC529A089E700B06F23 /* InviteFriendHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCA729A089E700B06F23 /* InviteFriendHomeController.swift */; };
+		A17FCCC729A089E700B06F23 /* InviteCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCAA29A089E700B06F23 /* InviteCountModel.swift */; };
+		A17FCCC929A089E700B06F23 /* InviteFriendPosterQrcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCAD29A089E700B06F23 /* InviteFriendPosterQrcodeView.swift */; };
+		A17FCCCB29A089E700B06F23 /* InviteFriendCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCAF29A089E700B06F23 /* InviteFriendCardCell.swift */; };
+		A17FCCCD29A089E700B06F23 /* InviteFriendSharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCB129A089E700B06F23 /* InviteFriendSharedView.swift */; };
+		A17FCCD029A089E700B06F23 /* InviteFriendBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCB429A089E700B06F23 /* InviteFriendBottomView.swift */; };
+		A17FCCDD29A08A7A00B06F23 /* InviteConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCDC29A08A7A00B06F23 /* InviteConfigModel.swift */; };
+		A17FCCE129A0914800B06F23 /* InviteRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCDF29A0914800B06F23 /* InviteRequestInfo.swift */; };
+		A17FCCE229A0914800B06F23 /* InviteNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE029A0914800B06F23 /* InviteNetworkManager.swift */; };
+		A17FCCE429A0B25B00B06F23 /* CurrentUserEditNamePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCE329A0B25B00B06F23 /* CurrentUserEditNamePopView.swift */; };
 		A38D7434E3928A0C480E5D70 /* Pods_RongLianDataTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEC8B66C20118199FDF9BBE /* Pods_RongLianDataTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -1043,6 +1053,16 @@
 		62F9ADBDE1A95C1FDD464985 /* Pods-AntClusterB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterB.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterB/Pods-AntClusterB.release.xcconfig"; sourceTree = "<group>"; };
 		6589BEC5AEE6C210D4C341B3 /* Pods-RongLianData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RongLianData.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RongLianData/Pods-RongLianData.debug.xcconfig"; sourceTree = "<group>"; };
 		958E791F3C2D488852DC1DEF /* Pods-RongLianDataTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RongLianDataTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RongLianDataTests/Pods-RongLianDataTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A17FCCA729A089E700B06F23 /* InviteFriendHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendHomeController.swift; sourceTree = "<group>"; };
+		A17FCCAA29A089E700B06F23 /* InviteCountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteCountModel.swift; sourceTree = "<group>"; };
+		A17FCCAD29A089E700B06F23 /* InviteFriendPosterQrcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendPosterQrcodeView.swift; sourceTree = "<group>"; };
+		A17FCCAF29A089E700B06F23 /* InviteFriendCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendCardCell.swift; sourceTree = "<group>"; };
+		A17FCCB129A089E700B06F23 /* InviteFriendSharedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendSharedView.swift; sourceTree = "<group>"; };
+		A17FCCB429A089E700B06F23 /* InviteFriendBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendBottomView.swift; sourceTree = "<group>"; };
+		A17FCCDC29A08A7A00B06F23 /* InviteConfigModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteConfigModel.swift; sourceTree = "<group>"; };
+		A17FCCDF29A0914800B06F23 /* InviteRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteRequestInfo.swift; sourceTree = "<group>"; };
+		A17FCCE029A0914800B06F23 /* InviteNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteNetworkManager.swift; sourceTree = "<group>"; };
+		A17FCCE329A0B25B00B06F23 /* CurrentUserEditNamePopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserEditNamePopView.swift; sourceTree = "<group>"; };
 		A42B7198B32A0313DF58D827 /* Pods_RongLianData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RongLianData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1450,6 +1470,7 @@
 		535DDF2A29A067D400E8E90C /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				A17FCCDE29A0914800B06F23 /* Invite */,
 				535DDF2B29A067D400E8E90C /* Password */,
 				535DDF2E29A067D400E8E90C /* Asset */,
 				535DDF3129A067D400E8E90C /* Advert */,
@@ -2382,6 +2403,7 @@
 				535DE06729A067D400E8E90C /* Home */,
 				535DE07229A067D400E8E90C /* Asset */,
 				535DE0B629A067D400E8E90C /* Brand */,
+				A17FCCA429A089E700B06F23 /* Invite */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -3037,6 +3059,7 @@
 		535DE12629A067D500E8E90C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A17FCCE329A0B25B00B06F23 /* CurrentUserEditNamePopView.swift */,
 				535DE12729A067D500E8E90C /* UserInfoControl.swift */,
 				535DE12829A067D500E8E90C /* UserInfoHeaderView.swift */,
 			);
@@ -3670,6 +3693,61 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A17FCCA429A089E700B06F23 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCA529A089E700B06F23 /* Home */,
+			);
+			path = Invite;
+			sourceTree = "<group>";
+		};
+		A17FCCA529A089E700B06F23 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCA629A089E700B06F23 /* Controller */,
+				A17FCCA829A089E700B06F23 /* Model */,
+				A17FCCAC29A089E700B06F23 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		A17FCCA629A089E700B06F23 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCA729A089E700B06F23 /* InviteFriendHomeController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A17FCCA829A089E700B06F23 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCDC29A08A7A00B06F23 /* InviteConfigModel.swift */,
+				A17FCCAA29A089E700B06F23 /* InviteCountModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A17FCCAC29A089E700B06F23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCAD29A089E700B06F23 /* InviteFriendPosterQrcodeView.swift */,
+				A17FCCAF29A089E700B06F23 /* InviteFriendCardCell.swift */,
+				A17FCCB129A089E700B06F23 /* InviteFriendSharedView.swift */,
+				A17FCCB429A089E700B06F23 /* InviteFriendBottomView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A17FCCDE29A0914800B06F23 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				A17FCCDF29A0914800B06F23 /* InviteRequestInfo.swift */,
+				A17FCCE029A0914800B06F23 /* InviteNetworkManager.swift */,
+			);
+			path = Invite;
+			sourceTree = "<group>";
+		};
 		F04D23F0F385BDC908419D96 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3964,6 +4042,7 @@
 				535DE38229A067D700E8E90C /* EFCountAdapter.swift in Sources */,
 				535DE32629A067D700E8E90C /* PhoneBindUpdateController.swift in Sources */,
 				535DE32A29A067D700E8E90C /* LoginPwdResetController.swift in Sources */,
+				A17FCCC929A089E700B06F23 /* InviteFriendPosterQrcodeView.swift in Sources */,
 				535DE1D129A067D500E8E90C /* AppColor.swift in Sources */,
 				535DE21D29A067D500E8E90C /* VersionManager.swift in Sources */,
 				535DE20029A067D500E8E90C /* RealmHelper.swift in Sources */,
@@ -4028,10 +4107,13 @@
 				535DE1D829A067D500E8E90C /* AccountManager.swift in Sources */,
 				535DE27129A067D600E8E90C /* MyApiKeyController.swift in Sources */,
 				535DE22E29A067D500E8E90C /* MiningGuideController.swift in Sources */,
+				A17FCCE129A0914800B06F23 /* InviteRequestInfo.swift in Sources */,
+				A17FCCDD29A08A7A00B06F23 /* InviteConfigModel.swift in Sources */,
 				535DE2A429A067D600E8E90C /* OrderListEmptyView.swift in Sources */,
 				535DE1E329A067D500E8E90C /* BrandNetworkManager.swift in Sources */,
 				535DE30729A067D700E8E90C /* FPHomeOrePoolItemView.swift in Sources */,
 				535DE35329A067D700E8E90C /* PreReturnTypeSelectController.swift in Sources */,
+				A17FCCE429A0B25B00B06F23 /* CurrentUserEditNamePopView.swift in Sources */,
 				535DE2F129A067D600E8E90C /* BrandProcurementItemView.swift in Sources */,
 				535DE1AD29A067D500E8E90C /* AdvertDBManager.swift in Sources */,
 				535DE26629A067D600E8E90C /* AdvertBannerView.swift in Sources */,
@@ -4087,6 +4169,7 @@
 				535DE28929A067D600E8E90C /* TitleButtonView.swift in Sources */,
 				535DE1ED29A067D500E8E90C /* FirstPageNetworkManager.swift in Sources */,
 				535DE33829A067D700E8E90C /* MainTabBarController+Extension.swift in Sources */,
+				A17FCCCB29A089E700B06F23 /* InviteFriendCardCell.swift in Sources */,
 				535DE25429A067D600E8E90C /* MessageListCell.swift in Sources */,
 				535DE2EB29A067D600E8E90C /* WalletDetailHomeController.swift in Sources */,
 				535DE27F29A067D600E8E90C /* DoubleIconControl.swift in Sources */,
@@ -4096,6 +4179,7 @@
 				535DE21A29A067D500E8E90C /* UploadTokenModel.swift in Sources */,
 				535DE2B029A067D600E8E90C /* PageDefaultServerErrorView.swift in Sources */,
 				535DE28429A067D600E8E90C /* IconTitleIconControl.swift in Sources */,
+				A17FCCE229A0914800B06F23 /* InviteNetworkManager.swift in Sources */,
 				535DE32129A067D700E8E90C /* AuthViewController.swift in Sources */,
 				535DE34B29A067D700E8E90C /* MiningDetailController.swift in Sources */,
 				535DE34229A067D700E8E90C /* EquipmentHomeHeaderView.swift in Sources */,
@@ -4119,10 +4203,12 @@
 				535DE27C29A067D600E8E90C /* ToastUtil.swift in Sources */,
 				535DE36429A067D700E8E90C /* EDAssetReturnListModel.swift in Sources */,
 				535DE2A929A067D600E8E90C /* SettingSectionFooter.swift in Sources */,
+				A17FCCC729A089E700B06F23 /* InviteCountModel.swift in Sources */,
 				535DE1DB29A067D500E8E90C /* DateFormatter.swift in Sources */,
 				535DE29229A067D600E8E90C /* TopTitleBottomTitleControl.swift in Sources */,
 				535DE36829A067D700E8E90C /* EDBackAssetDetailView.swift in Sources */,
 				535DE22A29A067D500E8E90C /* GuideController.swift in Sources */,
+				A17FCCD029A089E700B06F23 /* InviteFriendBottomView.swift in Sources */,
 				535DE26D29A067D600E8E90C /* SearchHistoryModel.swift in Sources */,
 				535DE2E529A067D600E8E90C /* WithdrawAddressBindingController.swift in Sources */,
 				535DE22229A067D500E8E90C /* BundleInfoModel.swift in Sources */,
@@ -4285,6 +4371,7 @@
 				535DE26929A067D600E8E90C /* AdvertIcarouselBannerView.swift in Sources */,
 				535DE2A629A067D600E8E90C /* SettingSectionHeader.swift in Sources */,
 				535DE2C929A067D600E8E90C /* AssetHomeOtherItemView.swift in Sources */,
+				A17FCCCD29A089E700B06F23 /* InviteFriendSharedView.swift in Sources */,
 				535DE36F29A067D700E8E90C /* LockDetailController.swift in Sources */,
 				535DE32029A067D700E8E90C /* PhoneVerityController.swift in Sources */,
 				535DE3A929A07E7100E8E90C /* SmsCodeLoginView.swift in Sources */,
@@ -4392,6 +4479,7 @@
 				535DE2D329A067D600E8E90C /* AssetListController.swift in Sources */,
 				535DE29E29A067D600E8E90C /* UserShieldPlaceHolderView.swift in Sources */,
 				535DE23129A067D600E8E90C /* NoviceGuideModel.swift in Sources */,
+				A17FCCC529A089E700B06F23 /* InviteFriendHomeController.swift in Sources */,
 				535DE3AA29A07E7100E8E90C /* PasswordLoginView.swift in Sources */,
 				535DE22D29A067D500E8E90C /* MeetGuideController.swift in Sources */,
 				535DE26529A067D600E8E90C /* AdvertSpaceModel.swift in Sources */,

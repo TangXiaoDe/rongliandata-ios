@@ -15,13 +15,12 @@ class CurrentUserInfoController: BaseViewController {
 
     // MARK: - Private Property
 
+    @IBOutlet weak var nickLabel: UILabel!
     @IBOutlet weak var phoneDetailLabel: UILabel!
     @IBOutlet weak var headIcon: UIImageView!
-
-    fileprivate let iconWH: CGFloat = 40
-    fileprivate let rightViewLeftMargin: CGFloat = 80
-    fileprivate let lrMargin: CGFloat = 12
-    fileprivate let descRightMargin: CGFloat = 30
+    @IBOutlet weak var headBtn: UIButton!
+    
+    fileprivate let iconWH: CGFloat = 100
 
     fileprivate var model: CurrentUserModel? {
         didSet {
@@ -68,9 +67,13 @@ extension CurrentUserInfoController {
         self.navigationItem.title = "个人资料"
         // icon
         self.headIcon.set(cornerRadius: self.iconWH * 0.5)
+        self.headBtn.setTitle("", for: .normal)
+        self.headBtn.setTitle("", for: .highlighted)
         // detailLabel
-        self.phoneDetailLabel.font = UIFont.pingFangSCFont(size: 15, weight: .medium)
+        self.phoneDetailLabel.font = UIFont.pingFangSCFont(size: 14, weight: .regular)
         self.phoneDetailLabel.text = nil
+        self.nickLabel.font = UIFont.pingFangSCFont(size: 14, weight: .regular)
+        self.nickLabel.text = nil
     }
 }
 
@@ -91,6 +94,7 @@ extension CurrentUserInfoController {
         }
         self.headIcon.kf.setImage(with: model.avatarUrl, placeholder: kPlaceHolderAvatar, options: nil, progressBlock: nil, completionHandler: nil)
         self.phoneDetailLabel.text = model.phone
+        self.nickLabel.text = model.name
     }
 }
 
@@ -102,14 +106,10 @@ extension CurrentUserInfoController {
     }
     /// 昵称点击
     @IBAction func nameBtnClick(_ sender: UIButton) {
-        guard let model = self.model else {
-            return
-        }
-        let nameUpdateVC = UserNameUpdateController(user: model)
-        nameUpdateVC.updateSuccessAction = { () in
-            self.initialDataSource()
-        }
-        self.navigationController?.pushViewController(nameUpdateVC, animated: true)
+        self.showEditNickAlert()
+    }
+    
+    @IBAction func phoneOnClicked(_ sender: UIButton) {
     }
 }
 
@@ -120,6 +120,16 @@ extension CurrentUserInfoController {
 
 // MARK: - Extension Function
 extension CurrentUserInfoController {
+    /// 修改昵称弹框
+    fileprivate func showEditNickAlert() -> Void {
+        guard let user = AccountManager.share.currentAccountInfo?.userInfo else {
+            return
+        }
+        let popView = CurrentUserEditNamePopView.init()
+        popView.delegate = self
+        popView.model = user.name
+        PopViewUtil.showPopView(popView)
+    }
     /// 显示头像选择弹窗
     fileprivate func showAvatarPicker() -> Void {
         guard let imagePickerVC = TZImagePickerController(maxImagesCount: 1, columnNumber: 4, delegate: self)
@@ -169,6 +179,26 @@ extension CurrentUserInfoController {
             AccountManager.share.updateCurrentAccount(userInfo: model)
         }
     }
+    /// 修改昵称
+    fileprivate func updateNameRequest(_ name: String) -> Void {
+        self.view.isUserInteractionEnabled = false
+        let indicator = AppLoadingView.init()
+        indicator.show()
+        UserNetworkManager.updateCurrentUser(name: name) { [weak self](status, msg, model) in
+            guard let `self` = self else {
+                return
+            }
+            self.view.isUserInteractionEnabled = true
+            indicator.dismiss()
+            guard status, let model = model else {
+                Toast.showToast(title: msg)
+                return
+            }
+            self.model = model
+            AccountManager.share.updateCurrentAccount(userInfo: model)
+            self.initialDataSource()
+        }
+    }
 }
 
 // MARK: - Delegate Function
@@ -184,4 +214,20 @@ extension CurrentUserInfoController: TZImagePickerControllerDelegate {
         self.updateAvatarRequest(image)
     }
 
+}
+
+// MARK: - <CurrentUserEditNamePopViewProtocol>
+extension CurrentUserInfoController: CurrentUserEditNamePopViewProtocol {
+    func popView(_ popView: CurrentUserEditNamePopView, didClickedSave saveBtn: UIButton, name: String?) {
+        guard let name = name, !name.isEmpty, let user = AccountManager.share.currentAccountInfo?.userInfo, user.name != name else {
+            return
+        }
+        self.updateNameRequest(name)
+    }
+
+    func popView(_ popView: CurrentUserEditNamePopView, didClickedCover cover: UIButton) {
+
+    }
+    func popView(_ popView: CurrentUserEditNamePopView, didClickedCancel doneBtn: UIButton) {
+    }
 }
