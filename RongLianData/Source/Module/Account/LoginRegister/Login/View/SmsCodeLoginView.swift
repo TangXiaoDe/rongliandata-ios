@@ -36,6 +36,8 @@ class SmsCodeLoginView: UIView {
     let smsCodeView: LoginSmsCodeInputView = LoginSmsCodeInputView.init()
 
     fileprivate let infoHeight: CGFloat = LoginNormalInputView.viewHeight
+    fileprivate let verMargin: CGFloat = LoginNormalInputView.verMargin
+    
     fileprivate let accountMaxLen: Int = 11
     fileprivate let codeMaxLen: Int = 6
 
@@ -118,7 +120,7 @@ extension SmsCodeLoginView {
         self.smsCodeView.codeBtn.addTarget(self, action: #selector(sendCodeBtnClick(_:)), for: .touchUpInside)
         self.smsCodeView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.phoneView.snp.bottom)
+            make.top.equalTo(self.phoneView.snp.bottom).offset(self.verMargin)
             make.height.equalTo(self.infoHeight)
         }
     }

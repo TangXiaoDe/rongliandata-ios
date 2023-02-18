@@ -19,34 +19,38 @@ class LoginViewController: BaseViewController {
     weak var delegate: LoginViewControllerProtocol?
     var hasBackBtn: Bool = false {
         didSet {
-            let showBackWH: CGFloat = 44
-            let backIconLrMargin: CGFloat = (showBackWH - self.backIconSize.width) * 0.5 // (44 - 19) * 0.5 = 12
-            self.backBtn.isHidden = !hasBackBtn
-            self.welcomeLabel.snp.remakeConstraints { make in
-                make.centerY.equalTo(self.backBtn)
-                if hasBackBtn {
-                    make.leading.equalTo(self.backBtn.snp.trailing).offset(self.welcomeLeftMargin - backIconLrMargin)
-                } else {
-                    make.leading.equalToSuperview().offset(self.lrMargin)
-                }
-            }
-            self.view.layoutIfNeeded()
+//            let showBackWH: CGFloat = 44
+//            let backIconLrMargin: CGFloat = (showBackWH - self.backIconSize.width) * 0.5 // (44 - 19) * 0.5 = 12
+//            self.backBtn.isHidden = !hasBackBtn
+//            self.welcomeLabel.snp.remakeConstraints { make in
+//                make.centerY.equalTo(self.backBtn)
+//                if hasBackBtn {
+//                    make.leading.equalTo(self.backBtn.snp.trailing).offset(self.welcomeLeftMargin - backIconLrMargin)
+//                } else {
+//                    make.leading.equalToSuperview().offset(self.lrMargin)
+//                }
+//            }
+//            self.view.layoutIfNeeded()
         }
     }
     /// 是否显示密码登录
     var showPwdLogin: Bool = true {
         didSet {
-            self.forgetPwdBtn.isHidden = !showPwdLogin
-            self.typeView.showPwdLogin = showPwdLogin
-            if !showPwdLogin {
-                self.selectedType = .smscode
-            }
+//            self.forgetPwdBtn.isHidden = !showPwdLogin
+//            self.typeView.showPwdLogin = showPwdLogin
+//            if !showPwdLogin {
+//                self.selectedType = .smscode
+//            }
         }
     }
 
     // MARK: - Private Property
 
-    //fileprivate let mainView: UIView = UIView.init()
+    fileprivate let bgView: UIImageView = UIImageView.init()
+    
+    fileprivate let mainView: UIView = UIView.init()
+    fileprivate let mainBgView: UIImageView = UIImageView.init()
+    
     fileprivate let backBtn: UIButton = UIButton.init()
     fileprivate let topBgView: UIImageView = UIImageView.init()
     fileprivate let topBgCover: UIView = UIView.init()
@@ -71,37 +75,41 @@ class LoginViewController: BaseViewController {
     //fileprivate let noAccountRegisterView: TitleButtonView = TitleButtonView.init() // 没有账号，立即注册
 
     
-    fileprivate let mainLrMargin: CGFloat = 16
-    fileprivate let lrMargin: CGFloat = 16
+    fileprivate let mainTopMargin: CGFloat = kNavigationStatusBarHeight + 5
+    fileprivate let mainBgSize: CGSize = CGSize.init(width: 349, height: 582)
+    
+    fileprivate let mainLrMargin: CGFloat = 13
+    fileprivate let lrMargin: CGFloat = 34
+    
+    fileprivate let logoTopMargin: CGFloat = 147
+    fileprivate let logoSize: CGSize = CGSize.init(width: 83.5, height: 24.5)
+    fileprivate let registerBtnSize: CGSize = CGSize.init(width: 68, height: 28)
+    //fileprivate let loginTypeBtnSize: CGSize = CGSize.init(width: 90, height: 28)
+    fileprivate let loginTypeBtnBottomMargin: CGFloat = 32
+    
+    fileprivate let inputContainerTopMargin: CGFloat = 28   // logo.bottom
+    fileprivate let singleInfoHeight: CGFloat = LoginNormalInputView.viewHeight
+    fileprivate lazy var inputContainerHeight: CGFloat = {
+        return self.singleInfoHeight * 2.0 + LoginNormalInputView.verMargin
+    }()
+    fileprivate let tipsTopMargin: CGFloat = 15     // doneBtn.bottom
+    fileprivate let doneBtnHeight: CGFloat = 44
+    fileprivate let doneBtnTopMargin: CGFloat = 48  // inputContainer.bottom
+    
+    
     
     fileprivate let backIconSize: CGSize = CGSize.init(width: 19, height: 13.5)
     fileprivate let welcomeLeftMargin: CGFloat = 16
-    fileprivate let loginTypeBtnSize: CGSize = CGSize.init(width: 90, height: 28)
-    fileprivate let loginTypeBtnTopMargin: CGFloat = 98
     fileprivate let welcomeViewSize: CGSize = CGSize.init(width: 132.5, height: 49)
     fileprivate let welcomeTopMargin: CGFloat = kStatusBarHeight + 25
-    
     fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 300).scaleAspectForWidth(kScreenWidth).height
     //fileprivate let topBgHeight: CGFloat = (196 - 88 + kNavigationStatusBarHeight) + 86
     fileprivate let topViewHeight: CGFloat = kNavigationStatusBarHeight + 76
-    fileprivate let registerBtnSize: CGSize = CGSize.init(width: 80, height: 32)
-    //fileprivate let logoTopMargin: CGFloat = kNavigationStatusBarHeight + 0
-    fileprivate let logoSize: CGSize = CGSize.init(width: 64, height: 64)
-    
     fileprivate let bottomViewHeight: CGFloat = 500
     fileprivate let typeViewTopMargin: CGFloat = 50
     fileprivate let typeViewHeight: CGFloat = LoginTypeView.viewHeight
     //fileprivate let logoBottomMargin: CGFloat = 22
     
-    fileprivate let inputContainerTopMargin: CGFloat = 2   // super
-    fileprivate let singleInfoHeight: CGFloat = LoginNormalInputView.viewHeight
-    fileprivate lazy var inputContainerHeight: CGFloat = {
-        return self.singleInfoHeight * 2.0
-    }()
-    fileprivate let tipsTopMargin: CGFloat = 12     // inputContainer.bottom
-    
-    fileprivate let doneBtnHeight: CGFloat = 44
-    fileprivate let doneBtnTopMargin: CGFloat = 66  // inputContainer.bottom
 
     
     fileprivate let types: [LoginType] = [.password, .smscode]
@@ -158,47 +166,146 @@ extension LoginViewController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = AppColor.pageBg
-        // 0. topBgView
-        self.view.addSubview(self.topBgView)
-        self.topBgView.set(cornerRadius: 0)
-        self.topBgView.image = UIImage.init(named: "IMG_login_img_top_bg")
-        //self.topBgView.backgroundColor = AppColor.theme.withAlphaComponent(0.5)
-        self.topBgView.snp.makeConstraints { (make) in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(self.topBgHeight)
+        // bgView
+        self.view.addSubview(self.bgView)
+        self.bgView.image = UIImage.init(named: "IMG_signin_img_bg")
+        self.bgView.set(cornerRadius: 0)
+        self.bgView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-//        self.topBgView.addSubview(self.topBgCover)
-//        self.topBgCover.backgroundColor = AppColor.theme.withAlphaComponent(0.5)
-//        self.topBgCover.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
+        // mainView
+        self.view.addSubview(self.mainView)
+        self.initialMainView(self.mainView)
+        self.mainView.snp.makeConstraints { make in
+            make.size.equalTo(self.mainBgSize)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.mainTopMargin)
+        }
+        
+//        // 0. topBgView
+//        self.view.addSubview(self.topBgView)
+//        self.topBgView.set(cornerRadius: 0)
+//        self.topBgView.image = UIImage.init(named: "IMG_login_img_top_bg")
+//        //self.topBgView.backgroundColor = AppColor.theme.withAlphaComponent(0.5)
+//        self.topBgView.snp.makeConstraints { (make) in
+//            make.top.leading.trailing.equalToSuperview()
+//            make.height.equalTo(self.topBgHeight)
 //        }
-        // 1. topView
-        self.view.addSubview(self.topView)
-        self.initialTopView(self.topView)
-        self.topView.snp.makeConstraints { (make) in
-            make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(self.topViewHeight)
+////        self.topBgView.addSubview(self.topBgCover)
+////        self.topBgCover.backgroundColor = AppColor.theme.withAlphaComponent(0.5)
+////        self.topBgCover.snp.makeConstraints { make in
+////            make.edges.equalToSuperview()
+////        }
+//        // 1. topView
+//        self.view.addSubview(self.topView)
+//        self.initialTopView(self.topView)
+//        self.topView.snp.makeConstraints { (make) in
+//            make.leading.trailing.top.equalToSuperview()
+//            make.height.equalTo(self.topViewHeight)
+//        }
+//        // 2. bottomView
+//        self.view.addSubview(self.bottomView)
+//        self.initialBottomView(self.bottomView)
+//        self.bottomView.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(self.mainLrMargin)
+//            make.trailing.equalToSuperview().offset(-self.mainLrMargin)
+//            make.top.equalTo(self.topView.snp.bottom)
+//            make.height.equalTo(self.bottomViewHeight)
+//            //make.bottom.equalToSuperview()
+//        }
+//        // 3. logoView
+//        self.view.addSubview(self.logoView)
+//        self.logoView.set(cornerRadius: 0)
+//        self.logoView.image = UIImage.init(named: "IMG_login_icon_logo")
+//        self.logoView.snp.makeConstraints { (make) in
+//            make.size.equalTo(self.logoSize)
+//            make.centerX.equalTo(self.bottomView)
+//            make.centerY.equalTo(self.bottomView.snp.top)
+//        }
+    }
+    
+
+    //
+    fileprivate func initialMainView(_ mainView: UIView) -> Void {
+        // bgView
+        mainView.addSubview(self.mainBgView)
+        self.mainBgView.image = UIImage.init(named: "IMG_signin_img_bg_white")
+        self.mainBgView.set(cornerRadius: 0)
+        self.mainBgView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-        // 2. bottomView
-        self.view.addSubview(self.bottomView)
-        self.initialBottomView(self.bottomView)
-        self.bottomView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.mainLrMargin)
-            make.trailing.equalToSuperview().offset(-self.mainLrMargin)
-            make.top.equalTo(self.topView.snp.bottom)
-            make.height.equalTo(self.bottomViewHeight)
-            //make.bottom.equalToSuperview()
-        }
-        // 3. logoView
-        self.view.addSubview(self.logoView)
+        // logoView
+        mainView.addSubview(self.logoView)
         self.logoView.set(cornerRadius: 0)
-        self.logoView.image = UIImage.init(named: "IMG_login_icon_logo")
+        self.logoView.image = UIImage.init(named: "IMG_signin_img_logo")
         self.logoView.snp.makeConstraints { (make) in
             make.size.equalTo(self.logoSize)
-            make.centerX.equalTo(self.bottomView)
-            make.centerY.equalTo(self.bottomView.snp.top)
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.top.equalToSuperview().offset(self.logoTopMargin)
+        }
+        // registerBtn
+        mainView.addSubview(self.registerBtn)
+        self.registerBtn.set(title: "注册", titleColor: AppColor.theme, for: .normal)
+        self.registerBtn.set(title: "注册", titleColor: AppColor.theme, for: .highlighted)
+        self.registerBtn.set(font: UIFont.pingFangSCFont(size: 16, weight: .medium))
+        self.registerBtn.backgroundColor = UIColor.white
+        self.registerBtn.set(cornerRadius: self.registerBtnSize.height * 0.5, borderWidth: 0.5, borderColor: AppColor.theme)
+        self.registerBtn.addTarget(self, action: #selector(registerBtnClick(_:)), for: .touchUpInside)
+        self.registerBtn.snp.makeConstraints { (make) in
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.size.equalTo(self.registerBtnSize)
+            make.centerY.equalTo(self.logoView)
+        }
+        // inputContainer
+        mainView.addSubview(self.inputContainer)
+        self.initialInputContainer(self.inputContainer)
+        self.inputContainer.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.top.equalTo(self.logoView.snp.bottom).offset(self.inputContainerTopMargin)
+            make.height.equalTo(self.inputContainerHeight)
+        }
+        // loginBtn
+        mainView.addSubview(self.doneBtn)
+        self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)
+        self.doneBtn.set(title: "donebtn.login".localized, titleColor: AppColor.white, bgImage: nil, for: .normal)
+        self.doneBtn.set(title: "donebtn.login".localized, titleColor: AppColor.white, bgImage: nil, for: .highlighted)
+        self.doneBtn.set(title: "donebtn.login".localized, titleColor: AppColor.white, bgImage: nil, for: .disabled)
+        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: self.doneBtnHeight * 0.5, borderWidth: 0, borderColor: UIColor.clear)
+        self.doneBtn.backgroundColor = AppColor.disable
+        self.doneBtn.gradientLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.mainLrMargin * 2.0 - self.lrMargin * 2.0, height: self.doneBtnHeight)
+        self.doneBtn.gradientLayer.isHidden = !self.doneBtn.isEnabled
+        self.doneBtn.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.height.equalTo(self.doneBtnHeight)
+            make.top.equalTo(self.inputContainer.snp.bottom).offset(self.doneBtnTopMargin)
+        }
+        // forgetPwd
+        mainView.addSubview(self.forgetPwdBtn)
+        self.forgetPwdBtn.contentHorizontalAlignment = .center
+        self.forgetPwdBtn.set(title: "login.forgetpwd".localized, titleColor: AppColor.themeRed, for: .normal)
+        self.forgetPwdBtn.set(title: "login.forgetpwd".localized, titleColor: AppColor.themeRed, for: .highlighted)
+        self.forgetPwdBtn.set(font: UIFont.pingFangSCFont(size: 14))
+        self.forgetPwdBtn.addTarget(self, action: #selector(forgetPwdBtnClick(_:)), for: .touchUpInside)
+        self.forgetPwdBtn.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(self.doneBtn.snp.bottom).offset(self.tipsTopMargin)
+        }
+        // loginTypeBtn
+        mainView.addSubview(self.btnType)
+        self.btnType.contentHorizontalAlignment = .center
+        self.btnType.set(title: "验证码登录", titleColor: AppColor.theme, image: nil, bgImage: nil, for: .normal)
+        self.btnType.set(title: "验证码登录", titleColor: AppColor.theme, image: nil, bgImage: nil, for: .highlighted)
+        self.btnType.set(font: UIFont.pingFangSCFont(size: 16), cornerRadius: 0, borderWidth: 0, borderColor: AppColor.theme)
+        //self.btnType.isHidden = true    // 取消验证码登录
+        self.btnType.addTarget(self, action: #selector(loginTypeBtnClick(_:)), for: .touchUpInside)
+        self.btnType.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-self.loginTypeBtnBottomMargin)
         }
     }
+    
     //
     fileprivate func initialTopView(_ topView: UIView) -> Void {
         let showBackWH: CGFloat = 44

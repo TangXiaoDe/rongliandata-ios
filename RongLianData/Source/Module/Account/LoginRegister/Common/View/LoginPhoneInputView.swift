@@ -14,7 +14,7 @@ class LoginPhoneInputView: UIView {
 
     // MARK: - Internal Property
 
-    static let viewHeight: CGFloat = 54 + 56
+    static let viewHeight: CGFloat = 50
 
     var model: String? {
         didSet {
@@ -46,13 +46,13 @@ class LoginPhoneInputView: UIView {
     let textField: UITextField = UITextField.init()
     let areaCodeView: TitleIconControl = TitleIconControl.init()
 
-    fileprivate let lrMargin: CGFloat = 16
+    fileprivate let lrMargin: CGFloat = 0
     
     fileprivate let iconLeftMargin: CGFloat = 16        // super.left
     fileprivate let titleLeftMargin: CGFloat = 16       // super.left
     fileprivate let iconCenterYTopMargin: CGFloat = 24 + 9.0  // super.top
     
-    fileprivate let fieldHeight: CGFloat = 56
+    fileprivate let fieldHeight: CGFloat = 50
     fileprivate let fieldBottomMargin: CGFloat = 0
     fileprivate lazy var fieldCenterYBottomMargin: CGFloat = {
         let margin: CGFloat = self.fieldBottomMargin + self.fieldHeight * 0.5
@@ -116,45 +116,45 @@ extension LoginPhoneInputView {
         }
     }
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        // 1. iconView
-        mainView.addSubview(self.iconView)
-        self.iconView.set(cornerRadius: 0)
-        self.iconView.isHidden = true
-        //self.iconView.image = UIImage.init(named: "IMG_login_icon_account")
-        //self.iconView.image = UIImage.getIconFontImage(code: IconFont.login_account, fontSize: 16, color: AppColor.theme)
-        self.iconView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.iconLeftMargin)
-            make.centerY.equalTo(mainView.snp.top).offset(self.iconCenterYTopMargin)
-            //make.size.equalTo(CGSize.init(width: 16, height: 16))
-        }
-        // 2. titleLabel
-        mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "账号", font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.minorText)
-        self.titleLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.iconView)
-            make.leading.equalToSuperview().offset(self.titleLeftMargin)
-        }
-        // 3. areaCodeView
-        mainView.addSubview(self.areaCodeView)
-        self.areaCodeView.isUserInteractionEnabled = false
-        self.areaCodeView.isHidden = true   // AppConfig.share.registerType != .phone
-        self.areaCodeView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.centerY.equalTo(mainView.snp.bottom).offset(-self.fieldCenterYBottomMargin)
-        }
-        self.areaCodeView.titleLabel.set(text: "+86", font: UIFont.pingFangSCFont(size: 15), textColor: AppColor.mainText)
-        self.areaCodeView.titleLabel.snp.remakeConstraints { (make) in
-            make.leading.equalToSuperview().offset(2)
-            make.centerY.top.bottom.equalToSuperview()
-        }
-        self.areaCodeView.iconView.set(cornerRadius: 0)
-        self.areaCodeView.iconView.image = UIImage.init(named: "IMG_login_triangle")
-        self.areaCodeView.iconView.snp.remakeConstraints { (make) in
-            make.size.equalTo(CGSize.init(width: 8, height: 4))
-            make.centerY.equalToSuperview()
-            make.leading.equalTo(self.areaCodeView.titleLabel.snp.trailing).offset(5)
-            make.trailing.equalToSuperview().offset(-2)
-        }
+//        // 1. iconView
+//        mainView.addSubview(self.iconView)
+//        self.iconView.set(cornerRadius: 0)
+//        self.iconView.isHidden = true
+//        //self.iconView.image = UIImage.init(named: "IMG_login_icon_account")
+//        //self.iconView.image = UIImage.getIconFontImage(code: IconFont.login_account, fontSize: 16, color: AppColor.theme)
+//        self.iconView.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(self.iconLeftMargin)
+//            make.centerY.equalTo(mainView.snp.top).offset(self.iconCenterYTopMargin)
+//            //make.size.equalTo(CGSize.init(width: 16, height: 16))
+//        }
+//        // 2. titleLabel
+//        mainView.addSubview(self.titleLabel)
+//        self.titleLabel.set(text: "账号", font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.minorText)
+//        self.titleLabel.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(self.iconView)
+//            make.leading.equalToSuperview().offset(self.titleLeftMargin)
+//        }
+//        // 3. areaCodeView
+//        mainView.addSubview(self.areaCodeView)
+//        self.areaCodeView.isUserInteractionEnabled = false
+//        self.areaCodeView.isHidden = true   // AppConfig.share.registerType != .phone
+//        self.areaCodeView.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(self.lrMargin)
+//            make.centerY.equalTo(mainView.snp.bottom).offset(-self.fieldCenterYBottomMargin)
+//        }
+//        self.areaCodeView.titleLabel.set(text: "+86", font: UIFont.pingFangSCFont(size: 15), textColor: AppColor.mainText)
+//        self.areaCodeView.titleLabel.snp.remakeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(2)
+//            make.centerY.top.bottom.equalToSuperview()
+//        }
+//        self.areaCodeView.iconView.set(cornerRadius: 0)
+//        self.areaCodeView.iconView.image = UIImage.init(named: "IMG_login_triangle")
+//        self.areaCodeView.iconView.snp.remakeConstraints { (make) in
+//            make.size.equalTo(CGSize.init(width: 8, height: 4))
+//            make.centerY.equalToSuperview()
+//            make.leading.equalTo(self.areaCodeView.titleLabel.snp.trailing).offset(5)
+//            make.trailing.equalToSuperview().offset(-2)
+//        }
         // 4. textField
         mainView.addSubview(self.textField)
         self.textField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText)
@@ -164,13 +164,12 @@ extension LoginPhoneInputView {
         self.textField.clearButtonMode = .whileEditing
         self.textField.autocorrectionType = .no
         self.textField.keyboardType = .phonePad //.numbersAndPunctuation
-        self.textField.set(cornerRadius: 8, borderWidth: 0.5, borderColor: AppColor.dividing)
+        self.textField.set(cornerRadius: self.fieldHeight * 0.5, borderWidth: 0, borderColor: AppColor.dividing)
         self.textField.snp.makeConstraints { (make) in
             let leftMargin: CGFloat = self.lrMargin // AppConfig.share.registerType == .phone ? self.fieldLeftMargin : self.lrMargin
             make.leading.equalToSuperview().offset(leftMargin)   // self.fieldLeftMargin self.lrMargin
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.height.equalTo(self.fieldHeight)
-            make.bottom.equalToSuperview().offset(-self.fieldBottomMargin)
+            make.top.bottom.equalToSuperview()
         }
         self.textField.leftViewMode = .always
         self.textField.leftView = UIView.init(frame: CGRect.init(origin: .zero, size: .init(width: 24, height: 0)))

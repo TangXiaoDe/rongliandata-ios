@@ -19,7 +19,7 @@ class LoginSmsCodeInputView: UIView {
 
     // MARK: - Internal Property
     weak var delegate: LoginSmsCodeInputViewDelegate?
-    static let viewHeight: CGFloat = 54 + 56
+    static let viewHeight: CGFloat = 50
 
     var model: String? {
         didSet {
@@ -70,17 +70,19 @@ class LoginSmsCodeInputView: UIView {
     let countdownView: TitleContainer = TitleContainer()
 
     
-    fileprivate let lrMargin: CGFloat = 16
+    fileprivate let lrMargin: CGFloat = 0
     
     fileprivate let iconLeftMargin: CGFloat = 16        // super.left
     fileprivate let titleLeftMargin: CGFloat = 16       // super.left
     fileprivate let iconCenterYTopMargin: CGFloat = 24 + 9.0  // super.top
     
-    let fieldHeight: CGFloat = 56
+    let fieldHeight: CGFloat = 50
+    fileprivate let codeRightMargin: CGFloat = 16
+    
     fileprivate let fieldBottomMargin: CGFloat = 0
     fileprivate let fieldLeftMargin: CGFloat = 16
-    fileprivate let fieldRightMargin: CGFloat = 128 + 10 //+ 16  //154
-    fileprivate let codeBtnSize: CGSize = CGSize.init(width: 128, height: 56)
+    fileprivate let fieldRightMargin: CGFloat = 100 + 18 //+ 16  //154
+    fileprivate let codeBtnSize: CGSize = CGSize.init(width: 100, height: 50)
 
     /// 定时器相关
     fileprivate let maxLeftSecond: Int = 60
@@ -190,38 +192,37 @@ extension LoginSmsCodeInputView {
         }
     }
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        // 1. iconView
-        mainView.addSubview(self.iconView)
-        self.iconView.set(cornerRadius: 0)
-        self.iconView.isHidden = true
-        //self.iconView.image = UIImage.init(named: "IMG_login_icon_validation")
-        //self.iconView.image = UIImage.getIconFontImage(code: IconFont.login_verification, fontSize: 12, color: AppColor.theme)
-        self.iconView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.iconLeftMargin)
-            make.centerY.equalTo(mainView.snp.top).offset(self.iconCenterYTopMargin)
-        }
-        // 2. titleLabel
-        mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "验证码", font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.minorText)
-        self.titleLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.iconView)
-            make.leading.equalToSuperview().offset(self.titleLeftMargin)
-        }
+//        // 1. iconView
+//        mainView.addSubview(self.iconView)
+//        self.iconView.set(cornerRadius: 0)
+//        self.iconView.isHidden = true
+//        //self.iconView.image = UIImage.init(named: "IMG_login_icon_validation")
+//        //self.iconView.image = UIImage.getIconFontImage(code: IconFont.login_verification, fontSize: 12, color: AppColor.theme)
+//        self.iconView.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(self.iconLeftMargin)
+//            make.centerY.equalTo(mainView.snp.top).offset(self.iconCenterYTopMargin)
+//        }
+//        // 2. titleLabel
+//        mainView.addSubview(self.titleLabel)
+//        self.titleLabel.set(text: "验证码", font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.minorText)
+//        self.titleLabel.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(self.iconView)
+//            make.leading.equalToSuperview().offset(self.titleLeftMargin)
+//        }
         // 3. fieldContainer
         mainView.addSubview(self.fieldContainer)
-        //self.fieldContainer.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
-        //self.fieldContainer.set(cornerRadius: 8, borderWidth: 0.5, borderColor: AppColor.dividing)
+        self.fieldContainer.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
+        self.fieldContainer.set(cornerRadius: self.fieldHeight * 0.5, borderWidth: 0, borderColor: AppColor.dividing)
         self.fieldContainer.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.height.equalTo(self.fieldHeight)
-            make.bottom.equalToSuperview().offset(-self.fieldBottomMargin)
+            make.top.bottom.equalToSuperview()
         }
         // textField
         self.fieldContainer.addSubview(self.textField)
         self.textField.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
-        self.textField.set(cornerRadius: 8, borderWidth: 0.5, borderColor: AppColor.dividing)
-        self.textField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText)
+        //self.textField.set(cornerRadius: 8, borderWidth: 0.5, borderColor: AppColor.dividing)
+        //self.textField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText)
         self.textField.setPlaceHolder("请输入验证码", font: UIFont.pingFangSCFont(size: 18, weight: .medium), color: AppColor.inputPlaceHolder)
         self.textField.clearButtonMode = .whileEditing
         self.textField.keyboardType = .numberPad
@@ -239,23 +240,22 @@ extension LoginSmsCodeInputView {
         self.fieldContainer.addSubview(self.codeBtn)
         self.codeBtn.set(title: "获取验证码", titleColor: AppColor.theme, bgImage: nil, for: .normal)
         self.codeBtn.set(title: "获取验证码", titleColor: AppColor.theme, bgImage: nil, for: .disabled)
-        self.codeBtn.set(font: UIFont.pingFangSCFont(size: 16, weight: .medium), cornerRadius: 8)
-        self.codeBtn.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
-        self.codeBtn.contentHorizontalAlignment = .center
+        self.codeBtn.set(font: UIFont.pingFangSCFont(size: 14, weight: .medium), cornerRadius: 0)
+        //self.codeBtn.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
+        self.codeBtn.contentHorizontalAlignment = .right
         self.codeBtn.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview()//.offset(-self.lrMargin)
-            make.size.equalTo(self.codeBtnSize)
+            make.trailing.equalToSuperview().offset(-self.codeRightMargin)
         }
         // countLabel
         self.fieldContainer.addSubview(self.countdownView)
         self.countdownView.isHidden = true // 默认隐藏
-        self.countdownView.set(cornerRadius: 8)
-        self.countdownView.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
+        //self.countdownView.set(cornerRadius: 8)
+        //self.countdownView.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
         self.countdownView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.codeBtn)
+            make.centerY.trailing.equalTo(self.codeBtn)
         }
-        self.countdownView.label.set(text: nil, font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.grayText, alignment: .center)
+        self.countdownView.label.set(text: nil, font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: AppColor.minorText, alignment: .right)
         self.countdownView.label.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
         }

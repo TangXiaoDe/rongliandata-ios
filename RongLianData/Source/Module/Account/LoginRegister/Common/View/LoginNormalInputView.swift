@@ -15,7 +15,8 @@ class LoginNormalInputView: UIView {
 
     // MARK: - Internal Property
 
-    static let viewHeight: CGFloat = 54 + 56
+    static let viewHeight: CGFloat = 50
+    static let verMargin: CGFloat = 18
 
     var model: String? {
         didSet {
@@ -52,7 +53,7 @@ class LoginNormalInputView: UIView {
     fileprivate let titleLeftMargin: CGFloat = 16       // super.left
     fileprivate let iconCenterYTopMargin: CGFloat = 24 + 9.0  // super.top
     
-    fileprivate let fieldHeight: CGFloat = 56
+    fileprivate let fieldHeight: CGFloat = 50
     fileprivate let fieldBottomMargin: CGFloat = 0
 
 
@@ -111,32 +112,33 @@ extension LoginNormalInputView {
         }
     }
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        // 1. iconView
-        mainView.addSubview(self.iconView)
-        self.iconView.set(cornerRadius: 0)
-        self.iconView.isHidden = true
-        self.iconView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.iconLeftMargin)
-            make.centerY.equalTo(mainView.snp.top).offset(self.iconCenterYTopMargin)
-        }
-        // 2. titleLabel
-        mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.minorText)
-        self.titleLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.iconView)
-            make.leading.equalToSuperview().offset(self.titleLeftMargin)
-        }
+        //
+//        // 1. iconView
+//        mainView.addSubview(self.iconView)
+//        self.iconView.set(cornerRadius: 0)
+//        self.iconView.isHidden = true
+//        self.iconView.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(self.iconLeftMargin)
+//            make.centerY.equalTo(mainView.snp.top).offset(self.iconCenterYTopMargin)
+//        }
+//        // 2. titleLabel
+//        mainView.addSubview(self.titleLabel)
+//        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.minorText)
+//        self.titleLabel.isHidden = true
+//        self.titleLabel.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(self.iconView)
+//            make.leading.equalToSuperview().offset(self.titleLeftMargin)
+//        }
         // 3. textField
         mainView.addSubview(self.textField)
         self.textField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText)
         self.textField.clearButtonMode = .whileEditing
         self.textField.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
-        self.textField.set(cornerRadius: 8, borderWidth: 0.5, borderColor: AppColor.dividing)
+        self.textField.set(cornerRadius: self.fieldHeight * 0.5, borderWidth: 0, borderColor: AppColor.dividing)
         self.textField.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.height.equalTo(self.fieldHeight)
-            make.bottom.equalToSuperview().offset(-self.fieldBottomMargin)
+            make.top.bottom.equalToSuperview()
         }
         self.textField.leftViewMode = .always
         self.textField.leftView = UIView.init(frame: CGRect.init(origin: .zero, size: .init(width: 24, height: 0)))
