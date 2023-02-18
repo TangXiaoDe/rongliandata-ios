@@ -22,7 +22,7 @@ enum ConfigType {
 /// App配置
 class AppConfig {
 
-    static let share = AppConfig(type: .develop)
+    static let share = AppConfig(type: .master)
     init(type: ConfigType) {
         self.type = type
         switch type {
