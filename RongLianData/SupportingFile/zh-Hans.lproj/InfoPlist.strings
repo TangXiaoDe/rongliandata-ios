@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  RongLianData
+
+  Created by 小唐 on 2019/5/31.
+  Copyright © 2019 ChainOne. All rights reserved.
+*/
+
+
+/// 项目名
+"CFBundleName" = "融链数据Test";
+"CFBundleDisplayName" = "融链数据Test";

@@ -5,7 +5,7 @@ inhibit_all_warnings!
 # 通过pod 使用三方库时,必须指定明确的版本号!方便同期开发的用户使用相同的三方,方便后续更新!
 # 编辑该文件时,必须使用专业的编辑器.不允许使用记事本编辑,避免导致的乱码错误引发的问题.
 
-target 'AntClusterB' do
+target 'RongLianData' do
 
 source 'https://github.com/CocoaPods/Specs.git'
   
@@ -75,7 +75,7 @@ pod 'AMapSearch', '7.1.0'                 # 高德定位搜索
 ##pod 'TXLiteAVSDK_Professional'   # 腾讯云播放器-全能版
 
 
-  target 'AntClusterBTests' do            # 测试相关三方库
+  target 'RongLianDataTests' do            # 测试相关三方库
     inherit! :search_paths
     pod 'Nimble', '8.0.1'                   # 断言
     pod 'Mockingjay', '2.0.1'               # 网络请求模拟
