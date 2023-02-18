@@ -19,6 +19,7 @@ enum LoginPwdForgetScene {
     case setting
 }
 
+
 typealias ForgetLoginPwdController = LoginPwdResetController
 typealias LoginPwdForgetController = LoginPwdResetController
 class LoginPwdResetController: BaseViewController {
@@ -27,27 +28,49 @@ class LoginPwdResetController: BaseViewController {
     let scene: LoginPwdForgetScene
 
     // MARK: - Private Property
+    
     fileprivate let coverBtn = UIButton.init(type: .custom)
     fileprivate var captchaView: DXCaptchaView!
+    
+    
+    fileprivate let navBar: AppHomeNavBar = AppHomeNavBar.init()
+    fileprivate let bgView: UIImageView = UIImageView.init()
+    
+    fileprivate let mainView: UIView = UIView.init()
+    fileprivate let mainBgView: UIImageView = UIImageView.init()
+    
+    fileprivate let logoView: UIImageView = UIImageView.init()
+    fileprivate let inputContainer: UIView = UIView.init()
+    fileprivate let phoneView: LoginPhoneInputView = LoginPhoneInputView.init()
+    fileprivate let smsCodeView: LoginSmsCodeInputView = LoginSmsCodeInputView.init()
+    fileprivate let setPwdView: LoginPasswordInputView = LoginPasswordInputView.init()
+    fileprivate let ensurePwdView: LoginPasswordInputView = LoginPasswordInputView.init()
+    fileprivate let doneBtn: GradientLayerButton = GradientLayerButton.init(type: .custom)
+    fileprivate let tipsLabel: UILabel = UILabel.init()
 
-    @IBOutlet weak var logoView: UIImageView!
-    @IBOutlet weak var areaCodeBtn: UIButton!
-    @IBOutlet weak var accountField: UITextField!
-    @IBOutlet weak var verifyCodeField: UITextField!
-    @IBOutlet weak var sendSmsBtn: UIButton!
-    @IBOutlet weak var confirmPwdField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var resetPwdBtn: CommonDoneBtn!
-    @IBOutlet weak var confirmPwdView: UIView!
-    @IBOutlet weak var resetBtnTopMarginConstraint: NSLayoutConstraint!
-    @IBOutlet weak var pwdSecurityBtn: UIButton!
-    @IBOutlet weak var confirmPwdCorrectBtn: UIButton!
 
-    fileprivate let countdownLabel: UILabel = UILabel()
+    fileprivate let mainTopMargin: CGFloat = kNavigationStatusBarHeight + 5
+    fileprivate let mainBgSize: CGSize = CGSize.init(width: 349, height: 582)
+    
+    fileprivate let mainLrMargin: CGFloat = 13
+    fileprivate let lrMargin: CGFloat = 34
+    
+    fileprivate let logoTopMargin: CGFloat = 147
+    fileprivate let logoSize: CGSize = CGSize.init(width: 83.5, height: 24.5)
+    fileprivate let registerBtnSize: CGSize = CGSize.init(width: 68, height: 28)
+    //fileprivate let loginTypeBtnSize: CGSize = CGSize.init(width: 90, height: 28)
+    fileprivate let loginTypeBtnBottomMargin: CGFloat = 32
+    
+    fileprivate let inputContainerTopMargin: CGFloat = 28   // logo.bottom
+    fileprivate let singleInfoHeight: CGFloat = LoginNormalInputView.viewHeight
+    fileprivate let infoVerMargin: CGFloat = LoginNormalInputView.verMargin
+//    fileprivate lazy var inputContainerHeight: CGFloat = {
+//        return self.singleInfoHeight * 2.0 + LoginNormalInputView.verMargin
+//    }()
+    fileprivate let tipsTopMargin: CGFloat = 15     // doneBtn.bottom
+    fileprivate let doneBtnHeight: CGFloat = 44
+    fileprivate let doneBtnTopMargin: CGFloat = 42  // inputContainer.bottom
 
-    fileprivate let doneBtnLrMargin: CGFloat = 12
-    fileprivate let doenBtnH: CGFloat = 44
-    fileprivate let sendCodeBtnH: CGFloat = 28
 
     /// 定时器相关
     fileprivate let maxLeftSecond: Int = 60
@@ -61,6 +84,7 @@ class LoginPwdResetController: BaseViewController {
     fileprivate let smsCodeMaxLen: Int = 6
     fileprivate let smsCodeMinLen: Int = 4
 
+    
     // MARK: - Initialize Function
 
     init(scene: LoginPwdForgetScene) {
@@ -73,7 +97,10 @@ class LoginPwdResetController: BaseViewController {
     }
 
     deinit {
-        self.stopTimer()
+        self.smsCodeView.stopTimer()
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
 
 }
@@ -90,99 +117,149 @@ extension LoginPwdResetController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         // 添加键盘通知
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // 移除键盘通知
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.default
-    }
-    
+
 }
 
 // MARK: - UI
 extension LoginPwdResetController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = UIColor.white
-        // navigationbar
-        self.navigationItem.title = "忘记密码"
-        // accountField
-        let accountClearBtn: UIButton = UIButton.init(type: .custom)
-        accountClearBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 22)
-        accountClearBtn.setImage(UIImage(named: "IMG_login_input_clear"), for: .normal)
-        accountClearBtn.addTarget(self, action: #selector(accountClearBtnClick(_:)), for: .touchUpInside)
-        self.accountField.rightView = accountClearBtn
-        self.accountField.rightViewMode = .whileEditing
-        self.accountField.addTarget(self, action: #selector(accountFieldValueChanged(_:)), for: .editingChanged)
-        self.accountField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.phone".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
-        // verifyCodeField
-        self.verifyCodeField.addTarget(self, action: #selector(verifyCodeFieldValueChanged(_:)), for: .editingChanged)
-        self.verifyCodeField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.smscode".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
-        // passwordField
-        let pwdClearBtn: UIButton = UIButton.init(type: .custom)
-        pwdClearBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 22)
-        pwdClearBtn.setImage(UIImage(named: "IMG_login_input_clear"), for: .normal)
-        pwdClearBtn.addTarget(self, action: #selector(pwdClearBtnClick(_:)), for: .touchUpInside)
-        self.passwordField.rightView = pwdClearBtn
-        self.passwordField.rightViewMode = .whileEditing
-        self.passwordField.isSecureTextEntry = true
-        self.pwdSecurityBtn.isSelected = true
-        self.passwordField.addTarget(self, action: #selector(passwordFieldValueChanged(_:)), for: .editingChanged)
-        self.passwordField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.loginpwd.desc".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
-        // confirmField
-        let confirmPwdClearBtn: UIButton = UIButton.init(type: .custom)
-        confirmPwdClearBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 22)
-        confirmPwdClearBtn.setImage(UIImage(named: "IMG_login_input_clear"), for: .normal)
-        confirmPwdClearBtn.addTarget(self, action: #selector(confirmPwdClearBtnClick(_:)), for: .touchUpInside)
-        confirmPwdClearBtn.isSelected = true
-        self.confirmPwdField.rightView = confirmPwdClearBtn
-        self.confirmPwdField.rightViewMode = .whileEditing
-        self.confirmPwdField.isSecureTextEntry = true
-        self.confirmPwdField.addTarget(self, action: #selector(confirmPwdFieldValueChanged(_:)), for: .editingChanged)
-        self.confirmPwdField.addTarget(self, action: #selector(confirmPwdFieldBeginEditing(_:)), for: .editingDidBegin)
-        self.confirmPwdField.attributedPlaceholder = NSAttributedString.init(string: "input.placeholder.repassword".localized, attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
-        // confirmPwdCorrectBtn
-        self.confirmPwdCorrectBtn.isHidden = true
-        // resetPwdBtn
-        self.resetPwdBtn.backgroundColor = UIColor.clear
-        self.resetPwdBtn.gradientLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.doneBtnLrMargin * 2.0, height: self.doenBtnH)
-        self.resetPwdBtn.set(cornerRadius: 5)
-        self.resetPwdBtn.setTitle("donebtn.resetpwd".localized, for: .normal)
-        // areaCodeBtn
-        self.areaCodeBtn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
-        self.areaCodeBtn.setTitle("+86", for: .normal)
-        // sendSmsBtn
-        self.sendSmsBtn.set(font: UIFont.systemFont(ofSize: 12), cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.theme)
-        self.sendSmsBtn.setTitleColor(AppColor.theme, for: .normal)
-        self.sendSmsBtn.backgroundColor = UIColor.init(hex: 0xFFFFFF)
-        // countdownLabel
-        self.view.addSubview(self.countdownLabel)
-        self.countdownLabel.set(text: nil, font: UIFont.systemFont(ofSize: 12), textColor: AppColor.minorText, alignment: .center)
-        self.countdownLabel.set(cornerRadius: 5, borderWidth: 1, borderColor: AppColor.minorText)
-        //self.countdownLabel.backgroundColor = UIColor.white
-        self.countdownLabel.isHidden = true // 默认隐藏
-        self.countdownLabel.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.sendSmsBtn)
+        self.view.backgroundColor = AppColor.pageBg
+        // navBar
+        self.view.addSubview(self.navBar)
+        self.navBar.titleLabel.set(text: "重置密码", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.white, alignment: .center)
+        self.navBar.delegate = self
+        self.navBar.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(kNavigationStatusBarHeight)
         }
-        // 版本适配
-        if #available(iOS 11.0, *) {
-            self.passwordField.textContentType = UITextContentType.name
-            self.confirmPwdField.textContentType = UITextContentType.name
+        // bgView
+        self.view.addSubview(self.bgView)
+        self.bgView.image = UIImage.init(named: "IMG_signin_img_bg")
+        self.bgView.set(cornerRadius: 0)
+        self.bgView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-        // iPhone5
-        if UIDevice.current.isiPhone5series() {
-            self.resetBtnTopMarginConstraint.constant = 40
-            self.view.layoutIfNeeded()
+        // mainView
+        self.view.addSubview(self.mainView)
+        self.initialMainView(self.mainView)
+        self.mainView.snp.makeConstraints { make in
+            make.size.equalTo(self.mainBgSize)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.mainTopMargin)
+        }
+        //
+        self.view.bringSubviewToFront(self.navBar)
+    }
+    
+    //
+    fileprivate func initialMainView(_ mainView: UIView) -> Void {
+        // bgView
+        mainView.addSubview(self.mainBgView)
+        self.mainBgView.image = UIImage.init(named: "IMG_signin_img_bg_white")
+        self.mainBgView.set(cornerRadius: 0)
+        self.mainBgView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        // logoView
+        mainView.addSubview(self.logoView)
+        self.logoView.set(cornerRadius: 0)
+        self.logoView.image = UIImage.init(named: "IMG_signin_img_logo")
+        self.logoView.snp.makeConstraints { (make) in
+            make.size.equalTo(self.logoSize)
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.top.equalToSuperview().offset(self.logoTopMargin)
+        }
+        // inputContainer
+        mainView.addSubview(self.inputContainer)
+        self.initialInputContainer(self.inputContainer)
+        self.inputContainer.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.top.equalTo(self.logoView.snp.bottom).offset(self.inputContainerTopMargin)
+            //make.height.equalTo(self.inputContainerHeight)
+        }
+        // 2. tips
+//        mainView.addSubview(self.tipsLabel)
+//        self.tipsLabel.set(text: "*限6-20个字符以内，建议使用数字字母组合，区分大小写", font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.grayText)
+//        self.tipsLabel.numberOfLines = 2
+//        self.tipsLabel.snp.makeConstraints { make in
+//            make.leading.equalToSuperview().offset(self.tipsLrMargin)
+//            make.trailing.equalToSuperview().offset(-self.tipsLrMargin)
+//            make.top.equalTo(self.inputContainer.snp.bottom).offset(self.tipsTopMargin)
+//        }
+        // 3. doneBtn
+        mainView.addSubview(self.doneBtn)
+        self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)
+        self.doneBtn.set(title: "重置密码", titleColor: AppColor.white, bgImage: nil, for: .normal)
+        self.doneBtn.set(title: "重置密码", titleColor: AppColor.white, bgImage: nil, for: .highlighted)
+        self.doneBtn.set(title: "重置密码", titleColor: AppColor.white, bgImage: nil, for: .disabled)
+        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: self.doneBtnHeight * 0.5, borderWidth: 0, borderColor: UIColor.clear)
+        self.doneBtn.backgroundColor = AppColor.disable
+        //self.doneBtn.gradientLayer.colors = [AppColor.theme.cgColor, AppColor.theme.cgColor]
+        self.doneBtn.gradientLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.mainLrMargin * 2.0 - self.lrMargin * 2.0, height: self.doneBtnHeight)
+        self.doneBtn.gradientLayer.isHidden = !self.doneBtn.isEnabled
+        self.doneBtn.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.height.equalTo(self.doneBtnHeight)
+            make.top.equalTo(self.inputContainer.snp.bottom).offset(self.doneBtnTopMargin)
+            //make.bottom.lessThanOrEqualToSuperview()
         }
     }
+    ///
+    fileprivate func initialInputContainer(_ container: UIView) -> Void {
+        // 1. phone
+        container.addSubview(self.phoneView)
+        self.phoneView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
+        self.phoneView.snp.makeConstraints { (make) in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(self.singleInfoHeight)
+        }
+        // 2. smsCode
+        container.addSubview(self.smsCodeView)
+        //self.smsCodeView.delegate = self
+        self.smsCodeView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
+        self.smsCodeView.codeBtn.addTarget(self, action: #selector(sendSmsCodeBtnClick(_:)), for: .touchUpInside)
+        self.smsCodeView.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(self.phoneView.snp.bottom).offset(self.infoVerMargin)
+            make.height.equalTo(self.singleInfoHeight)
+        }
+        // 2. setPwd
+        container.addSubview(self.setPwdView)
+        self.setPwdView.title = "设置密码"
+        self.setPwdView.placeholder = "请设置登录密码"
+        self.setPwdView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
+        self.setPwdView.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(self.smsCodeView.snp.bottom).offset(self.infoVerMargin)
+            make.height.equalTo(self.singleInfoHeight)
+        }
+        // 3. ensurePwd
+        container.addSubview(self.ensurePwdView)
+        self.ensurePwdView.title = "确认密码"
+        self.ensurePwdView.placeholder = "请再次输入密码"
+        self.ensurePwdView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
+        self.ensurePwdView.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(self.setPwdView.snp.bottom).offset(self.infoVerMargin)
+            make.height.equalTo(self.singleInfoHeight)
+            make.bottom.equalToSuperview()
+        }
+    }
+    
 }
 
 // MARK: - Data(数据处理与加载)
@@ -195,107 +272,81 @@ extension LoginPwdResetController {
     /// 判断当前操作按钮(确定、登录、下一步...)是否可用
     fileprivate func couldDone() -> Bool {
         var flag: Bool = false
-        guard let account = self.accountField.text, let verifyCode = self.verifyCodeField.text, let password = self.passwordField.text, let confirmPwd = self.confirmPwdField.text else {
+        guard let account = self.phoneView.textField.text, let smscode = self.smsCodeView.textField.text, let password = self.setPwdView.textField.text, let ensurePwd = self.ensurePwdView.textField.text else {
             return flag
         }
-        flag = (!account.isEmpty && !verifyCode.isEmpty && !password.isEmpty && !confirmPwd.isEmpty && (password == confirmPwd))
+        flag = (!account.isEmpty && !smscode.isEmpty && !password.isEmpty && !ensurePwd.isEmpty)
         return flag
     }
     /// 操作按钮(确定、登录、下一步...)的可用性判断
     fileprivate func couldDoneProcess() -> Void {
-        self.resetPwdBtn.isEnabled = self.couldDone()
+        self.doneBtn.isEnabled = self.couldDone()
+        self.doneBtn.gradientLayer.isHidden = !self.doneBtn.isEnabled
     }
 
-    /// 密码一致性处理
-    fileprivate func pwdCorrectProcess(isConfirmPwdEditing: Bool = false) -> Void {
-        guard let password = self.passwordField.text, let confirmPwd = self.confirmPwdField.text else {
-            self.confirmPwdCorrectBtn.isSelected = false
-            self.confirmPwdCorrectBtn.isHidden = true
-            return
-        }
-        self.confirmPwdCorrectBtn.isHidden = isConfirmPwdEditing ? false : confirmPwd.isEmpty
-        self.confirmPwdCorrectBtn.isSelected = (!password.isEmpty && password == confirmPwd)
-    }
 }
 
 // MARK: - Event(事件响应)
 extension LoginPwdResetController {
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
     }
 
-    @IBAction func pwdSecurityBtnClick(_ button: UIButton) {
-        button.isSelected = !button.isSelected
-        self.passwordField.isSecureTextEntry = button.isSelected
+    /// 输入框内容变更响应
+    @objc fileprivate func textFieldValueChanged(_ textField: UITextField) -> Void {
+        switch textField {
+        case self.phoneView.textField:
+            TextFieldHelper.limitTextField(textField, withMaxLen: self.accountMaxLen)
+        case self.smsCodeView.textField:
+            TextFieldHelper.limitTextField(textField, withMaxLen: self.smsCodeMaxLen)
+        case self.setPwdView.textField:
+            TextFieldHelper.limitTextField(textField, withMaxLen: self.passwordMaxLen)
+        case self.ensurePwdView.textField:
+            TextFieldHelper.limitTextField(textField, withMaxLen: self.passwordMaxLen)
+//            if let password = self.setPwdView.textField.text, let ensurePwd = self.ensurePwdView.textField.text, !ensurePwd.isEmpty, password != ensurePwd {
+//                self.tipsLabel.set(text: "*请输入一致的新密码", font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.themeRed)
+//            } else {
+//                self.tipsLabel.set(text: "*限6-20个字符以内，建议使用数字字母组合，区分大小写", font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.grayText)
+//            }
+        default:
+            break
+        }
+        self.couldDoneProcess()
     }
 
-    @objc fileprivate func accountClearBtnClick(_ button: UIButton) -> Void {
-        self.accountField.text = nil
-        self.couldDoneProcess()
-    }
-    @objc fileprivate func pwdClearBtnClick(_ button: UIButton) -> Void {
-        self.passwordField.text = nil
-        self.couldDoneProcess()
-        self.pwdCorrectProcess()
-    }
-    @objc fileprivate func confirmPwdClearBtnClick(_ button: UIButton) -> Void {
-        self.passwordField.text = nil
-        self.couldDoneProcess()
-        self.pwdCorrectProcess(isConfirmPwdEditing: true)
-    }
-
-    @objc fileprivate func accountFieldValueChanged(_ textField: UITextField) -> Void {
-        TextFieldHelper.limitTextField(textField, withMaxLen: self.accountLen)
-        self.couldDoneProcess()
-    }
-    @objc fileprivate func passwordFieldValueChanged(_ textField: UITextField) -> Void {
-        TextFieldHelper.limitTextField(textField, withMaxLen: self.passwordMaxLen)
-        self.couldDoneProcess()
-        self.pwdCorrectProcess()
-    }
-    @objc fileprivate func confirmPwdFieldValueChanged(_ textField: UITextField) -> Void {
-        TextFieldHelper.limitTextField(textField, withMaxLen: self.passwordMaxLen)
-        self.couldDoneProcess()
-        self.pwdCorrectProcess(isConfirmPwdEditing: true)
-    }
-    @objc fileprivate func verifyCodeFieldValueChanged(_ textField: UITextField) -> Void {
-        TextFieldHelper.limitTextField(textField, withMaxLen: self.smsCodeMaxLen)
-        self.couldDoneProcess()
-    }
-    @objc fileprivate func confirmPwdFieldBeginEditing(_ textField: UITextField) -> Void {
-        self.pwdCorrectProcess(isConfirmPwdEditing: true)
-    }
-
-    @IBAction func areaCodeBtnClick(_ sender: UIButton) {
-
-    }
-
-    @IBAction func sendSmsBtnClick(_ sender: UIButton) {
+    /// 发送验证码按钮点击
+    @objc fileprivate func sendSmsCodeBtnClick(_ button: UIButton) -> Void {
         self.view.endEditing(true)
-        guard let account = self.accountField.text, !account.isEmpty else {
+        guard let account = self.phoneView.textField.text, !account.isEmpty else {
+            Toast.showToast(title: "请先输入手机号")
             return
         }
-        // 顶象验证
-        self.coverBtn.backgroundColor = UIColor.black.withAlphaComponent(0)
-        self.coverBtn.addTarget(self, action: #selector(coverBtnClick(_:)), for: .touchUpInside)
-        UIApplication.shared.keyWindow?.addSubview(self.coverBtn)
-        self.coverBtn.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        let appId: String = "fc939e1ccf39d5533743d748d566f345"
-        let config: [String: Any] = ["appId": appId]
-        let captchaFrame: CGRect = CGRect.init(x: kScreenWidth * 0.5 - 150, y: kScreenHeight * 0.5 - 100, width: 300, height: 200)
-        //let captchaView: DXCaptchaView = DXCaptchaView.init(appId: appId, delegate: self, frame: captchaFrame)
-        self.captchaView = DXCaptchaView.init(config: config, delegate: self, frame: captchaFrame)
-        UIApplication.shared.keyWindow?.addSubview(self.captchaView)
+//        // 顶象验证
+//        self.coverBtn.backgroundColor = UIColor.black.withAlphaComponent(0)
+//        self.coverBtn.addTarget(self, action: #selector(coverBtnClick(_:)), for: .touchUpInside)
+//        UIApplication.shared.keyWindow?.addSubview(self.coverBtn)
+//        self.coverBtn.snp.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//        }
+//        let appId: String = "fc939e1ccf39d5533743d748d566f345"
+//        let config: [String: Any] = ["appId": appId]
+//        let captchaFrame: CGRect = CGRect.init(x: kScreenWidth * 0.5 - 150, y: kScreenHeight * 0.5 - 100, width: 300, height: 200)
+//        //let captchaView: DXCaptchaView = DXCaptchaView.init(appId: appId, delegate: self, frame: captchaFrame)
+//        self.captchaView = DXCaptchaView.init(config: config, delegate: self, frame: captchaFrame)
+//        UIApplication.shared.keyWindow?.addSubview(self.captchaView)
         // 发送验证码请求
-//        self.sendSmsCodeRequest(account: account, ticket: "", randStr: "")
+        self.sendSmsCodeRequest(account: account, ticket: "", randStr: "")
     }
 
-    @IBAction func resetPwdBtnClick(_ sender: UIButton) {
-        self.view.endEditing(true)
-        guard let account = self.accountField.text, let code = self.verifyCodeField.text, let newPwd = self.passwordField.text, let confirmPwd = self.confirmPwdField.text else {
+    /// 设置密码按钮点击
+    @objc fileprivate func doneBtnClick(_ button: UIButton) -> Void {
+        guard let account = self.phoneView.textField.text, let code = self.smsCodeView.textField.text, let newPwd = self.setPwdView.textField.text, let confirmPwd = self.ensurePwdView.textField.text else {
+            return
+        }
+        if newPwd != confirmPwd {
+            Toast.showToast(title: "两次密码不一致")
             return
         }
         self.resetLoginPwdRequest(account: account, smsCode: code, newPwd: newPwd, confirmPwd: confirmPwd)
@@ -306,7 +357,7 @@ extension LoginPwdResetController {
 extension LoginPwdResetController {
     /// 键盘将要显示
     @objc fileprivate func keyboardWillShowNotification(_ notification: Notification) -> Void {
-        if !self.confirmPwdField.isFirstResponder && !self.passwordField.isFirstResponder {
+        if !self.setPwdView.textField.isFirstResponder && !self.ensurePwdView.textField.isFirstResponder {
             return
         }
         guard let userInfo = notification.userInfo else {
@@ -315,7 +366,7 @@ extension LoginPwdResetController {
         let kbBounds = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let kbH: CGFloat = kbBounds.size.height
-        let confirmMaxY = self.confirmPwdView.convert(CGPoint.init(x: 0, y: self.confirmPwdView.bounds.size.height), to: nil).y
+        let confirmMaxY = self.ensurePwdView.convert(CGPoint.init(x: 0, y: self.ensurePwdView.bounds.size.height), to: nil).y
         let bottomMargin = kScreenHeight - confirmMaxY
         if bottomMargin < kbH + 25.0 {
             let margin: CGFloat = kbH + 25.0 - bottomMargin
@@ -386,48 +437,15 @@ extension LoginPwdResetController {
 
 }
 
-extension LoginPwdResetController {
-    /// 开启计时器
-    fileprivate func startTimer() -> Void {
-        // 相关控件设置
-        self.sendSmsBtn.isHidden = true
-        self.countdownLabel.isHidden = false
-        self.countdownLabel.text = "\(self.maxLeftSecond)秒后重发"
-        self.leftSecond = self.maxLeftSecond
-        // 开启倒计时
-        self.stopTimer()
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(countdown), object: nil)
-        let timer = XDPackageTimer.timerWithInterval(timeInterval: 1.0, target: self, selector: #selector(countdown), userInfo: nil, repeats: true)
-        RunLoop.main.add(timer, forMode: RunLoop.Mode.common)
-        timer.fire()
-        self.timer = timer
-    }
-    /// 停止计时器
-    fileprivate func stopTimer() -> Void {
-        self.timer?.invalidate()
-        self.timer = nil
-    }
-    /// 计时器回调 - 倒计时
-    @objc fileprivate func countdown() -> Void {
-        if self.leftSecond - 1 > 0 {
-            self.leftSecond -= 1
-            self.countdownLabel.text = "\(self.leftSecond)秒后重发"
-        } else {
-            self.stopTimer()
-            self.sendSmsBtn.setTitle("重新获取", for: .normal)
-            self.countdownLabel.isHidden = true
-            self.sendSmsBtn.isHidden = false
-        }
-    }
-
-}
 // MARK: - Extension Function
 extension LoginPwdResetController {
+    
     /// 遮罩点击
     @objc func coverBtnClick(_ button: UIButton) -> Void {
         self.coverBtn.removeFromSuperview()
         self.captchaView.removeFromSuperview()
     }
+    
 }
 
 // MARK: - Delegate Function

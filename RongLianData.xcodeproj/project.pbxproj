@@ -382,7 +382,6 @@
 		535DE32629A067D700E8E90C /* PhoneBindUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DE10E29A067D500E8E90C /* PhoneBindUpdateController.swift */; };
 		535DE32729A067D700E8E90C /* LoginPwdUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DE11129A067D500E8E90C /* LoginPwdUpdateController.swift */; };
 		535DE32829A067D700E8E90C /* LoginPwdUpdateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535DE11229A067D500E8E90C /* LoginPwdUpdateController.xib */; };
-		535DE32929A067D700E8E90C /* LoginPwdResetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535DE11329A067D500E8E90C /* LoginPwdResetController.xib */; };
 		535DE32A29A067D700E8E90C /* LoginPwdResetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DE11429A067D500E8E90C /* LoginPwdResetController.swift */; };
 		535DE32B29A067D700E8E90C /* PayPwdSetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535DE11729A067D500E8E90C /* PayPwdSetController.xib */; };
 		535DE32C29A067D700E8E90C /* PayPwdSetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DE11829A067D500E8E90C /* PayPwdSetController.swift */; };
@@ -916,7 +915,6 @@
 		535DE10E29A067D500E8E90C /* PhoneBindUpdateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneBindUpdateController.swift; sourceTree = "<group>"; };
 		535DE11129A067D500E8E90C /* LoginPwdUpdateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPwdUpdateController.swift; sourceTree = "<group>"; };
 		535DE11229A067D500E8E90C /* LoginPwdUpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPwdUpdateController.xib; sourceTree = "<group>"; };
-		535DE11329A067D500E8E90C /* LoginPwdResetController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPwdResetController.xib; sourceTree = "<group>"; };
 		535DE11429A067D500E8E90C /* LoginPwdResetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPwdResetController.swift; sourceTree = "<group>"; };
 		535DE11729A067D500E8E90C /* PayPwdSetController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayPwdSetController.xib; sourceTree = "<group>"; };
 		535DE11829A067D500E8E90C /* PayPwdSetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPwdSetController.swift; sourceTree = "<group>"; };
@@ -2993,7 +2991,6 @@
 			children = (
 				535DE11129A067D500E8E90C /* LoginPwdUpdateController.swift */,
 				535DE11229A067D500E8E90C /* LoginPwdUpdateController.xib */,
-				535DE11329A067D500E8E90C /* LoginPwdResetController.xib */,
 				535DE11429A067D500E8E90C /* LoginPwdResetController.swift */,
 			);
 			path = Controller;
@@ -3888,7 +3885,6 @@
 				53A6F41C24E0FA3500E8C9B4 /* Main.storyboard in Resources */,
 				535DE37F29A067D700E8E90C /* DXCaptcha.bundle in Resources */,
 				53A6F41724E0FA3500E8C9B4 /* LaunchScreen.strings in Resources */,
-				535DE32929A067D700E8E90C /* LoginPwdResetController.xib in Resources */,
 				535DE32829A067D700E8E90C /* LoginPwdUpdateController.xib in Resources */,
 				535DE33529A067D700E8E90C /* UserNameUpdateController.xib in Resources */,
 				535DE1F729A067D500E8E90C /* NetworkReadMe.md in Resources */,
