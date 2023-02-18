@@ -53,7 +53,7 @@ class ThemeConfig {
     /// 主题红色
     var themeRedColor: UIColor = UIColor.init(hex: 0xCE586E)
     /// 主题黄色
-    var themeYellowColor: UIColor = UIColor.init(hex: 0xFF8068)
+    var themeYellowColor: UIColor = UIColor.init(hex: 0xFF8068) // 0xF5BE41
 
     /// 标题色(页面)
     var titleColor: UIColor = UIColor.init(hex: 0x29313D)
@@ -78,7 +78,7 @@ class ThemeConfig {
     var disableTitleColor: UIColor = UIColor.init(hex: 0x8C97AC)
 
     /// 输入框背景色
-    var inputBgColor: UIColor = UIColor.init(hex: 0xFFFFFF)
+    var inputBgColor: UIColor = UIColor.init(hex: 0xEEF3FF)
     /// 输入框PlaceHolder文字颜色
     var inputPlaceColor: UIColor = UIColor.init(hex: 0xC5CED9)
 

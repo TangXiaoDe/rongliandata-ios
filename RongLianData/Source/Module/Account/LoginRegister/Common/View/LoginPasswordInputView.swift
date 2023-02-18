@@ -15,7 +15,7 @@ class LoginPasswordInputView: UIView {
 
     // MARK: - Internal Property
 
-    static let viewHeight: CGFloat = 54 + 56
+    static let viewHeight: CGFloat = 50
 
     var model: String? {
         didSet {
@@ -50,13 +50,13 @@ class LoginPasswordInputView: UIView {
     let pwdSecureBtn: UIButton = UIButton.init(type: .custom)
 
     
-    fileprivate let lrMargin: CGFloat = 16
+    fileprivate let lrMargin: CGFloat = 0
     
     fileprivate let iconLeftMargin: CGFloat = 16        // super.left
     fileprivate let titleLeftMargin: CGFloat = 16       // super.left
     fileprivate let iconCenterYTopMargin: CGFloat = 24 + 9.0  // super.top
     
-    let fieldHeight: CGFloat = 56
+    let fieldHeight: CGFloat = 50
     fileprivate let fieldBottomMargin: CGFloat = 0
     fileprivate lazy var fieldCenterYBottomMargin: CGFloat = {
         let margin: CGFloat = self.fieldBottomMargin + self.fieldHeight * 0.5
@@ -122,33 +122,32 @@ extension LoginPasswordInputView {
         }
     }
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        // 1. iconView
-        mainView.addSubview(self.iconView)
-        self.iconView.set(cornerRadius: 0)
-        self.iconView.isHidden = true
-        //self.iconView.image = UIImage.init(named: "IMG_login_icon_password")
-        //self.iconView.image = UIImage.getIconFontImage(code: IconFont.login_password, fontSize: 16, color: AppColor.theme)
-        self.iconView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.iconLeftMargin)
-            make.centerY.equalTo(mainView.snp.top).offset(self.iconCenterYTopMargin)
-            //make.size.equalTo(CGSize.init(width: 16, height: 16))
-        }
-        // 2. titleLabel
-        mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "密码", font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.minorText)
-        self.titleLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.iconView)
-            make.leading.equalToSuperview().offset(self.titleLeftMargin)
-        }
+//        // 1. iconView
+//        mainView.addSubview(self.iconView)
+//        self.iconView.set(cornerRadius: 0)
+//        self.iconView.isHidden = true
+//        //self.iconView.image = UIImage.init(named: "IMG_login_icon_password")
+//        //self.iconView.image = UIImage.getIconFontImage(code: IconFont.login_password, fontSize: 16, color: AppColor.theme)
+//        self.iconView.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(self.iconLeftMargin)
+//            make.centerY.equalTo(mainView.snp.top).offset(self.iconCenterYTopMargin)
+//            //make.size.equalTo(CGSize.init(width: 16, height: 16))
+//        }
+//        // 2. titleLabel
+//        mainView.addSubview(self.titleLabel)
+//        self.titleLabel.set(text: "密码", font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.minorText)
+//        self.titleLabel.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(self.iconView)
+//            make.leading.equalToSuperview().offset(self.titleLeftMargin)
+//        }
         // textfieldBg
         mainView.addSubview(self.textfieldBg)
         self.textfieldBg.backgroundColor = AppColor.inputBg.withAlphaComponent(0.5)
-        self.textfieldBg.set(cornerRadius: 8, borderWidth: 0.5, borderColor: AppColor.dividing)
+        self.textfieldBg.set(cornerRadius: self.fieldHeight * 0.5, borderWidth: 0, borderColor: AppColor.dividing)
         self.textfieldBg.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.height.equalTo(self.fieldHeight)
-            make.bottom.equalToSuperview().offset(-self.fieldBottomMargin)
+            make.top.bottom.equalToSuperview()
         }
         // 3. textField
         self.textfieldBg.addSubview(self.textField)

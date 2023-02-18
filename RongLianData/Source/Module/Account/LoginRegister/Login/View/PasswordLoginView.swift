@@ -36,6 +36,8 @@ class PasswordLoginView: UIView {
     let passwordView: LoginPasswordInputView = LoginPasswordInputView.init()
 
     fileprivate let infoHeight: CGFloat = LoginNormalInputView.viewHeight
+    fileprivate let verMargin: CGFloat = LoginNormalInputView.verMargin
+    
     fileprivate let accountMaxLen: Int = 11
     fileprivate let passwordMaxLen: Int = 20
 
@@ -117,7 +119,7 @@ extension PasswordLoginView {
         self.passwordView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
         self.passwordView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.phoneView.snp.bottom)
+            make.top.equalTo(self.phoneView.snp.bottom).offset(self.verMargin)
             make.height.equalTo(self.infoHeight)
         }
     }

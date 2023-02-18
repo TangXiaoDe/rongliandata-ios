@@ -23,6 +23,11 @@ class RegisterSecondController: BaseViewController {
     
     //fileprivate let navBar: UIView = UIView.init()
     
+    fileprivate let bgView: UIImageView = UIImageView.init()
+    
+    fileprivate let mainView: UIView = UIView.init()
+    fileprivate let mainBgView: UIImageView = UIImageView.init()
+    
     fileprivate let scrollView: UIScrollView = UIScrollView.init()      // 适配5s
     //fileprivate let mainView: UIView = UIView.init()
     
@@ -46,8 +51,31 @@ class RegisterSecondController: BaseViewController {
     fileprivate let doneBtn: GradientLayerButton = GradientLayerButton.init(type: .custom)
 
     
-    fileprivate let mainLrMargin: CGFloat = 16
-    fileprivate let lrMargin: CGFloat = 16
+    fileprivate let mainTopMargin: CGFloat = kNavigationStatusBarHeight + 5
+    fileprivate let mainBgSize: CGSize = CGSize.init(width: 349, height: 582)
+    
+    fileprivate let mainLrMargin: CGFloat = 13
+    fileprivate let lrMargin: CGFloat = 34
+    
+    
+    fileprivate let logoTopMargin: CGFloat = 147
+    fileprivate let logoSize: CGSize = CGSize.init(width: 83.5, height: 24.5)
+    fileprivate let loginBtnSize: CGSize = CGSize.init(width: 68, height: 28)
+    
+    fileprivate let inputContainerTopMargin: CGFloat = 28   // logo.bottom
+    fileprivate let singleInfoHeight: CGFloat = LoginNormalInputView.viewHeight
+    fileprivate let infoVerMargin: CGFloat = LoginNormalInputView.verMargin
+    fileprivate lazy var inputContainerHeight: CGFloat = {
+        return self.singleInfoHeight * 2.0 + LoginNormalInputView.verMargin
+    }()
+    fileprivate let tipsLrMargin: CGFloat = 55
+    fileprivate let tipsTopMargin: CGFloat = 15     // doneBtn.bottom
+    fileprivate let doneBtnHeight: CGFloat = 44
+    fileprivate let doneBtnTopMargin: CGFloat = 82  // inputContainer.bottom
+    fileprivate lazy var ensurePwdFieldHeight: CGFloat = {
+        return self.ensurePwdView.fieldHeight
+    }()
+    
     
     fileprivate let backIconSize: CGSize = CGSize.init(width: 19, height: 13.5)
     fileprivate let welcomeLeftMargin: CGFloat = 16
@@ -57,20 +85,11 @@ class RegisterSecondController: BaseViewController {
     fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 300).scaleAspectForWidth(kScreenWidth).height
     //fileprivate let topBgHeight: CGFloat = (196 - 88 + kNavigationStatusBarHeight) + 86
     fileprivate let topViewHeight: CGFloat = kNavigationStatusBarHeight + 76
-    //fileprivate let logoTopMargin: CGFloat = kNavigationStatusBarHeight + 0
-    fileprivate let logoSize: CGSize = CGSize.init(width: 64, height: 64)
-    //fileprivate let logoBottomMargin: CGFloat = 22
-    //fileprivate let registerBtnSize: CGSize = CGSize.init(width: 68, height: 28)
     fileprivate let titleViewTitleHeight: CGFloat = 44
     fileprivate let titleViewIconSize: CGSize = CGSize.init(width: 76, height: 12)
     
     fileprivate let bottomViewHeight: CGFloat = 500
-    fileprivate let inputContainerTopMargin: CGFloat = 28   // super
-    fileprivate let singleInfoHeight: CGFloat = LoginNormalInputView.viewHeight
-    fileprivate let tipsTopMargin: CGFloat = 10     // inputContainer.bottom
-    
-    fileprivate let doneBtnHeight: CGFloat = 44
-    fileprivate let doneBtnTopMargin: CGFloat = 134  // inputContainer.bottom
+
 
     
     
@@ -133,36 +152,136 @@ extension RegisterSecondController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = AppColor.pageBg
-        // 0. bgImage
-        self.view.addSubview(self.topBgView)
-        self.topBgView.set(cornerRadius: 0)
-        self.topBgView.image = UIImage.init(named: "IMG_login_img_top_bg")
-        //self.topBgView.backgroundColor = AppColor.theme.withAlphaComponent(0.5)
-        self.topBgView.snp.makeConstraints { (make) in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(self.topBgHeight)
-        }
-//        self.topBgView.addSubview(self.topBgCover)
-//        self.topBgCover.backgroundColor = AppColor.theme.withAlphaComponent(0.5)
-//        self.topBgCover.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
-        // scrollView
-        self.view.addSubview(self.scrollView)
-        self.initialScrollView(self.scrollView)
-        self.scrollView.snp.makeConstraints { (make) in
+        // bgView
+        self.view.addSubview(self.bgView)
+        self.bgView.image = UIImage.init(named: "IMG_signin_img_bg")
+        self.bgView.set(cornerRadius: 0)
+        self.bgView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        // 顶部位置 的版本适配
-        if #available(iOS 11.0, *) {
-            self.scrollView.contentInsetAdjustmentBehavior = .never
-        } else if #available(iOS 9.0, *) {
-            self.automaticallyAdjustsScrollViewInsets = false
+        // mainView
+        self.view.addSubview(self.mainView)
+        self.initialMainView(self.mainView)
+        self.mainView.snp.makeConstraints { make in
+            make.size.equalTo(self.mainBgSize)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.mainTopMargin)
         }
-        // tapGR
-        let tapGR: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGRProcess(_:)))
-        self.scrollView.addGestureRecognizer(tapGR)
+        // 1. backBtn
+        self.view.addSubview(self.backBtn)
+        self.backBtn.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .normal)
+        self.backBtn.setImage(UIImage.init(named: "IMG_icon_nav_back_white"), for: .highlighted)
+        self.backBtn.addTarget(self, action: #selector(navLeftItemClick), for: .touchUpInside)
+        self.backBtn.snp.makeConstraints { (make) in
+            make.width.height.equalTo(44)
+            make.leading.equalToSuperview().offset(15)
+            make.top.equalToSuperview().offset(kStatusBarHeight)
+        }
+
+
+//        // 0. bgImage
+//        self.view.addSubview(self.topBgView)
+//        self.topBgView.set(cornerRadius: 0)
+//        self.topBgView.image = UIImage.init(named: "IMG_login_img_top_bg")
+//        //self.topBgView.backgroundColor = AppColor.theme.withAlphaComponent(0.5)
+//        self.topBgView.snp.makeConstraints { (make) in
+//            make.top.leading.trailing.equalToSuperview()
+//            make.height.equalTo(self.topBgHeight)
+//        }
+////        self.topBgView.addSubview(self.topBgCover)
+////        self.topBgCover.backgroundColor = AppColor.theme.withAlphaComponent(0.5)
+////        self.topBgCover.snp.makeConstraints { make in
+////            make.edges.equalToSuperview()
+////        }
+//        // scrollView
+//        self.view.addSubview(self.scrollView)
+//        self.initialScrollView(self.scrollView)
+//        self.scrollView.snp.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//        }
+//        // 顶部位置 的版本适配
+//        if #available(iOS 11.0, *) {
+//            self.scrollView.contentInsetAdjustmentBehavior = .never
+//        } else if #available(iOS 9.0, *) {
+//            self.automaticallyAdjustsScrollViewInsets = false
+//        }
+//        // tapGR
+//        let tapGR: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGRProcess(_:)))
+//        self.scrollView.addGestureRecognizer(tapGR)
     }
+    
+    //
+    fileprivate func initialMainView(_ mainView: UIView) -> Void {
+        // bgView
+        mainView.addSubview(self.mainBgView)
+        self.mainBgView.image = UIImage.init(named: "IMG_signin_img_bg_white")
+        self.mainBgView.set(cornerRadius: 0)
+        self.mainBgView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        // logoView
+        mainView.addSubview(self.logoView)
+        self.logoView.set(cornerRadius: 0)
+        self.logoView.image = UIImage.init(named: "IMG_signin_img_logo")
+        self.logoView.snp.makeConstraints { (make) in
+            make.size.equalTo(self.logoSize)
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.top.equalToSuperview().offset(self.logoTopMargin)
+        }
+//        // loginBtn
+//        mainView.addSubview(self.loginBtn)
+//        self.loginBtn.set(title: "登录", titleColor: AppColor.theme, for: .normal)
+//        self.loginBtn.set(title: "登录", titleColor: AppColor.theme, for: .highlighted)
+//        self.loginBtn.set(font: UIFont.pingFangSCFont(size: 16, weight: .medium))
+//        self.loginBtn.backgroundColor = UIColor.white
+//        self.loginBtn.set(cornerRadius: self.loginBtnSize.height * 0.5, borderWidth: 0.5, borderColor: AppColor.theme)
+//        self.loginBtn.addTarget(self, action: #selector(loginBtnClick(_:)), for: .touchUpInside)
+//        self.loginBtn.isHidden = true
+//        self.loginBtn.snp.makeConstraints { (make) in
+//            make.trailing.equalToSuperview().offset(-self.lrMargin)
+//            make.size.equalTo(self.loginBtnSize)
+//            make.centerY.equalTo(self.logoView)
+//        }
+        // inputContainer
+        mainView.addSubview(self.inputContainer)
+        self.initialInputContainer(self.inputContainer)
+        self.inputContainer.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.top.equalTo(self.logoView.snp.bottom).offset(self.inputContainerTopMargin)
+            make.height.equalTo(self.inputContainerHeight)
+        }
+        // 2. tips
+        mainView.addSubview(self.tipsLabel)
+        self.tipsLabel.set(text: "*限6-20个字符以内，建议使用数字字母组合，区分大小写", font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.grayText)
+        self.tipsLabel.numberOfLines = 2
+        self.tipsLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(self.tipsLrMargin)
+            make.trailing.equalToSuperview().offset(-self.tipsLrMargin)
+            make.top.equalTo(self.inputContainer.snp.bottom).offset(self.tipsTopMargin)
+        }
+        // 3. doneBtn
+        mainView.addSubview(self.doneBtn)
+        let doneBtnTitle: String = "进入融链数据" // "进入" + "\(AppConfig.share.appName)"      // "立即注册"
+        self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)
+        self.doneBtn.set(title: doneBtnTitle, titleColor: AppColor.white, bgImage: nil, for: .normal)
+        self.doneBtn.set(title: doneBtnTitle, titleColor: AppColor.white, bgImage: nil, for: .highlighted)
+        self.doneBtn.set(title: doneBtnTitle, titleColor: AppColor.white, bgImage: nil, for: .disabled)
+        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: self.doneBtnHeight * 0.5, borderWidth: 0, borderColor: UIColor.clear)
+        self.doneBtn.backgroundColor = AppColor.disable
+        //self.doneBtn.gradientLayer.colors = [AppColor.theme.cgColor, AppColor.theme.cgColor]
+        self.doneBtn.gradientLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.mainLrMargin * 2.0 - self.lrMargin * 2.0, height: self.doneBtnHeight)
+        self.doneBtn.gradientLayer.isHidden = !self.doneBtn.isEnabled
+        self.doneBtn.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.height.equalTo(self.doneBtnHeight)
+            make.top.equalTo(self.inputContainer.snp.bottom).offset(self.doneBtnTopMargin)
+            //make.bottom.lessThanOrEqualToSuperview()
+        }
+    }
+
+    
     /// scrollView布局
     fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
         // scrollView
@@ -333,7 +452,7 @@ extension RegisterSecondController {
         self.ensurePwdView.textField.addTarget(self, action: #selector(textFieldValueChainge(_:)), for: .editingChanged)
         self.ensurePwdView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.setPwdView.snp.bottom)
+            make.top.equalTo(self.setPwdView.snp.bottom).offset(self.infoVerMargin)
             make.height.equalTo(self.singleInfoHeight)
             make.bottom.equalToSuperview()
         }
@@ -384,12 +503,12 @@ extension RegisterSecondController {
 //            Toast.showToast(title: "两次密码不一致")
             self.tipsLabel.text = "*请输入一致的新密码"
             self.tipsLabel.textColor = AppColor.themeRed
-            self.ensurePwdView.textfieldBg.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.themeRed)
+            self.ensurePwdView.textfieldBg.set(cornerRadius: self.ensurePwdFieldHeight * 0.5, borderWidth: 0.5, borderColor: AppColor.themeRed)
             return
         } else {
             self.tipsLabel.text = "*限6-20个字符以内，建议使用数字字母组合，区分大小写"
             self.tipsLabel.textColor = AppColor.grayText
-            self.ensurePwdView.textfieldBg.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
+            self.ensurePwdView.textfieldBg.set(cornerRadius: self.ensurePwdFieldHeight * 0.5, borderWidth: 0, borderColor: AppColor.dividing)
         }
         self.registerRequest(account: self.account, smsCode: self.smsCode, inviteCode: self.inviteCode, password: password, confirmPwd: confirmPwd)
     }
@@ -409,10 +528,10 @@ extension RegisterSecondController {
         }
         if let password = self.setPwdView.textField.text, let ensurePwd = self.ensurePwdView.textField.text, !password.isEmpty, !ensurePwd.isEmpty, password != ensurePwd {
             self.tipsLabel.set(text: "*请输入一致的新密码", font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.themeRed)
-            self.ensurePwdView.textfieldBg.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.themeRed)
+            self.ensurePwdView.textfieldBg.set(cornerRadius: self.ensurePwdFieldHeight * 0.5, borderWidth: 0.5, borderColor: AppColor.themeRed)
         } else {
             self.tipsLabel.set(text: "*限6-20个字符以内，建议使用数字字母组合，区分大小写", font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.grayText)
-            self.ensurePwdView.textfieldBg.set(cornerRadius: 5, borderWidth: 0.5, borderColor: AppColor.dividing)
+            self.ensurePwdView.textfieldBg.set(cornerRadius: self.ensurePwdFieldHeight * 0.5, borderWidth: 0, borderColor: AppColor.dividing)
         }
         self.couldDoneProcess()
     }
