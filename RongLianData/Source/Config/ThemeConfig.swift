@@ -94,8 +94,8 @@ class ThemeConfig {
     /// 标签栏背景色
     var tabBarTintColor: UIColor = UIColor.init(hex: 0xFFFFFF)
     /// 标签栏未选中色
-    var tabItemUnSelectedColor: UIColor = UIColor.init(hex: 0xC7C6D1)
+    var tabItemUnSelectedColor: UIColor = UIColor.init(hex: 0xCCCCCC)
     /// 标签栏选中色
-    var tabItemSelectedColor: UIColor = UIColor.init(hex: 0xF5BE41)
+    var tabItemSelectedColor: UIColor = UIColor.init(hex: 0x4444FF)
 
 }
