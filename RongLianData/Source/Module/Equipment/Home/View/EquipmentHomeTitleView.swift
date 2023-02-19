@@ -134,6 +134,7 @@ extension EquipmentHomeTitleView {
         // 2. slider
         titleView.addSubview(self.slider)
         self.slider.image = UIImage.init(named: "IMG_mine_sb_dot_nav")
+        self.slider.isHidden = true
         self.slider.set(cornerRadius: 0)
         // 默认选中
         if let button = titleView.viewWithTag(self.titleBtnTagBase + self.selectedIndex) as? UIButton {

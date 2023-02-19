@@ -25,7 +25,8 @@ class EquipmentHomeController: BaseViewController {
     
 
     fileprivate lazy var types: [ProductZone] = {
-        let types: [ProductZone] = AppConfig.share.isShowBzz ? [.ipfs, .chia, .bzz] : [.ipfs, .chia]
+        //let types: [ProductZone] = AppConfig.share.isShowBzz ? [.ipfs, .chia, .bzz] : [.ipfs, .chia]
+        let types: [ProductZone] = [.ipfs]
         return types
     }()
     fileprivate lazy var titleView: EquipmentHomeTitleView = {
@@ -40,7 +41,7 @@ class EquipmentHomeController: BaseViewController {
     fileprivate let detailView: UIView = UIView()
     fileprivate let horScrollView: UIScrollView = UIScrollView()
 
-    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height
+    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 213).scaleAspectForWidth(kScreenWidth).height
     fileprivate let titleViewHeight: CGFloat = EquipmentHomeTitleView.viewHeight
     fileprivate var selectedIndex: Int = 0 {
         didSet {
@@ -117,6 +118,7 @@ extension EquipmentHomeController {
         }
         self.navBar.titleView.addSubview(self.titleView)
         self.titleView.delegate = self
+        //self.titleView.isHidden = true
         self.titleView.snp.makeConstraints { (make) in
             make.left.greaterThanOrEqualTo(self.navBar.leftItem.snp.right)
             make.right.lessThanOrEqualTo(self.navBar.rightItem.snp.left)

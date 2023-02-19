@@ -259,8 +259,9 @@ extension EquipmentListModel {
     
     ///
     var totalNumColor: UIColor {
-        let color: UIColor = self.status == .closed ? UIColor.init(hex: 0xFFB6C0) : UIColor.init(hex: 0xD26C2F)
-        return color
+        //let color: UIColor = self.status == .closed ? UIColor.init(hex: 0xFFB6C0) : UIColor.init(hex: 0xD26C2F)
+        //return color
+        return AppColor.themeRed
     }
     ///
     var titleColor: UIColor {

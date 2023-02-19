@@ -51,7 +51,7 @@ class ThemeConfig {
     /// 分割线颜色
     var dividingColor: UIColor = UIColor.init(hex: 0xE2E2E2)
     /// 主题红色
-    var themeRedColor: UIColor = UIColor.init(hex: 0xE06236)
+    var themeRedColor: UIColor = UIColor.init(hex: 0xE16940)    // 0xE06236
     /// 主题黄色
     var themeYellowColor: UIColor = UIColor.init(hex: 0xFF8068) // 0xF5BE41
 
