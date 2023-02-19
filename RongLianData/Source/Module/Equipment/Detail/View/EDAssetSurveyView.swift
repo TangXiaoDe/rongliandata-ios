@@ -52,15 +52,17 @@ class EDAssetSurveyView: UIView {
     
     fileprivate let titleLeftMargin: CGFloat = 12
     fileprivate let titleViewHeight: CGFloat = 44
+    fileprivate let titleViewTopMargin: CGFloat = 8
     fileprivate let titleIconWH: CGFloat = 14
 
-    fileprivate let itemLrMargin: CGFloat = 24
-    fileprivate let itemHeight: CGFloat = 66
+    fileprivate let itemLrMargin: CGFloat = 27
+    fileprivate let itemHeight: CGFloat = 56
     fileprivate let itemHorMargin: CGFloat = 12
-    fileprivate let itemVerMargin: CGFloat = 12
-    fileprivate let itemTopMargin: CGFloat = 5
-    fileprivate let itemBottomMargin: CGFloat = 10
-    fileprivate let itemColNum: Int = 2
+    fileprivate let itemVerMargin: CGFloat = 8
+    fileprivate let itemTopMargin: CGFloat = 0
+    fileprivate let itemBottomMargin: CGFloat = 0
+    fileprivate let itemInLrMargin: CGFloat = 12
+    fileprivate let itemColNum: Int = 1
     fileprivate lazy var itemWidth: CGFloat = {
         let width: CGFloat = (kScreenWidth - self.itemLrMargin * 2.0 - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
         return width
@@ -134,7 +136,7 @@ extension EDAssetSurveyView {
         mainView.addSubview(self.titleView)
         self.titleView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.titleLeftMargin)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(self.titleViewTopMargin)
             make.height.equalTo(self.titleViewHeight)
         }
         self.titleView.iconView.set(cornerRadius: 0)
@@ -159,6 +161,7 @@ extension EDAssetSurveyView {
         self.assetDetailControl.leftIconView.set(cornerRadius: 0)
         //self.assetDetailControl.leftIconView.backgroundColor = UIColor.red
         self.assetDetailControl.leftIconView.image = UIImage.init(named: "IMG_equip_icon_zcmx")
+        self.assetDetailControl.leftIconView.isHidden = true
         self.assetDetailControl.leftIconView.snp.remakeConstraints { (make) in
             make.leading.centerY.equalToSuperview()
             make.size.equalTo(CGSize.init(width: 12, height: 12))
@@ -166,14 +169,14 @@ extension EDAssetSurveyView {
             make.bottom.lessThanOrEqualToSuperview()
         }
         self.assetDetailControl.rightIconView.set(cornerRadius: 0)
-        self.assetDetailControl.rightIconView.image = UIImage.init(named: "IMG_common_detail")
+        self.assetDetailControl.rightIconView.image = UIImage.init(named: "IMG_equip_next_blue")
         self.assetDetailControl.rightIconView.snp.remakeConstraints { (make) in
             make.trailing.centerY.equalToSuperview()
-            make.size.equalTo(CGSize.init(width: 6, height: 11))
+            //make.size.equalTo(CGSize.init(width: 6, height: 11))
             make.top.greaterThanOrEqualToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
         }
-        self.assetDetailControl.titleLabel.set(text: "资产明细", font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: AppColor.mainText, alignment: .right)
+        self.assetDetailControl.titleLabel.set(text: "资产明细", font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: AppColor.theme, alignment: .right)
         self.assetDetailControl.titleLabel.snp.remakeConstraints { (make) in
             make.leading.equalTo(self.assetDetailControl.leftIconView.snp.trailing).offset(5)
             make.trailing.equalTo(self.assetDetailControl.rightIconView.snp.leading).offset(-5)
@@ -191,65 +194,65 @@ extension EDAssetSurveyView {
     }
     ///
     fileprivate func initialContainer(_ container: UIView) -> Void {
-        let itemInLrMargin: CGFloat = 10
-        let itemTitleCenterYTopMargin: CGFloat = 20     // super.top
-        let itemValueCenterYBottomMargin: CGFloat = 22  // super.bottom
         //
         container.removeAllSubviews()
         let itemViews: [TitleValueView] = [self.canUseItemView, self.diyaItemView, self.lockItemView, self.frozenItemView]
+        var topView: UIView = container
         for (index, itemView) in itemViews.enumerated() {
-            let row: Int = index / self.itemColNum
-            let col: Int = index % self.itemColNum
             container.addSubview(itemView)
-            itemView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.08)
-            itemView.set(cornerRadius: 5)
+            itemView.backgroundColor = UIColor.init(hex: 0xF9F9F9)
+            itemView.set(cornerRadius: 8)
             itemView.snp.makeConstraints { (make) in
-                make.width.equalTo(self.itemWidth)
+                make.leading.equalToSuperview().offset(self.itemLrMargin)
+                make.trailing.equalToSuperview().offset(-self.itemLrMargin)
                 make.height.equalTo(self.itemHeight)
-                let leftMargin: CGFloat = self.itemLrMargin + (self.itemWidth + self.itemHorMargin) * CGFloat(col)
-                let topMargin: CGFloat = self.itemTopMargin + (self.itemHeight + self.itemVerMargin) * CGFloat(row)
-                make.top.equalToSuperview().offset(topMargin)
-                make.leading.equalToSuperview().offset(leftMargin)
+                if 0 == index {
+                    make.top.equalToSuperview().offset(self.itemTopMargin)
+                } else {
+                    make.top.equalTo(topView.snp.bottom).offset(self.itemVerMargin)
+                }
                 if index == itemViews.count - 1 {
-                    let rightMargin: CGFloat = kScreenWidth - leftMargin - self.itemWidth
-                    make.trailing.equalToSuperview().offset(-rightMargin)
                     make.bottom.equalToSuperview().offset(-self.itemBottomMargin)
                 }
             }
             //
-            itemView.titleLabel.set(text: self.itemTitles[index], font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x666666))
+            itemView.titleLabel.set(text: self.itemTitles[index], font: UIFont.pingFangSCFont(size: 13), textColor: UIColor.init(hex: 0x666666))
             itemView.titleLabel.snp.remakeConstraints { (make) in
-                make.leading.equalToSuperview().offset(itemInLrMargin)
-                make.trailing.lessThanOrEqualToSuperview()
-                make.centerY.equalTo(itemView.snp.top).offset(itemTitleCenterYTopMargin)
+                make.leading.equalToSuperview().offset(self.itemInLrMargin)
+                make.centerY.equalToSuperview()
             }
             itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 20, weight: .medium), textColor: AppColor.mainText)
             itemView.valueLabel.snp.remakeConstraints { (make) in
-                make.leading.equalToSuperview().offset(itemInLrMargin)
-                make.trailing.lessThanOrEqualToSuperview()
-                make.centerY.equalTo(itemView.snp.bottom).offset(-itemValueCenterYBottomMargin)
+                make.trailing.equalToSuperview().offset(-self.itemInLrMargin)
+                make.centerY.equalToSuperview()
             }
+            //
+            topView = itemView
         }
         // lockItemView - detailView
+        self.lockItemView.titleLabel.snp.remakeConstraints { make in
+            make.leading.equalToSuperview().offset(self.itemInLrMargin)
+            make.centerY.equalTo(self.lockItemView.snp.top).offset(20)
+        }
         self.lockItemView.addSubview(self.lockDetailView)
         self.lockDetailView.addTarget(self, action: #selector(loackDetailViewClick(_:)), for: .touchUpInside)
         self.lockDetailView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.lockItemView.titleLabel)
-            make.trailing.equalToSuperview()
+            make.leading.equalTo(self.lockItemView.titleLabel)
+            make.centerY.equalTo(self.lockItemView.titleLabel).offset(17)
         }
         self.lockDetailView.iconView.set(cornerRadius: self.lockDetailIconWH * 0.5)
         //self.lockDetailView.iconView.backgroundColor = UIColor.init(hex: 0x2280FB).withAlphaComponent(0.5)
         self.lockDetailView.iconView.image = UIImage.init(named: "IMG_equip_next_blue")
         self.lockDetailView.iconView.snp.remakeConstraints { (make) in
-            make.trailing.equalToSuperview().offset(-5)
+            make.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(self.lockDetailIconWH)
+            //make.width.height.equalTo(self.lockDetailIconWH)
             make.top.greaterThanOrEqualToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
         }
-        self.lockDetailView.titleLabel.set(text: "详情", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x2280FB).withAlphaComponent(0.5), alignment: .right)
+        self.lockDetailView.titleLabel.set(text: "详情", font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.theme, alignment: .right)
         self.lockDetailView.titleLabel.snp.remakeConstraints { (make) in
-            make.leading.equalToSuperview().offset(5)
+            make.leading.equalToSuperview()
             make.trailing.equalTo(self.lockDetailView.iconView.snp.leading).offset(-5)
             make.centerY.equalToSuperview()
             make.top.greaterThanOrEqualToSuperview()
@@ -274,11 +277,15 @@ extension EDAssetSurveyView {
     ///
     fileprivate func setupAsDemo() -> Void {
         //self.titleView.iconView.backgroundColor = UIColor.red
-   
+        self.canUseItemView.valueLabel.text = "34.8756"
+        self.diyaItemView.valueLabel.text = "2.87"
+        self.lockItemView.valueLabel.text = "4657.7642"
+        self.frozenItemView.valueLabel.text = "0"
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: (asset: EDAssetModel, zone: ProductZone)?) -> Void {
-        //self.setupAsDemo()
+        self.setupAsDemo()
+        return
         guard let model = model else {
             return
         }

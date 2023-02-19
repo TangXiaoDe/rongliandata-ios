@@ -144,7 +144,7 @@ extension OreDetailController {
             make.trailing.equalToSuperview().offset(-self.lrMargin)
             make.top.equalTo(self.headerView.snp.bottom).offset(self.itemContainerTopMargin)
             make.bottom.equalToSuperview()
-            let minHeight: CGFloat = kScreenHeight - kNavigationStatusBarHeight - self.headerViewHeight - self.headerViewTopMargin - self.itemTopMargin
+            let minHeight: CGFloat = kScreenHeight - kNavigationStatusBarHeight - self.headerViewHeight - self.headerViewTopMargin - self.itemContainerTopMargin
             make.height.greaterThanOrEqualTo(minHeight)
         }
     }

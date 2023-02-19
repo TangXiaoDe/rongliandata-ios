@@ -132,6 +132,9 @@ class EquipmentDetailModel: Mappable {
     /// 请求时间
     var requestDate: Date = Date()
 
+    init() {
+        
+    }
     required init?(map: Map) {
         
     }
@@ -430,6 +433,9 @@ class EDAssetModel: Mappable {
 //        return self.wait_pledge + self.wait_gas + self.wait_interest
     }
 
+    init() {
+        
+    }
     required init?(map: Map) {
         
     }

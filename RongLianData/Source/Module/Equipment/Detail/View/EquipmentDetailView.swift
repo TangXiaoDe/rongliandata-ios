@@ -51,6 +51,8 @@ class EquipmentDetailView: UIView
     fileprivate let packageDetailView: EDUniversalSubjectView = EDUniversalSubjectView.init()
     /// 资产概况
     fileprivate let assetSurveyView: EDAssetSurveyView = EDAssetSurveyView.init()
+    
+    
     /// 借贷资本明细
     fileprivate let loanCapitalView: EDUniversalSubjectView = EDUniversalSubjectView.init()
     /// 已归还
@@ -128,7 +130,8 @@ extension EquipmentDetailView {
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
         mainView.backgroundColor = UIColor.white
         //
-        let itemViews: [UIView] = [self.packageDetailView, self.assetSurveyView, self.loanCapitalView, self.backedAssetView, self.unbackAssetView, self.backAssetDetailView]
+        //let itemViews: [UIView] = [self.packageDetailView, self.assetSurveyView, self.loanCapitalView, self.backedAssetView, self.unbackAssetView, self.backAssetDetailView]
+        let itemViews: [UIView] = [self.packageDetailView, self.assetSurveyView]
         var topView: UIView = mainView
         for (index, itemView) in itemViews.enumerated() {
             mainView.addSubview(itemView)
@@ -169,31 +172,38 @@ extension EquipmentDetailView {
 
     ///
     fileprivate func setupAsDemo() -> Void {
-        
+        //
+        self.packageDetailView.model = ("封装详情", .ipfs)
+        self.packageDetailView.status = .deploying
+        self.packageDetailView.zhiyaItemView.valueLabel.text = "23.4512"
+        self.packageDetailView.xiaohaoItemView.valueLabel.text = "0"
+        //
+        self.assetSurveyView.model = (EDAssetModel.init(), .ipfs)
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: EquipmentDetailModel?) -> Void {
-        //self.setupAsDemo()
+        self.setupAsDemo()
+        return
         guard let model = model, let asset = model.assets else {
             return
         }
         // 子控件数据加载
         self.packageDetailView.zhiyaItemView.valueLabel.text = asset.used_pledge.decimalValidDigitsProcess(digits: 8)
         self.packageDetailView.xiaohaoItemView.valueLabel.text = asset.used_gas.decimalValidDigitsProcess(digits: 8)
-        self.loanCapitalView.zhiyaItemView.valueLabel.text = asset.pledge.decimalValidDigitsProcess(digits: 8)
-        self.loanCapitalView.xiaohaoItemView.valueLabel.text = asset.gas.decimalValidDigitsProcess(digits: 8)
-        self.backedAssetView.zhiyaItemView.valueLabel.text = asset.return_pledge.decimalValidDigitsProcess(digits: 8)
-        self.backedAssetView.xiaohaoItemView.valueLabel.text = asset.return_gas.decimalValidDigitsProcess(digits: 8)
+//        self.loanCapitalView.zhiyaItemView.valueLabel.text = asset.pledge.decimalValidDigitsProcess(digits: 8)
+//        self.loanCapitalView.xiaohaoItemView.valueLabel.text = asset.gas.decimalValidDigitsProcess(digits: 8)
+//        self.backedAssetView.zhiyaItemView.valueLabel.text = asset.return_pledge.decimalValidDigitsProcess(digits: 8)
+//        self.backedAssetView.xiaohaoItemView.valueLabel.text = asset.return_gas.decimalValidDigitsProcess(digits: 8)
         //
         self.packageDetailView.status = model.pkg_status
-        self.backAssetDetailView.model = model
+//        self.backAssetDetailView.model = model
         self.assetSurveyView.model = (asset, model.zone)
         //
-        self.unbackAssetView.model = model
-        //
+//        self.unbackAssetView.model = model
+//        //
         self.packageDetailView.model = ("封装详情", model.zone)
-        self.loanCapitalView.model = ("借贷资本明细", model.zone)
-        self.backedAssetView.model = ("已归还", model.zone)
+//        self.loanCapitalView.model = ("借贷资本明细", model.zone)
+//        self.backedAssetView.model = ("已归还", model.zone)
         
     }
     

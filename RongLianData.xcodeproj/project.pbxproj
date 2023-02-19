@@ -498,6 +498,8 @@
 		53A6F41C24E0FA3500E8C9B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F2E024E0FA3200E8C9B4 /* Main.storyboard */; };
 		53A6F43E24E0FA3500E8C9B4 /* ProductDetail.css in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F30724E0FA3200E8C9B4 /* ProductDetail.css */; };
 		53A6F45C24E121EF00E8C9B4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53A6F45B24E121EF00E8C9B4 /* Info.plist */; };
+		53CF2ED429A25DDA0019370F /* AssetDetailNewHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CF2ED329A25DDA0019370F /* AssetDetailNewHomeController.swift */; };
+		53CF2ED629A2636A0019370F /* AsssetDetailCateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CF2ED529A2636A0019370F /* AsssetDetailCateView.swift */; };
 		A17FCCC529A089E700B06F23 /* InviteFriendHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCA729A089E700B06F23 /* InviteFriendHomeController.swift */; };
 		A17FCCC729A089E700B06F23 /* InviteCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCAA29A089E700B06F23 /* InviteCountModel.swift */; };
 		A17FCCC929A089E700B06F23 /* InviteFriendPosterQrcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCAD29A089E700B06F23 /* InviteFriendPosterQrcodeView.swift */; };
@@ -1058,6 +1060,8 @@
 		53A6F2E224E0FA3200E8C9B4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53A6F30724E0FA3200E8C9B4 /* ProductDetail.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = ProductDetail.css; sourceTree = "<group>"; };
 		53A6F45B24E121EF00E8C9B4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		53CF2ED329A25DDA0019370F /* AssetDetailNewHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailNewHomeController.swift; sourceTree = "<group>"; };
+		53CF2ED529A2636A0019370F /* AsssetDetailCateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsssetDetailCateView.swift; sourceTree = "<group>"; };
 		56E162A723734D38F318862F /* Pods-RongLianData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RongLianData.release.xcconfig"; path = "Pods/Target Support Files/Pods-RongLianData/Pods-RongLianData.release.xcconfig"; sourceTree = "<group>"; };
 		62F9ADBDE1A95C1FDD464985 /* Pods-AntClusterB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterB.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterB/Pods-AntClusterB.release.xcconfig"; sourceTree = "<group>"; };
 		6589BEC5AEE6C210D4C341B3 /* Pods-RongLianData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RongLianData.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RongLianData/Pods-RongLianData.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3172,6 +3176,7 @@
 			children = (
 				535DE13D29A067D500E8E90C /* AssetDetailHomeController.swift */,
 				535DE13E29A067D500E8E90C /* AssetDetailHomeListController.swift */,
+				53CF2ED329A25DDA0019370F /* AssetDetailNewHomeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3190,6 +3195,7 @@
 				535DE14229A067D500E8E90C /* AssetDetailPlaceView.swift */,
 				535DE14329A067D500E8E90C /* AssetDetailFilterPopView.swift */,
 				535DE14429A067D500E8E90C /* AssetDetailTitleView.swift */,
+				53CF2ED529A2636A0019370F /* AsssetDetailCateView.swift */,
 				535DE14529A067D500E8E90C /* AssetDetailListCell.swift */,
 			);
 			path = View;
@@ -4356,6 +4362,7 @@
 				535DE1BB29A067D500E8E90C /* AreaManager.swift in Sources */,
 				535DE24129A067D600E8E90C /* TestPresentController.swift in Sources */,
 				535DE24029A067D600E8E90C /* XDPushPopAnimation.swift in Sources */,
+				53CF2ED629A2636A0019370F /* AsssetDetailCateView.swift in Sources */,
 				535DE26B29A067D600E8E90C /* SearchViewController.swift in Sources */,
 				535DE36129A067D700E8E90C /* OreDetailItemView.swift in Sources */,
 				535DE2B729A067D600E8E90C /* BaseTextView.swift in Sources */,
@@ -4568,6 +4575,7 @@
 				535DE24729A067D600E8E90C /* BubbleDrawTestView.swift in Sources */,
 				535DE20D29A067D500E8E90C /* CustomAlertUtil.swift in Sources */,
 				535DE3A329A07E7000E8E90C /* LoginPasswordInputView.swift in Sources */,
+				53CF2ED429A25DDA0019370F /* AssetDetailNewHomeController.swift in Sources */,
 				535DE32E29A067D700E8E90C /* PasswordInputItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

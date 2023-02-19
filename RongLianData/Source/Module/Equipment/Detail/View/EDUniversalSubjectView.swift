@@ -47,15 +47,17 @@ class EDUniversalSubjectView: UIView {
     
     fileprivate let titleLeftMargin: CGFloat = 12
     fileprivate let titleViewHeight: CGFloat = 44
+    fileprivate let titleViewTopMargin: CGFloat = 8
     fileprivate let titleIconWH: CGFloat = 14
 
-    fileprivate let itemLrMargin: CGFloat = 24
-    fileprivate let itemHeight: CGFloat = 66
+    fileprivate let itemLrMargin: CGFloat = 27
+    fileprivate let itemHeight: CGFloat = 56
     fileprivate let itemHorMargin: CGFloat = 12
-    fileprivate let itemVerMargin: CGFloat = 12
-    fileprivate let itemTopMargin: CGFloat = 5
-    fileprivate let itemBottomMargin: CGFloat = 10
-    fileprivate let itemColNum: Int = 2
+    fileprivate let itemVerMargin: CGFloat = 8
+    fileprivate let itemTopMargin: CGFloat = 0
+    fileprivate let itemBottomMargin: CGFloat = 0
+    fileprivate let itemInLrMargin: CGFloat = 12
+    fileprivate let itemColNum: Int = 1
     fileprivate lazy var itemWidth: CGFloat = {
         let width: CGFloat = (kScreenWidth - self.itemLrMargin * 2.0 - self.itemHorMargin * CGFloat(self.itemColNum - 1)) / CGFloat(self.itemColNum)
         return width
@@ -127,7 +129,7 @@ extension EDUniversalSubjectView {
         mainView.addSubview(self.titleView)
         self.titleView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.titleLeftMargin)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(self.titleViewTopMargin)
             make.height.equalTo(self.titleViewHeight)
         }
         self.titleView.iconView.set(cornerRadius: 0)
@@ -137,13 +139,13 @@ extension EDUniversalSubjectView {
         }
         self.titleView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14, weight: .medium), textColor: AppColor.mainText, alignment: .left)
         self.titleView.titleLabel.snp.remakeConstraints { (make) in
-            make.leading.equalTo(self.titleView.iconView.snp.trailing).offset(6)
+            make.leading.equalTo(self.titleView.iconView.snp.trailing).offset(5)
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
         }
         // 2. statusView
         mainView.addSubview(self.statusView)
-        self.statusView.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x666666), alignment: .right)
+        self.statusView.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x999999), alignment: .right)
         self.statusView.isHidden = true     // 默认隐藏
         self.statusView.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-self.itemLrMargin)
@@ -159,45 +161,40 @@ extension EDUniversalSubjectView {
     }
     ///
     fileprivate func initialContainer(_ container: UIView) -> Void {
-        let itemInLrMargin: CGFloat = 10
-        let itemTitleCenterYTopMargin: CGFloat = 20     // super.top
-        let itemValueCenterYBottomMargin: CGFloat = 22  // super.bottom
-        
         container.removeAllSubviews()
         //
         let itemViews: [TitleValueView] = [self.zhiyaItemView, self.xiaohaoItemView]
+        var topView: UIView = container
         for (index, itemView) in itemViews.enumerated() {
-            let row: Int = index / self.itemColNum
-            let col: Int = index % self.itemColNum
             container.addSubview(itemView)
-            itemView.backgroundColor = UIColor.init(hex: 0xFDC818).withAlphaComponent(0.08)
-            itemView.set(cornerRadius: 5)
+            itemView.backgroundColor = UIColor.init(hex: 0xF9F9F9)
+            itemView.set(cornerRadius: 8)
             itemView.snp.makeConstraints { (make) in
-                make.width.equalTo(self.itemWidth)
+                make.leading.equalToSuperview().offset(self.itemLrMargin)
+                make.trailing.equalToSuperview().offset(-self.itemLrMargin)
                 make.height.equalTo(self.itemHeight)
-                let leftMargin: CGFloat = self.itemLrMargin + (self.itemWidth + self.itemHorMargin) * CGFloat(col)
-                let topMargin: CGFloat = self.itemTopMargin + (self.itemHeight + self.itemVerMargin) * CGFloat(row)
-                make.top.equalToSuperview().offset(topMargin)
-                make.leading.equalToSuperview().offset(leftMargin)
+                if 0 == index {
+                    make.top.equalToSuperview().offset(self.itemTopMargin)
+                } else {
+                    make.top.equalTo(topView.snp.bottom).offset(self.itemVerMargin)
+                }
                 if index == itemViews.count - 1 {
-                    let rightMargin: CGFloat = kScreenWidth - leftMargin - self.itemWidth
-                    make.trailing.equalToSuperview().offset(-rightMargin)
                     make.bottom.equalToSuperview().offset(-self.itemBottomMargin)
                 }
             }
             //
-            itemView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x666666))
+            itemView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 13), textColor: UIColor.init(hex: 0x666666))
             itemView.titleLabel.snp.remakeConstraints { (make) in
-                make.leading.equalToSuperview().offset(itemInLrMargin)
-                make.trailing.lessThanOrEqualToSuperview()
-                make.centerY.equalTo(itemView.snp.top).offset(itemTitleCenterYTopMargin)
+                make.leading.equalToSuperview().offset(self.itemInLrMargin)
+                make.centerY.equalToSuperview()
             }
             itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 20, weight: .medium), textColor: AppColor.mainText)
             itemView.valueLabel.snp.remakeConstraints { (make) in
-                make.leading.equalToSuperview().offset(itemInLrMargin)
-                make.trailing.lessThanOrEqualToSuperview()
-                make.centerY.equalTo(itemView.snp.bottom).offset(-itemValueCenterYBottomMargin)
+                make.trailing.equalToSuperview().offset(-self.itemInLrMargin)
+                make.centerY.equalToSuperview()
             }
+            //
+            topView = itemView
         }
     }
     
@@ -217,8 +214,8 @@ extension EDUniversalSubjectView {
 
     ///
     fileprivate func setupAsDemo() -> Void {
-        self.titleView.iconView.backgroundColor = UIColor.red
-        self.titleView.titleLabel.text = "我是标题"
+        self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_zichan")
+        self.titleView.titleLabel.text = "封装详情"
         
         self.statusView.isHidden = false
         var statusAtts = NSAttributedString.textAttTuples()
@@ -226,25 +223,29 @@ extension EDUniversalSubjectView {
         statusAtts.append((str: "部署中", font: UIFont.pingFangSCFont(size: 16, weight: .medium), color: UIColor.init(hex: 0xE06236)))
         self.statusView.attributedText = NSAttributedString.attribute(statusAtts)
         
+        self.zhiyaItemView.titleLabel.text = "使用质押币数量(FIL)"
+        self.xiaohaoItemView.titleLabel.text = "Gas消耗数量(FIL)"
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: (title: String, zone: ProductZone)?) -> Void {
-//        self.setupAsDemo()
+        self.setupAsDemo()
+        return
         guard let model = model else {
             return
         }
         // 子控件数据加载
         self.titleView.titleLabel.text = model.title
 
-        self.zhiyaItemView.backgroundColor = UIColor.init(hex: 0xFDC818).withAlphaComponent(0.08)
-        self.xiaohaoItemView.backgroundColor = UIColor.init(hex: 0xFDC818).withAlphaComponent(0.08)
+        //self.zhiyaItemView.backgroundColor = UIColor.init(hex: 0xFDC818).withAlphaComponent(0.08)
+        //self.xiaohaoItemView.backgroundColor = UIColor.init(hex: 0xFDC818).withAlphaComponent(0.08)
         self.statusView.isHidden = true
         
         var zhiyaTitle: String = ""
         var xiaohaoTitle: String = ""
         switch model.title {
         case "封装详情":
-            self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_fengzhuang")
+            self.titleView.iconView.image = UIImage.init(named: "IMG_equip_icon_zichan")
+            self.titleView.titleLabel.text = "封装详情"
             self.statusView.isHidden = false
             zhiyaTitle = "使用质押数量(\(model.zone.rawValue.uppercased()))"
             xiaohaoTitle = "Gas消耗数量(\(model.zone.rawValue.uppercased()))"

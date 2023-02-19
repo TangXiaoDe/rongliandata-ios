@@ -176,6 +176,7 @@ extension AssetDetailTitleView {
     @objc fileprivate func titleBtnClick(_ button: UIButton) -> Void {
         let index = button.tag - self.titleBtnTagBase
         let title = self.titles[index]
+        self.selectedIndex = index
         self.delegate?.titleView(self, didClickedAt: index, with: title)
         self.titleClickAction?(self, index, title)
     }

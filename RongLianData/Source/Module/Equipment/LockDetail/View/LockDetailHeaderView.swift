@@ -13,7 +13,8 @@ class LockDetailHeaderView: UIView {
     
     // MARK: - Internal Property
     
-    static let viewHeight: CGFloat = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height - kNavigationStatusBarHeight
+    //static let viewHeight: CGFloat = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height - kNavigationStatusBarHeight
+    static let viewHeight: CGFloat = 100 + 88
 
     var zone: ProductZone = .ipfs {
         didSet {
@@ -32,16 +33,26 @@ class LockDetailHeaderView: UIView {
     
     fileprivate let mainView: UIView = UIView.init()
     fileprivate let bgView: UIImageView = UIImageView.init()
+    
+    fileprivate let topView: UIView = UIView.init()
     fileprivate let titleLabel: UILabel = UILabel.init()        // 设备总量
     fileprivate let valueLabel: UILabel = UILabel.init()
+    
     fileprivate let bottomView: UIView = UIView()
     fileprivate let waitReleaseNumView: TitleValueView = TitleValueView.init()   // 待释放
     fileprivate let hasReleaseNumView: TitleValueView = TitleValueView.init()   // 已释放
     
     fileprivate let lrMargin: CGFloat = 12
-    fileprivate let valueCenterYTopMargin: CGFloat = 30     // super.top
-    fileprivate let titleCenterYTopMargin: CGFloat = 29  // title.centerY
-    fileprivate let bottomViewHeight: CGFloat = 70
+    
+    fileprivate let topViewHeight: CGFloat = 100
+    fileprivate let valueCenterYTopMargin: CGFloat = 26     // super.top
+    fileprivate let titleCenterYTopMargin: CGFloat = 36  // title.centerY
+    
+    fileprivate let bottomViewHeight: CGFloat = 88
+    fileprivate let itemLrMargin: CGFloat = 15
+    fileprivate let itemHorMargin: CGFloat = 20
+    fileprivate let itemHeight: CGFloat = 58
+    
     
     // MARK: - Initialize Function
     init() {
@@ -109,68 +120,89 @@ extension LockDetailHeaderView {
 //        self.bgView.snp.makeConstraints { (make) in
 //            make.edges.equalToSuperview()
 //        }
+        // 1. topView
+        mainView.addSubview(self.topView)
+        self.initialTopView(self.topView)
+        self.topView.snp.makeConstraints { (make) in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(self.topViewHeight)
+        }
+        // 2. bottomView
+        mainView.addSubview(self.bottomView)
+        self.initialBottomView(self.bottomView)
+        self.bottomView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.height.equalTo(self.bottomViewHeight)
+            make.bottom.equalToSuperview()
+            make.top.equalTo(self.topView.snp.bottom)
+        }
+    }
+    ///
+    fileprivate func initialTopView(_ topView: UIView) -> Void {
         // 3. valueLabel
-        mainView.addSubview(self.valueLabel)
-        self.valueLabel.set(text: "0", font: UIFont.pingFangSCFont(size: 28, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        topView.addSubview(self.valueLabel)
+        self.valueLabel.set(text: "0", font: UIFont.pingFangSCFont(size: 35, weight: .medium), textColor: AppColor.theme, alignment: .center)
         self.valueLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(mainView.snp.top).offset(self.valueCenterYTopMargin)
-            
+            make.leading.greaterThanOrEqualToSuperview().offset(self.lrMargin)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.lrMargin)
         }
         // 2. titleLabel
-        mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "累计收益(FIL)", font: UIFont.pingFangSCFont(size: 14), textColor: UIColor.init(hex: 0x333333).withAlphaComponent(0.8), alignment: .center)
+        topView.addSubview(self.titleLabel)
+        self.titleLabel.set(text: "累计收益(FIL)", font: UIFont.pingFangSCFont(size: 14), textColor: UIColor.init(hex: 0x333333), alignment: .center)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(self.valueLabel.snp.centerY).offset(self.titleCenterYTopMargin)
+            make.leading.greaterThanOrEqualToSuperview().offset(self.lrMargin)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.lrMargin)
         }
-        mainView.addSubview(self.bottomView)
-        self.initialBottomView(self.bottomView, [self.waitReleaseNumView, self.hasReleaseNumView])
-        self.bottomView.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(self.bottomViewHeight)
-            make.bottom.equalToSuperview()
-        }
-        self.bottomView.backgroundColor = UIColor.init(R: 255, G: 250, B: 232)
-        self.bottomView.setupCorners([UIRectCorner.topLeft, UIRectCorner.topRight], selfSize: CGSize.init(width: kScreenWidth, height: self.bottomViewHeight), cornerRadius: 16)
     }
     /// bottom
-    fileprivate func initialBottomView(_ bottomView: UIView, _ itemViews: [TitleValueView]) -> Void {
-        bottomView.removeAllSubviews()
-        let titleCenterYBottomMargin: CGFloat = 30 // super.bottom
-        let valueCenterYTopMargin: CGFloat = 20    // super.top
-        var leftView: UIView = bottomView
-        for (index, itemView) in itemViews.enumerated() {
-            bottomView.addSubview(itemView)
-            itemView.snp.makeConstraints { (make) in
-                make.width.equalToSuperview().multipliedBy(1.0 / 2.0)
-                if 0 == index {
-                    make.leading.equalToSuperview()
-                } else {
-                    make.leading.equalTo(leftView.snp.trailing)
-                }
-                if itemViews.count - 1 == index {
-                    make.trailing.equalToSuperview()
-                }
-            }
-            itemView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: UIColor.init(hex: 0xCCAD78), alignment: .center)
-            itemView.titleLabel.snp.remakeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.leading.greaterThanOrEqualToSuperview()
-                make.trailing.lessThanOrEqualToSuperview()
-                make.centerY.equalTo(bottomView.snp.bottom).offset(-titleCenterYBottomMargin)
-            }
-            itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0xCCAD78), alignment: .center)
-            itemView.valueLabel.snp.remakeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.leading.greaterThanOrEqualToSuperview()
-                make.trailing.lessThanOrEqualToSuperview()
-                make.centerY.equalTo(bottomView.snp.top).offset(valueCenterYTopMargin)
-            }
-            leftView = itemView
+    fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
+        //
+        bottomView.backgroundColor = UIColor.white
+        bottomView.set(cornerRadius: 10)
+        // waitReleaseNumView
+        bottomView.addSubview(self.waitReleaseNumView)
+        self.waitReleaseNumView.snp.makeConstraints { (make) in
+            make.height.equalTo(self.itemHeight)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.itemLrMargin)
+            make.trailing.equalTo(bottomView.snp.centerX).offset(-self.itemHorMargin * 0.5)
         }
-        self.waitReleaseNumView.titleLabel.text = "待释放(FIL)"
-        self.hasReleaseNumView.titleLabel.text = "已释放(FIL)"
+        // hasReleaseNumView
+        bottomView.addSubview(self.hasReleaseNumView)
+        self.hasReleaseNumView.snp.makeConstraints { (make) in
+            make.height.equalTo(self.itemHeight)
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(bottomView.snp.centerX).offset(self.itemHorMargin * 0.5)
+            make.trailing.equalToSuperview().offset(-self.itemLrMargin)
+        }
+        //
+        let itemViews: [TitleValueView] = [self.waitReleaseNumView, self.hasReleaseNumView]
+        let itemTitles: [String] = ["待释放(FIL)", "已释放(FIL)"]
+        for (index, itemView) in itemViews.enumerated() {
+            itemView.set(cornerRadius: 8)
+            let bgLayer = AppUtil.commonGradientLayer()
+            itemView.layer.insertSublayer(bgLayer, below: nil)
+            bgLayer.colors = [UIColor.init(hex: 0xE6F1FD).cgColor, UIColor.init(hex: 0xF4F9FF).cgColor]
+            let itemWidth: CGFloat = (kScreenWidth - self.lrMargin * 2.0 - self.itemLrMargin * 2.0 - self.itemHorMargin) * 0.5
+            bgLayer.frame = CGRect.init(x: 0, y: 0, width: itemWidth, height: self.itemHeight)
+            //
+            itemView.titleLabel.set(text: itemTitles[index], font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: UIColor.init(hex: 0x999999), alignment: .center)
+            itemView.titleLabel.snp.remakeConstraints { (make) in
+                make.leading.trailing.equalToSuperview()
+                make.centerY.equalTo(itemView.snp.bottom).offset(-17)
+            }
+            itemView.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+            itemView.valueLabel.snp.remakeConstraints { (make) in
+                make.leading.trailing.equalToSuperview()
+                make.centerY.equalTo(itemView.snp.top).offset(20)
+            }
+        }
+        //
     }
 }
 // MARK: - UI Xib加载后处理
@@ -188,14 +220,14 @@ extension LockDetailHeaderView {
 
     ///
     fileprivate func setupAsDemo() -> Void {
-        self.valueLabel.text = "5,100"
-        self.initialBottomView(self.bottomView, [self.waitReleaseNumView, self.hasReleaseNumView])
+        self.valueLabel.text = "5100"
         self.waitReleaseNumView.valueLabel.text = "102.1031"
         self.hasReleaseNumView.valueLabel.text = "53.5423"
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: LockDetailListModel?) -> Void {
-        //self.setupAsDemo()
+        self.setupAsDemo()
+        return
         guard let model = model else {
             return
         }

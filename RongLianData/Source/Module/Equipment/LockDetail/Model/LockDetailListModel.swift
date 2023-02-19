@@ -18,6 +18,9 @@ class LockDetailListModel: Mappable {
     /// 明细
     var logs: [LockDetailLogModel] = []
 
+    init() {
+        
+    }
     required init?(map: Map) {
         
     }
