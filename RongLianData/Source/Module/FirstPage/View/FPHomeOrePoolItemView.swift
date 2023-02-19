@@ -8,12 +8,14 @@
 //
 
 import UIKit
+import ChainOneKit
 
 class FPHomeOrePoolItemView: UIView {
 
     // MARK: - Internal Property
 
-    static let viewHeight: CGFloat = 74
+    static let viewHeight: CGFloat = CGSize.init(width: 335, height: 90).scaleAspectForWidth(kScreenWidth - 20.0 * 2.0).height
+    static let bigViewHeight: CGFloat = CGSize.init(width: 335, height: 132).scaleAspectForWidth(kScreenWidth - 20.0 * 2.0).height
 
     var model: FPOrePoolItemModel? {
         didSet {
@@ -31,12 +33,26 @@ class FPHomeOrePoolItemView: UIView {
     let valueLabel: UILabel = UILabel.init()            // 值
     let nameView: TitleIconView = TitleIconView.init()  // 名称：图标 + 名称
 
+    fileprivate let valueLeftMargin: CGFloat = 20
+
+    fileprivate lazy var valueCenterYTopMargin: CGFloat = {
+        return (26.0 / 90.0) * Self.viewHeight
+    }()
+    fileprivate lazy var nameCenterYTopMargin: CGFloat = {
+        return (28.0 / 90.0) * Self.viewHeight
+    }()
+    fileprivate lazy var bigValueCenterYTopMargin: CGFloat = {
+        return (54.0 / 132.0) * Self.bigViewHeight
+    }()
+    fileprivate lazy var bigNameCenterYTopMargin: CGFloat = {
+        return (36.0 / 132.0) * Self.bigViewHeight
+    }()
+    
     fileprivate let iconWH: CGFloat = 74
-    fileprivate let valueLeftMargin: CGFloat = 15
     fileprivate let nameViewIconWH: CGFloat = 12
     fileprivate let nameViewHorMargin: CGFloat = 6
-    fileprivate let valueCenterYTopMargin: CGFloat = 26     // super.top
-    fileprivate let nameCenterYTopMargin: CGFloat = 25     // value.centerY
+    
+
 
 
     // MARK: - Initialize Function
@@ -88,7 +104,7 @@ extension FPHomeOrePoolItemView {
 
     /// 界面布局
     fileprivate func initialUI() -> Void {
-        self.backgroundColor = UIColor.white
+        //self.backgroundColor = UIColor.white
         //
         self.addSubview(self.mainView)
         self.initialMainView(self.mainView)
@@ -104,16 +120,16 @@ extension FPHomeOrePoolItemView {
         self.bgView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        // 1. iconView
-        mainView.addSubview(self.iconView)
-        self.iconView.set(cornerRadius: 0)
-        self.iconView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(self.iconWH)
-            make.centerY.trailing.equalToSuperview()
-        }
+//        // 1. iconView
+//        mainView.addSubview(self.iconView)
+//        self.iconView.set(cornerRadius: 0)
+//        self.iconView.snp.makeConstraints { (make) in
+//            make.width.height.equalTo(self.iconWH)
+//            make.centerY.trailing.equalToSuperview()
+//        }
         // 2. valueLabel
         mainView.addSubview(self.valueLabel)
-        self.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 17, weight: .medium), textColor: AppColor.grayText)
+        self.valueLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 24, weight: .medium), textColor: AppColor.themeRed)
         self.valueLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(mainView.snp.top).offset(self.valueCenterYTopMargin)
             make.leading.equalToSuperview().offset(self.valueLeftMargin)
@@ -126,15 +142,17 @@ extension FPHomeOrePoolItemView {
             make.trailing.lessThanOrEqualToSuperview()
             make.centerY.equalTo(self.valueLabel.snp.centerY).offset(self.nameCenterYTopMargin)
         }
-        self.nameView.iconView.set(cornerRadius: 0)
-        self.nameView.iconView.snp.remakeConstraints { (make) in
-            make.width.height.equalTo(self.nameViewIconWH)
-            make.top.bottom.leading.equalToSuperview()
-        }
-        self.nameView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.mainText)
+        self.nameView.iconView.snp.removeConstraints()
+//        self.nameView.iconView.set(cornerRadius: 0)
+//        self.nameView.iconView.snp.remakeConstraints { (make) in
+//            make.width.height.equalTo(self.nameViewIconWH)
+//            make.top.bottom.leading.equalToSuperview()
+//        }
+        self.nameView.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 13), textColor: AppColor.mainText)
         self.nameView.titleLabel.snp.remakeConstraints { (make) in
-            make.centerY.trailing.equalToSuperview()
-            make.leading.equalTo(self.nameView.iconView.snp.trailing).offset(self.nameViewHorMargin)
+//            make.centerY.trailing.equalToSuperview()
+//            make.leading.equalTo(self.nameView.iconView.snp.trailing).offset(self.nameViewHorMargin)
+            make.edges.equalToSuperview()
         }
     }
 
@@ -161,37 +179,65 @@ extension FPHomeOrePoolItemView {
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: FPOrePoolItemModel?) -> Void {
-        self.setupAsDemo()
+        //self.setupAsDemo()
         guard let model = model else {
             return
         }
         self.bgView.image = model.bg
-        self.iconView.image = model.icon
         self.valueLabel.text = model.value
-        self.nameView.iconView.image = model.title_icon
-        let valueColor: UIColor = model.bg != nil ? UIColor.white : AppColor.theme
-        let titleColor: UIColor = model.bg != nil ? UIColor.white : AppColor.mainText
-        //let titleColor: UIColor = ["全网有效算力", "活跃存储提供者", "全网算力", "当前算力难度"].contains(model.title) ? UIColor.white : AppColor.mainText
-        self.valueLabel.textColor = valueColor
-        var titleAtts = NSAttributedString.textAttTuples()
-        titleAtts.append((str: model.title, font: UIFont.pingFangSCFont(size: 12), color: titleColor))
-        titleAtts.append((str: model.strTitleUnit, font: UIFont.pingFangSCFont(size: 9), color: titleColor))
-        self.nameView.titleLabel.attributedText = NSAttributedString.attribute(titleAtts)
-        if model.title == "24h平均提供存储服务收益" {
-            self.nameView.titleLabel.numberOfLines = 2
-            self.nameView.titleLabel.snp.remakeConstraints { (make) in
-                make.top.equalTo(self.nameView.iconView).offset(-5)
-                make.leading.equalTo(self.nameView.iconView.snp.trailing).offset(self.nameViewHorMargin)
-                make.trailing.lessThanOrEqualToSuperview()
+        self.nameView.titleLabel.text = model.title + model.strTitleUnit
+        if model.title == "全网有效算力" || model.title == "活跃矿工人数"  {
+            self.valueLabel.textColor = AppColor.white
+            self.nameView.titleLabel.textColor = AppColor.white
+            self.valueLabel.font = UIFont.pingFangSCFont(size: 35, weight: .medium)
+            self.nameView.titleLabel.font = UIFont.pingFangSCFont(size: 16, weight: .regular)
+            self.valueLabel.snp.updateConstraints { (make) in
+                make.centerY.equalTo(self.mainView.snp.top).offset(self.bigValueCenterYTopMargin)
+            }
+            self.nameView.snp.updateConstraints { (make) in
+                make.centerY.equalTo(self.valueLabel.snp.centerY).offset(self.bigNameCenterYTopMargin)
             }
         } else {
-            self.nameView.titleLabel.numberOfLines = 1
-            self.nameView.titleLabel.snp.remakeConstraints { (make) in
-                make.centerY.trailing.equalToSuperview()
-                make.leading.equalTo(self.nameView.iconView.snp.trailing).offset(self.nameViewHorMargin)
+            self.valueLabel.textColor = AppColor.themeRed
+            self.nameView.titleLabel.textColor = AppColor.mainText
+            self.valueLabel.font = UIFont.pingFangSCFont(size: 24, weight: .medium)
+            self.nameView.titleLabel.font = UIFont.pingFangSCFont(size: 13, weight: .regular)
+            self.valueLabel.snp.updateConstraints { (make) in
+                make.centerY.equalTo(self.mainView.snp.top).offset(self.valueCenterYTopMargin)
+            }
+            self.nameView.snp.updateConstraints { (make) in
+                make.centerY.equalTo(self.valueLabel.snp.centerY).offset(self.nameCenterYTopMargin)
             }
         }
         self.layoutIfNeeded()
+
+//        self.bgView.image = model.bg
+//        self.valueLabel.text = model.value
+//        self.iconView.image = model.icon
+//        self.nameView.iconView.image = model.title_icon
+//        let valueColor: UIColor = model.bg != nil ? UIColor.white : AppColor.theme
+//        let titleColor: UIColor = model.bg != nil ? UIColor.white : AppColor.mainText
+//        //let titleColor: UIColor = ["全网有效算力", "活跃存储提供者", "全网算力", "当前算力难度"].contains(model.title) ? UIColor.white : AppColor.mainText
+//        self.valueLabel.textColor = valueColor
+//        var titleAtts = NSAttributedString.textAttTuples()
+//        titleAtts.append((str: model.title, font: UIFont.pingFangSCFont(size: 12), color: titleColor))
+//        titleAtts.append((str: model.strTitleUnit, font: UIFont.pingFangSCFont(size: 9), color: titleColor))
+//        self.nameView.titleLabel.attributedText = NSAttributedString.attribute(titleAtts)
+//        if model.title == "24h平均提供存储服务收益" {
+//            self.nameView.titleLabel.numberOfLines = 2
+//            self.nameView.titleLabel.snp.remakeConstraints { (make) in
+//                make.top.equalTo(self.nameView.iconView).offset(-5)
+//                make.leading.equalTo(self.nameView.iconView.snp.trailing).offset(self.nameViewHorMargin)
+//                make.trailing.lessThanOrEqualToSuperview()
+//            }
+//        } else {
+//            self.nameView.titleLabel.numberOfLines = 1
+//            self.nameView.titleLabel.snp.remakeConstraints { (make) in
+//                make.centerY.trailing.equalToSuperview()
+//                make.leading.equalTo(self.nameView.iconView.snp.trailing).offset(self.nameViewHorMargin)
+//            }
+//        }
+//        self.layoutIfNeeded()
     }
 
 }

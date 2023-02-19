@@ -68,7 +68,7 @@ extension FirstPageController {
 extension FirstPageController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = AppColor.pageBg
+        self.view.backgroundColor = AppColor.white
         // navBar
         self.view.addSubview(self.navBar)
         self.navBar.showBottomLine = false
@@ -103,7 +103,7 @@ extension FirstPageController {
     }
     ///
     fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
-        scrollView.backgroundColor = AppColor.pageBg
+        //scrollView.backgroundColor = AppColor.pageBg
         scrollView.showsVerticalScrollIndicator = false
         scrollView.mj_header = XDRefreshHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         // 1. headerView
@@ -116,7 +116,7 @@ extension FirstPageController {
         scrollView.addSubview(self.orePoolView)
         self.orePoolView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.headerView.snp.bottom).offset(24)
+            make.top.equalTo(self.headerView.snp.bottom).offset(10)
         }
         // 4. footerView
         scrollView.addSubview(self.footerView)
