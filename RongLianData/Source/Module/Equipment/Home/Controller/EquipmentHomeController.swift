@@ -41,7 +41,7 @@ class EquipmentHomeController: BaseViewController {
     fileprivate let detailView: UIView = UIView()
     fileprivate let horScrollView: UIScrollView = UIScrollView()
 
-    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 213).scaleAspectForWidth(kScreenWidth).height
+    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 205).scaleAspectForWidth(kScreenWidth).height
     fileprivate let titleViewHeight: CGFloat = EquipmentHomeTitleView.viewHeight
     fileprivate var selectedIndex: Int = 0 {
         didSet {

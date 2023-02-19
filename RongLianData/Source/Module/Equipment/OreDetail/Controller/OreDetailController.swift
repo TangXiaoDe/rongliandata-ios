@@ -9,6 +9,7 @@
     
 import Foundation
 import UIKit
+import ChainOneKit
 
 class OreDetailController: BaseViewController
 {
@@ -25,14 +26,17 @@ class OreDetailController: BaseViewController
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     
-    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 219).scaleAspectForWidth(kScreenWidth).height
+    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 205).scaleAspectForWidth(kScreenWidth).height
     fileprivate let headerViewNoGroupHeight: CGFloat = OreDetailHeaderView.noGroupViewHeight
     fileprivate let headerViewHasGroupHeight: CGFloat = OreDetailHeaderView.hasGroupViewHeight
-    fileprivate let headerViewTopMargin: CGFloat = 20
+    fileprivate let headerViewHeight: CGFloat = OreDetailHeaderView.viewHeight
+    fileprivate let headerViewTopMargin: CGFloat = 12
     fileprivate let lrMargin: CGFloat = 12
-    fileprivate let itemVerMargin: CGFloat = 12
-    fileprivate let itemBottomMargin: CGFloat = 12
-    fileprivate let itemTopMargin: CGFloat = 12     // -header.bottom
+    
+    fileprivate let itemContainerTopMargin: CGFloat = 12
+    fileprivate let itemVerMargin: CGFloat = 0
+    fileprivate let itemBottomMargin: CGFloat = 0//12
+    fileprivate let itemTopMargin: CGFloat = 0 //12     // -header.bottom
     fileprivate let itemViewTagBase: Int = 250
 
     // MARK: - Initialize Function
@@ -89,7 +93,7 @@ extension OreDetailController {
         }
         // 1.nav
         self.view.addSubview(self.navBar)
-        self.navBar.titleLabel.set(text: "收益明细-\(self.listModel.zone.title)", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText, alignment: .center)
+        self.navBar.titleLabel.set(text: "收益明细", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: AppColor.mainText, alignment: .center)
         self.navBar.leftItem.setImage(UIImage.init(named: "IMG_navbar_back"), for: .normal)
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { (make) in
@@ -121,50 +125,61 @@ extension OreDetailController {
         scrollView.mj_footer.isHidden = true
         // 1. headerView
         scrollView.addSubview(self.headerView)
+        self.headerView.backgroundColor = UIColor.white
+        self.headerView.set(cornerRadius: 10)
         self.headerView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(headerViewTopMargin)
+            make.top.equalToSuperview().offset(self.headerViewTopMargin)
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            let height: CGFloat = self.listModel.group.isEmpty ? self.headerViewNoGroupHeight : self.headerViewHasGroupHeight
-            make.height.equalTo(height)
+            //let height: CGFloat = self.listModel.group.isEmpty ? self.headerViewNoGroupHeight : self.headerViewHasGroupHeight
+            make.height.equalTo(self.headerViewHeight)
         }
         // 2. itemContainer
         scrollView.addSubview(self.itemContainer)
+        self.itemContainer.backgroundColor = AppColor.white
+        self.itemContainer.set(cornerRadius: 12)
         self.itemContainer.snp.makeConstraints { (make) in
-            make.width.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.headerView.snp.bottom).offset(self.itemTopMargin)
-            make.bottom.equalToSuperview().offset(-itemBottomMargin)
+            make.width.equalTo(kScreenWidth - self.lrMargin * 2.0)
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.top.equalTo(self.headerView.snp.bottom).offset(self.itemContainerTopMargin)
+            make.bottom.equalToSuperview()
+            let minHeight: CGFloat = kScreenHeight - kNavigationStatusBarHeight - self.headerViewHeight - self.headerViewTopMargin - self.itemTopMargin
+            make.height.greaterThanOrEqualTo(minHeight)
         }
     }
     
     /// 数据加载
     fileprivate func setupItemContainer(with models: [AssetListModel]) -> Void {
+        //
         self.itemContainer.removeAllSubviews()
+        //
         var topView: UIView = self.itemContainer
         for (index, model) in models.enumerated() {
             let itemView = OreDetailItemView.init()
             self.itemContainer.addSubview(itemView)
             itemView.model = model
-            itemView.type = self.listModel.zhiya_type
-            itemView.set(cornerRadius: 10)
+            //itemView.type = self.listModel.zhiya_type
+            //itemView.set(cornerRadius: 10)
             itemView.tag = self.itemViewTagBase + index
+            itemView.showTopMargin = index == 0
+            itemView.showBottomMargin = index == models.count - 1
             itemView.snp.makeConstraints { (make) in
-                make.leading.equalToSuperview().offset(self.lrMargin)
-                make.trailing.equalToSuperview().offset(-self.lrMargin)
+                make.leading.equalToSuperview().offset(0)
+                make.trailing.equalToSuperview().offset(-0)
                 if 0 == index {
-                    make.top.equalToSuperview()
+                    make.top.equalToSuperview().offset(self.itemTopMargin)
                 } else {
                     make.top.equalTo(topView.snp.bottom).offset(self.itemVerMargin)
                 }
                 if index == models.count - 1 {
-                    make.bottom.equalToSuperview()
+                    make.bottom.lessThanOrEqualToSuperview().offset(-self.itemBottomMargin)
                 }
             }
             topView = itemView
             // tapGR
-            let tapGR: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGRProcess(_:)))
-            itemView.addGestureRecognizer(tapGR)
+            //let tapGR: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGRProcess(_:)))
+            //itemView.addGestureRecognizer(tapGR)
         }
         self.view.layoutIfNeeded()
     }
@@ -176,19 +191,20 @@ extension OreDetailController {
 
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
-        self.scrollView.mj_header.beginRefreshing()
+        //self.scrollView.mj_header.beginRefreshing()
         self.headerView.model = self.listModel
-//        self.setupAsDemo()
+        self.setupAsDemo()
     }
     ///
-//    fileprivate func setupAsDemo() -> Void {
-//        for index in 0...20 {
-//            let model = EquipmentListModel.init(no: "202039\(index)")
-//            self.sourceList.append(model)
-//        }
-//        self.headerView.model = nil
-//        self.setupItemContainer(with: self.sourceList)
-//    }
+    fileprivate func setupAsDemo() -> Void {
+        for index in 0...1 {
+            let model = AssetListModel.init()
+            self.sourceList.append(model)
+        }
+        self.headerView.model = nil
+        self.setupItemContainer(with: self.sourceList)
+        self.scrollView.mj_footer?.isHidden = true
+    }
 
 }
 

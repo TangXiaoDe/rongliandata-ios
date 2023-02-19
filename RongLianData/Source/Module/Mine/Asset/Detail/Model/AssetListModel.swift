@@ -140,6 +140,9 @@ class AssetListModel: Mappable {
     /// 外界传入字段
     var zone: ProductZone?
 
+    init() {
+        
+    }
     required init?(map: Map) {
         
     }
