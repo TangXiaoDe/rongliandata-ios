@@ -50,7 +50,7 @@ class ServerConfigModel: Mappable {
     }
     func mapping(map: Map) {
         cdnDomain <- map["cdn_domain"]
-        business <- map["business"]
+        business <- map["contact"]
         quitDay <- map["quit_limit_day"]
         bonusLimit <- map["bonus"]
         register_protocol <- map["register_protocol"]
@@ -102,10 +102,10 @@ class BusinessContactModel: Mappable {
         //email <- map["email"]
         //imeet <- map["imeet"]
         //wechat <- map["wechat"]
-        qq <- map["Q Q"]
+        qq <- map["qq"]
         email <- map["邮箱"]
         imeet <- map["链乎"]
-        wechat <- map["微信"]
+        wechat <- map["wechat"]
     }
 
 }

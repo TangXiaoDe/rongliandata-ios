@@ -521,6 +521,9 @@
 		A17FCCFA29A0FD1900B06F23 /* CertPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCF929A0FD1900B06F23 /* CertPopView.swift */; };
 		A17FCCFE29A0FE4800B06F23 /* CertificationRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCFC29A0FE4800B06F23 /* CertificationRequestInfo.swift */; };
 		A17FCCFF29A0FE4800B06F23 /* CertificationNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FCCFD29A0FE4800B06F23 /* CertificationNetworkManager.swift */; };
+		A1D8915529A3ACFF000F51B5 /* ContactItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D8915229A3ACFF000F51B5 /* ContactItemView.swift */; };
+		A1D8915629A3ACFF000F51B5 /* ContactItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D8915329A3ACFF000F51B5 /* ContactItemModel.swift */; };
+		A1D8915729A3ACFF000F51B5 /* KefuContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D8915429A3ACFF000F51B5 /* KefuContactController.swift */; };
 		A38D7434E3928A0C480E5D70 /* Pods_RongLianDataTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEC8B66C20118199FDF9BBE /* Pods_RongLianDataTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -1087,6 +1090,9 @@
 		A17FCCF929A0FD1900B06F23 /* CertPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertPopView.swift; sourceTree = "<group>"; };
 		A17FCCFC29A0FE4800B06F23 /* CertificationRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificationRequestInfo.swift; sourceTree = "<group>"; };
 		A17FCCFD29A0FE4800B06F23 /* CertificationNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificationNetworkManager.swift; sourceTree = "<group>"; };
+		A1D8915229A3ACFF000F51B5 /* ContactItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactItemView.swift; sourceTree = "<group>"; };
+		A1D8915329A3ACFF000F51B5 /* ContactItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactItemModel.swift; sourceTree = "<group>"; };
+		A1D8915429A3ACFF000F51B5 /* KefuContactController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KefuContactController.swift; sourceTree = "<group>"; };
 		A42B7198B32A0313DF58D827 /* Pods_RongLianData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RongLianData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B6B363772541E58E0B7171 /* Pods-AntClusterBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E443D65902D95578BE5E367A /* Pods-AntClusterBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AntClusterBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AntClusterBTests/Pods-AntClusterBTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -2894,6 +2900,7 @@
 		535DE0F529A067D500E8E90C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				A1D8915129A3ACFF000F51B5 /* Kefu */,
 				535DE0F629A067D500E8E90C /* Home */,
 				535DE0FF29A067D500E8E90C /* AccountSecurity */,
 				535DE11C29A067D500E8E90C /* Common */,
@@ -3824,6 +3831,16 @@
 			path = Certification;
 			sourceTree = "<group>";
 		};
+		A1D8915129A3ACFF000F51B5 /* Kefu */ = {
+			isa = PBXGroup;
+			children = (
+				A1D8915229A3ACFF000F51B5 /* ContactItemView.swift */,
+				A1D8915329A3ACFF000F51B5 /* ContactItemModel.swift */,
+				A1D8915429A3ACFF000F51B5 /* KefuContactController.swift */,
+			);
+			path = Kefu;
+			sourceTree = "<group>";
+		};
 		F04D23F0F385BDC908419D96 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -4096,6 +4113,7 @@
 				535DE21629A067D500E8E90C /* PicturesThumbView.swift in Sources */,
 				535DE34129A067D700E8E90C /* EquipmentHomeTitleView.swift in Sources */,
 				535DE35629A067D700E8E90C /* PreReturnInputMainView.swift in Sources */,
+				A1D8915629A3ACFF000F51B5 /* ContactItemModel.swift in Sources */,
 				535DE2A029A067D600E8E90C /* BasePlaceHolder.swift in Sources */,
 				535DE22929A067D500E8E90C /* LaunchController.swift in Sources */,
 				535DE21C29A067D500E8E90C /* ServerVersionModel.swift in Sources */,
@@ -4311,6 +4329,7 @@
 				535DE2D129A067D600E8E90C /* RechargePlaceView.swift in Sources */,
 				535DE26829A067D600E8E90C /* AdvertSDCycleBannerView.swift in Sources */,
 				535DE36729A067D700E8E90C /* EquipDetailHeaderView.swift in Sources */,
+				A1D8915729A3ACFF000F51B5 /* KefuContactController.swift in Sources */,
 				535DE2AD29A067D600E8E90C /* PageDefaultNetErrorView.swift in Sources */,
 				535DE2D529A067D600E8E90C /* WalletBalanceProgressView.swift in Sources */,
 				535DE32529A067D700E8E90C /* PhoneBindController.swift in Sources */,
@@ -4483,6 +4502,7 @@
 				535DE32729A067D700E8E90C /* LoginPwdUpdateController.swift in Sources */,
 				535DE2DC29A067D600E8E90C /* WithdrawController.swift in Sources */,
 				535DE34329A067D700E8E90C /* EquipmentListCell.swift in Sources */,
+				A1D8915529A3ACFF000F51B5 /* ContactItemView.swift in Sources */,
 				A17FCCE629A0DAC300B06F23 /* CommonKeyboardInputAccessoryView.swift in Sources */,
 				535DE37129A067D700E8E90C /* LockDetailListModel.swift in Sources */,
 				535DE2A129A067D600E8E90C /* ContactEmptyPlaceHolderView.swift in Sources */,

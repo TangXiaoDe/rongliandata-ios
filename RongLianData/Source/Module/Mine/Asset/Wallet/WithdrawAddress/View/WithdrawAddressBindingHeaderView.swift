@@ -39,9 +39,9 @@ class WithdrawAddressBindingHeaderView: UIView
     fileprivate let fieldHeight: CGFloat = 30
     fileprivate let fieldLrMargin: CGFloat = 12
     fileprivate let doneBtnHeight: CGFloat = 44
-    fileprivate let doneBtnWidth: CGFloat = 200
+    fileprivate let doneBtnWidth: CGFloat = kScreenWidth - 20 * 2
     fileprivate let doneBtnTopMargin: CGFloat = 34
-    fileprivate let doneBtnBottomMargin: CGFloat = 32
+    fileprivate let doneBtnBottomMargin: CGFloat = kBottomHeight + 6
     
     fileprivate var limitSingleMinNum: Double = 1
     fileprivate var limitSingleMaxNum: Double = Double(Int.max)
@@ -105,14 +105,14 @@ extension WithdrawAddressBindingHeaderView {
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
         // 5. addressInputPrompt
         mainView.addSubview(self.addressInputPromptLabel)
-        self.addressInputPromptLabel.set(text: "请输入提现地址", font: UIFont.pingFangSCFont(size: 14), textColor: UIColor.init(hex: 0x333333))
+        self.addressInputPromptLabel.set(text: "请输入提现地址", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: UIColor.init(hex: 0x111112))
         self.addressInputPromptLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.centerY.equalTo(mainView.snp.top).offset(self.addressInputPromptCenterYTopMargin)
         }
         // pasteBtn
         mainView.addSubview(self.pasteBtn)
-        self.pasteBtn.set(title: "粘贴", titleColor: UIColor.init(hex: 0x3573FB), for: .normal)
+        self.pasteBtn.set(title: "粘贴", titleColor: UIColor.init(hex: 0x4444FF), for: .normal)
         self.pasteBtn.set(font: UIFont.pingFangSCFont(size: 14))
         self.pasteBtn.addTarget(self, action: #selector(pasteBtnClick(_:)), for: .touchUpInside)
         self.pasteBtn.snp.makeConstraints { (make) in
@@ -145,19 +145,19 @@ extension WithdrawAddressBindingHeaderView {
 //            make.trailing.equalToSuperview().offset(-self.lrMargin)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.doneBtnWidth)
-            make.top.equalTo(self.addressInputView.snp.bottom).offset(self.doneBtnTopMargin)
+//            make.top.equalTo(self.addressInputView.snp.bottom).offset(self.doneBtnTopMargin)
             make.bottom.equalToSuperview().offset(-self.doneBtnBottomMargin)
             make.height.equalTo(self.doneBtnHeight)
         }
 
     }
     fileprivate func initialAddressInputView(_ addressInputView: UIView) -> Void {
-        addressInputView.backgroundColor = UIColor.init(hex: 0xF5F5F5)
-        addressInputView.set(cornerRadius: 5, borderWidth: 1, borderColor: UIColor.init(hex: 0xECECEC))
+        addressInputView.backgroundColor = UIColor.init(hex: 0xF9F9F9)
+        addressInputView.set(cornerRadius: 5)
         // addressField
         addressInputView.addSubview(self.addressField)
-        self.addressField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 20), textColor: UIColor.init(hex: 0x333333))
-        self.addressField.attributedPlaceholder = NSAttributedString.init(string: "请输入提现地址", attributes: [NSAttributedString.Key.font : UIFont.pingFangSCFont(size: 20), NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x999999)])
+        self.addressField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 18), textColor: UIColor.init(hex: 0x333333))
+        self.addressField.attributedPlaceholder = NSAttributedString.init(string: "请输入提现地址", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 18), NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0xCCCCCC)])
         self.addressField.addTarget(self, action: #selector(addressFieldValueChanged(_:)), for: .editingChanged)
         self.addressField.snp.makeConstraints { (make) in
             make.height.equalTo(self.fieldHeight)
@@ -166,13 +166,12 @@ extension WithdrawAddressBindingHeaderView {
             make.trailing.equalToSuperview().offset(-self.fieldLrMargin)
         }
     }
-    
 }
 // MARK: - Private UI Xib加载后处理
 extension WithdrawAddressBindingHeaderView {
     /// awakeNib时的处理
     fileprivate func initialInAwakeNib() -> Void {
-        
+
     }
 
 }
@@ -234,6 +233,5 @@ extension WithdrawAddressBindingHeaderView {
 
 // MARK: - <XXXDelegate>
 extension WithdrawAddressBindingHeaderView {
-    
-}
 
+}
