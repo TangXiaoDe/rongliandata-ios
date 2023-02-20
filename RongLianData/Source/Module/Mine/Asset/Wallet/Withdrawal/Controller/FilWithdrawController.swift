@@ -330,7 +330,7 @@ extension FilWithdrawController {
     }
     /// 进入客服界面
     fileprivate func enterKefuPage() -> Void {
-        
+        AppUtil.enterKefuContactPage()
 //        let strUrl = UrlManager.kefuUrl
 //        let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.strUrl(strUrl: strUrl))
 //        self.enterPageVC(webVC)
