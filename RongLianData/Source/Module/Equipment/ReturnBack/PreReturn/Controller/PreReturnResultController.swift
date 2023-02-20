@@ -35,7 +35,7 @@ class PreReturnResultController: BaseViewController {
 
     fileprivate let lrMargin: CGFloat = 12
     fileprivate let promptIconTopMargin: CGFloat = 22
-    fileprivate let promptIconSize: CGSize = CGSize.init(width: 106, height: 64)
+    fileprivate let promptIconSize: CGSize = CGSize.init(width: 75, height: 87)
     fileprivate let promptTitleTopMargin: CGFloat = 40
     fileprivate let promptInfoTopMargin: CGFloat = 15
     fileprivate let topPromptViewHeight: CGFloat = 230
