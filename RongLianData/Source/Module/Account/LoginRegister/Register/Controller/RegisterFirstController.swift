@@ -270,6 +270,32 @@ extension RegisterFirstController {
         let mAttr = NSMutableAttributedString.init(string: "")
         mAttr.append(NSAttributedString.init(string: "《用户协议》", attributes: [NSAttributedString.Key.foregroundColor: AppColor.theme, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor: AppColor.theme]))
         self.agreementView.button.setAttributedTitle(mAttr, for: .normal)
+        // privacyView
+        mainView.addSubview(self.privacyView)
+        self.privacyView.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.selectBtn)
+            make.leading.equalTo(self.agreementView.snp.trailing)
+            make.trailing.lessThanOrEqualToSuperview()
+        }
+        self.privacyView.titleLabel.set(text: "和", font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.mainText)
+        self.privacyView.titleLabel.snp.remakeConstraints { (make) in
+            make.leading.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        self.privacyView.button.set(title: "《隐私政策》", titleColor: AppColor.theme, for: .normal)
+        self.privacyView.button.set(title: "《隐私政策》", titleColor: AppColor.theme, for: .highlighted)
+        self.privacyView.button.set(font: UIFont.pingFangSCFont(size: 12))
+        self.privacyView.button.addTarget(self, action: #selector(privacyBtnClick(_:)), for: .touchUpInside)
+        self.privacyView.button.snp.remakeConstraints { (make) in
+            make.leading.equalTo(self.privacyView.titleLabel.snp.trailing).offset(2)
+            make.centerY.trailing.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+        let mAttrPrivacy = NSMutableAttributedString.init(string: "")
+        mAttrPrivacy.append(NSAttributedString.init(string: "《隐私政策》", attributes: [NSAttributedString.Key.foregroundColor: AppColor.theme, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor: AppColor.theme]))
+        self.privacyView.button.setAttributedTitle(mAttrPrivacy, for: .normal)
         // doneBtn 下一步/注册
         mainView.addSubview(self.doneBtn)
         self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)
@@ -731,15 +757,25 @@ extension RegisterFirstController {
     }
     /// 进入协议界面
     fileprivate func enterAgreementPage() -> Void {
-        guard let registerProtocol = AppConfig.share.server?.register_protocol else {
+        guard let config = AppConfig.share.server else {
             return
         }
-        let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.strUrl(strUrl: registerProtocol))
+        //let html = AppUtil.contentShowWebStyle(strDetail: config.agreement.replacingOccurrences(of: "\n", with: "<br/>"))
+        //let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.strUrl(strUrl: html))
+        let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.strUrl(strUrl: config.agreement))
+        webVC.title = "用户协议"
         self.enterPageVC(webVC)
     }
     /// 进入隐私界面
     fileprivate func enterPrivacyPage() -> Void {
-        self.enterAgreementPage()
+        guard let config = AppConfig.share.server else {
+            return
+        }
+        //let html = AppUtil.contentShowWebStyle(strDetail: config.privacy.replacingOccurrences(of: "\n", with: "<br/>"))
+        //let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.content(html: html))
+        let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.strUrl(strUrl: config.privacy))
+        webVC.title = "隐私政策"
+        self.enterPageVC(webVC)
     }
     
     /// 显示顶象验证弹窗
