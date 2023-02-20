@@ -62,7 +62,8 @@ class WalletHomeMainView: UIView {
 //    fileprivate let frozenItem = WalletBalanceItem.init(type: .frozen)
     
 
-    fileprivate var topBgSize: CGSize = CGSize.init(width: 375, height: 205).scaleAspectForWidth(kScreenWidth)
+    fileprivate var topBgSize: CGSize = CGSize.init(width: 375, height: 178).scaleAspectForWidth(kScreenWidth)
+
     fileprivate let centerViewTopMargin: CGFloat = -24 // topView
     fileprivate let bottomViewTopMargin: CGFloat = 12 // topView
     fileprivate let centerViewHeight: CGFloat = 146
@@ -116,7 +117,7 @@ extension WalletHomeMainView {
         mainView.addSubview(self.topBgView)
         self.topBgView.isUserInteractionEnabled = true
         self.initialToptopBgView(self.topBgView)
-        self.topBgView.image = UIImage.init(named: "IMG_common_img_shebei_topbg")
+        self.topBgView.image = UIImage.init(named: "IMG_home_img_topbg")
         self.topBgView.set(cornerRadius: 0)
         self.topBgView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(self.bgTopMargin)
@@ -150,7 +151,7 @@ extension WalletHomeMainView {
         self.balancelMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 22, weight: .medium), textColor: AppColor.theme, alignment: .left)
         self.balancelMoneyView.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(lrMargin)
-            make.top.equalTo(topBgView.snp.top).offset(6 + kNavigationStatusBarHeight)
+            make.top.equalTo(topBgView.snp.top).offset(15 + kNavigationStatusBarHeight)
             make.width.greaterThanOrEqualTo(65)
             make.right.lessThanOrEqualTo(topBgView.snp.centerX).offset(0)
         }
@@ -288,6 +289,7 @@ extension WalletHomeMainView {
     }
     fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
         bottomView.backgroundColor = UIColor.white
+        let lrMargin: CGFloat = 15
         // bottomTitle
         bottomView.addSubview(self.bottomTitleLabel)
         self.bottomTitleLabel.set(text: "其他金额", font: UIFont.pingFangSCFont(size: 14, weight: .medium), textColor: UIColor.init(hex: 0x333333))
@@ -298,19 +300,22 @@ extension WalletHomeMainView {
         bottomView.addSubview(self.canUseItem)
         self.canUseItem.snp.makeConstraints { (make) in
             make.top.equalTo(self.bottomTitleLabel.snp.centerY).offset(20)
-            make.leading.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(lrMargin)
+            make.trailing.equalToSuperview().offset(-lrMargin)
             make.height.equalTo(WalletBalanceItem.viewHeight)
         }
         bottomView.addSubview(self.mortgageItem)
         self.mortgageItem.snp.makeConstraints { (make) in
             make.top.equalTo(self.canUseItem.snp.bottom).offset(self.itemVerMargin)
-            make.leading.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(lrMargin)
+            make.trailing.equalToSuperview().offset(-lrMargin)
             make.height.equalTo(WalletBalanceItem.viewHeight)
         }
         bottomView.addSubview(self.lockUpItem)
         self.lockUpItem.snp.makeConstraints { (make) in
             make.top.equalTo(self.mortgageItem.snp.bottom).offset(self.itemVerMargin)
-            make.leading.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(lrMargin)
+            make.trailing.equalToSuperview().offset(-lrMargin)
             make.height.equalTo(WalletBalanceItem.viewHeight)
         }
 //        bottomView.addSubview(self.securityItem)
