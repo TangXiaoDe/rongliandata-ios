@@ -357,6 +357,16 @@ extension AppUtil {
 
 // MARK: - EnterPage
 extension AppUtil {
+    /// present出客服联系方式界面
+    class func enterKefuContactPage() -> Void {
+        //
+        //let contactVC = CommonKefuContactController.init()
+        let contactVC = KefuContactController.init()
+        //AppUtil.topViewController()?.present(contactVC, animated: false, completion: nil)
+        RootManager.share.showRootVC.present(contactVC, animated: false, completion: nil)
+        //
+        //AppUtil.enterOnlineKefuCPage()
+    }
     /// 显示网络设置弹窗
     class func showNetworkSettingAlert() -> Void {
         let alertVC = UIAlertController.init(title: "已为“\(AppConfig.share.appName)”关闭无线局域网", message: "你可以在“设置”中为此应用打开无线局域网", preferredStyle: .alert)
