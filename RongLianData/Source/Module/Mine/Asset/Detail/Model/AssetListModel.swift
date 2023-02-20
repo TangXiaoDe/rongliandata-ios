@@ -185,10 +185,10 @@ class AssetListModel: Mappable {
     }
     /// 值颜色
     var valueColor: UIColor {
-        var color: UIColor = UIColor.init(hex: 0xF4CF4B)
+        var color: UIColor = UIColor.init(hex: 0xE34F1E)
         switch self.action {
         case .income:
-            color = UIColor.init(hex: 0xF04F0F)
+            color = UIColor.init(hex: 0xE34F1E)
         case .outcome:
             color = AppColor.mainText
         }

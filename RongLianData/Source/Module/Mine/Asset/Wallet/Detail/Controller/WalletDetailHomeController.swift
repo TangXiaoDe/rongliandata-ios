@@ -20,7 +20,7 @@ class WalletDetailHomeController: BaseViewController {
 
     fileprivate let titleViewH: CGFloat = AssetActionTitleView.viewHeight
     
-    fileprivate let scrollTopMargin: CGFloat = 12
+    fileprivate let scrollTopMargin: CGFloat = 8
 
     fileprivate(set) var selectedIndex: Int = 0 {
         didSet {
@@ -57,11 +57,11 @@ extension WalletDetailHomeController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.hiddenNavBarShadow()
+        //self.navigationController?.hiddenNavBarShadow()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.showNavBarShadow(color: AppColor.navShadow)
+        //self.navigationController?.showNavBarShadow(color: AppColor.navShadow)
     }
 }
 
@@ -69,7 +69,7 @@ extension WalletDetailHomeController {
 extension WalletDetailHomeController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = AppColor.pageBg
         // navigation
         self.navigationItem.title = "FIL明细"
         // 1. titleView
