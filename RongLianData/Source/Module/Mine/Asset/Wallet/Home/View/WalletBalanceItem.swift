@@ -177,10 +177,8 @@ extension WalletBalanceItem {
         // 2.progressView
         mainView.addSubview(self.progressView)
         //self.progressView.isHidden = true
-        //self.progressView.set(cornerRadius: self.progressViewHeight * 0.5)
-        self.progressView.mainView.backgroundColor = UIColor.white
-        //self.progressView.backgroundColor = UIColor.white
-        self.progressView.progressView.backgroundColor = UIColor.init(hex: 0x4444FF)
+        //self.progressView.mainView.backgroundColor = self.type.progressBgColor
+        self.progressView.progressView.backgroundColor = self.type.progressColor
         self.progressView.snp.makeConstraints { (make) in
             make.top.equalTo(self.titleLabel.snp.bottom).offset(self.progressTopMargin)
             make.leading.equalTo(self.titleLabel)
@@ -211,8 +209,8 @@ extension WalletBalanceItem {
     func setUpAsDemo() {
         self.iconImgView.image = self.type.icon
         self.titleLabel.text = self.type.title
-        self.progressView.mainView.backgroundColor = self.type.progressBgColor
-        self.progressView.progressView.backgroundColor = self.type.progressColor
+        //self.progressView.mainView.backgroundColor = self.type.progressBgColor
+        //self.progressView.progressView.backgroundColor = self.type.progressColor
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: AssetInfoModel?) -> Void {
@@ -235,7 +233,6 @@ extension WalletBalanceItem {
         case .frozen:
             self.valueLabel.text = model.frozen.decimalValidDigitsProcess(digits: 8)
         }
-        
     }
 }
 

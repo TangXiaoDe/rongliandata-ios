@@ -204,7 +204,7 @@ extension FilWithdrawHeaderView {
         }
         // 7. addressLabel
         topView.addSubview(self.addressLabel)
-        self.addressLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.addressLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: UIColor.init(hex: 0x333333), alignment: .left)
         //self.addressLabel.numberOfLines = 0
         self.addressLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
