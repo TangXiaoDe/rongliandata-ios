@@ -43,11 +43,11 @@ class EDAssetSurveyView: UIView {
     fileprivate let canUseItemView: TitleValueView = TitleValueView.init()       // 可用数量
     fileprivate let diyaItemView: TitleValueView = TitleValueView.init()        // 抵押数量
     fileprivate let lockItemView: TitleValueView = TitleValueView.init()       // 锁仓数量
-    fileprivate let frozenItemView: TitleValueView = TitleValueView.init()     // 冻结数量
     
+    fileprivate let frozenItemView: TitleValueView = TitleValueView.init()     // 冻结数量
     fileprivate let lockDetailView: TitleIconControl = TitleIconControl.init()  // 锁仓详情入口
     
-    fileprivate var itemTitles: [String] = ["可用数量(FIL)", "抵押数量(FIL)", "锁仓数量(FIL)", "冻结数量(FIL)"]
+    fileprivate var itemTitles: [String] = ["可用数量(FIL)", "抵押数量(FIL)", "锁仓数量(FIL)"] // , "冻结数量(FIL)"
     
     
     fileprivate let titleLeftMargin: CGFloat = 12
@@ -196,7 +196,7 @@ extension EDAssetSurveyView {
     fileprivate func initialContainer(_ container: UIView) -> Void {
         //
         container.removeAllSubviews()
-        let itemViews: [TitleValueView] = [self.canUseItemView, self.diyaItemView, self.lockItemView, self.frozenItemView]
+        let itemViews: [TitleValueView] = [self.canUseItemView, self.diyaItemView, self.lockItemView] // self.frozenItemView
         var topView: UIView = container
         for (index, itemView) in itemViews.enumerated() {
             container.addSubview(itemView)
