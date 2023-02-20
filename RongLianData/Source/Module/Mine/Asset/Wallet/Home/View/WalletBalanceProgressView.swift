@@ -84,7 +84,7 @@ extension WalletBalanceProgressView {
         }
     }
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        mainView.backgroundColor = UIColor.init(hex: 0xF0F4FF)
+        //mainView.backgroundColor = UIColor.init(hex: 0xF0F4FF)
         mainView.set(cornerRadius: 2)
         // 1. progressView
         mainView.addSubview(progressView)

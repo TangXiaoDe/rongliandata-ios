@@ -349,13 +349,14 @@ extension MineHomeController: MineHomeHeaderViewProtocol {
 extension MineHomeController: MineHomeIncomeInfoViewProtocol {
     /// fil点击
     func incomeInfoView(_ view: MineHomeIncomeInfoView, didTapPageAt index: Int) {
-        if index == 0 {
-            self.enterFilHomePage()
-        } else if index == 1 {
-            self.enterXCHAssetPage()
-        } else if index == 2 {
-            self.enterBZZAssetPage()
-        }
+//        if index == 0 {
+//            self.enterFilHomePage()
+//        } else if index == 1 {
+//            self.enterXCHAssetPage()
+//        } else if index == 2 {
+//            self.enterBZZAssetPage()
+//        }
+        self.enterFilHomePage()
     }
 }
 // MARK: - EnterPage
