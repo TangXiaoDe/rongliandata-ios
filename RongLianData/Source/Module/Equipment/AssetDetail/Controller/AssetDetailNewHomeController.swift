@@ -92,6 +92,7 @@ extension AssetDetailNewHomeController {
         self.titleView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 0.5, margin1: 0, margin2: 0)
         // 2. cateView
         self.view.addSubview(self.cateView)
+        self.cateView.delegate = self
         self.cateView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.titleView.snp.bottom)
@@ -110,7 +111,7 @@ extension AssetDetailNewHomeController {
         self.tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
         self.tableView.mj_header = XDRefreshHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         self.tableView.mj_footer = XDRefreshFooter(refreshingTarget: self, refreshingAction: #selector(footerLoadMore))
-        self.tableView.mj_header.isHidden = true
+        self.tableView.mj_header.isHidden = false
         self.tableView.mj_footer.isHidden = true
         self.tableView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
@@ -125,8 +126,8 @@ extension AssetDetailNewHomeController {
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
         self.cateView.models = self.cateList
-        //self.tableView.mj_header.beginRefreshing()
-        self.setupAsDemo()
+        self.tableView.mj_header.beginRefreshing()
+        //self.setupAsDemo()
     }
     
     ///
@@ -158,8 +159,6 @@ extension AssetDetailNewHomeController {
     
     
     fileprivate func refreshRequest() -> Void {
-        self.tableView.mj_header?.endRefreshing()
-        return
         EquipmentNetworkManager.getEquipAssetDetail(order_id: self.model.id, action: self.selectType, type: self.selectCate, offset: 0, limit: self.limit) { [weak self](status, msg, models) in
             guard let `self` = self else {
                 return
@@ -180,8 +179,6 @@ extension AssetDetailNewHomeController {
     }
 
     fileprivate func loadMoreRequest() -> Void {
-        self.tableView.mj_footer?.endRefreshing()
-        return
         EquipmentNetworkManager.getEquipAssetDetail(order_id: self.model.id, action: self.selectType, type: self.selectCate, offset: self.offset, limit: self.limit) { [weak self](status, msg, models) in
             guard let `self` = self else {
                 return

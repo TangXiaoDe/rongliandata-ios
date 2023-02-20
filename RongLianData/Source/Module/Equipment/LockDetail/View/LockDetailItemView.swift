@@ -291,8 +291,8 @@ extension LockDetailItemView {
     
     /// 数据加载
     fileprivate func setupWithModel(_ model: LockDetailLogModel?) -> Void {
-        self.setupAsDemo()
-        return
+//        self.setupAsDemo()
+//        return
         guard let model = model else {
             return
         }

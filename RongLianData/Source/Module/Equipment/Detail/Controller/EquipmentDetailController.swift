@@ -212,9 +212,10 @@ extension EquipmentDetailController {
     
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
-        self.topView.model = self.model
-        //self.scrollView.mj_header.beginRefreshing()
-        self.setupAsDemo()
+        //self.topView.model = self.model
+        self.headerView.model = self.model
+        self.scrollView.mj_header.beginRefreshing()
+        //self.setupAsDemo()
     }
     ///
     fileprivate func setupAsDemo() -> Void {
@@ -244,19 +245,20 @@ extension EquipmentDetailController {
             }
             self.detail = data.detail
             self.returns = data.returns
-            self.topView.model = self.model
+            //self.topView.model = self.model
+            self.headerView.model = self.model
             self.termInfoView.model = self.detail?.extend
             self.interestInfoView.model = self.detail?.extend
             self.interestInfoView.isHidden = data.detail.zhiya_type != .dianfu
             self.detailView.model = self.detail
             self.detailView.returns = self.returns
             self.offset = data.returns.count
-            self.scrollView.mj_footer.isHidden = data.returns.count < self.limit
-            self.detailView.snp.remakeConstraints { make in
-                let topView: UIView = data.detail.zhiya_type == .dianfu ? self.interestInfoView : self.termInfoView
-                make.leading.trailing.width.bottom.equalToSuperview()
-                make.top.equalTo(topView.snp.bottom).offset(self.detailViewTopMargin)
-            }
+            self.scrollView.mj_footer.isHidden = true //data.returns.count < self.limit
+//            self.detailView.snp.remakeConstraints { make in
+//                let topView: UIView = data.detail.zhiya_type == .dianfu ? self.interestInfoView : self.termInfoView
+//                make.leading.trailing.width.bottom.equalToSuperview()
+//                make.top.equalTo(topView.snp.bottom).offset(self.detailViewTopMargin)
+//            }
             self.view.layoutIfNeeded()
         }
     }

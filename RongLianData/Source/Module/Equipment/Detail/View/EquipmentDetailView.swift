@@ -182,8 +182,8 @@ extension EquipmentDetailView {
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: EquipmentDetailModel?) -> Void {
-        self.setupAsDemo()
-        return
+//        self.setupAsDemo()
+//        return
         guard let model = model, let asset = model.assets else {
             return
         }
