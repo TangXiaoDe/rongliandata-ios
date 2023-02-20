@@ -40,10 +40,10 @@ class WithdrawBindAddressPopView: UIView
     let doneBtn: GradientLayerButton = GradientLayerButton.init(type: .custom)
 
     fileprivate let mainLrMargin: CGFloat = 45
-    fileprivate let titleCenterYTopMargin: CGFloat = 40
+    fileprivate let titleCenterYTopMargin: CGFloat = 28
     fileprivate let btnTopMargin: CGFloat = 33 // title.centerY
-    fileprivate let btnSize: CGSize = CGSize.init(width: 100, height: 36)
-    fileprivate let btnLrMargin: CGFloat = UIDevice.current.isiPhone5series() ? 12 : 25
+    fileprivate let btnSize: CGSize = CGSize.init(width: (kScreenWidth - 20 * 3) / 2.0, height: 44)
+    fileprivate let btnLrMargin: CGFloat = 20
     fileprivate let btnBottomMargin: CGFloat = 20
 
 
@@ -94,40 +94,56 @@ extension WithdrawBindAddressPopView {
         self.addSubview(self.mainView)
         self.initialMainView(self.mainView)
         self.mainView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.mainLrMargin)
-            make.trailing.equalToSuperview().offset(-self.mainLrMargin)
-            make.center.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(10)
         }
     }
     /// mainView布局 - 子类可重写
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
         mainView.backgroundColor = UIColor.white
         mainView.set(cornerRadius: 10)
+        //
+        let bgImgV = UIImageView(image: UIImage(named: "IMG_qb_icon_dizhi_tishi"))
+        mainView.addSubview(bgImgV)
+        bgImgV.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(42)
+            make.height.equalTo(61)
+            make.centerX.equalToSuperview()
+        }
         // 1. titlLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "请先绑定提现地址", font: UIFont.pingFangSCFont(size: 15, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.titleLabel.set(text: "请先绑定提现地址", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.centerY.equalTo(mainView.snp.top).offset(self.titleCenterYTopMargin)
+            make.centerY.equalTo(bgImgV.snp.bottom).offset(self.titleCenterYTopMargin)
+        }
+        // 1. titlLabel
+        let tipLabel = UILabel()
+        mainView.addSubview(tipLabel)
+        tipLabel.set(text: "绑定后，才可继续操作", font: UIFont.pingFangSCFont(size: 16, weight: .regular), textColor: UIColor.init(hex: 0x999999), alignment: .center)
+        tipLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(self.titleLabel.snp.bottom).offset(self.titleCenterYTopMargin)
         }
         // 2. cancelBtn
         mainView.addSubview(self.cancelBtn)
-        self.cancelBtn.set(title: "取消", titleColor: UIColor.init(hex: 0x333333), for: .normal)
-        self.cancelBtn.set(title: "取消", titleColor: UIColor.init(hex: 0x333333), for: .highlighted)
-        self.cancelBtn.set(font: UIFont.pingFangSCFont(size: 15, weight: .medium), cornerRadius: self.btnSize.height * 0.5)
-        self.cancelBtn.backgroundColor = UIColor.init(hex: 0xF2F2F2)
+        self.cancelBtn.set(title: "再看看", titleColor: UIColor.init(hex: 0xFFFFFF), for: .normal)
+        self.cancelBtn.set(title: "再看看", titleColor: UIColor.init(hex: 0xFFFFFF), for: .highlighted)
+        self.cancelBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: self.btnSize.height * 0.5)
+        self.cancelBtn.backgroundColor = UIColor.init(hex: 0xCCCCCC)
         self.cancelBtn.addTarget(self, action: #selector(cancelBtnClick(_:)), for: .touchUpInside)
         self.cancelBtn.snp.makeConstraints { (make) in
             make.size.equalTo(self.btnSize)
             make.leading.equalToSuperview().offset(self.btnLrMargin)
-            make.top.equalTo(self.titleLabel.snp.centerY).offset(self.btnTopMargin)
-            make.bottom.equalToSuperview().offset(-self.btnBottomMargin)
+            make.top.equalToSuperview().offset(222)
+            make.bottom.equalToSuperview().offset(-(kBottomHeight + 6))
         }
         // 3. doneBtn
         mainView.addSubview(self.doneBtn)
         self.doneBtn.set(title: "去绑定", titleColor: UIColor.white, for: .normal)
         self.doneBtn.set(title: "去绑定", titleColor: UIColor.white, for: .highlighted)
-        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 15, weight: .medium), cornerRadius: self.btnSize.height * 0.5)
+        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: self.btnSize.height * 0.5)
         self.doneBtn.gradientLayer.colors = [AppColor.theme.cgColor, AppColor.theme.cgColor]
         self.doneBtn.gradientLayer.frame = CGRect.init(origin: CGPoint.zero, size: self.btnSize)
         self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)

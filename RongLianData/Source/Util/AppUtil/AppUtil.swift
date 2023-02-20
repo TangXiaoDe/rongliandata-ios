@@ -17,7 +17,7 @@ class AppUtil: NSObject {
 
     /// 邀请好友复制链接处理
     class func invitePageCopyLink(inviteUrl: String) -> String {
-        let strLink: String = "给大家强烈推荐一款区块链用户、社群运营、社区建设人人必备产品：\n\n【链乎】-全球首款区块链社区管理平台\n\n我为链乎带盐！！！\n推荐理由：最接地气，最了解区块链社区，最适合区块链社区建设、社群运营、社群管理，既有区别于微信的IM社交、社区广场，又有区块链专有的任务大厅、趣味挖矿等。\n\n下载狂戳：\(inviteUrl)\n\n自从有了链乎，我再也不用担心社群的无趣了 ，遇见另一个世界的你我~"
+        let strLink: String = "下载链接：\(inviteUrl)"
         return strLink
     }
 //    //字典转模型
