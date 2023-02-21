@@ -195,9 +195,9 @@ extension InviteFriendBottomView {
             self.delegate?.bottomView(self, didClickedCircle: control)
         case 2:
             self.delegate?.bottomView(self, didClickedCopyLink: control)
-        case 3:
-            self.delegate?.bottomView(self, didClickedCopyCode: control)
         case 4:
+            self.delegate?.bottomView(self, didClickedCopyCode: control)
+        case 3:
             self.delegate?.bottomView(self, didClickedSave: control)
         default:
             break

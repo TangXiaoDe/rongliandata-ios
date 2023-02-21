@@ -245,7 +245,6 @@ extension InviteFriendController {
         }
         // 配置sharedView
         self.sharedView.qrcodeImgView.image = self.qrCodeImage
-        self.sharedView.codeLabel.text = user.inviteCode
         let currentIndex = self.pagedView.currentPageIndex
         let currentModel = self.sourceList[currentIndex]
         self.sharedView.bgImgView.kf.setImage(with: UrlManager.fileUrl(name: currentModel.url), placeholder: kPlaceHolderImage, options: nil, progressBlock: nil) { (image, error, type, url) in

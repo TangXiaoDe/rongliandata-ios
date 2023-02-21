@@ -265,7 +265,7 @@ extension RealNameCertView {
         photoView.addSubview(handHoldBtnPromptLabel)
         handHoldBtnPromptLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 15), textColor: AppColor.mainText, alignment: .center)
         let headAtt: NSAttributedString = NSAttributedString.init(string: "手持身份证+签名", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 15)])
-        let tailAtt: NSAttributedString = NSAttributedString.init(string: "（\(AppConfig.share.appName)+姓名+日期）", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 12)])
+        let tailAtt: NSAttributedString = NSAttributedString.init(string: "（融链+姓名+日期）", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 12)])
         let holdAtt: NSMutableAttributedString = NSMutableAttributedString.init()
         holdAtt.append(headAtt)
         holdAtt.append(tailAtt)
@@ -277,7 +277,7 @@ extension RealNameCertView {
         // 5. tips
         photoView.addSubview(self.photoTipsLabel)
         self.photoTipsLabel.numberOfLines = 0
-        let tips: String = "注意：\n1.支持小于8M的jpg、jpge、png格式图片；\n2.照片要求清晰，不允许任何修改和遮挡，必须能看清人像、证件 号和姓名；\n3.照片需免冠，建议未化妆，手持证件人的五官清晰可见，完整漏出手臂；\n4.需要一张本人同时手持证件正面和个人手写文案的照片，手写内 容包括：\(AppConfig.share.appName)+姓名+日期；"
+        let tips: String = "注意：\n1.支持小于8M的jpg、jpge、png格式图片；\n2.照片要求清晰，不允许任何修改和遮挡，必须能看清人像、证件 号和姓名；\n3.照片需免冠，建议未化妆，手持证件人的五官清晰可见，完整漏出手臂；\n4.需要一张本人同时手持证件正面和个人手写文案的照片，手写内 容包括：融链+姓名+日期；"
         self.photoTipsLabel.set(text: tips, font: UIFont.pingFangSCFont(size: 14), textColor: AppColor.minorText)
         self.photoTipsLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(lrMargin)

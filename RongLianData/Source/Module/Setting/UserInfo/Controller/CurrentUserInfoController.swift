@@ -194,9 +194,10 @@ extension CurrentUserInfoController {
                 Toast.showToast(title: msg)
                 return
             }
-            self.model = model
+//            self.model = model
             AccountManager.share.updateCurrentAccount(userInfo: model)
-            self.initialDataSource()
+            self.nickLabel.text = model.name
+//            self.initialDataSource()
         }
     }
 }
