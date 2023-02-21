@@ -170,7 +170,7 @@ extension InviteFriendPosterQrcodeView {
         guard let model = model, let user = AccountManager.share.currentAccountInfo?.userInfo else {
             return
         }
-        let strLink = model.strUrl + "?c=" + user.inviteCode
+        let strLink = model.strUrl // + "?c=" + user.inviteCode
         // 二维码图片
         self.qrCodeIconView.image = strLink.generateQRCode(size: 250, color: UIColor.black, bgColor: UIColor.white, logo: nil, radius: 5, borderLineWidth: 0, borderLineColor: UIColor.clear, boderWidth: 0, borderColor: UIColor.white)
         self.inviteCodeLabel.text = user.inviteCode

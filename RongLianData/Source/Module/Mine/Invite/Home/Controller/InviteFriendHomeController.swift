@@ -83,6 +83,7 @@ extension InviteFriendController {
         self.view.addSubview(self.navBar)
         self.navBar.backgroundColor = .white
         self.navBar.title = "邀请好友"
+        self.navBar.titleLabel.textColor = AppColor.mainText
         self.navBar.delegate = self
         self.navBar.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
@@ -183,7 +184,7 @@ extension InviteFriendController {
         guard let model = model, let user = AccountManager.share.currentAccountInfo?.userInfo else {
             return
         }
-        let strLink = model.strUrl + "?c=" + user.inviteCode
+        let strLink = model.strUrl // + "?c=" + user.inviteCode
         // 二维码图片
         self.qrCodeImage = strLink.generateQRCode(size: 250, color: UIColor.black, bgColor: UIColor.white, logo: nil, radius: 5, borderLineWidth: 0, borderLineColor: UIColor.clear, boderWidth: 0, borderColor: UIColor.white)
     }
@@ -233,7 +234,7 @@ extension InviteFriendController {
         guard let model = self.model, let user = AccountManager.share.currentAccountInfo?.userInfo else {
             return
         }
-        let strInvite = model.strUrl + "?c=" + user.inviteCode
+        let strInvite = model.strUrl // + "?c=" + user.inviteCode
         let strCopy: String = AppUtil.invitePageCopyLink(inviteUrl: strInvite)
         AppUtil.copyToPasteProcess(strCopy, indicatorMsg: "邀请链接已复制到粘贴板")
     }
@@ -286,13 +287,13 @@ extension InviteFriendController {
 // MARK: - <HQFlowViewDataSource>
 extension InviteFriendController: HQFlowViewDataSource {
     func numberOfPages(in flowView: HQFlowView!) -> Int {
-        return 3 // self.sourceList.count
+        return self.sourceList.count
     }
     func flowView(_ flowView: HQFlowView!, cellForPageAt index: Int) -> HQIndexBannerSubview! {
-//        let model = self.sourceList[index]
+        let model = self.sourceList[index]
         let bannerView = InviteFriendCardCell.cellInFlowView(flowView)
         bannerView.coverView.backgroundColor = AppColor.pageBg
-//        bannerView.mainImageView.kf.setImage(with: UrlManager.fileUrl(name: model.url), placeholder: UIImage.init(named: "IMG_bg_inviteposter"))
+        bannerView.mainImageView.kf.setImage(with: UrlManager.fileUrl(name: model.url), placeholder: UIImage.init(named: "IMG_bg_inviteposter"))
         bannerView.qrcodeImgView.image = self.qrCodeImage
         bannerView.codeLabel.text = AccountManager.share.currentAccountInfo?.userInfo?.inviteCode
         bannerView.delegate = self
