@@ -22,15 +22,20 @@ class FilWithdrawController: BaseViewController
     fileprivate let statusNavBarView: AppHomeNavStatusView = AppHomeNavStatusView()
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
     fileprivate let headerView: FilWithdrawHeaderView = FilWithdrawHeaderView.init()
-    fileprivate let doneBtn: GradientLayerButton = GradientLayerButton.init(type: .custom)
     fileprivate let tipsLabel: UILabel = UILabel.init()
     
-    fileprivate let lrMargin: CGFloat = 15
+    fileprivate let bottomView: UIView = UIView.init()
+    fileprivate let doneBtn: GradientLayerButton = GradientLayerButton.init(type: .custom)
+    
+    fileprivate let lrMargin: CGFloat = 0 //15
     fileprivate let topMargin: CGFloat = 12
     
+    fileprivate let bottomViewHeight: CGFloat = 56
     fileprivate let doneBtnHeight: CGFloat = 44
-    fileprivate let doneBtnTopMargin: CGFloat = 22
-    fileprivate let tipsTopMargin: CGFloat = 30
+    fileprivate let doneBtnLrMargin: CGFloat = 20
+    
+    fileprivate let tipsLrMargin: CGFloat = 16
+    fileprivate let tipsTopMargin: CGFloat = 20
     
     fileprivate var limitSingleMinNum: Double = 1
     fileprivate var limitSingleMaxNum: Double = Double(Int.max)
@@ -80,7 +85,7 @@ extension FilWithdrawController {
 extension FilWithdrawController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = UIColor.init(hex: 0xF5F5F5)
+        self.view.backgroundColor = UIColor.white
          // 1. navigationbar
         self.view.addSubview(self.statusNavBarView)
         self.statusNavBarView.backgroundColor = UIColor.white
@@ -94,17 +99,48 @@ extension FilWithdrawController {
             make.top.equalToSuperview().offset(0)
             make.height.equalTo(kNavigationStatusBarHeight)
         }
+        // 2. bottomView
+        self.view.addSubview(self.bottomView)
+        self.bottomView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-kBottomHeight)
+            make.height.equalTo(self.bottomViewHeight)
+        }
+        //
+        self.bottomView.addSubview(self.doneBtn)
+        self.doneBtn.set(title: "立即提现", titleColor: UIColor.white, for: .normal)
+        self.doneBtn.set(title: "立即提现", titleColor: UIColor.white, for: .highlighted)
+        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: self.doneBtnHeight * 0.5)
+        self.doneBtn.backgroundColor = AppColor.disable
+        self.doneBtn.gradientLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.doneBtnLrMargin * 2.0, height: self.doneBtnHeight)
+        self.doneBtn.isEnabled = false
+        self.doneBtn.gradientLayer.isHidden = !self.doneBtn.isEnabled
+        self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)
+        self.doneBtn.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(self.doneBtnLrMargin)
+            make.trailing.equalToSuperview().offset(-self.doneBtnLrMargin)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(self.doneBtnHeight)
+        }
         // scrollView
         self.view.addSubview(self.scrollView)
         self.initialScrollView(self.scrollView)
         self.scrollView.snp.makeConstraints { (make) in
             make.top.equalTo(self.statusNavBarView.snp.bottom)
-            make.bottom.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(self.bottomView.snp.top)
         }
     }
     fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
         // scrollView
         scrollView.showsVerticalScrollIndicator = false
+        //
+        let topBgView: UIView = UIView.init(bgColor: UIColor.init(hex: 0xF5F5F5))
+        scrollView.addSubview(topBgView)
+        topBgView.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(self.topMargin)
+        }
         // 1. headerView
         scrollView.addSubview(self.headerView)
         self.headerView.delegate = self
@@ -116,30 +152,14 @@ extension FilWithdrawController {
             make.width.equalTo(kScreenWidth - self.lrMargin * 2.0)
             make.height.equalTo(FilWithdrawHeaderView.viewHeight)
         }
-        // 2. doneBtn
-        scrollView.addSubview(self.doneBtn)
-        self.doneBtn.set(title: "立即提现", titleColor: UIColor.white, for: .normal)
-        self.doneBtn.set(title: "立即提现", titleColor: UIColor.white, for: .highlighted)
-        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: self.doneBtnHeight * 0.5)
-        self.doneBtn.backgroundColor = UIColor.init(hex: 0xDDDDDD)
-        self.doneBtn.gradientLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.lrMargin * 2.0, height: self.doneBtnHeight)
-        self.doneBtn.isEnabled = false
-        self.doneBtn.gradientLayer.isHidden = !self.doneBtn.isEnabled
-        self.doneBtn.addTarget(self, action: #selector(doneBtnClick(_:)), for: .touchUpInside)
-        self.doneBtn.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.top.equalTo(self.headerView.snp.bottom).offset(self.doneBtnTopMargin)
-            make.height.equalTo(self.doneBtnHeight)
-        }
         // 3. tips
         scrollView.addSubview(self.tipsLabel)
         self.tipsLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x999999))
         self.tipsLabel.numberOfLines = 0
         self.tipsLabel.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.top.equalTo(self.doneBtn.snp.bottom).offset(self.tipsTopMargin)
+            make.leading.equalToSuperview().offset(self.tipsLrMargin)
+            make.trailing.equalToSuperview().offset(-self.tipsLrMargin)
+            make.top.equalTo(self.headerView.snp.bottom).offset(self.tipsTopMargin)
             make.bottom.lessThanOrEqualToSuperview().offset(-self.tipsTopMargin)
         }
         // tips
@@ -310,6 +330,7 @@ extension FilWithdrawController {
     }
     /// 进入客服界面
     fileprivate func enterKefuPage() -> Void {
+        AppUtil.enterKefuContactPage()
 //        let strUrl = UrlManager.kefuUrl
 //        let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.strUrl(strUrl: strUrl))
 //        self.enterPageVC(webVC)

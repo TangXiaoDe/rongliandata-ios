@@ -402,8 +402,8 @@ extension OreDetailHeaderView {
     
     /// 数据加载
     fileprivate func setupWithModel(_ model: EquipmentListModel?) -> Void {
-        self.setupAsDemo()
-        return
+//        self.setupAsDemo()
+//        return
         guard let model = model else {
             return
         }

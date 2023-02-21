@@ -48,12 +48,12 @@ extension WalletListController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.hiddenNavBarShadow()
+        //self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        //self.navigationController?.hiddenNavBarShadow()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.showNavBarShadow(color: AppColor.navShadow)
+        //self.navigationController?.showNavBarShadow(color: AppColor.navShadow)
     }
 }
 
@@ -61,10 +61,10 @@ extension WalletListController {
 extension WalletListController {
     override func initialUI() -> Void {
         super.initialUI()
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = AppColor.pageBg
         // 1. navigationbar
         // 2. tableView
-        self.tableView.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = AppColor.pageBg
         self.tableView.mj_header?.isHidden = false
         // 顶部位置 的版本适配
         if #available(iOS 11.0, *) {
@@ -181,6 +181,7 @@ extension WalletListController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = AssetListCell.cellInTableView(tableView)
+        cell.isFirst = indexPath.row == 0
         cell.model = self.sourceList[indexPath.row]
         return cell
     }
@@ -208,8 +209,8 @@ extension WalletListController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //return UITableView.automaticDimension
-        return AssetListCell.cellHeight
+        return UITableView.automaticDimension
+        //return AssetListCell.cellHeight
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

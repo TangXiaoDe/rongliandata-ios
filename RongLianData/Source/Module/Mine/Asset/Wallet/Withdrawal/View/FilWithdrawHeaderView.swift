@@ -42,7 +42,8 @@ class FilWithdrawHeaderView: UIView
     fileprivate let numField: UITextField = UITextField.init()
     let numTipsLabel: UILabel = UILabel.init()  // 余额不足
     
-    fileprivate let balanceControl: TopTitleBottomTitleControl = TopTitleBottomTitleControl()
+    //fileprivate let balanceControl: TopTitleBottomTitleControl = TopTitleBottomTitleControl()
+    fileprivate let balanceView: UILabel = UILabel.init()
     fileprivate let allExchangeBtn: UIButton = UIButton.init(type: .custom) // 全部提现
     
     fileprivate let feeView: UIView = UIView.init()         // 手续费view
@@ -55,22 +56,22 @@ class FilWithdrawHeaderView: UIView
     //fileprivate let updateTipsLabel: UILabel = UILabel.init()
     fileprivate let updateTipsLabel: YYLabel = YYLabel.init()
     
-    fileprivate let lrMargin: CGFloat = 10
-    fileprivate let viewVerMargin: CGFloat = 12
-    fileprivate let numInputCenterYTopMargin: CGFloat = 22
-    fileprivate let numInputTopMargin: CGFloat = 22     // numInputPrompt.centerY
+    fileprivate let lrMargin: CGFloat = 16
+    fileprivate let viewVerMargin: CGFloat = 0//12
+    fileprivate let numInputCenterYTopMargin: CGFloat = 29
+    fileprivate let numInputTopMargin: CGFloat = 20     // numInputPrompt.centerY
     fileprivate let numInputHeight: CGFloat = 56
-    fileprivate let balanceTopMargin: CGFloat = 10      // numInput.bottom
+    fileprivate let balanceTopMargin: CGFloat = 12      // numInput.bottom
     
     fileprivate let feeViewCenterYTopMargin: CGFloat = 20      // balanceLabel.bottom
-    fileprivate let uploadPromptCenterYTopMargin: CGFloat = 27      // feeview.bottom
+    fileprivate let uploadPromptCenterYTopMargin: CGFloat = 48      // feeview.bottom
     fileprivate let uploadQrcodeWH: CGFloat = 80
-    fileprivate let uploadQrcodeTopMargin: CGFloat = 23                   // uploadPrompt.centerY
+    fileprivate let uploadQrcodeTopMargin: CGFloat = 8                   // uploadPrompt.centerY
     fileprivate let tipsCenterYTopMargin: CGFloat = 15
     fileprivate let tipsCenterYBottomMargin: CGFloat = 19
     fileprivate let feeViewHeight: CGFloat = 56
-    fileprivate let topViewHeight: CGFloat = 260
-    fileprivate let bottomViewHeight: CGFloat = 56
+    fileprivate let topViewHeight: CGFloat = 262
+    fileprivate let bottomViewHeight: CGFloat = 58
     
     fileprivate let fieldHeight: CGFloat = 30
     fileprivate let fieldLrMargin: CGFloat = 12
@@ -151,10 +152,10 @@ extension FilWithdrawHeaderView {
     }
     fileprivate func initialTopView(_ topView: UIView) -> Void {
         topView.backgroundColor = UIColor.white
-        topView.set(cornerRadius: 10)
+        //topView.set(cornerRadius: 10)
         // 1. numInputPrompt
         topView.addSubview(self.numInputPromptLabel)
-        self.numInputPromptLabel.set(text: "请输入FIL个数", font: UIFont.pingFangSCFont(size: 14), textColor: UIColor.init(hex: 0x333333))
+        self.numInputPromptLabel.set(text: "请输入FIL数量", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: UIColor.init(hex: 0x333333))
         self.numInputPromptLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.centerY.equalTo(mainView.snp.top).offset(self.numInputCenterYTopMargin)
@@ -169,69 +170,79 @@ extension FilWithdrawHeaderView {
             make.height.equalTo(self.numInputHeight)
         }
         // 3. balanceControl
-        topView.addSubview(self.balanceControl)
-        self.balanceControl.topLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: UIColor.init(hex: 0x666666), alignment: .left)
-        self.balanceControl.bottomLabel.set(text: "可提现FIL", font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: UIColor.init(hex: 0x9a9a9a), alignment: .left)
-        self.balanceControl.snp.makeConstraints { (make) in
+        topView.addSubview(self.balanceView)
+        self.balanceView.set(text: "可提现 0.00", font: UIFont.pingFangSCFont(size: 12, weight: .regular), textColor: UIColor.init(hex: 0x666666), alignment: .left)
+        self.balanceView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(lrMargin)
             make.top.equalTo(self.numInputView.snp.bottom).offset(self.balanceTopMargin)
         }
         // 4. allExchange
         topView.addSubview(self.allExchangeBtn)
-        self.allExchangeBtn.set(title: "全部提现", titleColor: UIColor.init(hex: 0x5CB3F5), for: .normal)
-        self.allExchangeBtn.set(title: "全部提现", titleColor: UIColor.init(hex: 0x5CB3F5), for: .highlighted)
+        self.allExchangeBtn.set(title: "全部提现", titleColor: UIColor.init(hex: 0x4444FF), for: .normal)
+        self.allExchangeBtn.set(title: "全部提现", titleColor: UIColor.init(hex: 0x4444FF), for: .highlighted)
         self.allExchangeBtn.set(font: UIFont.pingFangSCFont(size: 12))
         self.allExchangeBtn.addTarget(self, action: #selector(allExchangeBtnClick(_:)), for: .touchUpInside)
         self.allExchangeBtn.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.centerY.equalTo(self.balanceControl)
+            make.centerY.equalTo(self.balanceView)
+        }
+        // lineView
+        let lineView: UIView = UIView.init(bgColor: AppColor.dividing)
+        topView.addSubview(lineView)
+        lineView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.top.equalTo(self.balanceView.snp.bottom).offset(20)
+            make.height.equalTo(0.5)
         }
         // 6. addressPrompt
         topView.addSubview(self.addressPromptLabel)
-        self.addressPromptLabel.set(text: "提现地址", font: UIFont.pingFangSCFont(size: 14), textColor: UIColor.init(hex: 0x333333))
+        self.addressPromptLabel.set(text: "提现地址", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: UIColor.init(hex: 0x333333))
         self.addressPromptLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
-            make.centerY.equalTo(self.balanceControl.snp.bottom).offset(self.uploadPromptCenterYTopMargin)
+            make.centerY.equalTo(lineView.snp.bottom).offset(28)
         }
         // 7. addressLabel
         topView.addSubview(self.addressLabel)
-        self.addressLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14), textColor: UIColor.init(hex: 0x333333), alignment: .center)
-        self.addressLabel.numberOfLines = 0
+        self.addressLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: UIColor.init(hex: 0x333333), alignment: .left)
+        //self.addressLabel.numberOfLines = 0
         self.addressLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.top.equalTo(self.addressPromptLabel.snp.centerY).offset(self.uploadQrcodeTopMargin)
+            make.top.equalTo(self.addressPromptLabel.snp.centerY).offset(20)
         }
         // 8. updateTipsLabel
         topView.addSubview(self.updateTipsLabel)
-        //self.updateTipsLabel.set(text: "（如需修改地址，请点击 联系客服）", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x999999), alignment: .center)
+        //self.updateTipsLabel.set(text: "如需修改地址，请点击 联系客服", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0x999999), alignment: .center)
         self.updateTipsLabel.font = UIFont.pingFangSCFont(size: 12)
         self.updateTipsLabel.textColor = UIColor.init(hex: 0x999999)
         self.updateTipsLabel.textAlignment = .center
         self.updateTipsLabel.textContainerInset = UIEdgeInsets.zero
         self.updateTipsLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(self.addressLabel.snp.bottom).offset(5)
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.top.equalTo(self.addressLabel.snp.bottom).offset(8)
 //            make.centerY.equalTo(topView.snp.bottom).offset(-self.tipsCenterYBottomMargin)
         }
-//        let tipsAttText: NSMutableAttributedString = NSMutableAttributedString.init()
-//        tipsAttText.append(NSAttributedString.init(string: "（如需修改地址，请点击", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hex: 0x999999)]))
-//        let kefuAttText: NSMutableAttributedString = NSMutableAttributedString.init()
-//        kefuAttText.append(NSAttributedString.init(string: "联系客服", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hex: 0x5CB3F5)]))
-//        let kefuAttHighlight: YYTextHighlight = YYTextHighlight.init(backgroundColor: UIColor.clear)
-//        kefuAttHighlight.tapAction = { (_ containerView: UIView, _ text: NSAttributedString, _ range: NSRange, _ rect: CGRect) in
-//            DispatchQueue.main.async {
-//                self.delegate?.headerView(self, didClickedKefu: self.updateTipsLabel)
-//            }
-//        }
-//        kefuAttText.setTextHighlight(kefuAttHighlight, range: kefuAttText.rangeOfAll())
-//        tipsAttText.append(kefuAttText)
-//        tipsAttText.append(NSAttributedString.init(string: " ）", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hex: 0x999999)]))
-//        self.updateTipsLabel.attributedText = tipsAttText
+        let tipsAttText: NSMutableAttributedString = NSMutableAttributedString.init()
+        tipsAttText.append(NSAttributedString.init(string: "如需修改地址，请点击", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hex: 0x999999)]))
+        let kefuAttText: NSMutableAttributedString = NSMutableAttributedString.init()
+        kefuAttText.append(NSAttributedString.init(string: "联系客服", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hex: 0x4444FF)]))
+        let kefuAttHighlight: YYTextHighlight = YYTextHighlight.init(backgroundColor: UIColor.clear)
+        kefuAttHighlight.tapAction = { (_ containerView: UIView, _ text: NSAttributedString, _ range: NSRange, _ rect: CGRect) in
+            DispatchQueue.main.async {
+                self.delegate?.headerView(self, didClickedKefu: self.updateTipsLabel)
+            }
+        }
+        kefuAttText.setTextHighlight(kefuAttHighlight, range: kefuAttText.rangeOfAll())
+        tipsAttText.append(kefuAttText)
+        tipsAttText.append(NSAttributedString.init(string: "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hex: 0x999999)]))
+        self.updateTipsLabel.attributedText = tipsAttText
+        //
+        topView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 0.5, margin1: self.lrMargin, margin2: self.lrMargin)
     }
     fileprivate func initialBottomView(_ bottomView: UIView) -> Void {
         bottomView.backgroundColor = UIColor.white
-        bottomView.set(cornerRadius: 10)
+        //bottomView.set(cornerRadius: 10)
         // 5. fee
         bottomView.addSubview(self.feeView)
         self.feeView.snp.makeConstraints { (make) in
@@ -240,21 +251,23 @@ extension FilWithdrawHeaderView {
             make.height.equalTo(self.feeViewHeight)
         }
         self.feeView.addSubview(self.feePromptLabel)
-        self.feePromptLabel.set(text: "本次手续费", font: UIFont.pingFangSCFont(size: 14), textColor: UIColor.init(hex: 0x999999))
+        self.feePromptLabel.set(text: "本次手续费", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: UIColor.init(hex: 0x333333))
         self.feePromptLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.centerY.equalToSuperview()
         }
         self.feeView.addSubview(self.feeValueLabel)
-        self.feeValueLabel.set(text: "0FIL", font: UIFont.pingFangSCFont(size: 14, weight: .regular), textColor: UIColor.init(hex: 0x333333))
+        self.feeValueLabel.set(text: "0FIL", font: UIFont.pingFangSCFont(size: 16, weight: .medium), textColor: UIColor.init(hex: 0x333333))
         self.feeValueLabel.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-self.lrMargin)
             make.centerY.equalToSuperview()
         }
+        //
+        bottomView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 0.5, margin1: self.lrMargin, margin2: self.lrMargin)
     }
     fileprivate func initialNumInputView(_ numInputView: UIView) -> Void {
         numInputView.backgroundColor = UIColor.init(hex: 0xF5F5F5)
-        numInputView.set(cornerRadius: 5, borderWidth: 1, borderColor: UIColor.init(hex: 0xECECEC))
+        numInputView.set(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.init(hex: 0xECECEC))
         // numTips
         numInputView.addSubview(self.numTipsLabel)
         self.numTipsLabel.set(text: "余额不足，无法提现", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0xFA3A90), alignment: .right)
@@ -268,7 +281,7 @@ extension FilWithdrawHeaderView {
         numInputView.addSubview(self.numField)
         self.numField.keyboardType = .decimalPad
         self.numField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 20), textColor: UIColor.init(hex: 0x333333))
-        self.numField.attributedPlaceholder = NSAttributedString.init(string: "最低提现数 1", attributes: [NSAttributedString.Key.font : UIFont.pingFangSCFont(size: 20), NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x999999)])
+        self.numField.attributedPlaceholder = NSAttributedString.init(string: "最低提现数 1", attributes: [NSAttributedString.Key.font : UIFont.pingFangSCFont(size: 20), NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0xCCCCCC)])
         self.numField.addTarget(self, action: #selector(numFieldValueChanged(_:)), for: .editingChanged)
         self.numField.snp.makeConstraints { (make) in
             make.height.equalTo(self.fieldHeight)
@@ -302,8 +315,7 @@ extension FilWithdrawHeaderView {
         // 子控件数据加载
         self.numInputPromptLabel.text = "请输入FIL个数"
         let balance: String = assetModel.withdrawable
-        self.balanceControl.bottomLabel.text = "可提现FIL"
-        self.balanceControl.topLabel.text = balance
+        self.balanceView.text = "可提现 " + balance
         self.limitSingleMaxNum = Double(balance) ?? 0.0
         self.limitSingleMinNum = configModel.user_min
         self.numField.attributedPlaceholder = NSAttributedString.init(string: "最低提现数 \(self.limitSingleMinNum)", attributes: [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 20), NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x999999)])

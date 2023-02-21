@@ -191,9 +191,9 @@ extension OreDetailController {
 
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
-        //self.scrollView.mj_header.beginRefreshing()
+        self.scrollView.mj_header.beginRefreshing()
         self.headerView.model = self.listModel
-        self.setupAsDemo()
+        //self.setupAsDemo()
     }
     ///
     fileprivate func setupAsDemo() -> Void {

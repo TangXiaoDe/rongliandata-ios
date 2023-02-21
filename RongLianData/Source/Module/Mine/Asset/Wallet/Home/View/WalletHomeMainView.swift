@@ -31,6 +31,8 @@ class WalletHomeMainView: UIView {
     fileprivate let mainView: UIView = UIView()
 
     fileprivate let topBgView: UIImageView = UIImageView()
+    
+    fileprivate let topView: UIView = UIView()
     /// 累计收入
     fileprivate let totalMoneyView = TopTitleBottomTitleControl()
     /// 资产余额
@@ -64,6 +66,8 @@ class WalletHomeMainView: UIView {
 
     fileprivate var topBgSize: CGSize = CGSize.init(width: 375, height: 178).scaleAspectForWidth(kScreenWidth)
 
+    fileprivate let topViewHeight: CGFloat = 90
+    
     fileprivate let centerViewTopMargin: CGFloat = -24 // topView
     fileprivate let bottomViewTopMargin: CGFloat = 12 // topView
     fileprivate let centerViewHeight: CGFloat = 146
@@ -116,14 +120,22 @@ extension WalletHomeMainView {
         // 1. topBgView
         mainView.addSubview(self.topBgView)
         self.topBgView.isUserInteractionEnabled = true
-        self.initialToptopBgView(self.topBgView)
         self.topBgView.image = UIImage.init(named: "IMG_home_img_topbg")
         self.topBgView.set(cornerRadius: 0)
         self.topBgView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(self.bgTopMargin)
             make.leading.equalToSuperview().offset(0)
             make.trailing.equalToSuperview().offset(0)
-//            make.height.equalTo(self.topBgSize.height + kStatusBarHeight)
+            //make.height.equalTo(self.topBgSize.height)
+        }
+        // topView
+        mainView.addSubview(self.topView)
+        self.initialTopView(self.topView)
+        self.topView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(12)
+            make.trailing.equalToSuperview().offset(-12)
+            make.top.equalToSuperview().offset(kNavigationStatusBarHeight)
+            make.height.equalTo(self.topViewHeight)
         }
         // 2. bottomView
         mainView.addSubview(self.centerView)
@@ -131,7 +143,7 @@ extension WalletHomeMainView {
         self.centerView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(12)
             make.trailing.equalToSuperview().offset(-12)
-            make.top.equalTo(self.topBgView.snp.bottom).offset(centerViewTopMargin)
+            make.top.equalTo(self.topView.snp.bottom)
             make.height.equalTo(self.centerViewHeight)
         }
         // 2. bottomView
@@ -142,16 +154,17 @@ extension WalletHomeMainView {
             make.top.equalTo(self.centerView.snp.bottom).offset(bottomViewTopMargin)
             make.bottom.equalToSuperview()
         }
-        self.bottomView.setupCorners([UIRectCorner.topRight, UIRectCorner.topLeft], selfSize: CGSize.init(width: kScreenWidth - 12 * 2, height: kScreenHeight - (self.topBgSize.height + kStatusBarHeight + centerViewTopMargin + self.centerViewHeight + bottomViewTopMargin)), cornerRadius: 10)
+        let bottomViewHeight: CGFloat = kScreenHeight - (kNavigationStatusBarHeight + self.topViewHeight + self.centerViewHeight + bottomViewTopMargin)
+        self.bottomView.setupCorners([UIRectCorner.topRight, UIRectCorner.topLeft], selfSize: CGSize.init(width: kScreenWidth - 12 * 2, height: bottomViewHeight), cornerRadius: 10)
     }
-    fileprivate func initialToptopBgView(_ topBgView: UIView) -> Void {
+    fileprivate func initialTopView(_ topView: UIView) -> Void {
         // 1.balancelMoneyView
-        topBgView.addSubview(self.balancelMoneyView)
+        topView.addSubview(self.balancelMoneyView)
         self.balancelMoneyView.topLabel.set(text: "资产余额(FIL)", font: UIFont.pingFangSCFont(size: 13), textColor: UIColor.init(hex: 0x333333), alignment: .left)
         self.balancelMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 22, weight: .medium), textColor: AppColor.theme, alignment: .left)
         self.balancelMoneyView.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(lrMargin)
-            make.top.equalTo(topBgView.snp.top).offset(15 + kNavigationStatusBarHeight)
+            make.top.equalToSuperview().offset(15)
             make.width.greaterThanOrEqualTo(65)
             make.right.lessThanOrEqualTo(topBgView.snp.centerX).offset(0)
         }
@@ -162,18 +175,18 @@ extension WalletHomeMainView {
             make.centerX.equalToSuperview()
             make.height.equalTo(17)
         }
-        topBgView.addSubview(self.cnyValueLabel)
+        topView.addSubview(self.cnyValueLabel)
         self.cnyValueLabel.set(text: "≈￥0.0", font: UIFont.pingFangSCFont(size: 12, weight: .medium), textColor: UIColor.init(hex: 0x999999), alignment: .left)
         self.cnyValueLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.balancelMoneyView.snp.left)
             make.top.equalTo(self.balancelMoneyView.snp.bottom).offset(5)
         }
         // 0.totalMoneyView
-        topBgView.addSubview(self.totalMoneyView)
+        topView.addSubview(self.totalMoneyView)
         self.totalMoneyView.topLabel.set(text: "累计收入(FIL)", font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .left)
         self.totalMoneyView.bottomLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 22, weight: .medium), textColor: AppColor.theme, alignment: .left)
         self.totalMoneyView.snp.makeConstraints { (make) in
-            make.left.equalTo(topBgView.snp.centerX)
+            make.left.equalTo(topView.snp.centerX)
             make.centerY.equalTo(self.balancelMoneyView)
             make.width.greaterThanOrEqualTo(65)
         }

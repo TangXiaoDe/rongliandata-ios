@@ -276,23 +276,29 @@ extension EquipmentNetworkManager {
             group.leave()
         }
 
-        // 资产归还流水
+//        // 资产归还流水
+//        group.enter()
+//        Self.getAssetBackList(order_id: id, offset: offset, limit: limit) { (status, msg, models) in
+//            returnStatus = status
+//            returnMsg = msg
+//            returnModels = models
+//
+////            // 临时测试代码
+////            returnModels = []
+////            for _ in 0...20 {
+////                let item = EDAssetReturnListModel.init()
+////                item.gas = 0.123
+////                item.pledge = 1.23123
+////                item.interest = 1.201
+////                returnModels?.append(item)
+////            }
+//
+//            group.leave()
+//        }
         group.enter()
-        Self.getAssetBackList(order_id: id, offset: offset, limit: limit) { (status, msg, models) in
-            returnStatus = status
-            returnMsg = msg
-            returnModels = models
-            
-//            // 临时测试代码
-//            returnModels = []
-//            for _ in 0...20 {
-//                let item = EDAssetReturnListModel.init()
-//                item.gas = 0.123
-//                item.pledge = 1.23123
-//                item.interest = 1.201
-//                returnModels?.append(item)
-//            }
-            
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            returnStatus = true
+            returnModels = []
             group.leave()
         }
         

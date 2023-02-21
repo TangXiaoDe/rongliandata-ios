@@ -185,8 +185,8 @@ extension LockDetailController {
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
         self.headerView.zone = self.zone
-        //self.scrollView.mj_header.beginRefreshing()
-        self.setupAsDemo()
+        self.scrollView.mj_header.beginRefreshing()
+        //self.setupAsDemo()
     }
     ///
     fileprivate func setupAsDemo() -> Void {

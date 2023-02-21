@@ -226,8 +226,8 @@ extension LockDetailHeaderView {
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: LockDetailListModel?) -> Void {
-        self.setupAsDemo()
-        return
+//        self.setupAsDemo()
+//        return
         guard let model = model else {
             return
         }
