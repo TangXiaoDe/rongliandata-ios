@@ -16,15 +16,14 @@ class InviteFriendSharedView: UIView {
     let bgImgView: UIImageView = UIImageView()
     var qrcodeCotainer: UIView = UIView()
     var qrcodeImgView: UIImageView = UIImageView()
-    var codeLabel: UILabel = UILabel()
     var bottomView: UIView = UIView()
     var logoImageView: UIImageView = UIImageView()
  
-    fileprivate let codeContainerSize: CGSize = CGSize.init(width: 110, height: 110)
-    fileprivate let codeWH: CGFloat = 100
+    fileprivate let codeContainerSize: CGSize = CGSize.init(width: 80, height: 80)
+    fileprivate let codeWH: CGFloat = 70
     fileprivate let codeTopMargin: CGFloat = 5
+    fileprivate let codeContainerBottomMargin: CGFloat = 21
     fileprivate let codeContainerRightMargin: CGFloat = 15
-    fileprivate let codeContainerBottomMargin: CGFloat = 35
     fileprivate let bottomViewHeight: CGFloat = 110
     fileprivate let logoLeftMargin: CGFloat = 15
     
@@ -76,10 +75,10 @@ extension InviteFriendSharedView {
         }
         self.bottomView.addSubview(self.logoImageView)
         self.logoImageView.set(cornerRadius: 0)
-        self.logoImageView.image = UIImage.init(named: "IMG_invite_logo")
+        self.logoImageView.image = UIImage.init(named: "IMG_setup_img_logo")
         self.logoImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-38)
+            make.leading.equalToSuperview().offset(19)
+            make.centerY.equalToSuperview()
 //            make.trailing.lessThanOrEqualToSuperview().offset(-115)
         }
         // 1. bgView
@@ -90,13 +89,13 @@ extension InviteFriendSharedView {
             make.bottom.equalTo(self.bottomView.snp.top)
         }
         // 2. codeCotainer
-        self.addSubview(self.qrcodeCotainer)
+        self.bottomView.addSubview(self.qrcodeCotainer)
         self.qrcodeCotainer.backgroundColor = UIColor.white
         self.qrcodeCotainer.set(cornerRadius: 8, borderWidth: 0.5, borderColor: UIColor(hex: 0xEAEAEA))
         self.qrcodeCotainer.snp.makeConstraints { (make) in
             make.size.equalTo(self.codeContainerSize)
             make.trailing.equalToSuperview().offset(-self.codeContainerRightMargin)
-            make.bottom.equalToSuperview().offset(-codeContainerBottomMargin)
+            make.centerY.equalToSuperview()
         }
         // 2.1 qrcodeImgView
         self.qrcodeCotainer.addSubview(self.qrcodeImgView)
