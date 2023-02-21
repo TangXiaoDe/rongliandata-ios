@@ -83,7 +83,7 @@ class AssetInfoModel: Mappable {
     var fil_balance: String {
         if let withdrawable = Double(withdrawable), let lock = Double(lock), let pawn = Double(pawn), let security = Double(security) {
             let balance = withdrawable + lock + pawn + security + self.frozen
-            return balance.decimalValidDigitsProcess(digits: 4)
+            return balance.decimalValidDigitsProcess(digits: 8)
         }
         return ""
     }
@@ -91,7 +91,7 @@ class AssetInfoModel: Mappable {
     var canUse_balance: String {
         if let security = Double(security), let withdrawable = Double(withdrawable) {
             let balance = security + withdrawable
-            return balance.decimalValidDigitsProcess(digits: 4)
+            return balance.decimalValidDigitsProcess(digits: 8)
         }
         return ""
     }
