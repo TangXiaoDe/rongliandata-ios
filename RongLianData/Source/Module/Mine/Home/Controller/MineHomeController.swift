@@ -57,7 +57,7 @@ extension MineHomeController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         NotificationCenter.default.post(name: AppNotificationName.Message.refresh, object: nil)
         self.refreshReust()
     }

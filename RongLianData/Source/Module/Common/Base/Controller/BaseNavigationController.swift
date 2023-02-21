@@ -22,14 +22,9 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
     // MARK: - Push时导航栏左侧按钮和底部tabbar处理
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if !self.viewControllers.isEmpty {
-            let backBarItem = UIBarButtonItem(image: UIImage(named: "IMG_navbar_back"), style: .plain, target: self, action: #selector(leftPopBackItemClick))
+            let backBarItem = UIBarButtonItem(image: UIImage(named: "IMG_navbar_back")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(leftPopBackItemClick))
             viewController.navigationItem.leftBarButtonItem = backBarItem
-            // // 当前导航栏, 只有第一个viewController push的时候设置隐藏
-            if self.viewControllers.count == 1 {
-                viewController.hidesBottomBarWhenPushed = true
-            }
-        } else {
-            viewController.hidesBottomBarWhenPushed = false
+            viewController.hidesBottomBarWhenPushed = true
         }
         super.pushViewController(viewController, animated: animated)
     }
@@ -41,7 +36,10 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
 //        // 判断是否是根控制器
 //        return self.children.count > 1
 //    }
-
+    ///
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return self.children.count > 1
+    }
     /*
     // MARK: - Navigation
 
@@ -51,5 +49,7 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         // Pass the selected object to the new view controller.
     }
     */
-
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
 }
