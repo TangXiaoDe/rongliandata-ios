@@ -76,7 +76,7 @@ extension AdvertSDCycleBannerView {
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
         mainView.addSubview(self.cycleView)
         cycleView.delegate = self
-        cycleView.placeholderImage = kPlaceHolderImage
+        cycleView.placeholderImage = UIImage.init(named: "IMG_bg_placeholder_banner") //kPlaceHolderImage
         cycleView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter
         cycleView.autoScrollTimeInterval = 2.5
         cycleView.snp.makeConstraints { (make) in

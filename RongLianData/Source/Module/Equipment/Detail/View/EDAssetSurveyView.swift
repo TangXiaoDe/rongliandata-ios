@@ -284,8 +284,8 @@ extension EDAssetSurveyView {
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: (asset: EDAssetModel, zone: ProductZone)?) -> Void {
-        self.setupAsDemo()
-        return
+//        self.setupAsDemo()
+//        return
         guard let model = model else {
             return
         }

@@ -153,7 +153,7 @@ extension AdvertBannerView: HQFlowViewDataSource {
             bannerView?.coverView.backgroundColor = UIColor.darkGray
         }
         let model = self.models[index]
-        bannerView?.mainImageView.kf.setImage(with: model.imageUrl, placeholder: kPlaceHolderImage, options: nil, progressBlock: nil, completionHandler: nil)
+        bannerView?.mainImageView.kf.setImage(with: model.imageUrl, placeholder: UIImage.init(named: "IMG_bg_placeholder_banner"), options: nil, progressBlock: nil, completionHandler: nil)
         return bannerView
     }
 }

@@ -118,7 +118,7 @@ extension EquipmentHomeController {
         }
         self.navBar.titleView.addSubview(self.titleView)
         self.titleView.delegate = self
-        //self.titleView.isHidden = true
+        self.titleView.isHidden = true
         self.titleView.snp.makeConstraints { (make) in
             make.left.greaterThanOrEqualTo(self.navBar.leftItem.snp.right)
             make.right.lessThanOrEqualTo(self.navBar.rightItem.snp.left)
