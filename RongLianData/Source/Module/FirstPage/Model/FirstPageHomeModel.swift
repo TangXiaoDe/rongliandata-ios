@@ -67,7 +67,7 @@ extension FirstPageHomeModel {
 //                        FPOrePoolItemModel.init(title: "活跃存储提供者", icon: UIImage.init(named: "IMG_img_home_bg_number"), bg: nil, title_unit: "人", title_icon: UIImage.init(named: "IMG_home_icon_number"), value: self.ipfs?.active_miners),
 //                        FPOrePoolItemModel.init(title: "流通总量", icon: UIImage.init(named: "IMG_img_home_bg_liutong"), bg: nil, title_unit: "FIL", title_icon: UIImage.init(named: "IMG_home_icon_liutong"), value: self.ipfs?.current_fil_str)
 //        ])
-        let model1 = FPOrePoolItemModel.init(title: "全网有效算力", icon: nil, bg: UIImage.init(named: "IMG_home_img_card1"), title_unit: "PIB", title_icon: nil, value: self.ipfs?.total_power)
+        let model1 = FPOrePoolItemModel.init(title: "全网有效算力", icon: nil, bg: UIImage.init(named: "IMG_home_img_card1"), title_unit: "EIB", title_icon: nil, value: self.ipfs?.total_power) // "PIB"
         let model2 = FPOrePoolItemModel.init(title: "活跃矿工人数", icon: nil, bg: UIImage.init(named: "IMG_home_img_card2"), title_unit: "人", title_icon: nil, value: self.ipfs?.active_miners)
         let model3 = FPOrePoolItemModel.init(title: "24h平均挖矿收益", icon: nil, bg: UIImage.init(named: "IMG_home_img_card3"), title_unit: "FIL/TiB", title_icon: nil, value: self.ipfs?.mining_income_str_one_day)
         let model4 = FPOrePoolItemModel.init(title: "新增算力成本", icon: nil, bg: UIImage.init(named: "IMG_home_img_card4"), title_unit: "FIL/TiB", title_icon: nil, value: self.ipfs?.add_power_cost)
