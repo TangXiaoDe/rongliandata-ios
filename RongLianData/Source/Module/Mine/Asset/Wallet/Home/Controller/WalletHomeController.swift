@@ -99,10 +99,10 @@ extension WalletHomeController {
             self.mainView.model = model
             self.assetModel = model
         }
-        // 同步充值记录
-        AssetNetworkManager.getRechargeRecords(currency: CurrencyType.fil.rawValue) { (status, msg) in
-            
-        }
+//        // 同步充值记录
+//        AssetNetworkManager.getRechargeRecords(currency: CurrencyType.fil.rawValue) { (status, msg) in
+//
+//        }
     }
 }
 
