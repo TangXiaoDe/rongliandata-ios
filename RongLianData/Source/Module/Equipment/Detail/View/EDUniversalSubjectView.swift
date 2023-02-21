@@ -228,8 +228,8 @@ extension EDUniversalSubjectView {
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: (title: String, zone: ProductZone)?) -> Void {
-        self.setupAsDemo()
-        return
+//        self.setupAsDemo()
+//        return
         guard let model = model else {
             return
         }
