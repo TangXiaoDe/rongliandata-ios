@@ -89,7 +89,7 @@ extension ContactEmptyPlaceHolderView {
         }
         // 2. titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "暂无内容~", font: UIFont.systemFont(ofSize: 15), textColor: UIColor(hex: 0x8C97AC), alignment: .center)
+        //self.titleLabel.set(text: "暂无内容~", font: UIFont.systemFont(ofSize: 15), textColor: UIColor(hex: 0x8C97AC), alignment: .center)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.iconView.snp.bottom).offset(20)

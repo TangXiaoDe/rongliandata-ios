@@ -83,7 +83,7 @@ class AssetInfoModel: Mappable {
     var fil_balance: String {
         if let withdrawable = Double(withdrawable), let lock = Double(lock), let pawn = Double(pawn), let security = Double(security) {
             let balance = withdrawable + lock + pawn + security + self.frozen
-            return balance.decimalValidDigitsProcess(digits: 4)
+            return balance.decimalValidDigitsProcess(digits: 8)
         }
         return ""
     }
@@ -91,7 +91,7 @@ class AssetInfoModel: Mappable {
     var canUse_balance: String {
         if let security = Double(security), let withdrawable = Double(withdrawable) {
             let balance = security + withdrawable
-            return balance.decimalValidDigitsProcess(digits: 4)
+            return balance.decimalValidDigitsProcess(digits: 8)
         }
         return ""
     }
@@ -101,7 +101,7 @@ class AssetInfoModel: Mappable {
 //            return CGFloat(canUse_balance/canUseTotal)
 //        }
 //        return 0.0
-        if let canUse_balance = Double(self.canUse_balance), let total_balance = Double(self.fil_balance) {
+        if let canUse_balance = Double(self.canUse_balance), let total_balance = Double(self.fil_balance), total_balance > 0 {
             return CGFloat(canUse_balance/total_balance)
         }
         return 0.0
@@ -112,7 +112,7 @@ class AssetInfoModel: Mappable {
 //            return CGFloat(lock_balance/lockTotal)
 //        }
 //        return 0.0
-        if let lock_balance = Double(self.lock), let total_balance = Double(self.fil_balance) {
+        if let lock_balance = Double(self.lock), let total_balance = Double(self.fil_balance), total_balance > 0  {
             return CGFloat(lock_balance/total_balance)
         }
         return 0.0
@@ -123,7 +123,7 @@ class AssetInfoModel: Mappable {
 //            return CGFloat(pawn_balance/pawnTotal)
 //        }
 //        return 0.0
-        if let pawn_balance = Double(self.pawn), let total_balance = Double(self.fil_balance) {
+        if let pawn_balance = Double(self.pawn), let total_balance = Double(self.fil_balance), total_balance > 0  {
             return CGFloat(pawn_balance/total_balance)
         }
         return 0.0

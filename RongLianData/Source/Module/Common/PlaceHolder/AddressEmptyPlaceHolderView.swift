@@ -99,7 +99,7 @@ extension AddressEmptyPlaceHolderView {
         }
         // 2. promptLabel
         mainView.addSubview(self.promptLabel)
-        self.promptLabel.set(text: "您还没有收货地址哦！", font: UIFont.systemFont(ofSize: 15), textColor: UIColor(hex: 0x333333), alignment: .center)
+        //self.promptLabel.set(text: "您还没有收货地址哦！", font: UIFont.systemFont(ofSize: 15), textColor: UIColor(hex: 0x333333), alignment: .center)
         self.promptLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.iconView.snp.bottom).offset(promptTopMargin)
