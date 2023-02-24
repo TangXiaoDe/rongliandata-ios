@@ -4812,11 +4812,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 497KAL5L98;
+				DEVELOPMENT_TEAM = BJKRQUX5JR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AntClusterB/Source/Library/dingxiang",
@@ -4834,9 +4834,9 @@
 					"$(PROJECT_DIR)/iMeet/Source/Library/EMHelper/3rdParty/VoiceConvert",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saas.rongliandata;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chainone.meltingChain;
 				PRODUCT_NAME = RongLianData;
-				PROVISIONING_PROFILE_SPECIFIER = "ComSaas-Development";
+				PROVISIONING_PROFILE_SPECIFIER = "RongLian-Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/SupportingFile/$(PRODUCT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4852,9 +4852,9 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 497KAL5L98;
+				DEVELOPMENT_TEAM = BJKRQUX5JR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AntClusterB/Source/Library/dingxiang",
@@ -4872,9 +4872,9 @@
 					"$(PROJECT_DIR)/iMeet/Source/Library/EMHelper/3rdParty/VoiceConvert",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saas.rongliandata;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chainone.meltingChain;
 				PRODUCT_NAME = RongLianData;
-				PROVISIONING_PROFILE_SPECIFIER = "ComSaas-AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "RongLian-AdHoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/SupportingFile/$(PRODUCT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
