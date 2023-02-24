@@ -29,12 +29,16 @@ class LockDetailController: BaseViewController
     fileprivate var offset: Int = 0
     fileprivate let limit: Int = 20
     
-    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
+    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 205).scaleAspectForWidth(kScreenWidth).height
     fileprivate let headerHeight: CGFloat = LockDetailHeaderView.viewHeight
     fileprivate let headerViewTopMargin: CGFloat = 0
+    
+    fileprivate let lrMargin: CGFloat = 12
+    
+    fileprivate let itemContainerTopMargin: CGFloat = 12
     fileprivate let itemVerMargin: CGFloat = 0
     fileprivate let itemBottomMargin: CGFloat = 12
-    fileprivate let itemTopMargin: CGFloat = -16     // -header.bottom
+    fileprivate let itemTopMargin: CGFloat = 12     // -header.bottom
     fileprivate let itemViewTagBase: Int = 250
 
     // MARK: - Initialize Function
@@ -125,18 +129,19 @@ extension LockDetailController {
         // 1. headerView
         scrollView.addSubview(self.headerView)
         self.headerView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(headerViewTopMargin)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(self.headerHeight)
             make.width.equalTo(kScreenWidth)
         }
         // 2. itemContainer
         scrollView.addSubview(self.itemContainer)
+        self.itemContainer.backgroundColor = UIColor.white
+        self.itemContainer.set(cornerRadius: 12)
         self.itemContainer.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.headerView.snp.bottom).offset(self.itemTopMargin)
-            make.bottom.equalToSuperview().offset(-itemBottomMargin)
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.top.equalTo(self.headerView.snp.bottom).offset(self.itemContainerTopMargin)
+            make.bottom.equalToSuperview()
         }
     }
     
@@ -148,22 +153,20 @@ extension LockDetailController {
             let itemView = LockDetailItemView.init()
             self.itemContainer.addSubview(itemView)
             itemView.model = model
-            if index == 0 {
-                itemView.isFirst = true
-            }
-            itemView.showBottomLine = (index != models.count - 1)
+            //itemView.isFirst = index == 0
+            itemView.showBottomLine = true //(index != models.count - 1)
             itemView.tag = self.itemViewTagBase + index
             itemView.snp.makeConstraints { (make) in
                 make.leading.equalToSuperview().offset(0)
                 make.trailing.equalToSuperview().offset(0)
-                make.height.equalTo(LockDetailItemView.viewHeight)
+                //make.height.equalTo(LockDetailItemView.viewHeight)
                 if 0 == index {
-                    make.top.equalToSuperview()
+                    make.top.equalToSuperview().offset(self.itemTopMargin)
                 } else {
                     make.top.equalTo(topView.snp.bottom).offset(self.itemVerMargin)
                 }
                 if index == models.count - 1 {
-                    make.bottom.equalToSuperview()
+                    make.bottom.equalToSuperview().offset(-self.itemBottomMargin)
                 }
             }
             topView = itemView
@@ -181,20 +184,29 @@ extension LockDetailController {
 
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
-        self.scrollView.mj_header.beginRefreshing()
         self.headerView.zone = self.zone
-//        self.setupAsDemo()
+        self.scrollView.mj_header.beginRefreshing()
+        //self.setupAsDemo()
     }
     ///
     fileprivate func setupAsDemo() -> Void {
-//        for index in 0...20 {
-//            let model = LockDetailLogModel.init()
-//            model.amount = 0.2342
-//            model.created_at = Date.init(timeInterval: -24.0 * 3600.0 * 5, since: Date.init())
-//            self.sourceList.append(model)
-//        }
-//        self.headerView.model = nil
-//        self.setupItemContainer(with: self.sourceList)
+        //
+        let model = LockDetailListModel.init()
+        var logs: [LockDetailLogModel] = []
+        for index in 0...10 {
+            let model = LockDetailLogModel.init()
+            model.amount = 0.2342
+            model.created_at = Date.init(timeInterval: -24.0 * 3600.0 * 5, since: Date.init())
+            logs.append(model)
+        }
+        model.logs = logs
+        //
+        self.detail = model
+        self.headerView.model = model
+        self.sourceList = model.logs
+        self.setupItemContainer(with: self.sourceList)
+        self.offset = self.sourceList.count
+        self.scrollView.mj_footer.isHidden = model.logs.count < self.limit
     }
 
 }

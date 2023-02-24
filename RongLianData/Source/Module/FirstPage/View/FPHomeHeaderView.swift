@@ -40,16 +40,16 @@ class FPHomeHeaderView: UIView {
     fileprivate let noticeContentView: XDMarqueeView = XDMarqueeView.init()
     fileprivate let noticeMenuView: UIButton = UIButton.init(type: .custom) // 全部通知
 
-    fileprivate let bannerHeight: CGFloat = CGSize(width: 351, height: 140).scaleAspectForWidth(kScreenWidth - 24.0).height
-    fileprivate let lrMargin: CGFloat = 12
-    fileprivate let bannerTopMargin: CGFloat = 12
+    fileprivate let bannerHeight: CGFloat = CGSize(width: 343, height: 140).scaleAspectForWidth(kScreenWidth - 32.0).height
+    fileprivate let lrMargin: CGFloat = 16
+    fileprivate let bannerTopMargin: CGFloat = 16
 
     fileprivate let noticeTopMargin: CGFloat = 16
-    fileprivate let noticeViewHeight: CGFloat = 36
-    fileprivate let noticeIconWH: CGFloat = 20
-    fileprivate let noticeIconLeftMargin: CGFloat = 8
+    fileprivate let noticeViewHeight: CGFloat = 48
+    fileprivate let noticeIconWH: CGFloat = 24
+    fileprivate let noticeIconLeftMargin: CGFloat = 10
     fileprivate let noticeMenuWidth: CGFloat = 36   //  noticeViewHeight
-    fileprivate let noticeContentLrMargin: CGFloat = 15
+    fileprivate let noticeContentLrMargin: CGFloat = 12
 
     fileprivate let itemColCount: Int = 2
     fileprivate let itemTopMargin: CGFloat = 15
@@ -145,12 +145,17 @@ extension FPHomeHeaderView {
     }
     //
     fileprivate func initialNoticeView(_ noticeView: UIView) -> Void {
-        noticeView.set(cornerRadius: 5)
-        noticeView.backgroundColor = UIColor.white
+        noticeView.set(cornerRadius: 12)
+        //noticeView.backgroundColor = UIColor.white
+        // bgView
+        let bgLayer = AppUtil.commonGradientLayer()
+        noticeView.layer.insertSublayer(bgLayer, below: nil)
+        bgLayer.colors = [UIColor.init(hex: 0xE6F1FD).cgColor, UIColor.init(hex: 0xF4F9FF).cgColor]
+        bgLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - self.lrMargin * 2.0, height: self.noticeViewHeight)
         // 1. noticeIconView
         noticeView.addSubview(self.noticeIconView)
         self.noticeIconView.set(cornerRadius: 0)
-        self.noticeIconView.image = UIImage.init(named: "IMG_home_icom_tongzhi")
+        self.noticeIconView.image = UIImage.init(named: "IMG_home_icon_notice")
         self.noticeIconView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.width.height.equalTo(self.noticeIconWH)
@@ -171,7 +176,7 @@ extension FPHomeHeaderView {
         self.noticeContentView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.leading.equalTo(self.noticeIconView.snp.trailing).offset(self.noticeContentLrMargin)
-            make.trailing.equalTo(self.noticeMenuView.snp.leading).offset(-self.noticeContentLrMargin)
+            make.trailing.equalTo(self.noticeMenuView.snp.leading)//.offset(-self.noticeContentLrMargin)
         }
     }
 }

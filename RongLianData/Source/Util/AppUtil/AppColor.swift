@@ -68,4 +68,7 @@ class AppColor {
     /// 标签栏选中色
     static let tabItemSelected: UIColor = AppConfig.share.theme.tabItemSelectedColor
 
+    ///
+    static let white: UIColor = UIColor.white
+    
 }

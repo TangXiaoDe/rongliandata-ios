@@ -85,7 +85,7 @@ import UIKit
 class WalletBalanceItem: UIView {
 
     // MARK: - Internal Property
-    static let viewHeight: CGFloat = 60
+    static let viewHeight: CGFloat = 58
     
     var model: AssetInfoModel? {
         didSet {
@@ -107,7 +107,9 @@ class WalletBalanceItem: UIView {
     fileprivate let iconWH: CGFloat = 43
     fileprivate let titleLeftMargin: CGFloat = 10
     fileprivate let progressViewHeight: CGFloat = 5
-    fileprivate let progressViewWidth: CGFloat = 94
+    fileprivate let progressViewWidth: CGFloat = 124
+    fileprivate let titleTopMargin: CGFloat = 15
+    fileprivate let progressTopMargin: CGFloat = 8
 
 
     // MARK: - Initialize Function
@@ -148,10 +150,17 @@ extension WalletBalanceItem {
         }
     }
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        mainView.backgroundColor = UIColor.white
+        //mainView.backgroundColor = UIColor.white
+        mainView.set(cornerRadius: 8)
+        //
+        let bgLayer = AppUtil.commonGradientLayer()
+        mainView.layer.insertSublayer(bgLayer, below: nil)
+        bgLayer.colors = [UIColor.init(hex: 0xE6F1FD).cgColor, UIColor.init(hex: 0xF4F9FF).cgColor]
+        bgLayer.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth - 27.0 * 2.0, height: Self.viewHeight)
         // 0.iconImgView
         mainView.addSubview(self.iconImgView)
         self.iconImgView.set(cornerRadius: 0)
+        self.iconImgView.isHidden = true
         self.iconImgView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(lrMargin)
             make.width.height.equalTo(self.iconWH)
@@ -159,23 +168,26 @@ extension WalletBalanceItem {
         }
         // 1.titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 13, weight: .medium), textColor: UIColor.init(hex: 0x333333))
+        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 13, weight: .regular), textColor: UIColor.init(hex: 0x333333))
         self.titleLabel.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(self.iconImgView.snp.right).offset(self.titleLeftMargin)
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.top.equalToSuperview().offset(self.titleTopMargin)
+            //make.left.equalTo(self.iconImgView.snp.right).offset(self.titleLeftMargin)
         }
         // 2.progressView
         mainView.addSubview(self.progressView)
-        self.progressView.isHidden = true
+        //self.progressView.isHidden = true
+        //self.progressView.mainView.backgroundColor = self.type.progressBgColor
+        self.progressView.progressView.backgroundColor = self.type.progressColor
         self.progressView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.iconImgView.snp.bottom).offset(-5)
-            make.left.equalTo(self.titleLabel)
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(self.progressTopMargin)
+            make.leading.equalTo(self.titleLabel)
             make.height.equalTo(self.progressViewHeight)
             make.width.equalTo(self.progressViewWidth)
         }
         // 3.valueLabel
         mainView.addSubview(self.valueLabel)
-        self.valueLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333))
+        self.valueLabel.set(text: "0.00", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .right)
         self.valueLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-lrMargin)
@@ -197,8 +209,8 @@ extension WalletBalanceItem {
     func setUpAsDemo() {
         self.iconImgView.image = self.type.icon
         self.titleLabel.text = self.type.title
-        self.progressView.mainView.backgroundColor = self.type.progressBgColor
-        self.progressView.progressView.backgroundColor = self.type.progressColor
+        //self.progressView.mainView.backgroundColor = self.type.progressBgColor
+        //self.progressView.progressView.backgroundColor = self.type.progressColor
     }
     /// 数据加载
     fileprivate func setupWithModel(_ model: AssetInfoModel?) -> Void {
@@ -221,7 +233,6 @@ extension WalletBalanceItem {
         case .frozen:
             self.valueLabel.text = model.frozen.decimalValidDigitsProcess(digits: 8)
         }
-        
     }
 }
 

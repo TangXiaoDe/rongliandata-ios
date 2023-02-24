@@ -99,7 +99,7 @@ extension OrderEmptyPlaceHolderView {
         }
         // 2. promptLabel
         mainView.addSubview(self.promptLabel)
-        self.promptLabel.set(text: "您暂时没有订单记录", font: UIFont.systemFont(ofSize: 15), textColor: UIColor(hex: 0x333333), alignment: .center)
+        //self.promptLabel.set(text: "您暂时没有订单记录", font: UIFont.systemFont(ofSize: 15), textColor: UIColor(hex: 0x333333), alignment: .center)
         self.promptLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.iconView.snp.bottom).offset(promptTopMargin)

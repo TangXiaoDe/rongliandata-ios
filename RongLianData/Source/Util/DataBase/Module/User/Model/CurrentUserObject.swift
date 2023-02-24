@@ -52,7 +52,7 @@ class CurrentUserObject: Object {
     /// 用户等级
     @objc dynamic var grade: UserGradeObject? = nil
     /// 认证状态
-    @objc dynamic var certStatusValue: String = ""
+    @objc dynamic var certStatusValue: Int = 0
     /// 上链信息
     @objc dynamic var chain: UserUpChainObject? = nil
     ///

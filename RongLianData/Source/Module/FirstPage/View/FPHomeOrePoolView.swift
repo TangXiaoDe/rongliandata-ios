@@ -45,7 +45,7 @@ class FPHomeOrePoolView: UIView
     
     fileprivate let mainView: UIView = UIView()
     
-    fileprivate let titleView: TitleView = TitleView.init()
+    fileprivate let titleView: IconContainer = IconContainer.init()
     fileprivate let typeView: FPHomeOrePoolTypeView = FPHomeOrePoolTypeView.init()
     
     fileprivate let container: UIView = UIView.init()
@@ -55,16 +55,17 @@ class FPHomeOrePoolView: UIView
     fileprivate let totalPledgeCollateralItemView: FPHomeOrePoolItemView = FPHomeOrePoolItemView.init()    // FIL质押量(FIL)
 
     
-    fileprivate let titleViewHeight: CGFloat = 40
-    fileprivate let lrMargin: CGFloat = 12
+    fileprivate let titleViewHeight: CGFloat = 44
+    fileprivate let lrMargin: CGFloat = 20
     fileprivate let itemHeight: CGFloat = FPHomeOrePoolItemView.viewHeight
-    fileprivate let itemVerMargin: CGFloat = 8
+    fileprivate let itemBigHeight: CGFloat = FPHomeOrePoolItemView.bigViewHeight
+    fileprivate let itemVerMargin: CGFloat = 12
     fileprivate let itemHorMargin: CGFloat = 8
     fileprivate let itemTopMargin: CGFloat = 0
     fileprivate let itemBottomMargin: CGFloat = 0
     
     
-    fileprivate let itemColCount: Int = 2
+    fileprivate let itemColCount: Int = 1
     fileprivate lazy var itemWidth: CGFloat = {
         let width: CGFloat = (kScreenWidth - self.lrMargin * 2.0 - self.itemHorMargin * CGFloat(self.itemColCount - 1)) / CGFloat(self.itemColCount)
         return width
@@ -138,19 +139,23 @@ extension FPHomeOrePoolView {
             make.top.equalToSuperview().offset(0)
             make.height.equalTo(self.titleViewHeight)
         }
-        self.titleView.label.set(text: "区块数据", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333))
-        self.titleView.label.snp.remakeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
+        self.titleView.iconView.image = UIImage.init(named: "IMG_home_icon_title")
+        self.titleView.iconView.snp.remakeConstraints { make in
+            make.center.equalToSuperview()
         }
-        // 2. typeView
-        mainView.addSubview(self.typeView)
-        self.typeView.addTarget(self, action: #selector(typeViewClick(_:)), for: .touchUpInside)
-        self.typeView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.titleView)
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
-        }
+//        self.titleView.label.set(text: "区块数据", font: UIFont.pingFangSCFont(size: 18, weight: .medium), textColor: UIColor.init(hex: 0x333333))
+//        self.titleView.label.snp.remakeConstraints { (make) in
+//            make.centerY.equalToSuperview()
+//            make.leading.equalToSuperview().offset(self.lrMargin)
+//            make.trailing.equalToSuperview().offset(-self.lrMargin)
+//        }
+//        // 2. typeView
+//        mainView.addSubview(self.typeView)
+//        self.typeView.addTarget(self, action: #selector(typeViewClick(_:)), for: .touchUpInside)
+//        self.typeView.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(self.titleView)
+//            make.trailing.equalToSuperview().offset(-self.lrMargin)
+//        }
         // 3. container
         mainView.addSubview(self.container)
         self.container.snp.makeConstraints { (make) in
@@ -158,6 +163,7 @@ extension FPHomeOrePoolView {
             make.top.equalTo(self.titleView.snp.bottom)
         }
     }
+    
     ///
 //    fileprivate func initialContainer(_ container: UIView) -> Void {
 //        self.container.removeAllSubviews()
@@ -192,28 +198,32 @@ extension FPHomeOrePoolView {
     
     fileprivate func setupContainer(with items: [FPOrePoolItemModel]) -> Void {
         self.container.removeAllSubviews()
+        //
+        var topView: UIView = self.container
         for (index, model) in items.enumerated() {
-            let row: Int = index / self.itemColCount
-            let col: Int = index % self.itemColCount
             let itemView = FPHomeOrePoolItemView.init()
             self.container.addSubview(itemView)
-            itemView.set(cornerRadius: 5)
+            //itemView.set(cornerRadius: 5)
             itemView.model = model
             itemView.snp.makeConstraints { (make) in
-                make.height.equalTo(self.itemHeight)
-                make.width.equalTo(self.itemWidth)
-                let leftMargin: CGFloat = self.lrMargin + (self.itemWidth + self.itemHorMargin) * CGFloat(col)
-                let topMargin: CGFloat = self.itemTopMargin + (self.itemHeight + self.itemVerMargin) * CGFloat(row)
-                let rightMargin: CGFloat = kScreenWidth - leftMargin - self.itemWidth
-                make.top.equalToSuperview().offset(topMargin)
-                make.leading.equalToSuperview().offset(leftMargin)
+                let height: CGFloat = (model.title == "全网有效算力" || model.title == "活跃矿工人数") ? self.itemBigHeight : self.itemHeight
+                make.height.equalTo(height)
+                make.leading.equalToSuperview().offset(self.lrMargin)
+                make.trailing.equalToSuperview().offset(-self.lrMargin)
+                if 0 == index {
+                    make.top.equalToSuperview().offset(self.itemTopMargin)
+                } else {
+                    make.top.equalTo(topView.snp.bottom).offset(self.itemVerMargin)
+                }
                 if index == items.count - 1 {
-                    make.trailing.equalToSuperview().offset(-rightMargin)
                     make.bottom.equalToSuperview().offset(-self.itemBottomMargin)
                 }
             }
+            topView = itemView
         }
+        
     }
+    
 }
 // MARK: - Private UI Xib加载后处理
 extension FPHomeOrePoolView {

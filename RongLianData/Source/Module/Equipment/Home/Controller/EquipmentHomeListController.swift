@@ -60,7 +60,8 @@ extension EquipmentHomeListController {
     fileprivate func firstLoadData() -> Void {
         if self.isFirstLoading {
             self.isFirstLoading = false
-            self.scrollView.mj_header?.beginRefreshing()
+//            self.scrollView.mj_header?.beginRefreshing()
+            self.initialDataSource()
         }
     }
     
@@ -181,15 +182,17 @@ extension EquipmentHomeListController {
     // MARK: - Private  数据处理与加载
     fileprivate func initialDataSource() -> Void {
         self.scrollView.mj_header.beginRefreshing()
-//        self.setupAsDemo()
+        //self.setupAsDemo()
     }
     ///
     fileprivate func setupAsDemo() -> Void {
-//        for index in 0...20 {
-//            let model = EquipmentListModel.init(no: "202039\(index)")
-//            self.sourceList.append(model)
-//        }
-//        self.setupItemContainer(with: self.sourceList)
+        for index in 0...20 {
+            let model = EquipmentListModel.init(no: "202039\(index)")
+            self.sourceList.append(model)
+        }
+        self.setupItemContainer(with: self.sourceList)
+        self.scrollView.mj_footer?.isHidden = true
+        self.emptyDefaultView.isHidden = !self.sourceList.isEmpty
     }
 
 }

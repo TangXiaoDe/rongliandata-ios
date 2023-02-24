@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class EquipmentDetailController: BaseViewController
 {
@@ -22,20 +23,34 @@ class EquipmentDetailController: BaseViewController
     
     fileprivate let scrollView: UIScrollView = UIScrollView.init()
 
+    fileprivate let headerView: OreDetailHeaderView = OreDetailHeaderView.init()
+    fileprivate let detailContainer: UIView = UIView.init()
+    fileprivate let detailView: EquipmentDetailView = EquipmentDetailView.init()
+    
+    
     fileprivate let topView: EquipDetailHeaderView = EquipDetailHeaderView.init()
     fileprivate let termInfoView: EquipDetailTermInfoView = EquipDetailTermInfoView.init() //期数配置说明
     fileprivate let interestInfoView: EquipDetailInterestInfoView = EquipDetailInterestInfoView.init() //利息配置说明
     
-    fileprivate let detailView: EquipmentDetailView = EquipmentDetailView.init()
     
-    fileprivate let topBgViewHeight: CGFloat = CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
+    
+    
+    
+    fileprivate let topBgViewHeight: CGFloat = CGSize.init(width: 375, height: 205).scaleAspectForWidth(kScreenWidth).height
+    fileprivate let headerViewHeight: CGFloat = OreDetailHeaderView.viewHeight
+    fileprivate let headerViewTopMargin: CGFloat = 12
+    fileprivate let lrMargin: CGFloat = 12
+    
+    fileprivate let detailViewTopMargin: CGFloat = 12
+    
+    
     
     fileprivate let topViewNoGroupHeight: CGFloat = EquipDetailHeaderView.noGroupViewHeight
     fileprivate let topViewHasGroupHeight: CGFloat = EquipDetailHeaderView.hasGroupViewHeight
     fileprivate let topViewLrMargin: CGFloat = 12
     fileprivate let topViewTopMargin: CGFloat = 20
     
-    fileprivate let detailViewTopMargin: CGFloat = 12
+    
     
     
     fileprivate var detail: EquipmentDetailModel?
@@ -137,36 +152,57 @@ extension EquipmentDetailController {
         } else if #available(iOS 9.0, *) {
             self.automaticallyAdjustsScrollViewInsets = false
         }
-        // 1. topView
-        scrollView.addSubview(self.topView)
-        self.topView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(self.topViewLrMargin)
-            make.trailing.equalToSuperview().offset(-self.topViewLrMargin)
-            make.top.equalToSuperview().offset(self.topViewTopMargin)
-            let height: CGFloat = self.model.group.isEmpty ? self.topViewNoGroupHeight : self.topViewHasGroupHeight
-            make.height.equalTo(height)
+        // 1. headerView
+        scrollView.addSubview(self.headerView)
+        self.headerView.backgroundColor = UIColor.white
+        self.headerView.set(cornerRadius: 10)
+        self.headerView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(self.headerViewTopMargin)
+            make.leading.equalToSuperview().offset(self.lrMargin)
+            make.trailing.equalToSuperview().offset(-self.lrMargin)
+            make.height.equalTo(self.headerViewHeight)
         }
-        // 2. termInfoView
-        scrollView.addSubview(self.termInfoView)
-        self.termInfoView.snp.makeConstraints { (make) in
-            make.leading.trailing.equalTo(self.topView)
-            make.top.equalTo(self.topView.snp.bottom)
+        // 2. detailContainer
+        scrollView.addSubview(self.detailContainer)
+        self.detailContainer.backgroundColor = AppColor.white
+        self.detailContainer.set(cornerRadius: 12)
+        self.detailContainer.snp.makeConstraints { (make) in
+            make.leading.trailing.width.equalToSuperview()
+            make.top.equalTo(self.headerView.snp.bottom).offset(self.detailViewTopMargin)
+            make.bottom.equalToSuperview()
+            let minHeight: CGFloat = kScreenHeight - kNavigationStatusBarHeight - self.headerViewHeight - self.headerViewTopMargin - self.detailViewTopMargin
+            make.height.greaterThanOrEqualTo(minHeight)
         }
-        // 3. interestInfoView
-        scrollView.addSubview(self.interestInfoView)
-        self.interestInfoView.isHidden = true   // 资本垫付才显示，自负自押不显示
-        self.interestInfoView.snp.makeConstraints { (make) in
-            make.leading.trailing.equalTo(self.topView)
-            make.top.equalTo(self.termInfoView.snp.bottom)
-        }
-        // 4. detailView
-        scrollView.addSubview(self.detailView)
+        // detailView
+        self.detailContainer.addSubview(self.detailView)
         self.detailView.delegate = self
-        self.detailView.backgroundColor = UIColor.white
         self.detailView.snp.makeConstraints { (make) in
-            make.leading.trailing.width.bottom.equalToSuperview()
-            make.top.equalTo(self.termInfoView.snp.bottom).offset(self.detailViewTopMargin)
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.lessThanOrEqualToSuperview().offset(-kBottomHeight)
         }
+
+//        // 1. topView
+//        scrollView.addSubview(self.topView)
+//        self.topView.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(self.topViewLrMargin)
+//            make.trailing.equalToSuperview().offset(-self.topViewLrMargin)
+//            make.top.equalToSuperview().offset(self.topViewTopMargin)
+//            let height: CGFloat = self.model.group.isEmpty ? self.topViewNoGroupHeight : self.topViewHasGroupHeight
+//            make.height.equalTo(height)
+//        }
+//        // 2. termInfoView
+//        scrollView.addSubview(self.termInfoView)
+//        self.termInfoView.snp.makeConstraints { (make) in
+//            make.leading.trailing.equalTo(self.topView)
+//            make.top.equalTo(self.topView.snp.bottom)
+//        }
+//        // 3. interestInfoView
+//        scrollView.addSubview(self.interestInfoView)
+//        self.interestInfoView.isHidden = true   // 资本垫付才显示，自负自押不显示
+//        self.interestInfoView.snp.makeConstraints { (make) in
+//            make.leading.trailing.equalTo(self.topView)
+//            make.top.equalTo(self.termInfoView.snp.bottom)
+//        }
     }
 
 }
@@ -176,8 +212,19 @@ extension EquipmentDetailController {
     
     /// 默认数据加载
     fileprivate func initialDataSource() -> Void {
-        self.topView.model = self.model
+        //self.topView.model = self.model
+        self.headerView.model = self.model
         self.scrollView.mj_header.beginRefreshing()
+        //self.setupAsDemo()
+    }
+    ///
+    fileprivate func setupAsDemo() -> Void {
+        let detail = EquipmentDetailModel.init()
+        detail.assets = EDAssetModel.init()
+        self.detail = detail
+        self.headerView.model = self.model
+        self.detailView.model = detail
+        self.scrollView.mj_footer.isHidden = true
     }
 
 }
@@ -198,19 +245,20 @@ extension EquipmentDetailController {
             }
             self.detail = data.detail
             self.returns = data.returns
-            self.topView.model = self.model
+            //self.topView.model = self.model
+            self.headerView.model = self.model
             self.termInfoView.model = self.detail?.extend
             self.interestInfoView.model = self.detail?.extend
             self.interestInfoView.isHidden = data.detail.zhiya_type != .dianfu
             self.detailView.model = self.detail
             self.detailView.returns = self.returns
             self.offset = data.returns.count
-            self.scrollView.mj_footer.isHidden = data.returns.count < self.limit
-            self.detailView.snp.remakeConstraints { make in
-                let topView: UIView = data.detail.zhiya_type == .dianfu ? self.interestInfoView : self.termInfoView
-                make.leading.trailing.width.bottom.equalToSuperview()
-                make.top.equalTo(topView.snp.bottom).offset(self.detailViewTopMargin)
-            }
+            self.scrollView.mj_footer.isHidden = true //data.returns.count < self.limit
+//            self.detailView.snp.remakeConstraints { make in
+//                let topView: UIView = data.detail.zhiya_type == .dianfu ? self.interestInfoView : self.termInfoView
+//                make.leading.trailing.width.bottom.equalToSuperview()
+//                make.top.equalTo(topView.snp.bottom).offset(self.detailViewTopMargin)
+//            }
             self.view.layoutIfNeeded()
         }
     }

@@ -51,6 +51,13 @@ class MineHomeOptionItemControl: UIControl {
             self.detailLabel.text = detail
             self.detailLabel.isHidden = false
             self.accessoryView.isHidden = true
+            if self.titleLabel.text == "清除缓存" {
+                self.accessoryView.isHidden = false
+                self.detailLabel.snp.remakeConstraints { (make) in
+                    make.centerY.equalToSuperview()
+                    make.trailing.equalTo(self.accessoryView.snp.leading).offset(-8)
+                }
+            }
         }
     }
     var unread: Int? {
@@ -108,6 +115,8 @@ extension MineHomeOptionItemControl {
 
     /// 界面布局
     fileprivate func initialUI() -> Void {
+        self.backgroundColor = UIColor(hex: 0xF9F9F9)
+        self.set(cornerRadius: 12)
         // 0. titleLabel
         self.addSubview(self.iconImgView)
         self.iconImgView.set(cornerRadius: 0)
@@ -124,7 +133,7 @@ extension MineHomeOptionItemControl {
         }
         // 2. accessoryView
         self.addSubview(self.accessoryView)
-        self.accessoryView.image = UIImage.init(named: "IMG_mine_list_arrow")
+        self.accessoryView.image = UIImage.init(named: "IMG_common_icon_back")
         self.accessoryView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-lrMargin)

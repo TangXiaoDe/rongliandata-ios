@@ -20,7 +20,7 @@ extension SettingItemCellProtocol {
 class SettingItemCell: UITableViewCell {
 
     // MARK: - Internal Property
-    static let cellHeight: CGFloat = 56
+    static let cellHeight: CGFloat = 60 + 20
     /// 重用标识符
     static let identifier: String = "SettingItemCellReuseIdentifier"
 
@@ -129,11 +129,16 @@ extension SettingItemCell {
 extension SettingItemCell {
     // 界面布局
     fileprivate func initialUI() -> Void {
+        self.backgroundColor = .clear
+        self.contentView.backgroundColor = .clear
         // mainView - 整体布局，便于扩展，特别是针对分割、背景色、四周间距
         self.contentView.addSubview(mainView)
         self.initialMainView(self.mainView)
         mainView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().offset(-15)
+            make.bottom.equalToSuperview().offset(-20)
         }
         // bottomLine
         self.bottomLine = mainView.addLineWithSide(.inBottom, color: AppColor.pageBg, thickness: 0.5, margin1: self.lineLrMargin, margin2: self.lineLrMargin)
@@ -141,6 +146,7 @@ extension SettingItemCell {
     // 主视图布局
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
         mainView.backgroundColor = UIColor.white
+        mainView.set(cornerRadius: 12)
         // 1. leftIcon
         mainView.addSubview(self.leftIconView)
         self.leftIconView.contentMode = .left
@@ -159,7 +165,7 @@ extension SettingItemCell {
         }
         // 3. titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 16), textColor: AppColor.mainText)
+        self.titleLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 14, weight: .medium), textColor: AppColor.mainText)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(self.lrMargin)

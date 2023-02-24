@@ -12,7 +12,7 @@ import UIKit
 public let kPlaceHolderImage: UIImage = #imageLiteral(resourceName: "IMG_icon_placeholder")
 public let kPlaceHolderLogo: UIImage = #imageLiteral(resourceName: "IMG_icon_placeholder")
 public let kPlaceHolderProduct: UIImage = #imageLiteral(resourceName: "IMG_icon_placeholder")
-public let kPlaceHolderAvatar: UIImage = UIImage.init(named: "IMG_mine_userface_default") ?? UIImage()
+public let kPlaceHolderAvatar: UIImage = UIImage.init(named: "IMG_icon_placeholder_user_avatar") ?? UIImage()
 
 
 public let kPlaceHolderUserManAvatar: UIImage = #imageLiteral(resourceName: "IMG_icon_head_boy_default")

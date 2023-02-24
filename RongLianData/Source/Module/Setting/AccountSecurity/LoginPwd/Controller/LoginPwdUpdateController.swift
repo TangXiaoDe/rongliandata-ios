@@ -65,63 +65,72 @@ extension LoginPwdUpdateController {
 extension LoginPwdUpdateController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = AppColor.minor
+        self.view.backgroundColor = .white
         // navigationbar
         self.navigationItem.title = "登录密码"
         // xib
         self.forgetBtn.setTitleColor(AppColor.theme, for: .normal)
-        self.oldPwdView.backgroundColor = UIColor.clear
-        self.newPwdView.backgroundColor = UIColor.clear
-        self.confirmPwdView.backgroundColor = UIColor.clear
-        self.oldPwdView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 1, margin1: 0, margin2: 0)
-        self.newPwdView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 1, margin1: 0, margin2: 0)
-        self.confirmPwdView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 1, margin1: 0, margin2: 0)
+        self.oldPwdView.set(cornerRadius: 20, borderWidth: 0.5, borderColor: UIColor(hex: 0x999999))
+        self.newPwdView.set(cornerRadius: 20, borderWidth: 0.5, borderColor: UIColor(hex: 0x999999))
+        self.confirmPwdView.set(cornerRadius: 20, borderWidth: 0.5, borderColor: UIColor(hex: 0x999999))
+//        self.oldPwdView.backgroundColor = UIColor.clear
+//        self.newPwdView.backgroundColor = UIColor.clear
+//        self.confirmPwdView.backgroundColor = UIColor.clear
+//        self.oldPwdView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 1, margin1: 0, margin2: 0)
+//        self.newPwdView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 1, margin1: 0, margin2: 0)
+//        self.confirmPwdView.addLineWithSide(.inBottom, color: AppColor.dividing, thickness: 1, margin1: 0, margin2: 0)
         // oldPwdField
+        let oldPwdSecureBtnView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: 20))
         let oldPwdSecureBtn: UIButton = UIButton.init(type: .custom)
-        oldPwdSecureBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 22)
+        oldPwdSecureBtn.frame = CGRect.init(x: 0, y: 0, width: 40, height: 20)
         oldPwdSecureBtn.setImage(UIImage(named: "IMG_login_pwdshow"), for: .normal)
         oldPwdSecureBtn.setImage(UIImage(named: "IMG_login_pwdhidden"), for: .selected)
         oldPwdSecureBtn.addTarget(self, action: #selector(oldPwdSecureBtnClick(_:)), for: .touchUpInside)
         oldPwdSecureBtn.isSelected = true
-        self.oldPwdField.rightView = oldPwdSecureBtn
+        oldPwdSecureBtnView.addSubview(oldPwdSecureBtn)
+        self.oldPwdField.rightView = oldPwdSecureBtnView
         self.oldPwdField.rightViewMode = .always
         self.oldPwdField.isSecureTextEntry = true
-        self.oldPwdField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 18), textColor: AppColor.mainText)
+        self.oldPwdField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 14), textColor: AppColor.mainText)
         self.oldPwdField.attributedPlaceholder = NSAttributedString.init(string: "请输入旧密码", attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         self.oldPwdField.addTarget(self, action: #selector(oldPwdFieldValueChanged(_:)), for: .editingChanged)
         // newPwdField
+        let newPwdSecureBtnView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: 20))
         let newPwdSecureBtn: UIButton = UIButton.init(type: .custom)
-        newPwdSecureBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 22)
+        newPwdSecureBtn.frame = CGRect.init(x: 0, y: 0, width: 40, height: 20)
         newPwdSecureBtn.setImage(UIImage(named: "IMG_login_pwdshow"), for: .normal)
         newPwdSecureBtn.setImage(UIImage(named: "IMG_login_pwdhidden"), for: .selected)
         newPwdSecureBtn.addTarget(self, action: #selector(newPwdSecureBtnClick(_:)), for: .touchUpInside)
+        newPwdSecureBtnView.addSubview(newPwdSecureBtn)
         newPwdSecureBtn.isSelected = true
-        self.newPwdField.rightView = newPwdSecureBtn
+        self.newPwdField.rightView = newPwdSecureBtnView
         self.newPwdField.rightViewMode = .always
         self.newPwdField.isSecureTextEntry = true
-        self.newPwdField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 18), textColor: AppColor.mainText)
+        self.newPwdField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 14), textColor: AppColor.mainText)
         self.newPwdField.attributedPlaceholder = NSAttributedString.init(string: "请输入新密码", attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         self.newPwdField.addTarget(self, action: #selector(newPwdFieldValueChanged(_:)), for: .editingChanged)
         // confirmField
+        let confirmPwdSecureBtnView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: 20))
         let confirmPwdSecureBtn: UIButton = UIButton.init(type: .custom)
-        confirmPwdSecureBtn.bounds = CGRect.init(x: 0, y: 0, width: 22, height: 22)
+        confirmPwdSecureBtn.frame = CGRect.init(x: 0, y: 0, width: 40, height: 20)
         confirmPwdSecureBtn.setImage(UIImage(named: "IMG_login_pwdshow"), for: .normal)
         confirmPwdSecureBtn.setImage(UIImage(named: "IMG_login_pwdhidden"), for: .selected)
         confirmPwdSecureBtn.addTarget(self, action: #selector(confirmPwdSecureBtnClick(_:)), for: .touchUpInside)
+        confirmPwdSecureBtnView.addSubview(confirmPwdSecureBtn)
         confirmPwdSecureBtn.isSelected = true
-        self.confirmPwdField.rightView = confirmPwdSecureBtn
+        self.confirmPwdField.rightView = confirmPwdSecureBtnView
         self.confirmPwdField.rightViewMode = .always
         self.confirmPwdField.isSecureTextEntry = true
-        self.confirmPwdField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 18), textColor: AppColor.mainText)
+        self.confirmPwdField.set(placeHolder: nil, font: UIFont.pingFangSCFont(size: 14), textColor: AppColor.mainText)
         self.confirmPwdField.attributedPlaceholder = NSAttributedString.init(string: "请再次输入新密码", attributes: [NSAttributedString.Key.foregroundColor: AppColor.inputPlaceHolder])
         self.confirmPwdField.addTarget(self, action: #selector(confirmPwdFieldValueChanged(_:)), for: .editingChanged)
 
         // doneBtn
         self.doneBtn.backgroundColor = UIColor.clear
-        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18), cornerRadius: 5)
-        self.doneBtn.set(title: "确认修改", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
-        self.doneBtn.set(title: "确认修改", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .highlighted)
-        self.doneBtn.set(title: "确认修改", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(UIColor.init(hex: 0xD9DCE4)), for: .disabled)
+        self.doneBtn.set(font: UIFont.pingFangSCFont(size: 18, weight: .medium), cornerRadius: 22)
+        self.doneBtn.set(title: "重置密码", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .normal)
+        self.doneBtn.set(title: "重置密码", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(AppColor.theme), for: .highlighted)
+        self.doneBtn.set(title: "重置密码", titleColor: UIColor.white, image: nil, bgImage: UIImage.imageWithColor(UIColor.init(hex: 0xDDDDDD)), for: .disabled)
     }
 }
 

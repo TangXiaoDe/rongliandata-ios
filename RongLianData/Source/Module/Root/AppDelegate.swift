@@ -171,12 +171,20 @@ extension AppDelegate {
         // navigationBar配置 - 同步(必须同步而不是异步，否则默认展示的导航控制器会显示异常)
         let titleFont: UIFont = UIFont.pingFangSCFont(size: 18, weight: .medium)
         UINavigationController.setNavBarTheme(titleFont: titleFont, titleColor: AppColor.navTitle, tintColor: AppColor.navTint, barTintColor: AppColor.navBarTint, isTranslucent: false, bgImage: UIImage(), shadowColor: AppColor.navShadow)
-
+        /// ios15 tableview适配
+        if #available(iOS 15.0, *) {
+            UITableView.appearance().sectionHeaderTopPadding = 0
+        }
+        /// ios15 导航适配
+        if #available(iOS 15.0, *) {
+            let navAppearance = UINavigationBarAppearance.init()
+            navAppearance.backgroundColor = AppColor.navBarTint
+            navAppearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.pingFangSCFont(size: 18, weight: .medium), NSAttributedString.Key.foregroundColor: AppColor.navTitle]
+            UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
+            UINavigationBar.appearance().standardAppearance = navAppearance
+        }
         /// 该类初始化之后，配置整个应用: 主题色等 - 异步
         DispatchQueue.main.async {
-            // input
-            //UITextField.appearance().tintColor = TSColor.main.theme
-            //UITextView.appearance().tintColor = TSColor.main.theme
             // button
             UIButton.appearance().isExclusiveTouch = true
             UIControl.appearance().isExclusiveTouch = true

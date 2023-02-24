@@ -21,12 +21,16 @@ class ServerConfigModel: Mappable {
     var quitDay: Int = 0
     /// 红包限制
     var bonusLimit: BonusLimitModel?
-    /// 注册协议
-    var register_protocol: String = ""
+    /// 用户协议
+    var agreement: String = ""
+    /// 隐私协议
+    var privacy: String = ""
 //    /// 是否开启版本管理
 //    var isVersionControl: Bool = false
     /// fil配置信息
     var filConfig: FilConfigModel?
+    /// 邀请配置信息
+    var inviteInfoModel: InviteInfoModel?
     
     /// 提现配置信息
     var withdrawalConfigModel: WithdrawalConfigModel?
@@ -48,12 +52,14 @@ class ServerConfigModel: Mappable {
     }
     func mapping(map: Map) {
         cdnDomain <- map["cdn_domain"]
-        business <- map["business"]
+        business <- map["contact"]
         quitDay <- map["quit_limit_day"]
         bonusLimit <- map["bonus"]
-        register_protocol <- map["register_protocol"]
+        agreement <- map["agreement"]
+        privacy <- map["privacy"]
 //        isVersionControl <- map["start_version_control"]
         filConfig <- map["fil:issue"]
+        inviteInfoModel <- map["invite"]
         
         
         withdrawalConfigModel <- map["withdrawal"]
@@ -99,10 +105,10 @@ class BusinessContactModel: Mappable {
         //email <- map["email"]
         //imeet <- map["imeet"]
         //wechat <- map["wechat"]
-        qq <- map["Q Q"]
+        qq <- map["qq"]
         email <- map["邮箱"]
         imeet <- map["链乎"]
-        wechat <- map["微信"]
+        wechat <- map["wechat"]
     }
 
 }

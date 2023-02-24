@@ -23,7 +23,7 @@ class MineHomeHeaderView: UIView {
 
     // MARK: - Internal Property
 
-    static var viewHeight: CGFloat = 92 - 20 + kStatusBarHeight // 6s下267
+    static var viewHeight: CGFloat = 60 + 21 + kStatusBarHeight // 6s下267
 
     static let iconTopMargin: CGFloat = UIDevice.current.isiPhoneXSeries() ? 86 : 66
 
@@ -55,14 +55,15 @@ class MineHomeHeaderView: UIView {
     fileprivate let iconContainer: UIView = UIView()
     fileprivate let iconView: UIImageView = UIImageView()
     fileprivate let nameLabel: UILabel = UILabel()
-    fileprivate let vipImgView: UIImageView = UIImageView()
+    fileprivate let certLabel: UILabel = UILabel()
+//    fileprivate let vipImgView: UIImageView = UIImageView()
 
     fileprivate let titleValueView: UIView = UIView()
 
     fileprivate let animaViewTopMargin: CGFloat = 50 + kStatusBarHeight
     
-    fileprivate let infoBottomMargin: CGFloat = 13
-    fileprivate let iconWH: CGFloat = 44
+    fileprivate let infoBottomMargin: CGFloat = 0
+    fileprivate let iconWH: CGFloat = 60
     fileprivate let nameLeftMargin: CGFloat = 12
     fileprivate let nameDescVerMargin: CGFloat = 4
     
@@ -80,7 +81,7 @@ class MineHomeHeaderView: UIView {
     
     fileprivate let unreadViewHeight: CGFloat = 15
 
-    fileprivate let lrMargin: CGFloat = 22
+    fileprivate let lrMargin: CGFloat = 15
     fileprivate let titleValueBottomMargin: CGFloat = 60
     fileprivate let vipIconSize: CGSize = CGSize.init(width: 73, height: 22)
 
@@ -124,17 +125,18 @@ extension MineHomeHeaderView {
         }
     }
     fileprivate func initialMainView(_ mainView: UIView) -> Void {
-        // 1. bgView
-        mainView.addSubview(self.bgImgView)
-        self.bgImgView.set(cornerRadius: 0)
-        self.bgImgView.image = UIImage.init(named: "IMG_mine_top_bg")
-        self.bgImgView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
+//        // 1. bgView
+//        mainView.addSubview(self.bgImgView)
+//        self.bgImgView.set(cornerRadius: 0)
+//        self.bgImgView.image = UIImage.init(named: "IMG_mine_top_bg")
+//        self.bgImgView.snp.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//        }
         // 3. infoView
         mainView.addSubview(self.infoView)
         self.initialInfoView(self.infoView)
         self.infoView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(kStatusBarHeight + 21)
             make.leading.equalToSuperview().offset(lrMargin)
             make.trailing.equalToSuperview().offset(-lrMargin)
             make.bottom.equalToSuperview().offset(-infoBottomMargin)
@@ -147,7 +149,7 @@ extension MineHomeHeaderView {
         self.noticeBtn.contentEdgeInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         self.noticeBtn.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-10)
-            make.centerY.equalTo(self.infoView)
+            make.top.equalToSuperview().offset(kStatusBarHeight + 10)
         }
         // 3. unReadView
         mainView.addSubview(self.unReadView)
@@ -192,22 +194,29 @@ extension MineHomeHeaderView {
         }
         // 3. nameLabel
         infoView.addSubview(self.nameLabel)
-        self.nameLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 15, weight: .medium), textColor: AppColor.mainText)
+        self.nameLabel.set(text: nil, font: UIFont.pingFangSCFont(size: 15, weight: .medium), textColor: .white)
         self.nameLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(iconContainer.snp.trailing).offset(nameLeftMargin)
             make.trailing.equalToSuperview()
-            make.centerY.equalTo(iconContainer.snp.centerY)
+            make.top.equalToSuperview().offset(10)
         }
-        // 4. vipImgView
-        infoView.addSubview(self.vipImgView)
-        self.vipImgView.set(cornerRadius: 0)
-        self.vipImgView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(vipImgViewTap(_:))))
-        self.vipImgView.isUserInteractionEnabled = true
-        self.vipImgView.snp.makeConstraints { (make) in
+        //
+        infoView.addSubview(self.certLabel)
+        self.certLabel.set(text: "认证状态：", font: UIFont.pingFangSCFont(size: 12), textColor: AppColor.disable)
+        self.certLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.nameLabel)
-            make.top.equalTo(iconContainer.snp.centerY).offset(self.nameDescVerMargin * 0.5)
-            make.size.equalTo(self.vipIconSize)
+            make.top.equalTo(self.nameLabel.snp.bottom).offset(5)
         }
+//        // 4. vipImgView
+//        infoView.addSubview(self.vipImgView)
+//        self.vipImgView.set(cornerRadius: 0)
+//        self.vipImgView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(vipImgViewTap(_:))))
+//        self.vipImgView.isUserInteractionEnabled = true
+//        self.vipImgView.snp.makeConstraints { (make) in
+//            make.leading.equalTo(self.nameLabel)
+//            make.top.equalTo(iconContainer.snp.centerY).offset(self.nameDescVerMargin * 0.5)
+//            make.size.equalTo(self.vipIconSize)
+//        }
 
         self.iconView.backgroundColor = UIColor.random
         self.nameLabel.text = "昵称"
@@ -231,12 +240,13 @@ extension MineHomeHeaderView {
         }
         self.nameLabel.text = model.name
         self.iconView.kf.setImage(with: model.avatarUrl, placeholder: kPlaceHolderAvatar, options: nil, progressBlock: nil, completionHandler: nil)
-        self.vipImgView.isHidden = true
-        self.nameLabel.snp.remakeConstraints { (make) in
-            make.leading.equalTo(iconContainer.snp.trailing).offset(nameLeftMargin)
-            make.trailing.equalToSuperview()
-            make.centerY.equalTo(iconContainer.snp.centerY).offset(0)
-        }
+        self.certLabel.text = "认证状态：" + model.certStatus.title
+//        self.vipImgView.isHidden = true
+//        self.nameLabel.snp.remakeConstraints { (make) in
+//            make.leading.equalTo(iconContainer.snp.trailing).offset(nameLeftMargin)
+//            make.trailing.equalToSuperview()
+//            make.centerY.equalTo(iconContainer.snp.centerY).offset(0)
+//        }
     }
     
     fileprivate func setupunReadNum(_ num: Int?) -> Void {
@@ -273,12 +283,10 @@ extension MineHomeHeaderView {
 
 // MARK: - Tap Gesture
 extension MineHomeHeaderView {
-    
     /// 个人信息点击事件
     @objc fileprivate func infoViewSingleTap(_ tapGR: UITapGestureRecognizer) -> Void {
         if tapGR.state == .ended {
             self.delegate?.didClickedUserInfo(in: self)
         }
     }
-    
 }

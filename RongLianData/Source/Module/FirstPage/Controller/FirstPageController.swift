@@ -8,6 +8,7 @@
 //  首页
 
 import UIKit
+import ChainOneKit
 
 
 typealias FirstPageHomeController = FirstPageController
@@ -17,16 +18,17 @@ class FirstPageController: BaseViewController
     
     // MARK: - Private Property
     
+    fileprivate let topBgView: UIImageView = UIImageView.init()
     fileprivate let navBar: MallHomeStatusNavBar = MallHomeStatusNavBar.init()
-    fileprivate let scrollView: UIScrollView = UIScrollView.init()
     
+    fileprivate let scrollView: UIScrollView = UIScrollView.init()
+
     fileprivate let headerView: FPHomeHeaderView = FPHomeHeaderView.init()          // 头部视图：banner、消息、ipfs数据
     fileprivate let orePoolView: FPHomeOrePoolView = FPHomeOrePoolView.init()         // 区块数据
-    fileprivate let quotationView: FPHomeQuotationView = FPHomeQuotationView.init()       // 实时行情
-
     fileprivate let footerView: UIView = UIView.init()
 
     fileprivate let barHeight: CGFloat = MallHomeStatusNavBar.barHeight
+    fileprivate let topBgHeight: CGFloat = CGSize.init(width: 375, height: 178).scaleAspectForWidth(kScreenWidth).height
     
 
     // MARK: - Initialize Function
@@ -66,7 +68,7 @@ extension FirstPageController {
 extension FirstPageController {
     /// 页面布局
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = AppColor.pageBg
+        self.view.backgroundColor = AppColor.white
         // navBar
         self.view.addSubview(self.navBar)
         self.navBar.showBottomLine = false
@@ -74,6 +76,13 @@ extension FirstPageController {
         self.navBar.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(self.barHeight)
+        }
+        // topBgView
+        self.view.addSubview(self.topBgView)
+        self.topBgView.image = UIImage.init(named: "IMG_home_img_topbg")
+        self.topBgView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(self.topBgHeight)
         }
         // scrollView
         self.view.addSubview(self.scrollView)
@@ -94,7 +103,7 @@ extension FirstPageController {
     }
     ///
     fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
-        scrollView.backgroundColor = AppColor.pageBg
+        //scrollView.backgroundColor = AppColor.pageBg
         scrollView.showsVerticalScrollIndicator = false
         scrollView.mj_header = XDRefreshHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         // 1. headerView
@@ -105,60 +114,63 @@ extension FirstPageController {
         }
         // 2. orePoolView
         scrollView.addSubview(self.orePoolView)
-        self.orePoolView.showTypeSelect = true
-        self.orePoolView.delegate = self
         self.orePoolView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.headerView.snp.bottom).offset(8)
-        }
-        // 3. quotationView
-        scrollView.addSubview(self.quotationView)
-        self.quotationView.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.orePoolView.snp.bottom).offset(8)
+            make.top.equalTo(self.headerView.snp.bottom).offset(10)
         }
         // 4. footerView
         scrollView.addSubview(self.footerView)
         self.initialFooterView(self.footerView)
         self.footerView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.quotationView.snp.bottom).offset(10)
+            make.top.equalTo(self.orePoolView.snp.bottom).offset(10)
             make.bottom.equalToSuperview().offset(-10)
         }
     }
     ///
     fileprivate func initialFooterView(_ footerView: UIView) -> Void {
-        let lineTitleHorMargin: CGFloat = 10
-        let lineLrMargin: CGFloat = 32
-        // 1. titleLabel
-        let titleLabel: UILabel = UILabel.init()
-        footerView.addSubview(titleLabel)
-        titleLabel.set(text: "已经到底啦", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0xC7CED8), alignment: .center)
-        titleLabel.snp.makeConstraints { (make) in
-            make.centerY.centerX.equalToSuperview()
+        //
+        let footerIconSize: CGSize = CGSize.init(width: 315, height: 15)
+        let iconView: UIImageView = UIImageView.init()
+        footerView.addSubview(iconView)
+        iconView.image = UIImage.init(named: "IMG_common_icon_dibu")
+        iconView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.size.equalTo(footerIconSize)
             make.top.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-10)
         }
-        // 2. leftLine
-        let leftLine: UIView = UIView.init()
-        footerView.addSubview(leftLine)
-        leftLine.backgroundColor = UIColor.init(hex: 0xC7CED8)
-        leftLine.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.height.equalTo(0.5)
-            make.leading.equalToSuperview().offset(lineLrMargin)
-            make.trailing.equalTo(titleLabel.snp.leading).offset(-lineTitleHorMargin)
-        }
-        // 3. rightLine
-        let rightLine: UIView = UIView.init()
-        footerView.addSubview(rightLine)
-        rightLine.backgroundColor = UIColor.init(hex: 0xC7CED8)
-        rightLine.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.height.equalTo(0.5)
-            make.leading.leading.equalTo(titleLabel.snp.trailing).offset(lineTitleHorMargin)
-            make.trailing.equalToSuperview().offset(-lineLrMargin)
-        }
+//        let lineTitleHorMargin: CGFloat = 10
+//        let lineLrMargin: CGFloat = 32
+//        // 1. titleLabel
+//        let titleLabel: UILabel = UILabel.init()
+//        footerView.addSubview(titleLabel)
+//        titleLabel.set(text: "已经到底啦", font: UIFont.pingFangSCFont(size: 12), textColor: UIColor.init(hex: 0xC7CED8), alignment: .center)
+//        titleLabel.snp.makeConstraints { (make) in
+//            make.centerY.centerX.equalToSuperview()
+//            make.top.equalToSuperview().offset(10)
+//            make.bottom.equalToSuperview().offset(-10)
+//        }
+//        // 2. leftLine
+//        let leftLine: UIView = UIView.init()
+//        footerView.addSubview(leftLine)
+//        leftLine.backgroundColor = UIColor.init(hex: 0xC7CED8)
+//        leftLine.snp.makeConstraints { (make) in
+//            make.centerY.equalToSuperview()
+//            make.height.equalTo(0.5)
+//            make.leading.equalToSuperview().offset(lineLrMargin)
+//            make.trailing.equalTo(titleLabel.snp.leading).offset(-lineTitleHorMargin)
+//        }
+//        // 3. rightLine
+//        let rightLine: UIView = UIView.init()
+//        footerView.addSubview(rightLine)
+//        rightLine.backgroundColor = UIColor.init(hex: 0xC7CED8)
+//        rightLine.snp.makeConstraints { (make) in
+//            make.centerY.equalToSuperview()
+//            make.height.equalTo(0.5)
+//            make.leading.leading.equalTo(titleLabel.snp.trailing).offset(lineTitleHorMargin)
+//            make.trailing.equalToSuperview().offset(-lineLrMargin)
+//        }
     }
 
 }
@@ -174,7 +186,6 @@ extension FirstPageController {
     fileprivate func setupAsDemo() -> Void {
         self.headerView.model = nil
         self.orePoolView.model = nil
-        self.quotationView.model = nil
     }
 
 }
@@ -193,7 +204,6 @@ extension FirstPageController {
             }
             self.headerView.model = model
             self.orePoolView.model = model
-            self.quotationView.model = model
 
             self.orePoolView.type = .ipfs
         }
@@ -242,7 +252,7 @@ extension FirstPageController: MallHomeStatusNavBarProtocol {
     /// 导航栏右侧按钮点击回调
     func homeBar(_ navBar: MallHomeStatusNavBar, didClickedRightItem itemView: UIView) -> Void {
         if AccountManager.share.isLogin {
-            let messageVC = MessageHomeController.init()
+            let messageVC = MessageListController.init(type: .system)
             self.enterPageVC(messageVC)
         } else {
             AppUtil.presentLoginPage()
@@ -265,42 +275,6 @@ extension FirstPageController: FPHomeHeaderViewProtocol {
         } else {
             AppUtil.presentLoginPage()
         }
-    }
-
-}
-
-// MARK: - Enter Page
-extension FirstPageController {
-    /// 区块数据类型选择
-    fileprivate func showOrePoolTypeSelectPage(with defaultType: FPOrePoolType?) -> Void {
-        let selectVC = FPOrePoolTypeSelectController.init()
-        selectVC.defaultType = defaultType
-        selectVC.delegate = self
-        RootManager.share.showRootVC.present(selectVC, animated: false, completion: nil)
-    }
-
-}
-
-// MARK: - <FPHomeOrePoolViewProtocol>
-extension FirstPageController: FPHomeOrePoolViewProtocol {
-    /// 矿池类型点击回调
-    func orePoolView(_ orePoolView: FPHomeOrePoolView, didClickedType typeView: FPHomeOrePoolTypeView) -> Void {
-        print("FirstPageController orePoolView didClickedType")
-        self.showOrePoolTypeSelectPage(with: typeView.type)
-    }
-
-}
-
-// MARK: - <FPOrePoolTypeSelectControllerProtocol>
-extension FirstPageController: FPOrePoolTypeSelectControllerProtocol {
-    ///
-    func typeSelectVC(_ selectVC: FPOrePoolTypeSelectController, didClickedClose closeView: UIView, with selectedType: FPOrePoolType) -> Void {
-
-    }
-
-    ///
-    func typeSelectVC(_ selectVC: FPOrePoolTypeSelectController, didClickedItem itemView: UIView, with selectedType: FPOrePoolType) -> Void {
-        self.orePoolView.type = selectedType
     }
 
 }

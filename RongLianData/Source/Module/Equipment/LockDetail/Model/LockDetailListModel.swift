@@ -18,6 +18,9 @@ class LockDetailListModel: Mappable {
     /// 明细
     var logs: [LockDetailLogModel] = []
 
+    init() {
+        
+    }
     required init?(map: Map) {
         
     }
@@ -85,7 +88,18 @@ class LockDetailLogModel: Mappable {
     }
     
     var released: Double {
-        let progress: Double = Double(self.days) / 180.0
+        // 蚂蚁b端计算方式
+//        let progress: Double = Double(self.days) / 180.0
+//        let result = progress * amount
+//        return result
+        // saas计算方式
+        // 先除以180，再取8位小数，再乘以天数，显示结果再取8位小数
+        var amount: Double = self.amount / 180.0
+        let strAmount: String = amount.decimalValidDigitsProcess(digits: 8)
+        if let value = Double(strAmount) {
+            amount = value
+        }
+        let progress: Double = Double(self.days)
         let result = progress * amount
         return result
     }

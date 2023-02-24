@@ -17,7 +17,7 @@ class MineHomeController: BaseViewController {
 
     fileprivate let statusView: UIView = UIView()
     fileprivate let scrollView: UIScrollView = UIScrollView()
-    fileprivate let incomeInfoView = MineHomeIncomeInfoView.init(viewWidth: kScreenWidth - 12.0 * 2.0)
+    fileprivate let incomeInfoView = MineHomeIncomeInfoView.init(viewWidth: kScreenWidth - 15.0 * 2.0)
     fileprivate let optionView = MineHomeOptionView()
     fileprivate let headerView: MineHomeHeaderView = MineHomeHeaderView()
     
@@ -57,7 +57,7 @@ extension MineHomeController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         NotificationCenter.default.post(name: AppNotificationName.Message.refresh, object: nil)
         self.refreshReust()
     }
@@ -75,7 +75,7 @@ extension MineHomeController {
 // MARK: - UI
 extension MineHomeController {
     fileprivate func initialUI() -> Void {
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor(hex: 0x4444FF)
         // 1. navigationbar
         self.navigationItem.title = "我的"
         // 3.statusView
@@ -93,7 +93,7 @@ extension MineHomeController {
         self.scrollView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview()
-            make.bottom.equalTo(self.view.snp_bottomMargin)
+            make.bottom.equalToSuperview()
         }
         // 顶部位置 的版本适配
         if #available(iOS 11.0, *) {
@@ -108,6 +108,14 @@ extension MineHomeController {
     /// 滚动视图布局
     fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = .white
+        //
+        let bgImgV = UIImageView.init(image: UIImage(named: "IMG_mine_img_bg"))
+        scrollView.addSubview(bgImgV)
+        bgImgV.snp.makeConstraints { make in
+            make.leading.top.equalToSuperview()
+            make.width.equalTo(kScreenWidth)
+        }
 //        scrollView.delegate = self
         self.scrollView.mj_header = XDRefreshHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         // headerView
@@ -122,7 +130,7 @@ extension MineHomeController {
         scrollView.addSubview(self.incomeInfoView)
         self.incomeInfoView.delegate = self
         self.incomeInfoView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.headerView.snp.bottom).offset(0)
+            make.top.equalTo(self.headerView.snp.bottom).offset(15)
             make.leading.equalToSuperview().offset(lrMargin)
             make.trailing.equalToSuperview().offset(-lrMargin)
             make.height.equalTo(MineHomeIncomeInfoView.viewHeight)
@@ -227,24 +235,39 @@ extension MineHomeController {
     }
     /// 退出登录弹窗
     fileprivate func showLogoutAlert() -> Void {
-        let alertVC = UIAlertController.init(title: nil, message: "退出登录?", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-        alertVC.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (action) in
+        let alertView = CommonAlertView.init(title: "确认退出", content: "是否确认退出登录")
+        alertView.doneBtnClickAction = { (alertView, doneBtn) in
             self.logout()
-        }))
-        DispatchQueue.main.async {
-            // 若遇到此处问题，请记录机型、系统、问题描述，可尝试使用RootManager.share下的 .rootVC .showRootVC；
-            self.present(alertVC, animated: false, completion: nil)
         }
+        PopViewUtil.showPopView(alertView)
+//        let alertVC = UIAlertController.init(title: nil, message: "退出登录?", preferredStyle: .alert)
+//        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+//        alertVC.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (action) in
+//            self.logout()
+//        }))
+//        DispatchQueue.main.async {
+//            // 若遇到此处问题，请记录机型、系统、问题描述，可尝试使用RootManager.share下的 .rootVC .showRootVC；
+//            self.present(alertVC, animated: false, completion: nil)
+//        }
     }
     /// 缓存清理
     fileprivate func showClearCacheAlert() -> Void {
-        let alertVC = UIAlertController.init(title: nil, message: "是否清理缓存?", preferredStyle: .actionSheet)
-        alertVC.addAction(UIAlertAction.init(title: "确定", style: .destructive, handler: { (action) in
+        guard let cacheSize = self.optionView.cacheSize else {
+            Toast.showToast(title: "暂无缓存")
+            return
+        }
+        let strCache = String(format: "%d.0M", cacheSize / (1_024 * 1_024))
+        let alertView = CommonAlertView.init(title: "清除缓存", content: "是否确认清除缓存\(strCache)")
+        alertView.doneBtnClickAction = { (alertView, doneBtn) in
             self.clearCache()
-        }))
-        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
+        }
+        PopViewUtil.showPopView(alertView)
+//        let alertVC = UIAlertController.init(title: nil, message: "是否清理缓存?", preferredStyle: .actionSheet)
+//        alertVC.addAction(UIAlertAction.init(title: "确定", style: .destructive, handler: { (action) in
+//            self.clearCache()
+//        }))
+//        alertVC.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+//        self.present(alertVC, animated: true, completion: nil)
     }
     fileprivate func clearCache() -> Void {
         // Kingfisher 缓存
@@ -273,6 +296,12 @@ extension MineHomeController {
 
 // MARK: - <MineHomeOptionViewProtocol>
 extension MineHomeController: MineHomeOptionViewProtocol {
+    func optionView(_ optionView: MineHomeOptionView, didSelectedCert itemView: MineHomeOptionItemControl) {
+        self.enterAccountCertPage()
+    }
+    func optionView(_ optionView: MineHomeOptionView, didSelectedInvite itemView: MineHomeOptionItemControl) {
+        self.enterAccountInvitePage()
+    }
     /// 账户安全
     func optionView(_ optionView: MineHomeOptionView, didSelectedAccount itemView: MineHomeOptionItemControl) -> Void {
         self.enterAccountSecurityPage()
@@ -320,20 +349,21 @@ extension MineHomeController: MineHomeHeaderViewProtocol {
 extension MineHomeController: MineHomeIncomeInfoViewProtocol {
     /// fil点击
     func incomeInfoView(_ view: MineHomeIncomeInfoView, didTapPageAt index: Int) {
-        if index == 0 {
-            self.enterFilHomePage()
-        } else if index == 1 {
-            self.enterXCHAssetPage()
-        } else if index == 2 {
-            self.enterBZZAssetPage()
-        }
+//        if index == 0 {
+//            self.enterFilHomePage()
+//        } else if index == 1 {
+//            self.enterXCHAssetPage()
+//        } else if index == 2 {
+//            self.enterBZZAssetPage()
+//        }
+        self.enterFilHomePage()
     }
 }
 // MARK: - EnterPage
 extension MineHomeController {
     /// 未读消息
     fileprivate func enterMessagePage() -> Void {
-        let messageVC = MessageHomeController()
+        let messageVC = MessageListController.init(type: .system)
         self.navigationController?.pushViewController(messageVC, animated: true)
     }
 
@@ -364,6 +394,15 @@ extension MineHomeController {
     /// 账户安全
     fileprivate func enterAccountSecurityPage(){
         self.enterPageVC(AccountSecurityHomeController())
+    }
+    /// 邀请好友
+    fileprivate func enterAccountInvitePage(){
+        self.enterPageVC(InviteFriendHomeController())
+    }
+    /// 实名认证
+    fileprivate func enterAccountCertPage(){
+        let vc = RealNameCertController.init()
+        self.enterPageVC(vc)
     }
     /// 我的品牌商界面
     fileprivate func enterMyBrandPage(){

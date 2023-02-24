@@ -24,7 +24,7 @@ enum EquipmentStatus: Int {
         case .deploying:
             title = "部署中"
         case .mining:
-            title = "运行中"
+            title = "工作中" //"运行中"
         case .closed:
             title = "已关闭"
         }
@@ -36,9 +36,9 @@ enum EquipmentStatus: Int {
         var color: UIColor
         switch self {
         case .deploying:
-            color = UIColor.init(hex: 0x333333)
+            color = UIColor.init(hex: 0xE16940)
         case .mining:
-            color = UIColor.init(hex: 0x00B8FF)
+            color = UIColor.init(hex: 0x4444FF)
         case .closed:
             color = UIColor.init(hex: 0x999999)
         }
@@ -65,7 +65,7 @@ enum EquipPackageStatus {
         case .deploying:
             title = "部署中"
         case .doing:
-            title = "进行中"
+            title = "工作中" //"进行中"
         case .done:
             title = "已完成"
         case .closed:
@@ -79,11 +79,11 @@ enum EquipPackageStatus {
         var color: UIColor
         switch self {
         case .doing:
-            color = UIColor.init(hex: 0x00B8FF)
+            color = UIColor.init(hex: 0x4444FF)
         case .deploying:
-            fallthrough
+            color = UIColor.init(hex: 0xE16940)
         case .done:
-            color = UIColor.init(hex: 0x333333)
+            color = UIColor.init(hex: 0x999999)
         case .closed:
             color = UIColor.init(hex: 0x999999)
         }
@@ -259,8 +259,9 @@ extension EquipmentListModel {
     
     ///
     var totalNumColor: UIColor {
-        let color: UIColor = self.status == .closed ? UIColor.init(hex: 0xFFB6C0) : UIColor.init(hex: 0xD26C2F)
-        return color
+        //let color: UIColor = self.status == .closed ? UIColor.init(hex: 0xFFB6C0) : UIColor.init(hex: 0xD26C2F)
+        //return color
+        return AppColor.themeRed
     }
     ///
     var titleColor: UIColor {

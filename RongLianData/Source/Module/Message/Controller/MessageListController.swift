@@ -158,7 +158,7 @@ extension MessageListController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = MessageListCell.cellInTableView(tableView)
+        let cell = MessageSystemTabCell.cellInTableView(tableView)
         cell.model = self.sourceList[indexPath.row]
         cell.selectionStyle = .none
         return cell
@@ -175,7 +175,9 @@ extension MessageListController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt\(indexPath.row)")
+        let model = self.sourceList[indexPath.section]
+        let newsDetailVC = MessageDetailController.init(model: model)
+        self.enterPageVC(newsDetailVC)
     }
 
 }

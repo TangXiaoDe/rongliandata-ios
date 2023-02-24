@@ -79,27 +79,27 @@ enum UserSex: Int {
 }
 
 /// 用户认证状态 - 设置页展示
-enum UserCertificationStatus: String {
+enum UserCertificationStatus: Int {
     /// 未认证
-    case unCertified = "unCertified"
+    case unCertified = -1
     /// 审核中
-    case waiting = "waiting"
+    case waiting = 0
     /// 认证失败
-    case failure = "failure"
+    case failure = 2
     /// 已认证 - 认证成功
-    case certified = "certified"
+    case certified = 1
 
     var title: String {
         var title: String = ""
         switch self {
         case .unCertified:
-            title = "未认证"
+            title = "未实名"
         case .waiting:
             title = "审核中"
         case .failure:
-            title = "认证失败"
+            title = "实名失败"
         case .certified:
-            title = "已认证"
+            title = "已实名"
         }
         return title
     }
@@ -163,7 +163,7 @@ class CurrentUserModel: NSObject, Mappable {
         return sex
     }
     /// 认证状态
-    var certStatusValue: String = ""    // 数据库存储字段
+    var certStatusValue: Int = 0    // 数据库存储字段
     var certStatus: UserCertificationStatus {
         var status = UserCertificationStatus.unCertified
         if let realStatus = UserCertificationStatus.init(rawValue: self.certStatusValue) {
@@ -197,6 +197,7 @@ class CurrentUserModel: NSObject, Mappable {
         phone <- map["phone"]
         number <- map["number"]
         avatar <- map["avatar"]
+        certStatusValue <- map["cer_status"]
         big_name <- map["big_name"]
         background <- map["background"]
         birthday <- map["birthday"]

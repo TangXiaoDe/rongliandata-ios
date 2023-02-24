@@ -163,7 +163,7 @@ extension AccountSecurityController {
         let model = self.sourceList[indexPath.section].items[indexPath.row]
         let cell = SettingItemCell.cellInTableView(tableView, at: indexPath)
         cell.model = model
-        cell.showBottomLine = (indexPath.row != self.sourceList[indexPath.section].items.count - 1)
+        cell.showBottomLine = false
         return cell
     }
 

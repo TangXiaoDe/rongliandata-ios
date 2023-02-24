@@ -83,7 +83,7 @@ class AssetInfoModel: Mappable {
     var fil_balance: String {
         if let withdrawable = Double(withdrawable), let lock = Double(lock), let pawn = Double(pawn), let security = Double(security) {
             let balance = withdrawable + lock + pawn + security + self.frozen
-            return balance.decimalValidDigitsProcess(digits: 4)
+            return balance.decimalValidDigitsProcess(digits: 8)
         }
         return ""
     }
@@ -91,28 +91,40 @@ class AssetInfoModel: Mappable {
     var canUse_balance: String {
         if let security = Double(security), let withdrawable = Double(withdrawable) {
             let balance = security + withdrawable
-            return balance.decimalValidDigitsProcess(digits: 4)
+            return balance.decimalValidDigitsProcess(digits: 8)
         }
         return ""
     }
     /// 可用比例
     var canUse_bili: CGFloat {
-        if let canUse_balance = Double(self.canUse_balance), let config = AppConfig.share.server?.filConfig, let canUseTotal = Double(config.total_enable) {
-            return CGFloat(canUse_balance/canUseTotal)
+//        if let canUse_balance = Double(self.canUse_balance), let config = AppConfig.share.server?.filConfig, let canUseTotal = Double(config.total_enable) {
+//            return CGFloat(canUse_balance/canUseTotal)
+//        }
+//        return 0.0
+        if let canUse_balance = Double(self.canUse_balance), let total_balance = Double(self.fil_balance), total_balance > 0 {
+            return CGFloat(canUse_balance/total_balance)
         }
         return 0.0
     }
     /// 锁仓比例
     var lock_bili: CGFloat {
-        if let lock_balance = Double(self.lock), let config = AppConfig.share.server?.filConfig, let lockTotal = Double(config.total_lock) {
-            return CGFloat(lock_balance/lockTotal)
+//        if let lock_balance = Double(self.lock), let config = AppConfig.share.server?.filConfig, let lockTotal = Double(config.total_lock) {
+//            return CGFloat(lock_balance/lockTotal)
+//        }
+//        return 0.0
+        if let lock_balance = Double(self.lock), let total_balance = Double(self.fil_balance), total_balance > 0  {
+            return CGFloat(lock_balance/total_balance)
         }
         return 0.0
     }
     /// 抵押比例
     var pawn_bili: CGFloat {
-        if let pawn_balance = Double(self.pawn), let config = AppConfig.share.server?.filConfig, let pawnTotal = Double(config.total_pawn) {
-            return CGFloat(pawn_balance/pawnTotal)
+//        if let pawn_balance = Double(self.pawn), let config = AppConfig.share.server?.filConfig, let pawnTotal = Double(config.total_pawn) {
+//            return CGFloat(pawn_balance/pawnTotal)
+//        }
+//        return 0.0
+        if let pawn_balance = Double(self.pawn), let total_balance = Double(self.fil_balance), total_balance > 0  {
+            return CGFloat(pawn_balance/total_balance)
         }
         return 0.0
     }

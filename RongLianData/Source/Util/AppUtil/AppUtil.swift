@@ -17,7 +17,7 @@ class AppUtil: NSObject {
 
     /// 邀请好友复制链接处理
     class func invitePageCopyLink(inviteUrl: String) -> String {
-        let strLink: String = "给大家强烈推荐一款区块链用户、社群运营、社区建设人人必备产品：\n\n【链乎】-全球首款区块链社区管理平台\n\n我为链乎带盐！！！\n推荐理由：最接地气，最了解区块链社区，最适合区块链社区建设、社群运营、社群管理，既有区别于微信的IM社交、社区广场，又有区块链专有的任务大厅、趣味挖矿等。\n\n下载狂戳：\(inviteUrl)\n\n自从有了链乎，我再也不用担心社群的无趣了 ，遇见另一个世界的你我~"
+        let strLink: String = "下载链接：\(inviteUrl)"
         return strLink
     }
 //    //字典转模型
@@ -357,6 +357,16 @@ extension AppUtil {
 
 // MARK: - EnterPage
 extension AppUtil {
+    /// present出客服联系方式界面
+    class func enterKefuContactPage() -> Void {
+        //
+        //let contactVC = CommonKefuContactController.init()
+        let contactVC = KefuContactController.init()
+        //AppUtil.topViewController()?.present(contactVC, animated: false, completion: nil)
+        RootManager.share.showRootVC.present(contactVC, animated: false, completion: nil)
+        //
+        //AppUtil.enterOnlineKefuCPage()
+    }
     /// 显示网络设置弹窗
     class func showNetworkSettingAlert() -> Void {
         let alertVC = UIAlertController.init(title: "已为“\(AppConfig.share.appName)”关闭无线局域网", message: "你可以在“设置”中为此应用打开无线局域网", preferredStyle: .alert)
@@ -377,5 +387,24 @@ extension AppUtil {
         }
         UIApplication.shared.openURL(url)
     }
-
+    /// present出系统分享界面
+    class func systemSharePage(shareImage: UIImage? = nil, shareUrl: URL? = nil) -> Void {
+        var activityItems: [Any] = []
+        if let shareImage = shareImage {
+            activityItems.append(shareImage)
+        }
+        if let shareUrl = shareUrl {
+            activityItems.append(shareUrl)
+        }
+        let activityVc = UIActivityViewController.init(activityItems: activityItems, applicationActivities: nil)
+        activityVc.completionWithItemsHandler = { (type, flag, array, error) -> Swift.Void in
+            print(type ?? "")
+            if type == .some(.saveToCameraRoll) {
+                Toast.showToast(title: "图片已保存到相册")
+            } else if type == .some(.copyToPasteboard) {
+                Toast.showToast(title: "已复制到粘贴板")
+            }
+        }
+        AppUtil.topViewController()?.present(activityVc, animated: true, completion: nil)
+    }
 }

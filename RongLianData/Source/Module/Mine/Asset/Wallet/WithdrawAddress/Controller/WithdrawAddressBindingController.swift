@@ -28,7 +28,7 @@ class WithdrawAddressBindingController: BaseViewController {
     
     fileprivate let doneBtnHeight: CGFloat = 44
     fileprivate let doneBtnTopMargin: CGFloat = 20
-    fileprivate let tipsTopMargin: CGFloat = 20
+    fileprivate let tipsTopMargin: CGFloat = 130
     
     fileprivate var currentText: String?
     fileprivate var currentAddressText: String?
@@ -77,26 +77,30 @@ extension WithdrawAddressBindingController {
     fileprivate func initialUI() -> Void {
         self.view.backgroundColor = AppColor.pageBg
         // navbar
-        self.navigationItem.title = "绑定提现地址-\(self.assetModel.title)"
+        self.navigationItem.title = "绑定提币地址"
         // scrollView
         self.view.addSubview(self.scrollView)
         self.initialScrollView(self.scrollView)
         self.scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(12)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     fileprivate func initialScrollView(_ scrollView: UIScrollView) -> Void {
         // scrollView
+        scrollView.backgroundColor = .white
         scrollView.showsVerticalScrollIndicator = false
         // 1. headerView
         scrollView.addSubview(self.headerView)
         self.headerView.delegate = self
         self.headerView.set(cornerRadius: 10)
         self.headerView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(self.topMargin)
-            make.leading.equalToSuperview().offset(self.lrMargin)
-            make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.width.equalTo(kScreenWidth - self.lrMargin * 2.0)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.width.equalTo(kScreenWidth)
+            make.height.equalTo(kScreenHeight - 12 - kNavigationStatusBarHeight)
+            make.bottom.equalToSuperview()
         }
         // 3. tips
         scrollView.addSubview(self.tipsLabel)
@@ -109,25 +113,25 @@ extension WithdrawAddressBindingController {
         self.tipsLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(self.lrMargin)
             make.trailing.equalToSuperview().offset(-self.lrMargin)
-            make.top.equalTo(self.headerView.snp.bottom).offset(self.tipsTopMargin)
-            make.bottom.lessThanOrEqualToSuperview().offset(-self.tipsTopMargin)
+            make.top.equalToSuperview().offset(self.tipsTopMargin)
+//            make.bottom.lessThanOrEqualToSuperview().offset(-self.tipsTopMargin)
         }
         // tips
-        //let tips: String = "温馨提示： \n地址绑定之后将不可更改，请仔细核对地址是否正确！ \n若有疑问请联系"
-        //self.tipsLabel.text = tips
-//        let tipsAttText: NSMutableAttributedString = NSMutableAttributedString.init()
-//        tipsAttText.append(NSAttributedString.init(string: "温馨提示： \n地址绑定之后将不可更改，请仔细核对地址是否正确！\n若有疑问请联系", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hex: 0x999999)]))
-//        let kefuAttText: NSMutableAttributedString = NSMutableAttributedString.init()
-//        kefuAttText.append(NSAttributedString.init(string: "客服", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(hex: 0x5CB3F5)]))
-//        let kefuAttHighlight: YYTextHighlight = YYTextHighlight.init(backgroundColor: UIColor.clear)
-//        kefuAttHighlight.tapAction = { (_ containerView: UIView, _ text: NSAttributedString, _ range: NSRange, _ rect: CGRect) in
-//            DispatchQueue.main.async {
-//                self.enterKefuPage()
-//            }
-//        }
-//        kefuAttText.setTextHighlight(kefuAttHighlight, range: kefuAttText.rangeOfAll())
-//        tipsAttText.append(kefuAttText)
-//        self.tipsLabel.attributedText = tipsAttText
+//        let tips: String = "温馨提示： \n地址绑定之后将不可更改，请仔细核对地址是否正确！ \n若有疑问请联系"
+//        self.tipsLabel.text = tips
+        let tipsAttText: NSMutableAttributedString = NSMutableAttributedString.init()
+        tipsAttText.append(NSAttributedString.init(string: "温馨提示： \n地址绑定之后将不可更改，请仔细核对地址是否正确！\n若有疑问请", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x999999)]))
+        let kefuAttText: NSMutableAttributedString = NSMutableAttributedString.init()
+        kefuAttText.append(NSAttributedString.init(string: "联系客服", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(hex: 0x4444FF)]))
+        let kefuAttHighlight: YYTextHighlight = YYTextHighlight.init(backgroundColor: UIColor.clear)
+        kefuAttHighlight.tapAction = { (_ containerView: UIView, _ text: NSAttributedString, _ range: NSRange, _ rect: CGRect) in
+            DispatchQueue.main.async {
+                self.enterKefuPage()
+            }
+        }
+        kefuAttText.setTextHighlight(kefuAttHighlight, range: kefuAttText.rangeOfAll())
+        tipsAttText.append(kefuAttText)
+        self.tipsLabel.attributedText = tipsAttText
     }
 
 }
@@ -172,7 +176,7 @@ extension WithdrawAddressBindingController {
 //        let strUrl = UrlManager.kefuUrl
 //        let webVC = XDWKWebViewController.init(type: XDWebViwSourceType.strUrl(strUrl: strUrl))
 //        self.enterPageVC(webVC)
-//        AppUtil.enterKefuContactPage()
+        AppUtil.enterKefuContactPage()
     }
 
 }

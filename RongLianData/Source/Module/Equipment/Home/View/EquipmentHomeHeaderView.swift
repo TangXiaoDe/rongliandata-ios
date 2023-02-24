@@ -14,7 +14,7 @@ class EquipmentHomeHeaderView: UIView {
     
     // MARK: - Internal Property
     
-    static let viewHeight: CGFloat = 90
+    static let viewHeight: CGFloat = 100
 //        CGSize.init(width: 375, height: 194).scaleAspectForWidth(kScreenWidth).height
     
 //    static var valueBottomMargin: CGFloat {
@@ -112,7 +112,7 @@ extension EquipmentHomeHeaderView {
 //        }
         // 3. valueLabel
         mainView.addSubview(self.valueLabel)
-        self.valueLabel.set(text: "0", font: UIFont.systemFont(ofSize: 28, weight: .medium), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.valueLabel.set(text: "0", font: UIFont.pingFangSCFont(size: 35, weight: .medium), textColor: UIColor.init(hex: 0x4444FF), alignment: .center)
         self.valueLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.leading.greaterThanOrEqualToSuperview()
@@ -122,7 +122,7 @@ extension EquipmentHomeHeaderView {
         }
         // 2. titleLabel
         mainView.addSubview(self.titleLabel)
-        self.titleLabel.set(text: "设备总量(T)", font: UIFont.systemFont(ofSize: 14), textColor: UIColor.init(hex: 0x333333), alignment: .center)
+        self.titleLabel.set(text: "设备总量(T)", font: UIFont.pingFangSCFont(size: 16, weight: .regular), textColor: UIColor.init(hex: 0x333333), alignment: .center)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.leading.greaterThanOrEqualToSuperview()

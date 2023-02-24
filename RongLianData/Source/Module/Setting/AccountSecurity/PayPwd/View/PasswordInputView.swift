@@ -3,7 +3,7 @@
 //  iMeet
 //
 //  Created by 小唐 on 2019/1/16.
-//  Copyright © 2019 ChainOne. All rights reserved.
+//  Copyright © 2021 ChainOne. All rights reserved.
 //
 //  方框密码输入框
 //  注：输入的是6位纯数字
@@ -19,11 +19,11 @@ class PasswordInputView: UIView {
 
     // MARK: - Internal Property
 
-    let count: Int = 6  // 最大位数
     let viewWidth: CGFloat
+    let count: Int = 6  // 最大位数
     // 固定itemWidth，而不固定spacing，而itemHeight跟整体高度一致，由外界确定
     let itemWidth: CGFloat
-    //let spacing: CGFloat = 10
+    let spacing: CGFloat = 10
 
     let itemStyle: PasswordInputItemView.Style
 
@@ -82,7 +82,7 @@ class PasswordInputView: UIView {
 
     // MARK: - Initialize Function
     /// width: viewWidth
-    init(width: CGFloat, itemWidth: CGFloat = 44, itemStyle: PasswordInputItemView.Style = PasswordInputItemView.Style.bottomLine) {
+    init(width: CGFloat, itemWidth: CGFloat = 44, itemStyle: PasswordInputItemView.Style = PasswordInputItemView.Style.border) {
         self.viewWidth = width
         self.itemWidth = itemWidth
         self.itemStyle = itemStyle
@@ -130,8 +130,11 @@ extension PasswordInputView {
             self.itemViewList.append(itemView)
             itemView.secureTextEntry = false
             itemView.style = self.itemStyle
+            if self.itemStyle == .round {
+                itemView.set(cornerRadius: self.itemWidth * 0.5, borderWidth: 1, borderColor: AppColor.theme)
+            }
             itemView.snp.makeConstraints({ (make) in
-                make.width.equalTo(self.itemWidth)
+                make.width.height.equalTo(self.itemWidth)
                 make.top.bottom.equalTo(self)
                 let offsetX: CGFloat = CGFloat(index) * (spacing + self.itemWidth)
                 make.leading.equalTo(self).offset(offsetX)

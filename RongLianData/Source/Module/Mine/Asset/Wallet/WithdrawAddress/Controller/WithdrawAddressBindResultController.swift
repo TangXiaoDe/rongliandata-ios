@@ -21,7 +21,7 @@ class WithdrawAddressBindResultController: BaseViewController
     fileprivate let resultTitleLabel: UILabel = UILabel.init()
     fileprivate let countdownLabel: UILabel = UILabel.init()
     
-    fileprivate let iconSize: CGSize = CGSize.init(width: 97, height: 58)
+    fileprivate let iconSize: CGSize = CGSize.init(width: 75, height: 87)
     fileprivate let titleTopMargin: CGFloat = 20
     fileprivate let countdownTopMargin: CGFloat = 15 // 20
     

@@ -45,15 +45,15 @@ class ThemeConfig {
     }
 
     /// 主题色
-    var themeColor: UIColor = UIColor.init(hex: 0xF5BE41)
+    var themeColor: UIColor = UIColor.init(hex: 0x4444FF)
     /// 辅助色/次要色
     var minorColor: UIColor = UIColor.init(hex: 0xFFFFFF)
     /// 分割线颜色
     var dividingColor: UIColor = UIColor.init(hex: 0xE2E2E2)
     /// 主题红色
-    var themeRedColor: UIColor = UIColor.init(hex: 0xCE586E)
+    var themeRedColor: UIColor = UIColor.init(hex: 0xE16940)    // 0xE06236
     /// 主题黄色
-    var themeYellowColor: UIColor = UIColor.init(hex: 0xFF8068)
+    var themeYellowColor: UIColor = UIColor.init(hex: 0xFF8068) // 0xF5BE41
 
     /// 标题色(页面)
     var titleColor: UIColor = UIColor.init(hex: 0x29313D)
@@ -78,7 +78,7 @@ class ThemeConfig {
     var disableTitleColor: UIColor = UIColor.init(hex: 0x8C97AC)
 
     /// 输入框背景色
-    var inputBgColor: UIColor = UIColor.init(hex: 0xFFFFFF)
+    var inputBgColor: UIColor = UIColor.init(hex: 0xEEF3FF)
     /// 输入框PlaceHolder文字颜色
     var inputPlaceColor: UIColor = UIColor.init(hex: 0xC5CED9)
 
@@ -94,8 +94,8 @@ class ThemeConfig {
     /// 标签栏背景色
     var tabBarTintColor: UIColor = UIColor.init(hex: 0xFFFFFF)
     /// 标签栏未选中色
-    var tabItemUnSelectedColor: UIColor = UIColor.init(hex: 0xC7C6D1)
+    var tabItemUnSelectedColor: UIColor = UIColor.init(hex: 0xCCCCCC)
     /// 标签栏选中色
-    var tabItemSelectedColor: UIColor = UIColor.init(hex: 0xF5BE41)
+    var tabItemSelectedColor: UIColor = UIColor.init(hex: 0x4444FF)
 
 }
